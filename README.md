@@ -1218,3 +1218,57 @@ chặn (mỗi tick đi ~26px, không có bước nửa thì dừng cách tườn
 test41 (cây chặn / nóc nhà / mặt tiền / vòng quanh cây) + test5 PASS.
 Ghi chú gỡ lỗi: vùng chặn luôn trông "to hơn tính toán ~24px" vì bước
 đi mỗi tick ~26px — không phải lỗi, là độ hạt của tick 10/s.
+
+GĐ54 (23/10) — CÔNG PHÁP TÔNG MÔN (theo đúng file thiết kế, mục Tông môn
+và đợt chiêu mộ): "Gia nhập tông môn: mở tiệm và công pháp riêng của tông
+(ở bản đầu: danh sách ngắn các công pháp đã có trong bảng, giảm điều kiện
+5 điểm chỉ số)". Cách làm: đệ tử Thiên Kiếm Môn / Huyền Thiên Tông nói
+chuyện với Sứ Giả sẽ thấy mục "📜 Công pháp <tông>" — danh sách = công
+pháp bậc TRÚC CƠ của lớp + vũ khí đang cầm trong bảng 511 sẵn có (5–6
+chiêu), mỗi chiêu ghi rõ điều kiện gốc → điều kiện đệ tử (mỗi chỉ số
+GIẢM 5 điểm). Học qua đường tông (learn_skill {via:'sect'}) dùng chính
+luồng lĩnh ngộ ngồi học hiện có; server chặn: người ngoài tông, chiêu
+không thuộc danh sách (Cơ bản/Luyện Khí/vũ khí khác). Môn phái nhỏ
+Thanh Phong KHÔNG có công pháp tông — khớp bảng của file (phần của nó
+chỉ gồm tiệm cơ bản + nhiệm vụ bang + 2 đồng hành). test42 (11 mục:
+danh sách, giảm 40→35, học thường bị chặn/học qua tông được, lĩnh ngộ
+xong thật, chặn chiêu Luyện Khí qua đường tông) + test5 ALL PASS.
+Ảnh: preview54-sect.png.
+
+GĐ55 (23/10 tối) — CỘNG ĐIỂM CHỈ SỐ LÀM LẠI (feedback trực tiếp từ bạn bè
+đang test trên Render: "up chỉ số k bị thoát bảng đi" + "nhiều điểm phải
+ấn nhiều quá"; người chơi chốt cách làm: thao tác tự do trên bảng, giữ
+nút để tăng nhanh, thêm nút trừ, bấm OK mới xác nhận):
+- BUG GỐC: trên cảm ứng, MỌI cú chạm trong thẻ nhân vật đều lan lên bộ xử
+  lý chạm-thẻ (toggle expanded) → bấm + cộng điểm là bảng THU LẠI. Đã chặn:
+  handler thẻ bỏ qua chạm từ #hudDetails + mọi nút trong bảng stopPropagation.
+- Cách cộng mới (client): chọn bể điểm (chíp "Điểm tự do +1" / "Điểm đột
+  phá +2") → mỗi dòng chỉ số có nút − / +; bấm = ±1, GIỮ = tăng liên tục
+  (nhịp lặp chạy theo tick 10/s trong updateHudBars — setInterval bị máy
+  yếu bóp nhịp nên không dùng); số đã chọn hiện vàng "+N" cạnh chỉ số;
+  "Hoàn lại" hủy chọn; "✔ OK" mới gửi server.
+- Server: sự kiện mới allocate_stats {free:{}, stat:{}} — kiểm tổng điểm
+  từng bể, áp MỘT lần, cộng quá → từ chối + sync lại số thật; sự kiện cũ
+  allocate_stat giữ nguyên tương thích.
+- test43 (6 mục: áp đúng 1 lần, chặn quá điểm, lọc số âm/thập phân, tương
+  thích sự kiện cũ) ALL PASS; probe cảm ứng: giữ + 1,3s chọn được +12
+  điểm, bảng KHÔNG đóng, OK áp thật 15→27. Ảnh: preview55-stats.png.
+
+GĐ56 (23/10 tối) — TỰ VÀO LẠI SAU KHI RỚT KẾT NỐI (feedback buổi test:
+"server chạy đc chút thì đứng disconnect"). GỐC LỖI ở client: sau lần
+nối đầu tiên, pendingMode bị xóa nên khi socket nối LẠI (rớt mạng, đổi
+WiFi/4G, tab bị đóng băng, server chập chờn) client KHÔNG gửi lại hello
+→ socket mới vô danh, nhân vật đứng hình tới khi tải lại trang. Đã sửa:
+- Client nhớ helloPayload (phiên/tài khoản hoặc token khách) và gửi lại
+  ở MỌI lần 'connect'; nếu đang trong game (wantsRejoin) và là tài
+  khoản, danh sách nhân vật về là tự chọn lại đúng nhân vật cũ
+  (activeCharId) — vào thẳng game, không dừng ở màn hình chọn.
+- Server: spawnFromCharacter cho "nghỉ hưu" bản online của phiên cũ
+  chưa timeout (_superseded) — phiên mới tiếp quản, thế giới chỉ còn 1
+  bản; disconnect của socket cũ không kéo nhân vật đi nghỉ offline nữa.
+- Server: guard uncaughtException/unhandledRejection (log + giữ sống),
+  pingTimeout 20s → 45s cho server free CPU yếu.
+- test44 (6 mục: rớt hẳn vào lại + di chuyển; tiếp quản khi phiên cũ
+  còn treo; socket cũ chết không kéo offline) ALL PASS; probe trình
+  duyệt thật: cắt mạng 4s → mở lại → nhân vật tự vào lại, chạy 624→911.
+  Ảnh: preview56-reconnect.png.

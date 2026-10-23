@@ -393,6 +393,30 @@
       .tbtn.tutil { border-color: rgba(139,233,201,.65); color: #c9f5e6; }
       .allocBtn { border-color: rgba(139,233,201,.6); background: rgba(87,201,139,.15); color: #8be9c9; border-radius: 99px; }
       .statRow .svv { color: #8be9c9; }
+      /* GĐ55: cộng điểm chọn trước — nút +/− giữ để tăng nhanh, chíp bể điểm, thanh OK */
+      .statRow .sctl { margin-left: auto; display: flex; gap: 4px; }
+      .allocBtn.plus, .allocBtn.minus {
+        min-width: 26px; padding: 1px 0; font-size: 13px; line-height: 1.25; margin-left: 0;
+        touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+      }
+      .allocBtn.minus { border-color: rgba(255,180,150,.55); background: rgba(201,120,87,.16); color: #ffc9a8; }
+      .svv .staged { color: #ffd94d; font-weight: 800; }
+      .poolRow { display: flex; gap: 4px; margin-top: 5px; }
+      .poolChip {
+        flex: 1; cursor: pointer; pointer-events: auto; font-size: 10px; padding: 3px 2px; border-radius: 99px;
+        border: 1px solid rgba(139,233,201,.35); background: rgba(10,30,24,.45); color: #bfe9d9;
+        user-select: none; -webkit-user-select: none;
+      }
+      .poolChip.on { border-color: #ffd94d; background: rgba(217,165,20,.22); color: #ffe9a3; font-weight: 700; }
+      .allocBar { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-top: 5px; font-size: 10.5px; }
+      .allocBar #allocSummary { flex: 1 1 100%; opacity: .92; }
+      .allocBar .allocReset { margin-left: auto; }
+      .allocBar button {
+        cursor: pointer; pointer-events: auto; border-radius: 99px; font-size: 11px; font-weight: 700; padding: 3px 10px;
+        user-select: none; -webkit-user-select: none;
+      }
+      .allocOk { border: 1px solid #ffd94d; background: linear-gradient(180deg, #ffd94d, #d9a514); color: #231a02; }
+      .allocReset { border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); color: #e8f4ee; }
 
       /* ==== GĐ44: thanh chiêu thành KHAY NÚT BẤM rõ ràng + HUD mobile nhỏ lại ==== */
       #skillBar {

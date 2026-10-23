@@ -567,9 +567,16 @@ interface SectWindowInfo {
   id: string; name: string; open: boolean; windowText: string; needText: string;
   canJoin: boolean; missing: string[]; trialPassed?: boolean;
 }
+// GĐ54: một công pháp trong danh sách tông môn (server tính sẵn điều kiện đã giảm)
+interface SectSkillData {
+  id: string; name: string; coef: number; cdMs: number; cost: number;
+  fxText: string; desc: string; condText: string; sectCondText: string;
+  learned: boolean; isLearning: boolean; canLearn: boolean; missingText: string;
+}
 interface SectInfoData {
   merit: number; boardQuests: number; letter: boolean;
   sect: string | null; sectName: string | null;
+  skills: SectSkillData[] | null; // GĐ54: null khi chưa có tông môn
   clock: { day: number; month: number; year: number };
   thienkiem: SectWindowInfo; huyenthien: SectWindowInfo;
 }
@@ -649,6 +656,12 @@ class GameScene extends Phaser.Scene {
   private session = '';
   private accountName = '';
   private pendingMode: 'session' | 'guest' | null = null; // hello sẽ gửi khi socket nối xong
+  // GĐ56: phiên hello gần nhất + nhân vật đang chơi — khi socket nối LẠI
+  // (rớt mạng, chuyển WiFi/4G, server chập chờn) client tự hello lại và
+  // tự chọn lại đúng nhân vật cũ, không phải tải lại trang.
+  private helloPayload: { session: string } | { token: string } | null = null;
+  private activeCharId: string | null = null; // charId nhân vật (tài khoản) đang chơi
+  private wantsRejoin = false; // vừa rớt kết nối GIỮA LÚC đang trong game
   private inGame = false;
   private authMode: 'login' | 'register' = 'login';
   private selGender = 'nam';
@@ -893,10 +906,18 @@ class GameScene extends Phaser.Scene {
       this.myId = this.socket.id ?? '';
       this.lastSent = { vx: 0, vy: 0 };
       this.setLoadProgress(100, 'Đã kết nối — sẵn sàng!');
-      if (this.pendingMode === 'session' && this.session) {
-        this.socket.emit('hello', { session: this.session });
+      // GĐ56: nối LẠI sau khi rớt → hello lại bằng phiên cũ để vào thẳng
+      // game. Trước đây pendingMode bị xóa sau lần nối đầu nên hello không
+      // bao giờ được gửi lại — đây là gốc của lỗi "chơi chút là đứng
+      // disconnect, phải tải lại trang" bạn bè báo ở buổi test 23/10.
+      if (this.helloPayload) {
+        this.socket.emit('hello', this.helloPayload);
+      } else if (this.pendingMode === 'session' && this.session) {
+        this.helloPayload = { session: this.session };
+        this.socket.emit('hello', this.helloPayload);
       } else if (this.pendingMode === 'guest') {
-        this.socket.emit('hello', { token: this.guestToken });
+        this.helloPayload = { token: this.guestToken };
+        this.socket.emit('hello', this.helloPayload);
       }
       this.pendingMode = null;
     });
@@ -936,6 +957,12 @@ class GameScene extends Phaser.Scene {
     this.socket.on('char_list', (r: { username: string; maxChars: number; characters: CharSummary[] }) => {
       this.accountName = r.username;
       this.charListCache = r.characters;
+      // GĐ56: đang tự vào lại sau khi rớt mạng → chọn lại đúng nhân vật cũ
+      // ngay, không dừng ở màn hình chọn nhân vật.
+      if (this.wantsRejoin && this.activeCharId && r.characters.some((ch) => ch.charId === this.activeCharId)) {
+        this.socket.emit('select_character', { charId: this.activeCharId });
+        return;
+      }
       this.renderCharList(r.maxChars);
     });
 
@@ -960,6 +987,7 @@ class GameScene extends Phaser.Scene {
       this.myChar = w.character;
       this.lastMyHp = w.character.hp;
       this.inGame = true;
+      this.wantsRejoin = false; // GĐ56: đã vào lại thành công (nếu là lần vào lại)
       (window as unknown as { tttChar?: CharacterData }).tttChar = w.character;
       const scr = document.getElementById('createScreen');
       if (scr) scr.style.display = 'none';
@@ -1161,6 +1189,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.socket.on('disconnect', () => {
+      if (this.inGame) this.wantsRejoin = true; // GĐ56: rớt GIỮA game → tự vào lại khi nối được
       this.hud.setText('Mất kết nối server — đang thử lại…');
     });
 
@@ -1682,7 +1711,7 @@ class GameScene extends Phaser.Scene {
         play.className = 'pbtn gold';
         play.type = 'button';
         play.textContent = 'Vào game';
-        play.onclick = () => this.socket.emit('select_character', { charId: c.charId });
+        play.onclick = () => { this.activeCharId = c.charId; this.socket.emit('select_character', { charId: c.charId }); };
         const del = document.createElement('button');
         del.className = 'delBtn';
         del.type = 'button';
@@ -1777,7 +1806,7 @@ class GameScene extends Phaser.Scene {
     if (guestBtn) {
       guestBtn.onclick = () => {
         this.ensureConnected('guest');
-        if (this.socket.connected) this.socket.emit('hello', { token: this.guestToken });
+        if (this.socket.connected) { this.helloPayload = { token: this.guestToken }; this.socket.emit('hello', this.helloPayload); }
       };
     }
     const exitBtn = byId('btnExit');
@@ -1895,6 +1924,59 @@ class GameScene extends Phaser.Scene {
     }
   }
 
+  // GĐ55: điểm chỉ số CHỌN TRƯỚC trên thẻ nhân vật — cộng/trừ tại chỗ (giữ
+  // nút để tăng nhanh), bấm OK mới gửi server qua 'allocate_stats'.
+  private statStage: { pool: 'free' | 'stat'; free: Record<string, number>; stat: Record<string, number> } = {
+    pool: 'free', free: {}, stat: {},
+  };
+
+  // GĐ55: nút +/− đang được GIỮ — nhịp lặp do updateHudBars (theo tick
+  // 10 lần/giây) điều khiển, bền hơn setInterval khi máy yếu/đang tải nặng.
+  private statHold: { stat: keyof StatsData; dir: number; since: number; btn: HTMLElement } | null = null;
+
+  // GĐ55: vẽ lại riêng phần số của bảng chỉ số — không dựng lại DOM để
+  // nhịp giữ nút không đứt.
+  private paintStats(): void {
+    const c = this.myChar;
+    const stats = document.getElementById('hudStats');
+    if (!c || !stats) return;
+    const st = this.statStage;
+    const usedOf = (m: Record<string, number>) => Object.values(m).reduce((a, b) => a + b, 0);
+    stats.querySelectorAll<HTMLElement>('[data-srow]').forEach((row) => {
+      const k = row.dataset.srow as keyof StatsData;
+      const g = (st.free[k] || 0) + (st.stat[k] || 0) * 2;
+      const svv = row.querySelector('.svv');
+      if (svv) svv.innerHTML = `${c.stats[k]}${g ? ` <b class="staged">+${g}</b>` : ''}`;
+    });
+    const rf = document.getElementById('remFree');
+    if (rf) rf.textContent = String((c.freePoints || 0) - usedOf(st.free));
+    const rs = document.getElementById('remStat');
+    if (rs) rs.textContent = String((c.statPoints || 0) - usedOf(st.stat));
+    const sum = document.getElementById('allocSummary');
+    if (sum) {
+      const t = usedOf(st.free) + usedOf(st.stat);
+      sum.innerHTML = t > 0
+        ? `Đang chọn: <b>+${usedOf(st.free) + usedOf(st.stat) * 2}</b> chỉ số (tốn ${usedOf(st.free)} điểm tự do, ${usedOf(st.stat)} điểm đột phá)`
+        : 'Chạm + để chọn điểm — GIỮ nút + để tăng nhanh, − để sửa lại';
+    }
+  }
+
+  private stageStep(stat: keyof StatsData, dir: number): void {
+    const c = this.myChar;
+    if (!c) return;
+    const st = this.statStage;
+    const usedF = Object.values(st.free).reduce((a, b) => a + b, 0);
+    const usedS = Object.values(st.stat).reduce((a, b) => a + b, 0);
+    if (dir > 0) {
+      if (st.pool === 'free') { if (usedF < (c.freePoints || 0)) st.free[stat] = (st.free[stat] || 0) + 1; }
+      else if (usedS < (c.statPoints || 0)) st.stat[stat] = (st.stat[stat] || 0) + 1;
+    } else {
+      const other = st.pool === 'free' ? 'stat' : 'free';
+      if ((st[st.pool][stat] || 0) > 0) st[st.pool][stat] -= 1;
+      else if ((st[other][stat] || 0) > 0) st[other][stat] -= 1;
+    }
+  }
+
   private renderHudCharStatic(): void {
     if (!this.myChar) return;
     const c = this.myChar;
@@ -1980,21 +2062,87 @@ class GameScene extends Phaser.Scene {
       if (tvText) tvText.textContent = c.linhCan ? `Tu vi ${c.tuVi} (viên mãn)` : 'Tu vi —';
       if (brk) brk.style.display = 'none';
     }
-    // 7 chỉ số + nút cộng điểm (điểm tạo nhân vật +1, điểm đột phá +2)
+    // GĐ55: 7 chỉ số + cộng điểm kiểu CHỌN TRƯỚC (feedback buổi test: bấm
+    // +1 từng phát rất mỏi tay và trên điện thoại bấm là thẻ thu lại).
+    // Nay: chọn bể điểm → bấm +/− hoặc GIỮ nút để tăng nhanh → bấm OK mới
+    // áp vào server. Mọi thao tác trong bảng đều chặn lan sự kiện lên thẻ.
     if (stats) {
       const s = c.stats;
+      const st = this.statStage;
+      const usedOf = (m: Record<string, number>) => Object.values(m).reduce((a, b) => a + b, 0);
+      // Kẹp phần đã chọn theo điểm thật (phòng khi điểm đổi từ nguồn khác)
+      const trim = (m: Record<string, number>, avail: number) => {
+        let used = usedOf(m);
+        for (const k of Object.keys(m)) while (used > avail && m[k] > 0) { m[k] -= 1; used -= 1; }
+      };
+      trim(st.free, c.freePoints || 0);
+      trim(st.stat, c.statPoints || 0);
+      const stagedGain = () => usedOf(st.free) + usedOf(st.stat) * 2;
+      const hasPoints = (c.freePoints || 0) + (c.statPoints || 0) > 0;
       const rows = STAT_LABELS.map(([k, label]) => {
-        let btns = '';
-        if (c.freePoints > 0) btns += `<button class="allocBtn" data-pool="free" data-stat="${k}">+1</button>`;
-        if (c.statPoints > 0) btns += `<button class="allocBtn" data-pool="stat" data-stat="${k}">+2</button>`;
-        return `<div class="statRow"><span class="sl">${label}</span><span class="svv">${s[k]}</span>${btns}</div>`;
+        const g = (st.free[k] || 0) + (st.stat[k] || 0) * 2;
+        const ctl = hasPoints
+          ? `<span class="sctl"><button class="allocBtn minus" data-adj="-1" data-stat="${k}" title="Giảm (giữ để giảm nhanh)">−</button><button class="allocBtn plus" data-adj="1" data-stat="${k}" title="Tăng (giữ để tăng nhanh)">+</button></span>`
+          : '';
+        return `<div class="statRow" data-srow="${k}"><span class="sl">${label}</span><span class="svv">${s[k]}${g ? ` <b class="staged">+${g}</b>` : ''}</span>${ctl}</div>`;
       }).join('');
+      const summaryHtml = () => {
+        const t = usedOf(st.free) + usedOf(st.stat);
+        return t > 0
+          ? `Đang chọn: <b>+${stagedGain()}</b> chỉ số (tốn ${usedOf(st.free)} điểm tự do, ${usedOf(st.stat)} điểm đột phá)`
+          : 'Chạm + để chọn điểm — GIỮ nút + để tăng nhanh, − để sửa lại';
+      };
       stats.innerHTML =
         rows +
-        `<div style="margin-top:3px">Điểm tự do: <b>${c.freePoints}</b> (+1/điểm) · Điểm đột phá: <b>${c.statPoints}</b> (+2/điểm)</div>`;
-      stats.querySelectorAll<HTMLButtonElement>('.allocBtn').forEach((b) => {
-        b.onclick = () =>
-          this.socket.emit('allocate_stat', { pool: b.dataset.pool, stat: b.dataset.stat });
+        (hasPoints
+          ? `<div class="poolRow">
+               <button class="poolChip ${st.pool === 'free' ? 'on' : ''}" data-poolchip="free">Điểm tự do (+1) · còn <span id="remFree">${(c.freePoints || 0) - usedOf(st.free)}</span></button>
+               <button class="poolChip ${st.pool === 'stat' ? 'on' : ''}" data-poolchip="stat">Điểm đột phá (+2) · còn <span id="remStat">${(c.statPoints || 0) - usedOf(st.stat)}</span></button>
+             </div>
+             <div class="allocBar"><span id="allocSummary">${summaryHtml()}</span>
+               <button class="allocReset" id="allocReset">Hoàn lại</button>
+               <button class="allocOk" id="allocOk">✔ OK</button>
+             </div>`
+          : `<div style="margin-top:3px">Điểm tự do: <b>0</b> · Điểm đột phá: <b>0</b></div>`);
+      // GĐ55: bấm +/− = 1 điểm ngay; GIỮ = lặp theo tick qua statHold
+      // (updateHudBars điều khiển) — vẽ lại bằng paintStats, không dựng lại DOM.
+      stats.querySelectorAll<HTMLButtonElement>('[data-adj]').forEach((b) => {
+        const stat = b.dataset.stat as keyof StatsData;
+        const dir = Number(b.dataset.adj);
+        b.addEventListener('pointerdown', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.statHold = { stat, dir, since: performance.now(), btn: b };
+          this.stageStep(stat, dir);
+          this.paintStats();
+        });
+        const release = () => {
+          if (this.statHold?.btn === b) { this.statHold = null; this.renderHudCharStatic(); }
+        };
+        b.addEventListener('pointerup', release);
+        b.addEventListener('pointercancel', release);
+        b.addEventListener('click', (e) => { e.stopPropagation(); e.preventDefault(); });
+      });
+      stats.querySelectorAll<HTMLButtonElement>('[data-poolchip]').forEach((b) => {
+        b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          st.pool = b.dataset.poolchip === 'stat' ? 'stat' : 'free';
+          this.renderHudCharStatic();
+        });
+      });
+      const okB = document.getElementById('allocOk') as HTMLButtonElement | null;
+      if (okB) okB.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const nz = (m: Record<string, number>) => Object.fromEntries(Object.entries(m).filter(([, v]) => v > 0));
+        this.socket.emit('allocate_stats', { free: nz(st.free), stat: nz(st.stat) });
+        st.free = {}; st.stat = {};
+        this.renderHudCharStatic();
+      });
+      const rsB = document.getElementById('allocReset') as HTMLButtonElement | null;
+      if (rsB) rsB.addEventListener('click', (e) => {
+        e.stopPropagation();
+        st.free = {}; st.stat = {};
+        this.renderHudCharStatic();
       });
     }
     // GĐ42b: nhãn nút "Chỉ số" — hướng mở/đóng + nhắc khi còn điểm chưa cộng
@@ -2197,7 +2345,10 @@ class GameScene extends Phaser.Scene {
     if (sideMenu) sideMenu.addEventListener('click', () => this.toggleGameMenu());
     // Điện thoại: chạm khung nhân vật để mở/thu bảng chỉ số
     const hudChar = document.getElementById('hudChar');
-    if (hudChar) hudChar.addEventListener('click', () => {
+    if (hudChar) hudChar.addEventListener('click', (e) => {
+      // GĐ55: thao tác TRONG bảng chỉ số (cộng điểm, chuyển bể…) không được
+      // làm thẻ thu lại — trước đây bấm + trên điện thoại là bảng tắt luôn.
+      if ((e.target as HTMLElement).closest('#hudDetails')) return;
       if (document.body.classList.contains('touch')) hudChar.classList.toggle('expanded');
     });
     // GĐ42b: nút "Chỉ số" riêng trong thẻ — bấm để xem/thu bảng chỉ số (mọi thiết bị)
@@ -2666,6 +2817,21 @@ class GameScene extends Phaser.Scene {
       if (si.sect) {
         html += `<div class="prow"><span class="pname">🏪 Tiệm Tông Môn + Kho Đan<span class="pdesc">Giá ưu đãi cho đệ tử — đan đột phá rẻ hơn Tiệm Đan Dược</span></span><button class="pbtn" data-shop="tiem_tong_mon">Vào tiệm</button></div>`;
         html += `<div class="prow"><span class="pname">⚜️ Đổi Công trạng<span class="pdesc">50 Công trạng → +1 điểm chỉ số tự do (tỉ lệ tạm)</span></span><button class="pbtn" data-exchange="1">Đổi 50</button></div>`;
+        // GĐ54: danh sách CÔNG PHÁP TÔNG MÔN — bậc Trúc Cơ theo lớp + vũ khí đang cầm, điều kiện đã giảm 5 điểm
+        if (si.skills) {
+          html += `<div class="prow"><span class="pname">📜 Công pháp ${si.sectName}<span class="pdesc">Công pháp riêng của tông — bậc Trúc Cơ theo lớp và vũ khí bạn đang cầm. Đệ tử học tại tông được GIẢM 5 điểm mỗi điều kiện chỉ số (theo lệ tông môn).</span></span></div>`;
+          if (!si.skills.length) html += `<div class="prow"><span class="pname">— Vũ khí này chưa có công pháp tông —</span></div>`;
+          for (const sk of si.skills) {
+            const right = sk.learned
+              ? `<span class="pdesc">✅ Đã lĩnh hội</span>`
+              : sk.isLearning
+                ? `<span class="pdesc">🧘 Đang lĩnh ngộ…</span>`
+                : sk.canLearn
+                  ? `<button class="pbtn gold" data-sectlearn="${sk.id}">Học</button>`
+                  : `<span class="pdesc">${sk.missingText}</span>`;
+            html += `<div class="prow"><span class="pname">${sk.name}<span class="pdesc">Hệ số ${sk.coef} · Hồi ${sk.cdMs / 1000}s · Chân nguyên ${sk.cost}${sk.fxText ? ` · ${sk.fxText}` : ''}<br/>Điều kiện gốc: ${sk.condText || '—'} → đệ tử chỉ cần: ${sk.sectCondText || '—'}</span></span>${right}</div>`;
+          }
+        }
       }
     }
     btns.innerHTML = html || '<div class="prow">Không có việc gì thêm lúc này.</div>';
@@ -2687,6 +2853,10 @@ class GameScene extends Phaser.Scene {
     });
     btns.querySelectorAll<HTMLButtonElement>('[data-exchange]').forEach((b) => {
       b.onclick = () => { this.socket.emit('exchange_merit'); setTimeout(() => this.socket.emit('talk_npc', { npcId: 'npc_sugia' }), 350); };
+    });
+    // GĐ54: học công pháp tông môn — bắt đầu lĩnh ngộ như học thường (đóng hộp thoại, nhân vật ngồi học tại chỗ)
+    btns.querySelectorAll<HTMLButtonElement>('[data-sectlearn]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('learn_skill', { skillId: b.dataset.sectlearn, via: 'sect' }); this.closePanels(); };
     });
     // GĐ40+: nút chỉ đích danh — bấm xong mở lại hộp thoại Trưởng Làng xem kết quả
     btns.querySelectorAll<HTMLButtonElement>('[data-accuse]').forEach((b) => {
@@ -2903,6 +3073,12 @@ class GameScene extends Phaser.Scene {
   }
 
   private updateHudBars(p: PlayerState): void {
+    // GĐ55: nhịp lặp khi GIỮ nút cộng/trừ điểm chỉ số (theo tick 10 lần/s)
+    const hold = this.statHold;
+    if (hold) {
+      if (!document.body.contains(hold.btn) || performance.now() - hold.since > 30000) this.statHold = null;
+      else if (performance.now() - hold.since > 350) { this.stageStep(hold.stat, hold.dir); this.paintStats(); }
+    }
     const hpFill = document.getElementById('hudHpFill') as HTMLElement | null;
     const hpText = document.getElementById('hudHpText');
     const mpFill = document.getElementById('hudMpFill') as HTMLElement | null;

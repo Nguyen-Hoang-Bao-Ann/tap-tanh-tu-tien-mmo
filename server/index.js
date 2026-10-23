@@ -1089,6 +1089,42 @@ const SECTS = {
   huyenthien: { name: 'Huyền Thiên Tông' },
 };
 const MERIT_PER_POINT = 50;
+// GĐ54: CÔNG PHÁP TÔNG MÔN — đúng file thiết kế (mục Tông môn và đợt chiêu
+// mộ): "Gia nhập tông môn: mở tiệm và công pháp riêng của tông (ở bản đầu:
+// danh sách ngắn các công pháp đã có trong bảng, giảm điều kiện 5 điểm chỉ
+// số)". Danh sách tông = công pháp bậc TRÚC CƠ của lớp + vũ khí đang cầm
+// trong bảng 511 sẵn có; đệ tử Thiên Kiếm Môn / Huyền Thiên Tông học các
+// chiêu này tại Sứ Giả với MỖI điều kiện chỉ số giảm 5 điểm. Môn phái nhỏ
+// Thanh Phong không có công pháp tông (bảng của file ghi rõ phần của nó chỉ
+// là tiệm cơ bản + nhiệm vụ bang + đồng hành).
+const SECT_COND_DISCOUNT = 5;
+function discountedSkill(sk, d = SECT_COND_DISCOUNT) {
+  if (!sk?.cond?.length) return sk;
+  return { ...sk, cond: sk.cond.map((c) => ({ stat: c.stat, value: Math.max(0, c.value - d) })) };
+}
+function sectSkillListFor(p) {
+  if (!p.sect || !SECTS[p.sect]) return null;
+  const w = weaponOf(p.classId, p.weaponId);
+  if (!w) return [];
+  return (SKILL_CATALOG[p.classId]?.[w.id] || [])
+    .filter((s) => s.tier === 'trucco')
+    .map((sk) => {
+      const dsk = discountedSkill(sk);
+      const learned = (p.skills || []).includes(sk.id);
+      const realmOk = p.realm === 'tc';
+      const condMet = realmOk && condMetOf(p, dsk);
+      return {
+        id: sk.id, name: sk.name, coef: sk.coef, cdMs: sk.cdMs, cost: sk.cost,
+        fxText: sk.fxText || '', desc: sk.desc || '',
+        condText: condTextOf(sk), sectCondText: condTextOf(dsk),
+        learned, isLearning: p.learning?.skillId === sk.id,
+        canLearn: !learned && condMet,
+        missingText: learned ? 'Đã lĩnh hội'
+          : !realmOk ? 'Cần cảnh giới Trúc Cơ'
+          : !condMet ? `Chưa đủ chỉ số — đệ tử cần: ${condTextOf(dsk)}` : '',
+      };
+    });
+}
 function sectInfoFor(p) {
   const w = worldClock();
   const stepNow = globalStep(p.realm, p.tier);
@@ -1101,6 +1137,7 @@ function sectInfoFor(p) {
     letter,
     sect: p.sect || null,
     sectName: p.sect && SECTS[p.sect] ? SECTS[p.sect].name : null,
+    skills: sectSkillListFor(p), // GĐ54: công pháp tông môn (null nếu chưa có tông)
     clock: { day: w.day, month: w.month, year: w.year },
     thienkiem: {
       id: 'thienkiem', name: SECTS.thienkiem.name, open: tkOpen,
@@ -1366,7 +1403,14 @@ const server = http.createServer(app);
 // Socket.io — cho phép client Vite (cổng 5173) kết nối chéo origin khi dev
 const io = new Server(server, {
   cors: { origin: '*', methods: ['GET', 'POST'] },
+  pingInterval: 25000,
+  pingTimeout: 45000, // GĐ56: nới chờ pong — server free CPU yếu dễ trễ nhịp, tránh rớt oan
 });
+
+// GĐ56: một lỗi bất ngờ lúc xử lý KHÔNG được phép làm sập cả tiến trình
+// (mọi người chơi rớt theo) — ghi log để truy vết, giữ server sống.
+process.on('uncaughtException', (e) => { console.error('[CRASH-GUARD] uncaughtException:', (e && e.stack) || e); });
+process.on('unhandledRejection', (e) => { console.error('[CRASH-GUARD] unhandledRejection:', (e && e.stack) || e); });
 
 // API trạng thái để kiểm tra nhanh (trang chủ / dành cho bản dựng game)
 app.get('/api/status', (req, res) => {
@@ -1452,10 +1496,18 @@ function spawnFromCharacter(socket, charKey, char) {
   // quãng nghỉ do vòng tick ghi trên bản offline (số ngày + Tu vi đã cộng).
   let offlineSummary = null;
   for (const [id, op] of players) {
-    if (op.isOffline && op.charKey === charKey) {
+    if (op.charKey !== charKey) continue;
+    if (op.isOffline) {
       if ((op.restDays || 0) > 0) {
         offlineSummary = { state: op.restState || null, days: op.restDays, grant: op.restGrant || 0 };
       }
+      players.delete(id);
+    } else {
+      // GĐ56: bản ONLINE của phiên socket cũ chưa kịp timeout (người chơi
+      // vừa nối lại bằng socket mới) → cho nghỉ hưu ngay: gỡ khỏi thế
+      // giới + đánh dấu để khi socket cũ ngắt hẳn, disconnect KHÔNG kéo
+      // nhân vật đi nghỉ offline chồng lên phiên mới.
+      op._superseded = true;
       players.delete(id);
     }
   }
@@ -2766,6 +2818,22 @@ io.on('connection', (socket) => {
       }
     }
     if (player.skills.includes(target.id)) return;
+    // GĐ54: học QUA TÔNG MÔN — chỉ đệ tử Thiên Kiếm/Huyền Thiên, chỉ công
+    // pháp Trúc Cơ trong danh sách tông (lớp + vũ khí đang cầm); điều kiện
+    // chỉ số được giảm 5 điểm mỗi chỉ số qua effTarget ở bước kiểm tra dưới.
+    const viaSect = !!(data && data.via === 'sect');
+    let effTarget = target;
+    if (viaSect) {
+      if (!player.sect || !SECTS[player.sect]) {
+        socket.emit('interact_error', { message: 'Chỉ đệ tử tông môn mới học được công pháp riêng của tông.' });
+        return;
+      }
+      if (target.tier !== 'trucco' || !target.weaponId) {
+        socket.emit('interact_error', { message: `${target.name} không nằm trong danh sách công pháp tông môn.` });
+        return;
+      }
+      effTarget = discountedSkill(target);
+    }
     // Kiểm tra thuộc về: chiêu theo vũ khí phải đúng vũ khí đang cầm; chiêu lớp thì đúng lớp
     if (target.weaponId) {
       const w = weaponOf(player.classId, player.weaponId);
@@ -2783,8 +2851,8 @@ io.on('connection', (socket) => {
         socket.emit('interact_error', { message: target.tier === 'trucco' ? `Cần cảnh giới Trúc Cơ để học ${target.name}.` : `Cần vào Luyện Khí để học ${target.name}.` });
         return;
       }
-      if (!condMetOf(player, target)) {
-        socket.emit('interact_error', { message: `Chưa đủ điều kiện học ${target.name} — cần: ${condTextOf(target)}.` });
+      if (!condMetOf(player, effTarget)) {
+        socket.emit('interact_error', { message: `Chưa đủ điều kiện học ${target.name} — cần: ${condTextOf(effTarget)}${viaSect ? ' (đã giảm 5 điểm cho đệ tử tông môn)' : ''}.` });
         return;
       }
     } else if (target.tier === 'luyenkhi') {
@@ -3207,6 +3275,42 @@ io.on('connection', (socket) => {
     persistPlayer(player);
     syncChar(socket, player);
     console.log(`[tu luyện] ${player.name} cộng điểm vào ${stat} → ${player.stats[stat]}`);
+  });
+
+  // GĐ55 (feedback buổi test 23/10): cộng điểm HÀNG LOẠT — client cho chọn
+  // trước bằng +/− (giữ nút tăng nhanh, trừ để sửa) rồi bấm OK mới gửi gói
+  // này. Server kiểm tổng điểm từng bể rồi áp một lần, tránh cộng dở dang.
+  socket.on('allocate_stats', (data) => {
+    if (!player || !data) return;
+    const clean = (obj) => {
+      if (!obj || typeof obj !== 'object') return {};
+      const out = {};
+      for (const [stat, n] of Object.entries(obj)) {
+        if (!STAT_KEYS.includes(stat)) continue;
+        const v = Math.floor(Number(n));
+        if (Number.isFinite(v) && v > 0) out[stat] = v;
+      }
+      return out;
+    };
+    const freeReq = clean(data.free);
+    const statReq = clean(data.stat);
+    const freeTotal = Object.values(freeReq).reduce((a, b) => a + b, 0);
+    const statTotal = Object.values(statReq).reduce((a, b) => a + b, 0);
+    if (freeTotal === 0 && statTotal === 0) return;
+    if (freeTotal > (player.freePoints || 0) || statTotal > (player.statPoints || 0)) {
+      socket.emit('interact_error', { message: 'Số điểm chọn vượt quá điểm đang có — bảng đã nạp lại số thật.' });
+      syncChar(socket, player);
+      return;
+    }
+    for (const [stat, n] of Object.entries(freeReq)) player.stats[stat] += n;
+    for (const [stat, n] of Object.entries(statReq)) player.stats[stat] += n * 2;
+    player.freePoints -= freeTotal;
+    player.statPoints -= statTotal;
+    player.hp = Math.min(player.hp, maxHpOf(player.stats));
+    player.mp = Math.min(player.mp, maxMpOf(player.stats));
+    persistPlayer(player);
+    syncChar(socket, player);
+    console.log(`[tu luyện] ${player.name} cộng điểm hàng loạt: tự do ${freeTotal} điểm, đột phá ${statTotal} điểm`);
   });
 
   // ---- Kinh tế + Nhiệm vụ (GĐ8) ----
@@ -3850,12 +3954,12 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    if (player) {
+    if (player && !player._superseded) {
       // GĐ21: nhân vật không biến mất — tự về điểm an toàn ngồi thiền / ngủ
       goOffline(player);
       console.log(`[-] ${player.name} rời game (nhân vật ở lại nghỉ offline) — ${players.size} thực thể`);
     } else {
-      console.log(`[-] Socket ${socket.id} ngắt (chưa vào game)`);
+      console.log(`[-] Socket ${socket.id} ngắt (${player ? 'phiên cũ đã được phiên mới thay' : 'chưa vào game'})`);
     }
   });
 });
