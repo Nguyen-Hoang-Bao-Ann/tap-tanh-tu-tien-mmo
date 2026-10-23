@@ -1100,6 +1100,7 @@ export const WORLD_GEO = {
   H: 1200,
   village: { x: 240, y: 180, w: 920, h: 760 },
   plaza: { x: 700, y: 560 },
+  realm: { x: 1760, y: 240, w: 880, h: 720 }, // GĐ57: Bí Cảnh Thạch Lâm (nướng ở texture riêng 'realm-bg' vì giới hạn cỡ texture)
   pond: { x: 990, y: 890, rx: 75, ry: 45 },
   houses: [
     { name: 'Đạo Quán', x: 605, y: 245, w: 190, h: 115, body: '#e9dcbc', roof: '#8a4b2a' },
@@ -1115,6 +1116,10 @@ export const WORLD_GEO = {
     [520, 860], [880, 640], [280, 400], [1120, 400], [640, 215], [760, 905],
     [150, 150], [1450, 150], [150, 1050], [1450, 1050], [120, 600], [1480, 600],
     [800, 80], [80, 80],
+    // GĐ57: dải rừng ngăn phía đông + cây trong bí cảnh — KHỚP TREE_TRUNKS phía server
+    [1680, 150], [1692, 330], [1676, 520], [1690, 700], [1680, 880], [1694, 1050],
+    [1900, 340], [2150, 320], [2450, 360], [1980, 880], [2280, 890], [2520, 860],
+    [2050, 560], [2400, 660],
   ] as Array<readonly [number, number]>,
 };
 export const HOUSE_TEX = { padX: 32, padY: 34 };
@@ -1499,10 +1504,110 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   b.beginPath(); b.arc(P.x, P.y, FR * 0.17, 0, Math.PI * 2); b.stroke();
   b.globalAlpha = 1; b.fillStyle = '#eafffa';
   b.beginPath(); b.arc(P.x, P.y, 2.4, 0, Math.PI * 2); b.fill();
+  // GĐ57: vòng cổng BÍ CẢNH ở sân Thanh Phong Môn (1470,600) — vẽ cùng
+  // ngôn ngữ với vòng trận pháp quảng trường nhưng tông tím huyền bí
+  {
+    const pg = b.createRadialGradient(1470, 600, 6, 1470, 600, 74);
+    pg.addColorStop(0, 'rgba(190,160,255,0.22)'); pg.addColorStop(1, 'rgba(190,160,255,0)');
+    b.fillStyle = pg;
+    b.beginPath(); b.arc(1470, 600, 74, 0, Math.PI * 2); b.fill();
+    b.strokeStyle = 'rgba(168,140,250,0.85)'; b.lineWidth = 2;
+    b.beginPath(); b.arc(1470, 600, 44, 0, Math.PI * 2); b.stroke();
+    b.strokeStyle = 'rgba(127,231,220,0.7)'; b.lineWidth = 1.4;
+    b.beginPath(); b.arc(1470, 600, 36, 0, Math.PI * 2); b.stroke();
+    b.fillStyle = '#efe9ff';
+    b.beginPath(); b.arc(1470, 600, 2.6, 0, Math.PI * 2); b.fill();
+  }
   // Viền bản đồ
   b.strokeStyle = 'rgba(24,46,24,0.5)'; b.lineWidth = 10;
   b.strokeRect(5, 5, G.W - 10, G.H - 10);
   scene.textures.addCanvas('world-bg', bgC);
+
+  // ---------- GĐ57: NỀN PHÍA ĐÔNG (dải rừng ngăn + BÍ CẢNH THẠCH LÂM) ----------
+  // Texture riêng cho x∈[1600,2800] — gộp vào world-bg sẽ quá 4096px,
+  // nhiều GPU điện thoại không nạp nổi. Tọa độ vẽ = tọa độ thế giới,
+  // canvas tự tịnh tiến −1600.
+  {
+    const [rC, r] = makeCanvas(1200 * 2, G.H * 2);
+    r.scale(2, 2);
+    r.translate(-1600, 0);
+    const rrnd = seededRand(4242);
+    r.fillStyle = '#4a7d3e';
+    r.fillRect(1600, 0, 1200, G.H);
+    for (let i = 0; i < 5200; i++) {
+      r.fillStyle = pxDet[i % 3];
+      r.fillRect(1600 + Math.floor(rrnd() * 150) * 8, Math.floor(rrnd() * 150) * 8, 8, 8);
+    }
+    // Dải rừng ngăn 1600–1760: nền tối rậm
+    r.fillStyle = 'rgba(24,52,24,0.45)';
+    r.fillRect(1600, 0, 160, G.H);
+    for (let i = 0; i < 260; i++) {
+      const cx = 1604 + rrnd() * 152, cy = rrnd() * G.H;
+      r.fillStyle = `rgba(18,44,18,${0.12 + rrnd() * 0.15})`;
+      r.beginPath(); r.ellipse(cx, cy, 16 + rrnd() * 22, 12 + rrnd() * 16, 0, 0, Math.PI * 2); r.fill();
+    }
+    // Nền bí cảnh: cỏ lạnh pha đá
+    const RM = G.realm;
+    r.fillStyle = 'rgba(58,88,84,0.38)';
+    r.fillRect(RM.x, RM.y, RM.w, RM.h);
+    r.fillStyle = 'rgba(30,60,58,0.20)';
+    r.fillRect(RM.x + 14, RM.y + 14, RM.w - 28, RM.h - 28);
+    for (let i = 0; i < 2400; i++) {
+      const px = RM.x + Math.floor(rrnd() * (RM.w / 8)) * 8, py = RM.y + Math.floor(rrnd() * (RM.h / 8)) * 8;
+      r.fillStyle = pxDet[i % 3];
+      r.fillRect(px, py, 8, 8);
+    }
+    for (let i = 0; i < 300; i++) { // sỏi đá trong bí cảnh
+      const px = RM.x + rrnd() * RM.w, py = RM.y + rrnd() * RM.h;
+      r.fillStyle = rrnd() > 0.5 ? 'rgba(140,148,150,0.25)' : 'rgba(52,72,70,0.25)';
+      r.fillRect(px, py, 3 + rrnd() * 4, 2 + rrnd() * 3);
+    }
+    // Hàng đá viền bí cảnh (khớp vòng tường vô hình phía server)
+    const rockAt = (x: number, y: number, s: number) => {
+      r.fillStyle = 'rgba(0,0,0,0.18)';
+      r.beginPath(); r.ellipse(x, y + 5 * s, 13 * s, 4 * s, 0, 0, Math.PI * 2); r.fill();
+      r.fillStyle = '#767b82';
+      r.beginPath(); r.ellipse(x, y, 12 * s, 9 * s, 0, 0, Math.PI * 2); r.fill();
+      r.fillStyle = '#a8adb3';
+      r.beginPath(); r.ellipse(x - 3 * s, y - 3 * s, 6 * s, 4 * s, 0, 0, Math.PI * 2); r.fill();
+    };
+    for (let x = RM.x + 6; x <= RM.x + RM.w - 6; x += 42) { rockAt(x, RM.y + 4, 0.9 + rrnd() * 0.4); rockAt(x, RM.y + RM.h - 4, 0.9 + rrnd() * 0.4); }
+    for (let y = RM.y + 40; y <= RM.y + RM.h - 40; y += 42) { rockAt(RM.x + 4, y, 0.9 + rrnd() * 0.4); rockAt(RM.x + RM.w - 4, y, 0.9 + rrnd() * 0.4); }
+    // Tinh thể ngọc rải trong bí cảnh (trang trí)
+    const crystalAt = (x: number, y: number, s: number) => {
+      r.fillStyle = 'rgba(127,231,220,0.85)';
+      r.beginPath(); r.moveTo(x, y - 16 * s); r.lineTo(x + 6 * s, y); r.lineTo(x, y + 4 * s); r.lineTo(x - 6 * s, y); r.closePath(); r.fill();
+      r.fillStyle = 'rgba(234,255,250,0.9)';
+      r.beginPath(); r.moveTo(x, y - 16 * s); r.lineTo(x + 3 * s, y - 2 * s); r.lineTo(x, y + 2 * s); r.lineTo(x - 3 * s, y - 2 * s); r.closePath(); r.fill();
+    };
+    const crys: Array<[number, number]> = [[1960, 430], [2320, 420], [2560, 520], [2020, 780], [2480, 800], [2180, 900], [2560, 900], [1900, 700]];
+    for (const [cx, cy] of crys) { crystalAt(cx, cy, 0.8 + rrnd() * 0.5); crystalAt(cx + 14, cy + 4, 0.55); }
+    // Đàn đá — nơi Thạch Khôi Lỗi trấn giữ (2200,600)
+    {
+      r.fillStyle = 'rgba(126,130,124,0.45)';
+      r.beginPath(); r.arc(2200, 600, 86, 0, Math.PI * 2); r.fill();
+      r.strokeStyle = 'rgba(190,196,188,0.5)'; r.lineWidth = 3;
+      r.beginPath(); r.arc(2200, 600, 74, 0, Math.PI * 2); r.stroke();
+      for (let k = 0; k < 6; k++) {
+        const a = (k / 6) * Math.PI * 2;
+        rockAt(2200 + Math.cos(a) * 74, 600 + Math.sin(a) * 74, 1.15);
+      }
+      crystalAt(2200 - 52, 600 - 40, 1.0); crystalAt(2200 + 52, 600 - 40, 1.0);
+      crystalAt(2200 - 52, 600 + 44, 1.0); crystalAt(2200 + 52, 600 + 44, 1.0);
+    }
+    // Vòng cổng TRỞ VỀ trong bí cảnh (1832,600)
+    {
+      const pg = r.createRadialGradient(1832, 600, 6, 1832, 600, 74);
+      pg.addColorStop(0, 'rgba(190,160,255,0.22)'); pg.addColorStop(1, 'rgba(190,160,255,0)');
+      r.fillStyle = pg;
+      r.beginPath(); r.arc(1832, 600, 74, 0, Math.PI * 2); r.fill();
+      r.strokeStyle = 'rgba(168,140,250,0.85)'; r.lineWidth = 2;
+      r.beginPath(); r.arc(1832, 600, 44, 0, Math.PI * 2); r.stroke();
+      r.strokeStyle = 'rgba(127,231,220,0.7)'; r.lineWidth = 1.4;
+      r.beginPath(); r.arc(1832, 600, 36, 0, Math.PI * 2); r.stroke();
+    }
+    scene.textures.addCanvas('realm-bg', rC);
+  }
 
   // ---------- VÒNG QUẺ XOAY (8 quẻ + vòng tick) ----------
   const [triC, tc] = makeCanvas(FORM_TEX.size * 2, FORM_TEX.size * 2);

@@ -553,6 +553,39 @@
         background: rgba(10, 20, 16, 0.22); border: 1.5px solid rgba(139, 233, 201, 0.35);
       }
       body.touch #joyKnob { width: 44px; height: 44px; opacity: 0.9; }
+
+      /* ==== GĐ58: KHÓA MÀN HÌNH DỌC trên thiết bị cảm ứng (người chơi chốt 23/10) ====
+         Game thiết kế cho màn NGANG: ở dọc, panel/HUD vỡ bố cục (bạn bè phản ánh qua ảnh+video).
+         Thiết bị cảm ứng đang để dọc → phủ kín màn hình nhắc xoay ngang, chặn mọi thao tác;
+         xoay ngang là lớp phủ tự biến mất, chơi tiếp ngay. Máy tính (chuột) không bị khóa. */
+      #rotateLock {
+        display: none; position: fixed; inset: 0; z-index: 9999;
+        flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+        background: radial-gradient(ellipse at 50% 38%, rgba(23,54,40,.97), rgba(5,10,8,.98));
+        color: #dff5e6; text-align: center; padding: 24px;
+        font-family: Palatino, Georgia, 'Times New Roman', serif;
+      }
+      #rotateLock .rlPhone {
+        width: 54px; height: 88px; border: 3px solid #8be9c9; border-radius: 10px;
+        position: relative; animation: rlRotate 2.2s ease-in-out infinite;
+        box-shadow: 0 0 24px rgba(139,233,201,.35), inset 0 0 14px rgba(139,233,201,.15);
+      }
+      #rotateLock .rlPhone::after {
+        content: ''; position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%);
+        width: 16px; height: 3px; border-radius: 2px; background: #8be9c9;
+      }
+      @keyframes rlRotate {
+        0%, 22% { transform: rotate(0deg); }
+        55%, 82% { transform: rotate(90deg); }
+        100% { transform: rotate(90deg); }
+      }
+      #rotateLock .rlTitle { font-size: 21px; font-weight: 700; color: #a9e8c9; letter-spacing: .5px; }
+      #rotateLock .rlSub { font-size: 14px; line-height: 1.55; color: #bfe9d9; max-width: 300px; font-family: inherit; }
+      @media (orientation: portrait) and (pointer: coarse) {
+        #rotateLock { display: flex; }
+      }
+      /* GĐ58: thẻ nhân vật trên mobile không tràn xuống cụm nút chiêu — cao tối đa rồi cuộn trong thẻ */
+      body.touch #hudChar { max-height: calc(100vh - 128px); overflow-y: auto; overscroll-behavior: contain; }
     </style>
   </head>
   <body>
@@ -757,5 +790,10 @@
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
+    <div id="rotateLock" aria-hidden="true">
+      <div class="rlPhone"></div>
+      <div class="rlTitle">Vui lòng xoay ngang điện thoại</div>
+      <div class="rlSub">Tập Tành Tu Tiên được thiết kế cho màn hình ngang.<br />Xoay máy lại là chơi tiếp ngay — nhân vật và dữ liệu vẫn nguyên vẹn.</div>
+    </div>
   </body>
 </html>

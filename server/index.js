@@ -28,7 +28,7 @@ const { Server } = require('socket.io');
 const storage = require('./storage'); // lưu trữ cloud tuỳ chọn (MONGODB_URI) — xem storage.js
 
 const PORT = process.env.PORT || 3001; // env để chạy thêm instance test song song
-const WORLD_W = 1600; // Giai đoạn 4: sân mở rộng 1600×1200, camera phía client bám theo nhân vật
+const WORLD_W = 2800; // GĐ57: mở rộng phía đông cho BÍ CẢNH (1600 làng/farm + dải rừng ngăn + vùng bí cảnh); camera client bám theo nhân vật
 const WORLD_H = 1200;
 const TICK_MS = 100; // 10 tick/giây
 const DEMO_BOTS = 8;
@@ -60,6 +60,12 @@ const MONSTER_TYPES = {
   wolf: { name: 'Sói Xám', hp: 40, atk: 5, def: 0, tuVi: 3, count: 5, chaseSpeed: 120, wanderSpeed: 42, atkRange: 42, atkCdMs: 1000, chestTier: 'yeu' },
   bat: { name: 'Dơi Đen', hp: 20, atk: 4, def: 0, tuVi: 4, count: 4, chaseSpeed: 175, wanderSpeed: 62, atkRange: 42, atkCdMs: 900, chestTier: 'trung' },
   golem: { name: 'Thạch Quái', hp: 140, atk: 10, def: 8, tuVi: 8, count: 3, chaseSpeed: 55, wanderSpeed: 20, atkRange: 46, atkCdMs: 1400, chestTier: 'manh' },
+  // GĐ57 — BÍ CẢNH THẠCH LÂM: số HP/ATK/Tu vi lấy từ dữ liệu GDD của
+  // người chơi (MonsterData: quái bậc Trúc Cơ); def/tốc độ là số TẠM vì
+  // dữ liệu không ghi. Chỉ sống trong vùng bí cảnh (area).
+  kiemma: { name: 'Kiếm Ma', hp: 420, atk: 26, def: 3, tuVi: 22, count: 4, chaseSpeed: 132, wanderSpeed: 40, atkRange: 44, atkCdMs: 1100, chestTier: 'manh', area: 'realm', respawnMs: 30000 },
+  huyetlang: { name: 'Huyết Lang', hp: 350, atk: 30, def: 0, tuVi: 22, count: 4, chaseSpeed: 168, wanderSpeed: 55, atkRange: 42, atkCdMs: 950, chestTier: 'manh', area: 'realm', respawnMs: 30000 },
+  khoiloi: { name: 'Thạch Khôi Lỗi', hp: 700, atk: 22, def: 8, tuVi: 33, count: 1, chaseSpeed: 62, wanderSpeed: 16, atkRange: 48, atkCdMs: 1400, chestTier: 'manh', area: 'realmBoss', respawnMs: 600000, minChestGrade: 'B' },
 };
 
 // ================= GĐ39: HỆ THỐNG RƯƠNG (dữ liệu-hóa) =================
@@ -1018,12 +1024,30 @@ const CASE_WITNESSES = ['npc_truonglang', 'npc_dan', 'npc_nguyenlieu', 'npc_sugi
 
 // NPC cố định của làng (đứng cạnh cửa nơi mình phụ trách). GĐ24: mỗi NPC có
 // TÍNH CÁCH (đúng file B11) — dùng cho lời thoại theo mức thiện cảm.
+// GĐ57: thông tin cổng bí cảnh cho hộp thoại NPC cổng — vào chỉ dành cho
+// đệ tử Thiên Kiếm Môn / Huyền Thiên Tông (đúng file: bí cảnh nhỏ là quyền
+// lợi của tông môn trung/lớn); cổng ra thì ai ở trong cũng dùng được.
+function realmInfoFor(p, npcId) {
+  if (npcId === 'npc_bicanh_in') {
+    const member = !!(p.sect && SECTS[p.sect]);
+    return {
+      dir: 'enter', member, canEnter: member,
+      sectName: member ? SECTS[p.sect].name : null,
+      missingText: member ? '' : 'Cổng chỉ nhận ấn ký đệ tử Thiên Kiếm Môn / Huyền Thiên Tông. Hãy gia nhập tông môn trước (gặp Sứ Giả Tông Môn).',
+    };
+  }
+  if (npcId === 'npc_bicanh_out') return { dir: 'exit', member: true, canEnter: true, sectName: null, missingText: '' };
+  return null;
+}
+
 const NPCS = [
   { id: 'npc_truonglang', name: 'Trưởng Làng', role: 'Trả nhiệm vụ', personality: 'Hiền hòa', x: 362, y: 548, direction: 'down' },
   { id: 'npc_dan', name: 'Chủ Tiệm Đan', role: 'Mua bán đan dược', personality: 'Trầm lặng', shopId: 'tiem_dan', x: 985, y: 548, direction: 'down' },
   { id: 'npc_nguyenlieu', name: 'Chủ Tiệm Nguyên Liệu', role: 'Mua bán nguyên liệu', personality: 'Hào sảng', shopId: 'tiem_nguyen_lieu', x: 368, y: 379, direction: 'down' },
   { id: 'npc_thuongnhan', name: 'Thương Nhân Lưu Động', role: 'Buôn hàng hiếm khắp nơi', personality: 'Tham lam', shopId: 'luu_dong', x: 884, y: 616, direction: 'down' }, // GĐ40
   { id: 'npc_sugia', name: 'Sứ Giả Tông Môn', role: 'Chiêu mộ đệ tử', personality: 'Trang nghiêm', x: 762, y: 470, direction: 'down' }, // GĐ30
+  { id: 'npc_bicanh_in', name: 'Cổng Bí Cảnh', role: 'Chỉ đệ tử tông môn mới qua được', personality: 'Cổ xưa', x: 1470, y: 600, direction: 'down' }, // GĐ57
+  { id: 'npc_bicanh_out', name: 'Cổng Trở Về', role: 'Về Làng Tân Thủ', personality: 'Cổ xưa', x: 1832, y: 600, direction: 'down' }, // GĐ57
 ];
 const NPC_BY_ID = Object.fromEntries(NPCS.map((n) => [n.id, n]));
 const SHOP_NPC = Object.fromEntries(NPCS.filter((n) => n.shopId).map((n) => [n.shopId, n.id]));
@@ -1368,8 +1392,32 @@ const TREE_TRUNKS = [
   [520, 860], [880, 640], [280, 400], [1120, 400], [640, 215], [760, 905],
   [150, 150], [1450, 150], [150, 1050], [1450, 1050], [120, 600], [1480, 600],
   [800, 80], [80, 80],
+  // GĐ57: cây dải rừng ngăn (x≈1680) + cây trong bí cảnh — KHỚP WORLD_GEO.trees phía client
+  [1680, 150], [1692, 330], [1676, 520], [1690, 700], [1680, 880], [1694, 1050],
+  [1900, 340], [2150, 320], [2450, 360], [1980, 880], [2280, 890], [2520, 860],
+  [2050, 560], [2400, 660],
 ].map(([tx, ty]) => ({ x: tx - 6, y: ty + 6, w: 12, h: 12 }));
-const OBSTACLES = [...HOUSE_OBSTACLES, POND, ...TREE_TRUNKS];
+// ================= GĐ57: BÍ CẢNH THẠCH LÂM (bí cảnh NHỎ) =================
+// File thiết kế: bí cảnh nhỏ là QUYỀN LỢI của đệ tử tông môn trung/lớn
+// (Thiên Kiếm Môn / Huyền Thiên Tông). Tên "Thạch Lâm" lấy từ dữ liệu bản
+// đồ GDD của người chơi (thach_lam — quê của Thạch Khôi Lỗi). Vùng nằm ở
+// phía đông thế giới, ngăn với làng bằng một dải rừng rậm không đi bộ qua
+// được — chỉ vào/ra bằng CỔNG BÍ CẢNH (NPC cổng ở sân Thanh Phong Môn).
+const REALM = { x: 1760, y: 240, w: 880, h: 720, name: 'Bí Cảnh Thạch Lâm' };
+const REALM_ENTRY = { x: 1905, y: 640 }; // điểm rơi xuống khi qua cổng vào
+const REALM_RETURN = { x: 1438, y: 648 }; // điểm trở về (trước cổng, sân Thanh Phong Môn)
+const REALM_BOSS_AREA = { x: 2090, y: 510, w: 220, h: 180 }; // quanh đàn đá — Thạch Khôi Lỗi
+function insideRealm(x, y, pad = 0) {
+  return x >= REALM.x - pad && x <= REALM.x + REALM.w + pad && y >= REALM.y - pad && y <= REALM.y + REALM.h + pad;
+}
+const REALM_WALLS = [
+  { x: REALM.x - 16, y: REALM.y - 16, w: REALM.w + 32, h: 16 },
+  { x: REALM.x - 16, y: REALM.y + REALM.h, w: REALM.w + 32, h: 16 },
+  { x: REALM.x - 16, y: REALM.y - 16, w: 16, h: REALM.h + 32 },
+  { x: REALM.x + REALM.w, y: REALM.y - 16, w: 16, h: REALM.h + 32 },
+  { x: 1652, y: 0, w: 16, h: WORLD_H }, // vách rừng rậm ngăn làng ↔ bí cảnh
+];
+const OBSTACLES = [...HOUSE_OBSTACLES, POND, ...TREE_TRUNKS, ...REALM_WALLS];
 
 function insideVillage(x, y, pad = 0) {
   return (
@@ -2011,14 +2059,23 @@ function spawnMonster(kind = 'wolf') {
   const v = makeVelocity();
   // Sinh quái NGOÀI làng (khu farm) — thử ngẫu nhiên tới khi ngoài hàng rào.
   // GĐ38: Thạch Quái ưu tiên góc ĐÔNG BẮC (vùng núi đá); Dơi/Sói khắp bãi.
+  // GĐ57: quái bí cảnh chỉ sinh TRONG vùng của chúng (area); quái farm giữ
+  // nguyên bãi cũ (x < 1600) — không lọt vào dải rừng ngăn / bí cảnh.
   let x = 0;
   let y = 0;
+  const area = type.area === 'realm' ? REALM : type.area === 'realmBoss' ? REALM_BOSS_AREA : null;
   for (let tries = 0; tries < 30; tries++) {
+    if (area) {
+      x = Math.round(rand(area.x + 46, area.x + area.w - 46));
+      y = Math.round(rand(area.y + 46, area.y + area.h - 46));
+      if (!hitsObstacle(x, y, 20)) break;
+      continue;
+    }
     if (kind === 'golem') {
-      x = Math.round(rand(1120, WORLD_W - 60));
+      x = Math.round(rand(1120, 1540));
       y = Math.round(rand(60, 320));
     } else {
-      x = Math.round(rand(60, WORLD_W - 60));
+      x = Math.round(rand(60, 1540));
       y = Math.round(rand(60, WORLD_H - 60));
     }
     if (!insideVillage(x, y, 50) && !insideSect(x, y, 50) && Math.hypot(x - 700, y - 196) > 110) break; // GĐ22/23: không sinh trong sân tông môn / gần Tụ Linh Trận
@@ -2126,13 +2183,21 @@ function onMonsterKilled(socket, player, target) {
     if (Math.random() < 0.35) dropItem('canh_doi', rand(-18, 18), rand(-14, 14));
   } else if (target.kind === 'golem') {
     if (Math.random() < 0.25) dropItem('da_quy', rand(-18, 18), rand(-14, 14));
+  } else if (target.kind === 'huyetlang') { // GĐ57 (tỉ lệ TẠM theo loài thường cùng hạng)
+    if (Math.random() < 0.30) dropItem('nanh_soi', rand(-18, 18), rand(-14, 14));
+  } else if (target.kind === 'kiemma') { // GĐ57 TẠM
+    if (Math.random() < 0.20) dropItem('da_quy', rand(-18, 18), rand(-14, 14));
+  } else if (target.kind === 'khoiloi') { // GĐ57: trùm bí cảnh rơi Đá Quý khá hơn (TẠM)
+    if (Math.random() < 0.45) dropItem('da_quy', rand(-18, 18), rand(-14, 14));
   }
   // GĐ39: tung RƯƠNG theo hạng quái (bảng B10) — rơi tại chỗ quái gục,
   // người chơi tới gần là mở; trùm thử thách không rơi rương (theo bản SP)
   {
     const tier = chestTierFor(target);
     if (tier) {
-      const grade = rollChestGrade(tier, rf);
+      let grade = rollChestGrade(tier, rf);
+      const minG = MONSTER_TYPES[target.kind]?.minChestGrade; // GĐ57: trùm bí cảnh không rớt rương dưới phẩm B
+      if (grade && minG && ({ C: 1, B: 2, A: 3 }[grade] || 0) < ({ C: 1, B: 2, A: 3 }[minG] || 0)) grade = minG;
       if (grade && spawnChest(target.x + rand(-14, 14), target.y + rand(-10, 10), grade)) {
         console.log(`[rương] ${target.name} rơi rương cấp ${grade}`);
       }
@@ -2170,11 +2235,12 @@ function onMonsterKilled(socket, player, target) {
   }
   persistPlayer(player);
   if (socket) syncChar(socket, player);
-  console.log(`[combat] ${target.id} bị tiêu diệt bởi ${player.name} — hồi sinh sau ${MONSTER_RESPAWN_MS / 1000}s`);
+  const respawnMs = MONSTER_TYPES[target.kind]?.respawnMs || MONSTER_RESPAWN_MS; // GĐ57: từng loài có nhịp hồi sinh riêng (trùm bí cảnh 10 phút — TẠM)
+  console.log(`[combat] ${target.id} bị tiêu diệt bởi ${player.name} — hồi sinh sau ${respawnMs / 1000}s`);
   setTimeout(() => {
     const t = MONSTER_TYPES[target.kind]; // GĐ38: hồi sinh đúng loài vừa hạ
     if (t && countKind(target.kind) < t.count) spawnMonster(target.kind);
-  }, MONSTER_RESPAWN_MS);
+  }, respawnMs);
 }
 
 // AI quái mỗi tick: có người chơi NGOÀI LÀNG trong tầm AGGRO thì
@@ -2244,6 +2310,7 @@ function updateMonster(m, dt) {
   for (const p of players.values()) {
     if (p.isOffline) continue; // GĐ22: người nghỉ offline luôn ở vùng an toàn
     if (isSafeZone(p.x, p.y)) continue;
+    if (insideRealm(p.x, p.y) !== insideRealm(m.x, m.y)) continue; // GĐ57: vách bí cảnh ngăn hai phía — không đuổi/đánh xuyên
     const d = Math.hypot(p.x - m.x, p.y - m.y);
     if (d < nearestDist) {
       nearestDist = d;
@@ -2734,6 +2801,7 @@ io.on('connection', (socket) => {
     let targetDist = Infinity;
     for (const m of monsters.values()) {
       if (m.kind === 'trial' && m.ownerId !== player.id) continue; // GĐ19: trùm thử thách của người khác — không đánh được
+      if (insideRealm(m.x, m.y) !== insideRealm(player.x, player.y)) continue; // GĐ57: không đánh xuyên vách bí cảnh
       const d = Math.hypot(m.x - player.x, m.y - player.y);
       if (d < targetDist) {
         targetDist = d;
@@ -3003,6 +3071,7 @@ io.on('connection', (socket) => {
     let targetDist = Infinity;
     for (const m of monsters.values()) {
       if (m.kind === 'trial' && m.ownerId !== player.id) continue; // GĐ19: trùm thử thách của người khác
+      if (insideRealm(m.x, m.y) !== insideRealm(player.x, player.y)) continue; // GĐ57: không tung chiêu xuyên vách bí cảnh
       const d = Math.hypot(m.x - player.x, m.y - player.y);
       if (d < targetDist) {
         targetDist = d;
@@ -3028,7 +3097,7 @@ io.on('connection', (socket) => {
     if (player.nextAtkMul) player.nextAtkMul = 0; // đòn kế tiếp đã được dùng
     let targets = [target];
     if (fx?.aoe) {
-      targets = [...monsters.values()].filter((m) => !(m.kind === 'trial' && m.ownerId !== player.id) && Math.hypot(m.x - player.x, m.y - player.y) <= skill.range);
+      targets = [...monsters.values()].filter((m) => !(m.kind === 'trial' && m.ownerId !== player.id) && insideRealm(m.x, m.y) === insideRealm(player.x, player.y) && Math.hypot(m.x - player.x, m.y - player.y) <= skill.range);
       if (!targets.length) targets = [target];
     }
     const pierce = fx?.pierce ? fx.pierce / 100 : 0;
@@ -3518,6 +3587,40 @@ io.on('connection', (socket) => {
   // GĐ24: TRÒ CHUYỆN với NPC — mỗi ngày game +2 thiện cảm (lần đầu gặp trong
   // ngày), kèm lời thoại theo tính cách + mức thiện cảm và các nút hành động
   // (nhận/trả nhiệm vụ riêng, trả nhiệm vụ bảng với Trưởng Làng).
+  // GĐ57: QUA CỔNG BÍ CẢNH — kiểm tra đứng gần đúng cổng + tư cách đệ tử
+  // (vào); dịch chuyển cả người lẫn đồng hành theo chủ, nạp lại toàn cảnh
+  // cho client để camera nhảy thẳng tới nơi.
+  socket.on('realm_portal', (data) => {
+    if (!player || !data) return;
+    const go = (x, y) => {
+      player.x = x; player.y = y; player.vx = 0; player.vy = 0;
+      if (player.input) { player.input.vx = 0; player.input.vy = 0; }
+      for (const q of players.values()) {
+        if (q.isCompanion && q.ownerId === player.id) { q.x = x + 28; q.y = y + 12; q.vx = 0; q.vy = 0; }
+      }
+      persistPlayer(player);
+      socket.emit('server_tick', fullSnapshot());
+      syncChar(socket, player);
+    };
+    if (data.action === 'enter') {
+      const npc = NPC_BY_ID.npc_bicanh_in;
+      if (Math.hypot(player.x - npc.x, player.y - npc.y) > 110) return;
+      if (!(player.sect && SECTS[player.sect])) {
+        socket.emit('interact_error', { message: 'Cổng bí cảnh chỉ mở cho đệ tử Thiên Kiếm Môn / Huyền Thiên Tông.' });
+        return;
+      }
+      go(REALM_ENTRY.x, REALM_ENTRY.y);
+      socket.emit('notice', { text: '🌀 Bạn bước qua cổng — Bí Cảnh Thạch Lâm. Đất dữ đầy rẫy Kiếm Ma, Huyết Lang và Thạch Khôi Lỗi trấn giữ đàn đá!' });
+      console.log(`[bí cảnh] ${player.name} vào Bí Cảnh Thạch Lâm`);
+    } else if (data.action === 'exit') {
+      const npc = NPC_BY_ID.npc_bicanh_out;
+      if (Math.hypot(player.x - npc.x, player.y - npc.y) > 110) return;
+      go(REALM_RETURN.x, REALM_RETURN.y);
+      socket.emit('notice', { text: '🌀 Bạn trở về Làng Tân Thú an toàn.' });
+      console.log(`[bí cảnh] ${player.name} rời Bí Cảnh Thạch Lâm`);
+    }
+  });
+
   socket.on('talk_npc', (data) => {
     if (!player || !data) return;
     const npc = NPC_BY_ID[data.npcId];
@@ -3598,7 +3701,12 @@ io.on('connection', (socket) => {
       npcId: npc.id, name: npc.name, personality: npc.personality, shopId: npc.shopId || null,
       affinity: aff, gained,
       // GĐ40: thương nhân lưu động chào hàng theo kho luân phiên của ngày
-      text: clueText || (npc.id === 'npc_thuongnhan'
+      // GĐ57: cổng bí cảnh có lời riêng (không dùng kho thoại theo tính cách)
+      text: clueText || (npc.id === 'npc_bicanh_in'
+        ? 'Cổng đá phủ rêu khắc đầy phù văn cổ. Linh khí lạnh lẽo phả ra từ khe đá — phía sau là Bí Cảnh Thạch Lâm, đất dữ chỉ dành cho đệ tử tông môn.'
+        : npc.id === 'npc_bicanh_out'
+        ? 'Cổng đá sau lưng từ từ khép lại. Bước qua cổng này là trở về sân Thanh Phong Môn, Làng Tân Thủ.'
+        : npc.id === 'npc_thuongnhan'
         ? `Ta buôn bán khắp nơi, nay ghé làng này ít hôm. Hôm nay ta mang: ${Object.entries(merchantToday().stock).map(([id, e]) => `${ITEMS[id].name} (${e.price} LT, còn ${e.qty})`).join(' · ') || '— hết sạch hàng rồi!'}. Đặt hàng trước thì lần sau ta đem tới tận nơi. À, nghe đồn: ${WORLD_HINTS[worldClock().dayIndex % WORLD_HINTS.length]}`
         : dialogLine(npc, aff)),
       // GĐ40+: đủ manh mối → Trưởng Làng cho chỉ đích danh 1 trong 3 nghi phạm
@@ -3612,6 +3720,7 @@ io.on('connection', (socket) => {
         order: player.merchantOrder ? { itemId: player.merchantOrder.itemId } : null,
       } : null,
       sectInfo: npc.id === 'npc_sugia' ? sectInfoFor(player) : null, // GĐ30
+      realmInfo: realmInfoFor(player, npc.id), // GĐ57: cổng bí cảnh
     });
   });
 

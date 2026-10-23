@@ -24,7 +24,7 @@ import { bakePersonTextures, personTexKey, personStyleKeyForPlayer, npcStyleKey,
 // Gộp 1 địa chỉ (GĐ5): bản dựng chạy từ chính server cổng 3001 →
 // kết nối cùng origin; khi dev bằng Vite (5173) thì trỏ sang 3001.
 const SERVER_URL = window.location.port === '5173' ? 'http://localhost:3001' : '';
-const WORLD_W = 1600;
+const WORLD_W = 2800; // GĐ57: + phía đông cho Bí Cảnh Thạch Lâm (nền vẽ ở 2 texture riêng)
 const WORLD_H = 1200;
 type Direction = 'left' | 'right' | 'up' | 'down';
 
@@ -264,6 +264,8 @@ const INTERACTS: Array<{ type: string; x: number; y: number; shopId?: string }> 
   { type: 'shop', shopId: 'tiem_dan', x: 1012, y: 541 },
   { type: 'shop', shopId: 'tiem_nguyen_lieu', x: 392, y: 373 },
   { type: 'sugia', x: 762, y: 470 }, // GĐ30: Sứ Giả Tông Môn ở quảng trường
+  { type: 'bicanh_in', x: 1470, y: 600 }, // GĐ57: cổng vào Bí Cảnh Thạch Lâm (sân Thanh Phong Môn)
+  { type: 'bicanh_out', x: 1832, y: 600 }, // GĐ57: cổng trở về trong bí cảnh
 ];
 
 interface PlayerState {
@@ -598,6 +600,7 @@ interface NpcDialogData {
   }>; // GĐ40: NPC có thể có nhiều nhiệm vụ (chuỗi vụ án)
   claimable: Array<{ questId: string; name: string; rewardStones: number }>;
   sectInfo: SectInfoData | null; // GĐ30: chỉ có khi nói chuyện với Sứ Giả Tông Môn
+  realmInfo?: { dir: 'enter' | 'exit'; member: boolean; canEnter: boolean; sectName: string | null; missingText: string } | null; // GĐ57: cổng bí cảnh
   accuse?: Array<{ npcId: string; name: string }> | null; // GĐ40+: chỉ đích danh thủ phạm
   merchantInfo?: {
     stock: Array<{ itemId: string; price: number; qty: number }>;
@@ -701,6 +704,7 @@ class GameScene extends Phaser.Scene {
     const WG = WORLD_GEO;
     // GĐ28: texture môi trường nướng 2× → hiển thị scale 0.5 (texel 1px, nét như sprite)
     this.add.image(0, 0, 'world-bg').setOrigin(0, 0).setScale(0.5).setDepth(-100);
+    this.add.image(1600, 0, 'realm-bg').setOrigin(0, 0).setScale(0.5).setDepth(-100); // GĐ57: nền dải rừng + bí cảnh
     WG.houses.forEach((h, i) => {
       this.add
         .image(h.x - HOUSE_TEX.padX, h.y - HOUSE_TEX.padY, 'house-' + i)
@@ -2300,6 +2304,12 @@ class GameScene extends Phaser.Scene {
     } else if (near.type === 'sugia') {
       // GĐ30: Sứ Giả Tông Môn — hộp thoại chiêu mộ
       this.socket.emit('talk_npc', { npcId: 'npc_sugia' });
+    } else if (near.type === 'bicanh_in') {
+      // GĐ57: cổng vào bí cảnh — hộp thoại cổng (nút Vào bí cảnh cho đệ tử)
+      this.socket.emit('talk_npc', { npcId: 'npc_bicanh_in' });
+    } else if (near.type === 'bicanh_out') {
+      // GĐ57: cổng trở về làng
+      this.socket.emit('talk_npc', { npcId: 'npc_bicanh_out' });
     } else if (near.type === 'shop' && near.shopId) {
       this.openShop(near.shopId);
     }
@@ -2419,11 +2429,14 @@ class GameScene extends Phaser.Scene {
     const inSect = me.x >= 1230 && me.x <= 1530 && me.y >= 420 && me.y <= 660;
     // GĐ23: quanh Tụ Linh Trận sau Đạo Quán cũng an toàn
     const inTulinh = Math.hypot(me.x - 700, me.y - 196) <= 78;
+    // GĐ57: trong Bí Cảnh Thạch Lâm
+    const rm0 = WORLD_GEO.realm;
+    const inRealm = me.x >= rm0.x && me.x <= rm0.x + rm0.w && me.y >= rm0.y && me.y <= rm0.y + rm0.h;
     const zb = document.getElementById('zoneBanner');
     if (zb) {
-      const txt = inSect ? '🏯 Thanh Phong Môn · An toàn' : inTulinh ? '🧘 Thiền Phòng · Tụ Linh Trận · An toàn' : inVillage ? '📍 Làng Tân Thủ · An toàn' : '⚔ Bãi Săn Sói · Nguy hiểm';
+      const txt = inRealm ? '🌀 Bí Cảnh Thạch Lâm · Nguy hiểm' : inSect ? '🏯 Thanh Phong Môn · An toàn' : inTulinh ? '🧘 Thiền Phòng · Tụ Linh Trận · An toàn' : inVillage ? '📍 Làng Tân Thủ · An toàn' : '⚔ Bãi Săn Sói · Nguy hiểm';
       if (zb.textContent !== txt) zb.textContent = txt;
-      zb.classList.toggle('danger', !inVillage && !inSect && !inTulinh);
+      zb.classList.toggle('danger', inRealm || (!inVillage && !inSect && !inTulinh));
     }
     const mm = document.getElementById('minimap') as HTMLCanvasElement | null;
     const c = mm?.getContext('2d');
@@ -2438,6 +2451,12 @@ class GameScene extends Phaser.Scene {
     c.strokeStyle = 'rgba(255,217,77,0.55)';
     c.lineWidth = 2;
     c.strokeRect(v.x * SX, v.y * SY, v.w * SX, v.h * SY);
+    // GĐ57: viền bí cảnh ngọc bích trên minimap
+    const rm = WORLD_GEO.realm;
+    c.fillStyle = 'rgba(64,110,100,0.5)';
+    c.fillRect(rm.x * SX, rm.y * SY, rm.w * SX, rm.h * SY);
+    c.strokeStyle = 'rgba(127,231,220,0.65)';
+    c.strokeRect(rm.x * SX, rm.y * SY, rm.w * SX, rm.h * SY);
     const p = WORLD_GEO.pond;
     c.fillStyle = '#7fb2d9';
     c.beginPath();
@@ -2491,6 +2510,26 @@ class GameScene extends Phaser.Scene {
     }
     for (const n of npcs) {
       if (this.npcActors.has(n.id)) continue;
+      // GĐ57: CỔNG BÍ CẢNH không phải người — vẽ vòng sáng tím-ngọc đập nhịp
+      // (hình tĩnh của cổng đã nướng sẵn vào nền ở đúng vị trí này)
+      if (n.id.startsWith('npc_bicanh')) {
+        const glow = this.add.image(0, -4, 'moonGlow').setScale(0.5).setAlpha(0.5).setTint(0x9a86ff);
+        this.tweens.add({ targets: glow, alpha: 0.22, scale: 0.4, duration: 1300, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+        const plabel = this.add
+          .text(0, -66, `${n.name}\n${n.role}`, {
+            fontFamily: 'Palatino, Georgia, serif',
+            fontSize: '11px',
+            color: '#e6dcff',
+            align: 'center',
+            backgroundColor: 'rgba(16,12,34,0.6)',
+            padding: { x: 5, y: 2 },
+          })
+          .setOrigin(0.5, 1);
+        const pc = this.add.container(n.x, n.y, [glow, plabel]);
+        pc.setDepth(n.y);
+        this.npcActors.set(n.id, pc);
+        continue;
+      }
       // GĐ14: NPC dùng bộ sprite pixel biến thể theo vai trò (Trưởng Làng =
       // elder tóc râu bạc...); nạp lỗi thì lùi về hình vẽ code của GĐ9.
       const npcSet = NPC_SPRITE_SET[n.id];
@@ -2691,12 +2730,14 @@ class GameScene extends Phaser.Scene {
     const cb = (mc.catalog || []).filter((e) => e.tier === 'coban');
     const lk = (mc.catalog || []).filter((e) => e.tier === 'luyenkhi');
     const tc = (mc.catalog || []).filter((e) => e.tier === 'trucco');
-    const tabs = `<div style="display:flex;gap:6px;margin-bottom:6px">${[0, 1]
+    // GĐ58: hint để DÒNG RIÊNG dưới hàng tab — trước đây hint nằm cùng hàng flex, bị ép hẹp
+    // nên quấn thành cột cao, kéo 2 nút tab giãn thành oval khổng lồ (lỗi bạn bè chụp được 23/10).
+    const tabs = `<div style="display:flex;gap:6px;margin-bottom:2px;align-items:center">${[0, 1]
       .map(
         (b) =>
-          `<button class="pbtn ${((mc.activeBoard || 0) === b) ? 'gold' : ''}" data-board="${b}">Bảng ${b + 1}${mc.boardsInfo?.[b] ? ` (${mc.boardsInfo[b].main} chính · ${mc.boardsInfo[b].util} phụ)` : ''}</button>`,
+          `<button class="pbtn ${((mc.activeBoard || 0) === b) ? 'gold' : ''}" style="flex:0 0 auto" data-board="${b}">Bảng ${b + 1}${mc.boardsInfo?.[b] ? ` (${mc.boardsInfo[b].main} chính · ${mc.boardsInfo[b].util} phụ)` : ''}</button>`,
       )
-      .join('')}<span class="pdesc" style="align-self:center">Đổi bảng để thay cả bộ chiêu (vd: farm quái ↔ tu luyện)</span></div>`;
+      .join('')}</div><div class="pdesc" style="margin-bottom:6px">Đổi bảng để thay cả bộ chiêu (vd: farm quái ↔ tu luyện)</div>`;
     body.innerHTML =
       tabs +
       (cb.length ? `<div class="panelSub" style="margin-top:2px">— Công pháp Cơ bản (tự có, học ngay) —</div>` + cb.map(row).join('') : '') +
@@ -2834,6 +2875,15 @@ class GameScene extends Phaser.Scene {
         }
       }
     }
+    // GĐ57: CỔNG BÍ CẢNH — nút qua cổng (đệ tử mới vào được; cổng ra ai cũng qua)
+    const ri = d.realmInfo;
+    if (ri) {
+      if (ri.dir === 'enter') {
+        html += `<div class="prow"><span class="pname">🌀 Bí Cảnh Thạch Lâm<span class="pdesc">${ri.canEnter ? `Cổng nhận ra ấn ký đệ tử ${ri.sectName} — phía trong có Kiếm Ma, Huyết Lang và Thạch Khôi Lỗi (bậc Trúc Cơ), rương theo hạng Mạnh.` : ri.missingText}</span></span>${ri.canEnter ? '<button class="pbtn gold" data-realm="enter">Vào bí cảnh</button>' : ''}</div>`;
+      } else {
+        html += `<div class="prow"><span class="pname">🌀 Cổng Trở Về<span class="pdesc">Qua cổng là về sân Thanh Phong Môn, Làng Tân Thủ.</span></span><button class="pbtn gold" data-realm="exit">Về làng</button></div>`;
+      }
+    }
     btns.innerHTML = html || '<div class="prow">Không có việc gì thêm lúc này.</div>';
     btns.querySelectorAll<HTMLButtonElement>('[data-claim]').forEach((b) => {
       b.onclick = () => { this.socket.emit('quest_claim', { questId: b.dataset.claim }); this.closePanels(); };
@@ -2857,6 +2907,10 @@ class GameScene extends Phaser.Scene {
     // GĐ54: học công pháp tông môn — bắt đầu lĩnh ngộ như học thường (đóng hộp thoại, nhân vật ngồi học tại chỗ)
     btns.querySelectorAll<HTMLButtonElement>('[data-sectlearn]').forEach((b) => {
       b.onclick = () => { this.socket.emit('learn_skill', { skillId: b.dataset.sectlearn, via: 'sect' }); this.closePanels(); };
+    });
+    // GĐ57: qua cổng bí cảnh — server dịch chuyển + nạp lại toàn cảnh, đóng hộp thoại
+    btns.querySelectorAll<HTMLButtonElement>('[data-realm]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('realm_portal', { action: b.dataset.realm }); this.closePanels(); };
     });
     // GĐ40+: nút chỉ đích danh — bấm xong mở lại hộp thoại Trưởng Làng xem kết quả
     btns.querySelectorAll<HTMLButtonElement>('[data-accuse]').forEach((b) => {
@@ -3165,18 +3219,20 @@ class GameScene extends Phaser.Scene {
     const face = (m.direction === 'left' ? -1 : 1) as 1 | -1;
     // GĐ19: trùm thử thách dùng hình Thạch Quái lớn + nhãn tên; Tâm Ma nhuộm tím
     const isTrial = !!m.trial;
-    const isRival = m.trial === 'rival'; // GĐ40: tu sĩ thù địch là NGƯỜI (sprite nhân vật)
+    const isRival = m.trial === 'rival' || m.kind === 'kiemma'; // GĐ40: tu sĩ thù địch là NGƯỜI · GĐ57: Kiếm Ma cũng hình người (kiếm khách ma)
     // GĐ42: tu sĩ thù địch dùng bộ sprite pixel 'rival'; nạp lỗi mới lùi về hình vẽ code cũ
     const rivalSet = isRival && this.textures.exists('rival-idle-south');
     // GĐ38: hình theo LOÀI — dơi dùng khung vỗ cánh, thạch quái hình đá
     const key = isRival
       ? rivalSet ? spriteTexKey('rival', m.direction, 'idle') : personTexKey('rivalmonk', m.direction, 'idle')
-      : isTrial || m.kind === 'golem' ? 'golem-idle' : m.kind === 'bat' ? 'bat-f0' : wolfTexKey(face, 'idle');
+      : isTrial || m.kind === 'golem' || m.kind === 'khoiloi' ? 'golem-idle' : m.kind === 'bat' ? 'bat-f0' : wolfTexKey(face, 'idle');
     const sprite = rivalSet
       ? this.add.sprite(0, 0, key).setOrigin(0.5, HERO_ORIGIN_Y).setScale(HERO_SCALE)
-      : this.add.image(0, 0, key).setScale(isRival ? PERSON_TEX.scale : isTrial ? 1.2 : m.kind === 'golem' || m.kind === 'bat' ? 1 : WOLF_TEX.scale);
+      : this.add.image(0, 0, key).setScale(isRival ? PERSON_TEX.scale : isTrial ? 1.2 : m.kind === 'khoiloi' ? 1.15 : m.kind === 'golem' || m.kind === 'bat' ? 1 : WOLF_TEX.scale);
     if (isTrial && m.trial === 'dai') sprite.setTint(0x9a86d8);
-    const barY = isRival ? (rivalSet ? -62 : -48) : isTrial || m.kind === 'golem' ? -56 : -30;
+    if (m.kind === 'khoiloi') sprite.setTint(0xa8c4de); // GĐ57: khôi lỗi đá xanh xám, khác Thạch Quái thường
+    if (m.kind === 'huyetlang') sprite.setTint(0xe58a8a); // GĐ57: Huyết Lang nhuộm đỏ
+    const barY = isRival ? (rivalSet ? -62 : -48) : isTrial || m.kind === 'golem' || m.kind === 'khoiloi' ? -56 : -30;
     const barBg = this.add.rectangle(0, barY, 38, 7, 0x101418).setAlpha(0.6);
     const barFg = this.add.rectangle(-18, barY, 36, 5, 0x53d769).setOrigin(0, 0.5);
     const parts: Phaser.GameObjects.GameObject[] = [sprite, barBg, barFg];
@@ -3234,6 +3290,10 @@ class GameScene extends Phaser.Scene {
             text = `✦ Bấm E — Vào ${SHOP_INFO[near.shopId].name}`;
           } else if (near.type === 'sugia') {
             text = '✦ Bấm E — Sứ Giả Tông Môn (chiêu mộ đệ tử)';
+          } else if (near.type === 'bicanh_in') {
+            text = '✦ Bấm E — Cổng Bí Cảnh Thạch Lâm';
+          } else if (near.type === 'bicanh_out') {
+            text = '✦ Bấm E — Cổng Trở Về làng';
           }
         }
         hint.textContent = text;
@@ -3392,11 +3452,11 @@ class GameScene extends Phaser.Scene {
       // GĐ19: trùm thử thách dùng khung hình Thạch Quái (slam khi vồ)
       // GĐ38: dơi vỗ cánh liên tục (4 khung), thạch quái thường đi như trùm
       // GĐ40: tu sĩ thù địch dùng khung NGƯỜI (đi bộ / kết ấn khi vồ)
-      const key = actor.trial === 'rival'
+      const key = actor.trial === 'rival' || actor.kind === 'kiemma'
         ? actor.rivalSet
           ? spriteTexKey('rival', actor.dir, _time < actor.lungeUntil ? 'cast' : frame === 'lunge' ? 'cast' : frame)
           : personTexKey('rivalmonk', actor.dir, _time < actor.lungeUntil ? 'cast' : frame === 'lunge' ? 'cast' : frame)
-        : actor.trial || actor.kind === 'golem'
+        : actor.trial || actor.kind === 'golem' || actor.kind === 'khoiloi'
         ? _time < actor.lungeUntil
           ? 'golem-slam'
           : moving
@@ -3415,6 +3475,8 @@ class GameScene extends Phaser.Scene {
       else if (actor.sprite.tintFill) {
         actor.sprite.clearTint();
         if (actor.trial === 'dai') actor.sprite.setTint(0x9a86d8);
+        if (actor.kind === 'khoiloi') actor.sprite.setTint(0xa8c4de); // GĐ57
+        if (actor.kind === 'huyetlang') actor.sprite.setTint(0xe58a8a); // GĐ57
       }
     }
 

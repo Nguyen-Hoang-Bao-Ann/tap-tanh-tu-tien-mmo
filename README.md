@@ -1272,3 +1272,46 @@ WiFi/4G, tab bị đóng băng, server chập chờn) client KHÔNG gửi lại 
   còn treo; socket cũ chết không kéo offline) ALL PASS; probe trình
   duyệt thật: cắt mạng 4s → mở lại → nhân vật tự vào lại, chạy 624→911.
   Ảnh: preview56-reconnect.png.
+
+GĐ57 (23/10 tối) — BÍ CẢNH THẠCH LÂM (bí cảnh NHỎ, hạng mục file xếp
+"làm sau" + quyền lợi đệ tử tông môn trung/lớn theo bảng tông môn):
+- Vùng mới phía đông thế giới (1760,240 — 880×720), ngăn với làng bằng
+  dải rừng rậm + vòng đá: KHÔNG đi bộ qua được, chỉ vào/ra bằng cổng.
+  Thế giới mở rộng 1600 → 2800 (nền phía đông nướng ở texture riêng
+  'realm-bg' vì giới hạn 4096px của GPU điện thoại).
+- Cổng vào ở sân Thanh Phong Môn (1470,600), cổng ra trong bí cảnh
+  (1832,600) — đều là NPC cổng: bấm E → hộp thoại → nút qua cổng. Vào
+  chỉ dành cho đệ tử Thiên Kiếm Môn / Huyền Thiên Tông (đúng file);
+  người ngoài bị từ chối kèm lời nhắn đi gia nhập tông môn.
+- Quái bậc Trúc Cơ lấy từ dữ liệu GDD của người chơi (MonsterData):
+  Kiếm Ma (HP 420, ATK 26, Tu vi 22, hình kiếm khách ma), Huyết Lang
+  (HP 350, ATK 30, Tu vi 22, hình sói nhuộm đỏ), Thạch Khôi Lỗi trấn
+  đàn đá (HP 700, ATK 22, Tu vi 33, giáp đá def 8 — hình Thạch Quái
+  xanh xám lớn hơn). def/tốc độ/hồi sinh là số TẠM vì dữ liệu không
+  ghi (quái thường 30s, trùm 10 phút). Rương theo hạng Mạnh (B10);
+  riêng trùm không rớt dưới phẩm B.
+- Chặn xuyên vách hai phía: đuổi/đánh/tung chiêu đều không qua được
+  vách bí cảnh; quái farm cũ không sinh sang phía đông.
+- test45 ALL PASS (10 mục: từ chối người ngoài, đệ tử qua cổng, đủ
+  quái đúng vùng, vách chặn, hạ trùm ra rương A, cổng về đúng chỗ);
+  ảnh: preview57-portal.png (hộp thoại cổng), preview57-realm-entry.png
+  (trong bí cảnh, cạnh cổng về + viền đá + tinh thể).
+
+GĐ58 (23/10 tối) — KHÓA MÀN HÌNH DỌC + SỬA TAB BẢNG CÔNG PHÁP (feedback bạn bè
+gửi ảnh+video: chơi dọc trên điện thoại vỡ hết bố cục; người chơi chốt
+"chỉnh về ngang hết"):
+- Lớp phủ #rotateLock: thiết bị CẢM ỨNG đang ở dọc (@media orientation:
+  portrait + pointer: coarse) → phủ kín màn hình ngọc bích "Vui lòng xoay
+  ngang điện thoại" + icon điện thoại tự xoay, chặn mọi thao tác; xoay
+  ngang là tự biến mất, chơi tiếp ngay. Máy tính không bị khóa.
+- GỐC LỖI tab Bảng 1/Bảng 2 phình thành oval khổng lồ (~330px) trong panel
+  Công pháp (lỗi có CẢ ở ngang trên điện thoại, video bạn bè quay được):
+  dòng hint "Đổi bảng..." nằm cùng hàng flex với 2 nút tab, bị ép hẹp nên
+  quấn thành cột cao, kéo nút giãn theo (align stretch) + border-radius
+  99px → oval. Đã tách hint xuống dòng riêng, nút flex:0 0 auto +
+  align-items:center → tab về dạng pill 23px.
+- Thẻ nhân vật trên mobile: max-height calc(100vh - 128px) + cuộn trong
+  thẻ, không tràn xuống cụm nút chiêu ở màn ngang thấp.
+- probe58 (shottools/probe_portrait58.cjs, server :3072): 6/6 PASS — dọc
+  hiện khóa, ngang vào game bình thường, tab đo 153×23/147×23px; ảnh
+  preview58-portrait-lock.png + preview58-learn.png. test5 ALL PASS.
