@@ -1,0 +1,1 @@
+{"dependencies":{"express":"^4.21.2","mongodb":"^6.9.0","socket.io":"^4.8.1"},"description":"Backend: Node.js + Express + Socket.io — server_tick 10 lần/giây","main":"index.js","name":"tap-tanh-tu-tien-server","private":true,"scripts":{"start":"node index.js"},"version":"0.1.0"}

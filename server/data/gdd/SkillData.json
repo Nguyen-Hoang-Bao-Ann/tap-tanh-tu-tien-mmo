@@ -1,0 +1,5334 @@
+{
+ "meta": {
+  "version": 1,
+  "source": "Tài liệu thiết kế mở rộng phần 2 (người chơi, 22/10/2026)",
+  "note": "generated=false: nội dung chép từ tài liệu. generated=true: tài liệu chỉ cho số lượng — tên sinh hệ thống để đủ số lượng, chờ người chơi chốt tên chính thức."
+ },
+ "qualityTiers": [
+  {
+   "id": "pham",
+   "name": "Phàm Cấp",
+   "color": "#9e9e9e",
+   "desc": "Đại trà"
+  },
+  {
+   "id": "linh",
+   "name": "Linh Cấp",
+   "color": "#4caf50",
+   "desc": "Khá"
+  },
+  {
+   "id": "bao",
+   "name": "Bảo Cấp",
+   "color": "#9c27b0",
+   "desc": "Xịn"
+  },
+  {
+   "id": "tien",
+   "name": "Tiên Cấp",
+   "color": "#ff9800",
+   "desc": "Kỹ năng Kim Đan"
+  },
+  {
+   "id": "than",
+   "name": "Thần Cấp",
+   "color": "#f44336",
+   "desc": "Ẩn/Cấm thuật"
+  }
+ ],
+ "kimDanSkills": [
+  {
+   "id": "kd_thetu_tay_khong_kim",
+   "name": "Xuyên giáp Quyền",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Tay không",
+   "weaponIds": [
+    "taykhong"
+   ],
+   "element": "Kim",
+   "desc": "Xuyên giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_tay_khong_moc",
+   "name": "Hút máu Quyền",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Tay không",
+   "weaponIds": [
+    "taykhong"
+   ],
+   "element": "Mộc",
+   "desc": "Hút máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_tay_khong_thuy",
+   "name": "Đóng băng Quyền",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Tay không",
+   "weaponIds": [
+    "taykhong"
+   ],
+   "element": "Thủy",
+   "desc": "Đóng băng 2s",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_tay_khong_hoa",
+   "name": "Cột lửa diện rộng",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Tay không",
+   "weaponIds": [
+    "taykhong"
+   ],
+   "element": "Hỏa",
+   "desc": "Cột lửa diện rộng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_tay_khong_tho",
+   "name": "Choáng Quyền",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Tay không",
+   "weaponIds": [
+    "taykhong"
+   ],
+   "element": "Thổ",
+   "desc": "Choáng 4m",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_dao_phu_kim",
+   "name": "Lưỡi đao",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Đao/Phủ",
+   "weaponIds": [
+    "daothe",
+    "chienphu"
+   ],
+   "element": "Kim",
+   "desc": "Lưỡi đao 15m",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_dao_phu_moc",
+   "name": "Chém hút máu",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Đao/Phủ",
+   "weaponIds": [
+    "daothe",
+    "chienphu"
+   ],
+   "element": "Mộc",
+   "desc": "Chém hút máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_dao_phu_thuy",
+   "name": "Sóng nước Đao",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Đao/Phủ",
+   "weaponIds": [
+    "daothe",
+    "chienphu"
+   ],
+   "element": "Thủy",
+   "desc": "Sóng nước",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_dao_phu_hoa",
+   "name": "Dmg theo % HP mất",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Đao/Phủ",
+   "weaponIds": [
+    "daothe",
+    "chienphu"
+   ],
+   "element": "Hỏa",
+   "desc": "Dmg theo % HP mất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_dao_phu_tho",
+   "name": "Hố sâu hút quái",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Đao/Phủ",
+   "weaponIds": [
+    "daothe",
+    "chienphu"
+   ],
+   "element": "Thổ",
+   "desc": "Hố sâu hút quái",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thuong_kim",
+   "name": "Luồng xuyên Thương",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thương",
+   "weaponIds": [
+    "thuongthe"
+   ],
+   "element": "Kim",
+   "desc": "3 luồng xuyên",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thuong_moc",
+   "name": "Trói chân Thương",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thương",
+   "weaponIds": [
+    "thuongthe"
+   ],
+   "element": "Mộc",
+   "desc": "Trói chân",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thuong_thuy",
+   "name": "Rồng nước Thương",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thương",
+   "weaponIds": [
+    "thuongthe"
+   ],
+   "element": "Thủy",
+   "desc": "Rồng nước",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thuong_hoa",
+   "name": "Lửa lan Thương",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thương",
+   "weaponIds": [
+    "thuongthe"
+   ],
+   "element": "Hỏa",
+   "desc": "Lửa lan",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thuong_tho",
+   "name": "Gai đá Thương",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thương",
+   "weaponIds": [
+    "thuongthe"
+   ],
+   "element": "Thổ",
+   "desc": "Gai đá",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thiet_con_kim",
+   "name": "Giảm giáp Côn",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thiết côn",
+   "weaponIds": [
+    "thietcon"
+   ],
+   "element": "Kim",
+   "desc": "Giảm giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thiet_con_moc",
+   "name": "Trói Côn",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thiết côn",
+   "weaponIds": [
+    "thietcon"
+   ],
+   "element": "Mộc",
+   "desc": "Trói 5m",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thiet_con_thuy",
+   "name": "Sóng băng Côn",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thiết côn",
+   "weaponIds": [
+    "thietcon"
+   ],
+   "element": "Thủy",
+   "desc": "Sóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thiet_con_hoa",
+   "name": "Lốc lửa Côn",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thiết côn",
+   "weaponIds": [
+    "thietcon"
+   ],
+   "element": "Hỏa",
+   "desc": "Lốc lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_thetu_thiet_con_tho",
+   "name": "Tường đất Côn",
+   "classId": "thetu",
+   "className": "Thể Tu",
+   "weaponGroup": "Thiết côn",
+   "weaponIds": [
+    "thietcon"
+   ],
+   "element": "Thổ",
+   "desc": "Tường đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_phat_chau_kim",
+   "name": "Khiên phản Châu",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Phật châu",
+   "weaponIds": [
+    "phatchau"
+   ],
+   "element": "Kim",
+   "desc": "Khiên phản 50%",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_phat_chau_moc",
+   "name": "Hồi máu + trói",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Phật châu",
+   "weaponIds": [
+    "phatchau"
+   ],
+   "element": "Mộc",
+   "desc": "Hồi máu + trói",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_phat_chau_thuy",
+   "name": "Giải debuff Châu",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Phật châu",
+   "weaponIds": [
+    "phatchau"
+   ],
+   "element": "Thủy",
+   "desc": "Giải debuff",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_phat_chau_hoa",
+   "name": "Cầu lửa nổ",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Phật châu",
+   "weaponIds": [
+    "phatchau"
+   ],
+   "element": "Hỏa",
+   "desc": "Cầu lửa nổ",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_phat_chau_tho",
+   "name": "Khiên đất vỡ choáng",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Phật châu",
+   "weaponIds": [
+    "phatchau"
+   ],
+   "element": "Thổ",
+   "desc": "Khiên đất vỡ choáng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_quyen_truong_kim",
+   "name": "Đập xuyên giáp",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Quyền trượng",
+   "weaponIds": [
+    "quyentruong"
+   ],
+   "element": "Kim",
+   "desc": "Đập xuyên giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_quyen_truong_moc",
+   "name": "Rễ cây hồi máu",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Quyền trượng",
+   "weaponIds": [
+    "quyentruong"
+   ],
+   "element": "Mộc",
+   "desc": "Rễ cây hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_quyen_truong_thuy",
+   "name": "Sóng âm đóng băng",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Quyền trượng",
+   "weaponIds": [
+    "quyentruong"
+   ],
+   "element": "Thủy",
+   "desc": "Sóng âm đóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_quyen_truong_hoa",
+   "name": "Quét lửa hồi máu",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Quyền trượng",
+   "weaponIds": [
+    "quyentruong"
+   ],
+   "element": "Hỏa",
+   "desc": "Quét lửa hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_quyen_truong_tho",
+   "name": "Núi ảo choáng",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Quyền trượng",
+   "weaponIds": [
+    "quyentruong"
+   ],
+   "element": "Thổ",
+   "desc": "Núi ảo choáng 3s",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_binh_bat_kim",
+   "name": "Giảm dmg quái",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Bình bát",
+   "weaponIds": [
+    "binhbat"
+   ],
+   "element": "Kim",
+   "desc": "Giảm 50% dmg quái",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_binh_bat_moc",
+   "name": "Cây hồi máu",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Bình bát",
+   "weaponIds": [
+    "binhbat"
+   ],
+   "element": "Mộc",
+   "desc": "Cây hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_binh_bat_thuy",
+   "name": "Xoáy nước hút quái",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Bình bát",
+   "weaponIds": [
+    "binhbat"
+   ],
+   "element": "Thủy",
+   "desc": "Xoáy nước hút quái",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_binh_bat_hoa",
+   "name": "Phun lửa Bát",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Bình bát",
+   "weaponIds": [
+    "binhbat"
+   ],
+   "element": "Hỏa",
+   "desc": "Phun lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phattu_binh_bat_tho",
+   "name": "Mái vòm đất",
+   "classId": "phattu",
+   "className": "Phật Tu",
+   "weaponGroup": "Bình bát",
+   "weaponIds": [
+    "binhbat"
+   ],
+   "element": "Thổ",
+   "desc": "Mái vòm đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_thuan_kim",
+   "name": "Bất hoại Thuẫn",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt thuẫn",
+   "weaponIds": [
+    "cotthuan"
+   ],
+   "element": "Kim",
+   "desc": "Bất hoại 5s",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_thuan_moc",
+   "name": "Gai độc Thuẫn",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt thuẫn",
+   "weaponIds": [
+    "cotthuan"
+   ],
+   "element": "Mộc",
+   "desc": "Gai độc",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_thuan_thuy",
+   "name": "Nổ băng Thuẫn",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt thuẫn",
+   "weaponIds": [
+    "cotthuan"
+   ],
+   "element": "Thủy",
+   "desc": "Nổ băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_thuan_hoa",
+   "name": "Giáp cháy Thuẫn",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt thuẫn",
+   "weaponIds": [
+    "cotthuan"
+   ],
+   "element": "Hỏa",
+   "desc": "Giáp cháy",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_thuan_tho",
+   "name": "Tường xương Thuẫn",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt thuẫn",
+   "weaponIds": [
+    "cotthuan"
+   ],
+   "element": "Thổ",
+   "desc": "Tường xương",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_chuy_kim",
+   "name": "Đập nát giáp",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt chùy",
+   "weaponIds": [
+    "cotchuy"
+   ],
+   "element": "Kim",
+   "desc": "Đập nát giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_chuy_moc",
+   "name": "Nổ xương hồi máu",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt chùy",
+   "weaponIds": [
+    "cotchuy"
+   ],
+   "element": "Mộc",
+   "desc": "Nổ xương hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_chuy_thuy",
+   "name": "Sóng băng Chùy",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt chùy",
+   "weaponIds": [
+    "cotchuy"
+   ],
+   "element": "Thủy",
+   "desc": "Sóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_chuy_hoa",
+   "name": "Biển lửa Chùy",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt chùy",
+   "weaponIds": [
+    "cotchuy"
+   ],
+   "element": "Hỏa",
+   "desc": "Biển lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_cottu_cot_chuy_tho",
+   "name": "Sóng đất Chùy",
+   "classId": "cottu",
+   "className": "Cốt Tu",
+   "weaponGroup": "Cốt chùy",
+   "weaponIds": [
+    "cotchuy"
+   ],
+   "element": "Thổ",
+   "desc": "Sóng đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phien_quat_kim",
+   "name": "Bão lưỡi kim",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Phiến (Quạt)",
+   "weaponIds": [
+    "phien"
+   ],
+   "element": "Kim",
+   "desc": "Bão lưỡi kim",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phien_quat_moc",
+   "name": "Lá độc trói",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Phiến (Quạt)",
+   "weaponIds": [
+    "phien"
+   ],
+   "element": "Mộc",
+   "desc": "Lá độc trói",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phien_quat_thuy",
+   "name": "Bão tuyết đóng băng",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Phiến (Quạt)",
+   "weaponIds": [
+    "phien"
+   ],
+   "element": "Thủy",
+   "desc": "Bão tuyết đóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phien_quat_hoa",
+   "name": "Phượng hoàng lửa",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Phiến (Quạt)",
+   "weaponIds": [
+    "phien"
+   ],
+   "element": "Hỏa",
+   "desc": "Phượng hoàng lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phien_quat_tho",
+   "name": "Bão cát Phiến",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Phiến (Quạt)",
+   "weaponIds": [
+    "phien"
+   ],
+   "element": "Thổ",
+   "desc": "Bão cát",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phap_truong_kim",
+   "name": "Tia sáng phá giáp",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Pháp trượng",
+   "weaponIds": [
+    "phaptruong"
+   ],
+   "element": "Kim",
+   "desc": "Tia sáng phá giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phap_truong_moc",
+   "name": "Rừng rút máu",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Pháp trượng",
+   "weaponIds": [
+    "phaptruong"
+   ],
+   "element": "Mộc",
+   "desc": "Rừng rút máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phap_truong_thuy",
+   "name": "Đóng băng vùng",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Pháp trượng",
+   "weaponIds": [
+    "phaptruong"
+   ],
+   "element": "Thủy",
+   "desc": "Đóng băng vùng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phap_truong_hoa",
+   "name": "Rồng lửa quét",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Pháp trượng",
+   "weaponIds": [
+    "phaptruong"
+   ],
+   "element": "Hỏa",
+   "desc": "Rồng lửa quét",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_phap_truong_tho",
+   "name": "Địa mạch nổ choáng",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Pháp trượng",
+   "weaponIds": [
+    "phaptruong"
+   ],
+   "element": "Thổ",
+   "desc": "Địa mạch nổ choáng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_sach_phep_kim",
+   "name": "Mưa phù giảm giáp",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Sách phép",
+   "weaponIds": [
+    "sachphep"
+   ],
+   "element": "Kim",
+   "desc": "Mưa phù giảm giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_sach_phep_moc",
+   "name": "Trận phù giam quái",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Sách phép",
+   "weaponIds": [
+    "sachphep"
+   ],
+   "element": "Mộc",
+   "desc": "Trận phù giam quái",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_sach_phep_thuy",
+   "name": "Gom phù dmg lớn",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Sách phép",
+   "weaponIds": [
+    "sachphep"
+   ],
+   "element": "Thủy",
+   "desc": "Gom phù dmg lớn",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_sach_phep_hoa",
+   "name": "Phù lửa trắng",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Sách phép",
+   "weaponIds": [
+    "sachphep"
+   ],
+   "element": "Hỏa",
+   "desc": "Phù lửa trắng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_phaptu_sach_phep_tho",
+   "name": "Phù đất nổ",
+   "classId": "phaptu",
+   "className": "Pháp Tu",
+   "weaponGroup": "Sách phép",
+   "weaponIds": [
+    "sachphep"
+   ],
+   "element": "Thổ",
+   "desc": "Phù đất nổ",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_co_lenh_kim",
+   "name": "Quỷ tướng chém xuyên giáp",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Cờ lệnh",
+   "weaponIds": [
+    "colenh"
+   ],
+   "element": "Kim",
+   "desc": "Quỷ tướng chém xuyên giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_co_lenh_moc",
+   "name": "Rừng quỷ hút máu",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Cờ lệnh",
+   "weaponIds": [
+    "colenh"
+   ],
+   "element": "Mộc",
+   "desc": "Rừng quỷ hút máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_co_lenh_thuy",
+   "name": "Quỷ vương băng",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Cờ lệnh",
+   "weaponIds": [
+    "colenh"
+   ],
+   "element": "Thủy",
+   "desc": "Quỷ vương băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_co_lenh_hoa",
+   "name": "Thu hồn tăng sức",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Cờ lệnh",
+   "weaponIds": [
+    "colenh"
+   ],
+   "element": "Hỏa",
+   "desc": "Thu hồn tăng sức",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_co_lenh_tho",
+   "name": "Gọi quỷ binh đất",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Cờ lệnh",
+   "weaponIds": [
+    "colenh"
+   ],
+   "element": "Thổ",
+   "desc": "Gọi quỷ binh đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_luoi_hai_kim",
+   "name": "Chém cung trăng",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Lưỡi hái",
+   "weaponIds": [
+    "luoihai"
+   ],
+   "element": "Kim",
+   "desc": "Chém cung trăng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_luoi_hai_moc",
+   "name": "Gặt hồn hồi máu",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Lưỡi hái",
+   "weaponIds": [
+    "luoihai"
+   ],
+   "element": "Mộc",
+   "desc": "Gặt hồn hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_luoi_hai_thuy",
+   "name": "Chém đóng băng",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Lưỡi hái",
+   "weaponIds": [
+    "luoihai"
+   ],
+   "element": "Thủy",
+   "desc": "Chém đóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_luoi_hai_hoa",
+   "name": "Lưỡi hái lửa",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Lưỡi hái",
+   "weaponIds": [
+    "luoihai"
+   ],
+   "element": "Hỏa",
+   "desc": "Lưỡi hái lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_luoi_hai_tho",
+   "name": "Mộ bia đập",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Lưỡi hái",
+   "weaponIds": [
+    "luoihai"
+   ],
+   "element": "Thổ",
+   "desc": "Mộ bia đập",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_quy_thuong_kim",
+   "name": "Mưa thương kim",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Quỷ thương",
+   "weaponIds": [
+    "quythuong"
+   ],
+   "element": "Kim",
+   "desc": "Mưa thương kim",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_quy_thuong_moc",
+   "name": "Rừng thương ma",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Quỷ thương",
+   "weaponIds": [
+    "quythuong"
+   ],
+   "element": "Mộc",
+   "desc": "Rừng thương ma",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_quy_thuong_thuy",
+   "name": "Thương băng",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Quỷ thương",
+   "weaponIds": [
+    "quythuong"
+   ],
+   "element": "Thủy",
+   "desc": "Thương băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_quy_thuong_hoa",
+   "name": "Ném nổ lửa",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Quỷ thương",
+   "weaponIds": [
+    "quythuong"
+   ],
+   "element": "Hỏa",
+   "desc": "Ném nổ lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_quytu_quy_thuong_tho",
+   "name": "Hóa quỷ vương",
+   "classId": "quytu",
+   "className": "Quỷ Tu",
+   "weaponGroup": "Quỷ thương",
+   "weaponIds": [
+    "quythuong"
+   ],
+   "element": "Thổ",
+   "desc": "Hóa quỷ vương",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_dao_gam_kim",
+   "name": "Ẩn thân chí mạng",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Dao găm",
+   "weaponIds": [
+    "daogam"
+   ],
+   "element": "Kim",
+   "desc": "Ẩn thân chí mạng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_dao_gam_moc",
+   "name": "Bóng độc Dao",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Dao găm",
+   "weaponIds": [
+    "daogam"
+   ],
+   "element": "Mộc",
+   "desc": "Bóng độc",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_dao_gam_thuy",
+   "name": "Đâm đóng băng",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Dao găm",
+   "weaponIds": [
+    "daogam"
+   ],
+   "element": "Thủy",
+   "desc": "Đâm đóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_dao_gam_hoa",
+   "name": "Lướt đâm lửa",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Dao găm",
+   "weaponIds": [
+    "daogam"
+   ],
+   "element": "Hỏa",
+   "desc": "Lướt đâm lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_dao_gam_tho",
+   "name": "Đâm choáng Dao",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Dao găm",
+   "weaponIds": [
+    "daogam"
+   ],
+   "element": "Thổ",
+   "desc": "Đâm choáng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_song_dao_kim",
+   "name": "Hợp kích giảm giáp",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Song đao",
+   "weaponIds": [
+    "songdao"
+   ],
+   "element": "Kim",
+   "desc": "Hợp kích giảm giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_song_dao_moc",
+   "name": "Mưa lá đao",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Song đao",
+   "weaponIds": [
+    "songdao"
+   ],
+   "element": "Mộc",
+   "desc": "Mưa lá đao",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_song_dao_thuy",
+   "name": "Xoáy băng Đao",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Song đao",
+   "weaponIds": [
+    "songdao"
+   ],
+   "element": "Thủy",
+   "desc": "Xoáy băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_song_dao_hoa",
+   "name": "Vòng lửa Đao",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Song đao",
+   "weaponIds": [
+    "songdao"
+   ],
+   "element": "Hỏa",
+   "desc": "Vòng lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_song_dao_tho",
+   "name": "Chém núi Đao",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Song đao",
+   "weaponIds": [
+    "songdao"
+   ],
+   "element": "Thổ",
+   "desc": "Chém núi",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_liem_ngan_kim",
+   "name": "Xoáy kim Liêm",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Liêm ngắn",
+   "weaponIds": [
+    "liemngan"
+   ],
+   "element": "Kim",
+   "desc": "Xoáy kim",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_liem_ngan_moc",
+   "name": "Kéo quái Liêm",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Liêm ngắn",
+   "weaponIds": [
+    "liemngan"
+   ],
+   "element": "Mộc",
+   "desc": "Kéo quái",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_liem_ngan_thuy",
+   "name": "Xoáy băng Liêm",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Liêm ngắn",
+   "weaponIds": [
+    "liemngan"
+   ],
+   "element": "Thủy",
+   "desc": "Xoáy băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_liem_ngan_hoa",
+   "name": "Lốc liêm lửa",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Liêm ngắn",
+   "weaponIds": [
+    "liemngan"
+   ],
+   "element": "Hỏa",
+   "desc": "Lốc liêm lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_liem_ngan_tho",
+   "name": "Đập choáng Liêm",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Liêm ngắn",
+   "weaponIds": [
+    "liemngan"
+   ],
+   "element": "Thổ",
+   "desc": "Đập choáng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_trao_kim",
+   "name": "Xé giáp Trảo",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Trảo",
+   "weaponIds": [
+    "trao"
+   ],
+   "element": "Kim",
+   "desc": "Xé giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_trao_moc",
+   "name": "Rễ cây Trảo",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Trảo",
+   "weaponIds": [
+    "trao"
+   ],
+   "element": "Mộc",
+   "desc": "Rễ cây",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_trao_thuy",
+   "name": "Vuốt băng Trảo",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Trảo",
+   "weaponIds": [
+    "trao"
+   ],
+   "element": "Thủy",
+   "desc": "Vuốt băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_trao_hoa",
+   "name": "Vuốt lửa Trảo",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Trảo",
+   "weaponIds": [
+    "trao"
+   ],
+   "element": "Hỏa",
+   "desc": "Vuốt lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_satthu_trao_tho",
+   "name": "Choáng diện rộng",
+   "classId": "satthu",
+   "className": "Sát Thủ",
+   "weaponGroup": "Trảo",
+   "weaponIds": [
+    "trao"
+   ],
+   "element": "Thổ",
+   "desc": "Choáng diện rộng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_kiem_kim",
+   "name": "Mưa kiếm khí",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Kiếm",
+   "weaponIds": [
+    "kiem"
+   ],
+   "element": "Kim",
+   "desc": "Mưa kiếm khí",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_kiem_moc",
+   "name": "Rừng kiếm",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Kiếm",
+   "weaponIds": [
+    "kiem"
+   ],
+   "element": "Mộc",
+   "desc": "Rừng kiếm",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_kiem_thuy",
+   "name": "Kiếm ý băng",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Kiếm",
+   "weaponIds": [
+    "kiem"
+   ],
+   "element": "Thủy",
+   "desc": "Kiếm ý băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_kiem_hoa",
+   "name": "Phi kiếm tự tìm",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Kiếm",
+   "weaponIds": [
+    "kiem"
+   ],
+   "element": "Hỏa",
+   "desc": "Phi kiếm tự tìm",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_kiem_tho",
+   "name": "Trận kiếm đất",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Kiếm",
+   "weaponIds": [
+    "kiem"
+   ],
+   "element": "Thổ",
+   "desc": "Trận kiếm đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_song_kiem_kim",
+   "name": "Hai luồng xuyên giáp",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Song kiếm",
+   "weaponIds": [
+    "songkiem"
+   ],
+   "element": "Kim",
+   "desc": "Hai luồng xuyên giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_song_kiem_moc",
+   "name": "Hai luồng mộc",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Song kiếm",
+   "weaponIds": [
+    "songkiem"
+   ],
+   "element": "Mộc",
+   "desc": "Hai luồng mộc",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_song_kiem_thuy",
+   "name": "Song long Kiếm",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Song kiếm",
+   "weaponIds": [
+    "songkiem"
+   ],
+   "element": "Thủy",
+   "desc": "Song long",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_song_kiem_hoa",
+   "name": "Cánh lửa Kiếm",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Song kiếm",
+   "weaponIds": [
+    "songkiem"
+   ],
+   "element": "Hỏa",
+   "desc": "Cánh lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_song_kiem_tho",
+   "name": "Nện đất Kiếm",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Song kiếm",
+   "weaponIds": [
+    "songkiem"
+   ],
+   "element": "Thổ",
+   "desc": "Nện đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_trong_kiem_kim",
+   "name": "Chém nặng giảm giáp",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Trọng kiếm",
+   "weaponIds": [
+    "trongkiem"
+   ],
+   "element": "Kim",
+   "desc": "Chém nặng giảm giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_trong_kiem_moc",
+   "name": "Rễ hồi máu",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Trọng kiếm",
+   "weaponIds": [
+    "trongkiem"
+   ],
+   "element": "Mộc",
+   "desc": "Rễ hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 70,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_trong_kiem_thuy",
+   "name": "Thủy Chém đóng băng",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Trọng kiếm",
+   "weaponIds": [
+    "trongkiem"
+   ],
+   "element": "Thủy",
+   "desc": "Chém đóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 70,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_trong_kiem_hoa",
+   "name": "Biển lửa Kiếm",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Trọng kiếm",
+   "weaponIds": [
+    "trongkiem"
+   ],
+   "element": "Hỏa",
+   "desc": "Biển lửa",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 70,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_kiemtu_trong_kiem_tho",
+   "name": "Nhảy đập choáng",
+   "classId": "kiemtu",
+   "className": "Kiếm Tu",
+   "weaponGroup": "Trọng kiếm",
+   "weaponIds": [
+    "trongkiem"
+   ],
+   "element": "Thổ",
+   "desc": "Nhảy đập choáng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 70,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_phat_tran_kim",
+   "name": "Khiên kim Trần",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Phất trần",
+   "weaponIds": [
+    "phattran"
+   ],
+   "element": "Kim",
+   "desc": "Khiên kim",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_phat_tran_moc",
+   "name": "Vùng hồi máu",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Phất trần",
+   "weaponIds": [
+    "phattran"
+   ],
+   "element": "Mộc",
+   "desc": "Vùng hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_phat_tran_thuy",
+   "name": "Vùng giảm dmg phép",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Phất trần",
+   "weaponIds": [
+    "phattran"
+   ],
+   "element": "Thủy",
+   "desc": "Vùng giảm dmg phép",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_phat_tran_hoa",
+   "name": "Hồi sinh Trần",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Phất trần",
+   "weaponIds": [
+    "phattran"
+   ],
+   "element": "Hỏa",
+   "desc": "Hồi sinh",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_phat_tran_tho",
+   "name": "Giáp đất Trần",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Phất trần",
+   "weaponIds": [
+    "phattran"
+   ],
+   "element": "Thổ",
+   "desc": "Giáp đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_kim_cham_kim",
+   "name": "Khóa mục tiêu",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Kim châm",
+   "weaponIds": [
+    "kimcham"
+   ],
+   "element": "Kim",
+   "desc": "Khóa mục tiêu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_kim_cham_moc",
+   "name": "Độc lan Châm",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Kim châm",
+   "weaponIds": [
+    "kimcham"
+   ],
+   "element": "Mộc",
+   "desc": "Độc lan",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_kim_cham_thuy",
+   "name": "Đóng băng Châm",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Kim châm",
+   "weaponIds": [
+    "kimcham"
+   ],
+   "element": "Thủy",
+   "desc": "Đóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_kim_cham_hoa",
+   "name": "Tự châm hồi máu",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Kim châm",
+   "weaponIds": [
+    "kimcham"
+   ],
+   "element": "Hỏa",
+   "desc": "Tự châm hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_kim_cham_tho",
+   "name": "Giải khống chế",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Kim châm",
+   "weaponIds": [
+    "kimcham"
+   ],
+   "element": "Thổ",
+   "desc": "Giải khống chế",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_co_cam_kim",
+   "name": "Câm lặng Cầm",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Cổ cầm",
+   "weaponIds": [
+    "cocam"
+   ],
+   "element": "Kim",
+   "desc": "Câm lặng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_co_cam_moc",
+   "name": "Hồi máu lớn",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Cổ cầm",
+   "weaponIds": [
+    "cocam"
+   ],
+   "element": "Mộc",
+   "desc": "Hồi máu lớn",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_co_cam_thuy",
+   "name": "Thủy Sóng âm đóng băng",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Cổ cầm",
+   "weaponIds": [
+    "cocam"
+   ],
+   "element": "Thủy",
+   "desc": "Sóng âm đóng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_co_cam_hoa",
+   "name": "Tăng tốc hồi máu",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Cổ cầm",
+   "weaponIds": [
+    "cocam"
+   ],
+   "element": "Hỏa",
+   "desc": "Tăng tốc hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_ytu_co_cam_tho",
+   "name": "Làm chậm Cầm",
+   "classId": "ytu",
+   "className": "Y Tu",
+   "weaponGroup": "Cổ cầm",
+   "weaponIds": [
+    "cocam"
+   ],
+   "element": "Thổ",
+   "desc": "Làm chậm",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_ngam_tho_kim",
+   "name": "Kết giới câm lặng",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Ngâm thơ",
+   "weaponIds": [
+    "ngamtho"
+   ],
+   "element": "Kim",
+   "desc": "Kết giới câm lặng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_ngam_tho_moc",
+   "name": "Hồi máu + linh lực",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Ngâm thơ",
+   "weaponIds": [
+    "ngamtho"
+   ],
+   "element": "Mộc",
+   "desc": "Hồi máu + linh lực",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_ngam_tho_thuy",
+   "name": "Ru ngủ Thơ",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Ngâm thơ",
+   "weaponIds": [
+    "ngamtho"
+   ],
+   "element": "Thủy",
+   "desc": "Ru ngủ",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_ngam_tho_hoa",
+   "name": "Hồi máu giải khống chế",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Ngâm thơ",
+   "weaponIds": [
+    "ngamtho"
+   ],
+   "element": "Hỏa",
+   "desc": "Hồi máu giải khống chế",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_ngam_tho_tho",
+   "name": "Giảm dmg diện rộng",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Ngâm thơ",
+   "weaponIds": [
+    "ngamtho"
+   ],
+   "element": "Thổ",
+   "desc": "Giảm dmg diện rộng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_but_phep_kim",
+   "name": "Chữ hóa giáp",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Bút phép",
+   "weaponIds": [
+    "butphep"
+   ],
+   "element": "Kim",
+   "desc": "Chữ hóa giáp",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_but_phep_moc",
+   "name": "Vẽ rừng giam",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Bút phép",
+   "weaponIds": [
+    "butphep"
+   ],
+   "element": "Mộc",
+   "desc": "Vẽ rừng giam",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_but_phep_thuy",
+   "name": "Vẽ vùng băng",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Bút phép",
+   "weaponIds": [
+    "butphep"
+   ],
+   "element": "Thủy",
+   "desc": "Vẽ vùng băng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_but_phep_hoa",
+   "name": "Chữ lửa nổ",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Bút phép",
+   "weaponIds": [
+    "butphep"
+   ],
+   "element": "Hỏa",
+   "desc": "Chữ lửa nổ",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_but_phep_tho",
+   "name": "Trận giáp đất",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Bút phép",
+   "weaponIds": [
+    "butphep"
+   ],
+   "element": "Thổ",
+   "desc": "Trận giáp đất",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_quyen_truc_kim",
+   "name": "Câm lặng Trục",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Quyển trục",
+   "weaponIds": [
+    "quyentruc"
+   ],
+   "element": "Kim",
+   "desc": "Câm lặng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_quyen_truc_moc",
+   "name": "Buff hồi máu",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Quyển trục",
+   "weaponIds": [
+    "quyentruc"
+   ],
+   "element": "Mộc",
+   "desc": "Buff hồi máu",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 35000,
+   "rangePx": 320,
+   "cooldownS": 35,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_quyen_truc_thuy",
+   "name": "Đổi vị trí",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Quyển trục",
+   "weaponIds": [
+    "quyentruc"
+   ],
+   "element": "Thủy",
+   "desc": "Đổi vị trí",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 250,
+   "cdMs": 40000,
+   "rangePx": 320,
+   "cooldownS": 40,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_quyen_truc_hoa",
+   "name": "Tăng tốc Trục",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Quyển trục",
+   "weaponIds": [
+    "quyentruc"
+   ],
+   "element": "Hỏa",
+   "desc": "Tăng tốc",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 150,
+   "cdMs": 45000,
+   "rangePx": 320,
+   "cooldownS": 45,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  },
+  {
+   "id": "kd_nhotu_quyen_truc_tho",
+   "name": "Thổ Choáng diện rộng",
+   "classId": "nhotu",
+   "className": "Nho Tu",
+   "weaponGroup": "Quyển trục",
+   "weaponIds": [
+    "quyentruc"
+   ],
+   "element": "Thổ",
+   "desc": "Choáng diện rộng",
+   "quality": "tien",
+   "minRealm": "kd",
+   "tier": "kd",
+   "coef": 3.0,
+   "cost": 200,
+   "cdMs": 50000,
+   "rangePx": 320,
+   "cooldownS": 50,
+   "damageTier": "cực đại (theo tài liệu: hồi chiêu 35s-50s, sát thương cực đại)",
+   "gameFrameNote": "coef/cost theo khung Áo nghĩa của thiết kế gốc (3.0 / 150-250); CD theo tài liệu mở rộng (35-50s).",
+   "generated": false
+  }
+ ],
+ "utilitySkills": {
+  "boPhap": [
+   {
+    "id": "bophap_lang_ba_vi_bo",
+    "name": "Lăng Ba Vi Bộ",
+    "category": "boPhap",
+    "desc": "Lướt 5m miễn sát thương (ví dụ trong tài liệu)",
+    "generated": false
+   },
+   {
+    "id": "bophap_lang_ba_than_phap",
+    "name": "Lăng Ba Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_lang_ba_quyet",
+    "name": "Lăng Ba Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_lang_ba_bo",
+    "name": "Lăng Ba Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_lang_ba_thuat",
+    "name": "Lăng Ba Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_tat_phong_vi_bo",
+    "name": "Tật Phong Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_tat_phong_than_phap",
+    "name": "Tật Phong Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_tat_phong_quyet",
+    "name": "Tật Phong Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_tat_phong_bo",
+    "name": "Tật Phong Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_tat_phong_thuat",
+    "name": "Tật Phong Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_luu_van_vi_bo",
+    "name": "Lưu Vân Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_luu_van_than_phap",
+    "name": "Lưu Vân Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_luu_van_quyet",
+    "name": "Lưu Vân Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_luu_van_bo",
+    "name": "Lưu Vân Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_luu_van_thuat",
+    "name": "Lưu Vân Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_hoi_quang_vi_bo",
+    "name": "Hồi Quang Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_hoi_quang_than_phap",
+    "name": "Hồi Quang Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_hoi_quang_quyet",
+    "name": "Hồi Quang Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_hoi_quang_bo",
+    "name": "Hồi Quang Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_hoi_quang_thuat",
+    "name": "Hồi Quang Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_anh_don_vi_bo",
+    "name": "Ảnh Độn Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_anh_don_than_phap",
+    "name": "Ảnh Độn Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_anh_don_quyet",
+    "name": "Ảnh Độn Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_anh_don_bo",
+    "name": "Ảnh Độn Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_anh_don_thuat",
+    "name": "Ảnh Độn Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_phi_van_vi_bo",
+    "name": "Phi Vân Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_phi_van_than_phap",
+    "name": "Phi Vân Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_phi_van_quyet",
+    "name": "Phi Vân Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_phi_van_bo",
+    "name": "Phi Vân Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_phi_van_thuat",
+    "name": "Phi Vân Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_kinh_hong_vi_bo",
+    "name": "Kinh Hồng Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_kinh_hong_than_phap",
+    "name": "Kinh Hồng Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_kinh_hong_quyet",
+    "name": "Kinh Hồng Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_kinh_hong_bo",
+    "name": "Kinh Hồng Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_kinh_hong_thuat",
+    "name": "Kinh Hồng Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_thien_la_vi_bo",
+    "name": "Thiên La Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_thien_la_than_phap",
+    "name": "Thiên La Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_thien_la_quyet",
+    "name": "Thiên La Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_thien_la_bo",
+    "name": "Thiên La Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_thien_la_thuat",
+    "name": "Thiên La Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_vo_anh_vi_bo",
+    "name": "Vô Ảnh Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_vo_anh_than_phap",
+    "name": "Vô Ảnh Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_vo_anh_quyet",
+    "name": "Vô Ảnh Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_vo_anh_bo",
+    "name": "Vô Ảnh Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_vo_anh_thuat",
+    "name": "Vô Ảnh Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_dap_tuyet_vi_bo",
+    "name": "Đạp Tuyết Vi Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_dap_tuyet_than_phap",
+    "name": "Đạp Tuyết Thân Pháp",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_dap_tuyet_quyet",
+    "name": "Đạp Tuyết Quyết",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_dap_tuyet_bo",
+    "name": "Đạp Tuyết Bộ",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   },
+   {
+    "id": "bophap_dap_tuyet_thuat",
+    "name": "Đạp Tuyết Thuật",
+    "category": "boPhap",
+    "desc": "Bộ pháp: di chuyển đặc biệt (lướt/lặn/tàng hình/nhảy/dịch chuyển).",
+    "generated": true
+   }
+  ],
+  "phongThu": [
+   {
+    "id": "phongthu_kim_chung_trao",
+    "name": "Kim Chung Tráo",
+    "category": "phongThu",
+    "desc": "Khiên vàng hấp thụ 30% HP (ví dụ trong tài liệu)",
+    "generated": false
+   },
+   {
+    "id": "phongthu_kim_chung_thuan",
+    "name": "Kim Chung Thuẫn",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_kim_chung_sam",
+    "name": "Kim Chung Sam",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_kim_chung_giap",
+    "name": "Kim Chung Giáp",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_huyen_vu_trao",
+    "name": "Huyền Vũ Tráo",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_huyen_vu_thuan",
+    "name": "Huyền Vũ Thuẫn",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_huyen_vu_sam",
+    "name": "Huyền Vũ Sam",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_huyen_vu_giap",
+    "name": "Huyền Vũ Giáp",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_thiet_bo_trao",
+    "name": "Thiết Bố Tráo",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_thiet_bo_thuan",
+    "name": "Thiết Bố Thuẫn",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_thiet_bo_sam",
+    "name": "Thiết Bố Sam",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_thiet_bo_giap",
+    "name": "Thiết Bố Giáp",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_ngoc_thanh_trao",
+    "name": "Ngọc Thanh Tráo",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_ngoc_thanh_thuan",
+    "name": "Ngọc Thanh Thuẫn",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_ngoc_thanh_sam",
+    "name": "Ngọc Thanh Sam",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_ngoc_thanh_giap",
+    "name": "Ngọc Thanh Giáp",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_dia_long_trao",
+    "name": "Địa Long Tráo",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_dia_long_thuan",
+    "name": "Địa Long Thuẫn",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_dia_long_sam",
+    "name": "Địa Long Sam",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   },
+   {
+    "id": "phongthu_dia_long_giap",
+    "name": "Địa Long Giáp",
+    "category": "phongThu",
+    "desc": "Phòng thủ: tạo khiên/giảm sát thương/phản đòn/hóa đá.",
+    "generated": true
+   }
+  ],
+  "hoTroTuLuyen": [
+   {
+    "id": "hotrotuluyen_dan_tam_thuat",
+    "name": "Dẫn Tâm Thuật",
+    "category": "hoTroTuLuyen",
+    "desc": "Thiền định tăng 20% Tu vi (ví dụ trong tài liệu)",
+    "generated": false
+   },
+   {
+    "id": "hotrotuluyen_dan_tam_quyet",
+    "name": "Dẫn Tâm Quyết",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_tu_linh_thuat",
+    "name": "Tụ Linh Thuật",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_tu_linh_quyet",
+    "name": "Tụ Linh Quyết",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_ngung_than_thuat",
+    "name": "Ngưng Thần Thuật",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_ngung_than_quyet",
+    "name": "Ngưng Thần Quyết",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_hap_tinh_thuat",
+    "name": "Hấp Tinh Thuật",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_hap_tinh_quyet",
+    "name": "Hấp Tinh Quyết",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_duong_nguyen_thuat",
+    "name": "Dưỡng Nguyên Thuật",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   },
+   {
+    "id": "hotrotuluyen_duong_nguyen_quyet",
+    "name": "Dưỡng Nguyên Quyết",
+    "category": "hoTroTuLuyen",
+    "desc": "Hỗ trợ tu luyện: tăng tốc hấp thu Tu vi / tỷ lệ rơi đồ.",
+    "generated": true
+   }
+  ],
+  "khongChe": [
+   {
+    "id": "khongche_dinh_than_chu",
+    "name": "Định Thân Chú",
+    "category": "khongChe",
+    "desc": "Định thân mục tiêu (ví dụ trong tài liệu)",
+    "generated": false
+   },
+   {
+    "id": "khongche_dinh_than_phu",
+    "name": "Định Thân Phù",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_tran_hon_chu",
+    "name": "Trấn Hồn Chú",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_tran_hon_phu",
+    "name": "Trấn Hồn Phù",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_phong_linh_chu",
+    "name": "Phong Linh Chú",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_phong_linh_phu",
+    "name": "Phong Linh Phù",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_han_toa_chu",
+    "name": "Hàn Tỏa Chú",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_han_toa_phu",
+    "name": "Hàn Tỏa Phù",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_thuc_phuoc_chu",
+    "name": "Thúc Phược Chú",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   },
+   {
+    "id": "khongche_thuc_phuoc_phu",
+    "name": "Thúc Phược Phù",
+    "category": "khongChe",
+    "desc": "Khống chế: choáng/trói/làm chậm diện rộng.",
+    "generated": true
+   }
+  ],
+  "sinhTon": [
+   {
+    "id": "sinhton_tao_thuc_thuat",
+    "name": "Tạo Thực Thuật",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_tao_thuc_quyet",
+    "name": "Tạo Thực Quyết",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_ngung_lo_thuat",
+    "name": "Ngưng Lộ Thuật",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_ngung_lo_quyet",
+    "name": "Ngưng Lộ Quyết",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_hoi_thanh_thuat",
+    "name": "Hồi Thành Thuật",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_hoi_thanh_quyet",
+    "name": "Hồi Thành Quyết",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_tam_bao_thuat",
+    "name": "Tầm Bảo Thuật",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_tam_bao_quyet",
+    "name": "Tầm Bảo Quyết",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_da_ngoai_thuat",
+    "name": "Dã Ngoại Thuật",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   },
+   {
+    "id": "sinhton_da_ngoai_quyet",
+    "name": "Dã Ngoại Quyết",
+    "category": "sinhTon",
+    "desc": "Sinh tồn: tạo thức ăn/nước uống, phát hiện rương ẩn, hồi thành.",
+    "generated": true
+   }
+  ]
+ },
+ "hiddenSkills": [
+  {
+   "id": "hidden_van_kiem_quy_tong",
+   "name": "Vạn Kiếm Quy Tông",
+   "desc": "Mưa 100 phi kiếm",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_1_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_1_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_1_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": false
+  },
+  {
+   "id": "hidden_thoi_gian_nghich_chuyen",
+   "name": "Thời Gian Nghịch Chuyển",
+   "desc": "Quay ngược thời gian 3s",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_2_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_2_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_2_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": false
+  },
+  {
+   "id": "hidden_bat_diet_kim_than",
+   "name": "Bất Diệt Kim Thân",
+   "desc": "Hồi máu 10%/giây",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_3_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_3_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_3_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": false
+  },
+  {
+   "id": "hidden_thien_nhan_thong",
+   "name": "Thiên Nhãn Thông",
+   "desc": "Nhìn xuyên vật cản, phát hiện kẻ tàng hình và rương ẩn",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_4_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_4_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_4_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_cuu_chuyen_hoan_hon_thuat",
+   "name": "Cửu Chuyển Hoàn Hồn Thuật",
+   "desc": "Hồi sinh bản thân 1 lần mỗi ngày với 50% HP",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_5_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_5_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_5_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_dai_la_thien_vong",
+   "name": "Đại La Thiên Võng",
+   "desc": "Kết giới giam mọi kẻ địch trong vùng 10s",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_6_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_6_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_6_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_hu_khong_pha_gioi",
+   "name": "Hư Không Phá Giới",
+   "desc": "Dịch chuyển tức thời xuyên map kèm sóng xung kích",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_7_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_7_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_7_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_sinh_tu_luan_hoi_chuong",
+   "name": "Sinh Tử Luân Hồi Chưởng",
+   "desc": "Một chưởng đổi %HP với mục tiêu",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_8_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_8_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_8_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_thai_cuc_vo_song",
+   "name": "Thái Cực Vô Song",
+   "desc": "Phản lại toàn bộ sát thương nhận trong 3s",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_9_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_9_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_9_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_huyet_hai_thao_thien",
+   "name": "Huyết Hải Thao Thiên",
+   "desc": "Sóng máu diện rộng, hút máu theo số kẻ địch trúng",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_10_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_10_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_10_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_phat_quang_pho_chieu",
+   "name": "Phật Quang Phổ Chiếu",
+   "desc": "Hồi máu + giải khống chế cho cả nhóm",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_11_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_11_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_11_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_ma_vuong_giang_the",
+   "name": "Ma Vương Giáng Thế",
+   "desc": "Hóa thân Ma Vương 15s, toàn chỉ số tăng mạnh",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_12_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_12_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_12_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_tinh_van_dai_kiep",
+   "name": "Tinh Vẫn Đại Kiếp",
+   "desc": "Triệu hồi thiên thạch mưa xuống vùng chỉ định",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_13_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_13_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_13_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_am_duong_dao_loan",
+   "name": "Âm Dương Đảo Loạn",
+   "desc": "Đảo ngược buff/debuff trên người mục tiêu",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_14_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_14_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_14_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  },
+  {
+   "id": "hidden_vo_tuong_than_cong",
+   "name": "Vô Tướng Thần Công",
+   "desc": "Sao chép chiêu cuối cùng mục tiêu vừa tung",
+   "quality": "than",
+   "exclusive": true,
+   "is_claimed": false,
+   "claimedBy": null,
+   "transferableTo": 2,
+   "inheritPowerPct": [
+    70,
+    80
+   ],
+   "questChains": [
+    {
+     "chainId": "chain_15_1",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "vo_tan_hu_khong"
+      },
+      {
+       "type": "time",
+       "fromHour": 23,
+       "toHour": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_15_2",
+     "conditions": [
+      {
+       "type": "item",
+       "itemId": "tam_ma_dan",
+       "count": 1
+      },
+      {
+       "type": "realm",
+       "realm": "kd",
+       "tier": 1
+      }
+     ]
+    },
+    {
+     "chainId": "chain_15_3",
+     "conditions": [
+      {
+       "type": "map",
+       "mapId": "long_mach_co_thanh"
+      },
+      {
+       "type": "item",
+       "itemId": "truyen_thua_lenh",
+       "count": 1
+      }
+     ]
+    }
+   ],
+   "generated": true
+  }
+ ],
+ "flawedSets": [
+  {
+   "id": "flawed_bang_hoa_luong_cuc",
+   "name": "Băng Hỏa Lưỡng Cực",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_dam_lua",
+     "name": "Mảnh 1 — Đấm Lửa",
+     "sideEffect": "Dùng lẻ: tự đốt HP"
+    },
+    {
+     "itemId": "manh_dam_bang",
+     "name": "Mảnh 2 — Đấm Băng",
+     "sideEffect": "Dùng lẻ: tự làm chậm"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Sát thương hủy diệt, miễn nhiễm hệ Băng/Hỏa",
+   "generated": false
+  },
+  {
+   "id": "flawed_loi_phong_luong_nghi",
+   "name": "Lôi Phong Lưỡng Nghi",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_phong_loi_phong_luong_nghi",
+     "name": "Mảnh Phong",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_loi_loi_phong_luong_nghi",
+     "name": "Mảnh Lôi",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Sấm sét cuốn theo cuồng phong",
+   "generated": true
+  },
+  {
+   "id": "flawed_am_duong_song_ngu",
+   "name": "Âm Dương Song Ngư",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_am_am_duong_song_ngu",
+     "name": "Mảnh Âm",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_duong_am_duong_song_ngu",
+     "name": "Mảnh Dương",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Hai khí âm dương luân chuyển",
+   "generated": true
+  },
+  {
+   "id": "flawed_sinh_tu_luan_hoi_an",
+   "name": "Sinh Tử Luân Hồi Ấn",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_sinh_sinh_tu_luan_hoi_an",
+     "name": "Mảnh Sinh",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_tu_sinh_tu_luan_hoi_an",
+     "name": "Mảnh Tử",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Hồi máu đồng đội, đoạt sinh khí kẻ địch",
+   "generated": true
+  },
+  {
+   "id": "flawed_quang_am_giao_thoa",
+   "name": "Quang Ám Giao Thoa",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_quang_quang_am_giao_thoa",
+     "name": "Mảnh Quang",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_am_quang_am_giao_thoa",
+     "name": "Mảnh Ám",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Sáng tối giao thoa gây mù + thiêu đốt",
+   "generated": true
+  },
+  {
+   "id": "flawed_kim_moc_tuong_sinh",
+   "name": "Kim Mộc Tương Sinh",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_kim_kim_moc_tuong_sinh",
+     "name": "Mảnh Kim",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_moc_kim_moc_tuong_sinh",
+     "name": "Mảnh Mộc",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Kiếm khí sinh sôi không dứt",
+   "generated": true
+  },
+  {
+   "id": "flawed_thuy_hoa_ky_te",
+   "name": "Thủy Hỏa Ký Tế",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_thuy_thuy_hoa_ky_te",
+     "name": "Mảnh Thủy",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_hoa_thuy_hoa_ky_te",
+     "name": "Mảnh Hỏa",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Thủy hỏa cân bằng, nổ diện rộng",
+   "generated": true
+  },
+  {
+   "id": "flawed_long_phuong_trinh_tuong",
+   "name": "Long Phượng Trình Tường",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_long_long_phuong_trinh_tuong",
+     "name": "Mảnh Long",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_phuong_long_phuong_trinh_tuong",
+     "name": "Mảnh Phượng",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Song thú hộ thể",
+   "generated": true
+  },
+  {
+   "id": "flawed_thien_dia_dong_lo",
+   "name": "Thiên Địa Đồng Lô",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_thien_thien_dia_dong_lo",
+     "name": "Mảnh Thiên",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_dia_thien_dia_dong_lo",
+     "name": "Mảnh Địa",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Lò luyện thiên địa nung chảy giáp địch",
+   "generated": true
+  },
+  {
+   "id": "flawed_nhat_nguyet_song_huy",
+   "name": "Nhật Nguyệt Song Huy",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_nhat_nhat_nguyet_song_huy",
+     "name": "Mảnh Nhật",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_nguyet_nhat_nguyet_song_huy",
+     "name": "Mảnh Nguyệt",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Hai vầng sáng xoay vòng tấn công",
+   "generated": true
+  },
+  {
+   "id": "flawed_tinh_than_dai_tran",
+   "name": "Tinh Thần Đại Trận",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_tinh_tinh_than_dai_tran",
+     "name": "Mảnh Tinh",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_than_tinh_than_dai_tran",
+     "name": "Mảnh Thần",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Trận sao trấn áp vùng rộng",
+   "generated": true
+  },
+  {
+   "id": "flawed_huyen_vu_tran_hai",
+   "name": "Huyền Vũ Trấn Hải",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_huyen_huyen_vu_tran_hai",
+     "name": "Mảnh Huyền",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_vu_huyen_vu_tran_hai",
+     "name": "Mảnh Vũ",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Khiên nước trấn hải, phản sóng",
+   "generated": true
+  },
+  {
+   "id": "flawed_chu_tuoc_phan_thien",
+   "name": "Chu Tước Phần Thiên",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_chu_chu_tuoc_phan_thien",
+     "name": "Mảnh Chu",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_tuoc_chu_tuoc_phan_thien",
+     "name": "Mảnh Tước",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Lửa thần thiêu rụi bầu trời",
+   "generated": true
+  },
+  {
+   "id": "flawed_bach_ho_pha_quan",
+   "name": "Bạch Hổ Phá Quân",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_bach_bach_ho_pha_quan",
+     "name": "Mảnh Bạch",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_ho_bach_ho_pha_quan",
+     "name": "Mảnh Hổ",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Sát khí phá vỡ hàng ngũ địch",
+   "generated": true
+  },
+  {
+   "id": "flawed_thanh_long_ngam",
+   "name": "Thanh Long Ngâm",
+   "quality": "bao",
+   "fragments": [
+    {
+     "itemId": "manh_thanh_thanh_long_ngam",
+     "name": "Mảnh Thanh",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    },
+    {
+     "itemId": "manh_long_thanh_long_ngam",
+     "name": "Mảnh Long",
+     "sideEffect": "Dùng lẻ: phản phệ nhẹ lên bản thân"
+    }
+   ],
+   "fragmentCount": 2,
+   "fusedDesc": "Tiếng rồng ngâm choáng + hồi mana",
+   "generated": true
+  }
+ ],
+ "forbiddenSkills": [
+  {
+   "id": "forbidden_dai_thon_phe_thuat",
+   "name": "Đại Thôn Phệ Thuật",
+   "desc": "Hút máu tăng vĩnh viễn Tu vi",
+   "quality": "than",
+   "cost": {
+    "desc": "Hiến tế vật liệu cực hiếm mỗi lần dùng"
+   },
+   "generated": false
+  },
+  {
+   "id": "forbidden_thien_loi_huy_diet",
+   "name": "Thiên Lôi Hủy Diệt",
+   "desc": "Sét đánh toàn màn hình cả bạn lẫn quái",
+   "quality": "than",
+   "cost": {
+    "desc": "Đánh cả đồng đội và bản thân"
+   },
+   "generated": false
+  },
+  {
+   "id": "forbidden_luan_hoi_chuyen_the",
+   "name": "Luân Hồi Chuyển Thế",
+   "desc": "Hồi sinh đồng đội nhưng bản thân mất 90% HP",
+   "quality": "than",
+   "cost": {
+    "desc": "Mất 90% HP khi thi triển"
+   },
+   "generated": false
+  },
+  {
+   "id": "forbidden_huyet_te_thien_dia",
+   "name": "Huyết Tế Thiên Địa",
+   "desc": "Dâng máu đổi sức mạnh tạm thời cực lớn",
+   "quality": "than",
+   "cost": {
+    "desc": "Mất 50% HP tối đa trong 1 giờ"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_nghich_thien_cai_menh",
+   "name": "Nghịch Thiên Cải Mệnh",
+   "desc": "Đổi vận mệnh: reset 1 lần đột phá thất bại",
+   "quality": "than",
+   "cost": {
+    "desc": "Mất 10 năm tuổi thọ"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_ma_than_hang_lam",
+   "name": "Ma Thần Hàng Lâm",
+   "desc": "Mượn sức Ma Thần trong 30s",
+   "quality": "than",
+   "cost": {
+    "desc": "Sau khi hết hiệu lực, mất 50% Tu vi tầng hiện tại"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_tan_the_loi_kiep",
+   "name": "Tận Thế Lôi Kiếp",
+   "desc": "Gọi lôi kiếp đánh xuống vùng rộng",
+   "quality": "than",
+   "cost": {
+    "desc": "Bản thân chịu 30% sát thương"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_hon_phi_phach_tan",
+   "name": "Hồn Phi Phách Tán",
+   "desc": "Đánh tan hồn phách mục tiêu",
+   "quality": "than",
+   "cost": {
+    "desc": "Mất vĩnh viễn 5% Thần thức tối đa (tối đa 3 lần)"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_thien_ma_giai_the",
+   "name": "Thiên Ma Giải Thể",
+   "desc": "Bạo tăng tốc độ và sát thương",
+   "quality": "than",
+   "cost": {
+    "desc": "Sau 10s, HP còn 1"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_van_quy_phe_tam",
+   "name": "Vạn Quỷ Phệ Tâm",
+   "desc": "Gọi vạn quỷ cắn xé kẻ địch",
+   "quality": "than",
+   "cost": {
+    "desc": "Mỗi lần dùng giảm thiện cảm mọi NPC 20 điểm"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_nhat_nguyet_dao_hanh",
+   "name": "Nhật Nguyệt Đảo Hành",
+   "desc": "Đảo ngày thành đêm trong khu vực",
+   "quality": "than",
+   "cost": {
+    "desc": "Cả server biết vị trí của bạn trong 1 giờ"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_can_khon_dien_dao",
+   "name": "Càn Khôn Điên Đảo",
+   "desc": "Đảo vị trí mọi đơn vị trong vùng",
+   "quality": "than",
+   "cost": {
+    "desc": "Không phân biệt địch/ta"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_thap_tuyet_tran",
+   "name": "Thập Tuyệt Trận",
+   "desc": "Dựng trận tuyệt sát 10 giây",
+   "quality": "than",
+   "cost": {
+    "desc": "Cần 10 người chơi cùng hiến tế 10% HP"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_hon_don_so_khai",
+   "name": "Hỗn Độn Sơ Khai",
+   "desc": "Một đòn hỗn độn bỏ qua mọi phòng thủ",
+   "quality": "than",
+   "cost": {
+    "desc": "Hồi chiêu 7 ngày thật"
+   },
+   "generated": true
+  },
+  {
+   "id": "forbidden_vo_luong_kiep",
+   "name": "Vô Lượng Kiếp",
+   "desc": "Gây sát thương theo số kiếp nạn đã tích lũy",
+   "quality": "than",
+   "cost": {
+    "desc": "Xóa toàn bộ tích lũy sau khi dùng"
+   },
+   "generated": true
+  }
+ ]
+}

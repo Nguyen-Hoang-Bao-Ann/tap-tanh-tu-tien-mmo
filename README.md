@@ -1,0 +1,1220 @@
+# Tập Tành Tu Tiên — Khung Client-Server (bản nền tảng)
+
+Monorepo 2 phần:
+
+- `server/` — Node.js + Express + Socket.io, cổng **3001**.
+  Mỗi client kết nối → 1 player (ID ngẫu nhiên, tọa độ X/Y ngẫu nhiên trong sân 800×600).
+  Server phát sự kiện **`server_tick` 10 lần/giây** chứa danh sách mọi người chơi `[{id, x, y}]`.
+  (Bản demo: player tự trôi nhẹ + có `DEMO_BOTS = 8` người chơi mô phỏng để mở Preview là thấy chuyển động ngay — chỉnh trong `server/index.js`.)
+- `client/` — Phaser 3 + TypeScript + Vite, cổng **5173**.
+  Scene 800×600, nghe `server_tick`, vẽ mỗi người chơi là 1 ô vuông xanh lá tại tọa độ X/Y,
+  dùng **lerp** trong `update()` để chuyển động mượt giữa các tick. Ô viền trắng = chính bạn.
+
+## Chạy
+
+```bash
+npm run install:all   # cài dependencies cả 3 nơi (chỉ lần đầu)
+npm start             # GĐ5: tự build client rồi chạy server — CẢ GAME ở http://localhost:3001
+npm run dev           # chế độ dev cũ: server :3001 + Vite :5173 (hot reload khi sửa client)
+```
+
+- **Chơi game: mở http://localhost:3001** (server phục vụ luôn giao diện game).
+- Mở nhiều tab = nhiều người chơi cùng lúc.
+- API kiểm tra: http://localhost:3001/api/status
+
+## Kiến trúc chịu tải (định hướng 100 người chơi)
+
+Socket.io + tick 10/giây + snapshot dạng mảng phẳng là đủ nhẹ cho ~100 kết nối đồng thời
+trên 1 tiến trình Node. Khi mở rộng tiếp: tách vòng tick khỏi tiến trình HTTP (worker),
+gửi delta thay vì toàn bộ danh sách, và chia phòng (room) theo khu vực bản đồ.
+
+## Giai đoạn 2 — Điều khiển thật (đã xong)
+
+- Client bắt **WASD / phím mũi tên**, tính vector (vx, vy) trong `update()` (đi chéo được chuẩn hóa)
+  và gửi sự kiện **`client_input`** lên server mỗi khi vector thay đổi.
+- Server lưu vector theo từng socket, tự cập nhật tọa độ trong tick: `x += vx * SPEED * 0.1`
+  (SPEED = 260 px/giây), kẹp trong sân 800×600 — **server là chuẩn**, client chỉ hiển thị + lerp.
+- Bot demo được làm mờ (alpha 0.13) phía client; ô viền trắng là chính bạn.
+- Kiểm chứng: 2 client socket — giữ phải 0.5s → y không đổi, x tăng đúng từng tick 26px;
+  giữ 4s → kẹp đúng biên x = 784; thả phím → đứng yên. Ảnh Preview 2 tab: `preview2-tab2-before/after.png`.
+
+## Giai đoạn 3 — Nhân vật thật + đồng bộ hướng nhìn (đã xong)
+
+- Server: player có thêm `direction` ("left"/"right"/"up"/"down", mặc định "down");
+  khi di chuyển, hướng lấy theo trục vận tốc lớn hơn; đứng yên giữ hướng cuối.
+  `server_tick` gửi kèm `direction`.
+- Client: sprite nhân vật pixel-art 4 hướng dệt từ bản đồ pixel trong code
+  (xuống = thấy mặt, lên = thấy gáy, trái/phải = profile), nhãn tên ID rút gọn trên đầu,
+  vòng sáng dưới chân + tên vàng cho chính mình; độ sâu sắp xếp theo y.
+- Kiểm chứng: test socket 6/6 đúng (mặc định down, 4 hướng, chéo theo trục lớn, thả phím giữ hướng);
+  ảnh Preview 2 tab: `preview3-tab2-front/right/up.png`.
+
+## Giai đoạn 4 — Bản đồ + Quái vật + Combat đồng bộ (đã xong)
+
+- Bản đồ 1600×1200 nền cỏ ô gạch; camera bám nhân vật (khung hình 800×600).
+- Server giữ mảng quái: 5 Sói, HP 100, AI lang thang / đuổi người chơi gần nhất
+  (tầm 260px, tốc độ đuổi 120px/giây, dừng cách người ~26px); `server_tick`
+  đổi sang dạng `{ players, monsters }`, quái gồm {id, x, y, hp, maxHp, direction}.
+- Client vẽ quái = khối đỏ + mõm theo hướng + thanh máu trên đầu (đổi màu theo %HP).
+- Combat: SPACE → `player_attack`; server kiểm tra tầm 50px, trừ 25 HP/đòn,
+  hồi chiêu 350ms; chết → xóa quái + broadcast `monster_killed` (client hiện thông báo),
+  hồi sinh quái mới sau 5s để bản đồ luôn đủ 5 con.
+- Kiểm chứng: test socket 7/7 (tick có 5 quái HP 100; đánh ngoài tầm không mất máu;
+  HP đi đúng 100→75→50→25→chết; broadcast đúng người hạ; quái biến mất; hồi sinh đủ 5).
+  Ảnh: `preview4-approach/fight/kill.png`.
+
+## Giai đoạn 5 — Gộp 1 địa chỉ + Làng Tân Thủ (đã xong)
+
+- **Gộp vận hành:** Express phục vụ bản dựng `client/dist` + Socket.io trên cùng cổng 3001;
+  `npm start` tự build client (prestart) rồi chạy server → cả game 1 địa chỉ, 1 lệnh.
+  Client tự chọn: trang từ :3001 → socket cùng origin; từ Vite :5173 (dev) → trỏ :3001.
+- **Làng Tân Thủ** (client vẽ + server giữ luật): quảng trường đá tròn với vòng trận pháp
+  Bát Quái phát sáng (vòng quẻ xoay liên tục, 5 điểm Ngũ Hành) tại (700, 560);
+  6 nhà có tên: Đạo Quán, Nhà Trưởng Làng, Tiệm Đan Dược, Tiệm Rèn, Quán Ăn, Tiệm Nguyên Liệu;
+  ao sen; đường làng nối 4 cổng; hàng rào quanh làng; cây trang trí.
+- **Luật server:** spawn tại quảng trường; nhà + ao là vật cản (di chuyển tách trục, trượt dọc tường);
+  làng = **vùng an toàn** — quái sinh ngoài làng, không vào làng, không đuổi người trong làng;
+  bot demo đi dạo trong làng. Khu ngoài làng = bãi farm.
+- Kiểm chứng: test socket 6/6 (spawn tại quảng trường; không quái nào vào làng; không đi xuyên
+  Đạo Quán — chặn ở mép y=389 khi nhà kết thúc y=360 + đệm 14; ra farm hạ sói bình thường;
+  quái hồi sinh ngoài làng tại (1497, 455)). Ảnh: `preview5-village.png`, `preview5-farm-b.png`.
+  (Chỉnh sau: dời Nhà Trưởng Làng + Tiệm Đan Dược lên y=425 để thông đường ngang của làng.)
+
+## Giai đoạn 6 — Nhân vật thật + công thức file thiết kế (đã xong)
+
+- **Tạo nhân vật:** client gửi `hello {token}` (token lưu ở localStorage của trình duyệt).
+  Chưa có nhân vật → màn hình tạo (DOM): nhập tên, **bốc 7 chỉ số** (server bốc 1–10,
+  tối đa 3 lượt, lượt 3 đảm bảo tổng ≥ 10 — server giữ kết quả, client không tự khai được),
+  chọn 1 trong **9 lớp** → `create_character`. Nhân vật lưu ở `server/data/characters.json`
+  theo token; vào lại là nhận ra ngay. (Tài khoản/mật khẩu thật để giai đoạn sau.)
+- **Công thức đúng file thiết kế (B3), chạy phía server:** HP max = 100 + Khí huyết×10;
+  Chân nguyên max = Thần thức×10, hồi 2 + Thần thức×0,2/giây; CDR = 0,40×Tốc độ/(Tốc độ+100);
+  tốc độ chạy cộng nhẹ theo Tốc độ; đánh thường = 0,85 × (Công + 10) — lớp vật lý dùng
+  Vật công, lớp phép dùng Pháp công, Phật/Quỷ tu lấy chỉ số công cao hơn; sát thương nhận
+  × 100/(100 + Phòng tương ứng), tối thiểu 1. **10 điểm tự do** khởi đầu chưa cộng (giai đoạn sau cộng).
+- **Sói Xám theo bảng quái của file:** HP 40, dame 5 (thay bộ số tạm 100/25 của GĐ4).
+  Sói **cắn trả** người chơi trong tầm 42px, hồi chiêu cắn 1 giây, trừ theo Vật phòng.
+- **Chết:** HP ≤ 0 → hồi sinh tại quảng trường làng, máu/Chân nguyên đầy (chết về làng
+  không mất đồ như bản chơi đơn; thời gian chờ leo thang chưa áp dụng).
+- Client: nhãn trên đầu = tên nhân vật, thanh máu trên đầu mọi người chơi, panel HUD
+  góc trái (tên/lớp/HP/Chân nguyên/7 chỉ số), bị cắn → nháy đỏ, chết → thông báo.
+- Kiểm chứng: test socket **17/17** — bốc chỉ số đúng luật; HP/Chân nguyên khớp công thức
+  (KH=4 → 140 HP); đòn đầu trừ đúng 16 = 0,85×(9+10); sói cắn trừ đúng 5 = 5×100/(100+3);
+  chết → hồi sinh quảng trường máu đầy; ngắt kết nối vào lại còn nguyên nhân vật.
+  Hồi quy GĐ5 sau khi dời nhà: 6/6. Ảnh: `preview6-create.png`, `preview6-hud.png`, `preview6-farm-a.png`.
+
+## Giai đoạn 7 — Công pháp + Tu vi + Cảnh giới/Đột phá (đã xong)
+
+- **Linh căn:** nhân vật khởi đầu là Phàm nhân. Đứng trước cửa Đạo Quán bấm **E**
+  → server bốc linh căn đúng tỷ lệ file (Đơn 10% / Song 30% / Tam 25% / Tứ 30% / Ngũ 5%,
+  hệ đầu tiên là hệ chính) → lên **Luyện Khí tầng 1** + nhận **2 công pháp Cơ bản**.
+  Chưa có linh căn thì hạ quái không được Tu vi (có thông báo nhắc đi đo linh căn).
+- **Công pháp:** catalog tạm theo lớp nằm trong khung bậc của file (Cơ bản: hệ số 1.0,
+  CD 0,5–2s, tốn 5–15 Chân nguyên; Luyện Khí: hệ số 1.6, CD 3–8s, tốn 20–50) — tên chiêu
+  là bản tạm cho tới khi chuyển đủ dữ liệu 477 công pháp. Phím **1/2/3** tung chiêu
+  (`cast_skill`): server kiểm tra tầm / hồi chiêu (giảm theo CDR) / Chân nguyên;
+  sát thương = hệ số × (Công + 10) qua cùng đường công thức. Chiêu Luyện Khí (ô 3)
+  học tại Đạo Quán từ Luyện Khí tầng 3 (điều kiện tạm).
+- **Tu vi + đột phá:** Sói Xám (quái Yếu) **+3 Tu vi**/con cho người hạ. Nhu cầu tầng n
+  = **200 × 1,12^(n−1)**. Đủ Tu vi → nút **Đột phá** sáng trên panel: lên tầng (tiểu cảnh
+  thành công chắc chắn), nhận **2–5 điểm chỉ số**. Tới tầng 9 là viên mãn — Trúc Cơ để sau.
+- **Cộng điểm:** trên panel, mỗi chỉ số có nút **+1** (điểm tự do tạo nhân vật) và **+2**
+  (điểm đột phá) — đúng luật file: điểm về sau mỗi điểm cộng 2 chỉ số.
+- Server cấu hình qua env: `PORT`, `TTT_CHAR_FILE`, `TTT_TUVI_NEED` (chỉ để test nhanh
+  trên instance riêng; bản chính luôn dùng 200).
+- Kiểm chứng: test socket trên instance test (nhu cầu 3) **14/14** trong 19 giây —
+  linh căn Song hệ; chiêu ngoài tầm không tốn Chân nguyên; Kiếm Khí Trảm trừ đúng
+  1,0×(Vật công+10); Ngự Kiếm Quyết trừ đúng 1,6×(Công+10); đột phá ×2; cộng điểm
+  +2 → HP tối đa +20; vào lại còn nguyên tiến trình. Hồi quy bản chính: test làng 6/6.
+  (Bài học test: vòng lặp farm phải có quãng nghỉ — quay tít không nghỉ làm nghẽn
+  socket + tràn bộ nhớ tiến trình test; game không bị ảnh hưởng.)
+  Ảnh: `preview7-linhcan.png`, `preview7-break.png`, `preview7-breakthrough.png`.
+
+## Giai đoạn 8 — NPC + Linh thạch + Cửa hàng + Nhiệm vụ (đã xong)
+
+- **NPC làng:** 3 NPC cố định do server quản lý, client vẽ sprite áo nâu + nhãn
+  tên/vai trò: Trưởng Làng (trả nhiệm vụ), Chủ Tiệm Đan, Chủ Tiệm Nguyên Liệu —
+  đứng cạnh cửa nơi mình phụ trách. Dân làng bot đi dạo giữ nguyên.
+- **Linh thạch + rơi đồ:** Sói Xám chết rơi **3–8 Linh thạch** và **30% Nanh Sói**
+  (đúng file thiết kế) nằm dưới đất 120 giây; đi qua gần (≤34px) là tự nhặt.
+  Linh thạch hạ phẩm là tiền tệ (hiện trên HUD + trong túi đồ, phím **I**).
+- **Cửa hàng** (đứng trước cửa, bấm **E** mở panel; server kiểm khoảng cách):
+  Tiệm Đan Dược bán Đan Tụ Khí 30 LT / Hồi Xuân Đan 15 LT, mua lại 40% (12/6);
+  Tiệm Nguyên Liệu bán Nanh Sói 12 LT, thu mua 5 LT. Giá là **bản tạm** (file
+  thiết kế không chốt giá), luật bán lại 40% theo file. Dùng đan ngay trong túi:
+  Đan Tụ Khí +50 Tu vi; Hồi Xuân Đan hồi 50% HP tối đa.
+- **Nhiệm vụ** đúng cấu trúc file: nhận tại **Bảng Treo Thưởng** giữa quảng trường
+  (đã vẽ bảng gỗ vào làng), trả tại **Nhà Trưởng Làng**. Hai nhiệm vụ lặp lại:
+  *Trừ khử Sói Xám* (hạ 5 con → 25 LT) và *Thu thập Nanh Sói* (mang 3 nanh → 20 LT).
+  Tiến độ hiện ngay trên HUD; làm xong có thông báo mời về trả.
+- **Sửa bố cục làng:** Tiệm Nguyên Liệu dời lên y=262 (trước kê sát Nhà Trưởng Làng,
+  khe cửa chỉ 17px trong khi bước đi 26px/tick khiến gần như không vào được tầm
+  tương tác từ phía đông) — hành lang trước cửa giờ rộng 40px.
+- Kiểm chứng: `client/test8.cjs` trên instance test **18/18** — nhận/trả đủ vòng
+  nhiệm vụ, nhặt đồ rơi (Linh thạch ≥15 sau 5 con, đúng sàn 3/con), mua −30/−15/−12
+  và bán +5 đều khớp số dư tuyệt đối, dùng Đan Tụ Khí +50 Tu vi, Hồi Xuân Đan hồi
+  đúng 50% HP, vào lại còn nguyên sau mọi giao dịch. Hồi quy bản chính 6/6.
+  (Bài học test: lái tự động phải đi theo điểm mốc qua hành lang trống + vòng cam kết
+  khi bị tường chặn — lái tham lam đơn trục sẽ kẹt ở góc nhà; `client/steer.cjs`.)
+  Ảnh: `preview8-quest.png`, `preview8-shop.png`, `preview8-inv.png`,
+  `preview8-boardprobe.png` (bảng + NPC), `preview8-farm.png`. (Ảnh đồ rơi nằm đất
+  chưa chụp được trong môi trường headless — nhân vật luôn tự nhặt trước khi kịp
+  chụp; cơ chế rơi/nhặt đã chứng minh bằng test + log server.)
+
+## Giai đoạn 9 — Đồ họa chuyển từ bản chơi đơn (đã xong)
+
+Toàn bộ lớp vẽ trong thế giới được thay bằng đồ họa minh họa 2D của bản chơi đơn
+(artifact): các hàm vẽ Canvas 2D của bản cũ được chuyển gần như nguyên văn vào
+`client/src/gfx.ts`, nướng thành texture lúc khởi động (bake) rồi cho Phaser
+phát lại theo khung — server/luật chơi/hình học làng **không đổi một dòng logic**
+(server chỉ thêm 2 sự kiện thuần hiển thị `player_attacked` / `skill_cast` để
+client khác máy phát tư thế ra đòn + đạn bay).
+
+- **Thế giới**: nền cỏ họa tiết pixel + wash màu nước của bản cũ, đường đá cuội,
+  quảng trường đá đồng tâm, ao sen, hàng rào có nan ngang + 4 cổng, cột đèn trụ
+  đá + tinh thể, nhà 2,5D mái ngói 2 dốc có biển tên + đèn lồng (mỗi nhà 1
+  texture, sắp chiều sâu theo chân nhà), cây tán 3 lớp, trang trí mặt đất gieo
+  hạt giống cố định (cỏ/hoa/đá/nấm/lá rụng).
+- **Vòng trận pháp Bát Quái**: phần tĩnh nướng vào nền (hào quang + vòng + tâm),
+  lớp 8 quẻ ☰☱☲… xoay thuận + sao Ngũ Hành 5 màu xoay ngược bằng texture riêng,
+  kèm hạt linh khí bốc lên liên tục.
+- **Nhân vật**: đủ 9 lớp theo bảng phong cách bản cũ (áo/mũ/phụ kiện riêng —
+  Thể tu nón lá + nắm đấm gấu 2 tay, Phật tu đầu trọc + chuỗi hạt, Pháp tu mũ
+  nhọn + quạt…), 4 hướng × khung đứng/4 khung đi/khung tung chiêu; vũ khí đặc
+  trưng theo lớp (bản MMO chưa có hệ thống vật phẩm vũ khí — mỗi lớp cầm vũ khí
+  khởi điểm của lớp đó). NPC dùng áo riêng theo vai trò; bot dân làng dùng 5 bộ
+  đồ dân làng; người chơi khác tung chiêu/đánh thường cũng phát tư thế nhờ 2 sự
+  kiện hiển thị mới.
+- **Quái**: sói vẽ nguyên bản cũ (2 hướng mặt × đứng/4 khung chạy/khung vồ cắn
+  há miệng lộ nanh), nháy sáng khi trúng đòn, khung vồ đồng bộ nhịp cắn ~1s của
+  server. Dơi + Thạch Quái đã nướng sẵn texture (server hiện mới có sói).
+- **Sinh vật ambient phía client**: 6 gà (3 màu lông) + 3 vịt bờ ao đi dạo, mổ
+  thóc, tự né người chơi — thuần hiển thị như bản cũ.
+- **Đồ rơi**: Linh thạch = khối ngọc xanh xoay 45° phát sáng, Nanh Sói = nanh
+  cong trắng ngà, có hào quang + nhấp nhô.
+- **Hiệu ứng chiêu**: viên đạn phát sáng theo hệ linh căn chính của người tung
+  (Kim/Mộc/Thủy/Hỏa/Thổ; người chơi khác chưa lộ linh căn nên tạm màu vàng
+  trung tính), bay tới quái rồi lóe sáng khi chạm đích.
+- Kiểm chứng: build sạch; test5 (GĐ5) + test8 (GĐ8) vẫn ALL PASS; ảnh chụp
+  `preview9-world1.png`, `preview9-wolf1/2.png`, `preview9-fx*.png`.
+
+## Đo tải 100 CCU — full logic game (`client/loadtest8.cjs`)
+
+Script đo lại bài test tải 100 client socket.io thật sau khi server đã có đủ logic game
+(GĐ6–8), thay cho bài đo GĐ3 (lúc đó mới chỉ có khung mạng):
+- **Phase A** (12s): 100 client chỉ di chuyển liên tục — so sánh trực tiếp với số GĐ3
+  (tick TB 98,8ms / p99 107ms, ~4,5KB/tick, CPU 4,3%, RAM ~100MB).
+- **Phase B** (20s): 100 client CÓ nhân vật thật (bốc chỉ số + chọn lớp ngẫu nhiên),
+  tự đi đo linh căn ở Đạo Quán rồi ra farm đánh sói + tung chiêu slot 0 —
+  stress đường combat/AI quái/rơi đồ/Tu vi thật.
+- Đo: số tick nhận/kỳ vọng, khoảng cách tick (TB/p99/max), payload KB/tick,
+  CPU% + RAM của đúng tiến trình server đang listen cổng target (qua `ss`).
+
+Chạy: `node client/loadtest8.cjs [--url http://localhost:3001] [--phase A|B|AB] [--clients 100] [--dry]`
+(`--dry` = 2 client vài giây để kiểm tra script; nhân vật test tự dọn khỏi characters.json
+sau phase B theo prefix token của lần chạy.)
+
+**Chỉ chạy bản đủ 100 client khi server ở trạng thái ổn định** — không ai đang test/sửa
+song song, vì 100 client sẽ làm nhiễu mọi bài test socket khác.
+
+**Kết quả đo thật (21/10/2026, trên bản chính :3001, cùng máy loopback):**
+- **Phase A** (di chuyển thuần, 12s): nhận đủ 120/120 tick; khoảng cách tick TB
+  **100,4ms**, p99 106ms, max 111ms — ngang bằng thời GĐ3 (98,8/107ms) dù server đã
+  nặng thêm 5 giai đoạn logic. Payload ~1,85KB/tick (gọn hơn mức 4,5KB của GĐ3),
+  CPU **2,8%**, RAM 61→63MB (GĐ3: 4,3% / ~100MB).
+- **Phase B** (full combat, 20s): 100/100 đo linh căn, **100 sói bị hạ**; nhận
+  195/200 tick, TB **102,6ms**, p99 144ms, một spike max 449ms (lúc 100 client dồn
+  đo linh căn + ồ ạt ra farm). CPU **2,6%**, RAM 64→73MB. Payload phình lên
+  ~17,7KB/tick (trạng thái combat + đồ rơi của cả làng) → server phát tổng
+  ~17MB/s: **băng thông ra là giới hạn cần để ý khi lên 100 người thật**, không
+  phải CPU/RAM. Chiêu thức ghi nhận thành công chỉ 2 lượt trong cửa sổ đo — bot
+  chủ yếu hạ sói bằng đánh thường (đường chiêu đã kiểm chứng riêng ở GĐ7).
+- Sau đo đã dọn toàn bộ nhân vật test khỏi `characters.json` (gồm 2 nhân vật sót
+  của lượt chạy thử bị server tự lưu đè lại — đã xóa và khởi động lại server).
+
+## Tối ưu băng thông tick (phương án A+B, 21/10/2026)
+
+Khắc phục nút thắt ~17MB/s phát hiện ở lần đo tải sau GĐ8, **không đổi luật
+chơi** — chỉ đổi cách server phát trạng thái:
+
+- **A — Tách trường tĩnh khỏi tick:** tên/lớp/cảnh giới/tầng/maxHp/maxMp của
+  người chơi, maxHp của quái chỉ gửi khi THAY ĐỔI (đột phá, cộng điểm...);
+  3 NPC tĩnh chỉ gửi 1 lần trong bản FULL lúc client mới vào.
+- **B — Delta:** mỗi tick `server_tick` (định dạng `v: 2`) chỉ chứa entity có
+  thay đổi, mỗi entity chỉ chứa trường đã đổi, kèm danh sách `*Gone` cho
+  entity biến mất. Client mới kết nối nhận riêng 1 bản `full: true` rồi gộp
+  delta tiếp (client trình duyệt gộp trong `mergeTick` ở `main.ts`; client
+  thô/test dùng chung `client/worldmerge.cjs`).
+- **Đo lại 100 CCU** bằng chính `loadtest8.cjs` trên :3001, so với trước:
+  Phase A payload 1,85KB → **0,48KB/tick**; Phase B (full combat) 17,7KB →
+  **4,69KB/tick**, tổng phát ~17MB/s → **~4,6MB/s** (giảm ~73%) — VPS
+  100Mbps (~12,5MB/s) giờ dư địa gấp ~2,7 lần cho 100 người combat. Tick vẫn
+  10/s (TB 100,5–103,1ms), CPU ~2,5–2,8%, RAM ~75MB. Hồi quy: test5 + test7
+  (TTT_TUVI_NEED=5 trên :3002) + test8 đều ALL PASS; ảnh kiểm chứng
+  `preview-delta1.png`.
+
+## Giai đoạn 10 — Tài khoản + màn hình chờ + tùy chỉnh (21/10/2026)
+
+Luồng vào game hoàn chỉnh thay cho cơ chế "mở trang là vào thẳng":
+
+- **Màn hình chờ (splash):** ảnh bìa `client/public/splash.jpg` lấy nguyên từ
+  bản game cũ (bản chơi đơn), tiêu đề vàng kim + thanh tiến trình tải, các nút
+  Đăng nhập / Đăng ký / Chơi nhanh / Thoát (Thoát hiện ghi chú như bản cũ:
+  bản web không tự đóng tab được).
+- **Tài khoản (server `server/data/accounts.json`):** đăng ký/đăng nhập bằng
+  tên tài khoản + mật khẩu băm **scrypt + salt** (không lưu mật khẩu thô);
+  phiên đăng nhập là token ngẫu nhiên giữ trong RAM, client lưu ở
+  localStorage (`ttt_session_v1`), tải lại trang tự khôi phục tới danh sách
+  nhân vật. Mỗi tài khoản tối đa **3 nhân vật** (tạo / chọn / xóa), nhân vật
+  nằm chung `characters.json` với khóa `acc-…` và trường `account`.
+- **Chơi nhanh (khách):** giữ nguyên luồng token trình duyệt cũ — 1 trình
+  duyệt 1 nhân vật, tương thích toàn bộ test cũ.
+- **Tùy chỉnh nhân vật:** lúc tạo chọn thêm **giới tính** (Nam/Nữ — đổi kiểu
+  tóc trong hàm vẽ) và **màu áo** (8 màu + mặc định theo lớp), có **ảnh xem
+  trước trực tiếp** vẽ bằng chính hàm đồ họa trong game. Trong game mở
+  **Menu (⚙ / Esc)**: đổi màu áo áp dụng ngay cho mọi người chơi khác thấy
+  (trường `robe` đi theo tick delta) + lưu lại; nút **Thoát về màn hình
+  chính** (giữ phiên) và **Đăng xuất**.
+- Kiểm chứng: `client/test10.cjs` **13/13 PASS** (đăng ký trùng, sai mật khẩu,
+  tạo/chọn/xóa nhân vật, khôi phục phiên, robe hợp lệ/không hợp lệ); hồi quy
+  test5 + test7 + test8 **ALL PASS**; ảnh `preview10-splash.png`,
+  `preview10-create.png`, `preview10-ingame2.png`, `preview10-menu.png`,
+  `preview10-charlist.png`.
+
+## Giai đoạn 11 — Vũ khí theo hướng tu + màu áo pastel (21/10/2026)
+
+Theo phản hồi người chơi sau GĐ10:
+
+- **Màu áo:** bảng màu cũ bị chê "lố, chói mắt" → đổi toàn bộ sang **tông nhạt
+  pastel** (8 màu), đồng thời giảm hệ số bão hòa khi vẽ áo (`sat` 1.35 → 1.18
+  trong `GFX_CONFIG.style`). Nhân vật đã tạo với màu cũ được **tự chuyển**
+  sang màu nhạt tương ứng khi vào game (bảng `ROBE_MIGRATE` phía server).
+- **Chọn hướng tu:** bỏ hẳn nhãn "Vật công / Pháp công / Cả hai công" trên ô
+  chọn lớp — mỗi ô chỉ hiện tên hướng tu + **danh sách loại vũ khí** của
+  hướng đó.
+- **Vũ khí khởi đầu (đúng file thiết kế):** dữ liệu lấy từ 2 bảng "Vũ khí
+  khởi đầu" và "Vũ khí khởi đầu bổ sung" trong file thiết kế — mỗi hướng tu
+  có 2–6 vũ khí (Thể tu 6, Sát thủ 4, Phật/Quỷ/Kiếm/Pháp/Y/Nho 3, Cốt 2; tổng
+  30 lựa chọn tính cả Ngâm thơ của Nho tu; con số "28 vũ khí" nằm ở file
+  Excel chưa đọc được). Tạo nhân vật chọn 1 vũ khí: ô chọn hiện tốc độ ra
+  chiêu / mức đòn / tốn linh lực / tầm + đặc điểm theo file, ảnh xem trước
+  cầm đúng vũ khí, hình trong game vẽ đúng loại (phủ, thương, côn, chùy,
+  khiên, cờ, liềm, trảo, cầm, trục... — hàm vẽ vũ khí có sẵn từ bản cũ).
+- **Đánh thường theo vũ khí (server là chuẩn):** hồi chiêu theo tốc độ của
+  file (Nhanh 0,5s / Trung bình 0,8s / Chậm 1,4s — chuẩn hoá quanh nhịp
+  Trung bình hiện tại), hệ số mỗi đòn tỉ lệ với hồi chiêu để vũ khí nhanh
+  yếu / chậm mạnh mà sát thương mỗi giây gần bằng nhau như nguyên tắc của
+  file. Vũ khí tầm xa (Pháp tu, Y tu, Nho tu, Phật châu, Cờ lệnh...) đánh
+  thường từ xa 150px và có đạn bay như chiêu. HUD và danh sách nhân vật
+  hiện "Hướng tu · Vũ khí".
+- Kiểm chứng: `client/test11.cjs` **10/10 PASS** (vũ khí sai lớp tự về vũ
+  khí đầu, tầm xa trúng ở 117px, cận chiến hụt ở 120px, hồi chiêu Chậm
+  chặn đòn nối tiếp); hồi quy test5 + test7 + test8 **ALL PASS**, test10
+  **13/13**; ảnh `preview11-create-the.png`, `preview11-ingame.png`.
+
+## Giai đoạn 12 — Nhân vật kiểu pixel (22/10/2026)
+
+Theo ảnh mẫu sprite pixel người chơi gửi (chibi 80×80, 8 khung đi bộ):
+
+- Ảnh mẫu chỉ có 1 nhân vật / 1 hướng nên không thể thay trực tiếp cho game
+  9 lớp × 30 vũ khí × 4 hướng. Thay vào đó, toàn bộ pipeline nướng texture
+  nhân vật chuyển sang **phong cách pixel**: vẽ ở độ phân giải thấp (mỗi
+  "pixel" = 3 đơn vị vẽ, `PERSON_PIXEL` trong `gfx.ts`) rồi phóng to với
+  `imageSmoothingEnabled = false` + bộ lọc NEAREST của Phaser — cạnh ô
+  vuông rõ nét như sprite pixel thật.
+- Áp dụng cho **mọi nhân vật**: người chơi (đủ lớp/vũ khí/màu áo/giới tính),
+  NPC, dân làng/bot — vì tất cả đều qua chung một hàm nướng. Ảnh xem trước ở
+  màn tạo nhân vật và thẻ chọn nhân vật cũng pixel đồng bộ. Logic game,
+  chỉ số, hoạt ảnh (4 hướng × đi/đứng/tung chiêu) giữ nguyên 100%.
+- Kiểm chứng: ảnh `preview12-ingame.png` + `preview12-closeup.png` (cận
+  cảnh thấy rõ ô pixel trên nhân vật), hồi quy test5 ALL PASS.
+- Nếu có bộ spritesheet đầy đủ (đủ hướng/đủ khung, ví dụ từ AutoSprite) thì
+  gửi sang — sẽ thay hẳn bằng sprite thật thay cho bản vẽ bằng code này.
+
+## Giai đoạn 13 — Sprite nhân vật pixel thật (22/10/2026)
+
+Người chơi gửi bộ sprite export từ AutoSprite (nhân vật tu tiên áo teal,
+tay không) và bản pixel-hoá ở GĐ12 bị chê "thô xấu" → thay bằng sprite thật:
+
+- Bộ gốc: idle 8 hướng (80×80) + đi bộ 5 hướng × 4 khung (112×112), nền
+  trong suốt. Đã **chuẩn hoá mọi khung về khổ 96×96, căn giữa + căn chân
+  (y=94)** để không nhảy hình khi đổi hướng/khung — file nằm ở
+  `client/public/sprites/hero/` (idle-<hướng>.png, walk-<hướng>-<0..3>.png),
+  Phaser nạp ở `preload()`.
+- **Người chơi thật** (mình + người khác) dùng sprite này: đủ 4 hướng
+  đứng/đi, khung tung chiêu tạm dùng khung bước (bộ sprite chưa có khung
+  đánh riêng). Cỡ hiển thị ~57px, ngang bản vẽ cũ. Nạp lỗi thì tự lùi về
+  bản vẽ code.
+- **Đánh đổi nói rõ:** bộ sprite chỉ có 1 hình — tạm thời mọi lớp/vũ khí/
+  màu áo/giới tính **không phân biệt bằng hình nhân vật** (vẫn hiện đầy đủ
+  ở HUD, thẻ nhân vật, danh sách chọn). Khi có thêm bộ sprite theo lớp
+  (đúng định dạng export này) thì gắn thêm từng lớp một.
+- NPC + dân làng/bot: giữ bản vẽ code nhưng **tắt pixel-hoá** của GĐ12
+  (`PERSON_PIXEL = 1`, về nét mượt như GĐ11).
+- Ảnh xem trước ở màn tạo nhân vật + thẻ chọn nhân vật cũng hiện sprite
+  thật. Kiểm chứng: `preview13-ingame.png` (đứng tại quảng trường),
+  `preview13-walk.png` (đi hướng đông), `preview13-create.png`; test5 ALL PASS.
+
+## Giai đoạn 14 — Học style từ sprite gốc, sinh NPC + dân làng (22/10/2026)
+
+Từ bộ sprite PixelLab của người chơi, trích xuất kỷ luật style (bảng màu
+26 màu theo cụm: áo teal 7 tông, tóc 5 tông, da 4 tông, vàng đồng...) rồi
+suy ra thêm asset bằng thay bảng màu theo bậc sáng (giữ nguyên shading):
+
+- **Trưởng Làng** (`elder`): áo chàm trầm + tóc hoá bạc + **râu bạc vẽ thêm
+  từng pixel** bám theo cụm da mặt (hướng nam/đông/tây).
+- **Chủ Tiệm Đan** (`shopdan`): áo nâu gỉ. **Chủ Tiệm Nguyên Liệu**
+  (`shopnl`): áo xanh ô-liu.
+- **Dân làng/bot** (`villager-a/b/c`): áo xanh bụi / tím mận / nâu cát —
+  bot đi dạo trong làng giờ dùng sprite thật thay cho hình vẽ code.
+- Mỗi bộ đủ 24 khung (idle 4 hướng + walk 4 hướng × 4) ở
+  `client/public/sprites/<bộ>/`; client nối theo vai trò
+  (`NPC_SPRITE_SET`, `BOT_SPRITE_SETS`), nạp lỗi thì lùi về hình cũ.
+- Bộ kit để người chơi tự sửa bằng LibreSprite/Aseprite nằm ở
+  `assets/style/`: `palette.gpl` (bảng màu chuẩn), `palette.png`,
+  `gen_variants.py` (script sinh biến thể — đổi tông/làm tóc bạc/thêm râu).
+- Kiểm chứng: `preview14-plaza.png` (quảng trường toàn sprite),
+  `preview14-elder.png` (Trưởng Làng tại nhà), test5 ALL PASS.
+
+## Giai đoạn 15 — Pixel hoá nốt quái, nhà, cây, môi trường (22/10/2026)
+
+Hàm `pixelSnap` trong gfx.ts: thu texture về lưới pixel thật rồi bắt mọi
+màu về bảng màu giới hạn theo nhóm vật liệu (suy từ style sprite gốc):
+nền đất/đường/ao/hàng rào (PAL_ENV), nhà + bảng treo thưởng (PAL_HOUSE —
+biển tên vẫn đọc rõ), cây, sói (PAL_WOLF đã nới sáng), dơi, thạch quái,
+gà/vịt. Nhân vật + môi trường + quái giờ chung một chất pixel.
+Chưa đổi (cố ý): đồ rơi và viên đạn chiêu — là hiệu ứng phát sáng nên giữ
+nét mượt; vòng quẻ Bát Quái giữ nguyên.
+Kiểm chứng: `preview15-village.png`, `preview15-wolf.png`, test5 ALL PASS.
+
+## Giai đoạn 16 — Sprite theo lớp + vũ khí cầm tay + hoạt ảnh ra đòn (22/10/2026)
+
+Theo phản hồi "bản cũ làm chung chung quá" — làm lại toàn bộ hình vũ khí:
+
+- **Vũ khí pixel vẽ riêng từng loại** (28 hình ở `client/public/sprites/
+  weapons/`): chiến phủ ra rìu, kiếm ra kiếm, thương ra thương, cờ lệnh,
+  lưỡi hái, cốt thuẫn, cốt chùy, phật châu, bình bát, quạt, phất trần,
+  kim châm, cổ cầm, bút phép, quyển trục, sách phép... mỗi loại một
+  silhouette riêng, vẽ theo bảng màu chuẩn của game.
+- **Cầm trên tay thật**: lớp phủ vũ khí bám theo tay nhân vật (nằm sau lưng
+  khi quay lên), song kiếm/song đao cầm 2 tay. Hoạt ảnh ra đòn theo nhóm:
+  **vung** (kiếm/rìu/đao/chùy/liềm/quạt/trảo), **đâm** (thương/dao găm/
+  kim châm), **nâng kết ấn** (trượng/châu/bát/cờ/sách/trục/bút/đàn/phất
+  trần), **giơ thủ** (khiên). Đi bộ lắc theo nhịp bước, đứng yên đung đưa.
+- **Sprite theo từng lớp**: 9 bộ `cls-<lớp>` đổi tông áo theo màu đặc
+  trưng của lớp (Sát thủ áo đen đai đỏ, Phật vàng hổ phách, Quỷ đỏ thẫm).
+  Đánh đổi: màu áo pastel tự chọn tạm không áp lên sprite (ưu tiên màu lớp).
+- **Nét hình**: bật `pixelArt: true` cho Phaser (NEAREST toàn cục + làm
+  tròn điểm ảnh) — hết rung/mờ khi di chuyển lẻ pixel.
+- Kiểm chứng: `preview16-create/idle/swing.png`; test5 ALL PASS +
+  test11 10/10 (lượt đầu treo 69 phút vì quên mở server test :3006 —
+  test chờ kết nối không có timeout; đã rõ nguyên nhân, không phải lỗi game).
+
+## Giai đoạn 17 — Vũ khí hoàn thiện cao + HUD mobile MMO + điều khiển cảm ứng (22/10/2026)
+
+- **Vũ khí vẽ lại bản hoàn thiện cao** (script `assets/style/draw_weapons.py`):
+  khổ 64×80 (trước 48×56), 3–4 tông bóng đổ mỗi chất liệu, chi tiết trang
+  trí riêng: kiếm có ngọc ở chắn tay + cán quấn chỉ chéo, thương có tua đỏ,
+  cờ lệnh có chữ vàng + tua, quạt có mặt trời đỏ, phất trần chùm lông 2 tông.
+  Điểm cầm mới (32, 66) — đã đồng bộ origin/xem trước trong client.
+- **HUD kiểu mobile MMO** (theo ảnh mẫu Võ Lâm Pixel của người chơi):
+  khung nhân vật có **avatar tròn** (cắt từ sprite theo lớp) + thanh HP/
+  Chân nguyên/Tu vi; **banner khu vực** giữa trên ("Làng Tân Thủ · An toàn"
+  / "Bãi Săn Sói · Nguy hiểm"); **minimap** góc phải (nhà, ao, NPC vàng,
+  sói đỏ, người chơi trắng, mình vàng có vòng); cột nút 🎒📜⚙ bên phải.
+  Màn hình game co vừa mọi kích thước (Phaser Scale FIT) — web và điện
+  thoại dùng chung một bố cục.
+- **Điều khiển cảm ứng** (chỉ hiện trên thiết bị cảm ứng): **joystick ảo**
+  analog trái dưới (kéo càng xa chạy càng nhanh — server đã nhận vector
+  −1..1), cụm nút tròn phải dưới: **⚔ đánh lớn**, 3 nút chiêu theo tên
+  công pháp (mờ khi hồi chiêu), nút **E** tương tác theo ngữ cảnh. Trên
+  điện thoại khung nhân vật thu gọn (chạm để mở bảng chỉ số/cộng điểm),
+  minimap thu nhỏ nhường chỗ cụm nút. Phím WASD/Space/1-3/E/I giữ nguyên
+  trên máy tính; thao tác dùng chung một hàm xử lý.
+- Kiểm chứng: `preview17-desktop.png`, `preview17-mobile.png` (giả lập
+  iPhone ngang 844×390) — kéo joystick bằng sự kiện chạm thật: nhân vật
+  chạy x 785 → 1256. test5 ALL PASS.
+
+## GDD mở rộng — Dữ liệu + module logic (22/10/2026, theo tài liệu mở rộng của người chơi)
+
+Chưa nối vào gameplay (bản Alpha hiện tại mới tới Luyện Khí/Trúc Cơ) — đây là
+tầng dữ liệu + logic data-driven sẵn sàng cho giai đoạn Kim Đan về sau:
+
+- `server/data/gdd/MapData.json`: 52 map (50 map của tài liệu: 10 thành phố,
+  15 nghề phụ, 10 farm, 15 Ngũ Hành + 2 map hiện có), có minRealm/minTier.
+- `server/data/gdd/MonsterData.json`: 21 quái (3 quái gốc theo số docx,
+  còn lại tài liệu cho tên/cơ chế — chỉ số gắn cờ placeholder).
+- `server/data/gdd/SkillData.json`: 140 công pháp Kim Đan (28 nhóm vũ khí ×
+  5 hệ, mô tả chép nguyên văn), 100 đa dụng (50 bộ pháp/20 phòng thủ/10 hỗ
+  trợ/10 khống chế/10 sinh tồn), 15 công pháp ẩn, 15 bộ khiếm khuyết, 15 cấm
+  thuật. Mục tài liệu chỉ cho số lượng được sinh hệ thống, gắn cờ generated.
+- `server/data/gdd/NPCData.json`: 25 map × 200 NPC (50 chính + 150 phụ theo
+  đúng cơ cấu tài liệu) = 5.000 NPC.
+- `server/gdd/MapManager.js`: kiểm tra cảnh giới khi vào map, cấp quái + NPC.
+- `server/gdd/FragmentManager.js`: `combine_fragments()` ghép mảnh khiếm khuyết.
+- `server/gdd/HiddenQuestService.js`: `check_hidden_quests()` theo điều kiện
+  (map/giờ/vật phẩm/cảnh giới), mỗi công pháp ẩn 1 chủ (is_claimed), truyền
+  thừa tối đa 2 người 70-80%, lưu trạng thái ra file khi có stateFile.
+- Sinh lại dữ liệu: `python3 assets/gdd/gen_gdd_data.py`. Test:
+  `node server/gdd/test_gdd.cjs` — 23/23 PASS.
+
+## GĐ18 — Đối chiếu GDD mở rộng với bản game + nền lát đá (22/10/2026)
+
+- **Đối chiếu dữ liệu GDD** (script sinh dữ liệu là nguồn sự thật, `meta.version: 2`):
+  mã cảnh giới dùng đúng mã server (`pham/lk/tc/kd/na/ht`); Tu vi quái theo
+  công thức thiết kế gốc (nền 3/4/8/12/75 × 1.12^(bước đầu bậc−1), boss Kim
+  Đan = 577); công pháp Kim Đan có thêm `coef 3.0 / cost 150-250 / cdMs /
+  rangePx` theo khung Áo nghĩa của game; nghề phụ khớp 5 nghề của game
+  (Luyện Khí Sư, Phù Sư); bổ sung `realmFeatures` (4 kỳ Kim Đan), `hiddenPaths`
+  (LK Viên Mãn/Luyện Hồn/Nhập Đạo — số năm X/Y/Z chờ chốt), `daoPaths`
+  (Tiên/Ma Đạo); map có cờ `impl: live/planned`, Làng Tân Thủ nối 3 NPC thật.
+  Test GDD nâng lên 27/27 PASS.
+- **Nền lát đá** (món nợ từ GĐ17, theo ảnh mẫu Võ Lâm Pixel): quảng trường
+  lát đá cuội toàn bộ (viên bo tròn lệch hàng, mạch vữa tối) dưới vòng Bát
+  Quái; nền trong hàng rào làng phủ đất nện + sỏi, tách khỏi cỏ hoang.
+  Ảnh `preview18-plaza.png`; test5 ALL PASS + test11 10/10.
+
+## GĐ19 — Đột phá Trúc Cơ: thang 18 bước B6 + trùm thử thách (22/10/2026)
+
+- **Thang đột phá** theo thiết kế gốc B6 (thay luật cũ "ngẫu nhiên 2–5 điểm"):
+  Tiểu cảnh +3 (LK) / +4 (TC) điểm; Trung cảnh (đích bước 4/7/13/16) +5/+6;
+  Đại cảnh LK9→TC1 +12 điểm. Điểm đột phá vẫn +2/chỉ số như cũ.
+- **Trung cảnh**: cần Đan Trung Cảnh + thắng **Thử Luyện Thú** tại sân Đạo
+  Quán (nút HUD đổi nhãn theo ngữ cảnh; trùm = 4× máu tinh anh cùng bậc,
+  công = tinh anh; chỉ chủ nhân đánh/ bị đánh; quá 5 phút hoặc gục ngã → tan,
+  đan chưa trừ). **Đại cảnh**: cần Đan Trúc Cơ + thắng **Tâm Ma Ảnh**
+  (HP 6× tinh anh, công ×1.3, tung chiêu hệ số 1.6 mỗi 4s, HP ≤50% phân
+  thân 2 bóng 20% máu) + tỉ lệ thành công theo công thức file: 0.60 + 0.10
+  Đan Hộ Mạch (tự tiêu) + 0.10 chỉ số chính ≥ 40 − 0.05×(số linh căn − 1)
+  + 0.10×thua liên tiếp; kẹp [0.10, 0.95]; thua 3 lần liên tiếp → lần kế
+  chắc chắn. Hậu quả thua: 50% mất 30% Tu vi; 35% mất 50% Tu vi (gốc: −10
+  năm tuổi thọ — bản online chưa có tuổi thọ, quy đổi tạm); 15% toàn bộ chỉ
+  số gốc −10% vĩnh viễn (tối đa 3 lần). TC9→Kim Đan: chặn "chưa mở" (V1).
+- **Thích ứng bản online (đã báo người chơi)**: bỏ bế quan theo ngày (không
+  có đồng hồ ngày), bỏ cộng tỉ lệ từ tài năng/năm tháng (chưa có 2 hệ đó);
+  giá đan TẠM: Trung Cảnh 200, Trúc Cơ 800, Hộ Mạch 300 LT (bán lại 40%).
+- Trúc Cơ farm sói vẫn +3 Tu vi (theo bậc của quái). Hình trùm: Thạch Quái
+  pixel (Tâm Ma nhuộm tím) + nhãn tên; test19.cjs **15/15 PASS** (chạy thật
+  qua socket, có vá file bỏ qua farm); test5/test7 ALL PASS, test11 10/10
+  (file test sạch — file cũ tích lũy nhân vật gây FAIL giả, đã xác minh).
+
+## GĐ20 — Đồng hồ thế giới + tuổi & tuổi thọ (22/10/2026)
+
+- **Đồng hồ dùng chung toàn server** (server là chuẩn): 1 ngày game = 24
+  phút thật — người chơi chốt **đêm trôi nhanh hơn ngày**: ban ngày
+  06:00–18:00 chiếm 16 phút (1 giờ game = 80 giây thật), ban đêm 18:00–06:00
+  chiếm 8 phút (1 giờ game = 40 giây thật, nhanh gấp đôi). Ngày mới bắt đầu
+  00:00; 1 năm = 12 tháng × 30 ngày = 360 ngày. Lưu ở `server/data/world.json`
+  và **chạy tiếp theo thời gian thật khi server tắt** (mở lại cộng dồn đúng).
+  Phát xuống client khi giờ đổi (kèm bản FULL lúc vào game) — gần như không
+  tốn thêm băng thông. Env test: `TTT_DAY_REAL_MS`, `TTT_WORLD_FILE`,
+  `TTT_WORLD_START_MINUTES`.
+- **HUD**: pill đồng hồ dưới banner khu vực — ☀️/🌙 + "Ngày · Tháng · Năm —
+  Giờ <12 canh> (HH:MM)"; **lớp phủ sáng/tối** theo giờ (đêm sâu tối 34%,
+  rạng đông/chạng vạng chuyển dần ~2 giờ game; HUD nằm trên lớp phủ nên vẫn
+  đọc rõ). Sự kiện `world_day` + toast khi qua ngày mới.
+- **Tuổi + tuổi thọ**: nhân vật mới roll tuổi khởi đầu 10–25, tuổi thọ
+  50–100 (đúng file); tuổi tăng theo năm thế giới; khung nhân vật hiện
+  "🎂 Tuổi — Thọ nguyên còn X năm" (đỏ khi ≤ 5 năm). Nhân vật cũ: TẠM
+  16 tuổi / thọ 80. Hết thọ: đợt này mới cảnh báo, chưa xử "tọa hóa".
+- **Gắn lại vào đột phá B6** (GĐ19 từng phải tạm bỏ): cộng thọ Trung cảnh
+  LK +5 / TC +10, Đại cảnh +50 năm; thua Đại cảnh mức trung bình về đúng
+  gốc **−10 năm tuổi thọ** (bỏ quy đổi tạm sang Tu vi).
+- **Tu vi theo ngày**: qua ngày mới người online **+1 Tu vi** (tu luyện
+  thường — đúng file); offline quay lại cộng dồn theo số ngày vắng, trần
+  30 ngày (TẠM chống lạm dụng — file không ghi). Bế quan +3/ngày: đợt sau.
+- Test `client/test20.cjs` **14/14 PASS** (tốc độ ngày ~180 vs đêm ~360
+  phút game/giây ở thang test, rollover + sự kiện ngày mới, cộng offline,
+  Trung cảnh +5 năm thọ chạy thật qua socket). Hồi quy: test5 ALL PASS,
+  test11 10/10, test19 15/15. Ảnh `preview20-day.png` / `preview20-night.png`.
+
+## GĐ21 — Nghỉ offline: về nơi an toàn, ngồi thiền / ngủ (22/10/2026)
+
+- **Thoát game ≠ biến mất**: khi ngắt kết nối, nhân vật tự trở về điểm an
+  toàn gần nhất — hiện tại là **sân trước Đạo Quán** (chế độ chơi 1 mình);
+  trường `homeType` ('daoquan' | 'tongmon' để dành) sẵn sàng cho đợt tông
+  môn. Nhân vật ở lại trong thế giới dạng bản offline: người khác nhìn thấy,
+  không điều khiển được, quái không chạm tới; server khởi động lại dựng lại
+  các bản offline từ file. Thử thách đột phá dang dở bị hủy khi thoát.
+- **Học Tọa Thiền** tại Đạo Quán (điều kiện: đã đo linh căn; phím E tại Đạo
+  Quán theo thứ tự: đo linh căn → học Tọa Thiền → học công pháp Luyện Khí).
+  Đã học → lúc offline **ngồi thiền**: hấp thụ linh khí **+3 Tu vi/ngày**
+  (tỉ lệ bế quan của file). Chưa học → **ngủ**: **+0** (không hấp thụ).
+  Người online vẫn +1/ngày như GĐ20. Trần cộng dồn khi server tắt: 30 ngày
+  (TẠM). Luật này thay cách cộng offline +1/ngày của GĐ20.
+- **Tổng kết khi quay lại**: server ghi sổ quãng nghỉ (số ngày + Tu vi) kể
+  cả khi tick đã cộng trực tiếp; đăng nhập lại hiện toast "🧘 đã tọa thiền
+  X ngày… +Y Tu vi" hoặc "💤 đã ngủ X ngày — chưa học Tọa Thiền…".
+- Client: nhãn trên đầu nhân vật offline thêm 🧘/💤 + thân hơi mờ; số
+  "Người chơi trực tuyến" không đếm người đang nghỉ offline.
+- Test `client/test21.cjs` **13/13 PASS** (học thiền → thoát ở bãi farm →
+  bản offline tự về sân Đạo Quán dạng meditate → qua ngày +3; nhân vật chưa
+  học → sleep → +0; boot lại server vẫn dựng được bản offline — kiểm cả
+  bằng ảnh `preview21-rest.png`). Hồi quy: test5 ALL PASS, test20 14/14
+  (đã cập nhật kỳ vọng offline theo luật mới).
+- Chưa có sprite tư thế ngồi thiền/ngủ (bộ sprite PixelLab không có khung
+  ngồi) → nhân vật đứng yên + nhãn trạng thái; điểm nghỉ xếp lưới 5 cột ở
+  sân Đạo Quán, đông người có thể trùng ô.
+
+## GĐ22 — Tọa Thiền là công pháp tiện ích phải kiếm học + 2 con đường khởi đầu (22/10/2026)
+
+Theo chỉnh sửa của người chơi:
+
+- **Tọa Thiền = công pháp tiện ích** (nhóm Hỗ trợ tu luyện), KHÔNG còn học
+  miễn phí ở Đạo Quán (đã gỡ sự kiện `learn_meditation`). Cách học: hạ Sói
+  Xám có **8% rơi Sách Tọa Thiền** (tỉ lệ TẠM — file không ghi), nhặt vào
+  túi, bấm **Dùng** khi đã có linh căn → học được, sách bị tiêu hao.
+- **2 con đường khởi đầu** (đúng file thiết kế / bản chơi đơn), chọn ngay ở
+  màn tạo nhân vật:
+  - 🚶 **Tu luyện một mình**: phần thưởng 100%, nghỉ offline tại Đạo Quán.
+  - 🏯 **Gia nhập Thanh Phong Môn** (môn phái nhỏ): **2 đồng môn AI** đi
+    theo hỗ trợ — chỉ số **70%** của chủ nhân, tự bám theo + lao vào đánh
+    phụ quái quanh chủ (kể cả hạ gục, thưởng ghi cho chủ); phần thưởng
+    **×2/3** (chia cả đội — mức bản chơi đơn đã chốt: Tu vi hạ sói +2 thay
+    vì +3, Linh thạch rơi cũng nhân 2/3). Nghỉ offline tại tông môn.
+- **Sân Thanh Phong Môn** mới ở phía đông làng (nhà mái xanh + sân đất nện
+  300×240): vùng **an toàn** thứ hai — quái không sinh, không đuổi, không
+  lọt vào. Banner khu vực hiện "🏯 Thanh Phong Môn · An toàn".
+- Nhân vật cũ (tạo trước GĐ22) mặc định đường Một mình.
+- Test `client/test22.cjs` **10/10 PASS**; test21 cập nhật theo luật sách:
+  **15/15 PASS** (Đạo Quán không dạy miễn phí nữa; dùng sách học được; thiền
+  +3/ngày, ngủ +0 như cũ). Hồi quy test5 ALL PASS, test20 14/14.
+- ⚠️ **Đóng gói zip từ GĐ22**: LOẠI `server/data/characters.json`,
+  `server/data/accounts.json`, `server/data/world.json` khỏi zip — tránh ghi
+  đè dữ liệu thật của người chơi khi họ giải nén đè lên thư mục cũ (lỗi đã
+  xảy ra ở zip GĐ20/GĐ21, đã báo và hướng dẫn cập nhật an toàn).
+
+## GĐ23 — Bế quan chủ động tại Tụ Linh Trận (Thiền Phòng sau Đạo Quán) (22/10/2026)
+
+- **Tụ Linh Trận** mới phía sau Đạo Quán (700,196): vòng trận phát sáng vẽ
+  trên nền; quanh trận (bán kính 78) là **vùng an toàn** — sói không sinh,
+  không đuổi vào; banner hiện "🧘 Thiền Phòng · Tụ Linh Trận · An toàn".
+- **Bế quan** (phím E tại trận, sự kiện `toggle_bequan`): điều kiện đã có
+  linh căn + đứng trong trận. Đang bế quan: nhân vật đứng yên hấp thụ linh
+  khí, cộng dồn theo phút game **+1 Tu vi mỗi 480 phút game = +3/ngày**
+  (đúng tỉ lệ bế quan của file) và ngày mới KHÔNG cộng thêm +1 thường
+  (không trùng). **Di chuyển / ra đòn / tung chiêu / thoát game = dừng**
+  bế quan. Người khác thấy nhãn 🧘 trên đầu người đang bế quan.
+- Khác với nghỉ offline (GĐ21): bế quan là hoạt động CHỦ ĐỘNG khi online;
+  offline thiền vẫn cần học Tọa Thiền bằng sách (GĐ22). Bế quan tại trận
+  chỉ cần linh căn (chỗ này là lựa chọn thiết kế của bản MMO, bản chơi đơn
+  dùng thiền Tụ Linh Trận để tua thời gian — MMO thế giới chung không tua
+  riêng được).
+- Sửa nhỏ: toast tổng kết ngủ offline (GĐ21) còn nhắc "học Tọa Thiền ở Đạo
+  Quán" → đã đổi theo luật GĐ22 (kiếm Sách Tọa Thiền) + tên nơi nghỉ theo
+  nhà (Đạo Quán / Thanh Phong Môn).
+- Đồng môn AI (GĐ22): thêm cơ chế đuổi kịp — bị bỏ xa >280px (kẹt góc nhà)
+  thì xuất hiện lại cạnh chủ, tránh đứng kẹt vĩnh viễn.
+- Test `client/test23.cjs` **9/9 PASS** (từ chối khi chưa có linh căn / sai
+  chỗ; bế quan 1 ngày game đo được đúng +3; di chuyển + ra đòn đều dừng).
+  Hồi quy: test5 ALL PASS, test21 15/15, test22 10/10.
+
+## GĐ24 — Thiện cảm NPC (đúng file B11) (22/10/2026)
+
+- Mỗi NPC có **thiện cảm −100..100** (bắt đầu 0, lưu theo từng nhân vật) và
+  **tính cách** theo file: Trưởng Làng — Hiền hòa; Chủ Tiệm Đan — Trầm lặng;
+  Chủ Tiệm Nguyên Liệu — Hào sảng. Lời thoại thay đổi theo tính cách + mức
+  thiện cảm.
+- **Cách tăng** (file không ghi số cụ thể — đây là mức của bản MMO): trò
+  chuyện lần đầu mỗi ngày game **+2** · mua/bán tại tiệm của NPC **+1/lần**
+  · trả nhiệm vụ bảng cho Trưởng Làng **+5** · hoàn thành nhiệm vụ riêng
+  **+10**. Hiện CHƯA có hành động trừ điểm trong gameplay (file mới nêu
+  ngưỡng) — cơ chế từ chối đã cài sẵn, chờ đợt sự kiện gây thù.
+- **Hiệu lực đúng file**: thiện cảm **≥50** → **giảm giá MUA 10%** tại tiệm
+  của NPC đó + mở **NHIỆM VỤ RIÊNG** (mỗi NPC 1 nhiệm vụ: Trưởng Làng — nộp
+  5 Nanh Sói/80 LT; Tiệm Đan — hạ 10 sói/50 LT + 1 Đan Tụ Khí; Tiệm Nguyên
+  Liệu — nộp 5 Nanh Sói/70 LT; nhận + trả ngay tại NPC, lặp lại được);
+  **≤−50** → NPC **từ chối giao dịch** (cả mua lẫn bán).
+- Giao diện: bấm E gặp Trưởng Làng → hộp thoại trò chuyện (thiện cảm, lời
+  thoại, nút trả nhiệm vụ + nhận nhiệm vụ riêng); trong tiệm có dòng thiện
+  cảm + giá gạch ngang khi được giảm + nút 💬 Trò chuyện; bảng nhiệm vụ
+  hiện cả nhiệm vụ riêng (khóa/mở theo thiện cảm).
+- Test `client/test24.cjs` **14/14 PASS** (trò chuyện +2/ngày không cộng
+  trùng; mua ở 49 giá gốc, ở 50 giảm đúng 15→14; nhiệm vụ riêng mở/nhận/
+  hạ 10 sói/trả +10 thiện cảm + thưởng vật phẩm; vá −60 → bị từ chối bán,
+  tiền không đổi).
+
+## GĐ25 — Hết thọ → tọa hóa, phương án B "mềm cho MMO" (người chơi chốt 22/10)
+
+- Thọ ≤ 0 → **ÂN HẠN 30 ngày game** bắt đầu khi nhân vật "biết" (đang online
+  lúc thọ tận hoặc lần đăng nhập đầu tiên sau đó — người offline chưa đăng
+  nhập thì ân hạn chưa chạy). Trong ân hạn chơi bình thường, HUD hiện đếm
+  ngược đỏ "ÂN HẠN TỌA HÓA: còn X ngày game".
+- **Tự cứu**: đột phá cộng thọ theo B6 (Trung +5/+10 năm, Đại +50 năm) kéo
+  thọ dương trở lại → ân hạn HỦY ngay, có thông báo.
+- Hết ân hạn mà thọ vẫn ≤ 0 → **TỌA HÓA VĨNH VIỄN**: nhân vật chết thật
+  (khác chết thường), hồ sơ ghi `dead`, biến mất khỏi danh sách tài khoản,
+  đồ + Linh thạch mất theo; khách/tài khoản tạo nhân vật mới bình thường.
+- Test `client/test25.cjs` **9/9 PASS**.
+
+## GĐ26 — Nghề phụ cơ bản (22/10/2026)
+
+- 5 nghề như bản cũ: **Đan Sư · Luyện Khí Sư · Trận Pháp Sư · Phù Sư · Thú
+  Sư**. Học nghề cần linh căn, mỗi nhân vật 1 nghề (panel 🔨).
+- Chế tạo từ **Nanh Sói + Linh thạch** — BẢN THÍCH ỨNG của bản MMO (file
+  dùng Linh thổ/Hỏa tinh/Huyền thạch chưa có trong game): 8 công thức, tỉ
+  lệ thành công 60–90%, thất bại mất nguyên liệu. Sản phẩm: đan dược, Phù
+  Hộ Thân (+40% HP), Phù Tụ Linh (+20 Tu vi), Trận Kỳ Dịch Chuyển (về
+  quảng trường), Nanh Tinh/Da Sói (bán lại Tiệm Nguyên Liệu 30/22 LT).
+- **Cấp nghề** theo lượt chế thành công: Thợ nghề ở **50**, Sư phụ ở
+  **200** (đúng mốc bản cũ), trần cấp theo cảnh giới (Sư phụ cần Trúc Cơ).
+  Công thức mạnh (Đan Tụ Khí, Phù Tụ Linh) cần cấp Thợ nghề.
+- Test `client/test26.cjs` **11/11 PASS**.
+
+## GĐ27 — Thành tựu cơ bản (22/10/2026)
+
+- Bộ đếm tích lũy theo nhân vật (sói đã hạ, nhiệm vụ xong, đột phá, lượt
+  chế, Tu vi tích lũy, phút bế quan) + **10 mốc thành tựu** thưởng Linh
+  thạch (20–200 LT): từ "Sơ Nhập Tiên Đồ" tới "Trúc Cơ Chân Nhân",
+  "Sát Lang Giả" (200 sói), "Nhập Định" (bế quan 1440 phút game)...
+- Panel 🏆: tiến độ thật từ server, đạt mốc thì bấm Nhận thưởng (mỗi mốc
+  nhận 1 lần). Test `client/test27.cjs` **14/14 PASS**.
+- Hồi quy cả đợt: test5 ALL PASS, test8 ALL PASS, test20 14/14.
+
+## GĐ28 — Môi trường nét như sprite nhân vật (22/10/2026)
+
+- Người chơi phản hồi: biển tên nhà bị nhòe (hệ quả pixelSnap ×2 ở GĐ15
+  làm chữ 12.5px nát còn ~6px). Khắc phục: **nướng supersample 2×** —
+  nền, nhà, cây, bảng treo thưởng đều vẽ trên canvas gấp đôi rồi mới
+  pixelSnap ×2: mỗi "pixel" môi trường giờ = 1px thế giới (trước là 2px,
+  cây 3px), chữ biển hiệu đọc rõ, chi tiết mái/ngói/cửa sắc cạnh như
+  sprite nhân vật. Hiển thị scale 0.5, vị trí/kích thước không đổi.
+- Test5 ALL PASS; ảnh preview28-village / preview28-sign đã kiểm.
+
+## GĐ29 — Bỏ hẳn pixel hoá môi trường, nét tối đa (22/10/2026)
+
+- Người chơi vẫn thấy mờ sau GĐ28 → đi nốt bước cuối: **bỏ pixelSnap**
+  cho nền/nhà/cây/bảng. Texture giữ bản nướng 2× nguyên độ phân giải +
+  lọc LINEAR: biển hiệu, mái ngói, cửa sổ sắc như ảnh gốc vẽ tay.
+  Quái và gà/vịt giữ pixelSnap riêng (không đổi).
+- Test5 ALL PASS; ảnh preview29 đã kiểm — chữ "Đạo Quán" nét căng.
+
+## GĐ30 — Chiêu mộ tông môn + Công trạng (22/10/2026)
+
+- **Công trạng**: trả nhiệm vụ bảng được cộng — giao hàng (nộp nanh) **+1**
+  đúng file; nhiệm vụ chiến đấu (hạ sói) **+3** là số của bản MMO (file ghi
+  hộ tống +6 — game chưa có nhiệm vụ hộ tống). Đủ **10 nhiệm vụ bảng** →
+  Trưởng Làng trao **Thư Tiến Cử**.
+- **Sứ Giả Tông Môn** đứng ở quảng trường (bấm E): hộp thoại hiện Công
+  trạng, tiến độ thư, trạng thái 2 đợt chiêu mộ theo đồng hồ thế giới.
+- **Thiên Kiếm Môn**: mở 30 ngày **tháng 3** hằng năm — cần Luyện Khí
+  tầng 7+, Công trạng ≥ 100, nộp Thư Tiến Cử khi gia nhập.
+- **Huyền Thiên Tông** (tên tạm — file không đặt tên tông môn lớn): mở
+  **3 năm/đợt, 60 ngày đầu năm** (năm 3, 6, 9…) — cần Trúc Cơ+, Công
+  trạng ≥ 500 và thắng **Thử Thách Thú** (HP = tinh anh bậc 9 ×4, chỉ
+  chủ nhân đánh được, gọi tại Sứ Giả).
+- Một nhân vật chỉ thờ **một tông môn**. Quyền lợi đệ tử: **Tiệm Tông
+  Môn** tại Sứ Giả (đan rẻ hơn Tiệm Đan ~15% — giá TẠM) + **đổi
+  50 Công trạng → +1 điểm chỉ số tự do** (tỉ lệ TẠM 50:1, file không ghi).
+- Test `client/test28.cjs` **20/20 PASS**; hồi quy test5 ALL PASS,
+  test24 14/14. Sứ Giả hiện dùng hình người vẽ thường (chưa có sprite riêng).
+
+## GĐ31 — Học công pháp tốn thời gian (22/10/2026)
+
+- Đúng mốc đã chốt ở bản chơi đơn: học công pháp **không còn ăn ngay**.
+  Tới Đạo Quán bấm E khi đủ điều kiện (chiêu Luyện Khí: tầng 3) → bắt đầu
+  **lĩnh ngộ 1 NGÀY GAME** (mốc Trúc Cơ 3 ngày đã cài sẵn trong bảng thời
+  gian, chờ có chiêu Trúc Cơ). Thời gian tính theo đồng hồ thế giới —
+  **online hay offline đều trôi**; qua ngày mới (hoặc đăng nhập lại sau
+  khi đủ ngày) chiêu tự hoàn tất + có thông báo 📖.
+- Mỗi lúc chỉ lĩnh ngộ **1 chiêu**; đang dở mà bấm học tiếp sẽ báo còn
+  mấy ngày. Khung nhân vật hiện dòng "📖 Đang lĩnh ngộ … (còn X ngày game)".
+- 2 chiêu Cơ bản lúc đo linh căn vẫn trao ngay (phần khởi đầu của Đạo
+  Quán, không tính vào luật này — đã ghi rõ trong code).
+- Test `client/test29.cjs` **8/8 PASS**; test7 đã cập nhật theo luật mới
+  (ALL PASS); test5 ALL PASS.
+
+### GĐ31-SỬA (theo ý người chơi tối 22/10): NGỒI LĨNH NGỘ chủ động
+
+- Người chơi sửa luật: chiêu **Luyện Khí chỉ học ở Đạo Quán**; từ **Trúc Cơ
+  trở lên học ở MỌI NƠI** (kể cả bãi quái — tìm chỗ không có quái mà ngồi);
+  đang học mà **bị quái tấn công thì bị văng, phải giết quái rồi học lại**;
+  **bị tác động (quái hoặc chiêu của người khác) → học lại TỪ ĐẦU**.
+- Cơ chế: `learning {skillId, progressMin}` lưu tiến độ theo PHÚT GAME khi
+  NGỒI YÊN học (LK 1440 phút = 1 ngày game; TC 4320 = 3 ngày). Di chuyển /
+  ra đòn / tung chiêu / thoát game → dừng buổi, **giữ tiến độ** (phần này
+  là cách hiểu của bản build: luật "về 0" chỉ áp cho BỊ ĐÁNH — móc ở
+  `hitPlayer`, mọi nguồn sát thương lên người chơi đều qua đó). Bị đánh
+  trúng → tiến độ **về 0** + thông báo. Tiến độ KHÔNG tự trôi offline nữa.
+- Thêm **1 công pháp Trúc Cơ cho mỗi lớp** (`<lớp>_4`, tên tạm) với số theo
+  khung bậc Trúc Cơ của file (hệ số 2.2, CD 12s, tốn 80) để cơ chế học TC
+  dùng được ngay; điều kiện: cảnh giới Trúc Cơ + đã có chiêu Luyện Khí.
+- Client: nút **📖 Ngồi học** trong khung nhân vật (cho chiêu TC), dòng
+  tiến độ % ở dòng linh căn, nhãn 📖 trên đầu nhân vật đang ngồi học;
+  chiêu LK vẫn bấm E tại Đạo Quán.
+- Hồ sơ GĐ31 bản đầu (dạng readyDay) tự chuyển đổi khi vào game
+  (test29 viết lại thành test chuyển đổi 5/5). Test cơ chế mới:
+  `client/test30.cjs` **16/16** (học LK ở quảng trường bị từ chối → Đạo
+  Quán chạy tiến độ → di chuyển giữ tiến độ → học tiếp xong; TC học ở
+  quảng trường; ra bãi farm bị sói cắn → về 0; học lại an toàn → xong).
+  test5 ALL PASS.
+
+## GĐ32 — Luật học v3 + toàn bộ công pháp LK/TC theo khung file (23/10/2026)
+
+- Người chơi chốt lại luật học: **tự đứng dậy / di chuyển / ra đòn cũng về 0**
+  (không còn giữ tiến độ); **thoát game** thì nhân vật tự về chỗ an toàn và
+  **ngồi học tiếp khi offline** (trạng thái nghỉ 'learn', nhãn 📖, tiến độ vẫn
+  chạy; học xong lúc offline → đăng nhập có thông báo + phát skill_learned).
+- Thời gian học mới: **Luyện Khí nửa ngày game, Trúc Cơ 2 ngày game** (Kim Đan
+  1–5 ngày theo cấp — đã chừa khung `learnDays`). **Lĩnh hội** là nhánh của
+  Thần thức: thời gian cần = gốc × 100/(100 + Thần thức), chốt tại lúc bắt đầu học.
+- **Danh mục công pháp**: bảng tên chi tiết nằm trong file Excel
+  `Du_lieu_game_tu_tien.xlsx` — đã kiểm tra Google Drive (thư mục TuTienGame
+  không có file này) và máy chủ dự án: không có. Vì vậy danh mục dựng theo
+  ĐÚNG CẤU TRÚC của file thiết kế (lớp × vũ khí, 7 cột): mỗi vũ khí 3 chiêu
+  Luyện Khí + 2 chiêu Trúc Cơ (30 vũ khí → 150 chiêu, tên tạm theo phong vị),
+  số trong khung file (LK hệ số 1.6/CD 3–8s/tốn 20–50; TC 2.2/10–20s/60–120),
+  **điều kiện học theo file** (LK: 1 chỉ số 15–30 hoặc 2 chỉ số 15–20; TC:
+  Trúc Cơ + 1 chỉ số 35–50 hoặc 2 chỉ số 30–40) và **chân nguyên nhân hệ số
+  theo lớp của file** (áp cho cả chiêu cũ — vd Kiếm tu ×0.8: chiêu gốc 8 tốn 6).
+  Khi có file Excel, thay dữ liệu thật 1-1 vào `SKILL_CATALOG`.
+- Client: panel **📖 Công pháp** (nút trong khung nhân vật / phím E ở Đạo
+  Quán): liệt kê toàn bộ chiêu của vũ khí đang cầm — đã học / đang học % /
+  🔒 điều kiện còn thiếu / nút Ngồi học.
+- Test: `client/test31.cjs` **15/15** (danh mục 7 chiêu cho Pháp tu+Phiến,
+  khóa TC, hệ số chân nguyên ×1.2, lĩnh hội rút ngắn theo Thần thức, học
+  offline hoàn tất + thông báo); test30 cập nhật luật về-0 **16/16**;
+  test29 5/5; test7 cập nhật (chân nguyên theo hệ số lớp) ALL PASS; test5 ALL PASS.
+
+## GĐ33 — Nạp TOÀN BỘ công pháp THẬT từ file thiết kế (23/10/2026)
+
+- Sửa sai của GĐ32: bảng công pháp nằm NGAY TRONG docx (145 bảng; trước đây
+  trích văn bản thuần nên bị xẹp bảng và kết luận nhầm là chỉ có trong Excel).
+  `assets/extract_skills.py` đọc cấu trúc bảng của docx → trích đủ **477 chiêu:
+  56 Cơ bản / 277 Luyện Khí / 144 Trúc Cơ** (bảng Thể tu dùng chung cho Chiến
+  phủ/Cự kiếm/Đao → trải theo vũ khí thành 511 mục) vào
+  `server/data/skills_catalog.json`, server nạp thay danh mục dựng tạm.
+- Mỗi chiêu có đủ 7 cột của file: tên, hệ, bậc, điều kiện học (đã bóc thành
+  chỉ số máy đọc được), hồi chiêu (giây → ms), chân nguyên gốc (nhân hệ số
+  lớp khi nạp), mô tả (hiện trong panel). Hệ số sát thương theo khung bậc của
+  file (1.0/1.6/2.2) vì bảng không có cột hệ số. Tầm đánh theo vũ khí (xa/gần)
+  vì bảng không có cột tầm.
+- Đo linh căn giờ trao **2 chiêu Cơ bản của vũ khí đang cầm** (đúng file:
+  công pháp theo lớp × vũ khí); chiêu Cơ bản trong panel bấm **Học ngay**
+  (tự có, không tốn thời gian) — nhân vật cũ thiếu chiêu cơ bản của vũ khí
+  tự bổ sung bằng nút này.
+- Chưa mô phỏng: hiệu ứng đặc biệt trong mô tả (choáng, trói, hút máu, buff
+  Công/Thủ...) — chiêu vẫn gây sát thương theo hệ số bậc như hiện tại.
+- Test: test31 viết lại theo dữ liệu thật **15/15**; test30 16/16; test29
+  5/5; test7 (áp sát vì Trảm Kiếm là chiêu chém gần) + test5 ALL PASS.
+
+## GĐ34 — Hiệu ứng đặc biệt của công pháp (theo mô tả trong file, tùy chỉnh cho game)
+
+- `assets/extract_skills.py` bóc hiệu ứng từ cột Mô tả của từng chiêu trong
+  docx → trường `fx` + `fxText` trong `skills_catalog.json`. Engine hỗ trợ:
+  choáng, trói, làm chậm, thiêu đốt/độc theo thời gian (DoT — quái chết vì
+  DoT vẫn tính công người hạ độc), hút máu, đẩy lùi, xuyên phòng, giảm sát
+  thương nhận, tăng công, đòn kế tiếp ×1.5, phản sát thương, hồi máu, đánh
+  nhiều lần, đánh vùng, địch yếu đi (nhận thêm sát thương). 342/511 chiêu
+  có hiệu ứng; phần còn lại là chiêu thuần sát thương trong dữ liệu gốc.
+- Chỉnh số hợp lý (chốt khi nạp): chiêu vùng hệ số ×0.7; chiêu nhiều đòn
+  chia lại tổng ≈ ×1.3; choáng ≥1.5s hệ số ×0.9; chiêu thiên thủ ×0.85.
+  Chiêu CƠ BẢN: mô tả liệt kê biến thể cả 5 hệ nên giới hạn tối đa 2 hiệu
+  ứng theo bản sắc chiêu (tên có "Hộ" → thiên thủ) kẻo thành chiêu ôm đồm.
+  Trùm thử thách kháng khống chế 50%.
+- Server: `hurtMonster` (tôn trọng "yếu đi"), `applyFxToMonster`,
+  `applySelfFx`, `atkMulOf`; quái bị choáng đứng yên, bị trói không di
+  chuyển, bị chậm giảm tốc; DoT xử lý trong tick. Client: panel Công pháp
+  hiện `⚡ fxText`; quái được nhuộm màu theo trạng thái (choáng = xanh
+  dương, chậm = xanh nhạt, trói = xám, đốt/độc = cam).
+- test32 (phần GĐ34): chậm + DoT tự trừ máu, phản sát thương PASS.
+
+## GĐ35 — Sự kiện ngẫu nhiên đầu tháng (đúng bảng B11 của file)
+
+- Đầu mỗi tháng game, mỗi sự kiện tung độc lập theo tỉ lệ của file, tối đa
+  2 sự kiện/tháng; cơ duyên ×1.5 cho người đi một mình (theo file). Tung
+  khi qua tháng (người online) hoặc lúc đăng nhập (tháng hiện tại; tháng
+  bị bỏ lỡ không cộng dồn). Lời mời tông môn theo đợt chiêu mộ (không tính
+  vào quota 2).
+- Đã có: nhặt túi linh thạch (+50–150 LT), suối linh (+100 Tu vi), kết
+  bạn (NPC +20 thiện cảm), thương nhân lưu động (1 món hiếm giá ×1.5, mua
+  trong Tiệm Đan trong 2 ngày — shop `luu_dong`), bị cướp (ở ngoài vùng an
+  toàn → 3 Kẻ Cướp Đường đuổi đánh, hạ mỗi tên +30 LT; ở nơi an toàn/ngoại
+  tuyến → mất 10% LT), bệnh lạ (−20% sát thương gây ra 7 ngày, Hồi Xuân
+  Đan chữa khỏi).
+- Điều chỉnh cho MMO (ghi rõ): tán tu truyền kinh nghiệm → tiến độ lĩnh
+  ngộ +30% (không học dở thì +30 Tu vi); rương lạ → vật phẩm ngẫu nhiên
+  (có tỉ lệ ra Sách Tọa Thiền); gây thù → NPC −20 thiện cảm và sau 30–90
+  ngày "tu sĩ thù địch" (HP theo tinh anh cùng bậc ×1.1) tìm đến ngoài
+  vùng an toàn — hạ được +100 LT, xóa thù. Bí cảnh nhỏ: file ghi "(làm
+  sau)" nên chưa làm. Nhân của thiên phú bỏ qua (MMO chưa có thiên phú).
+- Trạng thái hiện ở khung nhân vật: 🤒 bệnh còn X ngày · ⚔️ kẻ thù rình ·
+  🛒 thương nhân còn X ngày. test32 (phần GĐ35) PASS.
+
+## GĐ35 — Sự kiện ngẫu nhiên đầu tháng: ĐÃ GỠ (23/10)
+
+- Đã triển khai đầy đủ theo bảng B11 (túi linh thạch, suối linh, kết bạn,
+  gây thù, bị cướp, bệnh lạ, thương nhân lưu động...) và test đạt, nhưng
+  người chơi chốt "không cần" → gỡ toàn bộ khỏi server + client: không
+  còn tung sự kiện khi qua tháng/đăng nhập, bỏ quái Kẻ Cướp/Tu Sĩ Thù
+  Địch, bỏ bệnh lạ và hàng thương nhân lưu động. Các trường dữ liệu cũ
+  trong hồ sơ nhân vật (nếu có) được bỏ qua, không ảnh hưởng.
+
+## GĐ36 — Ô công pháp theo file (kiểu A: lắp/tháo thủ công)
+
+- Giới hạn ô theo đúng file: Luyện Khí 3 ô (từ tầng 7: 4 ô), Trúc Cơ 4 ô
+  (từ tầng 7: 5 ô), Kim Đan trở lên 5 ô. Chỉ chiêu ĐANG LẮP trong ô mới
+  tung được (cast_skill tra theo `equipped`); chiêu đã học mà chưa lắp
+  vẫn giữ nguyên trong danh sách đã học.
+- Học xong chiêu mới: còn ô trống thì tự lắp vào; ô đầy thì chiêu nằm
+  chờ, mở panel 📖 bấm [Tháo]/[Lắp vào ô] để sắp xếp (server chặn lắp
+  khi đầy). Nhân vật cũ tự lắp các chiêu đầu tiên theo thứ tự đã học.
+  Payload thêm `skillSlots {used, max}`; catalog thêm cờ `equipped`.
+- Sửa toast học chiêu cũ ghi cứng "(ô chiêu 3 — phím 3)" → báo đúng ô
+  vừa lắp / nhắc mở panel khi ô đầy.
+- test33: 10/10 PASS (ô 3 ở LK1, chiêu chờ khi đầy, tháo/lắp, tung chiêu
+  theo ô, lên tầng 7 mở ô 4). Hồi quy: test5/test7 ALL PASS, test28
+  20/20, test30 16/16, test31 15/15, test32 ALL PASS (test31/test7 đã
+  cập nhật theo luật ô + hiệu ứng GĐ34).
+
+## GĐ37 — 2 bảng công pháp + ô đa dụng (23/10)
+
+- Mỗi người chơi có **2 BẢNG công pháp** đổi qua lại (tab trong panel 📖,
+  sự kiện `switch_board`): vd Bảng 1 farm quái, Bảng 2 tu luyện. Bảng 2
+  khởi đầu là bản sao của Bảng 1 để tùy chỉnh tiếp; hai bảng độc lập và
+  lưu bền theo nhân vật (`boards`, `activeBoard`).
+- Mỗi bảng gồm **ô CHÍNH** (số ô theo cảnh giới như GĐ36) + **4 ô ĐA
+  DỤNG** nhỏ chứa công pháp HỖ TRỢ — nhận diện theo hiệu ứng: giảm sát
+  thương nhận / hồi máu / phản sát thương / tăng công / đòn kế tiếp
+  (`isUtilitySkill`). Chiêu thuần công không lắp được vào ô đa dụng;
+  một chiêu không lắp chéo 2 khu trong cùng 1 bảng.
+- Tung chiêu ô đa dụng: phím **6–9** hoặc bấm chuột vào ô nhỏ trên thanh
+  chiêu (client gửi `cast_skill {slot, area: 'util'}`; server trả
+  `cast_result` kèm `area` để client chạy hồi chiêu đúng ô).
+- Bài học test: việc "tự lắp chiêu đầu cho nhân vật cũ" chỉ được làm 1
+  lần lúc DỰNG bảng (trong `boardsOf`) — để trong normalize chạy mỗi lần
+  thì người chơi tháo trống bảng sẽ bị tự lắp lại.
+- test34: ALL PASS (lắp ô phụ, tung chiêu ô phụ, chặn chiêu thuần công,
+  chặn lắp chéo, đổi bảng giữ sắp xếp, lưu bền). Hồi quy: test5 ALL
+  PASS, test30 16/16, test31 15/15, test33 ALL PASS.
+- Ghi chú: nút chiêu cảm ứng (mobile) hiện vẫn là 3 nút ô chính — ô đa
+  dụng trên cảm ứng chưa có nút riêng.
+
+## GĐ38 — Bãi farm đa loài: Dơi Đen + Thạch Quái (23/10)
+
+- Thêm 2 loài quái theo ĐÚNG bảng quái của file: **Dơi Đen** (HP 20,
+  công 4, Tu vi +3) bay nhanh (đuổi 175px/s) và **Thạch Quái** (HP 140,
+  công 10, phòng thủ 8, Tu vi +8 hạng Mạnh) chậm chạp, sống ở góc đông
+  bắc. Sói Xám giữ nguyên (40/5, +3). Mỗi loài duy trì số lượng riêng
+  (5 sói / 4 dơi / 3 thạch) và hồi sinh đúng loài.
+- Sát thương lên quái tôn trọng phòng thủ TỪNG LOÀI ở mọi nguồn: đánh
+  thường, tung chiêu (kể cả chiêu vùng), đồng môn đánh phụ, phản sát
+  thương. AI quái dùng tốc độ/tầm cắn/hồi cắn riêng theo loài.
+- Rơi đồ theo loài: sói như cũ; dơi 35% **Cánh Dơi**; thạch quái 25%
+  **Đá Quý**. Tiệm Nguyên Liệu thu mua: Cánh Dơi 8, Đá Quý 45 (giá TẠM).
+  Vật phẩm rơi hiện đúng tên trên mặt đất.
+- Nhiệm vụ bảng mới theo ĐÚNG bảng B11 của file (thưởng gồm Tu vi):
+  Diệt Dơi Đen (10 con → 80 LT + 20 Tu vi), Diệt Thạch Quái (5 con →
+  150 LT + 30 Tu vi), Thu thập Cánh Dơi (5 cái → 60 LT). Nhiệm vụ diệt
+  quái nay tính ĐÚNG loài (hạ sói không tính vào Diệt Dơi) — áp cả
+  nhiệm vụ riêng của Chủ Tiệm Đan. Công trạng +3/+1 như lệ bản MMO.
+- Client: dơi dùng 4 khung vỗ cánh (đã nướng sẵn), thạch quái dùng bộ
+  khung đá (đi/đập), mọi quái farm có nhãn tên loài trên đầu.
+- test35: ALL PASS (3 loài đúng chỉ số, +3/+8 Tu vi, def thạch quái,
+  nhiệm vụ đúng loài). Hồi quy: test5 ALL PASS, test28 20/20, test32
+  ALL PASS.
+
+## GĐ39 — Hệ thống rương dữ liệu-hóa + sửa Tu vi Dơi (23/10)
+
+- NGƯỜI CHƠI HỎI rương: bản MMO chưa có (chỉ bản chơi đơn có) → làm mới
+  theo bảng B10 của file: rương rơi theo HẠNG quái — Yếu C 60%; Trung
+  C 50% / B 30% / A 5%; Mạnh C 25% / B 50% / A 20%. Sói = Yếu, Dơi =
+  Trung, Thạch = Mạnh. Đồ trong rương: số mục theo file (C 1–2, B 2–3,
+  A 3–4), rút từ kho trọng số từng phẩm (`CHEST_LOOT`); rương tồn tại
+  120s, tới gần (42px) là tự mở, đồ vào thẳng túi người mở + toast
+  `chest_opened` liệt kê nội dung.
+- RÀ SOÁT + UPDATE LỚN (theo yêu cầu): toàn bộ nằm trong 1 cấu hình
+  `CHEST_TABLES / CHEST_COUNT / CHEST_LOOT / CHEST_TTL_MS /
+  CHEST_MAX_UNOPENED (12)`; mỗi loài quái chỉ khai `chestTier` trong
+  MONSTER_TYPES; `ZONE_CHEST_TIER` để vùng/map sau này (bí cảnh) ghi đè
+  hạng rương; trùm thử thách không rơi rương (như bản chơi đơn); hạ
+  bằng DoT/đồng môn vẫn tung rương; có đồng hành thì tỉ lệ + Linh thạch
+  trong rương ×2/3 như bản chơi đơn. Quái/map mới = thêm 1 dòng khai
+  báo, không sửa logic.
+- SỬA LỖI GĐ38: file xếp Dơi Đen là quái TRUNG → Tu vi hạ dơi +3 → **+4**
+  (đúng thang Yếu 3 / Trung 4 / Mạnh 8).
+- Móc kiểm thử: env TTT_CHEST_FORCE_GRADE (ép phẩm), TTT_CHEST_TTL_MS.
+- test36: ALL PASS (rương C 1–2 mục, rương A 3–4 mục, hết hạn tự mất).
+  Hồi quy: test35 ALL PASS (gồm số Tu vi dơi mới), test5 ALL PASS.
+
+## GĐ40 — Nội dung sống: thương nhân lưu động · vụ án bệnh lạ · tu sĩ thù địch (23/10)
+
+Theo đính chính của người chơi (23/10): các yếu tố từng ở "sự kiện ngẫu
+nhiên" (đã gỡ ở GĐ35) nay thành NỘI DUNG CHƠI thật, trải dài trong game:
+
+- **Thương nhân lưu động** (`npc_thuongnhan`, quảng trường phía đông):
+  NPC buôn bán bình thường với tiệm `luu_dong` — hàng hiếm giá cao (số
+  TẠM: Đan Tụ Khí 45, Đan Trung Cảnh 300, Sách Tọa Thiền 500…), mỗi
+  ngày game chỉ mang **3 món luân phiên** (`merchantStockToday`, server
+  chặn mua món ngoài kho; lời thoại chào đúng hàng của ngày).
+- **Vụ án bệnh lạ** — chuỗi nhiệm vụ 2 phần tại Chủ Tiệm Đan (không cần
+  thiện cảm): (1/2) hạ 8 Dơi Đen chặn nguồn bệnh → đặt cờ chuỗi;
+  (2/2) mang 2 Hồi Xuân Đan cứu người (thưởng 120 LT + 30 Tu vi) → gỡ
+  cờ, vụ án mở lại từ đầu. Cơ chế tổng quát: `requiresFlag / setsFlag /
+  clearsFlag` trong QUESTS + `flags` lưu theo nhân vật; hộp thoại NPC
+  trả DANH SÁCH nhiệm vụ (phần chuỗi chưa mở thì ẩn).
+- **Tu sĩ thù địch** — nhiệm vụ bảng "Đối đầu Tu Sĩ Thù Địch": ra
+  ngoài làng bấm ⚔ Khiêu chiến (panel Nhiệm vụ) → tu sĩ xuất hiện đấu
+  tay đôi (quái thử thách khóa chủ nhân, HP = tinh anh ×2 theo bậc,
+  dùng sprite NGƯỜI áo đỏ sẫm thay vì hình quái). Thắng → trả Trưởng
+  Làng: 100 LT + 20 Tu vi + 3 Công trạng.
+- test37: ALL PASS (14 kiểm). Hồi quy: test24 14/14, test28 20/20,
+  test5 ALL PASS.
+
+## GĐ40+ — MỞ RỘNG LỚN nội dung sống (23/10, theo triết lý của người chơi)
+
+Triết lý dẫn đường (người chơi chốt): game như đời thật + tu tiên —
+không nạp-tiền-là-mạnh, không cày-một-chỗ, không lên-cấp-rồi-AFK; người
+chơi tự viết cuộc đời mình, chơi chậm tận hưởng, quan sát hint và phán
+đoán để mở nội dung ẩn.
+
+- **Thương nhân lưu động v2**: ghé làng THẤT THƯỜNG — chắc chắn mỗi 4
+  ngày + ~30% ngày khác ghé bất chợt (không vắng quá 3 ngày); vắng thì
+  NPC biến mất khỏi làng thật (snapshot/delta theo lịch) + loan tin toàn
+  server khi tới/rời. Mỗi ngày ghé: 3 món trong kho 8 món, GIÁ dao động
+  ±15% theo ngày, SỐ LƯỢNG 1–3 (hết là hết). **Đặt hàng**: trả trước
+  giá gốc +10%, lần ghé sau nói chuyện là giao tận tay (mỗi lần 1 đơn).
+  **Bán tin tức**: mỗi ngày 1 hint về thế giới trong lời thoại.
+- **Kho vụ án luân phiên** (chu kỳ 7 ngày, mỗi vụ mở 2–3 ngày — phải
+  quan sát bảng mỗi ngày): Đàn sói dữ (hạ 12 sói), Bầy dơi phá kho
+  (12 dơi), Thạch quái chặn đường (4 thạch), Dân làng mất tích (đối
+  đầu Kẻ Bắt Cóc cứu người — hệ đối đầu tổng quát `start_duel`), và
+  **Kẻ trộm trong làng** (vụ điều tra: 3 manh mối từ nhân chứng, nhất
+  quán với thủ phạm được gán lúc nhận vụ; về Trưởng Làng chỉ đích
+  danh 1/3 nghi phạm — đúng: phá án; sai: vụ khép lại, −5 thiện cảm).
+- **Bảng Vàng + Bảng Truy Nã** (điểm đá tại 856,668 cạnh bảng treo
+  thưởng): Bảng Tu Vi (top 10 cảnh giới toàn server, kể cả offline),
+  Bảng Tu Luyện (top 10 tổng Tu vi tích lũy), Bảng Truy Nã (tu sĩ thù
+  địch, kẻ bắt cóc, kẻ trộm + tin đồn truy nã luân phiên theo ngày).
+- test38 ALL PASS (17 kiểm); test37 cập nhật theo v2 ALL PASS; hồi quy
+  test24 14/14, test5 ALL PASS.
+
+## Chuẩn bị buổi test bạn bè (23/10)
+- test39 (khói đa người chơi): ALL PASS — 3 client thật thấy nhau; rương
+  là của chung (ai tới gần cũng mở được, kể cả rương người khác làm
+  rơi); quái đối đầu: bạn bè đánh ké được nhưng không cướp công (chủ
+  nhân phải tự kết liễu; gọi lại được, không kẹt nhiệm vụ).
+- `HUONG_DAN_TEST.md`: hướng dẫn buổi test (chạy server + firewall +
+  IPv4 cho bạn cùng Wi-Fi, chế độ test nhanh bằng TTT_DAY_REAL_MS /
+  TTT_TUVI_NEED, lộ trình 90 phút, mẫu báo lỗi, danh sách giới hạn đã
+  biết để khỏi báo nhầm).
+
+## Đưa lên web (Render) — 23/10
+- Thêm `render.yaml` (build `npm --prefix server install`, start
+  `node server/index.js`, env test nhanh) + `.gitignore` (bỏ node_modules
+  + dữ liệu cá nhân). ĐÃ MÔ PHỎNG tại máy agent: bản sao sạch (không
+  node_modules/không dữ liệu) cài đúng lệnh trong render.yaml → server
+  lên ở cổng tùy ý (PORT), trang game HTTP 200, socket vào được tới
+  bước tạo nhân vật.
+- `HUONG_DAN_LEN_WEB.md`: từng bước GitHub Desktop → Render cho người
+  chơi; giới hạn free: ngủ sau 15 phút không ai vào (thức ~1 phút),
+  đĩa tạm mất dữ liệu khi restart/redeploy.
+
+BỔ SUNG (23/10 chiều) — lớp lưu trữ cloud `server/storage.js`:
+- Không đặt `MONGODB_URI` → hành vi y hệt trước (file JSON tại chỗ).
+- Có `MONGODB_URI` (MongoDB Atlas free, không cần thẻ): boot nạp dữ
+  liệu từ cloud trước khi mở cổng (cloud trống + file có dữ liệu →
+  tự đẩy lên, chuyển nhà 1 bước); mọi lần lưu ghi cả file lẫn cloud
+  (gộp, trễ ≤ ~0,8s); Mongo lỗi → server vẫn chạy bằng file.
+  `/api/status` có trường `storage: 'file' | 'mongodb'` để kiểm nhanh.
+- Kiểm chứng: test stub-Mongo trong bộ nhớ 9/9 PASS (boot/nạp/chuyển
+  nhà/ghi runtime/song song file); hồi quy file test5 ALL PASS trên
+  :3001. Atlas thật sẽ xác nhận ở lần deploy đầu qua /api/status.
+- HUONG_DAN_LEN_WEB.md thêm Phần 2 (Atlas từng bước) + Phần 3 (ping
+  chống ngủ bằng cron-job.org chỉ trong giờ chơi). Lưu ý đã kiểm
+  chứng: Render free chỉ có ~5 GB băng thông/tháng cho workspace —
+  chỉ hợp test/demo nhóm nhỏ; 100–300 người thường xuyên thì chạy
+  máy nhà/VPS, dữ liệu Atlas mang theo được.
+
+GĐ41 (23/10) — NÚT CẢM ỨNG CHO Ô ĐA DỤNG (trả nợ GĐ37):
+- Client: thêm 4 nút tròn tUtil0–3 trong cụm điều khiển cảm ứng (cột
+  nhỏ viền xanh ngọc bên trái cụm chiêu chính, phía trên nút E). Nút
+  chỉ hiện khi ô phụ tương ứng có chiêu (nhãn = tên chiêu), mờ khi
+  đang hồi chiêu; bấm = castSlot(i, 'util') — cùng đường với phím 6–9
+  và bấm chuột ở thanh chiêu. Màn hình thường không đổi.
+- Kiểm chứng: build OK; test34 (lắp/tung ô phụ qua socket) ALL PASS;
+  probe Chromium giả lập cảm ứng 844×390 với nhân vật có Hộ Thể Công
+  ở ô phụ: nút hiện đúng tên + vị trí, 3 ô trống ẩn; hồi quy test5
+  ALL PASS trên :3001.
+
+GĐ42 (23/10) — LÀM GỌN HUD + ĐỒNG BỘ SPRITE NPC CÒN SÓT:
+Theo ý người chơi ("HUD quá to; vẫn còn nhân vật đồ họa cũ; học
+VLTK + Where Winds Meet rồi làm lại"):
+- HUD gọn: thẻ nhân vật 218→184px (avatar 52→40, thanh trạng thái
+  13→10px, nền trong hơn), banner + đồng hồ nhỏ lại, minimap
+  168×126→140×105, nút chức năng 46→38px, thanh chiêu neo đáy giữa
+  kiểu VLTK (ô 62→52, ô phụ 46→42), panel 284→268px, cụm cảm ứng
+  thu ~15% (joystick 124→106, nút đánh 78→66, chiêu 56→50, ô phụ
+  46→42; hành trình joystick 42→38). Dòng "Người chơi trực tuyến"
+  nâng từ y=580 lên 512 khỏi bị thanh chiêu che.
+- Đồ họa cũ: Sứ Giả + Thương Nhân Lưu Động + Tu Sĩ Thù Địch trước
+  đây rớt về hình vẽ code thời GĐ9 — đã sinh 3 bộ sprite pixel biến
+  thể từ bộ gốc (envoy áo hổ phách / merchant áo tím / rival áo đỏ
+  sẫm, thêm vào assets/style/gen_variants.py) và nối vào
+  NPC_SPRITE_SET + đường dựng quái đối đầu (giữ fallback cũ nếu
+  thiếu file). Giờ mọi nhân vật trên màn hình chung 1 phong cách.
+- Kiểm chứng: build OK; test5 + test37 ALL PASS trên :3001; ảnh
+  probe desktop 1280×720 + mobile 844×390 (preview42-*) đã xem bằng
+  mắt: HUD nhỏ rõ rệt, Sứ Giả áo vàng đứng ở quảng trường. Đẹp tới
+  đâu chờ người chơi duyệt trên máy thật.
+
+GĐ42b (23/10) — THẺ NHÂN VẬT THU GỌN + NÚT "CHỈ SỐ" RIÊNG:
+Theo ý người chơi (gửi ảnh thẻ cũ: "này nhỏ lại, có thể tạo 1 nút
+riêng ấn vô coi"): bảng 7 chỉ số + điểm cộng được gói vào
+#hudDetails ẩn mặc định ở MỌI thiết bị; trong thẻ thêm nút
+#hudDetailBtn "▸ Chỉ số" (tự nhắc "· còn N điểm chưa cộng" khi có
+điểm; mở thì lật "▾"). Bấm nút hoặc chạm thẻ (mobile) để mở/đóng;
+nút Đột phá vẫn hiện ngoài phần ẩn. Số đo probe: thẻ thu gọn cao
+193px so với 319px khi mở chi tiết (trước kia luôn ~330px).
+test5 ALL PASS; ảnh preview42b-* đã xem bằng mắt.
+
+GĐ43 (23/10) — THEME THỦY MẶC NGỌC BÍCH (MẪU C NGƯỜI CHƠI CHỐT):
+Người chơi chê GĐ42/42b "đồ họa và hud vẫn không đẹp" → trình 3 mẫu
+HUD trên ảnh game thật (A WWM / B VLTK / C thủy mặc) → CHỐT MẪU C.
+Đã áp theme C vào game thật: khối override CSS "GĐ43" trong
+index.html (thẻ nhân vật kính mờ ngọc + gờ ngọc trái, thanh trạng
+thái viên thuốc gradient, banner/clock dạng pill kính mờ, minimap
+viền ngọc bo 14px, panel + nút pill ngọc toàn bộ, Ô CHIÊU TRÒN
+54px viền ngọc + ô phụ 44px, joystick vòng ngọc + núm ngọc, nút
+cảm ứng tròn radial ngọc, nút ⚔ giữ đỏ nâu làm điểm nhấn) + phông
+canvas đổi monospace → Palatino/Georgia serif (nhãn tên người
+chơi/NPC, Bảng Treo Thưởng, toast). test5 ALL PASS; ảnh
+preview43-desktop/mobile đã xem: desktop thấy ô tròn "Liên Hoàn
+Quyền"/"Hộ Thể Công", mobile thấy đủ joystick + cụm nút chiêu.
+Hướng đồ họa THẾ GIỚI (minh họa mềm / pixel đồng bộ / thêm chiều
+sâu) người chơi CHƯA chốt — chờ chọn sau.
+
+GĐ44 (23/10) — THANH CHIÊU THÀNH KHAY NÚT BẤM + HUD MOBILE NHỎ LẠI:
+Theo phản hồi người chơi (ảnh desktop GĐ43): (1) thanh chiêu cũ chỉ
+vẽ ô cho chiêu ĐÃ CÓ + ô chính không bấm chuột được → nay LUÔN
+hiện đủ khung: nút ⚔ Đánh thường bấm được (Space) + 5 ô chính
+(phím 1–5) + 4 ô phụ (phím 6–9); ô trống = viền đứt mờ + số phím;
+ô chính có data-cast bấm chuột như ô phụ; cả thanh nằm trên khay
+kính mờ ngọc. Probe đếm: 10 ô, atk=true, display flex. (2) Mobile
+bị chê HUD to → thẻ 184→148px + avatar 30 + ẩn dòng Tuổi/Công
+trạng/Linh căn khi thẻ thu gọn (mở thẻ là hiện lại), minimap
+110×82→92×69, nút công cụ 38→32, joystick 106→94, cụm nút chiêu
+nhỏ ~10%.
+
+GĐ45 (23/10) — BỐ CỤC CHỐT THEO NGƯỜI CHƠI:
+"map phải luôn luôn nằm bên trái trên; bên phải trên thì vừa có
+thông tin nhân vật, các công cụ" → minimap cố định TRÁI TRÊN
+(mọi thiết bị); PHẢI TRÊN = hàng nút công cụ (ngang, trên cùng) +
+thẻ nhân vật ngay bên dưới (top 54px). Panel mở ra vẫn ở phải
+trên, tạm đè lên thẻ, đóng panel là thẻ hiện lại.
+test5 ALL PASS; ảnh preview44/45 desktop+mobile đã xem đạt.
+
+GĐ46 (23/10) — THÊM NÉ + THỐNG NHẤT PHÍM SPACE + MINIMAP RÕ:
+Người chơi hỏi "space là gì / cái né đâu / minimap nhìn rõ chút":
+(1) MMO trước giờ CHƯA có Né, và Space bị gán = đánh thường (khác
+bản chơi đơn Space = Né; tin nhắn GĐ43 nói nhầm "Space né" gây rối
+— đã nhận lỗi). Nay: thêm cơ chế NÉ server-authoritative (sự kiện
+'dodge', vọt 520px/s trong 190ms ≈ 104px, hồi 2,5s — số TẠM vì
+file thiết kế không quy định Né cho MMO; vẫn tôn trọng vật cản),
+Space = Né (khớp bản chơi đơn), đánh thường chuyển sang phím J
+(+ bấm nút ⚔ / nút ⚔ cảm ứng như cũ). Khay chiêu thêm ô 💨 Né
+(Space) cạnh ⚔; mobile thêm nút "Né" riêng trên cụm chiêu (đã sửa
+lỗi chồng nút Liên Hoàn Quyền ở bản đầu). test40 ALL PASS (vọt
+104px, tốc độ 547 vs đi bộ 262px/s, né lần 2 bị hồi chiêu chặn,
+hết hồi né lại được) + test5 ALL PASS.
+(2) Minimap: canvas 168×126 → 380×284 (hiển thị 190×142 desktop /
+108×81 mobile), chấm NPC/quái/người chơi to ~2,3× + viền tối tương
+phản, thêm viền vàng quanh làng, khối nhà tối thiểu 7px.
+HUONG_DAN_TEST.md thêm mục 2b "Điều khiển nhanh" cho buổi test.
+
+GĐ47 (23/10) — CỤM CHIÊU MOBILE ĐỦ 5 Ô CHÍNH (VÒNG CUNG):
+Người chơi chê "hub chiêu mobile tàn/phế" vì cụm cảm ứng chỉ có 3
+nút chiêu chính (di sản GĐ17, thời bảng chính tối đa 3 ô) trong khi
+lên cao dùng 5 ô chính + 4 ô phụ → chiêu ô 4–5 không bấm được trên
+điện thoại. Đã thiết kế lại: thêm tSkill3/tSkill4; 5 nút chính xếp
+VÒNG CUNG quanh ⚔ (S1 trái ⚔, S2 trên-trái, S3 trên ⚔, S4/S5 tiếp
+lên trên); Né dời sang cạnh nút tương tác (right 146, bottom 76);
+cột ô phụ đẩy lên (bottom 126/172/218/264) nhường vòng cung; nhãn
++ bind + mờ hồi chiêu đủ 5 ô. Kiểm tra tự động bằng probe: 10 nút
+cảm ứng hiển thị, 0 cặp chồng nhau. test5 ALL PASS.
+
+GĐ48 (23/10) — CÂN LẠI BỐ CỤC MOBILE:
+Người chơi xem ảnh GĐ47: "nút bấm quá to; bên dưới khúc ở giữa
+không có gì hết lại quá trống; mấy chỗ bên phải thì dày đặc đồ".
+Đã sửa: (1) toàn bộ nút cảm ứng nhỏ ~15% (⚔ 60→52, chiêu 45→40,
+phụ 37→34, Né/E 41→36, joystick 94→88); (2) 4 ô ĐA DỤNG rời phía
+phải → HÀNG NGANG ĐÁY GIỮA (vị trí cố định theo ô Đ1–Đ4, căn giữa
+màn hình); (3) phía phải chỉ còn vòng cung ⚔ + 5 chiêu chính (xếp
+gọn lại theo cỡ mới) + cột nhỏ Né/E. Probe: 10 nút hiện, 0 chồng.
+test5 ALL PASS.
+
+GĐ49 (23/10) — TOÀN MÀN HÌNH TRÊN MOBILE (HẾT 2 DẢI ĐEN):
+Người chơi gửi 3 ảnh mẫu game tu tiên mobile khác (đều phủ kín
+màn hình) và yêu cầu "màn hình mobile toàn màn hình, đừng để đen
+2 bên". Nguyên nhân: Phaser Scale FIT giữ khung 800×600 căn giữa
+→ máy ngang 19.5:9 bị 2 dải đen. Đã chuyển sang Scale EXPAND:
+canvas phủ 100% cửa sổ (đo thật 844×390 = đúng 100%), camera mở
+rộng tầm nhìn ngang (thấy nhiều thế giới hơn hẳn — 4 nhà cùng lúc),
+nền ngoài bản đồ đổi tông cỏ tối #22391b (màn siêu rộng/dọc đọc
+như bóng rừng thay vì đen), chữ giữa màn hình (toast/online) tính
+theo kích thước khung thật + tự căn lại khi resize, meta viewport
+thêm viewport-fit=cover, bỏ bóng/viền bo của canvas.
+Giới hạn còn lại (đã báo người chơi): màn DỌC — hết đen nhưng dưới
+đáy bản đồ là vùng cỏ tối vì bản đồ hình ngang (1200px cao) trong
+khi khung dọc nhìn được ~1730px; chơi ngang là chuẩn.
+test5 ALL PASS; ảnh preview49-mobile/desktop đã xem đạt.
+
+GĐ50 (23/10) — CỤM ĐIỀU KHIỂN MOBILE THEO ẢNH MẪU (1 CỤM GÓC):
+Người chơi xem ảnh GĐ49: "Hộ Thể Công nằm kì vậy, HUD mobile vẫn
+quá kì" — hàng ô phụ ở đáy giữa (GĐ48) khiến nút lẻ loi giữa màn
+hình. Học theo đúng 3 ảnh mẫu người chơi gửi: MỘT cụm duy nhất bám
+góc phải dưới — ⚔ 56px sát góc; 5 chiêu chính 44px vòng cung trong
+(bán kính ~118px quanh tâm ⚔); 4 ô đa dụng 36px vòng cung ngoài
+(~168px); Né + tương tác 36px ở mép trái cụm; joystick thành đĩa
+mềm 104px trong suốt (nền 0.22, núm 44) như ảnh mẫu. Kiểm tra
+chồng nút theo HÌNH TRÒN (tâm + bán kính): 0 va chạm. test5 PASS.
+Nguyên tắc rút ra: điều khiển mobile = 1 cụm góc phải dưới + 
+joystick trái dưới, KHÔNG rải nút ra giữa màn hình.
+
+GĐ51 (23/10) — ĐÈN LÀNG BAN ĐÊM PHÁT SÁNG:
+Trước: đêm chỉ có lớp phủ tối phẳng, trụ đèn đứng chết. Nay mỗi trụ
+trong 8 trụ (tọa độ dùng chung LAMP_POSITIONS ở gfx.ts) có 3 lớp
+sáng cộng (ADD): vệt sáng ấm trên mặt đất + quầng halo xanh ngọc
+quanh tinh thể (có tween "thở" nhẹ, mỗi đèn một nhịp) + lõi trắng.
+Độ sáng bám đúng hàm độ tối của đồng hồ (0 ngày → 1 đêm sâu, chuyển
+dần lúc rạng đông/chạng vạng), ban ngày ẩn hẳn. Kiểm chứng bằng ảnh
+đêm sâu 21:46: 8 quầng sáng rõ, NPC gần đèn được hắt sáng. test5 PASS.
+
+GĐ51b (23/10) — GỠ QUẦNG SÁNG ĐÈN (người chơi bác bỏ):
+Người chơi xem ảnh đêm GĐ51: "bỏ trụ đèn kiểu đó đi, nó sáng chói
+chá hết map rồi" — 3 lớp sáng ADD (halo 315px + vệt đất + lõi) quá
+gắt, rửa sáng cả vùng quanh đèn. Đã gỡ SẠCH lớp quầng động: trụ đèn
+về nguyên trạng nướng tĩnh (đốm sáng nhỏ ở đầu tinh thể như trước
+GĐ51), đêm chỉ còn lớp phủ tối. Ảnh đêm sau gỡ đã kiểm: dịu, không
+còn vùng cháy sáng. test5 PASS. Bài học: hiệu ứng sáng cộng dồn diện
+rộng dễ thành "chói" — sau này có làm lại ánh sáng đêm phải rất nhẹ
+và hỏi ý người chơi bằng ảnh mẫu trước.
+
+GĐ52 (23/10) — ÁNH SÁNG ĐÊM = ÁNH TRĂNG TỰ NHIÊN (theo yêu cầu
+người chơi "thay đèn bằng ánh sáng tự nhiên của ánh trăng"):
+- Lớp phủ đêm đổi từ màu phẳng sang gradient nhuộm sắc trăng (sáng
+  bạc dần về góc phải trên — hướng trăng).
+- 5 vệt sáng trăng bạc blend THƯỜNG (không ADD) rất nhẹ trên các
+  khoảng trống: quảng trường, sân tông môn, bãi farm sói, góc thạch
+  quái + mặt ao (ao sáng hơn + lấp lánh theo sin thời gian).
+- Độ sáng vệt trăng theo PHA TRĂNG chu kỳ 29 ngày tính từ dayIndex:
+  trăng non còn 45%, rằm 100%; icon đồng hồ hiện đúng pha (🌑→🌕).
+- Bài học GĐ51 áp dụng: bản đầu alpha 0.13 vẫn rửa sáng — đã hạ còn
+  0.07–0.085 (ao 0.13) mới đạt "sáng như trăng, không chói". Ảnh đêm
+  rằm 21:45 đã kiểm đạt. test5 PASS.
+
+GĐ53 (23/10) — VA CHẠM NHÀ/CÂY (người chơi chụp ảnh: "người đi xuyên
+nhà, xuyên cây luôn kìa"):
+Nguyên nhân: (1) cây chỉ là hình vẽ, server không có vật cản cho cây
+nên đi thẳng qua thân; (2) khung va chạm nhà nhỏ hơn hình vẽ (mái hiên
++ nóc thò ra 16–32px) nên đứng sát hông/nóc là bị mái "nuốt"; (3) quái
+thường vốn không tránh vật cản nào (chỉ bị chặn khỏi làng).
+Đã vá: TREE_TRUNKS — 20 thân cây thành vật cản (khớp WORLD_GEO.trees);
+khung nhà nở +10px hai bên, +16px phía nóc (không nở mặt tiền để giữ
+điểm tương tác); quái (đuổi + lang thang + trùm thử thách) và đồng
+hành chuyển sang moveWithCollision tách trục; thêm "cửa thoát" chống
+kẹt cho đối tượng lỡ đứng trong vùng cấm + BƯỚC NỬA khi bước đầy bị
+chặn (mỗi tick đi ~26px, không có bước nửa thì dừng cách tường 26px).
+test41 (cây chặn / nóc nhà / mặt tiền / vòng quanh cây) + test5 PASS.
+Ghi chú gỡ lỗi: vùng chặn luôn trông "to hơn tính toán ~24px" vì bước
+đi mỗi tick ~26px — không phải lỗi, là độ hạt của tick 10/s.

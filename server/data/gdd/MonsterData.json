@@ -1,0 +1,393 @@
+{
+ "meta": {
+  "version": 1,
+  "note": "tuViReward theo công thức thiết kế gốc (nền Yếu 3/Trung 4/Mạnh 8/Tinh anh 12/Trùm 75 × 1.12^(bước đầu bậc −1)). hpAtkSource=doc: HP/ATK từ thiết kế gốc; placeholder: tài liệu mở rộng chỉ cho tên/cơ chế — HP/ATK nội suy, chờ chốt.",
+  "total": 21
+ },
+ "monsters": [
+  {
+   "id": "soi_xam",
+   "name": "Sói Xám",
+   "realm": "lk",
+   "hp": 40,
+   "atk": 5,
+   "tuViReward": 3,
+   "maps": [
+    "bai_farm",
+    "huyet_sac_rung"
+   ],
+   "mechanics": [],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "weak",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "doc"
+  },
+  {
+   "id": "doi_den",
+   "name": "Dơi Đen",
+   "realm": "lk",
+   "hp": 20,
+   "atk": 4,
+   "tuViReward": 3,
+   "maps": [
+    "bai_farm"
+   ],
+   "mechanics": [],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "weak",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "doc"
+  },
+  {
+   "id": "thach_quai",
+   "name": "Thạch Quái",
+   "realm": "lk",
+   "hp": 140,
+   "atk": 10,
+   "tuViReward": 8,
+   "maps": [
+    "bai_farm",
+    "thach_lam"
+   ],
+   "mechanics": [],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "strong",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "doc"
+  },
+  {
+   "id": "doc_xa",
+   "name": "Độc Xà",
+   "realm": "lk",
+   "hp": 55,
+   "atk": 7,
+   "tuViReward": 4,
+   "maps": [
+    "bai_farm",
+    "hac_am_dam_lay"
+   ],
+   "mechanics": [
+    "cắn độc theo thời gian"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "medium",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "lam_tru",
+   "name": "Lâm Trư",
+   "realm": "lk",
+   "hp": 90,
+   "atk": 6,
+   "tuViReward": 4,
+   "maps": [
+    "bai_farm",
+    "thanh_moc_lam"
+   ],
+   "mechanics": [
+    "húc lao thẳng"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "medium",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "cot_binh",
+   "name": "Cốt Binh",
+   "realm": "lk",
+   "hp": 110,
+   "atk": 9,
+   "tuViReward": 8,
+   "maps": [
+    "tu_vong_mo_dia",
+    "bai_farm"
+   ],
+   "mechanics": [
+    "hồi sinh 1 lần khi gần chết"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "strong",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "thuy_trieu_tinh",
+   "name": "Thủy Triều Tinh",
+   "realm": "lk",
+   "hp": 70,
+   "atk": 8,
+   "tuViReward": 4,
+   "maps": [
+    "thanh_tuyen_khe"
+   ],
+   "mechanics": [
+    "phun bọt nước làm chậm"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "medium",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "kiem_ma",
+   "name": "Kiếm Ma",
+   "realm": "tc",
+   "hp": 420,
+   "atk": 26,
+   "tuViReward": 22,
+   "maps": [
+    "co_chien_truong",
+    "kiem_trung"
+   ],
+   "mechanics": [
+    "chém kiếm khí tầm xa"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "strong",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "huyet_lang",
+   "name": "Huyết Lang",
+   "realm": "tc",
+   "hp": 350,
+   "atk": 30,
+   "tuViReward": 22,
+   "maps": [
+    "huyet_sac_rung"
+   ],
+   "mechanics": [
+    "hồi máu khi cắn trúng"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "strong",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "huyen_anh_mieu",
+   "name": "Huyễn Ảnh Miêu",
+   "realm": "tc",
+   "hp": 260,
+   "atk": 24,
+   "tuViReward": 11,
+   "maps": [
+    "u_minh_quy_lam"
+   ],
+   "mechanics": [
+    "phân thân ảo ảnh",
+    "né chiêu cao"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "medium",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "thach_khoi_loi",
+   "name": "Thạch Khôi Lỗi",
+   "realm": "tc",
+   "hp": 700,
+   "atk": 22,
+   "tuViReward": 33,
+   "maps": [
+    "thach_lam",
+    "hoang_tho_coc"
+   ],
+   "mechanics": [
+    "giáp đá giảm sát thương vật lý"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "elite",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "loi_dieu",
+   "name": "Lôi Điểu",
+   "realm": "tc",
+   "hp": 300,
+   "atk": 28,
+   "tuViReward": 11,
+   "maps": [
+    "loi_dinh_son_coc"
+   ],
+   "mechanics": [
+    "phóng sét dây chuyền"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "medium",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "dia_hanh_yeu",
+   "name": "Địa Hành Yêu",
+   "realm": "tc",
+   "hp": 520,
+   "atk": 24,
+   "tuViReward": 33,
+   "maps": [
+    "hac_phong_sa_mac",
+    "thai_co_sa_mac"
+   ],
+   "mechanics": [
+    "độn thổ bất ngờ"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "elite",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "huyen_diep",
+   "name": "Huyễn Điệp",
+   "realm": "kd",
+   "hp": 1200,
+   "atk": 60,
+   "tuViReward": 31,
+   "maps": [
+    "thanh_moc_lam",
+    "u_minh_quy_lam"
+   ],
+   "mechanics": [
+    "Bướm độc, phân thân"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "medium",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "kim_giap_te",
+   "name": "Kim Giáp Tê",
+   "realm": "kd",
+   "hp": 2600,
+   "atk": 55,
+   "tuViReward": 62,
+   "maps": [
+    "kim_quang_dong",
+    "thien_cuong_kim_son"
+   ],
+   "mechanics": [
+    "Trâu bò, lao thẳng choáng"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "strong",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "dan_ma",
+   "name": "Đan Ma",
+   "realm": "kd",
+   "hp": 1500,
+   "atk": 66,
+   "tuViReward": 62,
+   "maps": [
+    "hoa_diem_dong"
+   ],
+   "mechanics": [
+    "Lò đan hỏng, ném độc đan, chết tự bạo"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "strong",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "hap_huyet_quy",
+   "name": "Hấp Huyết Quỷ",
+   "realm": "kd",
+   "hp": 1350,
+   "atk": 72,
+   "tuViReward": 62,
+   "maps": [
+    "u_minh_quy_lam"
+   ],
+   "mechanics": [
+    "Tàng hình, hút máu"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "strong",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "bang_tinh_cu_nhan",
+   "name": "Băng Tinh Cự Nhân",
+   "realm": "kd",
+   "hp": 3200,
+   "atk": 70,
+   "tuViReward": 92,
+   "maps": [
+    "han_bang_nguyen"
+   ],
+   "mechanics": [
+    "Dậm chân sóng băng"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "elite",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "diem_hoa_phuong",
+   "name": "Diễm Hỏa Phượng",
+   "realm": "kd",
+   "hp": 1800,
+   "atk": 80,
+   "tuViReward": 92,
+   "maps": [
+    "hoa_son_khau",
+    "dia_nguc_hoa_hai"
+   ],
+   "mechanics": [
+    "Bay lượn thả mưa lửa"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "elite",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "thien_loi_thu",
+   "name": "Thiên Lôi Thú",
+   "realm": "kd",
+   "hp": 2000,
+   "atk": 84,
+   "tuViReward": 92,
+   "maps": [
+    "thien_cuong_kim_son"
+   ],
+   "mechanics": [
+    "Triệu hồi sét"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "elite",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  },
+  {
+   "id": "hon_don_thu",
+   "name": "Hỗn Độn Thú",
+   "realm": "kd",
+   "hp": 4500,
+   "atk": 90,
+   "tuViReward": 577,
+   "maps": [
+    "vo_tan_hu_khong"
+   ],
+   "mechanics": [
+    "Boss nhỏ: tấn công ngẫu nhiên 5 hệ"
+   ],
+   "dodgeNote": "Quái từ Luyện Khí trở đi có cơ chế né chiêu (theo tài liệu 3.1)",
+   "rewardClass": "boss",
+   "rewardSource": "doc-formula",
+   "hpAtkSource": "placeholder"
+  }
+ ]
+}

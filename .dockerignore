@@ -1,0 +1,8 @@
+**/node_modules
+client/src
+client/node_modules
+preview*.png
+*.log
+server/data/characters.json
+server/data/accounts.json
+server/data/world.json

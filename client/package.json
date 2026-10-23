@@ -1,0 +1,1 @@
+{"dependencies":{"phaser":"^3.86.0","socket.io-client":"^4.8.1"},"devDependencies":{"typescript":"^5.7.2","vite":"^6.0.5"},"name":"tap-tanh-tu-tien-client","private":true,"scripts":{"build":"tsc && vite build","dev":"vite","preview":"vite preview"},"type":"module","version":"0.1.0"}

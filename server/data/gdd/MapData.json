@@ -1,0 +1,965 @@
+{
+ "meta": {
+  "version": 2,
+  "source": "Tài liệu thiết kế mở rộng (người chơi, 22/10/2026), đã đối chiếu bản game hiện tại",
+  "realms": [
+   "pham",
+   "lk",
+   "tc",
+   "kd",
+   "na",
+   "ht"
+  ],
+  "realmNames": {
+   "pham": "Phàm nhân",
+   "lk": "Luyện Khí",
+   "tc": "Trúc Cơ",
+   "kd": "Kim Đan",
+   "na": "Nguyên Anh",
+   "ht": "Hóa Thần"
+  },
+  "realmTiersPerRealm": 9,
+  "globalStepNote": "Tầng toàn cục: LK 1-9 = bước 1-9, TC = 10-18, Kim Đan = 19-27 (khớp tài liệu 1.1), NA = 28-36.",
+  "realmFeatures": {
+   "kd": [
+    {
+     "tierFrom": 1,
+     "tierTo": 3,
+     "phase": "Sơ Kỳ",
+     "unlock": "Ngự Kiếm Phi Hành: bay 50% tốc độ, bỏ qua địa hình"
+    },
+    {
+     "tierFrom": 4,
+     "tierTo": 6,
+     "phase": "Trung Kỳ",
+     "unlock": "Thần Thức Ngoại Phóng: +20% tầm đánh, khóa mục tiêu xuyên vật cản"
+    },
+    {
+     "tierFrom": 7,
+     "tierTo": 8,
+     "phase": "Hậu Kỳ",
+     "unlock": "Kim Đan Hộ Thể: tự tạo khiên hấp thụ sát thương khi HP < 30%"
+    },
+    {
+     "tierFrom": 9,
+     "tierTo": 9,
+     "phase": "Viên Mãn",
+     "unlock": "Đối mặt Thiên Kiếp Lôi để đột phá Nguyên Anh"
+    }
+   ]
+  },
+  "hiddenPaths": [
+   {
+    "id": "lk_vien_man",
+    "name": "Luyện Khí Viên Mãn",
+    "fromRealm": "lk",
+    "desc": "Tu luyện thêm X năm ở Luyện Khí; mở con đường đặc biệt theo lớp (VD: La Hán lên Thánh Tăng). X = chờ chốt."
+   },
+   {
+    "id": "luyen_hon",
+    "name": "Luyện Hồn",
+    "fromRealm": "lk",
+    "desc": "Tu thêm Y năm; mở chỉ số ẩn (May mắn, Bạo kích); hồn phách xuất khiếu miễn nhiễm vật lý 3s. Y = chờ chốt."
+   },
+   {
+    "id": "nhap_dao",
+    "name": "Nhập Đạo",
+    "fromRealm": "lk",
+    "desc": "Tu thêm Z năm; tu thêm 1 loại tu khác (Tách = song tu độc lập / Luyện hóa = hợp nhất 1 Chính 1 Phụ); mở ô công pháp 8, 9, 10. Z = chờ chốt."
+   }
+  ],
+  "daoPaths": {
+   "unlockRealm": "na",
+   "note": "Khóa đến Nguyên Anh, phải sống sót qua Thiên Kiếp (tài liệu 1.3)",
+   "paths": [
+    {
+     "id": "ma",
+     "name": "Ma Đạo",
+     "desc": "Sát thương cực cao, hút máu. Đột phá thất bại chỉ mất Tuổi thọ (không mất căn cơ)."
+    },
+    {
+     "id": "tien",
+     "name": "Tiên Đạo",
+     "desc": "Sát thương ổn định, nhiều buff/hồi máu. Đột phá chậm, thất bại có thể mất Căn cơ."
+    }
+   ],
+   "convert": "Uống Tẩy Ma/Tẩy Tiên đan cực hiếm, xóa sạch tu vi cũ."
+  },
+  "note": "rank cảnh giới = chỉ số realm trong meta.realms × 9 + tầng. Mã realm dùng đúng mã server hiện tại (pham/lk/...). MapData gồm 50 map của tài liệu + 2 map hiện có (existing, impl=live).",
+  "totalMaps": 52,
+  "expansionMaps": 50
+ },
+ "maps": [
+  {
+   "id": "lang_tan_thu",
+   "name": "Làng Tân Thủ",
+   "category": "current",
+   "safe": true,
+   "minRealm": "pham",
+   "minTier": 0,
+   "desc": "Làng khởi đầu của bản Alpha hiện tại",
+   "existing": true,
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tan_thu"
+   ],
+   "impl": "live",
+   "liveNpcs": [
+    {
+     "id": "npc_truonglang",
+     "name": "Trưởng Làng",
+     "role": "Trả nhiệm vụ"
+    },
+    {
+     "id": "npc_dan",
+     "name": "Chủ Tiệm Đan",
+     "role": "Shop đan dược"
+    },
+    {
+     "id": "npc_nguyenlieu",
+     "name": "Chủ Tiệm Nguyên Liệu",
+     "role": "Shop nguyên liệu"
+    }
+   ]
+  },
+  {
+   "id": "bai_farm",
+   "name": "Bãi Farm Quanh Làng",
+   "category": "current",
+   "safe": false,
+   "minRealm": "pham",
+   "minTier": 0,
+   "desc": "Vòng farm quanh làng (5 vòng theo thiết kế gốc)",
+   "existing": true,
+   "monsterSet": [
+    "soi_xam",
+    "doi_den",
+    "thach_quai"
+   ],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "thanh_van_thanh",
+   "name": "Thanh Vân Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Trung tâm, đấu giá",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tan_thu"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "vong_nguyet_lau",
+   "name": "Vọng Nguyệt Lâu",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Bán công pháp hiếm",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hac_phong_trai",
+   "name": "Hắc Phong Trại",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Chợ đen",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "tang_kinh_cac",
+   "name": "Tàng Kinh Các",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thư viện, tăng ngộ tính",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "phong_van_tong",
+   "name": "Phong Vân Tông",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Tông môn",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thien_co_thanh",
+   "name": "Thiên Cơ Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Chợ giao dịch",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "long_mach_co_thanh",
+   "name": "Long Mạch Cổ Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Nhiệm vụ truyền thừa",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thien_ngoai_phuong",
+   "name": "Thiên Ngoại Phường",
+   "category": "city",
+   "safe": true,
+   "minRealm": "kd",
+   "minTier": 1,
+   "desc": "Chợ Kim Đan",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "ma_vuc_thanh",
+   "name": "Ma Vực Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "kd",
+   "minTier": 1,
+   "desc": "Thành Ma tu",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "tien_gioi_cac",
+   "name": "Tiên Giới Các",
+   "category": "city",
+   "safe": true,
+   "minRealm": "kd",
+   "minTier": 1,
+   "desc": "Trạm Tiên nhân",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "duoc_coc",
+   "name": "Dược Cốc",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "dansu",
+   "professionName": "Đan Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Đan Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "luyen_dan_phong",
+   "name": "Luyện Đan Phòng",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "dansu",
+   "professionName": "Đan Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Đan Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "dan_thap",
+   "name": "Đan Tháp",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "dansu",
+   "professionName": "Đan Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Đan Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "van_thu_son",
+   "name": "Vạn Thú Sơn",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "thusu",
+   "professionName": "Thú Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Thú Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "linh_thu_vien",
+   "name": "Linh Thú Viên",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "thusu",
+   "professionName": "Thú Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Thú Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "ngu_thu_son_trang",
+   "name": "Ngự Thú Sơn Trang",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "thusu",
+   "professionName": "Thú Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Thú Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "ky_mon_dong",
+   "name": "Kỳ Môn Động",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "tranphap",
+   "professionName": "Trận Pháp Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Trận Pháp Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "tran_phap_cac",
+   "name": "Trận Pháp Các",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "tranphap",
+   "professionName": "Trận Pháp Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Trận Pháp Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "bat_quai_tran_do",
+   "name": "Bát Quái Trận Đồ",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "tranphap",
+   "professionName": "Trận Pháp Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Trận Pháp Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "linh_phu_dien",
+   "name": "Linh Phù Điện",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "phusu",
+   "professionName": "Phù Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Phù Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "chu_van_duong",
+   "name": "Chú Văn Đường",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "phusu",
+   "professionName": "Phù Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Phù Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "but_mac_hien",
+   "name": "Bút Mặc Hiên",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "phusu",
+   "professionName": "Phù Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Phù Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hoa_lo_coc",
+   "name": "Hỏa Lò Cốc",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "luyenkhisu",
+   "professionName": "Luyện Khí Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Luyện Khí Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thiet_coc",
+   "name": "Thiết Cốc",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "luyenkhisu",
+   "professionName": "Luyện Khí Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Luyện Khí Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "kiem_lo_son_trang",
+   "name": "Kiếm Lô Sơn Trang",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "profession": "luyenkhisu",
+   "professionName": "Luyện Khí Sư",
+   "npcProfile": "city",
+   "desc": "Map nghề Luyện Khí Sư",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "bang_phong_coc",
+   "name": "Băng Phong Cốc",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "lk",
+   "minTier": 7,
+   "realmBand": {
+    "realm": "lk",
+    "tierFrom": 7,
+    "tierTo": 9
+   },
+   "desc": "Map farm lk 7-9",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hoa_diem_son",
+   "name": "Hỏa Diễm Sơn",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "lk",
+   "minTier": 7,
+   "realmBand": {
+    "realm": "lk",
+    "tierFrom": 7,
+    "tierTo": 9
+   },
+   "desc": "Map farm lk 7-9",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hac_phong_sa_mac",
+   "name": "Hắc Phong Sa Mạc",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "lk",
+   "minTier": 7,
+   "realmBand": {
+    "realm": "lk",
+    "tierFrom": 7,
+    "tierTo": 9
+   },
+   "desc": "Map farm lk 7-9",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "huyet_sac_rung",
+   "name": "Huyết Sắc Rừng",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tc",
+   "minTier": 1,
+   "realmBand": {
+    "realm": "tc",
+    "tierFrom": 1,
+    "tierTo": 6
+   },
+   "desc": "Map farm tc 1-6",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "tu_vong_mo_dia",
+   "name": "Tử Vong Mộ Địa",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tc",
+   "minTier": 1,
+   "realmBand": {
+    "realm": "tc",
+    "tierFrom": 1,
+    "tierTo": 6
+   },
+   "desc": "Map farm tc 1-6",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "van_thu_son_mach",
+   "name": "Vạn Thú Sơn Mạch",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tc",
+   "minTier": 1,
+   "realmBand": {
+    "realm": "tc",
+    "tierFrom": 1,
+    "tierTo": 6
+   },
+   "desc": "Map farm tc 1-6",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "loi_dinh_son_coc",
+   "name": "Lôi Đình Sơn Cốc",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tc",
+   "minTier": 7,
+   "realmBand": {
+    "realm": "tc",
+    "tierFrom": 7,
+    "tierTo": 9
+   },
+   "desc": "Map farm tc 7-9",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hac_am_dam_lay",
+   "name": "Hắc Ám Đầm Lầy",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tc",
+   "minTier": 7,
+   "realmBand": {
+    "realm": "tc",
+    "tierFrom": 7,
+    "tierTo": 9
+   },
+   "desc": "Map farm tc 7-9",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "co_chien_truong",
+   "name": "Cổ Chiến Trường",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tc",
+   "minTier": 7,
+   "realmBand": {
+    "realm": "tc",
+    "tierFrom": 7,
+    "tierTo": 9
+   },
+   "desc": "Map farm tc 7-9",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "vo_tan_hu_khong",
+   "name": "Vô Tận Hư Không",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tc",
+   "minTier": 9,
+   "realmBand": {
+    "realm": "tc",
+    "tierFrom": 9,
+    "tierTo": 9
+   },
+   "desc": "Map farm đột phá",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "kim_quang_dong",
+   "name": "Kim Quáng Động",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Kim",
+   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "kiem_trung",
+   "name": "Kiếm Trủng",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Kim",
+   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thien_cuong_kim_son",
+   "name": "Thiên Cương Kim Sơn",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Kim",
+   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thanh_moc_lam",
+   "name": "Thanh Mộc Lâm",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Mộc",
+   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "u_minh_quy_lam",
+   "name": "U Minh Quỷ Lâm",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Mộc",
+   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "co_thu_yeu_gioi",
+   "name": "Cổ Thụ Yêu Giới",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Mộc",
+   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thanh_tuyen_khe",
+   "name": "Thanh Tuyền Khe",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Thủy",
+   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "han_bang_nguyen",
+   "name": "Hàn Băng Nguyên",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Thủy",
+   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "tham_hai_bi_canh",
+   "name": "Thâm Hải Bí Cảnh",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Thủy",
+   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hoa_diem_dong",
+   "name": "Hỏa Diễm Động",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Hỏa",
+   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hoa_son_khau",
+   "name": "Hỏa Sơn Khẩu",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Hỏa",
+   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "dia_nguc_hoa_hai",
+   "name": "Địa Ngục Hỏa Hải",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Hỏa",
+   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hoang_tho_coc",
+   "name": "Hoàng Thổ Cốc",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Thổ",
+   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thach_lam",
+   "name": "Thạch Lâm",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Thổ",
+   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thai_co_sa_mac",
+   "name": "Thái Cổ Sa Mạc",
+   "category": "elemental",
+   "safe": false,
+   "minRealm": "kd",
+   "minTier": 1,
+   "element": "Thổ",
+   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+# Cấu hình deploy lên Render.com (bản miễn phí) — Render tự đọc file này
+# khi tạo Web Service từ repo GitHub: build + start + biến môi trường
+# cho buổi test nhanh (ngày game 10 phút, đột phá nhanh). Chơi thật lâu
+# dài thì xóa 2 biến TTT_* trong trang quản trị Render.
+services:
+  - type: web
+    name: tap-tanh-tu-tien
+    env: node
+    plan: free
+    buildCommand: npm --prefix server install && npm --prefix client install --include=dev && npm --prefix client run build
+    startCommand: node server/index.js
+    envVars:
+      - key: TTT_DAY_REAL_MS
+        value: "600000"
+      - key: TTT_TUVI_NEED
+        value: "5"
+      # Chuỗi kết nối MongoDB Atlas (xem HUONG_DAN_LEN_WEB.md phần 2):
+      # sync: false = Render để bạn tự dán trong trang Environment,
+      # chuỗi này KHÔNG nằm trong code/GitHub. Chưa dán thì game lưu
+      # bằng file tại chỗ như cũ.
+      - key: MONGODB_URI
+        sync: false
