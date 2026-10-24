@@ -57,16 +57,315 @@ const WOLF = { hp: 40, atk: 5, def: 0, atkRange: 42, atkCooldownMs: 1000, name: 
 // (dơi yếu như sói). Phòng thủ Thạch Quái 8 (bản chơi đơn đã dùng; file
 // không ghi phòng thủ quái). Tốc độ: dơi bay nhanh, thạch quái chậm chạp.
 const MONSTER_TYPES = {
-  wolf: { name: 'Sói Xám', hp: 40, atk: 5, def: 0, tuVi: 3, count: 5, chaseSpeed: 120, wanderSpeed: 42, atkRange: 42, atkCdMs: 1000, chestTier: 'yeu' },
-  bat: { name: 'Dơi Đen', hp: 20, atk: 4, def: 0, tuVi: 4, count: 4, chaseSpeed: 175, wanderSpeed: 62, atkRange: 42, atkCdMs: 900, chestTier: 'trung' },
-  golem: { name: 'Thạch Quái', hp: 140, atk: 10, def: 8, tuVi: 8, count: 3, chaseSpeed: 55, wanderSpeed: 20, atkRange: 46, atkCdMs: 1400, chestTier: 'manh' },
+  wolf: { name: 'Sói Xám', hp: 40, atk: 5, def: 0, tuVi: 3, count: 5, chaseSpeed: 120, wanderSpeed: 42, atkRange: 42, atkCdMs: 1000, chestTier: 'yeu', realm: 'lk', stage: 'so' },
+  bat: { name: 'Dơi Đen', hp: 20, atk: 4, def: 0, tuVi: 4, count: 4, chaseSpeed: 175, wanderSpeed: 62, atkRange: 42, atkCdMs: 900, chestTier: 'trung', realm: 'lk', stage: 'so' },
+  golem: { name: 'Thạch Quái', hp: 140, atk: 10, def: 8, tuVi: 8, count: 3, chaseSpeed: 55, wanderSpeed: 20, atkRange: 46, atkCdMs: 1400, chestTier: 'manh', realm: 'lk', stage: 'so' },
   // GĐ57 — BÍ CẢNH THẠCH LÂM: số HP/ATK/Tu vi lấy từ dữ liệu GDD của
   // người chơi (MonsterData: quái bậc Trúc Cơ); def/tốc độ là số TẠM vì
   // dữ liệu không ghi. Chỉ sống trong vùng bí cảnh (area).
-  kiemma: { name: 'Kiếm Ma', hp: 420, atk: 26, def: 3, tuVi: 22, count: 4, chaseSpeed: 132, wanderSpeed: 40, atkRange: 44, atkCdMs: 1100, chestTier: 'manh', area: 'realm', respawnMs: 30000 },
-  huyetlang: { name: 'Huyết Lang', hp: 350, atk: 30, def: 0, tuVi: 22, count: 4, chaseSpeed: 168, wanderSpeed: 55, atkRange: 42, atkCdMs: 950, chestTier: 'manh', area: 'realm', respawnMs: 30000 },
-  khoiloi: { name: 'Thạch Khôi Lỗi', hp: 700, atk: 22, def: 8, tuVi: 33, count: 1, chaseSpeed: 62, wanderSpeed: 16, atkRange: 48, atkCdMs: 1400, chestTier: 'manh', area: 'realmBoss', respawnMs: 600000, minChestGrade: 'B' },
+  kiemma: { name: 'Kiếm Ma', hp: 420, atk: 26, def: 3, tuVi: 22, count: 4, chaseSpeed: 132, wanderSpeed: 40, atkRange: 44, atkCdMs: 1100, chestTier: 'manh', area: 'realm', respawnMs: 30000, realm: 'tc', stage: 'trung' },
+  huyetlang: { name: 'Huyết Lang', hp: 350, atk: 30, def: 0, tuVi: 22, count: 4, chaseSpeed: 168, wanderSpeed: 55, atkRange: 42, atkCdMs: 950, chestTier: 'manh', area: 'realm', respawnMs: 30000, realm: 'tc', stage: 'trung' },
+  khoiloi: { name: 'Thạch Khôi Lỗi', hp: 700, atk: 22, def: 8, tuVi: 33, count: 1, chaseSpeed: 62, wanderSpeed: 16, atkRange: 48, atkCdMs: 1400, chestTier: 'manh', area: 'realmBoss', respawnMs: 600000, minChestGrade: 'B', realm: 'tc', stage: 'trung' },
 };
+
+// ================= GĐ59: HỆ THỐNG NHIỀU BẢN ĐỒ — 52 map theo file GDD =================
+// Người chơi chốt 23/10: "làm tất cả các map còn lại trong file thiết kế".
+// Nguồn SỰ THẬT: server/data/gdd/MapData.json (52 map: tên, loại, cổng cảnh
+// giới minRealm/minTier, an toàn hay không, nối về đâu) + MonsterData.json
+// (21 quái: HP/ATK/Tu vi + danh sách map chúng sống). Đồ thị nối theo file:
+// mọi map đều nối về THANH VÂN THÀNH (cổng Luyện Khí tầng 1); thành nối về
+// Làng Tân Thủ + mọi nơi; các map khác chỉ nối về thành. Di chuyển bằng
+// TRẬN DỊCH CHUYỂN ở mỗi map (tại làng đặt ở (1080,600), mép đông quảng
+// trường) → mở danh sách đích, đích chưa đủ cảnh giới hiện khóa kèm điều kiện.
+// Map "nhà" lang_tan_thu = thế giới hiện tại 2800×1200 (làng + bãi farm +
+// bí cảnh Thạch Lâm của GĐ57 — giữ nguyên, Thạch Lâm KHÔNG tách map riêng,
+// cổng tông môn cũ vẫn chạy; mục thach_lam trong danh sách dịch chuyển là
+// lối tắt tới cổng đó, vẫn bắt buộc đệ tử tông môn như GĐ57).
+// Mỗi map mới là một KHÔNG GIAN RIÊNG (kích thước theo loại — số TẠM):
+// thành 1600×1200, đất nghề 1400×1050, farm/ngũ hành 1800×1350. Đồng bộ
+// theo phòng map: socket chỉ nhận entity của map mình đang đứng. Trang trí
+// + vật cản của map mới sinh bằng RNG có hạt giống theo id map (server giữ
+// vật cản để tính va chạm; client nhận decor qua map_enter để vẽ nền theo
+// theme). Số TẠM đã công bố: def/tốc độ/hồi sinh của quái GDD (file chỉ ghi
+// HP/ATK/Tu vi), số lượng quái mỗi map (thường 5, tinh anh 1, trùm 1),
+// 4 map file không gán quái (bang_phong_coc, hoa_diem_son, van_thu_son_mach,
+// tham_hai_bi_canh) được gán quái TẠM theo tông/cảnh giới ở cuối bảng dưới.
+const HOME_MAP = 'lang_tan_thu';
+const MAP_DEFS = new Map();
+try {
+  const rawMaps = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'gdd', 'MapData.json'), 'utf8')).maps || [];
+  for (const m of rawMaps) MAP_DEFS.set(m.id, m);
+  console.log(`[bản đồ] Đã nạp ${MAP_DEFS.size} bản đồ từ MapData.json`);
+} catch (e) { console.warn('[bản đồ] Không đọc được MapData.json:', e.message); }
+const REALM_ORDER = { pham: 0, lk: 1, tc: 2, kd: 3, na: 4, ht: 5 };
+const REALM_NAMES = { pham: 'Phàm nhân', lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần' };
+const MAP_SIZE_BY_CAT = { city: [2400, 1800], profession: [2200, 1650], farm: [3800, 2850], elemental: [4000, 3000], current: [WORLD_W, WORLD_H] }; // GĐ60: map SIÊU TO theo yêu cầu khám phá (số TẠM)
+function mapDims(mapId) {
+  if (!mapId || mapId === HOME_MAP) return { w: WORLD_W, h: WORLD_H };
+  const def = MAP_DEFS.get(mapId);
+  const s = (def && MAP_SIZE_BY_CAT[def.category]) || [1600, 1200];
+  return { w: s[0], h: s[1] };
+}
+function mapOf(a) { return (a && a.mapId) || HOME_MAP; }
+function gateTextOf(def) { return `Cần ${REALM_NAMES[def.minRealm] || def.minRealm}${def.minTier ? ` tầng ${def.minTier}` : ''}`; }
+function canEnterGate(p, def) {
+  const mine = REALM_ORDER[p.realm || 'pham'] ?? 0;
+  const need = REALM_ORDER[def.minRealm || 'pham'] ?? 0;
+  if (mine !== need) return mine > need;
+  return (p.tier || 0) >= (def.minTier || 0);
+}
+// Theme nền theo từng map (client vẽ theo theme này; decor quyết vật cản)
+const THEME_BY_ID = {
+  thanh_van_thanh: 'city', vong_nguyet_lau: 'city', hac_phong_trai: 'city', tang_kinh_cac: 'city',
+  phong_van_tong: 'city', thien_co_thanh: 'city', long_mach_co_thanh: 'city', thien_ngoai_phuong: 'city',
+  ma_vuc_thanh: 'city', tien_gioi_cac: 'city',
+  duoc_coc: 'garden', luyen_dan_phong: 'garden', dan_thap: 'garden',
+  van_thu_son: 'beast', linh_thu_vien: 'beast', ngu_thu_son_trang: 'beast',
+  ky_mon_dong: 'array', tran_phap_cac: 'array', bat_quai_tran_do: 'array',
+  linh_phu_dien: 'script', chu_van_duong: 'script', but_mac_hien: 'script',
+  hoa_lo_coc: 'forge', thiet_coc: 'forge', kiem_lo_son_trang: 'forge',
+  bang_phong_coc: 'ice', hoa_diem_son: 'lava', hac_phong_sa_mac: 'desert', huyet_sac_rung: 'blood_forest',
+  tu_vong_mo_dia: 'graveyard', van_thu_son_mach: 'mountain', loi_dinh_son_coc: 'storm',
+  hac_am_dam_lay: 'swamp', co_chien_truong: 'battlefield', vo_tan_hu_khong: 'void',
+  kim_quang_dong: 'metal', kiem_trung: 'swords', thien_cuong_kim_son: 'metal',
+  thanh_moc_lam: 'deep_forest', u_minh_quy_lam: 'ghost_forest', co_thu_yeu_gioi: 'deep_forest',
+  thanh_tuyen_khe: 'stream', han_bang_nguyen: 'ice_plain', tham_hai_bi_canh: 'deep_sea',
+  hoa_diem_dong: 'lava', hoa_son_khau: 'lava', dia_nguc_hoa_hai: 'lava',
+  hoang_tho_coc: 'badland', thai_co_sa_mac: 'desert',
+};
+// [loại decor, trọng số, bán kính va chạm (0 = chỉ để ngắm)]
+const THEME_DECOR = {
+  // GĐ68: thêm kind mới (nhà/núi/hang/nước/cỏ/hoa + cây mới) — mỗi theme tổng
+  // trọng số vẫn = 1.00; bán kính va chạm 0 = chỉ để ngắm, không cản đường.
+  city: [['tree', 0.25, 16], ['lamp', 0.20, 0], ['stone', 0.15, 14], ['banner', 0.20, 0], ['house', 0.15, 22], ['flower', 0.05, 0]],
+  garden: [['tree', 0.30, 16], ['herb', 0.25, 0], ['furnace', 0.15, 18], ['stone', 0.10, 14], ['flower', 0.15, 0], ['grass', 0.05, 0]],
+  beast: [['tree', 0.35, 16], ['fence', 0.25, 0], ['hay', 0.15, 0], ['rock', 0.10, 16], ['hut', 0.15, 18]],
+  array: [['pillar', 0.25, 16], ['stone', 0.25, 14], ['tree', 0.15, 16], ['banner', 0.15, 0], ['pavilion', 0.20, 18]],
+  script: [['pillar', 0.20, 16], ['tree', 0.30, 16], ['desk', 0.15, 0], ['stone', 0.15, 14], ['pavilion', 0.20, 18]],
+  forge: [['rock', 0.35, 16], ['forge', 0.20, 18], ['anvil', 0.15, 12], ['dead_tree', 0.30, 14]],
+  ice: [['ice_shard', 0.30, 16], ['rock', 0.20, 16], ['pine', 0.30, 15], ['mountain_snow', 0.20, 30]],
+  lava: [['lava_rock', 0.35, 16], ['rock', 0.25, 16], ['dead_tree', 0.20, 14], ['mountain', 0.20, 30]],
+  desert: [['cactus', 0.25, 12], ['rock', 0.25, 16], ['bone', 0.15, 0], ['dead_tree', 0.15, 14], ['grass_tall', 0.20, 0]],
+  blood_forest: [['blood_tree', 0.40, 16], ['rock', 0.20, 16], ['mushroom', 0.15, 0], ['blossom', 0.10, 16], ['grass', 0.15, 0]],
+  graveyard: [['tomb', 0.30, 16], ['dead_tree', 0.30, 14], ['bone', 0.20, 0], ['willow', 0.10, 15], ['grass', 0.10, 0]],
+  mountain: [['pine', 0.30, 15], ['rock', 0.25, 16], ['tree', 0.15, 16], ['mountain', 0.15, 30], ['cave', 0.10, 18], ['grass', 0.05, 0]],
+  storm: [['rock', 0.35, 16], ['pillar', 0.20, 16], ['dead_tree', 0.25, 14], ['mountain', 0.20, 30]],
+  swamp: [['swamp_tree', 0.35, 16], ['mushroom', 0.20, 0], ['rock', 0.15, 16], ['reed', 0.15, 0], ['pond', 0.15, 0]],
+  battlefield: [['sword_stone', 0.25, 14], ['bone', 0.20, 0], ['dead_tree', 0.20, 14], ['rock', 0.15, 16], ['hut', 0.10, 18], ['grass_tall', 0.10, 0]],
+  void: [['crystal', 0.35, 16], ['rock', 0.30, 16], ['pillar', 0.20, 16], ['mushroom', 0.15, 0]],
+  metal: [['crystal_gold', 0.30, 16], ['rock', 0.40, 16], ['pillar', 0.30, 16]],
+  swords: [['sword_stone', 0.45, 14], ['rock', 0.30, 16], ['dead_tree', 0.25, 14]],
+  deep_forest: [['tree_big', 0.35, 20], ['tree', 0.20, 16], ['mushroom', 0.15, 0], ['bamboo', 0.15, 14], ['blossom', 0.05, 16], ['grass', 0.10, 0]],
+  ghost_forest: [['dead_tree', 0.30, 14], ['mushroom', 0.20, 0], ['tomb', 0.15, 16], ['tree', 0.10, 16], ['willow', 0.15, 15], ['grass', 0.10, 0]],
+  stream: [['tree', 0.30, 16], ['rock', 0.20, 16], ['reed', 0.20, 0], ['stone', 0.10, 14], ['pond', 0.10, 0], ['willow', 0.10, 15]],
+  ice_plain: [['ice_shard', 0.30, 16], ['rock', 0.20, 16], ['pine', 0.30, 15], ['mountain_snow', 0.20, 30]],
+  deep_sea: [['coral', 0.30, 14], ['rock', 0.25, 16], ['reed', 0.15, 0], ['palm', 0.15, 14], ['wave', 0.15, 0]],
+  badland: [['rock', 0.35, 16], ['dead_tree', 0.25, 14], ['bone', 0.15, 0], ['grass_tall', 0.15, 0], ['mountain', 0.10, 30]],
+};
+function hashStr(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h = Math.imul(h ^ s.charCodeAt(i), 16777619); } return h >>> 0; }
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+// Runtime của 1 map mới: cổng dịch chuyển (cũng là điểm tới) + decor + vật cản
+const MAP_RUNTIME = new Map();
+function buildMapRuntime(def) {
+  const { w, h } = mapDims(def.id);
+  const theme = THEME_BY_ID[def.id] || 'mountain';
+  const portal = { x: Math.round(w / 2), y: h - 150 };
+  const rng = mulberry32(hashStr(def.id));
+  const table = THEME_DECOR[theme] || THEME_DECOR.mountain;
+  const decor = [];
+  const obstacles = [];
+  // GĐ60: mật độ trang trí theo theme — rừng/đầm DÀY ĐẶC cây cối (người
+  // chơi: "map rừng thì phải cực kì nhiều cây"), theme khác thưa hơn.
+  const FORESTY = ['deep_forest', 'ghost_forest', 'blood_forest', 'swamp'];
+  const n = FORESTY.includes(theme)
+    ? Math.max(120, Math.min(650, Math.round((w * h) / 7000)))
+    : Math.max(60, Math.min(420, Math.round((w * h) / 12000)));
+  for (let i = 0; i < n; i++) {
+    let kind = table[0][0]; let cr = table[0][2];
+    const roll = rng();
+    let acc = 0;
+    for (const [k, wt, r] of table) { acc += wt; if (roll <= acc) { kind = k; cr = r; break; } }
+    let x = 0; let y = 0; let okPos = false;
+    for (let t = 0; t < 8 && !okPos; t++) {
+      x = Math.round(56 + rng() * (w - 112));
+      y = Math.round(56 + rng() * (h - 112));
+      okPos = Math.hypot(x - portal.x, y - portal.y) > 185
+        && !(cr > 0 && obstacles.some((o) => Math.hypot(x - o.x, y - o.y) < 52));
+    }
+    if (!okPos) continue;
+    decor.push({ k: kind, x, y, s: Math.round((0.85 + rng() * 0.4) * 100) / 100 });
+    if (cr > 0) obstacles.push({ x, y, r: cr });
+  }
+  // GĐ60: ĐẶC SẢN theo theme — dung nham có NÚI LỬA + HỐ LỬA (đứng vào
+  // bị thiêu), băng có HANG BĂNG (cụm tinh thể quanh cửa hang tối).
+  const hazards = [];
+  const features = { volcano: null, caves: [] };
+  const farFromPortal = (minD) => {
+    for (let t = 0; t < 20; t++) {
+      const x = Math.round(180 + rng() * (w - 360));
+      const y = Math.round(180 + rng() * (h - 360));
+      if (Math.hypot(x - portal.x, y - portal.y) > minD) return { x, y };
+    }
+    return { x: Math.round(w / 2), y: 260 };
+  };
+  if (theme === 'lava') {
+    const v = farFromPortal(650);
+    features.volcano = { x: v.x, y: v.y, r: 95 };
+    obstacles.push({ x: v.x, y: v.y, r: 95 });
+    for (let i = 0; i < 7; i++) {
+      const p = farFromPortal(300);
+      hazards.push({ x: p.x, y: p.y, r: 42 + Math.round(rng() * 26) });
+    }
+  }
+  if (theme === 'ice' || theme === 'ice_plain') {
+    for (let i = 0; i < 2; i++) {
+      const c = farFromPortal(420);
+      if (features.caves.some((o) => Math.hypot(o.x - c.x, o.y - c.y) < 300)) continue;
+      features.caves.push({ x: c.x, y: c.y });
+      obstacles.push({ x: c.x, y: c.y, r: 62 });
+    }
+  }
+  return { w, h, theme, portal, decor, obstacles, hazards, features };
+}
+for (const def of MAP_DEFS.values()) {
+  if (def.id !== HOME_MAP && def.id !== 'thach_lam' && def.id !== 'bai_farm') MAP_RUNTIME.set(def.id, buildMapRuntime(def));
+}
+function hitsObstacleIn(mapId, x, y, pad = 14) {
+  if (!mapId || mapId === HOME_MAP) return hitsObstacle(x, y, pad);
+  const rt = MAP_RUNTIME.get(mapId);
+  if (!rt) return false;
+  return rt.obstacles.some((o) => Math.hypot(x - o.x, y - o.y) <= o.r + 6);
+}
+function mapEnterPayload(mapId) {
+  if (!mapId || mapId === HOME_MAP) {
+    return { mapId: HOME_MAP, isHome: true, name: 'Làng Tân Thủ', w: WORLD_W, h: WORLD_H, safe: false, portal: { x: 1080, y: 600 } };
+  }
+  const def = MAP_DEFS.get(mapId);
+  const rt = MAP_RUNTIME.get(mapId);
+  if (!def || !rt) return mapEnterPayload(HOME_MAP);
+  return { mapId, isHome: false, name: def.name, category: def.category, safe: !!def.safe, w: rt.w, h: rt.h, theme: rt.theme, portal: rt.portal, decor: rt.decor, hazards: rt.hazards || [], features: rt.features || null, desc: def.desc || '' }; // GĐ60: + hazards/features
+}
+// ---- Quái GDD: nạp thêm loài chưa có từ MonsterData (số file: HP/ATK/Tu vi;
+//      def/tốc độ/hồi sinh TẠM như ghi chú đầu mục) ----
+const GDD_KIND_ALIAS = { soi_xam: 'wolf', doi_den: 'bat', thach_quai: 'golem', kiem_ma: 'kiemma', huyet_lang: 'huyetlang', thach_khoi_loi: 'khoiloi' };
+const CHEST_BY_REWARD = { weak: 'yeu', medium: 'trung', strong: 'manh', elite: 'manh', boss: 'manh' };
+let GDD_MONSTERS = [];
+try {
+  GDD_MONSTERS = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'gdd', 'MonsterData.json'), 'utf8')).monsters || [];
+} catch (e) { console.warn('[bản đồ] Không đọc được MonsterData.json:', e.message); }
+// GĐ70: CƠ CHẾ RIÊNG từng loài — bóc từ MonsterData.mechanics (file chỉ ghi
+// tên cơ chế, mọi con số dưới đây đều là TẠM do agent chọn, người chơi duyệt sau):
+const MONSTER_MECH = {
+  doc_xa: { poison: { dps: 2, sec: 5 } }, // cắn độc theo thời gian (phục kích đã có từ GĐ60)
+  lam_tru: { charge: { cdMs: 6000, dmgMul: 1.5 } }, // húc lao thẳng
+  cot_binh: { reviveOnce: 0.5 }, // hồi sinh 1 lần khi gần chết (về 50% HP)
+  thuy_trieu_tinh: { slowOnHit: { pct: 40, sec: 3 } }, // phun bọt nước làm chậm
+  kiem_ma: { ranged: 150 }, // chém kiếm khí tầm xa
+  huyet_lang: { lifesteal: 0.3 }, // hồi máu khi cắn trúng
+  huyen_anh_mieu: { dodge: 0.6, clones: 2 }, // phân thân ảo ảnh + né chiêu cao
+  thach_khoi_loi: { physResist: 0.5 }, // giáp đá giảm 50% sát thương vật lý
+  loi_dieu: { ranged: 150, chain: { jumps: 2, falloff: 0.7, radius: 150 } }, // phóng sét dây chuyền
+  dia_hanh_yeu: { burrow: true }, // độn thổ bất ngờ (ẩn như rắn độc)
+  huyen_diep: { poison: { dps: 3, sec: 4 }, clones: 2 }, // bướm độc + phân thân
+  kim_giap_te: { charge: { cdMs: 7000, dmgMul: 1.6, stunSec: 0.8 } }, // trâu bò, lao thẳng gây choáng
+  dan_ma: { ranged: 130, poison: { dps: 4, sec: 4 }, selfDestruct: { radius: 100, mul: 1.5 } }, // ném độc đan, chết tự bạo
+  hap_huyet_quy: { invis: true, lifesteal: 0.4 }, // tàng hình + hút máu
+  bang_tinh_cu_nhan: { iceStomp: { radius: 120, mul: 1.2, windupMs: 850, cdMs: 8000, slowPct: 50, slowSec: 3 } }, // dậm chân sóng băng
+  diem_hoa_phuong: { fireRain: { radius: 90, mul: 1.3, delayMs: 1000, cdMs: 9000 } }, // bay lượn thả mưa lửa
+  thien_loi_thu: { lightning: { radius: 80, mul: 1.4, delayMs: 800, cdMs: 7000 } }, // triệu hồi sét
+  hon_don_thu: { boss5: true }, // trùm: mỗi đòn ngẫu nhiên 1 trong 5 hệ
+};
+function mechOf(m) {
+  if (!m || m.illusion) return null; // ảo ảnh không có cơ chế riêng
+  return (m.kind && MONSTER_TYPES[m.kind]?.mech) || null;
+}
+for (const g of GDD_MONSTERS) {
+  const rk = GDD_KIND_ALIAS[g.id] || g.id;
+  if (MONSTER_TYPES[rk]) {
+    // GĐ70: loài GDD trùng loài cứng (Kiếm Ma, Huyết Lang, Thạch Khôi Lỗi) —
+    // giữ bộ số đã chốt nhưng NHẬN cơ chế riêng + tầm đánh + hạng từ GDD,
+    // nếu không 3 cơ chế này mất hẳn trên mọi map dùng loài cứng.
+    if (GDD_KIND_ALIAS[g.id] && MONSTER_TYPES[rk]) {
+      if (!MONSTER_TYPES[rk].mech) MONSTER_TYPES[rk].mech = MONSTER_MECH[g.id] || null;
+      if (MONSTER_MECH[g.id]?.ranged) MONSTER_TYPES[rk].atkRange = MONSTER_MECH[g.id].ranged;
+      if (!MONSTER_TYPES[rk].rewardClass) MONSTER_TYPES[rk].rewardClass = g.rewardClass;
+    }
+    continue;
+  }
+  MONSTER_TYPES[rk] = {
+    name: g.name, hp: g.hp, atk: g.atk,
+    def: g.realm === 'kd' ? (g.rewardClass === 'boss' ? 10 : 6) : g.realm === 'tc' ? (g.rewardClass === 'elite' || g.rewardClass === 'boss' ? 8 : 3) : 0,
+    tuVi: g.tuViReward, count: 0, realm: g.realm, rewardClass: g.rewardClass, // GĐ70: để luật trùm (MAP_BOSSES) nhận diện đúng hạng
+    mech: MONSTER_MECH[g.id] || null, // GĐ70
+    // GĐ67: tầng quái (sơ/trung/hậu) — file GDD chỉ có cảnh giới, không có
+    // tầng, nên quy ước: TC = trung kỳ; KD hạng Trung = trung kỳ, KD hạng
+    // Mạnh/Tinh anh/Trùm = hậu kỳ; LK = sơ kỳ; NA/HT = hậu kỳ. Người chơi
+    // có thể sửa từng loài nếu muốn mốc khác.
+    stage: g.realm === 'tc' ? 'trung' : g.realm === 'kd' ? (g.rewardClass === 'medium' ? 'trung' : 'hau') : g.realm === 'lk' ? 'so' : 'hau',
+    chaseSpeed: g.realm === 'kd' ? 160 : g.realm === 'tc' ? 148 : 128,
+    wanderSpeed: 40, atkRange: MONSTER_MECH[g.id]?.ranged || 44, atkCdMs: 1150, // GĐ70: loài đánh xa (kiếm khí / độc đan / sét) có tầm riêng
+    chestTier: CHEST_BY_REWARD[g.rewardClass] || 'trung',
+    respawnMs: g.rewardClass === 'boss' ? 600000 : 30000,
+    ...(g.rewardClass === 'boss' ? { minChestGrade: 'B' } : {}),
+    ...(g.id === 'doc_xa' ? { ambush: true } : {}), // GĐ60: rắn độc nằm ẩn phục kích
+    gdd: true,
+  };
+}
+// Bảng sinh quái theo map — từ MonsterData.maps (map nhà bỏ qua: hệ cũ giữ nguyên)
+// GĐ70: SỐ LƯỢNG THEO MAP (người chơi chốt 24/10: map yếu cực nhiều, map mạnh
+// ít dần) + LUẬT TRÙM (map LK cơ bản KHÔNG có trùm; map TC/KD có quái đều có
+// trùm; map đặc biệt có NHIỀU trùm). Mọi hệ số đều TẠM.
+const MAP_COUNT_FACTOR = { pham: 3, lk: 3, tc: 2, kd: 1, na: 1, ht: 1 }; // LK ×3, TC ×2, KD giữ nguyên
+const SPECIAL_BOSS_MAPS = ['vo_tan_hu_khong', 'tham_hai_bi_canh']; // map đặc biệt: 3 trùm (TẠM — người chơi có thể chỉ định thêm)
+const MAP_SPAWNS = [];
+for (const g of GDD_MONSTERS) {
+  const rk = GDD_KIND_ALIAS[g.id] || g.id;
+  const base = g.rewardClass === 'boss' ? 1 : g.rewardClass === 'elite' ? 3 : g.rewardClass === 'strong' ? 6 : 12; // GĐ60: map siêu to → quái đông (số TẠM)
+  for (const mid of g.maps || []) {
+    if (mid === HOME_MAP || mid === 'bai_farm' || mid === 'thach_lam') continue;
+    const mr = MAP_DEFS.get(mid)?.minRealm || 'lk';
+    if (g.rewardClass === 'boss' && (mr === 'lk' || mr === 'pham')) continue; // GĐ70: map LK cơ bản không có trùm
+    let count = g.rewardClass === 'boss' ? 1 : Math.round(base * (MAP_COUNT_FACTOR[mr] ?? 1));
+    if (g.rewardClass === 'boss' && SPECIAL_BOSS_MAPS.includes(mid)) count = 3; // GĐ70: map đặc biệt nhiều trùm
+    MAP_SPAWNS.push({ mapId: mid, kind: rk, count });
+  }
+}
+// 4 map file KHÔNG gán quái nào — gán TẠM theo tông + cảnh giới của map (cũng nhân hệ số map):
+MAP_SPAWNS.push(
+  { mapId: 'bang_phong_coc', kind: 'thuy_trieu_tinh', count: 12 * MAP_COUNT_FACTOR.lk }, // cốc băng LK7 ← tinh linh thủy/băng
+  { mapId: 'hoa_diem_son', kind: 'golem', count: 12 * MAP_COUNT_FACTOR.lk },             // núi lửa LK7 ← thạch quái
+  { mapId: 'van_thu_son_mach', kind: 'huyetlang', count: 12 * MAP_COUNT_FACTOR.tc },    // sơn mạch vạn thú TC1 ← huyết lang
+  { mapId: 'tham_hai_bi_canh', kind: 'bang_tinh_cu_nhan', count: 1 }, // biển sâu KD ← cự nhân băng (trùm thêm ở MAP_BOSSES dưới)
+);
+// GĐ70: TRÙM THEO MAP — mọi map TC/KD có quái mà chưa có trùm thật thì lấy loài
+// mạnh nhất map làm trùm (1 con, gắn cờ mapBoss: thanh máu trùm + rương chắc chắn
+// + Linh thạch Cực phẩm + hồi sinh 10 phút như trùm thật).
+const MAP_BOSSES = [];
+{
+  const byMap = new Map();
+  for (const s of MAP_SPAWNS) {
+    if (!byMap.has(s.mapId)) byMap.set(s.mapId, []);
+    if (!byMap.get(s.mapId).includes(s.kind)) byMap.get(s.mapId).push(s.kind);
+  }
+  const RANK = { boss: 4, elite: 3, strong: 2, medium: 1, weak: 0 };
+  for (const [mid, kinds] of byMap) {
+    const mr = MAP_DEFS.get(mid)?.minRealm || 'lk';
+    if (mr !== 'tc' && mr !== 'kd') continue; // LK cơ bản không trùm
+    if (kinds.some((k) => MONSTER_TYPES[k]?.rewardClass === 'boss')) continue; // đã có trùm thật (Vô Tận Hư Không)
+    let top = kinds[0];
+    for (const k of kinds) {
+      const r = RANK[MONSTER_TYPES[k]?.rewardClass] ?? 2;
+      if (r > (RANK[MONSTER_TYPES[top]?.rewardClass] ?? 2)) top = k;
+    }
+    MAP_BOSSES.push({ mapId: mid, kind: top, count: SPECIAL_BOSS_MAPS.includes(mid) ? 3 : 1 });
+  }
+}
+function spawnCountFor(kind, mapId) { const e = MAP_SPAWNS.find((s) => s.kind === kind && s.mapId === mapId); return e ? e.count : 0; }
+function countKindInMap(kind, mapId) { let n = 0; for (const m of monsters.values()) if (!m.illusion && m.kind === kind && mapOf(m) === mapId) n++; return n; } // GĐ70: ảo ảnh không tính vào số lượng thật
+function countBossInMap(kind, mapId) { let n = 0; for (const m of monsters.values()) if (m.mapBoss && m.kind === kind && mapOf(m) === mapId) n++; return n; } // GĐ70
 
 // ================= GĐ39: HỆ THỐNG RƯƠNG (dữ liệu-hóa) =================
 // Số liệu theo bảng B10 của file thiết kế (đối chiếu bản chơi đơn):
@@ -148,10 +447,28 @@ function rollChestLoot(grade) {
   }
   return out;
 }
-function spawnChest(x, y, grade) {
+// GĐ67: phẩm Linh thạch trong rương theo quái rơi ra (ý người chơi
+// 24/10: Trung phẩm ở rương Trúc Cơ trung trở lên, Thượng phẩm ở rương
+// Kim Đan hậu trở lên; rương LK vẫn chỉ Hạ phẩm). Phân biệt "phẩm
+// rương" (C/B/A — số mục đồ) với "phẩm Linh thạch" (Hạ/Trung/Thượng).
+const STAGE_ORDER = { so: 0, trung: 1, hau: 2 };
+function stoneGradeForKind(kind) {
+  const t = MONSTER_TYPES[kind];
+  if (!t) return 'ha';
+  if (t.minChestGrade) return 'cuc'; // GĐ69: rương boss → Cực phẩm (ý người chơi: Cực từ rương boss; trùm = minChestGrade: Khôi Lỗi + boss GDD)
+  const ro = REALM_ORDER[t.realm || 'lk'] ?? 1;
+  const so = STAGE_ORDER[t.stage || 'so'] ?? 0;
+  if (ro >= 4) return 'thuong'; // Nguyên Anh / Hóa Thần trở lên
+  if (t.realm === 'kd' && so >= 2) return 'thuong'; // Kim Đan hậu kỳ
+  if (t.realm === 'tc' && so >= 1) return 'trung'; // Trúc Cơ trung kỳ trở lên
+  if (t.realm === 'kd') return 'trung'; // Kim Đan sơ/trung kỳ
+  return 'ha';
+}
+const STONE_GRADE_NAME = { ha: 'Hạ phẩm', trung: 'Trung phẩm', thuong: 'Thượng phẩm', cuc: 'Cực phẩm' };
+function spawnChest(x, y, grade, mapId = HOME_MAP, stoneGrade = 'ha') {
   if (chests.size >= CHEST_MAX_UNOPENED) return null;
   chestSeq++;
-  const c = { id: 'chest-' + chestSeq, x: Math.round(x), y: Math.round(y), grade, bornAt: Date.now() };
+  const c = { id: 'chest-' + chestSeq, x: Math.round(x), y: Math.round(y), grade, bornAt: Date.now(), mapId, stoneGrade };
   chests.set(c.id, c);
   return c;
 }
@@ -1048,6 +1365,7 @@ const NPCS = [
   { id: 'npc_sugia', name: 'Sứ Giả Tông Môn', role: 'Chiêu mộ đệ tử', personality: 'Trang nghiêm', x: 762, y: 470, direction: 'down' }, // GĐ30
   { id: 'npc_bicanh_in', name: 'Cổng Bí Cảnh', role: 'Chỉ đệ tử tông môn mới qua được', personality: 'Cổ xưa', x: 1470, y: 600, direction: 'down' }, // GĐ57
   { id: 'npc_bicanh_out', name: 'Cổng Trở Về', role: 'Về Làng Tân Thủ', personality: 'Cổ xưa', x: 1832, y: 600, direction: 'down' }, // GĐ57
+  { id: 'npc_laibuan', name: 'Lái Buôn', role: 'Giao việc hộ tống thương nhân', personality: 'Sởi lởi', x: 1005, y: 545, direction: 'down' }, // GĐ60
 ];
 const NPC_BY_ID = Object.fromEntries(NPCS.map((n) => [n.id, n]));
 const SHOP_NPC = Object.fromEntries(NPCS.filter((n) => n.shopId).map((n) => [n.shopId, n.id]));
@@ -1217,6 +1535,7 @@ function persistPlayer(p) {
   c.mp = Math.round(p.mp);
   c.x = Math.round(p.x);
   c.y = Math.round(p.y);
+  c.mapId = mapOf(p); // GĐ59: nhớ map đang đứng để đăng nhập lại đúng chỗ
   // GĐ7: tiến trình tu luyện
   c.stats = p.stats;
   c.freePoints = p.freePoints;
@@ -1267,6 +1586,9 @@ function persistPlayer(p) {
   c.skills = p.skills;
   // GĐ8: kinh tế + nhiệm vụ
   c.stones = p.stones;
+  c.stonesTrung = p.stonesTrung ?? 0; // GĐ67: ví Trung phẩm (rương TC+)
+  c.stonesThuong = p.stonesThuong ?? 0; // GĐ67: ví Thượng phẩm (rương KD hậu+)
+  c.stonesCuc = p.stonesCuc ?? 0; // GĐ69: ví Cực phẩm (rương boss)
   c.inventory = p.inventory;
   c.quests = p.quests;
   // GĐ10: ngoại hình tùy chỉnh
@@ -1438,11 +1760,12 @@ function hitsObstacle(x, y, pad = 14) {
 // thay vì kẹt cứng tại chỗ. Bước đầy bị chặn thì thử BƯỚC NỬA — mỗi tick
 // đi ~26px nên không có bước nửa, nhân vật dừng cách tường tới ~26px.
 function moveWithCollision(a, nx, ny) {
-  const stuck = hitsObstacle(a.x, a.y);
-  if (stuck || !hitsObstacle(nx, a.y)) a.x = nx;
-  else { const mx = (a.x + nx) / 2; if (!hitsObstacle(mx, a.y)) a.x = mx; }
-  if (stuck || !hitsObstacle(a.x, ny)) a.y = ny;
-  else { const my = (a.y + ny) / 2; if (!hitsObstacle(a.x, my)) a.y = my; }
+  const mid = mapOf(a); // GĐ59: vật cản theo map của đối tượng
+  const stuck = hitsObstacleIn(mid, a.x, a.y);
+  if (stuck || !hitsObstacleIn(mid, nx, a.y)) a.x = nx;
+  else { const mx = (a.x + nx) / 2; if (!hitsObstacleIn(mid, mx, a.y)) a.x = mx; }
+  if (stuck || !hitsObstacleIn(mid, a.x, ny)) a.y = ny;
+  else { const my = (a.y + ny) / 2; if (!hitsObstacleIn(mid, a.x, my)) a.y = my; }
 }
 
 const app = express();
@@ -1559,14 +1882,26 @@ function spawnFromCharacter(socket, charKey, char) {
       players.delete(id);
     }
   }
-  const pos =
-    typeof char.x === 'number' && typeof char.y === 'number' && !hitsObstacle(char.x, char.y)
-      ? { x: char.x, y: char.y }
-      : plazaSpawn();
+  // GĐ59: nhân vật có thể đang đứng ở map khác — hồi sinh đúng map đó
+  const spawnMapId = MAP_DEFS.has(char.mapId) && char.mapId !== 'thach_lam' && char.mapId !== 'bai_farm' ? char.mapId : HOME_MAP;
+  let pos;
+  if (spawnMapId === HOME_MAP) {
+    pos =
+      typeof char.x === 'number' && typeof char.y === 'number' && !hitsObstacle(char.x, char.y)
+        ? { x: char.x, y: char.y }
+        : plazaSpawn();
+  } else {
+    const rt = MAP_RUNTIME.get(spawnMapId);
+    pos =
+      rt && typeof char.x === 'number' && typeof char.y === 'number' && char.x >= 0 && char.x <= rt.w && char.y >= 0 && char.y <= rt.h && !hitsObstacleIn(spawnMapId, char.x, char.y)
+        ? { x: char.x, y: char.y }
+        : { x: rt ? rt.portal.x : 800, y: rt ? rt.portal.y - 56 : 600 };
+  }
   const player = {
     id: socket.id,
     x: pos.x,
     y: pos.y,
+    mapId: spawnMapId, // GĐ59
     vx: 0,
     vy: 0,
     input: { vx: 0, vy: 0 },
@@ -1613,6 +1948,9 @@ function spawnFromCharacter(socket, charKey, char) {
     skillReadyAt: {},
     // GĐ8: kinh tế + nhiệm vụ
     stones: char.stones ?? 0,
+    stonesTrung: char.stonesTrung ?? 0, // GĐ67
+    stonesThuong: char.stonesThuong ?? 0, // GĐ67
+    stonesCuc: char.stonesCuc ?? 0, // GĐ69
     inventory: char.inventory && typeof char.inventory === 'object' ? char.inventory : {},
     quests: char.quests && typeof char.quests === 'object' ? char.quests : {},
     // GĐ24: thiện cảm NPC
@@ -1681,6 +2019,9 @@ function spawnFromCharacter(socket, charKey, char) {
     persistPlayer(player);
   }
   spawnCompanions(player); // GĐ22: đường tông môn → 2 đồng môn theo cùng
+  // GĐ59: vào phòng đồng bộ của map + báo client dựng đúng bản đồ
+  socket.join('map:' + mapOf(player));
+  socket.emit('map_enter', mapEnterPayload(mapOf(player)));
   return player;
 }
 
@@ -1709,6 +2050,7 @@ function characterPayload(p) {
     realm: p.realm ?? 'pham',
     tier: p.tier ?? 0,
     tuVi: p.tuVi ?? 0,
+    escort: p.escort ? { dest: p.escort.dest, destName: MAP_DEFS.get(p.escort.dest)?.name || p.escort.dest, delivery: p.escort.delivery, reward: p.escort.reward } : null, // GĐ60
     tuViNeed: (() => {
       const bi = breakInfoFor(p.realm ?? 'pham', p.tier ?? 0);
       return bi && bi.type !== 'blocked_kimdan' ? tuViNeedStep(globalStep(p.realm, p.tier)) : null;
@@ -1773,7 +2115,7 @@ function characterPayload(p) {
         }
         out.push({
           id: sk.id, name: sk.name, tier: sk.tier, coef: sk.coef, cdMs: sk.cdMs, cost: sk.cost, range: sk.range,
-          element: sk.element || CLASS_ELEMENT[p.classId] || '', condText, condMet,
+          element: sk.element || CLASS_ELEMENT[p.classId] || '', weaponId: sk.weaponId || '', condText, condMet,
           desc: sk.desc || '',
           fxText: sk.fxText || '',
           learned: (p.skills || []).includes(sk.id),
@@ -1825,6 +2167,9 @@ function characterPayload(p) {
     boardsInfo: boardsOf(p).map((b) => ({ main: b.main.length, util: b.util.length })),
     // GĐ8: ví + túi + nhiệm vụ (tiến độ nhiệm vụ thu thập tính theo túi đồ)
     stones: p.stones ?? 0,
+    stonesTrung: p.stonesTrung ?? 0, // GĐ67
+    stonesThuong: p.stonesThuong ?? 0, // GĐ67
+    stonesCuc: p.stonesCuc ?? 0, // GĐ69
     inventory: p.inventory || {},
     quests: Object.fromEntries(
       Object.entries(p.quests || {}).map(([qid, q]) => {
@@ -1972,7 +2317,7 @@ function spawnCompanions(owner) {
       id: `comp-${owner.id}-${i}`,
       x: owner.x + def.dx, y: owner.y + def.dy,
       vx: 0, vy: 0, input: { vx: 0, vy: 0 }, direction: 'down',
-      isBot: false, isCompanion: true, ownerId: owner.id, ownerKey: owner.charKey,
+      isBot: false, isCompanion: true, ownerId: owner.id, ownerKey: owner.charKey, mapId: mapOf(owner), // GĐ59
       name: def.name, classId: def.classId, stats,
       hp: maxHpOf(stats), mp: maxMpOf(stats),
       robe: null, gender: def.gender,
@@ -2007,13 +2352,15 @@ function updateCompanion(c, dt) {
   let td = Infinity;
   for (const m of monsters.values()) {
     if (m.kind === 'trial' && m.ownerId !== owner.id) continue; // trùm của người khác — không xen vào
+    if (mapOf(m) !== mapOf(owner)) continue; // GĐ59: đồng hành chỉ đánh quái cùng map với chủ
+    if (m.hidden) continue; // GĐ60: quái đang ẩn nấp — chưa ai thấy nó
     const d = Math.hypot(m.x - owner.x, m.y - owner.y);
     if (d < td) {
       td = d;
       target = m;
     }
   }
-  const anchor = target && td <= 220 ? target : null;
+  const anchor = !c.isEscortMerchant && target && td <= 220 ? target : null; // GĐ60: thương nhân được hộ tống là dân thường — chỉ đi theo, không đánh nhau
   const dest = anchor ? { x: anchor.x, y: anchor.y } : { x: owner.x + c.followDx, y: owner.y + c.followDy };
   const distDest = Math.hypot(dest.x - c.x, dest.y - c.y);
   const stopD = anchor ? 40 : 4;
@@ -2026,8 +2373,9 @@ function updateCompanion(c, dt) {
     moveWithCollision(c, nx, ny);
     faceDirection(c, dx, dy);
   }
-  c.x = Math.max(MARGIN, Math.min(WORLD_W - MARGIN, c.x));
-  c.y = Math.max(MARGIN, Math.min(WORLD_H - MARGIN, c.y));
+  const cd59 = mapDims(mapOf(c)); // GĐ59: biên theo map của đồng hành
+  c.x = Math.max(MARGIN, Math.min(cd59.w - MARGIN, c.x));
+  c.y = Math.max(MARGIN, Math.min(cd59.h - MARGIN, c.y));
   if (anchor && Math.hypot(anchor.x - c.x, anchor.y - c.y) <= 48) {
     const now = Date.now();
     const cd = ATTACK_COOLDOWN_MS * (1 - cdrOf(c.stats));
@@ -2053,10 +2401,33 @@ for (const [key, c] of Object.entries(characters)) spawnOfflineActor(key, c);
 const monsters = new Map();
 let monsterSeq = 0;
 
-function spawnMonster(kind = 'wolf') {
+function spawnMonster(kind = 'wolf', mapId = HOME_MAP, opts = {}) {
   const type = MONSTER_TYPES[kind] || MONSTER_TYPES.wolf;
   monsterSeq++;
   const v = makeVelocity();
+  // GĐ59: quái của map mới sinh trong biên map đó, né cổng dịch chuyển + vật cản
+  if (mapId && mapId !== HOME_MAP) {
+    const rt = MAP_RUNTIME.get(mapId);
+    if (!rt) return null;
+    let x = rt.portal.x; let y = rt.portal.y - 220;
+    for (let tries = 0; tries < 30; tries++) {
+      x = Math.round(rand(60, rt.w - 60));
+      y = Math.round(rand(60, rt.h - 60));
+      if (Math.hypot(x - rt.portal.x, y - rt.portal.y) > 200 && !hitsObstacleIn(mapId, x, y, 20)) break;
+    }
+    const m = {
+      id: kind + '-' + monsterSeq, kind, name: type.name, mapId,
+      x, y, hp: type.hp, maxHp: type.hp, atk: type.atk, def: type.def,
+      chaseSpeed: type.chaseSpeed, wanderSpeed: type.wanderSpeed,
+      atkRange: type.atkRange, atkCdMs: type.atkCdMs,
+      vx: v.vx, vy: v.vy, direction: 'down', lastAttackAt: 0,
+    };
+    if (type.ambush || type.mech?.burrow || type.mech?.invis) m.hidden = true; // GĐ60: sinh ra đã ẩn nấp (rắn độc, độn thổ, tàng hình)
+    if (opts.mapBoss) m.mapBoss = true; // GĐ70: trùm theo map
+    initMonsterFx(m);
+    monsters.set(m.id, m);
+    return m;
+  }
   // Sinh quái NGOÀI làng (khu farm) — thử ngẫu nhiên tới khi ngoài hàng rào.
   // GĐ38: Thạch Quái ưu tiên góc ĐÔNG BẮC (vùng núi đá); Dơi/Sói khắp bãi.
   // GĐ57: quái bí cảnh chỉ sinh TRONG vùng của chúng (area); quái farm giữ
@@ -2068,8 +2439,18 @@ function spawnMonster(kind = 'wolf') {
     if (area) {
       x = Math.round(rand(area.x + 46, area.x + area.w - 46));
       y = Math.round(rand(area.y + 46, area.y + area.h - 46));
-      if (!hitsObstacle(x, y, 20)) break;
-      continue;
+      if (hitsObstacle(x, y, 20)) continue;
+      // GĐ59b: quái bí cảnh không sinh CAMP ngay điểm vào (1905,640 — người
+      // vừa qua cổng đã bị 2 Kiếm Ma kẹp chết) và không sinh chụm một chỗ
+      // (cả đàn hội đồng ở đàn đá làm trận trùm thành không thể đi lẻ).
+      // Cùng nguyên tắc cổng >200px đã áp cho các map GĐ59.
+      if (Math.hypot(x - 1905, y - 640) < 180) continue;
+      let crowded = false;
+      for (const o of monsters.values()) {
+        if ((MONSTER_TYPES[o.kind]?.area === 'realm' || MONSTER_TYPES[o.kind]?.area === 'realmBoss') && Math.hypot(o.x - x, o.y - y) < 110) { crowded = true; break; }
+      }
+      if (crowded) continue;
+      break;
     }
     if (kind === 'golem') {
       x = Math.round(rand(1120, 1540));
@@ -2083,6 +2464,7 @@ function spawnMonster(kind = 'wolf') {
   const m = {
     id: kind + '-' + monsterSeq,
     kind,
+    mapId: HOME_MAP, // GĐ59
     name: type.name, // GĐ38: nhãn tên loài trên đầu quái
     x,
     y,
@@ -2110,22 +2492,33 @@ function countKind(kind) {
 }
 
 for (const [kind, type] of Object.entries(MONSTER_TYPES)) for (let i = 0; i < type.count; i++) spawnMonster(kind);
+// GĐ59: sinh quái cho các map mới theo bảng MAP_SPAWNS (từ MonsterData.maps)
+for (const s of MAP_SPAWNS) for (let i = 0; i < s.count; i++) spawnMonster(s.kind, s.mapId);
+// GĐ70: sinh trùm theo map (MAP_BOSSES) — gắn cờ mapBoss
+for (const b of MAP_BOSSES) for (let i = 0; i < b.count; i++) spawnMonster(b.kind, b.mapId, { mapBoss: true });
+console.log(`[bản đồ] Đã sinh quái cho ${MAP_SPAWNS.length} cặp map/loài + ${MAP_BOSSES.length} map có trùm (tổng ${monsters.size} quái)`);
 
 // ------------------------- Rơi đồ + hạ quái (GĐ8) -------------------------
 const drops = new Map();
 let dropSeq = 0;
-function spawnDrop(kind, itemId, amount, x, y) {
+function spawnDrop(kind, itemId, amount, x, y, mapId = HOME_MAP) {
   dropSeq++;
   const id = 'drop-' + dropSeq;
-  drops.set(id, { id, kind, itemId, amount, x, y, bornAt: Date.now() });
+  drops.set(id, { id, kind, itemId, amount, x, y, bornAt: Date.now(), mapId });
 }
 
 // Xử lý tập trung khi một con quái bị hạ (đánh thường + tung chiêu dùng chung)
 function onMonsterKilled(socket, player, target) {
+  // GĐ70: ảo ảnh (phân thân) — chỉ tan biến, không rương/Tu vi/nhiệm vụ/hồi sinh
+  if (target.illusion) {
+    monsters.delete(target.id);
+    io.to('map:' + mapOf(target)).emit('monster_killed', { monsterId: target.id, kind: target.kind, by: player.id, byName: player.name });
+    return;
+  }
   // GĐ19: trùm thử thách — không rơi đồ/Tu vi; thắng trùm chính → mở khóa đột phá tương ứng
   if (target.kind === 'trial') {
     monsters.delete(target.id);
-    io.emit('monster_killed', { monsterId: target.id, kind: target.kind, by: player.id, byName: player.name });
+    io.to('map:' + mapOf(target)).emit('monster_killed', { monsterId: target.id, kind: target.kind, by: player.id, byName: player.name }); // GĐ59: chỉ map liên quan
     // GĐ40+: thắng trận ĐỐI ĐẦU (tu sĩ thù địch / kẻ bắt cóc...) → nhiệm
     // vụ tương ứng hoàn thành, về Trưởng Làng trả
     if ((target.trialKind === 'duel' || target.trialKind === 'rival') && target.ownerId === player.id) {
@@ -2166,16 +2559,30 @@ function onMonsterKilled(socket, player, target) {
     return;
   }
   monsters.delete(target.id);
-  io.emit('monster_killed', { monsterId: target.id, kind: target.kind, by: player.id, byName: player.name });
+  io.to('map:' + mapOf(target)).emit('monster_killed', { monsterId: target.id, kind: target.kind, by: player.id, byName: player.name }); // GĐ59: chỉ map liên quan
+  // GĐ70: Đan Ma chết tự bạo (phân thân KHÔNG tan theo bản thể — còn lại tối đa
+  // 25s, để cơ chế nhìn thấy được cả khi bản thể bị một đòn hạ)
+  const mechD = mechOf(target);
+  if (mechD?.selfDestruct) {
+    for (const p of players.values()) {
+      if (p.isOffline || p.isBot || mapOf(p) !== mapOf(target)) continue;
+      if (Math.hypot(p.x - target.x, p.y - target.y) <= (mechD.selfDestruct.radius || 100)) {
+        hitPlayer(p, (target.atk ?? 10) * (mechD.selfDestruct.mul || 1.5), 'magic', target);
+      }
+    }
+  }
   // GĐ22: đường tông môn chia thưởng cho cả đội (hệ số 2/3 — bản chơi đơn đã chốt)
   const rf = rewardFactorOf(player);
   // GĐ38: rơi đồ theo LOÀI (nằm dưới đất, đi qua là nhặt). Linh thạch: sói
   // 3–8 (theo file), dơi 2–6, thạch quái 8–15 (số MMO). Tỉ lệ rơi vật phẩm
   // là số TẠM của bản MMO (file không ghi): nanh sói 30%, cánh dơi 35%,
   // đá quý 25%, sách tọa thiền 8% từ sói.
-  const stoneRange = target.kind === 'golem' ? [8, 15] : target.kind === 'bat' ? [2, 6] : [3, 8];
-  spawnDrop('stones', null, Math.max(1, Math.round((stoneRange[0] + Math.floor(Math.random() * (stoneRange[1] - stoneRange[0] + 1))) * rf)), Math.round(target.x), Math.round(target.y));
-  const dropItem = (itemId, dx, dy) => spawnDrop('item', itemId, 1, Math.round(target.x + dx), Math.round(target.y + dy));
+  let stoneRange = target.kind === 'golem' ? [8, 15] : target.kind === 'bat' ? [2, 6] : [3, 8];
+  // GĐ59: quái GDD ở map mới — Linh thạch theo bậc (TẠM): TC 8–15, KD 15–30
+  if (MONSTER_TYPES[target.kind]?.gdd) stoneRange = MONSTER_TYPES[target.kind].realm === 'kd' ? [15, 30] : MONSTER_TYPES[target.kind].realm === 'tc' ? [8, 15] : [3, 8];
+  const deadMapId = mapOf(target); // GĐ59: đồ rơi thuộc về map của quái
+  spawnDrop('stones', null, Math.max(1, Math.round((stoneRange[0] + Math.floor(Math.random() * (stoneRange[1] - stoneRange[0] + 1))) * rf)), Math.round(target.x), Math.round(target.y), deadMapId);
+  const dropItem = (itemId, dx, dy) => spawnDrop('item', itemId, 1, Math.round(target.x + dx), Math.round(target.y + dy), deadMapId);
   if (target.kind === 'wolf') {
     if (Math.random() < 0.3) dropItem('nanh_soi', rand(-18, 18), rand(-14, 14));
     if (Math.random() < 0.08) dropItem('sach_toa_thien', rand(-18, 18), rand(-14, 14)); // GĐ22
@@ -2189,6 +2596,8 @@ function onMonsterKilled(socket, player, target) {
     if (Math.random() < 0.20) dropItem('da_quy', rand(-18, 18), rand(-14, 14));
   } else if (target.kind === 'khoiloi') { // GĐ57: trùm bí cảnh rơi Đá Quý khá hơn (TẠM)
     if (Math.random() < 0.45) dropItem('da_quy', rand(-18, 18), rand(-14, 14));
+  } else if (MONSTER_TYPES[target.kind]?.gdd) { // GĐ59: loài GDD mới — Đá Quý 22% (TẠM, mọi map)
+    if (Math.random() < 0.22) dropItem('da_quy', rand(-18, 18), rand(-14, 14));
   }
   // GĐ39: tung RƯƠNG theo hạng quái (bảng B10) — rơi tại chỗ quái gục,
   // người chơi tới gần là mở; trùm thử thách không rơi rương (theo bản SP)
@@ -2196,16 +2605,22 @@ function onMonsterKilled(socket, player, target) {
     const tier = chestTierFor(target);
     if (tier) {
       let grade = rollChestGrade(tier, rf);
-      const minG = MONSTER_TYPES[target.kind]?.minChestGrade; // GĐ57: trùm bí cảnh không rớt rương dưới phẩm B
+      const minG = MONSTER_TYPES[target.kind]?.minChestGrade || (target.mapBoss ? 'B' : null); // GĐ57: trùm bí cảnh không rớt rương dưới phẩm B; GĐ70: trùm theo map cũng vậy
+      // GĐ59b: trùm có minChestGrade thì CHẮC CHẮN có rương — trước đây hệ số
+      // thưởng rf (đệ tử tông môn ×2/3) làm xác suất rơi rương của trùm tụt
+      // còn ~63%, giết trùm xong 1/3 số lần không có rương nào, trái với
+      // cam kết "tối thiểu phẩm B" (đã bắt gặp ở test45).
+      if (!grade && minG) grade = minG;
       if (grade && minG && ({ C: 1, B: 2, A: 3 }[grade] || 0) < ({ C: 1, B: 2, A: 3 }[minG] || 0)) grade = minG;
-      if (grade && spawnChest(target.x + rand(-14, 14), target.y + rand(-10, 10), grade)) {
-        console.log(`[rương] ${target.name} rơi rương cấp ${grade}`);
+      const stoneG = target.mapBoss ? 'cuc' : stoneGradeForKind(target.kind); // GĐ70: rương trùm theo map cũng ra Cực phẩm
+      if (grade && spawnChest(target.x + rand(-14, 14), target.y + rand(-10, 10), grade, deadMapId, stoneG)) {
+        console.log(`[rương] ${target.name} rơi rương cấp ${grade} (linh thạch ${stoneG})`);
       }
     }
   }
   // Tu vi (GĐ7): chỉ khi đã có linh căn. GĐ38+39: theo hạng quái của file
   // (Yếu 3 / Trung 4 / Mạnh 8)
-  if (player.realm === 'lk' || player.realm === 'tc') {
+  if ((REALM_ORDER[player.realm || 'pham'] ?? 0) >= 1) { // GĐ59: mở cho cả Kim Đan (trước chỉ LK/TC)
     const tv = Math.round((MONSTER_TYPES[target.kind]?.tuVi ?? TU_VI_PER_KILL) * rf);
     player.tuVi += tv;
     if (player.counters) player.counters.totalTuVi = (player.counters.totalTuVi || 0) + tv; // GĐ27
@@ -2235,11 +2650,19 @@ function onMonsterKilled(socket, player, target) {
   }
   persistPlayer(player);
   if (socket) syncChar(socket, player);
-  const respawnMs = MONSTER_TYPES[target.kind]?.respawnMs || MONSTER_RESPAWN_MS; // GĐ57: từng loài có nhịp hồi sinh riêng (trùm bí cảnh 10 phút — TẠM)
+  const respawnMs = target.mapBoss ? 600000 : MONSTER_TYPES[target.kind]?.respawnMs || MONSTER_RESPAWN_MS; // GĐ57: từng loài có nhịp hồi sinh riêng (trùm bí cảnh 10 phút — TẠM); GĐ70: trùm theo map cũng 10 phút
   console.log(`[combat] ${target.id} bị tiêu diệt bởi ${player.name} — hồi sinh sau ${respawnMs / 1000}s`);
+  const deadMap = mapOf(target); // GĐ59: hồi sinh đúng map + đúng số lượng của map đó
   setTimeout(() => {
     const t = MONSTER_TYPES[target.kind]; // GĐ38: hồi sinh đúng loài vừa hạ
-    if (t && countKind(target.kind) < t.count) spawnMonster(target.kind);
+    if (!t) return;
+    if (target.mapBoss) { // GĐ70: trùm hồi sinh riêng theo số trùm của map, không phụ thuộc số lượng thường
+      const wantBoss = MAP_BOSSES.find((b) => b.kind === target.kind && b.mapId === deadMap)?.count || 1;
+      if (countBossInMap(target.kind, deadMap) < wantBoss) spawnMonster(target.kind, deadMap, { mapBoss: true });
+      return;
+    }
+    const want = deadMap === HOME_MAP ? t.count : spawnCountFor(target.kind, deadMap);
+    if (countKindInMap(target.kind, deadMap) < want) spawnMonster(target.kind, deadMap);
   }, respawnMs);
 }
 
@@ -2252,6 +2675,33 @@ function updateMonster(m, dt) {
   const stunned = nowFx < (m.stunUntil || 0);
   const rooted = nowFx < (m.rootUntil || 0);
   const slowK = nowFx < (m.slowUntil || 0) ? 1 - (m.slowPct || 0) / 100 : 1;
+  // GĐ70: AoE đã hẹn giờ (mưa lửa / sét / dậm băng) tới giờ thì nổ
+  if (m.aoe && nowFx >= m.aoe.at) {
+    const a = m.aoe; m.aoe = null; m.windupUntil = 0;
+    const cx = a.centerOnSelf ? m.x : a.x;
+    const cy = a.centerOnSelf ? m.y : a.y;
+    for (const p of players.values()) {
+      if (p.isOffline || p.isBot || mapOf(p) !== mapOf(m)) continue;
+      if (Math.hypot(p.x - cx, p.y - cy) <= a.radius) {
+        hitPlayer(p, (m.atk ?? 10) * (a.mul || 1), a.type || 'magic', m);
+        if (a.slowPct) applyPlayerStatus(p, { slowPct: a.slowPct, slowSec: a.slowSec || 3 });
+      }
+    }
+  }
+  // GĐ60: quái PHỤC KÍCH (rắn độc…) — nằm ẩn bất động, chỉ hiện hình + lao
+  // vồ khi con mồi tới gần (<130px). Đang ẩn: không lang thang, không bị
+  // nhắm đánh (chưa ai nhìn thấy nó).
+  if (m.hidden) {
+    let nd = Infinity;
+    for (const p of players.values()) {
+      if (p.isOffline || p.isCompanion || p.isBot) continue;
+      if (mapOf(p) !== mapOf(m)) continue;
+      const d = Math.hypot(p.x - m.x, p.y - m.y);
+      if (d < nd) nd = d;
+    }
+    if (nd < 130) { m.hidden = false; m.lungeUntil = Date.now() + 700; }
+    else return;
+  }
   // GĐ19: trùm thử thách — chỉ đuổi/cắn CHỦ NHÂN của nó, đứng trong làng (sân Đạo Quán), quá 5 phút tự tan
   if (m.kind === 'trial') {
     if (Date.now() - (m.bornAt || 0) > 5 * 60 * 1000) {
@@ -2294,7 +2744,7 @@ function updateMonster(m, dt) {
           const miniHp = Math.round(m.maxHp * 0.2);
           const miniId = 'trial-mini-' + ++monsterSeq;
           monsters.set(miniId, {
-            id: miniId, kind: 'trial', trialKind: 'dai', isTrialBoss: false, ownerId: m.ownerId,
+            id: miniId, kind: 'trial', trialKind: 'dai', isTrialBoss: false, ownerId: m.ownerId, mapId: mapOf(m), // GĐ59
             name: 'Tâm Ma Phân Thân', x: m.x + (i === 0 ? -46 : 46), y: m.y + 24, hp: miniHp, maxHp: miniHp,
             atk: Math.round(m.atk * 0.5 * 10) / 10, vx: 0, vy: 0, direction: 'down', lastAttackAt: 0, bornAt: Date.now(),
           });
@@ -2309,8 +2759,18 @@ function updateMonster(m, dt) {
   let nearestDist = Infinity;
   for (const p of players.values()) {
     if (p.isOffline) continue; // GĐ22: người nghỉ offline luôn ở vùng an toàn
-    if (isSafeZone(p.x, p.y)) continue;
-    if (insideRealm(p.x, p.y) !== insideRealm(m.x, m.y)) continue; // GĐ57: vách bí cảnh ngăn hai phía — không đuổi/đánh xuyên
+    if (mapOf(p) !== mapOf(m)) continue; // GĐ59: quái chỉ thấy người CÙNG MAP
+    if (mapOf(m) === HOME_MAP) {
+      if (isSafeZone(p.x, p.y)) continue;
+      if (insideRealm(p.x, p.y) !== insideRealm(m.x, m.y)) continue; // GĐ57: vách bí cảnh ngăn hai phía — không đuổi/đánh xuyên
+      // GĐ59b: điểm đáp bí cảnh (1905,640) có vòng an toàn 130px như cổng
+      // các map GĐ59 — vừa qua cổng không bị quái chờ sẵn hội đồng.
+      if (insideRealm(m.x, m.y) && Math.hypot(p.x - 1905, p.y - 640) < 130) continue;
+    } else {
+      // GĐ59: vòng an toàn quanh cổng dịch chuyển của map mới — quái không đuổi vào
+      const rt59 = MAP_RUNTIME.get(mapOf(m));
+      if (rt59 && Math.hypot(p.x - rt59.portal.x, p.y - rt59.portal.y) < 130) continue;
+    }
     const d = Math.hypot(p.x - m.x, p.y - m.y);
     if (d < nearestDist) {
       nearestDist = d;
@@ -2318,17 +2778,90 @@ function updateMonster(m, dt) {
     }
   }
 
-  if (stunned) return; // GĐ34: sói bị choáng → đứng yên
-  if (nearest && nearestDist <= MONSTER_AGGRO_RANGE && nearestDist > 26) {
-    // Đuổi theo người chơi gần nhất (dừng cách ~26px, không đứng chồng lên người)
+  if (stunned) { // GĐ34: bị choáng → đứng yên; GĐ70: khống chế ngắt luôn chiêu đang vận (dậm băng / lao)
+    m.aoe = null; m.windupUntil = 0;
+    if (m.chargeState === 'windup' || m.chargeState === 'dashing') { m.chargeState = 'ready'; m.chargeReadyAt = Date.now() + 3000; }
+    return;
+  }
+  // GĐ70: đang vận dậm băng thì đứng yên (cảnh báo phía client qua st='windup' → nhuộm đỏ)
+  if (m.windupUntil && nowFx < m.windupUntil) return;
+  const mech70 = mechOf(m);
+  // GĐ70: kích hoạt AoE theo loài (dậm băng / mưa lửa / triệu sét)
+  if (mech70 && nearest && !m.aoe) {
+    const nowA = Date.now();
+    if (mech70.iceStomp && nearestDist <= 160 && nowA >= (m.nextStompAt || 0)) {
+      m.aoe = { at: nowA + mech70.iceStomp.windupMs, centerOnSelf: true, radius: mech70.iceStomp.radius, mul: mech70.iceStomp.mul, type: 'physical', slowPct: mech70.iceStomp.slowPct, slowSec: mech70.iceStomp.slowSec };
+      m.windupUntil = nowA + mech70.iceStomp.windupMs;
+      m.nextStompAt = nowA + mech70.iceStomp.cdMs;
+      const sockA = io.sockets.sockets.get(nearest.id);
+      if (sockA) sockA.emit('notice', { text: `⚠ ${m.name} đang dậm chân — tránh ra khỏi vòng băng!` });
+      return;
+    }
+    if (mech70.fireRain && nearestDist <= 320 && nowA >= (m.nextRainAt || 0)) {
+      m.aoe = { at: nowA + mech70.fireRain.delayMs, x: nearest.x, y: nearest.y, radius: mech70.fireRain.radius, mul: mech70.fireRain.mul, type: 'magic' };
+      m.nextRainAt = nowA + mech70.fireRain.cdMs;
+      const sockA = io.sockets.sockets.get(nearest.id);
+      if (sockA) sockA.emit('notice', { text: `⚠ ${m.name} sắp thả mưa lửa xuống chỗ bạn!` });
+    }
+    if (mech70.lightning && nearestDist <= 320 && nowA >= (m.nextBoltAt || 0)) {
+      m.aoe = { at: nowA + mech70.lightning.delayMs, x: nearest.x, y: nearest.y, radius: mech70.lightning.radius, mul: mech70.lightning.mul, type: 'magic' };
+      m.nextBoltAt = nowA + mech70.lightning.cdMs;
+      const sockA = io.sockets.sockets.get(nearest.id);
+      if (sockA) sockA.emit('notice', { text: `⚠ ${m.name} triệu hồi sét đánh xuống chỗ bạn!` });
+    }
+  }
+  // GĐ70: LAO (Lâm Trư / Kim Giáp Tê) — lấy đà 0.6s rồi vọt thẳng ×3 tốc độ
+  if (mech70?.charge && !rooted && nearest && nearestDist <= MONSTER_AGGRO_RANGE) {
+    const nowC = Date.now();
+    if (m.chargeState === 'windup') {
+      if (nowC >= (m.chargeWindupUntil || 0)) {
+        const dx = nearest.x - m.x;
+        const dy = nearest.y - m.y;
+        const len = Math.hypot(dx, dy) || 1;
+        m.chargeDx = dx / len; m.chargeDy = dy / len;
+        m.chargeState = 'dashing'; m.chargeUntil = nowC + 700; m.chargeHit = false;
+        faceDirection(m, dx, dy);
+      } else { faceDirection(m, nearest.x - m.x, nearest.y - m.y); return; }
+    } else if (m.chargeState === 'dashing') {
+      if (nowC >= (m.chargeUntil || 0)) { m.chargeState = 'ready'; m.chargeReadyAt = nowC + (mech70.charge.cdMs || 6000); }
+      else {
+        const step = (m.chaseSpeed || 160) * 3 * dt;
+        const nx = m.x + m.chargeDx * step;
+        const ny = m.y + m.chargeDy * step;
+        if (hitsObstacleIn(mapOf(m), nx, ny, 20)) { m.chargeState = 'ready'; m.chargeReadyAt = nowC + (mech70.charge.cdMs || 6000); }
+        else {
+          m.x = nx; m.y = ny; faceDirection(m, m.chargeDx, m.chargeDy);
+          if (!m.chargeHit) {
+            for (const p of players.values()) {
+              if (p.isOffline || p.isBot || mapOf(p) !== mapOf(m)) continue;
+              if (Math.hypot(p.x - m.x, p.y - m.y) <= 48) {
+                m.chargeHit = true;
+                hitPlayer(p, (m.atk ?? 10) * (mech70.charge.dmgMul || 1.5), 'physical', m);
+                if (mech70.charge.stunSec) applyPlayerStatus(p, { stunSec: mech70.charge.stunSec });
+                break;
+              }
+            }
+          }
+        }
+      }
+      return;
+    } else if (nearestDist < 280 && nearestDist > 50 && nowC >= (m.chargeReadyAt || 0)) {
+      m.chargeState = 'windup'; m.chargeWindupUntil = nowC + 600;
+      faceDirection(m, nearest.x - m.x, nearest.y - m.y);
+      return;
+    }
+  }
+  if (nearest && nearestDist <= MONSTER_AGGRO_RANGE && nearestDist > Math.max(26, m.atkRange || WOLF.atkRange)) {
+    // Đuổi theo người chơi gần nhất (dừng ở tầm đánh của mình — GĐ70: quái đánh
+    // xa dừng ở 150px chứ không áp sát 26px; quái cận chiến dừng ở ~44px như cũ)
     if (rooted) return; // GĐ34: bị trói → không di chuyển (vẫn cắn được nếu đã áp sát)
     const dx = nearest.x - m.x;
     const dy = nearest.y - m.y;
     const len = Math.hypot(dx, dy) || 1;
     moveWithCollision(
       m,
-      m.x + (dx / len) * (m.chaseSpeed || MONSTER_CHASE_SPEED) * slowK * dt,
-      m.y + (dy / len) * (m.chaseSpeed || MONSTER_CHASE_SPEED) * slowK * dt,
+      m.x + (dx / len) * (m.chaseSpeed || MONSTER_CHASE_SPEED) * (Date.now() < (m.lungeUntil || 0) ? 2.1 : 1) * slowK * dt, // GĐ60: cú lao vồ lúc vừa hiện hình nhanh gấp đôi
+      m.y + (dy / len) * (m.chaseSpeed || MONSTER_CHASE_SPEED) * (Date.now() < (m.lungeUntil || 0) ? 2.1 : 1) * slowK * dt,
     );
     faceDirection(m, dx, dy);
   } else if (nearest && nearestDist <= (m.atkRange || WOLF.atkRange)) {
@@ -2351,20 +2884,23 @@ function updateMonster(m, dt) {
     // GĐ53: lang thang cũng tránh vật cản — đụng trục nào thì nảy trục đó
     const wx = m.x + m.vx * scale * dt;
     const wy = m.y + m.vy * scale * dt;
-    const wStuck = hitsObstacle(m.x, m.y);
-    if (wStuck || !hitsObstacle(wx, m.y)) m.x = wx;
+    const wStuck = hitsObstacleIn(mapOf(m), m.x, m.y);
+    if (wStuck || !hitsObstacleIn(mapOf(m), wx, m.y)) m.x = wx;
     else m.vx = -m.vx;
-    if (wStuck || !hitsObstacle(m.x, wy)) m.y = wy;
+    if (wStuck || !hitsObstacleIn(mapOf(m), m.x, wy)) m.y = wy;
     else m.vy = -m.vy;
     faceDirection(m, m.vx, m.vy);
+    const md59 = mapDims(mapOf(m)); // GĐ59: biên theo map của quái
     if (m.x < MARGIN) { m.x = MARGIN; m.vx = Math.abs(m.vx); }
-    if (m.x > WORLD_W - MARGIN) { m.x = WORLD_W - MARGIN; m.vx = -Math.abs(m.vx); }
+    if (m.x > md59.w - MARGIN) { m.x = md59.w - MARGIN; m.vx = -Math.abs(m.vx); }
     if (m.y < MARGIN) { m.y = MARGIN; m.vy = Math.abs(m.vy); }
-    if (m.y > WORLD_H - MARGIN) { m.y = WORLD_H - MARGIN; m.vy = -Math.abs(m.vy); }
+    if (m.y > md59.h - MARGIN) { m.y = md59.h - MARGIN; m.vy = -Math.abs(m.vy); }
   }
   // Kẹp trong sân + TUYỆT ĐỐI không vào làng: nếu lọt vào thì đẩy ra cạnh gần nhất
-  m.x = Math.max(MARGIN, Math.min(WORLD_W - MARGIN, m.x));
-  m.y = Math.max(MARGIN, Math.min(WORLD_H - MARGIN, m.y));
+  const md59b = mapDims(mapOf(m));
+  m.x = Math.max(MARGIN, Math.min(md59b.w - MARGIN, m.x));
+  m.y = Math.max(MARGIN, Math.min(md59b.h - MARGIN, m.y));
+  if (mapOf(m) !== HOME_MAP) return; // GĐ59: đẩy khỏi làng/sân tông chỉ có ở map nhà
   if (insideVillage(m.x, m.y, 6)) {
     const left = m.x - (VILLAGE.x - 6);
     const right = VILLAGE.x + VILLAGE.w + 6 - m.x;
@@ -2399,12 +2935,42 @@ function initMonsterFx(m) {
   return m;
 }
 // Gây sát thương lên quái, tôn trọng trạng thái "yếu đi" (vuln: nhận thêm %)
-function hurtMonster(m, raw, def) {
+function hurtMonster(m, raw, def, dmgType = 'physical') {
   initMonsterFx(m);
+  // GĐ70: phân thân lần đầu chịu đòn (Huyễn Ảnh Miêu / Huyễn Điệp)
+  const mech = mechOf(m);
+  if (mech?.clones && !m.clonesSpawned && !m.illusion) {
+    m.clonesSpawned = true;
+    spawnIllusions(m, mech.clones);
+  }
   let dmg = damageThrough(raw, def);
+  if (mech?.physResist && dmgType === 'physical') dmg = Math.max(1, Math.round(dmg * (1 - mech.physResist))); // GĐ70: giáp đá (Thạch Khôi Lỗi)
   if (Date.now() < (m.vulnUntil || 0)) dmg = Math.max(1, Math.round(dmg * (1 + (m.vulnPct || 0) / 100)));
   m.hp -= dmg;
+  // GĐ70: hồi sinh 1 lần (Cốt Binh) — không chết mà về 50% HP
+  if (m.hp <= 0 && mech?.reviveOnce && !m.revivedOnce) {
+    m.revivedOnce = true;
+    m.hp = Math.max(1, Math.round(m.maxHp * mech.reviveOnce));
+  }
   return dmg;
+}
+// GĐ70: sinh ảo ảnh (phân thân quái) — HP thấp, không rương/Tu vi/nhiệm vụ/hồi sinh, tự tan sau 25s
+function spawnIllusions(m, n) {
+  for (let i = 0; i < n; i++) {
+    const hp = Math.max(1, Math.round(m.maxHp * 0.3));
+    const id = m.kind + '-ao-' + (++monsterSeq);
+    const ill = {
+      id, kind: m.kind, name: m.name, mapId: mapOf(m),
+      x: m.x + (i === 0 ? -44 : 44), y: m.y + 30,
+      hp, maxHp: hp, atk: Math.round(m.atk * 0.5), def: m.def,
+      chaseSpeed: m.chaseSpeed, wanderSpeed: m.wanderSpeed,
+      atkRange: m.atkRange, atkCdMs: m.atkCdMs,
+      vx: 0, vy: 0, direction: 'down', lastAttackAt: 0,
+      illusion: true, illusionBornAt: Date.now(),
+    };
+    initMonsterFx(ill);
+    monsters.set(id, ill);
+  }
 }
 function applyFxToMonster(caster, m, fx) {
   if (!fx) return;
@@ -2456,45 +3022,270 @@ function atkMulOf(p) {
   return mul;
 }
 
-function hitPlayer(p, rawDamage, type, source) {
+// GĐ70: trạng thái quái gây lên NGƯỜI CHƠI (độc / chậm / choáng) — chỉ báo lần đầu để khỏi spam
+function applyPlayerStatus(p, st) {
+  if (!p || p.isBot || p.hp <= 0) return;
+  const now = Date.now();
+  const sock = io.sockets.sockets.get(p.id);
+  if (st.poisonDps) {
+    const fresh = !(p.dots && p.dots.length);
+    if (!p.dots) p.dots = [];
+    p.dots.push({ dps: st.poisonDps, until: now + (st.poisonSec || 4) * 1000 });
+    if (fresh && sock) sock.emit('notice', { text: `☠ Bạn trúng độc (${st.poisonDps} HP/s)!` });
+  }
+  if (st.slowPct) {
+    const fresh = !(now < (p.slowUntil || 0));
+    if (fresh || st.slowPct >= (p.slowPct || 0)) p.slowPct = st.slowPct;
+    p.slowUntil = Math.max(p.slowUntil || 0, now + (st.slowSec || 3) * 1000);
+    if (fresh && sock) sock.emit('notice', { text: `❄ Bạn bị làm chậm ${st.slowPct}%!` });
+  }
+  if (st.stunSec) {
+    const fresh = !(now < (p.stunUntil || 0));
+    p.stunUntil = Math.max(p.stunUntil || 0, now + st.stunSec * 1000);
+    if (fresh && sock) sock.emit('notice', { text: `💫 Bạn bị choáng ${st.stunSec}s!` });
+  }
+}
+// GĐ70: gục ngã — tách từ hitPlayer để độc theo thời gian cũng dùng chung
+function handlePlayerDeath(p, source) {
+  if (p.isEscortMerchant) { failEscort(p); players.delete(p.id); return; } // GĐ60
+  p.journey = null; // GĐ60: gục giữa hành trình → hủy ngự kiếm/thuyền
+  const pos = plazaSpawn();
+  const diedMap = mapOf(p); // GĐ59
+  p.mapId = HOME_MAP;
+  p.x = pos.x;
+  p.y = pos.y;
+  p.hp = maxHpOf(p.stats);
+  p.mp = maxMpOf(p.stats);
+  p.input.vx = 0;
+  p.input.vy = 0;
+  p.dots = []; p.slowUntil = 0; p.stunUntil = 0; // GĐ70: hồi sinh sạch trạng thái
+  // GĐ19: gục ngã giữa thử thách → trùm thử thách tan, phải gọi lại (đan chưa bị trừ)
+  if (source && source.kind === 'trial') {
+    for (const mm of [...monsters.values()]) {
+      if (mm.kind === 'trial' && mm.ownerId === p.id) monsters.delete(mm.id);
+    }
+  }
+  persistPlayer(p);
+  // GĐ59: chết ở map khác → socket rời phòng map đó, về phòng làng + nạp lại cảnh làng
+  if (diedMap !== HOME_MAP) {
+    const dsock = io.sockets.sockets.get(p.id);
+    if (dsock) {
+      dsock.leave('map:' + diedMap);
+      dsock.join('map:' + HOME_MAP);
+      dsock.emit('map_enter', mapEnterPayload(HOME_MAP));
+      dsock.emit('server_tick', fullSnapshotFor(HOME_MAP));
+    }
+    for (const q of players.values()) if (q.isCompanion && q.ownerId === p.id) { q.mapId = HOME_MAP; q.x = pos.x + 28; q.y = pos.y + 12; }
+  }
+  io.to('map:' + diedMap).emit('player_died', { id: p.id, name: p.name, by: (source && source.name) || WOLF.name });
+  io.to(p.id).emit('you_died', { by: (source && source.name) || WOLF.name });
+  console.log(`[combat] ${p.name} gục ngã — hồi sinh tại quảng trường làng`);
+}
+function hitPlayer(p, rawDamage, type, source, chainDepth = 0, chainHit = null) {
   if (p.isBot || p.hp <= 0) return;
   // GĐ31/GĐ32: đang ngồi lĩnh ngộ mà BỊ ĐÁNH TRÚNG → văng, tiến độ VỀ 0
   breakLearning(p, true);
-  const def = type === 'magic' ? p.stats.phapPhong : p.stats.vatPhong;
+  // GĐ70: trùm Hỗn Độn — mỗi đòn ngẫu nhiên 1 trong 5 hệ
+  let effType = type;
+  let rawEff = rawDamage;
+  let bossElem = null;
+  const srcMech = source && source.kind ? mechOf(source) : null;
+  if (source && source.kind === 'hon_don_thu' && !source.illusion) {
+    bossElem = ['fire', 'water', 'wood', 'metal', 'earth'][Math.floor(Math.random() * 5)];
+    if (bossElem === 'fire') rawEff = rawDamage * 1.2;
+    if (bossElem === 'metal') effType = 'magic'; // kim hệ xuyên Vật phòng → tính theo Pháp phòng
+  }
+  const def = effType === 'magic' ? p.stats.phapPhong : p.stats.vatPhong;
   // GĐ34: buff giảm sát thương nhận đang hiệu lực
-  let rawIn = rawDamage;
+  let rawIn = rawEff;
   if (Date.now() < (p.defBuffUntil || 0)) rawIn *= 1 - (p.defBuffPct || 0) / 100;
   const dmg = damageThrough(rawIn, def);
   p.hp -= dmg;
+  // GĐ70: hút máu / độc / chậm / choáng theo loài quái + sét dây chuyền (Lôi Điểu)
+  if (source && typeof source.hp === 'number' && typeof source.maxHp === 'number' && srcMech?.lifesteal) {
+    source.hp = Math.min(source.maxHp, source.hp + Math.round(dmg * srcMech.lifesteal));
+  }
+  if (source && source.kind) {
+    if (srcMech?.poison) applyPlayerStatus(p, { poisonDps: srcMech.poison.dps, poisonSec: srcMech.poison.sec });
+    if (srcMech?.slowOnHit) applyPlayerStatus(p, { slowPct: srcMech.slowOnHit.pct, slowSec: srcMech.slowOnHit.sec });
+    if (bossElem === 'water') applyPlayerStatus(p, { slowPct: 40, slowSec: 3 });
+    if (bossElem === 'wood') applyPlayerStatus(p, { poisonDps: 3, poisonSec: 4 });
+    if (bossElem === 'earth') applyPlayerStatus(p, { stunSec: 0.5 });
+    if (srcMech?.chain && chainDepth < srcMech.chain.jumps) {
+      const hit = chainHit || new Set([p.id]);
+      let next = null;
+      let nextD = Infinity;
+      for (const q of players.values()) {
+        if (hit.has(q.id) || q.isOffline || q.isBot || mapOf(q) !== mapOf(p)) continue;
+        if (Math.hypot(q.x - p.x, q.y - p.y) <= (srcMech.chain.radius || 150) && Math.hypot(q.x - p.x, q.y - p.y) < nextD) { next = q; nextD = Math.hypot(q.x - p.x, q.y - p.y); }
+      }
+      if (next) {
+        hit.add(next.id);
+        hitPlayer(next, rawDamage * Math.pow(srcMech.chain.falloff || 0.7, chainDepth + 1), 'magic', source, chainDepth + 1, hit);
+      }
+    }
+  }
   // GĐ34: phản sát thương — quái đánh trúng người đang có buff phản thì ăn lại
   if (source && typeof source.hp === 'number' && Date.now() < (p.reflectUntil || 0) && p.reflectPct) {
     hurtMonster(source, (rawDamage * p.reflectPct) / 100, source.def ?? WOLF.def); // GĐ38
     if (source.hp <= 0) onMonsterKilled(null, p, source);
   }
   console.log(`[combat] ${source.id} cắn ${p.name}: -${dmg} HP (còn ${Math.max(0, Math.round(p.hp))}/${maxHpOf(p.stats)})`);
-  if (p.hp <= 0) {
-    const pos = plazaSpawn();
-    p.x = pos.x;
-    p.y = pos.y;
-    p.hp = maxHpOf(p.stats);
-    p.mp = maxMpOf(p.stats);
-    p.input.vx = 0;
-    p.input.vy = 0;
-    // GĐ19: gục ngã giữa thử thách → trùm thử thách tan, phải gọi lại (đan chưa bị trừ)
-    if (source && source.kind === 'trial') {
-      for (const mm of [...monsters.values()]) {
-        if (mm.kind === 'trial' && mm.ownerId === p.id) monsters.delete(mm.id);
-      }
-    }
-    persistPlayer(p);
-    io.emit('player_died', { id: p.id, name: p.name, by: (source && source.name) || WOLF.name });
-    io.to(p.id).emit('you_died', { by: (source && source.name) || WOLF.name });
-    console.log(`[combat] ${p.name} gục ngã — hồi sinh tại quảng trường làng`);
-  } else {
-    persistPlayer(p);
-  }
+  if (p.hp <= 0) handlePlayerDeath(p, source);
+  else persistPlayer(p);
 }
 // ------------------------- Kết nối người chơi -------------------------
+// ================= GĐ60: LUẬT ĐI LẠI LIÊN MAP (người chơi chốt 24/10) =====
+// - Mọi map có Trận Dịch Chuyển, nhưng TỐN NHIỀU LINH THẠCH (về làng/thành
+//   miễn phí; đang hộ tống tới đúng đích cũng miễn phí).
+// - Kim Đan NGỰ KIẾM: miễn phí nhưng CHẬM (tính theo số chặng qua hub).
+// - Đảo ngoài biển: trận không tới được — ĐI THUYỀN tuyến thành ↔ đảo
+//   (chậm), hoặc ngự kiếm nếu đã Kim Đan.
+// - Luyện Khí / Trúc Cơ kiếm Linh thạch + đi lại bằng HỘ TỐNG THƯƠNG NHÂN.
+const TRAVEL_COST_BY_ORDER = { 0: 0, 1: 50, 2: 150, 3: 400, 4: 900, 5: 1600 }; // theo cảnh giới của map đích (TẠM)
+const BOAT_ONLY = new Set(['tham_hai_bi_canh']); // đảo biển sâu — chỉ thuyền / ngự kiếm
+const JOURNEY_UNIT_MS = Number(process.env.TTT_JOURNEY_MS) > 0 ? Number(process.env.TTT_JOURNEY_MS) : 15000; // 1 chặng ngự kiếm (móc kiểm thử: TTT_JOURNEY_MS)
+let lastHazardMs60 = 0;
+function journeyHops(from, to) {
+  if (from === to) return 0;
+  if (from === 'thanh_van_thanh' || to === 'thanh_van_thanh') return 1;
+  if (from === HOME_MAP || to === HOME_MAP) return 2;
+  return 2;
+}
+function travelCostFor(p, destId) {
+  if (destId === HOME_MAP) return 0; // về làng: luôn miễn phí (chống kẹt)
+  if (destId === 'thanh_van_thanh' && mapOf(p) !== HOME_MAP) return 0; // từ map xa về thành: miễn phí; làng → thành vẫn phí 50 như map LK
+  if (p.escort && (destId === p.escort.dest || destId === 'thanh_van_thanh')) return 0; // đang hộ tống: cả chặng qua thành lẫn tới map đích đều miễn phí
+  const def = MAP_DEFS.get(destId);
+  return TRAVEL_COST_BY_ORDER[REALM_ORDER[def?.minRealm || 'pham'] ?? 0] ?? 50;
+}
+function startJourney(socket, p, dest, method) {
+  const hops = Math.max(1, journeyHops(mapOf(p), dest));
+  const ms = method === 'boat' ? Math.round((JOURNEY_UNIT_MS * 4) / 3) * hops : JOURNEY_UNIT_MS * hops;
+  p.journey = { dest, method, arriveAt: Date.now() + ms };
+  socket.emit('journey_started', { dest, name: MAP_DEFS.get(dest)?.name || dest, method, seconds: Math.round(ms / 1000) });
+}
+// HỘ TỐNG: nhận ở Lái Buôn (cạnh Trận làng) — thương nhân đi theo như đồng
+// hành (không đánh nhau), bị quái phục kích ở map đích; đưa người + hàng
+// tới ĐIỂM GIAO (giữa map đích) là xong, thưởng Linh thạch + Tu vi.
+const ESCORT_REWARD = { 1: { stones: 80, tuVi: 8 }, 2: { stones: 160, tuVi: 16 }, 3: { stones: 260, tuVi: 30 }, 4: { stones: 400, tuVi: 45 }, 5: { stones: 600, tuVi: 60 } }; // theo cảnh giới map đích (TẠM)
+function escortDestinationsFor(p) {
+  return [...MAP_DEFS.values()]
+    .filter((d) => !d.safe && d.id !== HOME_MAP && d.id !== 'thach_lam' && d.id !== 'bai_farm' && d.id !== 'thanh_van_thanh' && !BOAT_ONLY.has(d.id) && canEnterGate(p, d))
+    .sort((a, b) => (REALM_ORDER[a.minRealm] - REALM_ORDER[b.minRealm]) || ((a.minTier || 0) - (b.minTier || 0)) || a.name.localeCompare(b.name, 'vi'))
+    .map((d) => ({ id: d.id, name: d.name, category: d.category, reward: ESCORT_REWARD[REALM_ORDER[d.minRealm] ?? 1] || ESCORT_REWARD[1] }));
+}
+function escortInfoFor(p) {
+  return {
+    active: p.escort ? { dest: p.escort.dest, destName: MAP_DEFS.get(p.escort.dest)?.name || p.escort.dest } : null,
+    missions: p.escort ? [] : escortDestinationsFor(p),
+  };
+}
+function spawnEscortMerchant(p) {
+  const stats = { khiHuyet: 40, vatCong: 5, vatPhong: 25, phapCong: 5, phapPhong: 25, tocDo: 20, thanThuc: 10 };
+  const c = {
+    id: `escort-${p.id}`, x: p.x + 36, y: p.y + 10, vx: 0, vy: 0, input: { vx: 0, vy: 0 }, direction: 'down',
+    isBot: false, isCompanion: true, isEscortMerchant: true, ownerId: p.id, ownerKey: p.charKey, mapId: mapOf(p),
+    name: 'Thương Nhân (đang hộ tống)', classId: 'nhotu', stats, hp: maxHpOf(stats), mp: maxMpOf(stats),
+    robe: null, gender: 'nam', weaponId: null, realm: p.realm || 'pham', tier: p.tier || 0, lastAttackAt: 0,
+    followDx: 36, followDy: 10,
+  };
+  players.set(c.id, c);
+  return c;
+}
+function failEscort(merchant) {
+  const owner = players.get(merchant.ownerId);
+  if (!owner || !owner.escort) return;
+  owner.escort = null;
+  const sock = io.sockets.sockets.get(owner.id);
+  if (sock) {
+    sock.emit('escort_failed', {});
+    sock.emit('notice', { text: '💀 Thương nhân đã gục ngã — nhiệm vụ hộ tống THẤT BẠI. Về gặp Lái Buôn nhận chuyến khác.' });
+    syncChar(sock, owner);
+  }
+  console.log(`[hộ tống] ${owner.name}: thương nhân gục — thất bại`);
+}
+function completeEscort(p) {
+  const esc = p.escort; if (!esc) return;
+  p.escort = null;
+  players.delete(esc.merchantId);
+  p.stones = (p.stones || 0) + esc.reward.stones;
+  p.tuVi = (p.tuVi || 0) + esc.reward.tuVi;
+  if (p.counters) p.counters.totalTuVi = (p.counters.totalTuVi || 0) + esc.reward.tuVi;
+  persistPlayer(p);
+  const sock = io.sockets.sockets.get(p.id);
+  if (sock) {
+    sock.emit('escort_done', { destName: MAP_DEFS.get(esc.dest)?.name || esc.dest, stones: esc.reward.stones, tuVi: esc.reward.tuVi });
+    sock.emit('notice', { text: `🎉 Hộ tống thành công! Thương nhân thưởng ${esc.reward.stones} Linh thạch + ${esc.reward.tuVi} Tu vi.` });
+    syncChar(sock, p);
+  }
+  console.log(`[hộ tống] ${p.name}: giao hàng xong tới ${esc.dest} (+${esc.reward.stones} LT)`);
+}
+
+// GĐ59: danh sách đích dịch chuyển từ map hiện tại của người chơi (đồ thị
+// theo MapData: mọi nơi nối về Thanh Vân Thành; thành nối đi khắp nơi).
+function destinationsFor(p) {
+  const cur = mapOf(p);
+  const entry = (def, sectGate) => {
+    if (!def) return null;
+    if (sectGate) {
+      const ok = !!(p.sect && SECTS[p.sect]);
+      return { id: def.id, name: def.name, category: def.category, safe: !!def.safe, canEnter: ok, needText: ok ? '' : 'Chỉ đệ tử Thiên Kiếm Môn / Huyền Thiên Tông' };
+    }
+    const ok = canEnterGate(p, def);
+    const hops = journeyHops(cur, def.id);
+    return {
+      id: def.id, name: def.name, category: def.category, safe: !!def.safe, canEnter: ok, needText: ok ? '' : gateTextOf(def),
+      cost: travelCostFor(p, def.id), boatOnly: BOAT_ONLY.has(def.id), // GĐ60
+      flySec: Math.round((JOURNEY_UNIT_MS / 1000) * hops), boatSec: Math.round(((JOURNEY_UNIT_MS * 4) / 3000) * hops),
+    };
+  };
+  const city = MAP_DEFS.get('thanh_van_thanh');
+  const realm = MAP_DEFS.get('thach_lam');
+  const home = MAP_DEFS.get(HOME_MAP);
+  if (cur === HOME_MAP) return [entry(city), entry(realm, true)].filter(Boolean);
+  if (cur === 'thanh_van_thanh') {
+    const list = [entry(home)];
+    const rest = [...MAP_DEFS.values()].filter((d) => d.id !== HOME_MAP && d.id !== 'thanh_van_thanh' && d.id !== 'thach_lam' && d.id !== 'bai_farm');
+    rest.sort((a, b) => (REALM_ORDER[a.minRealm] - REALM_ORDER[b.minRealm]) || ((a.minTier || 0) - (b.minTier || 0)) || a.name.localeCompare(b.name, 'vi'));
+    for (const d of rest) list.push(entry(d));
+    list.push(entry(realm, true));
+    return list.filter(Boolean);
+  }
+  return [entry(city)].filter(Boolean);
+}
+// GĐ59: chuyển người chơi sang map khác (cả đồng hành), đổi phòng đồng bộ,
+// nạp lại toàn cảnh của map đích cho client.
+function switchPlayerMap(socket, p, destId, pos) {
+  const old = mapOf(p);
+  p.mapId = destId; p.x = pos.x; p.y = pos.y; p.vx = 0; p.vy = 0;
+  if (p.input) { p.input.vx = 0; p.input.vy = 0; }
+  for (const q of players.values()) if (q.isCompanion && q.ownerId === p.id) { q.mapId = destId; q.x = pos.x + 28; q.y = pos.y + 12; q.vx = 0; q.vy = 0; }
+  // GĐ60: tới map đích của chuyến hộ tống → quái phục kích gần điểm tới
+  if (p.escort && destId === p.escort.dest && !p.escort.ambushDone) {
+    p.escort.ambushDone = true;
+    const spKind = (MAP_SPAWNS.find((s) => s.mapId === destId) || {}).kind;
+    if (spKind) {
+      for (let i = 0; i < 2; i++) {
+        const mm = spawnMonster(spKind, destId);
+        if (mm) {
+          mm.x = pos.x + (i ? 175 : -155); mm.y = pos.y + (i ? -70 : 95);
+          if (hitsObstacleIn(destId, mm.x, mm.y, 20)) { mm.x = pos.x; mm.y = pos.y - 130; }
+          mm.hidden = false;
+        }
+      }
+    }
+    if (socket) socket.emit('notice', { text: '⚠ Quái phục kích đoàn hộ tống — bảo vệ thương nhân, đưa ông ta tới điểm giao hàng ở giữa bản đồ!' });
+  }
+  if (socket) {
+    if (old !== destId) { socket.leave('map:' + old); socket.join('map:' + destId); }
+    socket.emit('map_enter', mapEnterPayload(destId));
+    socket.emit('server_tick', fullSnapshotFor(destId));
+    syncChar(socket, p);
+  }
+  persistPlayer(p);
+}
+
 io.on('connection', (socket) => {
   // GĐ6: kết nối socket CHƯA phải người chơi. Client gửi 'hello' kèm token:
   // - Đã có nhân vật → vào thẳng thế giới (welcome kèm dữ liệu nhân vật)
@@ -2541,7 +3332,7 @@ io.on('connection', (socket) => {
       player = spawnFromCharacter(socket, token, char);
       if (!player) return; // GĐ25: vừa tọa hóa trong lúc vào game (đã báo client)
       socket.emit('welcome', { id: socket.id, character: characterPayload(player) });
-      socket.emit('server_tick', fullSnapshot()); // bản FULL riêng cho client mới vào (delta A+B)
+      socket.emit('server_tick', fullSnapshotFor(mapOf(player))); // bản FULL riêng cho client mới vào (delta A+B) — GĐ59: theo map
       console.log(`[+] ${char.name} (${CLASSES[char.classId].name}) trở lại — tổng ${players.size} player`);
     } else {
       socket.emit('need_character', {});
@@ -2650,7 +3441,7 @@ io.on('connection', (socket) => {
       player = spawnFromCharacter(socket, token, char);
     }
     socket.emit('welcome', { id: socket.id, character: characterPayload(player) });
-    socket.emit('server_tick', fullSnapshot()); // bản FULL riêng cho client mới vào (delta A+B)
+    socket.emit('server_tick', fullSnapshotFor(mapOf(player))); // bản FULL riêng cho client mới vào (delta A+B) — GĐ59: theo map
     console.log(`[+] Nhân vật mới: ${name} (${CLASSES[char.classId].name}) — tổng chỉ số ${statTotal(char.stats)}`);
   });
 
@@ -2718,7 +3509,7 @@ io.on('connection', (socket) => {
     player = spawnFromCharacter(socket, data.charId, char);
     if (!player) return; // GĐ25: nhân vật vừa tọa hóa (đã báo client)
     socket.emit('welcome', { id: socket.id, character: characterPayload(player) });
-    socket.emit('server_tick', fullSnapshot());
+    socket.emit('server_tick', fullSnapshotFor(mapOf(player))); // GĐ59: theo map
     console.log(`[+] ${char.name} (${CLASSES[char.classId].name}) vào game bằng tài khoản — tổng ${players.size} player`);
   });
 
@@ -2752,6 +3543,12 @@ io.on('connection', (socket) => {
     };
     player.input.vx = clamp(data.vx);
     player.input.vy = clamp(data.vy);
+    // GĐ60: đang ngự kiếm / trên thuyền mà di chuyển → hủy hành trình
+    if (player.journey && (player.input.vx !== 0 || player.input.vy !== 0)) {
+      player.journey = null;
+      socket.emit('journey_cancelled', {});
+      socket.emit('notice', { text: 'Đã hủy hành trình — bạn ở lại nơi này.' });
+    }
   });
 
   // GĐ46: NÉ — client gửi hướng muốn vọt (thường là hướng đang di
@@ -2760,6 +3557,7 @@ io.on('connection', (socket) => {
     if (!player || player.isBot) return;
     const now = Date.now();
     if (now < (player.dodgeCdUntil || 0)) return;
+    if (now < (player.stunUntil || 0)) return; // GĐ70: đang choáng thì không né được
     const clamp = (n) => {
       n = Number(n);
       if (!Number.isFinite(n)) return 0;
@@ -2784,6 +3582,7 @@ io.on('connection', (socket) => {
   // thô = 0.85 × (Công + 10), trừ theo phòng của quái; hồi chiêu giảm theo CDR.
   socket.on('player_attack', () => {
     if (!player) return;
+    if (Date.now() < (player.stunUntil || 0)) return; // GĐ70: đang choáng thì không ra đòn được
     if (player.bequan) setBequan(player, false); // GĐ23: ra đòn là dứt bế quan
     if (player.learningActive) breakLearning(player, false); // GĐ32: ra đòn là phá lĩnh ngộ (về 0)
     // GĐ11: nhịp đánh thường theo TỐC ĐỘ VŨ KHÍ (file thiết kế: Nhanh 0,5s /
@@ -2801,6 +3600,8 @@ io.on('connection', (socket) => {
     let targetDist = Infinity;
     for (const m of monsters.values()) {
       if (m.kind === 'trial' && m.ownerId !== player.id) continue; // GĐ19: trùm thử thách của người khác — không đánh được
+      if (mapOf(m) !== mapOf(player)) continue; // GĐ59: không đánh xuyên map
+      if (m.hidden) continue; // GĐ60: quái đang ẩn nấp — không thấy mà đánh
       if (insideRealm(m.x, m.y) !== insideRealm(player.x, player.y)) continue; // GĐ57: không đánh xuyên vách bí cảnh
       const d = Math.hypot(m.x - player.x, m.y - player.y);
       if (d < targetDist) {
@@ -2811,8 +3612,15 @@ io.on('connection', (socket) => {
     const range = weapon && weapon.ranged ? ATTACK_RANGE_RANGED : ATTACK_RANGE;
     if (!target || targetDist > range) return; // đánh hụt — không có quái trong tầm
 
+    // GĐ70: quái né chiêu cao (Huyễn Ảnh Miêu) — né được thì đòn này hụt hẳn
+    const mechA = mechOf(target);
+    if (mechA?.dodge && Math.random() < mechA.dodge) {
+      io.emit('player_attacked', { id: player.id, targetId: target.id });
+      socket.emit('notice', { text: `${target.name} né được đòn của bạn!` });
+      return;
+    }
     const atk = attackStatOf(player);
-    const dmg = hurtMonster(target, BASIC_COEF * speedK * atkMulOf(player) * (atk.value + 10), target.def ?? WOLF.def); // GĐ38: def theo loài
+    const dmg = hurtMonster(target, BASIC_COEF * speedK * atkMulOf(player) * (atk.value + 10), target.def ?? WOLF.def, atk.type); // GĐ38: def theo loài; GĐ70: loại sát thương cho giáp đá
     if (player.nextAtkMul) player.nextAtkMul = 0; // GĐ34: đòn kế tiếp đã dùng
     io.emit('player_attacked', { id: player.id, targetId: target.id }); // GĐ9: cho client khác phát tư thế ra đòn
     console.log(`[combat] ${player.name} đánh ${target.id}: -${dmg} (${atk.type}) — HP quái còn ${Math.max(0, target.hp)}/${target.maxHp}`);
@@ -3053,6 +3861,7 @@ io.on('connection', (socket) => {
   // Chân nguyên / tầm — sát thương qua cùng đường công thức của file.
   socket.on('cast_skill', (data) => {
     if (!player || !data) return;
+    if (Date.now() < (player.stunUntil || 0)) { socket.emit('cast_result', { ok: false, slot: Number(data.slot), area: data.area === 'util' ? 'util' : 'main', reason: 'stunned' }); return; } // GĐ70: đang choáng thì không tung chiêu được
     if (player.bequan) setBequan(player, false); // GĐ23: tung chiêu là dứt bế quan
     if (player.learningActive) breakLearning(player, false); // GĐ32: tung chiêu là phá lĩnh ngộ (về 0)
     const slot = Number(data.slot);
@@ -3071,6 +3880,7 @@ io.on('connection', (socket) => {
     let targetDist = Infinity;
     for (const m of monsters.values()) {
       if (m.kind === 'trial' && m.ownerId !== player.id) continue; // GĐ19: trùm thử thách của người khác
+      if (mapOf(m) !== mapOf(player)) continue; // GĐ59: không tung chiêu xuyên map
       if (insideRealm(m.x, m.y) !== insideRealm(player.x, player.y)) continue; // GĐ57: không tung chiêu xuyên vách bí cảnh
       const d = Math.hypot(m.x - player.x, m.y - player.y);
       if (d < targetDist) {
@@ -3097,18 +3907,24 @@ io.on('connection', (socket) => {
     if (player.nextAtkMul) player.nextAtkMul = 0; // đòn kế tiếp đã được dùng
     let targets = [target];
     if (fx?.aoe) {
-      targets = [...monsters.values()].filter((m) => !(m.kind === 'trial' && m.ownerId !== player.id) && insideRealm(m.x, m.y) === insideRealm(player.x, player.y) && Math.hypot(m.x - player.x, m.y - player.y) <= skill.range);
+      targets = [...monsters.values()].filter((m) => !(m.kind === 'trial' && m.ownerId !== player.id) && !m.hidden && mapOf(m) === mapOf(player) && insideRealm(m.x, m.y) === insideRealm(player.x, player.y) && Math.hypot(m.x - player.x, m.y - player.y) <= skill.range); // GĐ59: + cùng map · GĐ60: trừ quái đang ẩn
       if (!targets.length) targets = [target];
     }
     const pierce = fx?.pierce ? fx.pierce / 100 : 0;
     let totalDealt = 0;
     let firstDmg = 0;
     for (const t of targets) {
+      // GĐ70: quái né chiêu cao — né được thì chiêu này không trúng nó
+      const mechT = mechOf(t);
+      if (mechT?.dodge && Math.random() < mechT.dodge) {
+        if (t === target) socket.emit('notice', { text: `${t.name} né được chiêu của bạn!` });
+        continue;
+      }
       const effDef = Math.max(0, Math.round((t.def ?? WOLF.def) * (1 - pierce))); // GĐ38: def theo loài
       const hits = fx?.hits || 1;
       for (let h = 0; h < hits; h++) {
         const g = 1 + (fx?.hitGrowth || 0) * h;
-        const d = hurtMonster(t, skill.coef * g * mul * (atk.value + 10), effDef);
+        const d = hurtMonster(t, skill.coef * g * mul * (atk.value + 10), effDef, atk.type); // GĐ70: loại sát thương cho giáp đá
         totalDealt += d;
         if (t === target && h === 0) firstDmg = d;
         if (t.hp <= 0) break;
@@ -3160,6 +3976,7 @@ io.on('connection', (socket) => {
     const eAtk = eliteAtkAt(step);
     const boss = {
       id: 'trial-' + ++monsterSeq, kind: 'trial', trialKind: info.trial, isTrialBoss: true, ownerId: player.id,
+      mapId: mapOf(player), // GĐ59
       name: isDai ? 'Tâm Ma Ảnh' : 'Thử Luyện Thú',
       x: 700, y: 452, hp: isDai ? eHp * 6 : eHp * 4, maxHp: isDai ? eHp * 6 : eHp * 4,
       atk: isDai ? Math.round(eAtk * 1.3 * 10) / 10 : eAtk,
@@ -3200,6 +4017,7 @@ io.on('connection', (socket) => {
     const eAtk = eliteAtkAt(step);
     const foe = {
       id: 'trial-' + ++monsterSeq, kind: 'trial', trialKind: 'duel', questId, isTrialBoss: true, ownerId: player.id,
+      mapId: mapOf(player), // GĐ59
       name: def.duel.spawnName,
       x: Math.round(player.x + 130), y: Math.round(player.y),
       hp: Math.round(eHp * def.duel.hpMul), maxHp: Math.round(eHp * def.duel.hpMul), atk: Math.round(eAtk * 10) / 10,
@@ -3587,6 +4405,140 @@ io.on('connection', (socket) => {
   // GĐ24: TRÒ CHUYỆN với NPC — mỗi ngày game +2 thiện cảm (lần đầu gặp trong
   // ngày), kèm lời thoại theo tính cách + mức thiện cảm và các nút hành động
   // (nhận/trả nhiệm vụ riêng, trả nhiệm vụ bảng với Trưởng Làng).
+  // GĐ59: TRẬN DỊCH CHUYỂN — xin danh sách đích + đi. Phải đứng gần trận
+  // của map hiện tại (chống gọi từ xa); cổng cảnh giới/tông môn kiểm ở đây.
+  socket.on('travel_list', () => {
+    if (!player) return;
+    socket.emit('travel_info', { from: mapOf(player), list: destinationsFor(player) });
+  });
+  socket.on('travel_to', (data) => {
+    if (!player || !data || typeof data.mapId !== 'string') return;
+    const dest = data.mapId;
+    const info = destinationsFor(player).find((d) => d.id === dest);
+    if (!info) { socket.emit('interact_error', { message: 'Không có đường dịch chuyển tới đó từ nơi này.' }); return; }
+    const curPortal = mapOf(player) === HOME_MAP ? { x: 1080, y: 600 } : (MAP_RUNTIME.get(mapOf(player)) || {}).portal;
+    if (!curPortal || Math.hypot(player.x - curPortal.x, player.y - curPortal.y) > 130) {
+      socket.emit('interact_error', { message: 'Hãy đứng cạnh Trận Dịch Chuyển rồi mới lên đường.' });
+      return;
+    }
+    if (dest === 'thach_lam') {
+      // Thạch Lâm vẫn là vùng trong map nhà (GĐ57) — cổng tông môn giữ nguyên
+      if (!info.canEnter) { socket.emit('interact_error', { message: 'Bí Cảnh Thạch Lâm chỉ mở cho đệ tử Thiên Kiếm Môn / Huyền Thiên Tông.' }); return; }
+      switchPlayerMap(socket, player, HOME_MAP, { x: 1905, y: 640 });
+      socket.emit('notice', { text: '🌀 Dịch chuyển tới Bí Cảnh Thạch Lâm!' });
+      return;
+    }
+    if (!info.canEnter) { socket.emit('interact_error', { message: `Chưa thể tới ${info.name} — ${info.needText}.` }); return; }
+    const rt = MAP_RUNTIME.get(dest);
+    const pos = dest === HOME_MAP ? { x: 1080, y: 664 } : { x: rt.portal.x, y: rt.portal.y - 56 };
+    const method = data.method === 'fly' || data.method === 'boat' ? data.method : 'portal';
+    if (method === 'fly') {
+      // GĐ60: NGỰ KIẾM — chỉ Kim Đan, miễn phí nhưng chậm theo số chặng
+      if ((REALM_ORDER[player.realm || 'pham'] ?? 0) < 3) { socket.emit('interact_error', { message: 'Chỉ tu sĩ Kim Đan mới ngự kiếm phi hành được.' }); return; }
+      startJourney(socket, player, dest, 'fly');
+      return;
+    }
+    if (method === 'boat') {
+      // GĐ60: THUYỀN — chỉ chạy tuyến Thanh Vân Thành ↔ đảo ngoài biển
+      const cur = mapOf(player);
+      const okLeg = (cur === 'thanh_van_thanh' && BOAT_ONLY.has(dest)) || (BOAT_ONLY.has(cur) && dest === 'thanh_van_thanh');
+      if (!okLeg) { socket.emit('interact_error', { message: 'Thuyền chỉ chạy tuyến Thanh Vân Thành ↔ đảo ngoài biển.' }); return; }
+      startJourney(socket, player, dest, 'boat');
+      return;
+    }
+    // Trận Dịch Chuyển: tức thì nhưng tốn Linh thạch (đảo thì không tới được)
+    if (BOAT_ONLY.has(dest)) { socket.emit('interact_error', { message: `${info.name} là đảo ngoài biển — trận dịch chuyển không tới được. Hãy đi thuyền từ Thanh Vân Thành (hoặc ngự kiếm nếu đã Kim Đan).` }); return; }
+    const cost = travelCostFor(player, dest);
+    if ((player.stones || 0) < cost) {
+      socket.emit('interact_error', { message: `Không đủ Linh thạch để dịch chuyển — cần ${cost}, đang có ${player.stones || 0}. Hãy nhận việc hộ tống thương nhân ở Lái Buôn để kiếm thêm (hoặc ngự kiếm nếu đã Kim Đan).` });
+      return;
+    }
+    if (cost > 0) { player.stones -= cost; persistPlayer(player); }
+    switchPlayerMap(socket, player, dest, pos);
+    socket.emit('notice', { text: cost > 0 ? `🌀 Đã tới ${info.name} (−${cost} Linh thạch)` : `🌀 Đã tới ${info.name}` });
+    if (cost > 0) syncChar(socket, player);
+  });
+
+  // GĐ60: NHẬN / HỦY việc hộ tống thương nhân (nói chuyện với Lái Buôn)
+  socket.on('escort_accept', (data) => {
+    if (!player || !data || typeof data.mapId !== 'string') return;
+    if (player.escort) { socket.emit('interact_error', { message: 'Bạn đang hộ tống một chuyến rồi — giao xong hoặc bỏ chuyến đã.' }); return; }
+    const npc = NPC_BY_ID.npc_laibuan;
+    if (mapOf(player) !== HOME_MAP || Math.hypot(player.x - npc.x, player.y - npc.y) > 110) {
+      socket.emit('interact_error', { message: 'Hãy tới gặp Lái Buôn (cạnh Trận Dịch Chuyển ở quảng trường) để nhận việc.' });
+      return;
+    }
+    const mission = escortDestinationsFor(player).find((d) => d.id === data.mapId);
+    if (!mission) { socket.emit('interact_error', { message: 'Không có chuyến hộ tống tới đó cho cảnh giới của bạn.' }); return; }
+    const rt = MAP_RUNTIME.get(mission.id);
+    const mer = spawnEscortMerchant(player);
+    player.escort = {
+      dest: mission.id, merchantId: mer.id, reward: mission.reward, ambushDone: false,
+      delivery: { x: Math.round(rt.w / 2), y: Math.round(rt.h / 2) },
+    };
+    persistPlayer(player);
+    socket.emit('escort_started', { dest: mission.id, destName: mission.name, reward: mission.reward });
+    socket.emit('notice', { text: `🧳 Đã nhận hộ tống! Đưa thương nhân tới điểm giao hàng ở GIỮA ${mission.name} — đi qua Trận Dịch Chuyển là miễn phí cho chuyến này. Cẩn thận quái phục kích!` });
+    syncChar(socket, player);
+  });
+  socket.on('escort_abandon', () => {
+    if (!player || !player.escort) return;
+    players.delete(player.escort.merchantId);
+    player.escort = null;
+    persistPlayer(player);
+    socket.emit('escort_abandoned', {});
+    socket.emit('notice', { text: 'Đã bỏ chuyến hộ tống — thương nhân quay về làng an toàn.' });
+    syncChar(socket, player);
+  });
+
+  // GĐ60: TỔNG QUAN BẢN ĐỒ (bấm vào minimap) — chi tiết map hiện tại + mọi
+  // map: quái gì, đặc sản gì, cổng khóa ra sao, đi hết bao nhiêu Linh thạch.
+  // GĐ63: map nhà không có decor sinh tự động — lấy cây + nhà từ hằng số
+  // thế giới để canvas tổng quan ở làng cũng có hình (trước đây trống trơn).
+  const HOME_DECOR = [
+    ...TREE_TRUNKS.map((o) => ({ x: Math.round(o.x + o.w / 2), y: Math.round(o.y + o.h / 2), kind: 'tree' })), // TREE_TRUNKS đã là hộp va chạm {x,y,w,h}
+    ...HOUSE_OBSTACLES.map((o) => ({ x: Math.round(o.x + o.w / 2), y: Math.round(o.y + o.h / 2), kind: 'house' })),
+  ];
+  socket.on('map_overview', () => {
+    if (!player) return;
+    const cur = mapOf(player);
+    const dests = destinationsFor(player);
+    // GĐ60: quái bí cảnh Thạch Lâm là vùng riêng trong map nhà — tách đúng từng map:
+    // làng/farm chỉ hiện Sói Xám, Dơi Đen, Thạch Quái; mục Bí Cảnh Thạch Lâm
+    // hiện Kiếm Ma, Huyết Lang, Thạch Khôi Lỗi (trước đây gộp nhầm quái bí cảnh
+    // vào làng và để mục Bí Cảnh Thạch Lâm trống 0 quái trong panel tổng quan).
+    const DUNGEON_MONSTERS = [{ name: 'Kiếm Ma', count: 4 }, { name: 'Huyết Lang', count: 4 }, { name: 'Thạch Khôi Lỗi', count: 1 }];
+    const FARM_MONSTERS = [{ name: 'Sói Xám', count: 5 }, { name: 'Dơi Đen', count: 4 }, { name: 'Thạch Quái', count: 3 }];
+    const inDungeon = (x, y) => x >= REALM.x && x <= REALM.x + REALM.w && y >= REALM.y && y <= REALM.y + REALM.h;
+    const monstersOf = (mid) => mid === 'thach_lam' ? DUNGEON_MONSTERS
+      : mid === HOME_MAP ? (inDungeon(player.x, player.y) ? DUNGEON_MONSTERS : FARM_MONSTERS)
+      : MAP_SPAWNS.filter((s) => s.mapId === mid).map((s) => ({ name: MONSTER_TYPES[s.kind]?.name || s.kind, count: s.count }));
+    const rt = MAP_RUNTIME.get(cur);
+    socket.emit('overview_data', {
+      current: {
+        mapId: cur, name: cur === HOME_MAP ? 'Làng Tân Thủ' : (MAP_DEFS.get(cur)?.name || cur),
+        theme: cur === HOME_MAP ? 'village' : (rt?.theme || ''), w: rt ? rt.w : WORLD_W, h: rt ? rt.h : WORLD_H,
+        portal: cur === HOME_MAP ? { x: 1080, y: 600 } : rt?.portal, hazards: rt?.hazards || [], features: rt?.features || null,
+        decor: cur === HOME_MAP ? HOME_DECOR : (rt?.decor || []), monsters: monstersOf(cur),
+        // GĐ64: popup bản đồ vẽ đàng hoàng — NPC (chấm vàng + tên) + khung vùng cho map nhà
+        npcs: cur === HOME_MAP ? NPCS.map((n) => ({ x: n.x, y: n.y, name: n.name })) : [],
+        zones: cur === HOME_MAP ? [
+          { x: 240, y: 180, w: 920, h: 760, label: 'Làng Tân Thủ' },
+          { x: 1230, y: 420, w: 300, h: 240, label: 'Thanh Phong Môn' },
+          { x: REALM.x, y: REALM.y, w: REALM.w, h: REALM.h, label: 'Bí Cảnh Thạch Lâm' },
+        ] : [],
+      },
+      maps: [...MAP_DEFS.values()].filter((d) => d.id !== 'bai_farm').map((d) => ({
+        id: d.id, name: d.name, category: d.category, safe: !!d.safe, minRealm: d.minRealm, minTier: d.minTier || 0,
+        theme: d.id === HOME_MAP ? 'village' : (THEME_BY_ID[d.id] || ''), boatOnly: BOAT_ONLY.has(d.id),
+        canEnter: d.id === 'thach_lam' ? !!(player.sect && SECTS[player.sect]) : canEnterGate(player, d),
+        needText: d.id === 'thach_lam' ? 'Chỉ đệ tử tông môn' : gateTextOf(d),
+        cost: travelCostFor(player, d.id), reachable: dests.some((x) => x.id === d.id),
+        monsters: monstersOf(d.id),
+      })),
+    });
+  });
+
   // GĐ57: QUA CỔNG BÍ CẢNH — kiểm tra đứng gần đúng cổng + tư cách đệ tử
   // (vào); dịch chuyển cả người lẫn đồng hành theo chủ, nạp lại toàn cảnh
   // cho client để camera nhảy thẳng tới nơi.
@@ -3599,7 +4551,7 @@ io.on('connection', (socket) => {
         if (q.isCompanion && q.ownerId === player.id) { q.x = x + 28; q.y = y + 12; q.vx = 0; q.vy = 0; }
       }
       persistPlayer(player);
-      socket.emit('server_tick', fullSnapshot());
+      socket.emit('server_tick', fullSnapshotFor(HOME_MAP));
       syncChar(socket, player);
     };
     if (data.action === 'enter') {
@@ -3623,6 +4575,10 @@ io.on('connection', (socket) => {
 
   socket.on('talk_npc', (data) => {
     if (!player || !data) return;
+    if (mapOf(player) !== HOME_MAP) { // GĐ59: NPC đều ở Làng Tân Thủ
+      socket.emit('interact_error', { message: 'Nơi này không có ai để trò chuyện — về Làng Tân Thủ nhé.' });
+      return;
+    }
     const npc = NPC_BY_ID[data.npcId];
     if (!npc) return;
     if (Math.hypot(player.x - npc.x, player.y - npc.y) > 95) {
@@ -3721,6 +4677,7 @@ io.on('connection', (socket) => {
       } : null,
       sectInfo: npc.id === 'npc_sugia' ? sectInfoFor(player) : null, // GĐ30
       realmInfo: realmInfoFor(player, npc.id), // GĐ57: cổng bí cảnh
+      escortInfo: npc.id === 'npc_laibuan' ? escortInfoFor(player) : null, // GĐ60: việc hộ tống
     });
   });
 
@@ -3874,6 +4831,7 @@ io.on('connection', (socket) => {
     const eAtk = eliteAtkAt(9);
     const boss = {
       id: 'trial-' + ++monsterSeq, kind: 'trial', trialKind: 'sect', isTrialBoss: true, ownerId: player.id,
+      mapId: mapOf(player), // GĐ59
       name: 'Thử Thách Thú', x: 700, y: 712, hp: eHp * 4, maxHp: eHp * 4, atk: eAtk,
       vx: 0, vy: 0, direction: 'down', lastAttackAt: 0, lastSkillAt: 0, bornAt: Date.now(), phase2: false,
     };
@@ -4085,10 +5043,13 @@ setInterval(() => {
 // maxHp của quái, NPC tĩnh...). Client gộp delta vào trạng thái đã có.
 // Client mới vào được nhận riêng 1 bản FULL (đủ mọi trường) ngay sau welcome,
 // rồi gộp các delta phát chung như mọi người.
-const sentPlayers = new Map(); // id -> object trạng thái đã phát ở tick trước
-const sentMonsters = new Map();
-const sentDrops = new Map();
-const sentChests = new Map(); // GĐ39
+// GĐ59: cache delta TÁCH THEO MAP — mỗi map một bộ {players, monsters, drops, chests}
+const sentByMap = new Map(); // mapId -> cache
+function sentCacheFor(mapId) {
+  let c = sentByMap.get(mapId);
+  if (!c) { c = { players: new Map(), monsters: new Map(), drops: new Map(), chests: new Map() }; sentByMap.set(mapId, c); }
+  return c;
+}
 let lastNpcKey = ''; // GĐ40+: khóa danh sách NPC đã phát (theo lịch thương nhân)
 let lastSentWorldKey = -1; // GĐ20: khóa ngày×24+giờ của đồng hồ đã phát gần nhất
 
@@ -4108,8 +5069,8 @@ function playerSyncState(p) {
 function monsterSyncState(m) {
   return {
     id: m.id, x: Math.round(m.x), y: Math.round(m.y), hp: m.hp, maxHp: m.maxHp, direction: m.direction,
-    kind: m.kind, name: m.name || null, trial: m.kind === 'trial' ? m.trialKind : null, ownerId: m.ownerId || null,
-    st: Date.now() < (m.stunUntil || 0) ? 'stun' : Date.now() < (m.rootUntil || 0) ? 'root' : Date.now() < (m.slowUntil || 0) ? 'slow' : m.dots && m.dots.length ? 'dot' : null, // GĐ34
+    kind: m.kind, name: m.name || null, trial: m.kind === 'trial' ? m.trialKind : null, ownerId: m.ownerId || null, hidden: m.hidden ? 1 : 0, boss: (m.trialKind || m.mapBoss || MONSTER_TYPES[m.kind]?.minChestGrade) ? 1 : 0, // GĐ61: trùm/thử thách → thanh máu trùm trên HUD; GĐ70: + trùm theo map
+    st: (m.windupUntil && Date.now() < m.windupUntil) ? 'windup' : Date.now() < (m.stunUntil || 0) ? 'stun' : Date.now() < (m.rootUntil || 0) ? 'root' : Date.now() < (m.slowUntil || 0) ? 'slow' : m.dots && m.dots.length ? 'dot' : null, // GĐ34; GĐ70: + windup
   };
 }
 function dropSyncState(d) {
@@ -4146,17 +5107,19 @@ function diffInto(cache, cur, changed, gone) {
 function npcsForWorld() {
   return NPCS.filter((n) => n.id !== 'npc_thuongnhan' || merchantPresent());
 }
-function fullSnapshot() {
+function fullSnapshotFor(mapId) {
+  const inMap = (a) => mapOf(a) === mapId; // GĐ59: chỉ entity của map này
   return {
     v: 2, full: true,
-    players: Array.from(players.values()).map(playerSyncState),
-    monsters: Array.from(monsters.values()).map(monsterSyncState),
-    npcs: npcsForWorld(), // GĐ40+
-    drops: Array.from(drops.values()).map(dropSyncState),
-    chests: Array.from(chests.values()).map(chestSyncState), // GĐ39
+    players: Array.from(players.values()).filter(inMap).map(playerSyncState),
+    monsters: Array.from(monsters.values()).filter(inMap).map(monsterSyncState),
+    npcs: mapId === HOME_MAP ? npcsForWorld() : [], // GĐ40+ (NPC chỉ ở làng)
+    drops: Array.from(drops.values()).filter(inMap).map(dropSyncState),
+    chests: Array.from(chests.values()).filter(inMap).map(chestSyncState), // GĐ39
     world: worldClock(), // GĐ20
   };
 }
+function fullSnapshot() { return fullSnapshotFor(HOME_MAP); }
 
 // ------------------------- Vòng lặp tick của server -------------------------
 setInterval(() => {
@@ -4292,9 +5255,10 @@ setInterval(() => {
       // X/Y để trượt dọc tường nhà thay vì kẹt cứng
       // GĐ46: đang NÉ thì dùng hướng + tốc độ vọt, vẫn tôn trọng vật cản
       const dodging = p.dodgeUntil && Date.now() < p.dodgeUntil;
-      const mvx = dodging ? p.dodgeVx : p.input.vx;
-      const mvy = dodging ? p.dodgeVy : p.input.vy;
-      const spd = dodging ? DODGE_SPEED : speedOf(p.stats);
+      const stunnedP = Date.now() < (p.stunUntil || 0); // GĐ70: choáng → đứng yên
+      const mvx = stunnedP ? 0 : (dodging ? p.dodgeVx : p.input.vx);
+      const mvy = stunnedP ? 0 : (dodging ? p.dodgeVy : p.input.vy);
+      const spd = dodging ? DODGE_SPEED : speedOf(p.stats) * (Date.now() < (p.slowUntil || 0) ? 1 - (p.slowPct || 0) / 100 : 1); // GĐ70: bị chậm → tốc độ giảm
       const stepX = mvx * spd * dt;
       const stepY = mvy * spd * dt;
       const pStuck = hitsObstacle(p.x, p.y); // GĐ53: đang trong vùng cấm thì cho đi ra
@@ -4310,8 +5274,9 @@ setInterval(() => {
       // Hồi Chân nguyên: 2 + Thần thức × 0.2 mỗi giây
       p.mp = Math.min(maxMpOf(p.stats), p.mp + mpRegenOf(p.stats) * dt);
       // Không cho ra khỏi sân 1600×1200
-      p.x = Math.max(MARGIN, Math.min(WORLD_W - MARGIN, p.x));
-      p.y = Math.max(MARGIN, Math.min(WORLD_H - MARGIN, p.y));
+      const pd59 = mapDims(mapOf(p)); // GĐ59: biên theo map đang đứng
+      p.x = Math.max(MARGIN, Math.min(pd59.w - MARGIN, p.x));
+      p.y = Math.max(MARGIN, Math.min(pd59.h - MARGIN, p.y));
     }
   }
 
@@ -4332,7 +5297,59 @@ setInterval(() => {
       else monsters.delete(m.id);
     }
   }
-  for (const m of monsters.values()) updateMonster(m, dt);
+  // GĐ70: độc trên NGƯỜI CHƠI (quái độc cắn) + ảo ảnh tự tan sau 25s
+  for (const p of [...players.values()]) {
+    if (p.isBot || p.hp <= 0 || !p.dots?.length) continue;
+    const nowP = Date.now();
+    p.dots = p.dots.filter((d) => nowP < d.until);
+    if (!p.dots.length) continue;
+    const dps = p.dots.reduce((a, d) => a + d.dps, 0);
+    p.hp = Math.round((p.hp - dps * 0.1) * 10) / 10;
+    if (p.hp <= 0) handlePlayerDeath(p, { name: 'Độc' });
+  }
+  for (const m of [...monsters.values()]) if (m.illusion && Date.now() - (m.illusionBornAt || 0) > 25000) monsters.delete(m.id);
+  // GĐ60: map không có người chơi đang hoạt động thì quái đứng yên (tiết
+  // kiệm CPU khi có ~600 quái khắp 50 map siêu to; hồi sinh chạy theo giờ)
+  const activeMaps60 = new Set();
+  for (const p of players.values()) if (!p.isOffline) activeMaps60.add(mapOf(p));
+  for (const m of monsters.values()) if (activeMaps60.has(mapOf(m))) updateMonster(m, dt);
+
+  // GĐ60: HÀNH TRÌNH (ngự kiếm / đi thuyền) — tới giờ là tới nơi
+  for (const p of players.values()) {
+    if (!p.journey) continue;
+    if (p.isOffline) { p.journey = null; continue; }
+    if (Date.now() < p.journey.arriveAt) continue;
+    const j = p.journey; p.journey = null;
+    const rtJ = MAP_RUNTIME.get(j.dest);
+    const posJ = j.dest === HOME_MAP ? { x: 1080, y: 664 } : rtJ ? { x: rtJ.portal.x, y: rtJ.portal.y - 56 } : null;
+    if (!posJ) continue;
+    const sockJ = io.sockets.sockets.get(p.id);
+    if (sockJ) {
+      switchPlayerMap(sockJ, p, j.dest, posJ);
+      sockJ.emit('notice', { text: j.method === 'boat' ? `⛵ Thuyền đã cập bến — ${MAP_DEFS.get(j.dest)?.name || j.dest}` : `🗡 Ngự kiếm đã tới — ${MAP_DEFS.get(j.dest)?.name || j.dest}` });
+    } else { p.mapId = j.dest; p.x = posJ.x; p.y = posJ.y; }
+  }
+  // GĐ60: HỐ LỬA ở map dung nham — đứng trong vòng lửa bị thiêu 9 HP/s
+  if (Date.now() - lastHazardMs60 >= 1000) {
+    lastHazardMs60 = Date.now();
+    for (const p of players.values()) {
+      if (p.isBot || p.isOffline || p.isCompanion || p.hp <= 0) continue;
+      const rtH = MAP_RUNTIME.get(mapOf(p));
+      if (!rtH || !rtH.hazards || !rtH.hazards.length) continue;
+      for (const hz of rtH.hazards) {
+        if (Math.hypot(p.x - hz.x, p.y - hz.y) < hz.r) { hitPlayer(p, 9, 'magic', { id: 'hố lửa', name: 'Hố lửa' }); break; }
+      }
+    }
+  }
+  // GĐ60: HỘ TỐNG — người + thương nhân cùng tới điểm giao hàng là xong
+  for (const p of players.values()) {
+    if (!p.escort || p.isBot || p.isOffline) continue;
+    if (mapOf(p) !== p.escort.dest) continue;
+    const mer = players.get(p.escort.merchantId);
+    if (!mer) { p.escort = null; continue; }
+    const d = p.escort.delivery;
+    if (Math.hypot(p.x - d.x, p.y - d.y) < 130 && Math.hypot(mer.x - d.x, mer.y - d.y) < 220) completeEscort(p);
+  }
 
   // Đồ rơi (GĐ8): hết hạn thì xóa; người chơi đi qua gần là tự nhặt
   if (drops.size) {
@@ -4344,6 +5361,7 @@ setInterval(() => {
       }
       for (const p of players.values()) {
         if (p.isBot) continue;
+        if (mapOf(p) !== mapOf(d)) continue; // GĐ59
         if (Math.hypot(p.x - d.x, p.y - d.y) <= PICKUP_RANGE) {
           drops.delete(d.id);
           if (d.kind === 'stones') {
@@ -4373,6 +5391,7 @@ setInterval(() => {
       }
       for (const p of players.values()) {
         if (p.isBot || p.isOffline || p.isCompanion) continue;
+        if (mapOf(p) !== mapOf(c)) continue; // GĐ59
         if (Math.hypot(p.x - c.x, p.y - c.y) <= CHEST_OPEN_RANGE) {
           chests.delete(c.id);
           const loot = rollChestLoot(c.grade);
@@ -4380,8 +5399,12 @@ setInterval(() => {
           for (const l of loot) {
             if (l.kind === 'stones') {
               const amt = Math.max(1, Math.round(l.amount * rewardFactorOf(p)));
-              p.stones = (p.stones || 0) + amt;
-              lines.push(`${amt} Linh thạch`);
+              const sg = c.stoneGrade || 'ha'; // GĐ67: phẩm linh thạch theo quái rơi rương
+              if (sg === 'trung') p.stonesTrung = (p.stonesTrung || 0) + amt;
+              else if (sg === 'thuong') p.stonesThuong = (p.stonesThuong || 0) + amt;
+              else if (sg === 'cuc') p.stonesCuc = (p.stonesCuc || 0) + amt;
+              else p.stones = (p.stones || 0) + amt;
+              lines.push(`${amt} Linh thạch ${STONE_GRADE_NAME[sg] || 'Hạ phẩm'}`);
             } else {
               p.inventory[l.itemId] = (p.inventory[l.itemId] || 0) + l.qty;
               lines.push(`${ITEMS[l.itemId]?.name || l.itemId} ×${l.qty}`);
@@ -4400,30 +5423,42 @@ setInterval(() => {
     }
   }
 
-  // BROADCAST delta: chỉ entity/trường thay đổi so với tick trước (A+B)
-  const curP = new Map(); for (const p of players.values()) curP.set(p.id, playerSyncState(p));
-  const curM = new Map(); for (const m of monsters.values()) curM.set(m.id, monsterSyncState(m));
-  const curD = new Map(); for (const d of drops.values()) curD.set(d.id, dropSyncState(d));
-  const curC = new Map(); for (const c of chests.values()) curC.set(c.id, chestSyncState(c));
-  const delta = { v: 2, full: false, players: [], playersGone: [], monsters: [], monstersGone: [], drops: [], dropsGone: [], chests: [], chestsGone: [] };
-  diffInto(sentPlayers, curP, delta.players, delta.playersGone);
-  diffInto(sentMonsters, curM, delta.monsters, delta.monstersGone);
-  diffInto(sentDrops, curD, delta.drops, delta.dropsGone);
-  diffInto(sentChests, curC, delta.chests, delta.chestsGone);
-  // GĐ40+: danh sách NPC đổi (thương nhân tới/rời) → gửi lại nguyên danh sách
+  // BROADCAST delta THEO MAP (GĐ59): gom entity theo map, diff với cache
+  // riêng của map, phát vào phòng 'map:<id>' — client chỉ thấy map mình đứng.
+  // Map không có socket nào thì bỏ qua + xóa cache (người vào sau nhận FULL).
+  const byMap59 = new Map();
+  const bucket59 = (mid) => {
+    let b = byMap59.get(mid);
+    if (!b) { b = { players: new Map(), monsters: new Map(), drops: new Map(), chests: new Map() }; byMap59.set(mid, b); }
+    return b;
+  };
+  for (const p of players.values()) bucket59(mapOf(p)).players.set(p.id, playerSyncState(p));
+  for (const m of monsters.values()) bucket59(mapOf(m)).monsters.set(m.id, monsterSyncState(m));
+  for (const d of drops.values()) bucket59(mapOf(d)).drops.set(d.id, dropSyncState(d));
+  for (const c of chests.values()) bucket59(mapOf(c)).chests.set(c.id, chestSyncState(c));
+  // GĐ40+: danh sách NPC đổi (thương nhân tới/rời) → gửi lại cho phòng làng
   const npcListNow = npcsForWorld();
   const npcKey = npcListNow.map((n) => n.id).join(',');
-  if (npcKey !== lastNpcKey) {
-    lastNpcKey = npcKey;
-    delta.npcs = npcListNow;
-  }
+  const npcChanged = npcKey !== lastNpcKey;
+  if (npcChanged) lastNpcKey = npcKey;
   // GĐ20: đồng hồ chỉ phát kèm tick khi GIỜ đổi (nhẹ băng thông)
   const wKey = wcNow.dayIndex * 24 + wcNow.hour;
-  if (wKey !== lastSentWorldKey) {
-    lastSentWorldKey = wKey;
-    delta.world = wcNow;
+  const worldChanged = wKey !== lastSentWorldKey;
+  if (worldChanged) lastSentWorldKey = wKey;
+  for (const mapId of new Set([...byMap59.keys(), ...sentByMap.keys()])) {
+    const room = io.sockets.adapter.rooms.get('map:' + mapId);
+    if (!room || room.size === 0) { sentByMap.delete(mapId); continue; }
+    const cache = sentCacheFor(mapId);
+    const cur = byMap59.get(mapId) || { players: new Map(), monsters: new Map(), drops: new Map(), chests: new Map() };
+    const delta = { v: 2, full: false, players: [], playersGone: [], monsters: [], monstersGone: [], drops: [], dropsGone: [], chests: [], chestsGone: [] };
+    diffInto(cache.players, cur.players, delta.players, delta.playersGone);
+    diffInto(cache.monsters, cur.monsters, delta.monsters, delta.monstersGone);
+    diffInto(cache.drops, cur.drops, delta.drops, delta.dropsGone);
+    diffInto(cache.chests, cur.chests, delta.chests, delta.chestsGone);
+    if (mapId === HOME_MAP && npcChanged) delta.npcs = npcListNow;
+    if (worldChanged) delta.world = wcNow;
+    io.to('map:' + mapId).emit('server_tick', delta);
   }
-  io.emit('server_tick', delta);
 }, TICK_MS);
 
 // Khởi động: nếu có MONGODB_URI thì đồng bộ dữ liệu từ cloud xuống

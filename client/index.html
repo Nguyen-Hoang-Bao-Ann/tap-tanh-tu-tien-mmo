@@ -586,6 +586,316 @@
       }
       /* GĐ58: thẻ nhân vật trên mobile không tràn xuống cụm nút chiêu — cao tối đa rồi cuộn trong thẻ */
       body.touch #hudChar { max-height: calc(100vh - 128px); overflow-y: auto; overscroll-behavior: contain; }
+      /* GĐ60: thanh hành trình ngự kiếm / thuyền */
+      #journeyBar {
+        display: none; position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+        z-index: 60; background: rgba(16, 34, 26, 0.88); color: #ffe9a8;
+        border: 1px solid rgba(255, 217, 77, 0.55); border-radius: 99px;
+        padding: 6px 16px; font-size: 13.5px; pointer-events: none; white-space: nowrap;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+      }
+      /* GĐ60: panel Bản đồ thế giới (bấm vào minimap) */
+      #worldMapPanel {
+        display: none; position: fixed; z-index: 55;
+        left: 50%; top: 50%; transform: translate(-50%, -50%);
+        width: min(560px, 94vw); max-height: 92vh; overflow-y: auto;
+        background: rgba(14, 30, 22, 0.97); border: 1px solid rgba(139, 233, 201, 0.4);
+        border-radius: 14px; padding: 12px 14px; color: #e8f2ea;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      }
+      #worldMapPanel .panelHead { display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 700; color: #a9e8c9; margin-bottom: 8px; }
+      #wmCanvas { display: block; margin: 0 auto 8px; max-width: 100%; border-radius: 8px; }
+      /* ===== GĐ61: BỐ CỤC HUD THEO ẢNH MẪU NGƯỜI CHƠI GỬI (24/10) =====
+         Trái trên: thẻ nhân vật + Linh thạch + nhiệm vụ ngay dưới.
+         Giữa trên: pill vùng + đồng hồ + THANH TRÙM. Phải trên: minimap
+         (tên vùng trên đầu) + hàng nút công cụ có nhãn. Trái dưới: nhật ký
+         thông báo. Giữa dưới: khay chiêu ô vuông bo góc. */
+      #hudChar {
+        top: 10px; left: 10px; width: 214px; padding: 8px 10px; border-radius: 14px;
+        background: rgba(7, 13, 10, 0.68); border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      }
+      #hudChar .bar { height: 12px; border-radius: 6px; }
+      #hudChar .bar span { line-height: 12px; font-size: 9.5px; }
+      #hudStones {
+        display: inline-block; margin-top: 5px; padding: 2.5px 10px; border-radius: 999px;
+        background: rgba(0, 0, 0, 0.42); border: 1px solid rgba(255, 217, 77, 0.35);
+        color: #ffe9a8; font-size: 11px; font-weight: 700;
+      }
+      #questTracker {
+        margin-top: 7px; padding: 6px 8px; border-top: none; border-radius: 10px;
+        background: rgba(0, 0, 0, 0.34); font-size: 10.5px; color: #ffe9a8;
+      }
+      #minimapWrap {
+        top: 10px; right: 10px; bottom: auto; left: auto; border-radius: 12px; overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(7, 13, 10, 0.78);
+        pointer-events: auto; cursor: pointer; flex-direction: column;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      }
+      body.ingame #minimapWrap { display: flex; }
+      #minimapLabel {
+        order: -1; font-size: 10.5px; font-weight: 700; color: #eaf5ec; letter-spacing: 0.6px;
+        padding: 4px 0 5px; background: rgba(0, 0, 0, 0.35);
+      }
+      #sideBtns { top: 190px; right: 10px; flex-direction: row; gap: 6px; }
+      body.ingame #sideBtns { display: flex; }
+      #sideBtns button {
+        width: 47px; height: 52px; border-radius: 12px; padding: 3px 0 2px;
+        background: rgba(7, 13, 10, 0.68); border: 1px solid rgba(255, 255, 255, 0.15);
+        font-size: 19px; line-height: 1.1; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      }
+      #sideBtns button span { font-size: 8.5px; color: #cfe3d4; margin-top: 2px; letter-spacing: 0.2px; }
+      #zoneBanner { top: 10px; font-size: 12.5px; padding: 5px 16px; background: rgba(7, 13, 10, 0.72); }
+      #hudClock { top: 42px; }
+      #bossBar {
+        position: absolute; top: 66px; left: 50%; transform: translateX(-50%); z-index: 6;
+        width: min(540px, 62vw); display: none; pointer-events: none;
+      }
+      body.ingame #bossBar.on { display: block; }
+      #bossName {
+        text-align: center; font-size: 13px; font-weight: 800; color: #ffb3b3;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85); margin-bottom: 3px; letter-spacing: 0.4px;
+      }
+      #bossBar .bossTrack {
+        height: 13px; border-radius: 7px; position: relative; overflow: hidden;
+        background: rgba(30, 8, 10, 0.78); border: 1px solid rgba(255, 120, 120, 0.55);
+      }
+      #bossHpFill { height: 100%; width: 100%; background: linear-gradient(90deg, #a31621, #e5484d); transition: width 0.18s; }
+      #bossHpText {
+        position: absolute; inset: 0; text-align: center; font-size: 9.5px; line-height: 13px;
+        color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+      }
+      #journeyBar { top: 112px; }
+      #gameLog {
+        position: absolute; left: 10px; bottom: 10px; width: 312px; z-index: 5; display: none;
+        pointer-events: none;
+      }
+      body.ingame #gameLog { display: block; }
+      #gameLog .logLine {
+        margin-top: 4px; padding: 4px 9px; border-radius: 8px; font-size: 11px; line-height: 1.4;
+        color: #d9e8dc; background: rgba(7, 13, 10, 0.58); border-left: 3px solid rgba(139, 233, 201, 0.55);
+        transition: opacity 1.2s;
+      }
+      body.ingame #invBtn { display: none; } /* GĐ61: trùng nút Túi đồ ở hàng công cụ phải trên */
+      #skillBar .slot { border-radius: 14px; background: rgba(7, 13, 10, 0.7); border: 1px solid rgba(255, 255, 255, 0.17); }
+      #skillBar .slot.util { border-radius: 12px; }
+      #skillBar .slot .key { background: rgba(0, 0, 0, 0.5); border-radius: 4px; padding: 0 3px; top: 3px; left: 3px; }
+      #skillAnnounce {
+        position: absolute; top: 25%; left: 50%; transform: translateX(-50%); z-index: 8;
+        font-family: Georgia, 'Times New Roman', serif; font-size: 34px; font-weight: 800;
+        color: #ffd94d; letter-spacing: 1.5px; white-space: nowrap; pointer-events: none;
+        text-shadow: 0 2px 0 #7a4b00, 0 0 20px rgba(255, 180, 0, 0.5), 0 3px 8px rgba(0, 0, 0, 0.65);
+        opacity: 0;
+      }
+      #skillAnnounce.show { animation: announcePop 1.2s ease-out forwards; }
+      @keyframes announcePop {
+        0% { opacity: 0; transform: translateX(-50%) scale(0.75); }
+        18% { opacity: 1; transform: translateX(-50%) scale(1.06); }
+        30% { transform: translateX(-50%) scale(1); }
+        78% { opacity: 1; }
+        100% { opacity: 0; transform: translateX(-50%) scale(1.02); }
+      }
+      /* GĐ61 trên cảm ứng: gọn lại theo mẫu mobile */
+      body.touch #hudChar { width: 178px; padding: 6px 7px; top: 8px; left: 8px; }
+      body.touch #minimapWrap { top: 8px; right: 8px; bottom: auto; left: auto; }
+      body.touch #minimap { width: 108px; height: 81px; }
+      body.touch #minimapLabel { font-size: 8.5px; padding: 2px 0 3px; }
+      body.touch #sideBtns { top: 116px; right: 8px; gap: 4px; }
+      body.touch #sideBtns button { width: 39px; height: 44px; font-size: 16px; border-radius: 10px; }
+      body.touch #sideBtns button span { font-size: 7.5px; }
+      body.touch #bossBar { top: 58px; width: 52vw; }
+      body.touch #journeyBar { top: 100px; }
+      body.touch #gameLog { bottom: 122px; width: 208px; }
+      body.touch #gameLog .logLine { font-size: 9.5px; padding: 3px 7px; }
+      body.touch #skillAnnounce { font-size: 23px; top: 21%; }
+      /* ===== GĐ62 (24/10, theo góp ý mobile của người chơi): =====
+         1) Joystick + nút đánh thường dời sát góc + to hơn cho ngón tay.
+         2) Thanh máu / Chân nguyên TÁCH khỏi thẻ, xuống giữa dưới.
+         3) Hàng nút công cụ thu nhỏ, ôm sát minimap. */
+      #touchBars { display: none; }
+      body.touch.ingame #touchBars {
+        display: block; position: absolute; left: 50%; transform: translateX(-50%);
+        bottom: 10px; width: min(330px, 36vw); z-index: 6; pointer-events: none;
+      }
+      #touchBars .tbar {
+        height: 15px; border-radius: 8px; position: relative; overflow: hidden; margin-top: 4px;
+        background: rgba(10, 14, 12, 0.62); border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      #touchBars .tbar > div { height: 100%; width: 100%; transition: width 0.18s; }
+      #hudHpFillT { background: linear-gradient(90deg, #c22e35, #e5484d); }
+      #hudMpFillT { background: linear-gradient(90deg, #1d5fd1, #4da3ff); }
+      #touchBars .tbar span {
+        position: absolute; inset: 0; text-align: center; font-size: 10px; line-height: 15px;
+        color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85); font-weight: 700;
+      }
+      body.touch #hudChar .bar:has(#hudHpFill), body.touch #hudChar .bar:has(#hudMpFill) { display: none; }
+      body.touch #joy { width: 102px; height: 102px; left: 8px; bottom: 10px; }
+      body.touch #joyKnob { width: 44px; height: 44px; }
+      body.touch #tAtk { width: 66px; height: 66px; right: 8px; bottom: 10px; font-size: 25px; }
+      body.touch #sideBtns { top: 110px; gap: 3px; }
+      body.touch #sideBtns button { width: 34px; height: 38px; font-size: 14.5px; border-radius: 9px; }
+      body.touch #sideBtns button span { font-size: 7px; margin-top: 1px; }
+      /* ===== GĐ63 (24/10, góp ý mobile đợt 2 của người chơi): =====
+         1) Joystick + ⚔ cách góc/mép ÍT NHẤT 15px (đặt tay lên máy dễ chịu).
+         2) Thanh máu/Chân nguyên nhỏ lại còn một nửa.
+         3) Hàng nút công cụ ÔM quanh minimap: lưới 2 cột × 3 hàng ôm sát
+            mép TRÁI minimap, cao ngang minimap.
+         4) Panel bản đồ (bấm minimap) trên mobile: popup to giữa màn hình. */
+      body.touch #joy { left: 16px; bottom: 16px; }
+      body.touch #tAtk { right: 16px; bottom: 16px; }
+      body.touch #tSkill0 { right: 96px; bottom: 26px; }
+      body.touch #tSkill1 { right: 80px; bottom: 80px; }
+      body.touch #tSkill2 { right: 30px; bottom: 94px; }
+      body.touch #tAct { right: 152px; bottom: 20px; }
+      body.touch .tbtn.tutil { right: 156px; }
+      body.touch #tUtil0 { bottom: 70px; }
+      body.touch #tUtil1 { bottom: 116px; }
+      body.touch #tUtil2 { bottom: 162px; }
+      body.touch #tUtil3 { bottom: 208px; }
+      body.touch.ingame #touchBars { width: min(205px, 25vw); bottom: 12px; }
+      #touchBars .tbar { height: 15px; }
+      body.touch #touchBars .tbar { height: 11px; margin-top: 3px; }
+      body.touch #touchBars .tbar span { font-size: 8.5px; line-height: 11px; }
+      body.touch #sideBtns {
+        display: grid; grid-template-rows: repeat(3, 38px); grid-auto-flow: column;
+        grid-auto-columns: 34px; gap: 3px; top: 8px; right: 122px;
+      }
+      body.touch #worldMapPanel { width: 97vw; max-height: 94vh; padding: 10px; }
+      body.touch #wmCanvas { width: 100%; height: auto; }
+      /* ===== GĐ64 (24/10, góp ý mobile đợt 3): =====
+         1) Thẻ nhân vật thu nhỏ. 2) 5 ô chiêu xếp quạt đều quanh nút ⚔.
+         3) Thanh máu/Chân nguyên mỏng hơn + dài ra. */
+      body.touch #hudChar { width: 156px; padding: 4px 5px; border-radius: 11px; top: 6px; left: 6px; }
+      body.touch #hudAvatar { width: 24px; height: 24px; margin: 0 4px 1px 0; border-width: 1.5px; }
+      body.touch #hudName { font-size: 11px; }
+      body.touch #hudClass { font-size: 8px; margin-bottom: 1px; }
+      body.touch #hudRealm, body.touch #hudAge, body.touch #hudLinhCan { font-size: 8px; line-height: 1.15; }
+      body.touch #hudSect { font-size: 8.5px !important; }
+      body.touch #hudChar .bar { height: 10px; margin: 1.5px 0; }
+      body.touch #hudChar .bar span { line-height: 10px; font-size: 8.5px; }
+      body.touch #hudDetailBtn { font-size: 9.5px; padding: 2.5px 0; }
+      body.touch #hudStones { font-size: 9.5px; padding: 1.5px 7px; margin-top: 3px; }
+      body.touch #hudLearn, body.touch #hudBreak { font-size: 9.5px !important; padding: 3.5px 0 !important; }
+      body.touch #questTracker { font-size: 9px; padding: 4px 6px; margin-top: 5px; }
+      body.touch .tbtn[id^="tSkill"] { width: 42px; height: 42px; font-size: 8.5px; }
+      body.touch #tSkill0 { right: 151px; bottom: 36px; }
+      body.touch #tSkill1 { right: 139px; bottom: 79px; }
+      body.touch #tSkill2 { right: 112px; bottom: 118px; }
+      body.touch #tSkill3 { right: 69px; bottom: 144px; }
+      body.touch #tSkill4 { right: 27px; bottom: 163px; }
+      body.touch #tAct { right: 204px; bottom: 14px; }
+      body.touch .tbtn.tutil { right: 208px; }
+      body.touch #tUtil0 { bottom: 66px; }
+      body.touch #tUtil1 { bottom: 112px; }
+      body.touch #tUtil2 { bottom: 158px; }
+      body.touch #tUtil3 { bottom: 204px; }
+      body.touch.ingame #touchBars { width: min(300px, 36vw); }
+      body.touch #touchBars .tbar { height: 9px; margin-top: 2.5px; }
+      body.touch #touchBars .tbar span { font-size: 8px; line-height: 9px; }
+      /* ===== GĐ65 (24/10, góp ý mobile đợt 4): =====
+         1) Quạt chiêu THU SÁT nút ⚔: đo thật GĐ64 cho thấy mép nút ⚔ cách
+            mép chiêu 69–81px (khoảng trống chết) mà các nút chiêu lại sát
+            nhau chỉ hở 0,6px (nhìn như bị đè). Hình học giới hạn: 5 nút
+            40px trên vòng R=92 quanh ⚔, góc −12°/16°/44°/72°/100° → mép
+            ⚔–chiêu còn 39px, tâm kề 44,5px (hở 4,5px, hết chạm nhau).
+            Góc −12°/100° vượt ra khỏi góc phần tư để đủ chỗ, nhưng vẫn
+            cách mép màn hình ≥10px. Né dời sang trái Chiêu 1, cách tâm
+            Chiêu 1 đúng 50px (hết chạm). Ô đa dụng thành cột ôm sát
+            bên trái cụm mới. Chỉ body.touch — desktop không đổi. */
+      body.touch .tbtn[id^="tSkill"] { width: 40px; height: 40px; font-size: 8.5px; }
+      /* Chú ý: luật cũ ở pha trước dùng selector ID (#tSkill0…) nên thắng
+         luật class — phải ghi đè lại bằng chính selector ID mới thu nhỏ được. */
+      body.touch #tSkill0, body.touch #tSkill1, body.touch #tSkill2,
+      body.touch #tSkill3, body.touch #tSkill4 { width: 40px; height: 40px; }
+      body.touch #tSkill0 { right: 119px; bottom: 10px; }
+      body.touch #tSkill1 { right: 117px; bottom: 54px; }
+      body.touch #tSkill2 { right: 95px; bottom: 93px; }
+      body.touch #tSkill3 { right: 57px; bottom: 117px; }
+      body.touch #tSkill4 { right: 13px; bottom: 120px; }
+      /* GĐ65b: cặp Né + tương tác từng đè nhau (tâm cách nhau chỉ ~13px
+         ở GĐ64, nút tương tác bị Né che gần hết): xếp thành cặp dọc bên
+         trái Chiêu 1 — Né dưới, tương tác trên, tâm cách nhau 48px và
+         cách Chiêu 1/Chiêu 2 ≥50px. */
+      body.touch #tDodge { right: 171px; bottom: 12px; }
+      body.touch #tAct { right: 171px; bottom: 60px; }
+      body.touch .tbtn.tutil { right: 217px; }
+      body.touch #tUtil0 { bottom: 12px; }
+      body.touch #tUtil1 { bottom: 58px; }
+      body.touch #tUtil2 { bottom: 104px; }
+      body.touch #tUtil3 { bottom: 150px; }
+      /* GĐ65: popup bản đồ sang hơn — nền gradient, viền sáng, tiêu đề lớn */
+      #worldMapPanel {
+        background: linear-gradient(180deg, rgba(20, 42, 31, 0.98), rgba(10, 22, 16, 0.98));
+        border: 1px solid rgba(139, 233, 201, 0.45); border-radius: 18px;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+      #worldMapPanel .panelHead { font-size: 17px; letter-spacing: 0.3px; }
+      #wmCanvas { border: 1px solid rgba(139, 233, 201, 0.25); border-radius: 12px; }
+      #wmClose { border-radius: 50%; width: 26px; height: 26px; padding: 0; line-height: 24px; }
+      .wmLegend { display: flex; flex-wrap: wrap; gap: 5px; margin: 2px 0 4px; }
+      .wmLegend span { font-size: 10.5px; color: #c9e8d6; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 99px; padding: 2px 8px; }
+      /* ===== GĐ66 (24/10, góp ý mobile đợt 5): =====
+         1) Thẻ gọn: Linh thạch tách khỏi khung thẻ → pill riêng cố định
+            dưới minimap (chỉ cảm ứng; desktop giữ nguyên trong thẻ).
+            Bỏ dòng "Công pháp — học chiêu mới" trong thẻ → chấm đỏ có số
+            trên nút Công pháp (số chiêu đủ điều kiện, chưa học). Bỏ dòng
+            "Chỉ số · còn N điểm" trên cảm ứng → chấm đỏ có số trên góc
+            avatar (chạm thẻ vẫn mở bảng chỉ số như cũ). Bỏ chữ
+            "(Kim Đan chưa mở)" ở dòng cảnh giới. Thu gọn thẻ khi chưa mở:
+            ẩn dòng Tuổi + Linh căn (mở thẻ ra vẫn thấy đủ; riêng cảnh báo
+            Ân hạn tọa hóa thì luôn hiện).
+         2) Bỏ nút tương tác (E/…) riêng — tích hợp vào nút ⚔.
+         3) Ô đa dụng + bình thuốc luôn hiện nút kể cả khi trống. */
+      #sideBtns button { position: relative; }
+      .sideBadge { position: absolute; top: -5px; right: -5px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 99px; background: #e5484d; color: #fff; font-size: 10px; font-weight: 800; line-height: 17px; text-align: center; border: 1.5px solid #2a0d0d; z-index: 3; pointer-events: none; }
+      .avatarBadge { position: absolute; top: 0; left: 2px; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 99px; background: #e5484d; color: #fff; font-size: 10px; font-weight: 800; line-height: 16px; text-align: center; border: 1.5px solid #2a0d0d; z-index: 3; pointer-events: none; }
+      body.touch #hudDetailBtn { display: none; }
+      body.touch #hudChar:not(.expanded):not(.grace) #hudAge { display: none; }
+      body.touch #hudChar:not(.expanded) #hudLinhCan { display: none; }
+      body.touch #hudStones { position: fixed; top: 134px; right: 8px; z-index: 7; margin-top: 0; }
+      body.touch #tAct { display: none; }
+      #tAtk.isInteract { background: rgba(16, 72, 48, 0.92); border-color: rgba(87, 201, 139, 0.95); color: #d7ffe8; }
+      /* Ô đa dụng về hàng ngang đáy giữa (như GĐ48 từng chốt) thay cho cột
+         phải — đều 3 vùng, không chạm thanh HP/MP (nút cao 36, đáy 45). */
+      body.touch .tbtn.tutil { right: auto; bottom: 45px; }
+      body.touch #tUtil0 { left: calc(50% - 81px); bottom: 45px; }
+      body.touch #tUtil1 { left: calc(50% - 39px); bottom: 45px; }
+      body.touch #tUtil2 { left: calc(50% + 3px); bottom: 45px; }
+      body.touch #tUtil3 { left: calc(50% + 45px); bottom: 45px; }
+      body.touch .tbtn.tutil.empty { border-style: dashed; opacity: 0.65; }
+      body.touch #tPotion { width: 36px; height: 36px; left: calc(50% - 129px); bottom: 45px; font-size: 13px; }
+      body.touch #tPotion.empty { border-style: dashed; opacity: 0.7; }
+      /* GĐ66 sửa nhỏ (2): pill Linh thạch bấm được để mở panel ví.
+         Cần pointer-events: auto vì thẻ chỉ có auto trên cảm ứng
+         (body.touch #hudChar) — desktop click sẽ xuyên xuống canvas. */
+      #hudStones { cursor: pointer; pointer-events: auto; }
+      /* GĐ67: panel ví nhỏ lại (theo ý người chơi), không dòng mô tả */
+      #stonesPanel { width: 216px; box-sizing: border-box; padding: 8px 12px; }
+      #stonesBody .prow { padding: 5px 0; font-size: 13px; }
+      /* GĐ68: icon công pháp — hàng Sổ (28px) + nút chiêu cảm ứng (34px) */
+      .skicon { width: 28px; height: 28px; flex: 0 0 auto; border-radius: 7px; align-self: flex-start; margin-top: 2px; }
+      .tbtn img.skicon-touch { width: 34px; height: 34px; border-radius: 8px; display: block; margin: 0 auto; }
+
+      /* GĐ69: Sổ công pháp mở như 1 tab mới — ngang, rộng, cuộn dọc
+         (thay panel hẹp 268px bên phải hay bị tràn tab + che nút). */
+      #learnPanel {
+        left: 50%; right: auto; transform: translateX(-50%);
+        top: 24px; bottom: 20px; width: min(900px, 94vw);
+        box-sizing: border-box; overflow-y: auto;
+      }
+      #learnPanel .panelHead {
+        position: sticky; top: 0; z-index: 2;
+        background: rgba(10, 18, 12, 0.97); padding-top: 2px; padding-bottom: 6px;
+      }
+      /* GĐ69: khay chiêu desktop chỉ hiện icon, bỏ chữ (tên + chân nguyên).
+         Số phím nhỏ ở góc giữ lại để biết bấm phím nào. */
+      #skillBar .slot img.skicon-desk { width: 44px; height: 44px; border-radius: 10px; display: block; margin: 4px auto 0; }
+      #skillBar .slot.util img.skicon-desk { width: 34px; height: 34px; border-radius: 8px; }
+      /* GĐ71: mặt nút toolbar = tile tròn Kenney (CC0, 32px -> 38px, chỉ là
+         background nên KHÔNG đổi kích thước/vị trí nút). */
+      #sideBtns button { background-image: url(/ui/btn-face.png); background-size: 100% 100%; image-rendering: pixelated; }
     </style>
   </head>
   <body>
@@ -593,6 +903,7 @@
       <!-- Panel nhân vật trong game -->
       <div id="hudChar">
         <canvas id="hudAvatar" width="52" height="52"></canvas>
+        <span id="hudAvatarBadge" class="avatarBadge" style="display:none"></span>
         <div id="hudName">—</div>
         <div id="hudClass">—</div>
         <div id="hudRealm">Phàm nhân</div>
@@ -614,14 +925,19 @@
       <div id="zoneBanner">📍 Làng Tân Thủ · An toàn</div>
       <!-- GĐ20: đồng hồ thế giới + phủ tối ban đêm -->
       <div id="hudClock">☀️ —</div>
+      <div id="touchBars"><div class="tbar"><div id="hudHpFillT"></div><span id="hudHpTextT">HP</span></div><div class="tbar"><div id="hudMpFillT"></div><span id="hudMpTextT">Chân nguyên</span></div></div>
+      <div id="bossBar"><div id="bossName">Trùm</div><div class="bossTrack"><div id="bossHpFill"></div><span id="bossHpText"></span></div></div>
+      <div id="skillAnnounce"></div>
+      <div id="gameLog"></div>
       <div id="nightOverlay"></div>
-      <div id="minimapWrap"><canvas id="minimap" width="380" height="284"></canvas><div id="minimapLabel">LÀNG TÂN THỦ</div></div>
+      <div id="minimapWrap" title="Bấm để mở Bản đồ thế giới"><canvas id="minimap" width="380" height="284"></canvas><div id="minimapLabel">LÀNG TÂN THỦ</div></div>
       <div id="sideBtns">
-        <button id="sideBag" type="button" title="Túi đồ (I)">🎒</button>
-        <button id="sideQuest" type="button" title="Nhiệm vụ">📜</button>
-        <button id="sideJob" type="button" title="Nghề phụ">🔨</button>
-        <button id="sideAch" type="button" title="Thành tựu">🏆</button>
-        <button id="sideMenu" type="button" title="Menu">⚙</button>
+        <button id="sideBag" type="button" title="Túi đồ (I)">🎒<span>Túi đồ</span></button>
+        <button id="sideQuest" type="button" title="Nhiệm vụ">📜<span>Nhiệm vụ</span></button>
+        <button id="sideSkills" type="button" title="Công pháp (K)">📖<span>Công pháp</span><b class="sideBadge" id="skillBadge" style="display:none"></b></button>
+        <button id="sideJob" type="button" title="Nghề phụ">🔨<span>Nghề</span></button>
+        <button id="sideAch" type="button" title="Thành tựu + Bảng Vàng">🏆<span>Thành tựu</span></button>
+        <button id="sideMenu" type="button" title="Menu">⚙<span>Menu</span></button>
       </div>
       <div id="touchUI">
         <div id="joy"><div id="joyKnob"></div></div>
@@ -637,6 +953,7 @@
         <button class="tbtn tutil" id="tUtil3" type="button" style="display:none">Đ4</button>
         <button class="tbtn" id="tAtk" type="button">⚔</button>
         <button class="tbtn" id="tDodge" type="button">Né</button>
+        <button class="tbtn" id="tPotion" type="button" title="Bình thuốc">💊</button>
       </div>
 
       <!-- Thanh công pháp + gợi ý tương tác -->
@@ -683,6 +1000,11 @@
         <div class="panelSub" id="invStones"></div>
         <div id="invBody"></div>
       </div>
+      <!-- GĐ66 sửa nhỏ (2): panel Ví Linh thạch — bấm pill Linh thạch thì mở -->
+      <div id="stonesPanel" class="panel">
+        <div class="panelHead"><span>💠 Linh thạch</span><button class="xBtn" id="stonesClose" type="button">✕</button></div>
+        <div id="stonesBody"></div>
+      </div>
 
       <!-- Nút + panel menu trong game (GĐ10) -->
       <button id="menuBtn" type="button">⚙ Menu</button>
@@ -693,6 +1015,7 @@
         <button class="menuAction" id="menuExitBtn" type="button">🚪 Thoát về màn hình chính</button>
         <button class="menuAction danger" id="menuLogoutBtn" type="button">Đăng xuất</button>
         <div class="note">Đổi màu áo áp dụng ngay và được lưu lại. Thoát về màn hình chính giữ nguyên phiên đăng nhập.</div>
+        <div class="note">Icon chiêu: <a href="https://game-icons.net" target="_blank" rel="noopener">game-icons.net</a> (CC BY 3.0) · Khung/nút: Kenney.nl (CC0).</div>
       </div>
 
       <!-- Màn hình chờ / đăng nhập (GĐ10) — ảnh bìa lấy từ bản game cũ -->
@@ -790,6 +1113,12 @@
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
+    <div id="journeyBar"></div>
+    <div id="worldMapPanel">
+      <div class="panelHead"><span id="wmTitle">🗺 Bản đồ thế giới</span><button class="xBtn" id="wmClose" type="button">✕</button></div>
+      <canvas id="wmCanvas" width="520" height="360"></canvas>
+      <div id="wmBody"></div>
+    </div>
     <div id="rotateLock" aria-hidden="true">
       <div class="rlPhone"></div>
       <div class="rlTitle">Vui lòng xoay ngang điện thoại</div>

@@ -19,7 +19,8 @@
 
 import Phaser from 'phaser';
 import { io, Socket } from 'socket.io-client';
-import { bakePersonTextures, personTexKey, personStyleKeyForPlayer, npcStyleKey, PERSON_TEX, bakeWorldTextures, WORLD_GEO, HOUSE_TEX, TREE_TEX, bakeMonsterTextures, bakeDropTextures, bakeChestTextures, wolfTexKey, WOLF_TEX, bakeBirdTextures, birdTexKey, BIRD_TEX, bakeFxTextures, fxOrbKey, ensurePersonVariant, drawPersonPreview } from './gfx';
+import { bakePersonTextures, personTexKey, personStyleKeyForPlayer, npcStyleKey, PERSON_TEX, bakeWorldTextures, WORLD_GEO, HOUSE_TEX, DAOQUAN_TEX, TREE_TEX, bakeMonsterTextures, bakeDropTextures, bakeChestTextures, wolfTexKey, WOLF_TEX, bakeBirdTextures, birdTexKey, BIRD_TEX, bakeFxTextures, fxOrbKey, ensurePersonVariant, drawPersonPreview, buildMapObjects, destroyBuiltMap, skillIconURL } from './gfx';
+import type { MapEnterData, BuiltMap } from './gfx';
 
 // Gộp 1 địa chỉ (GĐ5): bản dựng chạy từ chính server cổng 3001 →
 // kết nối cùng origin; khi dev bằng Vite (5173) thì trỏ sang 3001.
@@ -132,6 +133,10 @@ interface CharacterData {
   skills: SkillData[];
   // GĐ8
   stones: number;
+  stonesTrung?: number; // GĐ67: ví Trung phẩm (rương TC+)
+  stonesThuong?: number; // GĐ67: ví Thượng phẩm (rương KD hậu+)
+  stonesCuc?: number; // GĐ69: ví Cực phẩm (rương boss)
+  escort?: { dest: string; destName: string; delivery: { x: number; y: number }; reward: { stones: number; tuVi: number } } | null; // GĐ60
   inventory: Record<string, number>;
   quests: Record<string, QuestStateData>;
   // GĐ10
@@ -266,7 +271,61 @@ const INTERACTS: Array<{ type: string; x: number; y: number; shopId?: string }> 
   { type: 'sugia', x: 762, y: 470 }, // GĐ30: Sứ Giả Tông Môn ở quảng trường
   { type: 'bicanh_in', x: 1470, y: 600 }, // GĐ57: cổng vào Bí Cảnh Thạch Lâm (sân Thanh Phong Môn)
   { type: 'bicanh_out', x: 1832, y: 600 }, // GĐ57: cổng trở về trong bí cảnh
+  { type: 'laibuan', x: 1005, y: 545 }, // GĐ60: Lái Buôn — nhận việc hộ tống thương nhân
 ];
+
+// GĐ59: hình cho các loài GDD mới — mượn khung sẵn có + nhuộm màu + tỉ lệ
+// (loài cũ wolf/bat/golem/kiemma/huyetlang/khoiloi giữ hình riêng như trước)
+const GDD_MONSTER_VISUAL: Record<string, { base: 'wolf' | 'bat' | 'golem' | 'rival'; tint: number; scale: number }> = {
+  doc_xa: { base: 'wolf', tint: 0x7fae5a, scale: 0.8 },
+  lam_tru: { base: 'golem', tint: 0xa9814f, scale: 0.9 },
+  cot_binh: { base: 'rival', tint: 0xd8d4c4, scale: 1 },
+  thuy_trieu_tinh: { base: 'bat', tint: 0x7fd1e8, scale: 1.05 },
+  huyen_anh_mieu: { base: 'wolf', tint: 0xa678d8, scale: 0.85 },
+  loi_dieu: { base: 'bat', tint: 0xf2d24b, scale: 1.25 },
+  dia_hanh_yeu: { base: 'golem', tint: 0xd8b878, scale: 1.15 },
+  huyen_diep: { base: 'bat', tint: 0xb678f0, scale: 1.3 },
+  kim_giap_te: { base: 'golem', tint: 0xf0c84b, scale: 1.35 },
+  dan_ma: { base: 'rival', tint: 0xd84f4f, scale: 1.15 },
+  hap_huyet_quy: { base: 'rival', tint: 0x8e2f3f, scale: 1.05 },
+  bang_tinh_cu_nhan: { base: 'golem', tint: 0xbfe6f5, scale: 1.6 },
+  diem_hoa_phuong: { base: 'bat', tint: 0xf08a3c, scale: 1.5 },
+  thien_loi_thu: { base: 'wolf', tint: 0x9a86f0, scale: 1.4 },
+  hon_don_thu: { base: 'golem', tint: 0x6a5aa8, scale: 1.7 },
+};
+
+// GĐ59: một đích trong danh sách Trận Dịch Chuyển (server gửi qua travel_info)
+// GĐ60: dữ liệu panel Bản đồ thế giới (server trả qua overview_data)
+interface OverviewData {
+  current: {
+    mapId: string; name: string; theme: string; w: number; h: number;
+    portal: { x: number; y: number };
+    hazards: Array<{ x: number; y: number; r: number }>;
+    features: { volcano: { x: number; y: number; r: number } | null; caves: Array<{ x: number; y: number }> } | null;
+    decor: Array<{ k: string; x: number; y: number; s: number }>;
+    monsters: Array<{ name: string; count: number }>;
+    npcs?: Array<{ x: number; y: number; name: string }>;
+    zones?: Array<{ x: number; y: number; w: number; h: number; label: string }>;
+  };
+  maps: Array<{
+    id: string; name: string; category: string; safe: boolean; minRealm: string; minTier: number;
+    theme: string; boatOnly: boolean; canEnter: boolean; needText: string; cost: number; reachable: boolean;
+    monsters: Array<{ name: string; count: number }>;
+  }>;
+}
+
+interface TravelDest {
+  id: string;
+  name: string;
+  category: string;
+  safe: boolean;
+  canEnter: boolean;
+  needText: string;
+  cost?: number; // GĐ60: Linh thạch cho Trận Dịch Chuyển
+  boatOnly?: boolean; // GĐ60: đảo biển — chỉ thuyền / ngự kiếm
+  flySec?: number; // GĐ60: giây ngự kiếm (chỉ Kim Đan)
+  boatSec?: number; // GĐ60: giây đi thuyền
+}
 
 interface PlayerState {
   id: string;
@@ -300,6 +359,7 @@ interface CatalogEntry {
   cost: number;
   range: number;
   element: string;
+  weaponId?: string; // GĐ68: để vẽ icon chiêu theo vũ khí
   condText: string;
   condMet: boolean;
   desc?: string;
@@ -428,6 +488,8 @@ interface MonsterState {
   trial?: string | null;
   ownerId?: string | null;
   st?: string | null; // GĐ34: trạng thái khống chế (stun/root/slow/dot) để nhuộm màu quái
+  hidden?: number; // GĐ60: quái phục kích đang ẩn nấp (1 = đang ẩn)
+  boss?: number; // GĐ61: trùm / quái thử thách → hiện thanh máu trùm giữa trên
 }
 
 interface Actor {
@@ -544,6 +606,7 @@ interface BirdSim {
 }
 
 interface MonsterActor {
+  hiddenShown?: boolean; // GĐ60: trạng thái ẩn của quái phục kích đang hiển thị
   container: Phaser.GameObjects.Container;
   sprite: Phaser.GameObjects.Image;
   barFg: Phaser.GameObjects.Rectangle;
@@ -551,6 +614,8 @@ interface MonsterActor {
   trial?: string | null; // GĐ19: loại thử thách (trung/dai) nếu là trùm thử thách
   rivalSet?: boolean; // GĐ42: tu sĩ thù địch dùng bộ sprite 'rival' (thay hình vẽ code cũ)
   kind?: string; // GĐ38: loài quái (wolf/bat/golem) để chọn hình + hoạt ảnh
+  base?: string; // GĐ59: họ hình dùng cho hoạt ảnh ('wolf' | 'bat' | 'golem' | 'rival')
+  tintN?: number | null; // GĐ59: màu nhuộm cố định của loài GDD (khôi phục sau nháy trúng đòn)
   stShown?: string | null; // GĐ34: trạng thái khống chế đang hiển thị
   // GĐ9: hoạt ảnh sói từ texture nướng sẵn
   face: 1 | -1;
@@ -601,6 +666,7 @@ interface NpcDialogData {
   claimable: Array<{ questId: string; name: string; rewardStones: number }>;
   sectInfo: SectInfoData | null; // GĐ30: chỉ có khi nói chuyện với Sứ Giả Tông Môn
   realmInfo?: { dir: 'enter' | 'exit'; member: boolean; canEnter: boolean; sectName: string | null; missingText: string } | null; // GĐ57: cổng bí cảnh
+  escortInfo?: { active: { dest: string; destName: string } | null; missions: Array<{ id: string; name: string; category: string; reward: { stones: number; tuVi: number } }> } | null; // GĐ60: việc hộ tống của Lái Buôn
   accuse?: Array<{ npcId: string; name: string }> | null; // GĐ40+: chỉ đích danh thủ phạm
   merchantInfo?: {
     stock: Array<{ itemId: string; price: number; qty: number }>;
@@ -631,10 +697,21 @@ class GameScene extends Phaser.Scene {
   private lastHintCheck = 0;
   // GĐ17: điều khiển cảm ứng + HUD phụ (banner/minimap/avatar)
   private touchVec = { x: 0, y: 0 };
+  // GĐ66: nút ⚔ kiêm nút tương tác (E) trên cảm ứng + id thuốc nhanh
+  private touchInteract = false;
+  private quickPotionId: string | null = null;
   private lastHudExtra = 0;
   private avatarKey = '';
   // GĐ8: NPC + đồ rơi + panel đang mở
   private birds: BirdSim[] = [];
+  // GĐ59: trạng thái bản đồ hiện tại + vật thể chỉ thuộc map nhà (để ẩn khi đi map khác)
+  private mapState: MapEnterData | null = null;
+  private mapBg: Phaser.GameObjects.Image | null = null;
+  private builtMap: BuiltMap | null = null; // GĐ60: cảnh của map hiện tại (lưới ô + decor)
+  private bossShown: { id: string; name: string; hp: number; maxHp: number; dist: number; at: number } | null = null; // GĐ61
+  private journeyUntil = 0; // GĐ60: mốc hết hành trình ngự kiếm/thuyền (đếm ngược hiển thị)
+  private journeyText = '';
+  private homeObjects: Phaser.GameObjects.GameObject[] = [];
   // Trạng thái thế giới đầy đủ phía client — gộp từ các tick delta (A+B)
   private worldPlayers = new Map<string, PlayerState>();
   private worldMonsters = new Map<string, MonsterState>();
@@ -644,7 +721,7 @@ class GameScene extends Phaser.Scene {
   private worldNpcs: NpcState[] = [];
   private npcActors = new Map<string, Phaser.GameObjects.Container>();
   private dropActors = new Map<string, Phaser.GameObjects.Container>();
-  private openPanel: 'shop' | 'quest' | 'inv' | 'job' | 'ach' | 'learn' | 'bangvang' | null = null;
+  private openPanel: 'shop' | 'quest' | 'inv' | 'job' | 'ach' | 'learn' | 'bangvang' | 'stones' | null = null;
   private currentShop = '';
   private lastMerchantInfo: NpcDialogData['merchantInfo'] = null; // GĐ40+
   private questMode: 'board' | 'elder' = 'board';
@@ -696,6 +773,11 @@ class GameScene extends Phaser.Scene {
     for (const wid of WEAPON_IDS) {
       this.load.image(`wpn-${wid}`, `/sprites/weapons/${wid}.png`);
     }
+    // GĐ72: nhà làng PixelLab (nhà nhỏ dùng sprite, nhà lớn giữ vẽ code)
+    this.load.image('house-village-01', '/sprites/house_village_01.png');
+    // GĐ73: Đạo Quán + cây làng PixelLab
+    this.load.image('dao-quan-01', '/sprites/dao_quan_01.png');
+    this.load.image('tree-village-01', '/sprites/tree_village_01.png');
   }
 
   create(): void {
@@ -703,25 +785,33 @@ class GameScene extends Phaser.Scene {
     bakeWorldTextures(this);
     const WG = WORLD_GEO;
     // GĐ28: texture môi trường nướng 2× → hiển thị scale 0.5 (texel 1px, nét như sprite)
-    this.add.image(0, 0, 'world-bg').setOrigin(0, 0).setScale(0.5).setDepth(-100);
-    this.add.image(1600, 0, 'realm-bg').setOrigin(0, 0).setScale(0.5).setDepth(-100); // GĐ57: nền dải rừng + bí cảnh
+    this.homeObjects.push(this.add.image(0, 0, 'world-bg').setOrigin(0, 0).setScale(0.5).setDepth(-100));
+    this.homeObjects.push(this.add.image(1600, 0, 'realm-bg').setOrigin(0, 0).setScale(0.5).setDepth(-100)); // GĐ57: nền dải rừng + bí cảnh
     WG.houses.forEach((h, i) => {
-      this.add
-        .image(h.x - HOUSE_TEX.padX, h.y - HOUSE_TEX.padY, 'house-' + i)
-        .setOrigin(0, 0)
-        .setScale(0.5)
-        .setDepth(h.y + h.h);
+      // GĐ73: Đạo Quán nướng canvas riêng nên padX riêng — điều kiện
+      // phải khớp y hệt bên bake (kẻo load lỗi là lệch vị trí).
+      const dqPadX = h.name === 'Đạo Quán' && this.textures.exists('dao-quan-01') ? DAOQUAN_TEX.padX : HOUSE_TEX.padX;
+      this.homeObjects.push(
+        this.add
+          .image(h.x - dqPadX, h.y - HOUSE_TEX.padY, 'house-' + i)
+          .setOrigin(0, 0)
+          .setScale(0.5)
+          .setDepth(h.y + h.h),
+      );
     });
     WG.trees.forEach((t, i) => {
-      this.add
-        .image(t[0], t[1] + 12, 'tree-' + i)
-        .setOrigin(TREE_TEX.originX, TREE_TEX.originY)
-        .setScale(0.5)
-        .setDepth(t[1] + 12);
+      this.homeObjects.push(
+        this.add
+          .image(t[0], t[1] + 12, 'tree-' + i)
+          .setOrigin(TREE_TEX.originX, TREE_TEX.originY)
+          .setScale(0.5)
+          .setDepth(t[1] + 12),
+      );
     });
     // Vòng trận pháp Bát Quái: lớp quẻ xoay thuận + sao Ngũ Hành xoay ngược
     this.formTrig = this.add.image(WG.plaza.x, WG.plaza.y, 'form-trigram').setDepth(-97);
     this.formStar = this.add.image(WG.plaza.x, WG.plaza.y, 'form-star').setDepth(-97);
+    this.homeObjects.push(this.formTrig, this.formStar);
     // Hạt linh khí bốc lên từ vòng trận (như bản cũ)
     for (let i = 0; i < 10; i++) {
       const ang = Math.random() * Math.PI * 2;
@@ -729,6 +819,7 @@ class GameScene extends Phaser.Scene {
       const px = WG.plaza.x + Math.cos(ang) * rad;
       const py = WG.plaza.y + Math.sin(ang) * rad;
       const dot = this.add.circle(px, py, 1.6 + Math.random() * 1.4, 0x7fe3d0, 0.75).setDepth(-96);
+      this.homeObjects.push(dot);
       this.tweens.add({
         targets: dot,
         y: py - 42 - Math.random() * 26,
@@ -740,8 +831,8 @@ class GameScene extends Phaser.Scene {
       });
     }
     // Bảng treo thưởng (GĐ8): nhận nhiệm vụ, cạnh quảng trường
-    this.add.image(740, 606, 'board').setOrigin(0, 0).setScale(0.5).setDepth(660);
-    this.add
+    this.homeObjects.push(this.add.image(740, 606, 'board').setOrigin(0, 0).setScale(0.5).setDepth(660));
+    const boardLbl = this.add
       .text(800, 612, 'Bảng Treo Thưởng', {
         fontFamily: 'Palatino, Georgia, serif',
         fontSize: '12px',
@@ -751,6 +842,7 @@ class GameScene extends Phaser.Scene {
       })
       .setOrigin(0.5, 1)
       .setDepth(668);
+    this.homeObjects.push(boardLbl);
 
     // Camera: giới hạn trong bản đồ, bám theo nhân vật khi spawn
     this.cameras.main.setBounds(0, 0, WORLD_W, WORLD_H);
@@ -844,6 +936,20 @@ class GameScene extends Phaser.Scene {
       sheen(990, 890, 165, 100, 0.13, 0xdceaff, true); // ánh trăng trên mặt ao
     }
 
+    // GĐ59: TRẬN DỊCH CHUYỂN ở mép đông quảng trường làng (1080,600) — cổng đi các bản đồ khác
+    {
+      const stone = this.add.image(1080, 600, 'moonGlow').setScale(0.55).setAlpha(0.5).setTint(0x57c98b).setDepth(598);
+      this.tweens.add({ targets: stone, alpha: 0.28, scale: 0.44, duration: 1300, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+      const stoneLbl = this.add
+        .text(1080, 570, 'Trận Dịch Chuyển', {
+          fontFamily: 'Palatino, Georgia, serif', fontSize: '12px', color: '#a9e8c9',
+          backgroundColor: 'rgba(20,30,20,0.55)', padding: { x: 6, y: 3 },
+        })
+        .setOrigin(0.5, 1)
+        .setDepth(601);
+      this.homeObjects.push(stone, stoneLbl);
+    }
+
     // ---- Bàn phím: WASD + mũi tên + SPACE tấn công ----
     const kb = this.input.keyboard;
     if (kb) {
@@ -881,6 +987,7 @@ class GameScene extends Phaser.Scene {
     wire('questClose', () => this.closePanels());
     wire('boardClose', () => this.closePanels()); // GĐ40+
     wire('invClose', () => this.closePanels());
+    wire('stonesClose', () => this.closePanels());
     wire('invBtn', () => this.toggleInv());
 
     // ---- Kết nối Socket.io tới Backend ----
@@ -1063,6 +1170,25 @@ class GameScene extends Phaser.Scene {
       this.showToast(`${d.delta > 0 ? '💛' : '💔'} Thiện cảm với ${d.name}: ${d.delta > 0 ? '+' : ''}${d.delta} (hiện ${d.value})`);
     });
     this.socket.on('npc_dialog', (d: NpcDialogData) => this.openNpcDialog(d));
+    // GĐ59: server báo vào map (lúc đăng nhập + mỗi lần dịch chuyển)
+    this.socket.on('map_enter', (d: MapEnterData) => this.onMapEnter(d));
+    this.socket.on('travel_info', (d: { from: string; list: TravelDest[] }) => this.openTravelDialog(d));
+    // GĐ60: hành trình ngự kiếm / đi thuyền — thanh tiến trình trên đầu màn hình
+    this.socket.on('journey_started', (d: { dest: string; name: string; method: string; seconds: number }) => {
+      this.journeyUntil = Date.now() + d.seconds * 1000;
+      this.journeyText = d.method === 'boat' ? `⛵ Đang đi thuyền tới ${d.name}` : `🗡 Đang ngự kiếm tới ${d.name}`;
+      const bar = document.getElementById('journeyBar');
+      if (bar) { bar.style.display = 'block'; bar.textContent = `${this.journeyText}… ${d.seconds}s (di chuyển là hủy)`; }
+    });
+    this.socket.on('journey_cancelled', () => {
+      this.journeyUntil = 0;
+      const bar = document.getElementById('journeyBar');
+      if (bar) bar.style.display = 'none';
+    });
+    this.socket.on('overview_data', (d: OverviewData) => this.renderWorldMap(d));
+    document.getElementById('minimapWrap')?.addEventListener('click', () => {
+      if (this.inGame) this.socket.emit('map_overview');
+    });
     // GĐ40+: dữ liệu Bảng Vàng + Truy Nã
     this.socket.on('leaderboard_data', (d: { tuVi: Array<{ name: string; realm: string; tier: number; tuVi: number }>; tuLuyen: Array<{ name: string; totalTuVi: number }>; truyNa: Array<{ name: string; bounty: string; how: string }> }) => this.renderBoardPanel(d));
 
@@ -1076,10 +1202,11 @@ class GameScene extends Phaser.Scene {
     });
 
     // Thông báo chung từ server (mua bán / nhiệm vụ / dùng đồ — GĐ8)
-    this.socket.on('notice', (n: { text: string }) => this.showToast(n.text));
+    this.socket.on('notice', (n: { text: string }) => { this.showToast(n.text); this.pushLog(n.text); });
     // GĐ39: báo nội dung rương vừa mở
     this.socket.on('chest_opened', (d: { grade: string; loot: string[] }) => {
       this.showToast(`🎁 Mở rương cấp ${d.grade}: ${d.loot.join(' · ')}`);
+      this.pushLog(`🎁 Mở rương cấp ${d.grade}: ${d.loot.join(' · ')}`);
     });
 
     this.socket.on('linhcan_result', (r: { linhCan: LinhCanData }) => {
@@ -1708,7 +1835,7 @@ class GameScene extends Phaser.Scene {
         cv.height = 96;
         const info = document.createElement('div');
         info.className = 'cinfo';
-        const realmTxt = !c.linhCanMain ? 'Phàm nhân' : `Luyện Khí tầng ${c.tier}`;
+        const realmTxt = !c.linhCanMain ? 'Phàm nhân' : c.realm === 'kd' ? `Kim Đan tầng ${c.tier}` : c.realm === 'tc' ? `Trúc Cơ tầng ${c.tier}` : `Luyện Khí tầng ${c.tier}`; // GĐ59: gọi đúng cảnh giới (trước đây TC/KD đều hiện Luyện Khí)
         info.innerHTML = `<div class="cname"></div><div class="cmeta">${c.className}${c.weaponName ? ' · ' + c.weaponName : ''} · ${realmTxt}${c.linhCanMain ? ' · Linh căn ' + c.linhCanMain : ''} · ${c.gender === 'nu' ? 'Nữ' : 'Nam'}</div>`;
         (info.querySelector('.cname') as HTMLElement).textContent = c.name;
         const play = document.createElement('button');
@@ -1995,15 +2122,18 @@ class GameScene extends Phaser.Scene {
       cls.textContent = c.path === 'sect' ? `${base} · 🏯 Thanh Phong Môn` : base;
     }
     if (realm) {
+      // GĐ59: thêm Kim Đan (map KD vào được rồi — thẻ phải gọi đúng cảnh giới)
       realm.textContent = !c.linhCan
         ? 'Phàm nhân'
-        : c.realm === 'tc'
-          ? c.tier >= 9
-            ? 'Trúc Cơ tầng 9 · Viên mãn (Kim Đan chưa mở)'
-            : `Trúc Cơ tầng ${c.tier}`
-          : c.tier >= 9
-            ? 'Luyện Khí tầng 9 · Viên mãn'
-            : `Luyện Khí tầng ${c.tier}`;
+        : c.realm === 'kd'
+          ? `Kim Đan tầng ${c.tier}`
+          : c.realm === 'tc'
+            ? c.tier >= 9
+              ? 'Trúc Cơ tầng 9 · Viên mãn'
+              : `Trúc Cơ tầng ${c.tier}`
+            : c.tier >= 9
+              ? 'Luyện Khí tầng 9 · Viên mãn'
+              : `Luyện Khí tầng ${c.tier}`;
     }
     if (linhCan) {
       linhCan.textContent = c.linhCan
@@ -2013,6 +2143,8 @@ class GameScene extends Phaser.Scene {
     // GĐ20: dòng Tuổi + Thọ nguyên (đỏ khi sắp cạn)
     // GĐ25: đang trong ÂN HẠN thì hiện đếm ngược tọa hóa nổi bật
     const age = document.getElementById('hudAge');
+    // GĐ66: thẻ thu gọn trên cảm ứng vẫn phải thấy cảnh báo Ân hạn tọa hóa
+    document.getElementById('hudChar')?.classList.toggle('grace', c.graceDaysLeft !== null && c.graceDaysLeft !== undefined);
     if (age && typeof c.age === 'number') {
       if (c.graceDaysLeft !== null && c.graceDaysLeft !== undefined) {
         age.innerHTML = `☠ Thọ nguyên ĐÃ TẬN · <span class="warn">ÂN HẠN TỌA HÓA: còn ${c.graceDaysLeft} ngày game</span> — đột phá để tự cứu!`;
@@ -2026,18 +2158,16 @@ class GameScene extends Phaser.Scene {
     if (sectEl) {
       sectEl.textContent = `⚜️ Công trạng: ${c.merit || 0}${c.sectName ? ` · 🏯 Đệ tử ${c.sectName}` : ''}`;
     }
-    // GĐ32: nút 📖 Công pháp — mở panel danh mục (học chiêu Luyện Khí tại
-    // Đạo Quán, Trúc Cơ ở mọi nơi; đang học thì hiện % tiến độ)
+    // GĐ66: dòng 📖 Công pháp trong thẻ BỎ HẲN — thay bằng chấm đỏ có số
+    // trên nút Công pháp (số chiêu đủ điều kiện chỉ số, chưa học, chưa
+    // đang lĩnh ngộ). Bấm nút Công pháp vẫn mở Sổ công pháp như cũ.
     const lrn = document.getElementById('hudLearn') as HTMLButtonElement | null;
-    if (lrn) {
-      const show = !!c.linhCan && Array.isArray(c.catalog) && c.catalog.length > 0;
-      lrn.style.display = show ? 'block' : 'none';
-      if (show) {
-        lrn.textContent = c.learning
-          ? `📖 Đang lĩnh ngộ ${c.learning.name} · ${c.learning.pct}%${c.learning.active ? ' (đang ngồi học)' : ''}`
-          : '📖 Công pháp — học chiêu mới';
-        lrn.onclick = () => this.toggleLearnPanel();
-      }
+    if (lrn) lrn.style.display = 'none';
+    const skillBadge = document.getElementById('skillBadge');
+    if (skillBadge) {
+      const n = (c.catalog || []).filter((e) => !e.learned && !e.isLearning && e.condMet).length;
+      skillBadge.style.display = n > 0 ? 'block' : 'none';
+      if (n > 0) skillBadge.textContent = String(n);
     }
     // Thanh Tu vi + nút Đột phá
     const tvFill = document.getElementById('hudTuViFill') as HTMLElement | null;
@@ -2156,9 +2286,24 @@ class GameScene extends Phaser.Scene {
       const pts = (c.freePoints || 0) + (c.statPoints || 0);
       dbtn.textContent = `${open ? '▾' : '▸'} Chỉ số${pts > 0 ? ` · còn ${pts} điểm chưa cộng` : ''}`;
     }
+    // GĐ66: trên cảm ứng, dòng Chỉ số trong thẻ ẩn đi (CSS) — thay bằng
+    // chấm đỏ có số trên góc avatar; chạm thẻ vẫn mở bảng như cũ (GĐ55).
+    const abadge = document.getElementById('hudAvatarBadge');
+    if (abadge) {
+      const pts = (c.freePoints || 0) + (c.statPoints || 0);
+      const show = document.body.classList.contains('touch') && pts > 0;
+      abadge.style.display = show ? 'block' : 'none';
+      if (show) abadge.textContent = String(pts);
+    }
     // GĐ8: ví Linh thạch + dòng theo dõi nhiệm vụ
+    // GĐ66 sửa nhỏ (2): trên cảm ứng, pill dưới minimap chỉ còn chữ
+    // "💠 Linh thạch" (không ghi số cho gọn); bấm pill mở panel ví xem
+    // chi tiết từng phẩm. Desktop giữ dòng đủ chữ + số như cũ.
     const stones = document.getElementById('hudStones');
-    if (stones) stones.textContent = `💠 Linh thạch hạ phẩm: ${c.stones ?? 0}`;
+    if (stones) stones.textContent = document.body.classList.contains('touch')
+      ? '💠 Linh thạch'
+      : `💠 Linh thạch hạ phẩm: ${c.stones ?? 0}`;
+    if (this.openPanel === 'stones') this.renderStonesPanel();
     const tracker = document.getElementById('questTracker');
     if (tracker) {
       const lines = Object.entries(c.quests || {}).map(([qid, q]) => {
@@ -2188,13 +2333,13 @@ class GameScene extends Phaser.Scene {
     const mainSlots = Array.from({ length: 5 }, (_, i) => {
       const s = skills[i];
       return s
-        ? `<div class="slot" data-cast="${i}" title="${s.name} — bấm hoặc phím ${i + 1}"><span class="key">${i + 1}</span><div class="sname">${s.name}</div><span class="scost">${s.cost} CN</span><div class="cdov" id="cdov${i}"></div></div>`
+        ? `<div class="slot" data-cast="${i}" title="${s.name} — bấm hoặc phím ${i + 1}"><span class="key">${i + 1}</span><img class="skicon-desk" src="${skillIconURL(s)}" alt=""><div class="cdov" id="cdov${i}"></div></div>`
         : `<div class="slot empty" title="Ô chiêu ${i + 1} — chưa lắp công pháp (phím ${i + 1})"><span class="key">${i + 1}</span></div>`;
     }).join('');
     const utilSlots = Array.from({ length: 4 }, (_, i) => {
       const s = utils[i];
       return s
-        ? `<div class="slot util" data-ucast="${i}" title="Ô đa dụng ${i + 1} — bấm hoặc phím ${i + 6}"><span class="key">Đ${i + 1}</span><div class="sname">${s.name}</div><span class="scost">${s.cost} CN</span><div class="cdov" id="cduov${i}"></div></div>`
+        ? `<div class="slot util" data-ucast="${i}" title="${s.name} — bấm hoặc phím ${i + 6}"><span class="key">Đ${i + 1}</span><img class="skicon-desk" src="${skillIconURL(s)}" alt=""><div class="cdov" id="cduov${i}"></div></div>`
         : `<div class="slot util empty" title="Ô đa dụng ${i + 1} — chưa lắp (phím ${i + 6})"><span class="key">Đ${i + 1}</span></div>`;
     }).join('');
     bar.innerHTML =
@@ -2213,20 +2358,47 @@ class GameScene extends Phaser.Scene {
     const dge = document.getElementById('dodgeSlot');
     if (dge) dge.onclick = () => this.doDodge();
     // GĐ17 + GĐ47: nhãn nút chiêu cảm ứng — ĐỦ 5 ô chính
+    // GĐ68: ô có chiêu hiện ICON (thay chữ — đọc nhanh hơn, đúng mẫu game
+    // mobile); tên chiêu giữ trong title; ô trống vẫn ghi "Chiêu n".
     for (let i = 0; i < 5; i++) {
       const tb = document.getElementById('tSkill' + i);
-      if (tb) tb.textContent = skills[i] ? skills[i].name : 'Chiêu ' + (i + 1);
+      if (!tb) continue;
+      if (skills[i]) {
+        tb.innerHTML = `<img class="skicon-touch" src="${skillIconURL(skills[i])}" alt="">`;
+        tb.title = skills[i].name;
+      } else {
+        tb.textContent = 'Chiêu ' + (i + 1);
+        tb.title = '';
+      }
     }
-    // Nút cảm ứng ô ĐA DỤNG: có chiêu mới hiện (đỡ rối mắt), nhãn = tên chiêu
+    // GĐ66: ô ĐA DỤNG LUÔN HIỆN — có chiêu thì tên chiêu, trống thì
+    // "Đ1..Đ4" viền đứt (bấm ô trống mở Sổ công pháp để lắp chiêu hỗ trợ).
     for (let i = 0; i < 4; i++) {
       const tb = document.getElementById('tUtil' + i);
       if (!tb) continue;
       if (utils[i]) {
-        tb.textContent = utils[i].name;
-        tb.style.display = 'flex';
+        tb.innerHTML = `<img class="skicon-touch" src="${skillIconURL(utils[i])}" alt="">`;
+        tb.title = utils[i].name;
+        tb.classList.remove('empty');
       } else {
-        tb.style.display = 'none';
+        tb.textContent = 'Đ' + (i + 1);
+        tb.classList.add('empty');
+        tb.style.opacity = '';
       }
+      tb.style.display = 'flex';
+    }
+    // GĐ66: nút bình thuốc nhanh (cảm ứng) — ưu tiên Hồi Xuân Đan, rồi
+    // Đan Tụ Khí, rồi vật phẩm dùng được khác trong túi; không có gì thì
+    // nút mờ, bấm mở Túi đồ.
+    const pot = document.getElementById('tPotion');
+    if (pot) {
+      const inv = this.myChar.inventory || {};
+      const usable = ['dan_hoi_xuan', 'dan_tu_khi', 'banh_thit', 'phu_ho_than', 'phu_tu_linh'];
+      const pick = usable.find((id) => (inv[id] || 0) > 0) || null;
+      this.quickPotionId = pick;
+      pot.textContent = pick ? `💊${inv[pick]}` : '💊';
+      pot.title = pick ? (ITEM_INFO[pick]?.name || pick) : 'Túi đồ (chưa có thuốc)';
+      pot.classList.toggle('empty', !pick);
     }
   }
 
@@ -2236,6 +2408,31 @@ class GameScene extends Phaser.Scene {
     if (!list[slot]) return;
     if (Date.now() < (this.skillCdEnds.get(`${area}:${slot}`) || 0)) return;
     this.socket.emit('cast_skill', { slot, area });
+    // GĐ61: hô tên chiêu giữa màn hình như ảnh mẫu (chiêu từ Luyện Khí trở lên)
+    const sk = list[slot];
+    if (sk && sk.tier && sk.tier !== 'coban') this.announceSkill(sk.name);
+  }
+
+  private announceSkill(name: string): void {
+    const el = document.getElementById('skillAnnounce');
+    if (!el) return;
+    el.textContent = `${name}!`;
+    el.classList.remove('show');
+    void (el as HTMLElement).offsetWidth; // khởi động lại hoạt ảnh
+    el.classList.add('show');
+  }
+
+  // GĐ61: nhật ký thông báo góc trái dưới (tối đa 5 dòng, tự mờ sau 14s)
+  private pushLog(text: string): void {
+    const box = document.getElementById('gameLog');
+    if (!box || !text) return;
+    const line = document.createElement('div');
+    line.className = 'logLine';
+    line.textContent = text;
+    box.appendChild(line);
+    while (box.children.length > 5) box.removeChild(box.firstChild as Node);
+    window.setTimeout(() => { line.style.opacity = '0'; }, 14000);
+    window.setTimeout(() => { line.remove(); }, 15500);
   }
 
   // Vòng cập nhật lớp phủ hồi chiêu trên thanh công pháp
@@ -2310,8 +2507,13 @@ class GameScene extends Phaser.Scene {
     } else if (near.type === 'bicanh_out') {
       // GĐ57: cổng trở về làng
       this.socket.emit('talk_npc', { npcId: 'npc_bicanh_out' });
+    } else if (near.type === 'laibuan') {
+      // GĐ60: Lái Buôn — nhận việc hộ tống thương nhân
+      this.socket.emit('talk_npc', { npcId: 'npc_laibuan' });
     } else if (near.type === 'shop' && near.shopId) {
       this.openShop(near.shopId);
+    } else if (near.type === 'travel') {
+      this.socket.emit('travel_list'); // GĐ59: mở danh sách đích dịch chuyển
     }
   }
 
@@ -2331,21 +2533,39 @@ class GameScene extends Phaser.Scene {
       const el = document.getElementById(id);
       if (el) el.addEventListener('pointerdown', (e) => { e.preventDefault(); fn(); });
     };
-    bind('tAtk', () => this.doAttack());
+    // GĐ66: nút ⚔ kiêm nút tương tác — gần chỗ tương tác được thì bấm
+    // là tương tác (nút hiện E), còn không thì vẫn đánh thường.
+    bind('tAtk', () => { if (this.touchInteract) this.doInteract(); else this.doAttack(); });
     bind('tDodge', () => this.doDodge()); // GĐ46: nút Né cảm ứng
     bind('tSkill0', () => this.castSlot(0));
     bind('tSkill1', () => this.castSlot(1));
     bind('tSkill2', () => this.castSlot(2));
     bind('tSkill3', () => this.castSlot(3)); // GĐ47: ô chính 4
     bind('tSkill4', () => this.castSlot(4)); // GĐ47: ô chính 5
-    bind('tUtil0', () => this.castSlot(0, 'util'));
-    bind('tUtil1', () => this.castSlot(1, 'util'));
-    bind('tUtil2', () => this.castSlot(2, 'util'));
-    bind('tUtil3', () => this.castSlot(3, 'util'));
+    // GĐ66: ô đa dụng trống thì bấm mở Sổ công pháp để lắp chiêu hỗ trợ
+    const utilTap = (i: number) => {
+      if ((this.myChar?.utilSkills || [])[i]) this.castSlot(i, 'util');
+      else this.toggleLearnPanel();
+    };
+    bind('tUtil0', () => utilTap(0));
+    bind('tUtil1', () => utilTap(1));
+    bind('tUtil2', () => utilTap(2));
+    bind('tUtil3', () => utilTap(3));
+    bind('tPotion', () => {
+      if (this.quickPotionId) this.socket?.emit('use_item', { itemId: this.quickPotionId });
+      else this.toggleInv();
+    });
     bind('tAct', () => this.doInteract());
     bind('sideBag', () => this.toggleInv());
+    // GĐ66 sửa nhỏ (2): bấm pill Linh thạch mở panel ví. Chặn click lan
+    // lên thẻ — nếu không, trên cảm ứng chạm pill sẽ làm thẻ nở/thu
+    // bảng chỉ số (handler chạm thẻ nằm ở #hudChar cha của pill).
+    const stonesEl = document.getElementById('hudStones');
+    if (stonesEl) stonesEl.addEventListener('click', (e) => { e.stopPropagation(); this.toggleStonesPanel(); });
     const sideQuest = document.getElementById('sideQuest');
     if (sideQuest) sideQuest.addEventListener('click', () => this.openQuestPanel('board'));
+    const sideSkills = document.getElementById('sideSkills');
+    if (sideSkills) sideSkills.addEventListener('click', () => this.toggleLearnPanel());
     // GĐ26/GĐ27: panel nghề phụ + thành tựu
     const sideJob = document.getElementById('sideJob');
     if (sideJob) sideJob.addEventListener('click', () => this.toggleJobPanel());
@@ -2405,6 +2625,26 @@ class GameScene extends Phaser.Scene {
 
   // Banner khu vực + minimap + avatar trong khung nhân vật (gọi ~3 lần/giây)
   private refreshHudExtra(): void {
+    // GĐ61: thanh máu trùm giữa trên (giữ 1.2s sau tick cuối cho đỡ nhấp nháy)
+    const bb = document.getElementById('bossBar');
+    if (bb) {
+      const bs = this.bossShown;
+      if (bs && Date.now() - bs.at < 1200 && bs.hp > 0) {
+        bb.classList.add('on');
+        const nm = document.getElementById('bossName');
+        if (nm && nm.textContent !== bs.name) nm.textContent = bs.name;
+        const fill = document.getElementById('bossHpFill');
+        if (fill) fill.style.width = `${Math.max(0, (bs.hp / bs.maxHp) * 100)}%`;
+        const tx = document.getElementById('bossHpText');
+        if (tx) tx.textContent = `${Math.ceil(bs.hp)} / ${bs.maxHp}`;
+      } else bb.classList.remove('on');
+    }
+    // GĐ60: đếm ngược ngự kiếm / thuyền
+    if (this.journeyUntil > 0) {
+      const bar = document.getElementById('journeyBar');
+      const left = Math.max(0, Math.ceil((this.journeyUntil - Date.now()) / 1000));
+      if (bar) { bar.style.display = 'block'; bar.textContent = `${this.journeyText}… còn ${left}s (di chuyển là hủy)`; }
+    }
     if (this.myChar) {
       const key = this.myChar.classId;
       if (this.avatarKey !== key) {
@@ -2423,6 +2663,47 @@ class GameScene extends Phaser.Scene {
     }
     const me = this.myId ? this.worldPlayers.get(this.myId) : undefined;
     if (!me) return;
+    // GĐ59: đang ở MAP KHÁC — banner + minimap theo bản đồ hiện tại
+    if (this.mapState && !this.mapState.isHome) {
+      const ms = this.mapState;
+      const zb2 = document.getElementById('zoneBanner');
+      if (zb2) {
+        const txt = `${ms.safe ? '🏯' : '⚔'} ${ms.name} · ${ms.safe ? 'An toàn' : 'Nguy hiểm'}`;
+        if (zb2.textContent !== txt) zb2.textContent = txt;
+        zb2.classList.toggle('danger', !ms.safe);
+      }
+      const mm2 = document.getElementById('minimap') as HTMLCanvasElement | null;
+      const c2 = mm2?.getContext('2d');
+      if (mm2 && c2) {
+        const SX2 = mm2.width / ms.w;
+        const SY2 = mm2.height / ms.h;
+        c2.fillStyle = '#22312a';
+        c2.fillRect(0, 0, mm2.width, mm2.height);
+        c2.strokeStyle = 'rgba(139,233,201,0.5)';
+        c2.lineWidth = 2;
+        c2.strokeRect(3, 3, mm2.width - 6, mm2.height - 6);
+        const dot2 = (x: number, y: number, col: string, r: number) => {
+          c2.beginPath();
+          c2.arc(x * SX2, y * SY2, r, 0, Math.PI * 2);
+          c2.fillStyle = col;
+          c2.fill();
+          c2.strokeStyle = 'rgba(0,0,0,0.65)';
+          c2.lineWidth = 2;
+          c2.stroke();
+        };
+        dot2(ms.portal.x, ms.portal.y, '#57c98b', 5);
+        if (this.myChar?.escort && this.myChar.escort.dest === ms.mapId) dot2(this.myChar.escort.delivery.x, this.myChar.escort.delivery.y, '#ffd94d', 6); // GĐ60: điểm giao hàng hộ tống
+        for (const m of this.monsterTargets.values()) dot2(m.x, m.y, '#ff6b5e', 4.5);
+        for (const [id, pl] of this.worldPlayers) if (id !== this.myId) dot2(pl.x, pl.y, '#e8f2ea', 3.6);
+        dot2(me.x, me.y, '#ffe14d', 6.5);
+        c2.strokeStyle = '#fff2b0';
+        c2.lineWidth = 2.5;
+        c2.beginPath();
+        c2.arc(me.x * SX2, me.y * SY2, 10, 0, Math.PI * 2);
+        c2.stroke();
+      }
+      return;
+    }
     const v = WORLD_GEO.village;
     const inVillage = me.x >= v.x && me.x <= v.x + v.w && me.y >= v.y && me.y <= v.y + v.h;
     // GĐ22: sân Thanh Phong Môn (khớp SECT phía server) cũng là vùng an toàn
@@ -2487,9 +2768,14 @@ class GameScene extends Phaser.Scene {
   // ---------------- GĐ8: NPC + đồ rơi + panel ----------------
   private nearestInteract(): { type: string; x: number; y: number; shopId?: string } | null {
     if (!this.myContainer) return null;
-    let best: (typeof INTERACTS)[number] | null = null;
+    // GĐ59: ở map khác thì chỉ còn Trận Dịch Chuyển; ở làng có thêm các điểm cũ
+    const isHome = !this.mapState || this.mapState.isHome;
+    const cands: Array<{ type: string; x: number; y: number; shopId?: string }> = isHome ? [...INTERACTS] : [];
+    const portal = this.mapState?.portal || { x: 1080, y: 600 };
+    cands.push({ type: 'travel', x: portal.x, y: portal.y });
+    let best: { type: string; x: number; y: number; shopId?: string } | null = null;
     let bd = Infinity;
-    for (const it of INTERACTS) {
+    for (const it of cands) {
       const d = Math.hypot(this.myContainer.x - it.x, this.myContainer.y - it.y);
       if (d < bd) {
         bd = d;
@@ -2616,7 +2902,7 @@ class GameScene extends Phaser.Scene {
 
   private closePanels(): void {
     this.openPanel = null;
-    for (const id of ['shopPanel', 'questPanel', 'invPanel', 'npcDialog', 'jobPanel', 'achPanel', 'learnPanel', 'boardPanel']) {
+    for (const id of ['shopPanel', 'questPanel', 'invPanel', 'npcDialog', 'jobPanel', 'achPanel', 'learnPanel', 'boardPanel', 'stonesPanel']) {
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
     }
@@ -2697,6 +2983,8 @@ class GameScene extends Phaser.Scene {
     }
     const row = (e: CatalogEntry) => {
       const tierName = e.tier === 'coban' ? 'Cơ bản' : e.tier === 'luyenkhi' ? 'Luyện Khí' : 'Trúc Cơ';
+      // GĐ68: icon chiêu vẽ thủ tục (hệ + bậc + vũ khí) — mọi chiêu đều có icon
+      const ic = `<img class="skicon" src="${skillIconURL(e)}" alt="" title="${e.name}">`;
       const meta = `Hệ ${e.element} · Hệ số ${e.coef} · Hồi chiêu ${(e.cdMs / 1000).toFixed(1)}s · Tốn ${e.cost} chân nguyên${e.fxText ? ` · ⚡ ${e.fxText}` : ''}${e.desc ? ` · ${e.desc.slice(0, 90)}${e.desc.length > 90 ? '…' : ''}` : ''}`;
       if (e.learned) {
         const full = (mc.skillSlots?.used || 0) >= (mc.skillSlots?.max || 0);
@@ -2714,18 +3002,18 @@ class GameScene extends Phaser.Scene {
               ? ''
               : `<button class="pbtn gold" data-equip="${e.id}" data-area="util" ${utilFull ? 'disabled title="Ô đa dụng đã đầy"' : ''}>${utilFull ? 'Ô phụ đầy' : 'Lắp ô phụ'}</button>`;
         const marks = `${e.equipped ? ' <span style="color:#ffd98a">◆ ô chính</span>' : ''}${e.equippedUtil ? ' <span style="color:#8be9c9">◆ ô đa dụng</span>' : ''}`;
-        return `<div class="prow"><span class="pname">✅ ${e.name}${marks}<span class="pdesc">${tierName} · ${meta}</span></span><span style="display:flex;gap:4px">${mainBtn}${utilBtn}</span></div>`;
+        return `<div class="prow">${ic}<span class="pname">✅ ${e.name}${marks}<span class="pdesc">${tierName} · ${meta}</span></span><span style="display:flex;gap:4px">${mainBtn}${utilBtn}</span></div>`;
       }
       if (e.isLearning) {
         const btn = mc.learning?.active
           ? `<button class="pbtn" data-stop="1">⏸ Dừng (về 0)</button>`
           : `<button class="pbtn gold" data-learn="${e.id}">▶ Ngồi học tiếp</button>`;
-        return `<div class="prow"><span class="pname">📖 ${e.name} · ${mc.learning?.pct || 0}%<span class="pdesc">${tierName} · ${meta}</span></span>${btn}</div>`;
+        return `<div class="prow">${ic}<span class="pname">📖 ${e.name} · ${mc.learning?.pct || 0}%<span class="pdesc">${tierName} · ${meta}</span></span>${btn}</div>`;
       }
       const btn = e.condMet
         ? `<button class="pbtn gold" data-learn="${e.id}">${e.tier === 'coban' ? 'Học ngay' : 'Ngồi học'}</button>`
         : `<button class="pbtn" disabled>🔒 ${e.condText}</button>`;
-      return `<div class="prow"><span class="pname">${e.name}<span class="pdesc">${tierName} · ${meta} · Cần: ${e.condText}${e.tier === 'luyenkhi' ? ' · Học tại Đạo Quán' : ''}</span></span>${btn}</div>`;
+      return `<div class="prow">${ic}<span class="pname">${e.name}<span class="pdesc">${tierName} · ${meta} · Cần: ${e.condText}${e.tier === 'luyenkhi' ? ' · Học tại Đạo Quán' : ''}</span></span>${btn}</div>`;
     };
     const cb = (mc.catalog || []).filter((e) => e.tier === 'coban');
     const lk = (mc.catalog || []).filter((e) => e.tier === 'luyenkhi');
@@ -2787,6 +3075,221 @@ class GameScene extends Phaser.Scene {
   }
 
   // GĐ24: hộp thoại trò chuyện với NPC (lời thoại + thiện cảm + nhiệm vụ riêng)
+  // GĐ59: vào một bản đồ — ẩn/hiện cảnh làng, dựng nền map mới, đặt biên camera
+  private onMapEnter(def: MapEnterData): void {
+    this.mapState = def;
+    const isHome = !!def.isHome;
+    for (const o of this.homeObjects) (o as Phaser.GameObjects.Image).setVisible(isHome);
+    for (const s of this.moonSheens) s.setVisible(isHome);
+    for (const b of this.birds) b.img.setVisible(isHome);
+    if (isHome) {
+      if (this.mapBg) this.mapBg.setVisible(false);
+      destroyBuiltMap(this, this.builtMap);
+      this.builtMap = null;
+      this.cameras.main.setBounds(0, 0, WORLD_W, WORLD_H);
+    } else {
+      destroyBuiltMap(this, this.builtMap);
+      this.builtMap = buildMapObjects(this, def);
+      // GĐ60: hố lửa nhấp nháy cảnh báo
+      for (const img of this.builtMap.hazardImages) {
+        this.tweens.add({ targets: img, alpha: 0.7, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+      }
+      // GĐ60: đang hộ tống tới đúng map này → cột sáng vàng ở điểm giao hàng
+      if (this.myChar?.escort && this.myChar.escort.dest === def.mapId) {
+        const dl = this.myChar.escort.delivery;
+        const beacon = this.add.image(dl.x, dl.y, 'moonGlow').setTint(0xffd94d).setScale(1.6).setDepth(-98).setAlpha(0.9);
+        this.tweens.add({ targets: beacon, scale: 2.3, alpha: 0.45, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+        this.builtMap.objects.push(beacon);
+      }
+      this.cameras.main.setBounds(0, 0, def.w, def.h);
+      this.showToast(`🗺 ${def.name}${def.safe ? ' · An toàn' : ''}`);
+    }
+    // GĐ60: sang map mới = hành trình (nếu có) đã xong — tắt thanh đếm ngược
+    this.journeyUntil = 0;
+    const jbar = document.getElementById('journeyBar');
+    if (jbar) jbar.style.display = 'none';
+    const lbl = document.getElementById('minimapLabel');
+    if (lbl) lbl.textContent = def.name.toUpperCase();
+  }
+
+  // GĐ59: hộp thoại Trận Dịch Chuyển — danh sách đích từ server (đích khóa hiện điều kiện)
+  private openTravelDialog(d: { from: string; list: TravelDest[] }): void {
+    const p = document.getElementById('npcDialog');
+    if (!p) return;
+    this.closePanels();
+    p.style.display = 'block';
+    const title = document.getElementById('npcDlgTitle');
+    if (title) title.textContent = '🌀 Trận Dịch Chuyển';
+    const affEl = document.getElementById('npcDlgAff');
+    const stones = this.myChar?.stones ?? 0;
+    if (affEl) affEl.textContent = `Đang ở: ${this.mapState?.name || 'Làng Tân Thủ'} · 💠 Linh thạch: ${stones}`;
+    const textEl = document.getElementById('npcDlgText');
+    if (textEl) textEl.textContent = 'Dịch chuyển tức thì nhưng tốn Linh thạch (về làng/thành miễn phí). Kim Đan có thể ngự kiếm — miễn phí nhưng chậm. Đảo ngoài biển chỉ đi thuyền từ Thanh Vân Thành. Thiếu Linh thạch thì gặp Lái Buôn nhận việc hộ tống.';
+    const btns = document.getElementById('npcDlgBtns');
+    if (!btns) return;
+    const CAT_LABEL: Record<string, string> = { city: 'Thành thị', profession: 'Đất nghề', farm: 'Bãi săn', elemental: 'Vùng ngũ hành', current: 'Làng' };
+    const canFly = (this.myChar?.realm === 'kd' || this.myChar?.realm === 'na' || this.myChar?.realm === 'ht');
+    let html = '';
+    for (const t of d.list) {
+      const meta = `${CAT_LABEL[t.category] || t.category} · ${t.safe ? 'An toàn' : 'Nguy hiểm'}`;
+      if (!t.canEnter) {
+        html += `<div class="prow"><span class="pname">🔒 ${t.name}<span class="pdesc">${meta} · ${t.needText}</span></span><button class="pbtn" disabled>Chưa mở</button></div>`;
+        continue;
+      }
+      if (t.id === 'thach_lam') {
+        html += `<div class="prow"><span class="pname">${t.name}<span class="pdesc">${meta} · qua cổng tông môn</span></span><button class="pbtn gold" data-travel="${t.id}">Đi</button></div>`;
+        continue;
+      }
+      const btnsHtml: string[] = [];
+      if (t.boatOnly) {
+        btnsHtml.push(`<button class="pbtn gold" data-travel="${t.id}" data-method="boat">⛵ Thuyền ~${t.boatSec ?? '?'}s</button>`);
+      } else {
+        const cost = t.cost ?? 0;
+        const poor = stones < cost;
+        btnsHtml.push(cost > 0
+          ? `<button class="pbtn gold" data-travel="${t.id}" data-method="portal" ${poor ? 'disabled' : ''}>🌀 ${cost} LT${poor ? ' (thiếu)' : ''}</button>`
+          : `<button class="pbtn gold" data-travel="${t.id}" data-method="portal">🌀 Miễn phí</button>`);
+        if (this.mapState?.mapId === 'tham_hai_bi_canh' && t.id === 'thanh_van_thanh') { // đang ở đảo → thêm lựa chọn về bằng thuyền
+          btnsHtml.push(`<button class="pbtn" data-travel="${t.id}" data-method="boat">⛵ Thuyền ~${t.boatSec ?? '?'}s</button>`);
+        }
+      }
+      if (canFly) btnsHtml.push(`<button class="pbtn" data-travel="${t.id}" data-method="fly">🗡 Kiếm ~${t.flySec ?? '?'}s</button>`);
+      html += `<div class="prow"><span class="pname">${t.name}<span class="pdesc">${meta}${t.boatOnly ? ' · Đảo ngoài biển' : ''}</span></span><span style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end">${btnsHtml.join('')}</span></div>`;
+    }
+    btns.innerHTML = html || '<div class="panelSub">Không có đường đi nào từ đây.</div>';
+    btns.querySelectorAll<HTMLButtonElement>('[data-travel]').forEach((btn) => {
+      btn.onclick = () => {
+        this.socket.emit('travel_to', { mapId: btn.dataset.travel, method: btn.dataset.method || 'portal' });
+        p.style.display = 'none';
+      };
+    });
+  }
+
+  // GĐ60: panel BẢN ĐỒ THẾ GIỚI (bấm vào minimap) — chi tiết map hiện tại
+  // (canvas to: cổng, hố lửa, đặc sản, vật trang trí, điểm giao hàng) + sổ
+  // mọi map: quái gì, khóa cổng ra sao, đi hết bao nhiêu Linh thạch.
+  private renderWorldMap(d: OverviewData): void {
+    const p = document.getElementById('worldMapPanel');
+    if (!p) return;
+    this.closePanels();
+    p.style.display = 'block';
+    const title = document.getElementById('wmTitle');
+    if (title) title.textContent = `🗺 ${d.current.name}`;
+    const cv = document.getElementById('wmCanvas') as HTMLCanvasElement | null;
+    const ctx = cv?.getContext('2d');
+    if (cv && ctx) {
+      // GĐ64: chiều cao canvas theo ĐÚNG tỉ lệ map (hết dải đen thừa trên/dưới)
+      const wantH = Math.max(170, Math.min(430, Math.round(cv.width * (d.current.h / Math.max(1, d.current.w)))));
+      if (cv.height !== wantH) cv.height = wantH;
+      const W = cv.width, H = cv.height;
+      const sc = Math.min(W / d.current.w, H / d.current.h);
+      const ox = (W - d.current.w * sc) / 2, oy = (H - d.current.h * sc) / 2;
+      // GĐ65: nền gradient + lưới thưa/mờ hơn (400px, alpha 0.04) cho đỡ rối
+      const grad = ctx.createLinearGradient(0, 0, 0, H);
+      grad.addColorStop(0, '#1b2f24'); grad.addColorStop(1, '#0e1c15');
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1;
+      for (let gx = 0; gx <= d.current.w; gx += 400) { ctx.beginPath(); ctx.moveTo(ox + gx * sc, oy); ctx.lineTo(ox + gx * sc, oy + d.current.h * sc); ctx.stroke(); }
+      for (let gy = 0; gy <= d.current.h; gy += 400) { ctx.beginPath(); ctx.moveTo(ox, oy + gy * sc); ctx.lineTo(ox + d.current.w * sc, oy + gy * sc); ctx.stroke(); }
+      // GĐ65: hộp nhãn đã đặt — nhãn mới (vùng/NPC) phải tránh đè lên chúng
+      const placed: Array<{ l: number; t: number; r: number; b: number }> = [];
+      const boxHits = (b: { l: number; t: number; r: number; b: number }, m = 3) => placed.some((p) => b.l < p.r + m && b.r > p.l - m && b.t < p.b + m && b.b > p.t - m);
+      const pill = (text: string, cx: number, cy: number, fg: string, border: string) => {
+        ctx.font = '10px sans-serif';
+        const w = ctx.measureText(text).width + 12, h = 17;
+        const l = Math.max(2, Math.min(W - w - 2, cx - w / 2)), t = Math.max(2, Math.min(H - h - 2, cy - h / 2));
+        ctx.beginPath(); ctx.roundRect(l, t, w, h, 5);
+        ctx.fillStyle = 'rgba(6,14,10,0.88)'; ctx.fill();
+        ctx.strokeStyle = border; ctx.lineWidth = 1; ctx.stroke();
+        ctx.fillStyle = fg; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(text, l + w / 2, t + h / 2 + 0.5);
+        ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        return { l, t, r: l + w, b: t + h };
+      };
+      // khung vùng (làng / tông môn / bí cảnh ở map nhà): nền rất nhạt + nhãn pill
+      for (const z of d.current.zones || []) {
+        const zx = ox + z.x * sc, zy = oy + z.y * sc, zw = z.w * sc, zh = z.h * sc;
+        ctx.fillStyle = 'rgba(87,201,139,0.05)'; ctx.fillRect(zx, zy, zw, zh);
+        ctx.strokeStyle = 'rgba(87,201,139,0.35)'; ctx.lineWidth = 1.2; ctx.strokeRect(zx, zy, zw, zh);
+        ctx.font = '10px sans-serif';
+        const tw = ctx.measureText(z.label).width + 12;
+        placed.push(pill(z.label, zx + 5 + tw / 2, zy + 13.5, 'rgba(215,255,228,0.9)', 'rgba(87,201,139,0.4)'));
+      }
+      ctx.strokeStyle = 'rgba(139,233,201,0.55)'; ctx.lineWidth = 2;
+      ctx.strokeRect(ox, oy, d.current.w * sc, d.current.h * sc);
+      const dot = (x: number, y: number, col: string, r: number) => { ctx.beginPath(); ctx.arc(ox + x * sc, oy + y * sc, r, 0, Math.PI * 2); ctx.fillStyle = col; ctx.fill(); };
+      for (const it of d.current.decor) dot(it.x, it.y, 'rgba(230,240,230,0.22)', 1.5);
+      for (const hz of d.current.hazards) dot(hz.x, hz.y, '#f0643c', Math.max(3, hz.r * sc));
+      if (d.current.features?.volcano) dot(d.current.features.volcano.x, d.current.features.volcano.y, '#e5484d', 8);
+      for (const c of d.current.features?.caves || []) dot(c.x, c.y, '#7fd1e8', 7);
+      // GĐ65: NPC — chấm vàng viền tối + nhãn pill. Thử 4 vị trí (phải/trái/
+      // trên/dưới); vị trí nào cũng đè thì xếp chồng xuống dưới kèm đường
+      // nối mảnh từ chấm tới nhãn — hết cảnh tên đè lên nhau ở giữa làng.
+      const placeNpc = (n: { x: number; y: number; name: string }) => {
+        const sx = ox + n.x * sc, sy = oy + n.y * sc;
+        ctx.font = '10px sans-serif';
+        const w = ctx.measureText(n.name).width + 12, h = 17;
+        const cands = [
+          { l: sx + 9, t: sy - h / 2 },
+          { l: sx - 9 - w, t: sy - h / 2 },
+          { l: sx - w / 2, t: sy - 9 - h },
+          { l: sx - w / 2, t: sy + 9 },
+        ];
+        let box = cands.find((c) => c.l >= 2 && c.t >= 2 && c.l + w <= W - 2 && c.t + h <= H - 2 && !boxHits({ l: c.l, t: c.t, r: c.l + w, b: c.t + h }));
+        if (!box) {
+          const below = placed.filter((p) => p.l < sx + 30 && p.r > sx - 30 && p.t >= sy - 20).reduce((m, p) => Math.max(m, p.b), sy + 9);
+          box = { l: Math.max(2, Math.min(W - w - 2, sx - w / 2)), t: below + 3 };
+        }
+        const b = { l: box.l, t: box.t, r: box.l + w, b: box.t + h };
+        const nx = Math.max(b.l, Math.min(sx, b.r)), ny = Math.max(b.t, Math.min(sy, b.b));
+        ctx.strokeStyle = 'rgba(255,217,77,0.45)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(nx, ny); ctx.stroke();
+        placed.push(pill(n.name, b.l + w / 2, b.t + h / 2, '#ffe9a8', 'rgba(255,217,77,0.4)'));
+        dot(n.x, n.y, '#ffd94d', 4);
+        ctx.beginPath(); ctx.arc(sx, sy, 5.5, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(6,14,10,0.9)'; ctx.lineWidth = 1.4; ctx.stroke();
+      };
+      for (const n of d.current.npcs || []) placeNpc(n);
+      // cổng dịch chuyển: hình thoi xanh lá (khác hẳn chấm tròn của NPC)
+      const px = ox + d.current.portal.x * sc, py = oy + d.current.portal.y * sc;
+      ctx.beginPath(); ctx.moveTo(px, py - 7); ctx.lineTo(px + 7, py); ctx.lineTo(px, py + 7); ctx.lineTo(px - 7, py); ctx.closePath();
+      ctx.fillStyle = '#57c98b'; ctx.fill(); ctx.strokeStyle = 'rgba(6,14,10,0.9)'; ctx.lineWidth = 1.2; ctx.stroke();
+      if (this.myChar?.escort && this.myChar.escort.dest === d.current.mapId) dot(this.myChar.escort.delivery.x, this.myChar.escort.delivery.y, '#ffd94d', 6);
+      const me = this.myContainer;
+      if (me) {
+        dot(me.x, me.y, '#ffffff', 4.5);
+        ctx.beginPath(); ctx.arc(ox + me.x * sc, oy + me.y * sc, 7.5, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(20,26,22,0.9)'; ctx.lineWidth = 1.6; ctx.stroke();
+      }
+    }
+    const body = document.getElementById('wmBody');
+    if (!body) return;
+    const cur = d.current;
+    const featTxt = [cur.features?.volcano ? '🌋 Núi lửa' : '', (cur.features?.caves?.length ? '🧊 Hang băng' : ''), (cur.hazards.length ? `🔥 ${cur.hazards.length} hố lửa (đứng vào bị thiêu!)` : '')].filter(Boolean).join(' · ');
+    let html = `<div class="prow"><span class="pname">Đang ở: ${cur.name}<span class="pdesc">${cur.theme === 'village' ? 'Làng quê' : 'Chủ đề: ' + cur.theme} · Cổng dịch chuyển có vòng tròn xanh lá${featTxt ? ' · ' + featTxt : ''}<br/>Quái ở đây: ${cur.monsters.map((m) => `${m.name} ×${m.count}`).join(', ') || 'không có'}</span></span></div>`;
+    html += '<div class="wmLegend"><span>⚪ Vị trí của bạn</span><span>◆ Cổng dịch chuyển</span>' + (cur.npcs?.length ? '<span>🟡 NPC (tên trong khung vàng)</span>' : '') + '<span>chấm mờ = cây / nhà</span></div>';
+    html += '<div class="panelSub" style="margin-top:6px">TẤT CẢ BẢN ĐỒ — bấm Đi nếu đang đứng cạnh Trận Dịch Chuyển của map hiện tại:</div>';
+    const CATL: Record<string, string> = { city: '🏯 Thành thị', profession: '🛠 Đất nghề', farm: '⚔ Bãi săn', elemental: '🌋 Vùng ngũ hành', current: '🏡 Làng' };
+    let lastCat = '';
+    for (const m of d.maps) {
+      if (m.category !== lastCat) { lastCat = m.category; html += `<div class="panelSub" style="margin-top:8px">${CATL[m.category] || m.category}</div>`; }
+      const right = !m.canEnter
+        ? `<span style="color:#c9a0a0">🔒 ${m.needText}</span>`
+        : m.reachable
+          ? `<button class="pbtn gold" data-wm-travel="${m.id}">Đi</button>`
+          : '<span style="color:#9fb8a8">Qua Thanh Vân Thành</span>';
+      html += `<div class="prow"><span class="pname">${m.name}${m.boatOnly ? ' 🏝' : ''}<span class="pdesc">${m.safe ? 'An toàn' : 'Nguy hiểm'}${m.boatOnly ? ' · Đảo biển (thuyền/ngự kiếm)' : ` · Dịch chuyển ${m.cost > 0 ? m.cost + ' LT' : 'miễn phí'}`}<br/>Quái: ${m.monsters.map((x) => `${x.name} ×${x.count}`).join(', ') || '—'}</span></span>${right}</div>`;
+    }
+    body.innerHTML = html;
+    body.querySelectorAll<HTMLButtonElement>('[data-wm-travel]').forEach((b) => {
+      b.onclick = () => {
+        p.style.display = 'none';
+        this.socket.emit('travel_to', { mapId: b.dataset.wmTravel, method: 'portal' });
+      };
+    });
+    const close = document.getElementById('wmClose');
+    if (close) close.onclick = () => { p.style.display = 'none'; };
+  }
+
   private openNpcDialog(d: NpcDialogData): void {
     const p = document.getElementById('npcDialog');
     if (!p) return;
@@ -2875,6 +3378,19 @@ class GameScene extends Phaser.Scene {
         }
       }
     }
+    // GĐ60: LÁI BUÔN — việc hộ tống thương nhân (đi lại + kiếm Linh thạch)
+    const ei = d.escortInfo;
+    if (ei) {
+      if (ei.active) {
+        html += `<div class="prow"><span class="pname">🧳 Đang hộ tống tới ${ei.active.destName}<span class="pdesc">Đưa thương nhân tới điểm giao hàng (cột sáng vàng) ở giữa bản đồ đích. Bỏ chuyến thì thương nhân tự về làng an toàn.</span></span><button class="pbtn" data-escort-abandon="1">Bỏ chuyến</button></div>`;
+      } else {
+        html += `<div class="prow"><span class="pname">🧳 Việc hộ tống<span class="pdesc">Đưa thương nhân tới giữa bản đồ đích — đi qua Trận Dịch Chuyển miễn phí cho chuyến này, tới nơi được thưởng Linh thạch + Tu vi. Quái sẽ phục kích lúc đoàn tới nơi!</span></span></div>`;
+        for (const m of ei.missions) {
+          html += `<div class="prow"><span class="pname">${m.name}<span class="pdesc">Thưởng ${m.reward.stones} Linh thạch + ${m.reward.tuVi} Tu vi</span></span><button class="pbtn gold" data-escort="${m.id}">Nhận hộ tống</button></div>`;
+        }
+        if (!ei.missions.length) html += '<div class="prow">Cảnh giới của bạn chưa đủ cho chuyến nào — hãy tu luyện thêm.</div>';
+      }
+    }
     // GĐ57: CỔNG BÍ CẢNH — nút qua cổng (đệ tử mới vào được; cổng ra ai cũng qua)
     const ri = d.realmInfo;
     if (ri) {
@@ -2911,6 +3427,13 @@ class GameScene extends Phaser.Scene {
     // GĐ57: qua cổng bí cảnh — server dịch chuyển + nạp lại toàn cảnh, đóng hộp thoại
     btns.querySelectorAll<HTMLButtonElement>('[data-realm]').forEach((b) => {
       b.onclick = () => { this.socket.emit('realm_portal', { action: b.dataset.realm }); this.closePanels(); };
+    });
+    // GĐ60: nhận / bỏ việc hộ tống — nhận xong đóng hộp thoại, thương nhân xuất hiện cạnh người chơi
+    btns.querySelectorAll<HTMLButtonElement>('[data-escort]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('escort_accept', { mapId: b.dataset.escort }); this.closePanels(); };
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-escort-abandon]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('escort_abandon'); this.closePanels(); };
     });
     // GĐ40+: nút chỉ đích danh — bấm xong mở lại hộp thoại Trưởng Làng xem kết quả
     btns.querySelectorAll<HTMLButtonElement>('[data-accuse]').forEach((b) => {
@@ -3103,6 +3626,34 @@ class GameScene extends Phaser.Scene {
     this.renderInv();
   }
 
+  // GĐ66 sửa nhỏ (2): panel Ví Linh thạch — liệt kê 4 phẩm theo file
+  // thiết kế. MMO hiện chỉ có 1 số dư thật (Hạ phẩm = c.stones, mọi
+  // giao dịch đều dùng nó); 3 phẩm cao chưa có cách kiếm/đổi trong
+  // code nên hiện 0 kèm ghi chú, KHÔNG bịa số.
+  private toggleStonesPanel(): void {
+    if (!this.myChar) return;
+    if (this.openPanel === 'stones') { this.closePanels(); return; }
+    this.closePanels();
+    this.openPanel = 'stones';
+    const p = document.getElementById('stonesPanel');
+    if (p) p.style.display = 'block';
+    this.renderStonesPanel();
+  }
+
+  private renderStonesPanel(): void {
+    const body = document.getElementById('stonesBody');
+    if (!body || !this.myChar) return;
+    // GĐ67: 4 phẩm, không dòng mô tả (theo ý người chơi) — Trung/Thượng
+    // là số thật từ rương (TC+ / KD hậu+); GĐ69: Cực phẩm từ rương boss.
+    const row = (name: string, n: number) =>
+      `<div class="prow"><span class="pname">${name}</span><b>${n}</b></div>`;
+    body.innerHTML =
+      row('💠 Hạ phẩm', this.myChar.stones ?? 0) +
+      row('🔷 Trung phẩm', this.myChar.stonesTrung ?? 0) +
+      row('🔶 Thượng phẩm', this.myChar.stonesThuong ?? 0) +
+      row('🟣 Cực phẩm', this.myChar.stonesCuc ?? 0);
+  }
+
   private renderInv(): void {
     if (!this.myChar) return;
     const stones = document.getElementById('invStones');
@@ -3141,6 +3692,15 @@ class GameScene extends Phaser.Scene {
     if (hpText) hpText.textContent = `HP ${p.hp} / ${p.maxHp}`;
     if (mpFill) mpFill.style.width = `${Math.max(0, (p.mp / Math.max(1, p.maxMp)) * 100)}%`;
     if (mpText) mpText.textContent = `Chân nguyên ${p.mp} / ${p.maxMp}`;
+    // GĐ62: bản cảm ứng có cụm thanh riêng ở giữa dưới màn hình
+    const hpFillT = document.getElementById('hudHpFillT') as HTMLElement | null;
+    const hpTextT = document.getElementById('hudHpTextT');
+    const mpFillT = document.getElementById('hudMpFillT') as HTMLElement | null;
+    const mpTextT = document.getElementById('hudMpTextT');
+    if (hpFillT) hpFillT.style.width = `${Math.max(0, (p.hp / Math.max(1, p.maxHp)) * 100)}%`;
+    if (hpTextT) hpTextT.textContent = `HP ${p.hp} / ${p.maxHp}`;
+    if (mpFillT) mpFillT.style.width = `${Math.max(0, (p.mp / Math.max(1, p.maxMp)) * 100)}%`;
+    if (mpTextT) mpTextT.textContent = `Chân nguyên ${p.mp} / ${p.maxMp}`;
   }
 
   // ---------------- Đồng bộ quái vật ----------------
@@ -3149,12 +3709,32 @@ class GameScene extends Phaser.Scene {
 
     for (const m of monsters) {
       seen.add(m.id);
-      this.monsterTargets.set(m.id, { x: m.x, y: m.y });
+      // GĐ60: quái đang ẩn nấp không lên minimap (giữ bất ngờ phục kích)
+      if (m.hidden) this.monsterTargets.delete(m.id);
+      else this.monsterTargets.set(m.id, { x: m.x, y: m.y });
 
       let actor = this.monsterActors.get(m.id);
       if (!actor) {
         actor = this.spawnMonsterActor(m);
         this.monsterActors.set(m.id, actor);
+      }
+      // GĐ61: ghi nhận trùm đang giao chiến gần nhất cho thanh máu trùm
+      if ((m.boss || m.trial) && m.hp > 0 && m.hp < m.maxHp && this.myContainer) {
+        const dd = Math.hypot(m.x - this.myContainer.x, m.y - this.myContainer.y);
+        if (dd < 950 && (!this.bossShown || this.bossShown.id === m.id || dd < this.bossShown.dist)) {
+          this.bossShown = { id: m.id, name: m.name || m.kind || 'Trùm', hp: m.hp, maxHp: m.maxHp, dist: dd, at: Date.now() };
+        }
+      }
+      // GĐ60: ẩn/hiện hình quái phục kích — vừa hiện hình thì nảy hình vồ mồi
+      const hid = !!m.hidden;
+      if (actor.hiddenShown !== hid) {
+        actor.hiddenShown = hid;
+        actor.container.setVisible(!hid);
+        if (!hid) {
+          const bs = actor.sprite.scaleX;
+          actor.sprite.setScale(bs * 1.35);
+          this.tweens.add({ targets: actor.sprite, scale: bs, duration: 240, ease: 'Back.easeOut' });
+        }
       }
       // Thanh máu: độ dài + màu theo % HP còn lại
       const frac = Math.max(0, m.hp) / m.maxHp;
@@ -3168,6 +3748,7 @@ class GameScene extends Phaser.Scene {
         else if (stNow === 'slow') actor.sprite.setTint(0x9fe8ff);
         else if (stNow === 'root') actor.sprite.setTint(0xd8d8d8);
         else if (stNow === 'dot') actor.sprite.setTint(0xffa040);
+        else if (stNow === 'windup') actor.sprite.setTint(0xff5040); // GĐ70: đang vận dậm băng → nhuộm đỏ cảnh báo
         else actor.sprite.clearTint();
       }
       // GĐ9: hướng mới nhất (vòng update lo mặt trái/phải) + nháy khi mất máu
@@ -3220,19 +3801,35 @@ class GameScene extends Phaser.Scene {
     // GĐ19: trùm thử thách dùng hình Thạch Quái lớn + nhãn tên; Tâm Ma nhuộm tím
     const isTrial = !!m.trial;
     const isRival = m.trial === 'rival' || m.kind === 'kiemma'; // GĐ40: tu sĩ thù địch là NGƯỜI · GĐ57: Kiếm Ma cũng hình người (kiếm khách ma)
+    // GĐ59: loài GDD mới mượn họ hình sẵn có (base) + nhuộm màu (tint) + tỉ lệ (scale)
+    const vis = GDD_MONSTER_VISUAL[m.kind || ''];
+    const base: 'wolf' | 'bat' | 'golem' | 'rival' = isTrial
+      ? 'golem'
+      : vis
+        ? vis.base
+        : isRival
+          ? 'rival'
+          : m.kind === 'golem' || m.kind === 'khoiloi'
+            ? 'golem'
+            : m.kind === 'bat'
+              ? 'bat'
+              : 'wolf';
     // GĐ42: tu sĩ thù địch dùng bộ sprite pixel 'rival'; nạp lỗi mới lùi về hình vẽ code cũ
-    const rivalSet = isRival && this.textures.exists('rival-idle-south');
+    const rivalSet = base === 'rival' && this.textures.exists('rival-idle-south');
     // GĐ38: hình theo LOÀI — dơi dùng khung vỗ cánh, thạch quái hình đá
-    const key = isRival
+    const key = base === 'rival'
       ? rivalSet ? spriteTexKey('rival', m.direction, 'idle') : personTexKey('rivalmonk', m.direction, 'idle')
-      : isTrial || m.kind === 'golem' || m.kind === 'khoiloi' ? 'golem-idle' : m.kind === 'bat' ? 'bat-f0' : wolfTexKey(face, 'idle');
+      : base === 'golem' ? 'golem-idle' : base === 'bat' ? 'bat-f0' : wolfTexKey(face, 'idle');
+    const baseScale = base === 'rival' ? PERSON_TEX.scale : isTrial ? 1.2 : m.kind === 'khoiloi' ? 1.15 : base === 'golem' || base === 'bat' ? 1 : WOLF_TEX.scale;
     const sprite = rivalSet
-      ? this.add.sprite(0, 0, key).setOrigin(0.5, HERO_ORIGIN_Y).setScale(HERO_SCALE)
-      : this.add.image(0, 0, key).setScale(isRival ? PERSON_TEX.scale : isTrial ? 1.2 : m.kind === 'khoiloi' ? 1.15 : m.kind === 'golem' || m.kind === 'bat' ? 1 : WOLF_TEX.scale);
+      ? this.add.sprite(0, 0, key).setOrigin(0.5, HERO_ORIGIN_Y).setScale(HERO_SCALE * (vis?.scale ?? 1))
+      : this.add.image(0, 0, key).setScale(baseScale * (vis?.scale ?? 1));
     if (isTrial && m.trial === 'dai') sprite.setTint(0x9a86d8);
     if (m.kind === 'khoiloi') sprite.setTint(0xa8c4de); // GĐ57: khôi lỗi đá xanh xám, khác Thạch Quái thường
     if (m.kind === 'huyetlang') sprite.setTint(0xe58a8a); // GĐ57: Huyết Lang nhuộm đỏ
-    const barY = isRival ? (rivalSet ? -62 : -48) : isTrial || m.kind === 'golem' || m.kind === 'khoiloi' ? -56 : -30;
+    if (vis) sprite.setTint(vis.tint); // GĐ59
+    const tintN: number | null = vis ? vis.tint : m.kind === 'khoiloi' ? 0xa8c4de : m.kind === 'huyetlang' ? 0xe58a8a : isTrial && m.trial === 'dai' ? 0x9a86d8 : null;
+    const barY = base === 'rival' ? (rivalSet ? -62 : -48) : base === 'golem' ? -56 : -30;
     const barBg = this.add.rectangle(0, barY, 38, 7, 0x101418).setAlpha(0.6);
     const barFg = this.add.rectangle(-18, barY, 36, 5, 0x53d769).setOrigin(0, 0.5);
     const parts: Phaser.GameObjects.GameObject[] = [sprite, barBg, barFg];
@@ -3247,7 +3844,7 @@ class GameScene extends Phaser.Scene {
     const container = this.add.container(m.x, m.y, parts);
     container.setDepth(m.y);
     return {
-      container, sprite, barFg, dir: m.direction, face, curTex: key, trial: m.trial || null, kind: m.kind, rivalSet,
+      container, sprite, barFg, dir: m.direction, face, curTex: key, trial: m.trial || null, kind: m.kind, rivalSet, base, tintN, // GĐ59
       // (gán tiếp các trường còn lại ở dòng dưới của return gốc)
       walkPhase: 0, lastX: m.x, lastY: m.y, lastHp: m.hp,
       flashUntil: 0, lungeUntil: 0, nextLunge: 0,
@@ -3294,13 +3891,24 @@ class GameScene extends Phaser.Scene {
             text = '✦ Bấm E — Cổng Bí Cảnh Thạch Lâm';
           } else if (near.type === 'bicanh_out') {
             text = '✦ Bấm E — Cổng Trở Về làng';
+          } else if (near.type === 'laibuan') {
+            text = '✦ Bấm E — Lái Buôn (nhận việc hộ tống thương nhân)';
+          } else if (near.type === 'travel') {
+            text = '✦ Bấm E — Trận Dịch Chuyển (đi bản đồ khác)';
           }
         }
         hint.textContent = text;
         hint.style.display = text ? 'block' : 'none';
-        // GĐ17: nút E cảm ứng hiện nhãn theo ngữ cảnh
-        const tAct = document.getElementById('tAct');
-        if (tAct) tAct.textContent = text ? 'E' : '···';
+        // GĐ66: bỏ nút E riêng — tích hợp vào nút ⚔: gần chỗ tương tác
+        // được thì nút đánh thường hiện E (bấm là tương tác), còn không
+        // thì vẫn là ⚔ đánh thường.
+        this.touchInteract = !!text;
+        const tAtk = document.getElementById('tAtk');
+        if (tAtk) {
+          const label = text ? 'E' : '⚔';
+          if (tAtk.textContent !== label) tAtk.textContent = label;
+          tAtk.classList.toggle('isInteract', !!text);
+        }
       }
     }
     // GĐ17: banner khu vực + minimap + avatar (~3 lần/giây)
@@ -3452,20 +4060,20 @@ class GameScene extends Phaser.Scene {
       // GĐ19: trùm thử thách dùng khung hình Thạch Quái (slam khi vồ)
       // GĐ38: dơi vỗ cánh liên tục (4 khung), thạch quái thường đi như trùm
       // GĐ40: tu sĩ thù địch dùng khung NGƯỜI (đi bộ / kết ấn khi vồ)
-      const key = actor.trial === 'rival' || actor.kind === 'kiemma'
+      const key = actor.base === 'rival' // GĐ59: chọn khung theo họ hình đã chốt lúc dựng actor
         ? actor.rivalSet
           ? spriteTexKey('rival', actor.dir, _time < actor.lungeUntil ? 'cast' : frame === 'lunge' ? 'cast' : frame)
           : personTexKey('rivalmonk', actor.dir, _time < actor.lungeUntil ? 'cast' : frame === 'lunge' ? 'cast' : frame)
-        : actor.trial || actor.kind === 'golem' || actor.kind === 'khoiloi'
+        : actor.base === 'golem'
         ? _time < actor.lungeUntil
           ? 'golem-slam'
           : moving
             ? 'golem-w' + (Math.floor(actor.walkPhase / (Math.PI / 2)) % 4)
             : 'golem-idle'
-        : actor.kind === 'bat'
+        : actor.base === 'bat'
           ? 'bat-f' + (Math.floor(_time / 110) % 4)
           : wolfTexKey(actor.face, frame);
-      if (actor.kind === 'bat') actor.sprite.setFlipX(actor.dir === 'left');
+      if (actor.base === 'bat') actor.sprite.setFlipX(actor.dir === 'left');
       if (key !== actor.curTex) {
         actor.curTex = key;
         actor.sprite.setTexture(key);
@@ -3474,6 +4082,7 @@ class GameScene extends Phaser.Scene {
       if (_time < actor.flashUntil) actor.sprite.setTintFill(0xffe9e9);
       else if (actor.sprite.tintFill) {
         actor.sprite.clearTint();
+        if (actor.tintN != null) actor.sprite.setTint(actor.tintN); // GĐ59: màu cố định của loài (GDD/khôi lỗi/huyết lang/Tâm Ma)
         if (actor.trial === 'dai') actor.sprite.setTint(0x9a86d8);
         if (actor.kind === 'khoiloi') actor.sprite.setTint(0xa8c4de); // GĐ57
         if (actor.kind === 'huyetlang') actor.sprite.setTint(0xe58a8a); // GĐ57

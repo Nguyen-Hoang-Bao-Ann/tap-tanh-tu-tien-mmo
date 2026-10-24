@@ -1315,3 +1315,497 @@ gửi ảnh+video: chơi dọc trên điện thoại vỡ hết bố cục; ngư
 - probe58 (shottools/probe_portrait58.cjs, server :3072): 6/6 PASS — dọc
   hiện khóa, ngang vào game bình thường, tab đo 153×23/147×23px; ảnh
   preview58-portrait-lock.png + preview58-learn.png. test5 ALL PASS.
+
+GĐ59 (23/10 khuya) — HỆ THỐNG 52 BẢN ĐỒ (người chơi: "làm tất cả các map
+còn lại trong file thiết kế + mấy chục map đó"):
+- Nguồn sự thật: server/data/gdd/MapData.json (52 map) + MonsterData.json
+  (21 quái). Đồ thị theo file: mọi map nối qua trung tâm thanh_van_thanh.
+- TRẬN DỊCH CHUYỂN: vòng đá phát sáng ở mép đông quảng trường làng
+  (1080,600); mỗi map khác có cổng ở nam-trung. Bấm E → danh sách điểm đến
+  (server travel_list/travel_to; phải đứng ≤130px cạnh cổng; cổng kiểm
+  cảnh giới theo minRealm/minTier của file, báo rõ "Cần Luyện Khí tầng 1"…).
+  Từ làng → [Thanh Vân Thành, Thạch Lâm (chỉ đệ tử tông)]; từ thành → 50
+  điểm (cả 48 map còn lại + làng + Thạch Lâm); từ map khác → chỉ về thành.
+- Map chính (lang_tan_thu) GIỮ NGUYÊN thế giới 2800×1200 hiện tại (làng +
+  farm + Thạch Lâm trong cùng map); bai_farm/thach_lam không tách runtime
+  — mục Thạch Lâm trong danh sách là lối tắt dịch chuyển nội bộ, vẫn bắt
+  đệ tử như GĐ57.
+- 50 map mới là KHÔNG GIAN RIÊNG: đồng bộ theo phòng socket.io ('map:'+id)
+  — chỉ thấy người/quái/rương/đạn cùng map; NPC/chợ/nhiệm vụ chỉ ở làng.
+  Đồng hồ thế giới dùng chung. Chết ở map khác → hồi sinh quảng trường làng.
+  Nhân vật lưu mapId + vị trí; đăng nhập lại đứng đúng map cũ.
+- Cảnh quan SINH THEO CHỦ ĐỀ (seeded RNG theo id map — mọi người thấy
+  giống nhau): 24 theme (thành thị/vườn thuốc/rừng huyết/băng/ngục lửa/
+  hư không/kim loại/đầm lầy/mộ địa…) × bảng màu nền + ~26–64 vật trang trí
+  (cây/đá/tinh thể/cột/trụ đèn/lò rèn/bia mộ…) kèm vòng đá cổng. Vật có
+  bán kính cản được server giữ làm chướng ngại va chạm thật.
+- Quái theo MonsterData.maps (28 cặp map–loài); 4 map file không gán quái
+  được gán TẠM theo theme (bang_phong_coc←Thủy Triều Tinh, hoa_diem_son←
+  Thạch Quái, van_thu_son_mach←Huyết Lang, tham_hai_bi_canh←Băng Tinh Cự
+  Nhân). Số lượng TẠM: thường 5/map, Tu vi ≥33 hoặc hạng boss = 1. def/
+  tốc độ/hồi sinh TẠM suy từ cảnh giới+hạng (file không ghi). Rơi đồ TẠM:
+  linh thạch theo cảnh giới quái + đá quý 22%. Đánh quái nay cộng Tu vi
+  cả cho Kim Đan+ (trước chỉ LK/TC).
+- Hình quái mới (15 loài GDD): mượn hình họ gần nhất (sói/dơi/golem/người)
+  + nhuộm màu + phóng tỉ lệ theo loài (GDD_MONSTER_VISUAL ở client) —
+  hình RIÊNG từng loài là việc sau. Cơ chế riêng của quái trong file
+  (Kiếm Ma kiếm khí tầm xa, Huyết Lang hút máu, Cốt Binh hồi sinh…) CHƯA
+  làm — quái GDD dùng AI cơ bản chung.
+- Kích thước map TẠM theo loại: thành 1600×1200, đất nghề 1400×1050,
+  bãi săn/ngũ hành 1800×1350.
+- Sửa kèm: thẻ nhân vật + thẻ chọn nhân vật nay gọi đúng "Kim Đan tầng N"
+  (trước đây TC/KD đều hiện "Luyện Khí" — chỉ là chữ hiển thị).
+- test46 (client/test46.cjs, :3074) ALL PASS 31 mục: Phàm nhân bị khóa
+  cổng thành + Thạch Lâm; LK1 vào thành (tick chỉ thấy mình, người ở làng
+  không thấy), 50 điểm đến từ thành, khóa đúng LK7/TC1/TC9/KD1; Dược Cốc
+  an toàn không quái; LK9 hạ Thủy Triều Tinh ở Băng Phong Cốc (+4 Tu vi —
+  số file), lưu map qua đăng nhập lại, chết về làng hồi đầy máu; KD1 vào
+  Kim Quáng Động gặp đúng 1 Kim Giáp Tê. test5 ALL PASS. Probe trình
+  duyệt probe_maps59.cjs 12/12 PASS + 5 ảnh preview59-*.png (cổng làng,
+  thành, cốc băng, hư không, động kim) — đã xem bằng mắt: nền/vòng cổng/
+  trang trí đúng theme, minimap + banner đúng tên vùng.
+
+Các số TẠM của GĐ59 (chờ người chơi duyệt/đổi): kích thước map, số quái
+mỗi map, def/tốc độ/hồi sinh quái GDD, 4 map gán quái tay, tỉ lệ rơi đá
+quý 22% + linh thạch theo cảnh giới, hình quái mượn+nhuộm.
+
+GĐ59b (23/10 khuya, sửa trong lúc chạy hồi quy test45): (1) Quái bí cảnh
+không còn sinh camp ngay điểm vào + không sinh chụm (<110px) — trước đây
+quái lang thang tụ ở cửa, người vừa qua cổng bị hội đồng chết. (2) Điểm
+đáp bí cảnh có vòng an toàn 130px như cổng các map GĐ59 (quái không
+đuổi vào vòng này). (3) Trùm có minChestGrade (Thạch Khôi Lỗi): CHẮC
+CHẮN rơi rương — hệ số thưởng đệ tử ×2/3 từng làm xác suất rương trùm
+tụt còn ~63%. test45 ALL PASS 13/13 sau 3 sửa này (kèm chỉnh test: đệ
+tử mẫu mạnh đúng tầm Trúc Cơ + nhận diện rương tự mở trong tầm 42px).
+
+## GĐ60 (24/10) — Kinh tế di chuyển + map siêu to + bản đồ thế giới
+
+Theo luật người chơi chốt 24/10: đi lại phải là HÀNH TRÌNH để khám phá,
+không phải bấm là tới nơi.
+
+- MAP SIÊU TO: thành 2400×1800, đất nghề 2200×1650, bãi săn 3800×2850,
+  vùng ngũ hành 4000×3000 (map nhà giữ nguyên vẽ tay). Trang trí dày
+  theo theme: rừng/đầm lầy ~1 vật/7000px² (tối đa 650/map), theme khác
+  ~1/12000px² (tối đa 420). Map dung nham có NÚI LỬA (chướng ngại r95)
+  + 7 HỐ LỬA đứng vào mất 9 HP/giây; map băng có tới 2 HANG BĂNG
+  (cảnh + chướng ngại). Client bỏ nướng 1 canvas khổng lồ, chuyển sang
+  VẼ THEO LƯỚI Ô 1024px + texture trang trí dùng chung theo theme.
+- QUÁI NHIỀU HƠN: mỗi map yếu/trung ×12, mạnh ×6, tinh anh ×3, trùm ×1
+  (tổng cả server 224 quái). Độc Xà (doc_xa) thành quái PHỤC KÍCH: ẩn
+  hoàn toàn (không hiện hình, không lên minimap, không bị đánh trúng),
+  người tới <130px thì hiện hình lao ra với tốc độ ×2,1 trong 0,7s.
+  Map không có người thì quái đứng yên (tiết kiệm CPU).
+- TRẬN DỊCH CHUYỂN CÓ GIÁ (theo cảnh giới map đích): Luyện Khí 50,
+  Trúc Cơ 150, Kim Đan 400 Linh thạch (Nguyên Anh 900 / Hóa Thần 1600
+  để sẵn). VỀ LÀNG luôn miễn phí; từ map xa VỀ THÀNH miễn phí
+  (chống kẹt); làng → thành vẫn 50 như map LK khác. Đang hộ tống thì
+  cả tuyến tới map đích miễn phí.
+- NGỰ KIẾM: Kim Đan trở lên, miễn phí nhưng CHẬM — 15 giây/chặng
+  (env TTT_JOURNEY_MS chỉnh được), có thanh đếm ngược trên màn hình;
+  di chuyển / chết / thoát game là HỦY hành trình.
+- THUYỀN: đảo ngoài biển (Thâm Hải Bí Cảnh) — Trận KHÔNG tới được;
+  thuyền chỉ chạy tuyến Thanh Vân Thành ↔ đảo (20 giây/chặng); Kim
+  Đan có thể ngự kiếm qua thay thế.
+- HỘ TỐNG THƯƠNG NHÂN: NPC mới Lái Buôn (1005,545 — cạnh Trận ở
+  quảng trường). Nhận chuyến → thương nhân (500 HP, không đánh trả)
+  đi theo; qua Trận miễn phí cả tuyến; tới map đích có 2 quái PHỤC
+  KÍCH gần điểm đáp; đưa thương nhân tới điểm giao hàng GIỮA map
+  (cột sáng vàng + chấm vàng trên minimap) → thưởng theo cảnh giới
+  map đích: LK 80 LT + 8 Tu vi, TC 160 + 16, KD 260 + 30 (NA/HT để
+  sẵn 400+45 / 600+60). Thương nhân chết = hỏng chuyến; bỏ chuyến
+  thì ông ta tự về. Trạng thái hộ tống KHÔNG lưu qua đăng xuất
+  (thoát game = bỏ chuyến) — giới hạn v1.
+- BẢN ĐỒ THẾ GIỚI: bấm vào minimap → panel vẽ map hiện tại (vật
+  trang trí, hố lửa, núi lửa, hang băng, cổng, điểm giao hàng, vị
+  trí của mình) + chi tiết quái từng map + sổ 51 map: khóa cổng,
+  giá dịch chuyển, đường nào đi thẳng được. Nút "Đi" trong panel
+  cũng dùng được khi đứng cạnh Trận.
+- test47 (client/test47.cjs, :3078, TTT_JOURNEY_MS=300) ALL PASS 42
+  mục: nghèo bị chặn vì Linh thạch, trừ phí đúng từng chặng (tổng
+  300 LT cho tuyến TC9), ngự kiếm chậm + hủy khi di chuyển, thuyền
+  đúng tuyến, rắn ẩn → hiện, hố lửa đốt máu, hộ tống trọn vòng
+  (miễn phí 2 chặng, phục kích 2 quái, giao hàng nhận thưởng, bỏ
+  chuyến). test46 cập nhật kích thước mới + ALL PASS; test45 +
+  test5 ALL PASS. Probe trình duyệt: 6 ảnh preview60-*.png (hộp
+  thoại Trận ở thành 98 nút đi, rừng Thanh Mộc Lâm dày, núi lửa +
+  hố lửa Hỏa Diệm Sơn, panel bản đồ thế giới, thanh ngự kiếm đếm
+  ngược 8s → tới thành) — đã xem bằng mắt.
+
+Các số TẠM của GĐ60 (chờ người chơi duyệt/đổi): kích thước map, mật
+độ trang trí, số quái mỗi hạng, bảng giá dịch chuyển, 15s/chặng ngự
+kiếm (thuyền 20s), thưởng hộ tống, hố lửa 9 HP/giây, vị trí núi
+lửa/hang băng sinh ngẫu nhiên theo seed map.
+
+## GĐ61 (24/10) — Làm lại HUD theo CẤU TRÚC ảnh mẫu bạn bè gửi
+
+Bạn bè chê "đồ họa và HUD cổ" (tiếp nối nhận xét của Đặng Nam tối
+23/10). Người chơi gửi 2 ảnh mẫu (mobile + web) của một game tu tiên
+khác và chốt: LẤY CẤU TRÚC, tên nút/nội dung giữ của game mình.
+
+- TRÁI TRÊN: thẻ nhân vật (avatar tròn, tên, cảnh giới, 3 thanh
+  HP/Chân nguyên/Tu vi) → pill 💠 Linh thạch → khung nhiệm vụ ngay
+  dưới thẻ (tracker cũ chuyển thành ô riêng bo góc).
+- GIỮA TRÊN: pill tên vùng + dòng đồng hồ thế giới → THANH TRÙM mới:
+  khi có trùm/quái thử thách đang giao chiến trong ~950px, hiện tên
+  + thanh máu đỏ lớn kiểu mẫu (server gửi thêm cờ boss trong sync).
+- PHẢI TRÊN: minimap (tên vùng chuyển lên ĐẦU khung) + hàng nút công
+  cụ CÓ NHÃN CHỮ: Túi đồ / Nhiệm vụ / Công pháp (nút MỚI, mở Sổ công
+  pháp) / Nghề / Thành tựu / Menu. Sửa luôn lỗi cũ: minimap trước
+  để pointer-events:none nên người chơi bấm chuột thật KHÔNG mở
+  được bản đồ thế giới (probe bấm bằng DOM nên không phát hiện) —
+  nay bấm được thật.
+- TRÁI DƯỚI: NHẬT KÝ thông báo (khu chat của mẫu — game mình chưa
+  có chat người chơi nên đặt nhật ký sự kiện): mọi thông báo server
+  + mở rương đều ghi 1 dòng, tối đa 5 dòng, tự mờ sau 14s. Nút 🎒
+  Túi đồ (I) cũ ở góc này bỏ (trùng nút hàng công cụ).
+- GIỮA DƯỚI: khay chiêu đổi sang ô vuông bo góc 14px, badge phím có
+  nền tối — giữ nguyên 10 ô + Né Space như luật cũ.
+- HÔ TÊN CHIÊU: tung chiêu từ bậc Luyện Khí trở lên → tên chiêu hiện
+  chữ vàng serif lớn giữa màn hình kiểu "Trầm Thiên Kiếm Thuật!"
+  trong mẫu (chiêu Cơ bản không hô cho đỡ rối).
+- Mobile: cùng cấu trúc thu gọn — thẻ trái trên, minimap phải trên,
+  hàng nút có nhãn ngay dưới minimap, cụm chiêu tròn phải dưới giữ
+  nguyên (vốn đã giống mẫu).
+- Kiểm chứng: probe61 13/13 PASS (bố cục đo bằng tọa độ thật trên
+  desktop + giả lập mobile; thanh trùm hiện đúng "Hỗn Độn Thú
+  4446/4500" khi đánh trùm ở Vô Tận Hư Không), test5 ALL PASS,
+  3 ảnh preview61-* đã xem bằng mắt. CHƯA gồm: đổi đồ họa THẾ GIỚI
+  (mẫu là vẽ vector phẳng — hướng đồ họa thế giới vẫn là câu hỏi mở
+  riêng), số sát thương nổi (server chưa phát số đòn đánh), chat
+  thật giữa người chơi.
+
+## GĐ62 (24/10) — Tinh chỉnh HUD mobile theo góp ý trực tiếp của người chơi
+
+- Joystick + nút ⚔: dời sát góc (8px) và to lên (joystick 102px,
+  ⚔ 66px) cho ngón tay dễ thao tác.
+- Thanh HP + Chân nguyên: TÁCH khỏi thẻ nhân vật, đặt thành cụm
+  riêng ở GIỮA DƯỚI màn hình (rộng tối đa 330px, chữ số to rõ);
+  trong thẻ trên mobile chỉ còn thanh Tu vi. Desktop giữ nguyên.
+- Hàng nút công cụ trên mobile: thu nhỏ (34×38px) và ôm sát minimap
+  (cách 4px).
+- probe62 11/11 PASS (đo tọa độ/kích thước thật trên giả lập mobile +
+  đối chứng desktop không đổi), ảnh preview62-mobile.png đã xem.
+
+## GĐ63 (24/10) — Chỉnh HUD mobile đợt 2 theo góp ý người chơi
+
+- Joystick + nút ⚔: cách góc/mép 16px (≥15px theo yêu cầu) để đặt
+  tay lên điện thoại dễ thao tác; cả vòng cung chiêu dời theo.
+- Thanh HP/Chân nguyên dưới giữa: thu còn ~một nửa (rộng 205px,
+  thanh cao 11px).
+- Hàng nút công cụ: đổi thành lưới 2 cột × 3 hàng ÔM SÁT mép trái
+  minimap, cao ngang minimap.
+- Bấm minimap trên mobile: panel Bản đồ thế giới mở dạng popup TO
+  giữa màn hình (97% bề ngang). Kèm sửa: tổng quan map nhà trước
+  trả decor rỗng nên canvas ở làng trống trơn — nay lấy 41 điểm
+  cây + nhà từ hằng số thế giới. (Bản nháp đầu của sửa này làm sập
+  handler overview vì TREE_TRUNKS lưu dạng hộp {x,y,w,h} chứ không
+  phải cặp [x,y] — đã sửa + kiểm chứng bằng socket test riêng.)
+- probe63 12/12 PASS (gồm chạm thật vào minimap trên giả lập cảm
+  ứng), test5 ALL PASS, ảnh preview63-mobile/worldmap đã xem.
+
+## GĐ64 (24/10) — Chỉnh HUD mobile đợt 3 + làm lại popup bản đồ
+
+- Thẻ nhân vật mobile thu nhỏ (avatar 24px, chữ 8–11px, thẻ cao
+  ~147px so với ~170px trước).
+- 5 ô chiêu cảm ứng xếp QUẠT đều quanh nút ⚔ (bán kính 124px, góc
+  giãn dần, tâm các nút kề nhau ≥44,6px — không chồng). Né + ô đa
+  dụng lùi sang trái nhường quạt. (Đối chiếu luật ô: Kim Đan mở đủ
+  5 ô chính — LK 3 ô/tầng 7→4, TC 4 ô/tầng 7→5, KD+ 5; thêm 4 ô đa
+  dụng mỗi bảng × 2 bảng.)
+- Thanh HP/Chân nguyên: mỏng hơn (9px) + dài ra (300px).
+- Popup Bản đồ thế giới làm lại: canvas theo đúng tỉ lệ map (hết
+  dải đen), lưới tọa độ 200px, khung + tên từng vùng (Làng / Thanh
+  Phong Môn / Bí Cảnh), NPC chấm vàng CÓ TÊN (tên tự né khi NPC
+  đứng sát nhau), chú thích ký hiệu.
+- probe64 15/15 PASS, ảnh preview64-mobile/worldmap đã xem.
+
+## GĐ65 (24/10) — Chỉnh HUD mobile đợt 4: quạt chiêu thu sát ⚔ + gỡ nút bị đè + popup bản đồ gọn/xịn
+
+- Đo thật GĐ64 trước khi sửa (probe đo rect): mép nút ⚔ cách mép chiêu
+  69–81px (khoảng trống chết), trong khi 5 nút chiêu sát nhau chỉ hở
+  0,6px (nhìn như dính nhau). Và lỗi thật nặng hơn: nút Né (tDodge)
+  với nút tương tác (tAct, hiện "E"/"···") đè lên nhau — tâm cách nhau
+  chỉ ~13px trong khi mỗi nút rộng 36px, nên nút tương tác bị Né che
+  gần hết (các pha trước chỉ đo tAct nên lọt lỗi này).
+- Quạt chiêu mới (chỉ touch): 5 nút thu còn 40px trên vòng R=92 quanh
+  ⚔, góc −12°/16°/44°/72°/100° → mép ⚔–chiêu còn tối đa 39px, tâm kề
+  44px (hở 4px, hết chạm nhau), không nút nào chạm mép màn hình
+  (cách ≥10px). Chú ý: luật cũ dùng selector ID (#tSkill…) nên thắng
+  luật class — GĐ65 phải ghi đè bằng chính selector ID mới thu nhỏ
+  được nút (phát hiện khi probe lần 1 vẫn đo ra 44px).
+- Cặp Né + tương tác xếp dọc bên trái Chiêu 1 (Né dưới, tương tác
+  trên): tâm cách nhau 48px, cách chiêu gần nhất 50–52px — hết đè.
+  Ô đa dụng thành cột ôm sát bên trái cụm mới. ⚔/joystick giữ nguyên
+  cách mép 16px; desktop không đổi.
+- Popup bản đồ làm lại lần 2 cho gọn/xịn: nền gradient, panel bo
+  18px + viền sáng; lưới thưa lại (400px, mờ hơn); chấm cây/nhà mờ
+  hơn; khung vùng nền rất nhạt + nhãn dạng pill; NPC chấm vàng viền
+  tối + nhãn pill thử 4 vị trí (phải/trái/trên/dưới), vị trí nào cũng
+  đè thì xếp chồng xuống dưới kèm đường nối mảnh — hết cảnh tên đè
+  lên nhau ở giữa làng; cổng dịch chuyển đổi thành hình thoi xanh lá
+  (khác hẳn chấm tròn NPC); chú thích thành hàng chip bo tròn.
+- probe65 14/14 PASS (gồm chạm thật vào minimap), test5 ALL PASS,
+  ảnh preview65-mobile/worldmap đã xem bằng mắt.
+
+## GĐ66 (24/10) — Thẻ gọn + ⚔ kiêm E + ô đa dụng/bình thuốc luôn hiện nút
+
+- Thẻ nhân vật mobile thu gọn hẳn (từ ~147px còn ~54px khi thu):
+  Linh thạch tách khỏi khung thẻ → pill riêng cố định dưới minimap
+  (chỉ cảm ứng; desktop vẫn trong thẻ). Bỏ dòng "Công pháp — học
+  chiêu mới" trong thẻ → chấm đỏ có số trên nút Công pháp (số chiêu
+  đủ điều kiện chỉ số, chưa học, chưa đang lĩnh ngộ; nhân vật test
+  Trúc Cơ 9 đo được 16). Bỏ dòng "Chỉ số · còn N điểm" trên cảm ứng
+  → chấm đỏ có số trên góc TRÁI avatar (chạm thẻ vẫn mở bảng chỉ số
+  như cũ; bản đầu đặt góc phải làm che 2 chữ đầu của tên — đã dời).
+  Bỏ chữ "(Kim Đan chưa mở)" ở dòng cảnh giới. Khi thẻ thu lại thì
+  ẩn dòng Tuổi + Linh căn (mở thẻ ra vẫn thấy đủ; riêng cảnh báo Ân
+  hạn tọa hóa luôn hiện). Thẻ khi thu chỉ còn: tên, hướng tu + vũ khí,
+  cảnh giới, thanh Tu vi (+ tên tông môn/Công trạng khi có).
+- Nút tương tác (E/…) riêng BỎ HẲN — tích hợp vào nút ⚔ như nhiều
+  game khác: đứng gần chỗ tương tác được thì nút ⚔ đổi thành E nền
+  xanh lá, bấm là tương tác (mở đúng panel/NPC/cổng đó); đi ra xa thì
+  nút trở lại ⚔ đánh thường. Đã kiểm bằng đi bộ thật tới Bảng treo
+  thưởng: nút hóa E + bấm mở được Bảng. Lưu ý: đứng sát NPC thì nút
+  là E, muốn đánh quái phải bước ra xa một chút (ngoài tầm 70px).
+- Ô đa dụng + bình thuốc LUÔN HIỆN nút (trước đây trống là ẩn nên
+  người chơi không thấy): 4 ô phụ về hàng ngang đáy giữa (như GĐ48
+  từng chốt), trống thì "Đ1..Đ4" viền đứt — bấm ô trống mở Sổ công
+  pháp để lắp chiêu hỗ trợ. Thêm nút bình thuốc 💊 cùng hàng: ưu tiên
+  Hồi Xuân Đan, rồi Đan Tụ Khí, rồi vật phẩm dùng được khác trong túi
+  (kèm số lượng); túi trống thì nút mờ, bấm mở Túi đồ.
+- probe66 20/20 PASS (gồm đi bộ tới Bảng + bấm E mở Bảng + bấm bình
+  thuốc mở Túi đồ), test5 ALL PASS, ảnh preview66-mobile/interact
+  đã xem bằng mắt.
+- Sửa nhỏ sau GĐ66 (theo ý người chơi): pill Linh thạch dưới minimap
+  trên cảm ứng viết gọn "💠 LT: N" (LT là chữ tắt game đã dùng ở phí
+  dịch chuyển) — đo được 79px, nằm trọn trong bề ngang minimap
+  110px; desktop vẫn giữ đủ chữ "Linh thạch hạ phẩm". probe66 cập
+  nhật lên 21/21 PASS.
+- Sửa nhỏ (2) sau GĐ66: người chơi chê "💠 LT: N" vẫn dài → pill
+  trên cảm ứng chỉ còn chữ "💠 Linh thạch" (81px); bấm pill mở panel
+  Ví Linh thạch liệt kê đủ 4 phẩm theo file thiết kế. MMO hiện chỉ
+  có 1 số dư thật (Hạ phẩm = c.stones, mọi giao dịch đều dùng nó)
+  nên 3 phẩm cao hiện 0 kèm ghi chú, không bịa số. Bấm pill không
+  làm thẻ nở/thu bảng chỉ số (stopPropagation). Trên desktop, dòng
+  Linh thạch trong thẻ giữ đủ chữ + số và bấm cũng mở panel ví —
+  lúc đầu desktop bấm không mở vì thẻ chỉ có pointer-events: auto
+  trên cảm ứng, click xuyên xuống canvas; đã thêm pointer-events:
+  auto riêng cho dòng Linh thạch. probe66 lên 25/25 PASS.
+
+## GĐ67 (24/10) — Phẩm Linh thạch trong rương + panel ví gọn
+
+- Người chơi đính chính: Trung/Thượng phẩm có từ mở rương (theo
+  file/SP), và chốt mốc: Trung phẩm ở rương Trúc Cơ trung trở lên,
+  Thượng phẩm ở rương Kim Đan hậu trở lên (rương LK vẫn chỉ Hạ).
+- Code MMO trước đây: rương không ghi quái nào rơi ra, loot `stones`
+  về thẳng 1 ví Hạ phẩm; quái chỉ có cảnh giới, không có tầng; map
+  KD toàn cổng KD1 nên mốc "KD hậu" không bám được vào cổng map.
+  Quy ước đã ghi rõ trong code để người chơi sửa từng loài nếu muốn:
+  mỗi loài có thêm `stage` (sơ/trung/hậu) — TC = trung kỳ; KD hạng
+  Trung = trung kỳ, KD hạng Mạnh/Tinh anh/Trùm = hậu kỳ; LK = sơ kỳ;
+  NA/HT = hậu kỳ. Loài làng/bí cảnh được gán cảnh giới theo
+  MonsterData (sói/dơi/thạch = LK sơ; Kiếm Ma/Huyết Lang/Khôi Lỗi
+  = TC trung). Rương ghi `stoneGrade` lúc rơi (phân biệt "phẩm rương"
+  C/B/A với "phẩm Linh thạch" Hạ/Trung/Thượng); mở rương cộng đúng
+  ví (`stones` / `stonesTrung` / `stonesThuong`, vẫn nhân hệ số
+  thưởng 2/3 khi có đồng hành) và toast ghi rõ phẩm. Ví mới được
+  lưu bền (persistPlayer), đồng bộ (characterPayload) và spawn từ
+  file cũ (thiếu → 0). Chi tiêu (mua/dịch chuyển/hộ tống/chế tạo)
+  vẫn chỉ dùng Hạ phẩm — Trung/Thượng hiện chỉ tích lũy từ rương.
+  Cực phẩm chưa có luật rơi, vẫn 0.
+- Panel ví gọn theo ý người chơi: bỏ hết dòng mô tả + ghi chú cuối,
+  chỉ còn 4 hàng tên + số; panel thu từ 268px còn 216px.
+  probe66 cập nhật (panel không mô tả + rộng ≤230px).
+- Kiểm chứng: probe_chestgrades hạ quái thật 3 đường — sói LK →
+  chỉ Hạ; Kiếm Ma TC ở Cổ Chiến Trường → Trung; Kim Giáp Tê KD
+  mạnh ở Kim Quang Động → Thượng.
+
+## GĐ68 (24/10) — Sắc nét + asset môi trường mới + icon công pháp
+
+- Sắc nét: 6 texture map GĐ60 (decor, plaza, núi lửa, hang băng,
+  hố lửa, nền lát ô 1024) chuyển từ NEAREST sang LINEAR — hết răng
+  cưa/rung khi camera di chuyển. Map nhà vốn đã LINEAR từ GĐ29;
+  nhân vật/quái vẫn NEAREST để giữ nét pixel.
+- 15 kind decor mới trong drawDecorItem (vẽ vector viền sáng):
+  trúc, đào, liễu, dừa; nhà ngói, lều, đình; núi, núi tuyết; hang đá;
+  ao, sóng; cỏ, hoa, cỏ khô. THEME_DECOR cân lại theo theme (tổng
+  trọng số mỗi theme vẫn = 1,00); va chạm: nhà 22, lều/đình 18,
+  núi 30, hang 18, cây mới 14–16; ao/sóng/cỏ/hoa không va chạm.
+  Map làng KHÔNG đổi decor (tránh rối bản đồ thế giới).
+- Icon cho cả 511 công pháp (skillIconURL, vẽ Canvas 2D, cache):
+  màu theo hệ (Kim/Hỏa/Mộc/Thủy/Thổ + "Theo linh căn" = vòng 5 màu),
+  khung theo bậc (Cơ bản vuông đồng, Luyện Khí thoi ngọc, Trúc Cơ
+  lục giác vàng), glyph theo 10 họ vũ khí (đao/kiếm, thương, búa,
+  côn/trượng, châu/trận, phiến, sách/bút, lưới, đàn, quyền cước);
+  chiêu hỗ trợ thêm viền xanh nhạt. Icon hiện ở Sổ công pháp (mọi
+  hàng) và nút chiêu cảm ứng khi đã lắp chiêu; khay chiêu desktop
+  vẫn giữ chữ (ô 52px không đủ chỗ icon + tên 2 dòng).
+- Kiểm chứng: probe_hud68 29/29 — 6 texture LINEAR, đủ 15 kind mới,
+  map rừng sâu gửi đủ trúc/đào/cỏ, Sổ 19/19 hàng có icon, nút chiêu
+  chính hiện icon Trảm Kiếm, chuỗi làng → thành → rừng mở đúng
+  dialog dịch chuyển; ảnh rừng/làng/Sổ/ví đã xem bằng mắt.
+
+## GĐ69 (24/10) — Sổ công pháp dạng tab + khay desktop icon-only + Cực phẩm rương boss
+
+- Sổ công pháp mở như 1 tab mới: panel rộng (tối đa 900px,
+  94% màn hình), tiêu đề dính trên cùng + nút ✕, nội dung cuộn
+  dọc — hết tràn tab "Bảng 2" và hết che cụm nút toolbar như
+  panel hẹp 268px trước đây (desktop + mobile đều vậy).
+- Icon "Theo linh căn" bỏ vành 5 màu, dùng 1 màu trung tính
+  (#8fa3bd) tạm thời; vẽ tay từng chiêu để sau, chưa gấp.
+- Khay chiêu desktop: ô có chiêu chỉ hiện icon, bỏ tên +
+  chân nguyên; số phím nhỏ ở góc giữ lại để biết bấm phím nào.
+  Ô trống và ô ⚔/💨 giữ nguyên.
+- Cực phẩm có luật rơi: rương boss (quái có minChestGrade:
+  Thạch Khôi Lỗi + boss các map GDD) cho Cực phẩm; ví thêm ô
+  stonesCuc (lưu bền + đồng bộ + panel ví hiện số thật).
+  Rương ẩn và nhiệm vụ xịn là 2 nguồn Cực tiếp theo, làm khi
+  có cơ chế rương ẩn / bảng nhiệm vụ xịn.
+- Luật tiền tệ về sau (ý người chơi): Trung/Thượng càng về
+  sau càng là tiền chính (mua đồ, luyện chế...); hướng đồ họa
+  tổng thể = pixel đời mới; decor làng kiểu làng trong
+  truyện/phim tu tiên (đợt vẽ lại làng làm tiếp sau GĐ69).
+- Kiểm chứng: probe_gd69 12/13 — 1 fail là lỗi check tĩnh
+  (quét nhầm ô ⚔/💨), check trên trình duyệt khẳng định ô
+  chiêu chính có icon, không tên, chỉ còn số phím; rương boss
+  Hỗn Độn Thú ở Vô Tận Hư Không cho 65 Cực phẩm ngay lượt
+  đầu; tab Sổ rộng 900px (desktop) / 793px (mobile), cuộn
+  dọc được, tab Bảng 2 không cắt; ảnh tab đã xem bằng mắt.
+
+## GĐ70 (24/10) — Tất cả loài quái + số lượng theo map + luật trùm + cơ chế riêng
+- Luật quái (ý người chơi): làm tất cả loài; map yếu cực
+  nhiều quái, map mạnh ít dần; map Luyện Khí cơ bản không
+  có trùm; map khác có trùm; map đặc biệt có nhiều trùm.
+- Số lượng: cơ số yếu/trung 12, mạnh 6, tinh anh 3, trùm 1;
+  nhân hệ số theo cảnh giới map đích: LK ×3, TC ×2,
+  KD/NA/HT giữ nguyên. Tổng quái 224 → 367.
+  Loài cứng giữ nguyên số lượng (làng 12 + bí cảnh 9).
+- Trùm theo map: mọi map TC/KD có quái mà chưa có trùm
+  thật thì lấy loài mạnh nhất map làm trùm (1 con, cờ
+  mapBoss: thanh máu trùm + rương chắc chắn tối thiểu B +
+  Linh thạch Cực phẩm + hồi sinh 10 phút như trùm thật).
+  21 trùm map. 2 map đặc biệt 3 trùm: Vô Tận Hư Không
+  (Hỗn Độn Thú ×3) + Thâm Hải Bí Cảnh (1 thường + 3 trùm
+  Cự Nhân Băng, đi thuyền từ thành).
+- Cơ chế riêng cho 18 loài theo MonsterData.mechanics
+  (mọi số TẠM): độc (Độc Xà 2 HP/s×5s, Huyền Điệp 3×4s),
+  lao + choáng (Lam Trư, Kim Giáp Tê), hồi sinh 1 lần 50%
+  (Cốt Binh), làm chậm khi đánh trúng (Thủy Triều Tinh
+  40%×3s), đánh xa (Kiếm Ma 150, Đan Ma 130, Lôi Điêu 150
+  + sét dây chuyền), hút máu (Huyết Lang 30%, Hấp Huyết
+  Quỷ 40% + tàng hình), phân thân (Huyễn Ảnh Miêu né 60%
+  + 2 ảo ảnh HP 30% — ảo ảnh không Tu vi, không rương,
+  tồn tại tối đa 25s kể cả khi bản thể chết), kháng vật
+  lý 50% (Thạch Khôi Lỗi), độn thổ (Địa Hành Yêu), dậm
+  băng có vận chiêu (Băng Tinh Cự Nhân: vòng 120, ×1,2,
+  làm chậm 50%×3s, báo trước bằng notice + nhuộm đỏ
+  sprite), mưa lửa (Diệm Hỏa Phượng), triệu sét (Thiên
+  Lôi Thú), trùm 5 hệ ngẫu nhiên (Hỗn Độn Thú), tự bạo
+  khi chết (Đan Ma). Trạng thái người chơi (độc/chậm/
+  choáng) có notice riêng, không lưu file.
+- Sửa kèm: loài GDD trùng loài cứng (Kiếm Ma/Huyết
+  Lang/Thạch Khôi Lỗi) được backfill cơ chế + tầm đánh +
+  hạng từ GDD (trước đây alias làm mất cơ chế); quái
+  đánh xa dừng ở tầm đánh của nó thay vì áp sát 26px.
+- Giản lược v1 (chờ người chơi duyệt): loài đánh xa gây
+  sát thương ở tầm xa nhưng chưa có đạn bay nhìn thấy;
+  Diệm Hỏa Phượng chưa bay thật; Hấp Huyết Quỷ tàng hình
+  = ẩn tới khi lộ lần đầu, không ẩn lại; dậm băng báo
+  bằng notice + nhuộm đỏ, chưa có vòng đỏ dưới đất;
+  trạng thái người chơi chưa có biểu hiện trên sprite/HUD.
+- Kiểm chứng: probe_gd70 20/20 — /api/status 367 quái;
+  Băng Phong Cốc 36 Thủy Triều Tinh, 0 trùm; Cổ Chiến
+  Trường 13 Kiếm Ma (12 + 1 trùm); rương trùm cho Cực
+  phẩm; độc rút máu khi đứng yên; lao gây choáng; Kim
+  Quang Động 7 Kim Giáp Tê (6 + 1 trùm); phân thân +
+  hạ ảo ảnh không thưởng; dậm băng có windup; kiếm khí
+  trúng từ 113–141px; Thâm Hải 3 trùm; tick giữ 100ms
+  với 367 quái (map không có người thì quái đứng yên).
+
+## GĐ71 (24/10) — Icon chiêu game-icons + mặt nút Kenney
+- Icon chiêu: 511 chiêu trong skills_catalog.json được
+  map sang icon game-icons.net (CC BY 3.0, credit trong
+  panel Menu) theo từ khóa trong tên chiêu + hệ + vũ
+  khí, phân phối băm để chiêu cùng họ nhận biến thể
+  khác nhau. Kết quả: 189 icon riêng (bản procedural cũ
+  chỉ có 111 mẫu). Icon sinh ra là SVG 96×96: khung bậc
+  (đồng / thoi ngọc / lục giác vàng) + silhouette tô
+  màu hệ + vành lam cho chiêu hỗ trợ; nền đen gốc của
+  game-icons đã gỡ, scale theo viewBox thật của từng
+  file (512 hoặc 256).
+- Nối vào client: skillIconURL() trả /icons/<id>.svg
+  khi id có trong skill_icons.ts (sinh tự động bởi
+  shottools/gen_skill_icons.py); chiêu ngoài catalog
+  (2 chiêu legacy Ngự Kiếm Quyết, Thiên Kiếm Vô Song)
+  vẫn dùng icon procedural cũ — đúng thiết kế fallback.
+  File SVG nằm trong client/public/icons/ (2,0 MB) nên
+  theo zip lên Render và được Vite copy sang dist.
+- Mặt nút toolbar: tile tròn Kenney UI Pack - Pixel
+  Adventure (CC0, tile_0042 xám xanh) làm background
+  cho #sideBtns button — chỉ là background nên KHÔNG
+  đổi kích thước/vị trí nút. Nút cảm ứng chưa áp (chờ
+  xem trên máy thật).
+- Kiểm chứng: probe_gd71 11/11 — Sổ 17/19 icon thật
+  (2 hàng procedural đúng 2 chiêu legacy), 0 icon vỡ,
+  khay desktop có icon thật, Menu hiện credit; ảnh
+  preview71-learn.png / preview71-hud.png /
+  preview71-kenney.png đã xem bằng mắt.
+- Chưa làm: vẽ tay từng icon chiêu (người chơi dặn
+  không gấp — vẫn PARKED); Báo (panther/leopard) không
+  có file trong game-icons nên chiêu Báo dùng icon vũ
+  khí; 2 chiêu legacy ngoài catalog chưa có icon thật.
+
+## GĐ72 (24/10) — Nhà làng PixelLab nối vào Làng Tân Thủ
+- Sprite `client/public/sprites/house_village_01.png` (gen PixelLab
+  24/10, 192×128, nền trong suốt) vẽ thay mặt tiền code cho 5 nhà
+  nhỏ: Nhà Trưởng Làng, Tiệm Đan Dược, Tiệm Rèn, Quán Ăn, Tiệm
+  Nguyên Liệu. Vẽ vừa chiều ngang hộp nhà, giữ tỉ lệ gốc, có bóng
+  đất; load lỗi thì rơi về vẽ code như cũ.
+- Đạo Quán + Thanh Phong Môn GIỮ vẽ code. Khung va chạm, vị trí
+  và depth không đổi — chỉ đổi texture nướng `house-i`.
+- Ảnh `preview72-village.png` đã xem bằng mắt: nhà nhỏ hiện đúng
+  sprite (mái ngói cong, tường gỗ, đèn lồng đỏ), Đạo Quán vẫn
+  kiểu cũ. Zip GĐ54→GĐ71 hiện tại CHƯA có GĐ72 — đóng lại sau khi
+  người chơi duyệt ảnh trong game.
+
+## GĐ72b (24/10) — Sửa nhà sprite bay + phóng to
+- Theo feedback "nhà bay lơ lửng": đo được ảnh 192×128 có viền
+  trong suốt (trái/phải 12px, trên 9px, dưới 10px) và bản GĐ72 vẽ
+  căn giữa hộp nên đáy nhà nổi ~19px trên bóng đất.
+- Sửa: cắt đúng vùng thấy được (12,9,168×109), phóng 1.3× chiều
+  ngang hộp, neo đáy nhà vào đáy hộp, bóng đất theo chiều ngang
+  mới ngay dưới đáy. Ảnh `preview72b-village.png` đã xem bằng mắt:
+  nhà to hơn ~49% so với bản đầu, đáy chạm đất.
+
+## GĐ72c (24/10) — Nhà nhỏ to thêm xíu
+- Theo feedback "to hơn xíu": tỉ lệ 1.3× → 1.45× chiều ngang hộp
+  (vừa khung nướng: nhà 140px có mép x = 0.5px, không cắt).
+- Bóng đất kẹp rx ≤ w/2 + 18 cho khỏi tràn khung nướng (bóng vẽ
+  liền màu, tràn là thấy vệt cắt). Ảnh `preview72c-village.png`
+  đã xem bằng mắt: nhà to hơn rõ, đáy vẫn chạm đất.
+
+## GĐ72d (24/10) — Bỏ bóng nhà sprite + gen Đạo Quán/cây
+- Theo feedback "bóng nhà nhìn như bay": bỏ hẳn ellipse bóng đất
+  của nhà sprite (nhà vẽ code giữ nguyên bóng trong drawBuilding).
+  Ảnh `preview72d-village.png` đã xem bằng mắt: nhà đứng trực tiếp
+  trên cỏ bằng chân đế đá, hết cảm giác bay.
+- Gen PixelLab 2 ảnh (user duyệt spec, tốn 2 lượt, tổng 3/40):
+  `dao_quan_01.png` (384×192, đại điện rộng 2 tầng + 2 cánh) và
+  `tree_village_01.png` (128×128, tán tự nhiên). Ảnh Đạo Quán gốc
+  về với nền xám đặc (no_background không tác dụng ở cỡ này) nên
+  đã tách nền miễn phí bằng flood-fill + dọn viền, ra
+  `dao_quan_01_cut.png` (vùng thấy được 338×146). Cả 2 CHƯA nối
+  vào game — chờ user duyệt.
+
+## GĐ73 (24/10) — Nối Đạo Quán + cây PixelLab vào làng
+- `dao_quan_01.png` (bản cắt nền) + `tree_village_01.png` vào
+  `client/public/sprites/`, preload `dao-quan-01`/`tree-village-01`.
+- Đạo Quán nướng canvas riêng `DAOQUAN_TEX` (352×160, đặt ở
+  h.x−81): sprite 320×138, đáy ở world 360 (đáy hộp cũ), đỉnh
+  world 222 — tâm Tụ Linh Trận (700,196) vẫn nhìn thấy. Biển tên
+  vẽ code mất theo (sprite có biển vàng trống).
+- Cây làng: cả 20 cây dùng sprite (vùng thấy được 102×114, đáy
+  neo điểm đất canvas y=130, giữ độ lệch cỡ cũ s 0.9–1.3, cây lẻ
+  lật ngang). Cây decor các map GĐ60 không đổi. Va chạm/vị trí/
+  depth không đổi; load lỗi thì vẽ code. Ảnh `preview73-village.png`
+  đã xem bằng mắt: Đạo Quán bề thế, cây tự nhiên nhiều cỡ.

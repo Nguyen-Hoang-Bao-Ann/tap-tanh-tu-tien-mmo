@@ -115,8 +115,13 @@ const inRealm = (x, y) => x >= 1760 && x <= 2640 && y >= 240 && y <= 960;
   const key = Object.keys(chars).find((k) => chars[k].name === NAME);
   Object.assign(chars[key], {
     sect: 'thienkiem', realm: 'lk', tier: 9,
-    stats: { khiHuyet: 60, vatCong: 60, vatPhong: 40, phapCong: 20, phapPhong: 20, tocDo: 30, thanThuc: 30 },
-    hp: 700,
+    // GĐ59b: chỉ số của một đệ tử MẠNH sắp lên Trúc Cơ (đối tượng thật của
+    // bí cảnh Trúc Cơ) — bộ số cũ {60,60,40}/700HP chết hội đồng trước khi
+    // chạm được trùm khi quái sinh không may mắn (GĐ57 qua được nhờ quái
+    // sinh thưa phía tây); test kiểm HỆ THỐNG cổng/quái/rương, không kiểm
+    // cân bằng số.
+    stats: { khiHuyet: 80, vatCong: 90, vatPhong: 55, phapCong: 20, phapPhong: 20, tocDo: 30, thanThuc: 30 },
+    hp: 900,
   });
   fs.writeFileSync(CHAR_FILE, JSON.stringify(chars));
   proc = await boot();
@@ -174,7 +179,12 @@ const inRealm = (x, y) => x >= 1760 && x <= 2640 && y >= 240 && y <= 960;
   ok(!boss(), 'hạ được Thạch Khôi Lỗi');
   await sleep(400);
   const chest = (S.tick?.chests || []).find((c) => lastBossPos && Math.hypot(c.x - lastBossPos.x, c.y - lastBossPos.y) < 90);
-  if (chest) {
+  if (chestOpened) {
+    // GĐ59b: rương tự mở ngay khi rơi vì người giết đứng trong tầm 42px
+    // (CHEST_OPEN_RANGE) — biến mất khỏi tick trước cả khi kịp kiểm 400ms.
+    ok(chestOpened.grade === 'B' || chestOpened.grade === 'A', `rương của trùm là phẩm ${chestOpened.grade} (tối thiểu B)`);
+    ok(true, 'mở rương trùm thành công (tự mở khi đứng gần)');
+  } else if (chest) {
     ok(chest.grade === 'B' || chest.grade === 'A', `rương của trùm là phẩm ${chest.grade} (tối thiểu B)`);
     await steerTo(s, S, chest.x, chest.y, 20, 15000);
     await waitFor(() => !!chestOpened, 6000, 'mở được rương trùm');
