@@ -896,6 +896,113 @@
       /* GĐ71: mặt nút toolbar = tile tròn Kenney (CC0, 32px -> 38px, chỉ là
          background nên KHÔNG đổi kích thước/vị trí nút). */
       #sideBtns button { background-image: url(/ui/btn-face.png); background-size: 100% 100%; image-rendering: pixelated; }
+      /* ===== GĐ74 (feedback bạn bè 25/10) =====
+         1) Banner tên map chỉ hiện 2,5s khi vào map / đăng nhập (class
+         .show do JS bật; luật body.ingame cũ hiện thường trực bị ghi đè
+         vì block này đứng sau, cùng độ ưu tiên).
+         2) Đồng hồ vào trong thẻ nhân vật (dưới cùng, trái).
+         3) Pill Linh thạch vào trong khung minimap, sát dưới bản đồ.
+         4) Panel cuộn được + chữ nhỏ lại một chút (vuốt lên/xuống được).
+         5) Hàng nút phải trên lùi xuống vì khung minimap cao thêm pill. */
+      body.ingame #zoneBanner { display: none; }
+      body.ingame #zoneBanner.show { display: block; }
+      #hudChar #hudClock {
+        position: static; transform: none; display: block; margin: 6px 0 1px;
+        text-align: center; font-size: 10px; white-space: normal; line-height: 1.35;
+      }
+      #minimapWrap #hudStones {
+        align-self: center; margin: 5px 0 7px; cursor: pointer;
+      }
+      #sideBtns { top: 214px; }
+      .panel {
+        max-height: calc(100vh - 130px); overflow-y: auto; overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+      .prow { font-size: 11px; }
+      .panelHead { font-size: 13px; }
+      #learnPanel { max-height: none; }
+      /* ===== GĐ75 (feedback 25/10: nút bao quanh minimap + pill ảnh đá) =====
+         Desktop: cột trái 3 nút ôm cạnh trái minimap + hàng dưới 3 nút
+         (phải trên, lùi theo GĐ74). Cảm ứng: 2 lưới 1 cột kề nhau ở trái
+         minimap (lưới cũ chỉ còn 3 nút nên thu về 1 cột). */
+      #sideBtnsL {
+        position: absolute; right: 206px; top: 25px; z-index: 6; display: none;
+        flex-direction: column; gap: 6px;
+      }
+      body.ingame #sideBtnsL { display: flex; }
+      #sideBtnsL button {
+        width: 47px; height: 52px; border-radius: 12px; padding: 3px 0 2px;
+        background: rgba(7, 13, 10, 0.68); border: 1px solid rgba(255, 255, 255, 0.15);
+        font-size: 19px; line-height: 1.1; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); color: #cfe3d4;
+        background-image: url(/ui/btn-face.png); background-size: 100% 100%; image-rendering: pixelated;
+      }
+      #sideBtnsL button span { font-size: 8.5px; color: #cfe3d4; margin-top: 2px; letter-spacing: 0.2px; }
+      #sideBtnsL button:active { transform: scale(0.93); }
+      /* Pill Linh thạch: ảnh đá bản cũ (14px như bản đơn), không emoji nữa. */
+      #hudStones img { width: 14px; height: 14px; image-rendering: pixelated; vertical-align: -2px; margin-right: 3px; }
+      body.touch #sideBtnsL {
+        display: grid; grid-template-rows: repeat(3, 38px); gap: 3px; top: 8px; right: 159px;
+      }
+      body.touch #sideBtnsL button { width: 34px; height: 38px; font-size: 14.5px; border-radius: 9px; }
+      body.touch #sideBtnsL button span { font-size: 7px; margin-top: 1px; }
+      body.touch #hudStones img { width: 12px; height: 12px; }
+      /* GĐ75-fix: luật cảm ứng GĐ66 cũ ghim pill fixed ở top:134px — giờ
+         pill đã nằm trong khung minimap nên phải về lại luồng flex,
+         nếu không pill rơi ra ngoài khung (đo thật: hở 33px). */
+      body.touch #minimapWrap #hudStones { position: static; top: auto; right: auto; }
+      /* ===== GĐ76: nút ngồi thiền (góc phải dưới, trên khay chiêu) ===== */
+      #meditateBtn {
+        position: absolute; right: 16px; bottom: 132px; z-index: 6; display: none;
+        width: 52px; height: 52px; border-radius: 14px; padding: 3px 0 2px;
+        background: rgba(7, 13, 10, 0.68); border: 1px solid rgba(125, 242, 220, 0.4);
+        font-size: 20px; line-height: 1.1; flex-direction: column;
+        align-items: center; justify-content: center; cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); color: #cfe3d4;
+      }
+      #meditateBtn.show { display: flex; }
+      #meditateBtn span { font-size: 8.5px; color: #cfe3d4; margin-top: 2px; }
+      #meditateBtn.active { border-color: #7df2dc; box-shadow: 0 0 14px rgba(125, 242, 220, 0.65); }
+      #meditateBtn:active { transform: scale(0.93); }
+      body.touch #meditateBtn { bottom: 170px; width: 46px; height: 46px; }
+      /* GĐ77: số giây hồi chiêu còn lại, giữa nút chiêu (desktop + cảm ứng) */
+      .slot .cdnum { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); font-size: 16px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px #000, 0 0 6px #000; pointer-events: none; z-index: 2; }
+      .slot.util .cdnum { font-size: 13px; }
+      .tbtn .cdnum { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); font-size: 15px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px #000, 0 0 6px #000; pointer-events: none; z-index: 2; }
+      /* GĐ78: thanh thức ăn (cam) / nước uống (xanh dương) trên thẻ nhân vật */
+      #hudFoodFill { background: linear-gradient(90deg, #b45309, #f5a524); }
+      #hudWaterFill { background: linear-gradient(90deg, #1d5fd1, #4da3ff); }
+      #hudNeeds .bar span { font-size: 10px; }
+      /* GĐ79: cụm nút chiêu cảm ứng (⚔ + fan 5 nút) nhích sang trái 20px cho khỏi sát góc phải */
+      body.touch #tAtk { right: 34px; }
+      body.touch #tSkill0 { right: 108px; }
+      body.touch #tSkill1 { right: 92px; }
+      body.touch #tSkill2 { right: 42px; }
+      body.touch #tSkill3 { right: 116px; }
+      body.touch #tSkill4 { right: 64px; }
+      /* GĐ83: nút chiêu cảm ứng trống trong số ô — mờ + viền đứt (không ghi "Chiêu n") */
+      body.touch #tSkill0.empty, body.touch #tSkill1.empty, body.touch #tSkill2.empty, body.touch #tSkill3.empty, body.touch #tSkill4.empty { border-style: dashed; opacity: 0.55; }
+      /* GĐ81: nút Thiền cảm ứng nhỏ lại xíu (46→40px); hàng 5 nút dưới
+         (💊 + Đ1–Đ4) đều nhau — cùng cỡ 42px, cùng đáy 45px, hở đều,
+         cân giữa (ghi đè margin-left: -17px cũ của ô đa dụng). */
+      body.touch #meditateBtn { width: 40px; height: 40px; box-sizing: border-box; }
+      body.touch #tPotion { width: 42px; height: 42px; left: calc(50% - 121px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil0 { width: 42px; height: 42px; left: calc(50% - 71px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil1 { width: 42px; height: 42px; left: calc(50% - 21px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil2 { width: 42px; height: 42px; left: calc(50% + 29px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil3 { width: 42px; height: 42px; left: calc(50% + 79px); margin-left: 0; bottom: 45px; }
+      /* GĐ82: nút Thiền cảm ứng vẽ như nút Né — tròn, chữ không, không
+         icon (nhãn "Thiền"/"Đứng dậy" vẫn do JS đổi trong span; chữ 8px
+         để "Đứng dậy" vừa hoặc xuống 2 dòng trong nút tròn). */
+      body.touch #meditateBtn { width: 36px; height: 36px; box-sizing: border-box; border-radius: 50%; padding: 0; background: rgba(10, 18, 14, 0.78); border: 2px solid rgba(230, 184, 62, 0.65); color: #ffe9a8; font-weight: 700; flex-direction: row; }
+      body.touch #meditateBtn span { font-size: 8px; line-height: 1.1; color: #ffe9a8; margin-top: 0; text-align: center; }
+      /* GĐ82: hàng 5 nút dưới thu xuống bằng nút Né (36px), hở đều 8px, cân giữa */
+      body.touch #tPotion { width: 36px; height: 36px; left: calc(50% - 106px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil0 { width: 36px; height: 36px; left: calc(50% - 62px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil1 { width: 36px; height: 36px; left: calc(50% - 18px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil2 { width: 36px; height: 36px; left: calc(50% + 26px); margin-left: 0; bottom: 45px; }
+      body.touch #tUtil3 { width: 36px; height: 36px; left: calc(50% + 70px); margin-left: 0; bottom: 45px; }
     </style>
   </head>
   <body>
@@ -913,32 +1020,40 @@
         <div class="bar"><div id="hudHpFill"></div><span id="hudHpText">HP</span></div>
         <div class="bar"><div id="hudMpFill"></div><span id="hudMpText">Chân nguyên</span></div>
         <div class="bar"><div id="hudTuViFill"></div><span id="hudTuViText">Tu vi</span></div>
+        <div id="hudNeeds">
+          <div class="bar"><div id="hudFoodFill"></div><span id="hudFoodText">🍖 Thức ăn</span></div>
+          <div class="bar"><div id="hudWaterFill"></div><span id="hudWaterText">💧 Nước uống</span></div>
+        </div>
         <button id="hudDetailBtn" type="button">▸ Chỉ số</button>
         <div id="hudDetails"><div id="hudStats">—</div></div>
-        <div id="hudStones">💠 Linh thạch: 0</div>
         <button id="hudBreak" type="button">✦ Đột phá cảnh giới ✦</button>
         <button id="hudLearn" type="button" style="display:none;margin-top:5px;width:100%;padding:5px 0;font-size:12px;border-radius:8px;border:1px solid #7a5c2e;background:linear-gradient(#ffe9a8,#f5c85c);color:#4a3205;font-weight:700;cursor:pointer">📖 Ngồi học công pháp</button>
         <div id="questTracker"></div>
+        <!-- GĐ74: đồng hồ dời xuống dưới thẻ nhân vật (trái), theo feedback 25/10 -->
+        <div id="hudClock">☀️ —</div>
       </div>
 
       <!-- GĐ17: banner khu vực + minimap + cột nút chức năng + điều khiển cảm ứng -->
       <div id="zoneBanner">📍 Làng Tân Thủ · An toàn</div>
-      <!-- GĐ20: đồng hồ thế giới + phủ tối ban đêm -->
-      <div id="hudClock">☀️ —</div>
       <div id="touchBars"><div class="tbar"><div id="hudHpFillT"></div><span id="hudHpTextT">HP</span></div><div class="tbar"><div id="hudMpFillT"></div><span id="hudMpTextT">Chân nguyên</span></div></div>
       <div id="bossBar"><div id="bossName">Trùm</div><div class="bossTrack"><div id="bossHpFill"></div><span id="bossHpText"></span></div></div>
       <div id="skillAnnounce"></div>
       <div id="gameLog"></div>
       <div id="nightOverlay"></div>
-      <div id="minimapWrap" title="Bấm để mở Bản đồ thế giới"><canvas id="minimap" width="380" height="284"></canvas><div id="minimapLabel">LÀNG TÂN THỦ</div></div>
-      <div id="sideBtns">
+      <!-- GĐ75: nút bao quanh minimap — cột trái 3 nút + hàng dưới 3 nút -->
+      <div id="sideBtnsL">
         <button id="sideBag" type="button" title="Túi đồ (I)">🎒<span>Túi đồ</span></button>
         <button id="sideQuest" type="button" title="Nhiệm vụ">📜<span>Nhiệm vụ</span></button>
         <button id="sideSkills" type="button" title="Công pháp (K)">📖<span>Công pháp</span><b class="sideBadge" id="skillBadge" style="display:none"></b></button>
+      </div>
+      <div id="minimapWrap" title="Bấm để mở Bản đồ thế giới"><canvas id="minimap" width="380" height="284"></canvas><div id="minimapLabel">LÀNG TÂN THỦ</div><!-- GĐ74: pill Linh thạch sát dưới minimap, theo feedback 25/10 --><div id="hudStones">💠 Linh thạch: 0</div></div>
+      <div id="sideBtns">
         <button id="sideJob" type="button" title="Nghề phụ">🔨<span>Nghề</span></button>
         <button id="sideAch" type="button" title="Thành tựu + Bảng Vàng">🏆<span>Thành tựu</span></button>
         <button id="sideMenu" type="button" title="Menu">⚙<span>Menu</span></button>
       </div>
+      <!-- GĐ76: nút ngồi thiền — chỉ hiện khi ngoài giao tranh 5s (client ước lượng, server kiểm tra thật) -->
+      <button id="meditateBtn" type="button" title="Ngồi thiền (M)"><span>Thiền</span></button>
       <div id="touchUI">
         <div id="joy"><div id="joyKnob"></div></div>
         <button class="tbtn" id="tAct" type="button">E</button>
@@ -980,6 +1095,11 @@
         <div class="panelHead"><span>📖 Công pháp</span><button class="xBtn" id="learnClose" type="button">✕</button></div>
         <div class="panelSub" id="learnSub"></div>
         <div id="learnBody"></div>
+      </div>
+      <div id="altarPanel" class="panel">
+        <div class="panelHead"><span>🕯️ Đàn Tế</span><button class="xBtn" id="altarClose" type="button">✕</button></div>
+        <div class="panelSub" id="altarSub"></div>
+        <div id="altarBody"></div>
       </div>
       <div id="npcDialog" class="panel">
         <div class="panelHead"><span id="npcDlgTitle">NPC</span><button class="xBtn" id="npcDlgClose" type="button">✕</button></div>

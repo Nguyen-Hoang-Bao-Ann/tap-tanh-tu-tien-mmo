@@ -2292,6 +2292,8 @@ export interface MapEnterData {
   w: number; h: number; theme?: string; portal: { x: number; y: number };
   decor?: MapDecorItem[]; desc?: string;
   hazards?: MapHazard[]; features?: MapFeatures | null; // GĐ60
+  spots?: { x: number; y: number }[]; // GĐ76: điểm linh mạch
+  altar?: { x: number; y: number } | null; // GĐ85: đàn tế (chỉ map có trùm)
 }
 interface ThemeStyle { g1: string; g2: string; accent: string; leaf: string; leaf2: string; rock: string; plaza: string }
 const MAP_THEME_STYLE: Record<string, ThemeStyle> = {

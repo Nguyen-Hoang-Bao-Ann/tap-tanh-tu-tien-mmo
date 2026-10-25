@@ -960,6 +960,306 @@
     "thanh_van_thanh"
    ],
    "impl": "planned"
+  },
+  {
+   "id": "thanh_ha_thanh",
+   "name": "Thanh Hà Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành ven sông, chợ đông, thuyền bè tấp nập",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "bach_lo_thanh",
+   "name": "Bạch Lộ Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành sương sớm, nhiều dược liệu và đan sư",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "tu_truc_thanh",
+   "name": "Tử Trúc Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành trong rừng trúc tím, yên tĩnh",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "hoang_sa_thanh",
+   "name": "Hoàng Sa Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành biên thùy cát vàng, thương đội qua lại",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "bich_ba_thanh",
+   "name": "Bích Ba Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành ven hồ xanh, nghề cá và thủy tu",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "van_an_thanh",
+   "name": "Vân Ẩn Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành trong mây, ẩn sĩ lui tới",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "xich_thuy_thanh",
+   "name": "Xích Thủy Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành nước đỏ, luyện khí sĩ đông",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "co_moc_thanh",
+   "name": "Cổ Mộc Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành gỗ cổ thụ, mộc tu tụ họp",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "suong_nguyet_thanh",
+   "name": "Sương Nguyệt Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thành nguyệt quang, chợ đêm nổi tiếng",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "long_ngam_thanh",
+   "name": "Long Ngâm Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành rồng ngâm, truyền thừa lâu đời",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "phuong_minh_thanh",
+   "name": "Phượng Minh Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành phượng hót, hỏa tu tụ họp",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "huyen_vu_thanh",
+   "name": "Huyền Vũ Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành rùa thần, phòng ngự kiên cố",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "bach_ho_thanh",
+   "name": "Bạch Hổ Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành bạch hổ, võ tu và kiếm tu đông",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "chu_tuoc_thanh",
+   "name": "Chu Tước Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành chu tước, lửa thiêng quanh năm",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "thanh_long_thanh",
+   "name": "Thanh Long Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành thanh long, lôi tu tụ họp",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "ky_lan_thanh",
+   "name": "Kỳ Lân Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành kỳ lân, điềm lành và bảo vật",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "tinh_ha_thanh",
+   "name": "Tinh Hà Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành sông sao, trận pháp sư đông",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "nguyet_hoa_thanh",
+   "name": "Nguyệt Hoa Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tc",
+   "minTier": 1,
+   "desc": "Thành hoa nguyệt, thi họa và nhạc tu",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "cuu_tieu_thanh",
+   "name": "Cửu Tiêu Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "kd",
+   "minTier": 1,
+   "desc": "Thành chín tầng trời, chỉ Kim Đan mới vào",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
+  },
+  {
+   "id": "vo_cuc_thanh",
+   "name": "Vô Cực Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "kd",
+   "minTier": 1,
+   "desc": "Thành vô cực, đạo vận thâm sâu",
+   "npcProfile": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "planned"
   }
  ]
 }

@@ -1809,3 +1809,323 @@ khác và chốt: LẤY CẤU TRÚC, tên nút/nội dung giữ của game mình
   lật ngang). Cây decor các map GĐ60 không đổi. Va chạm/vị trí/
   depth không đổi; load lỗi thì vẽ code. Ảnh `preview73-village.png`
   đã xem bằng mắt: Đạo Quán bề thế, cây tự nhiên nhiều cỡ.
+
+## GĐ74 (25/10) — Feedback bạn bè đợt 25/10 (layout + 2 lỗi nặng + reset chỉ số)
+- Banner tên map chỉ hiện 1 lần 2,5s khi vào map / đăng nhập
+  (`showZoneBanner`, class .show + timeout; toast 🗺 cũ ở onMapEnter
+  đã bỏ để khỏi trùng). Đồng hồ dời vào cuối thẻ nhân vật trái
+  (trong #hudChar). Pill Linh thạch dời vào trong khung minimap,
+  sát dưới bản đồ (bấm pill vẫn mở panel ví, stopPropagation nên
+  không mở Bản đồ thế giới); hàng nút phải trên lùi xuống 214px
+  desktop cho khỏi đè khung minimap (đo thật: wrap bottom 208,
+  nút top 214). Ảnh `preview74-banner.png` / `preview74-after.png`
+  đã xem bằng mắt: banner hiện rồi tự mất, đồng hồ + pill đúng chỗ.
+- Panel cuộn được + chữ nhỏ lại: .panel max-height calc(100vh -
+  130px), overflow-y auto; .prow 12px → 11px, .panelHead 14px →
+  13px (learnPanel tab GĐ69 giữ max-height riêng).
+- Trả nhiệm vụ được ngay tại Bảng: server quest_claim cho nhiệm
+  vụ bảng chấp nhận cả BOARD_POINT lẫn ELDER_POINT; panel bảng
+  hiện nút "Trả +X LT" khi xong (trước chỉ có chữ bảo đi gặp
+  Trưởng Làng nên bạn bè tưởng ấn không được). Gợi ý E ở bảng đổi
+  thành "nhận/trả nhiệm vụ"; notice hoàn thành ghi cả 2 chỗ trả.
+- Lỗi bắt đăng nhập lại: gốc là phiên tài khoản chỉ giữ trong RAM
+  (Map sessions) nên mỗi lần Render deploy/ngủ-dậy là toàn bộ
+  người chơi bị auth_expired. Giờ phiên lưu bền như accounts:
+  file sessions.json + doc 'sessions' trên cloud (nạp lại khi boot,
+  xóa khi logout). "Mất nhân vật" khi đổi tk thường chỉ là nhầm
+  lẫn khách/tài khoản: nhân vật khách nằm theo token trình duyệt,
+  nhân vật tài khoản nằm theo tên tài khoản — đổi sang tài khoản
+  thì không thấy nhân vật khách (không mất, đăng nhập lại đúng
+  chỗ là thấy). ZIP PHẢI LOẠI sessions.json (chứa token phiên)
+  như characters/accounts/world.
+- Reset chỉ số bằng Linh thạch (phí TẠM 100 LT Hạ phẩm): nút
+  "↺ Reset chỉ số (100 LT)" trong bảng chỉ số; server ghi sổ
+  allocFree/allocStat từ mọi lần cộng điểm (cộng 1 lần + hàng loạt),
+  reset hoàn đúng số điểm đã cộng về bể điểm và trừ phí; chặn lỗi
+  thiếu LT và chưa có điểm. Giới hạn thật: chỉ hoàn được điểm cộng
+  TỪ GĐ74 trở đi (sổ mới ghi từ đây).
+- Kiểm chứng: probe socket probe_gd74.cjs 15/15 (phiên sống qua
+  restart + logout hủy phiên; trả nhiệm vụ tại bảng +25 LT; cộng
+  điểm + reset hoàn đúng + trừ 100 LT + 2 chặn lỗi); probe trình
+  duyệt probe_gd74_hud.cjs 8/8 (banner, đồng hồ, pill, nút, panel).
+- CHƯA làm: "đàn để mở boss thử thách" — cần user chốt thiết kế
+  (đặt ở đâu, tốn gì, gọi trùm nào) trước khi code.
+
+## GĐ75 (25/10) — Nút bao quanh minimap + pill ảnh đá bản cũ
+- 6 nút chia 2: cột trái minimap (Túi đồ / Nhiệm vụ / Công pháp,
+  ôm sát cạnh trái 4px, cân tâm) + hàng dưới (Nghề / Thành tựu /
+  Menu, hở khung 6px). Cảm ứng: 2 lưới 1 cột kề nhau (hở 3px).
+  Nút dời DOM nhưng handler gắn theo id nút nên bấm vẫn mở đúng panel.
+- Pill Linh thạch: bỏ emoji, dùng ảnh đá bản game đơn cũ
+  (assets/items/linh_thach_{ha,trung,thuong,cuc}.png, copy sang
+  client/public/items/), chỉ ghi "Linh thạch: N" với N = số của phẩm
+  NHIỀU NHẤT (bằng nhau → phẩm cao hơn; mới chơi = Hạ 0).
+  Bấm pill vẫn mở panel ví đủ 4 phẩm.
+- Lỗi tìm được lúc đo cảm ứng: luật GĐ66 cũ ghim pill
+  `position: fixed; top: 134px` kéo pill ra ngoài khung 33px —
+  đã ghi đè `position: static` trong block GĐ75.
+- Kiểm chứng: probe trình duyệt probe_gd75_hud.cjs 10/10
+  (cột/hàng đủ nút + khoảng hở đo thật; pill ảnh Hạ lúc 0, đổi
+  sang ảnh Trung khi Trung 150 > Hạ 20; nút dời vẫn mở panel;
+  cảm ứng đủ 6 nút).
+
+## GĐ76 (25/10) — Tu vi + hồi phục (người chơi chốt 25/10)
+- Bỏ hoàn toàn Đan Tụ Khí: khỏi ITEMS, rương (B/A), công thức
+  Đan Sư (→ Đan Hồi Nguyên), tiệm (mua/bán), giỏ thương nhân,
+  nhiệm vụ pq_dan (thưởng đổi sang Hồi Xuân Đan). Túi đồ cũ có
+  Đan Tụ Khí được migrate lúc boot: cộng dồn sang Hồi Xuân Đan.
+  Mua đan cũ ở tiệm bị chặn hẳn (server không sync, không trừ tiền).
+- Bỏ Tu vi khi đánh quái (khối grant trong onMonsterKilled đã gỡ).
+  Tu vi còn lại từ: nhiệm vụ, hộ tống, tick ngày, Phù Tụ Linh,
+  và MỚI: thiền tại nơi linh khí.
+- Bỏ hồi chân nguyên tự động cả trong lẫn ngoài giao tranh.
+  Trong giao tranh máu + chân nguyên chỉ hồi bằng đan hồi phục.
+  MỚI: Đan Hồi Nguyên (hồi 50% Chân nguyên tối đa, Đan Sư chế,
+  tiệm Đan 30/12, tiệm Tông 25/10, lưu động 45).
+- Ngồi thiền: phím M hoặc nút 🧘 (desktop: phải dưới, trên khay
+  chiêu; cảm ứng: trên quạt chiêu, không đè nút ⚔). Điều kiện:
+  rời giao tranh 5s (đồng hồ làm mới khi đánh/đánh hụt/bị đánh/
+  né/hố lửa); di chuyển, đánh, né, bị đánh, dịch chuyển đều ngắt
+  thiền. Khi thiền: hồi máu 1%/s + chân nguyên theo mpRegenOf
+  (2 + Thần thức×0,2)/s — số TẠM.
+- Linh mạch: sân Đạo Quán/Tụ Linh Trận (700,196) r120 + 2 điểm
+  trong làng (600,1000), (1100,1000) + 3 điểm ngẫu nhiên (seeded)
+  mỗi map GĐ59. Marker ✦ Linh mạch vẽ trên map. Thiền tại đó
+  (cần có linh căn): +1 Tu vi mỗi 30s, trần 15/ngày game — số TẠM.
+  Trần/ngày lưu bền (tuViMedDay/tuViMedGain). Thiền ngoài điểm
+  linh mạch vẫn hồi máu/mana nhưng không Tu vi.
+- Kiểm chứng: probe socket probe_gd76.cjs 16/16 (migrate, tiệm,
+  không hồi mana tự động, cổng 5s, thiền hồi máu 446→457 và
+  mana 38→42, +1 Tu vi tại linh mạch, ngắt thiền khi di chuyển,
+  giết sói Tu vi không đổi); probe trình duyệt probe_gd76_hud.cjs
+  9/9 (nút thiền hiện/ẩn theo giao tranh, bấm thiền/đứng dậy,
+  nút 💊, cảm ứng không đè ⚔) + ảnh preview76-*.png đã xem bằng mắt.
+  Lưu ý: trần Tu vi/ngày chỉ kiểm chứng bằng đọc code (test sống
+  cần ~70s và ngày game hiện tại); lần chạy đầu 4 kiểm tra cuối
+  fail do nhân vật 60 máu bị sói đánh chết giữa chừng — đã sửa
+  probe (nhân vật 1100 máu + dọn sói) và lần chạy lại pass hết.
+
+## GĐ77 — Số giây hồi chiêu + trạng thái Suy nhược (25/10)
+- Hồi chiêu theo độ mạnh ĐÃ CÓ SẴN trong dữ liệu (Cơ bản TB 1,6s,
+  Luyện Khí TB 5s, Trúc Cơ TB 19s) và server đã chặn tung lại khi
+  chưa hồi xong — phần thiếu chỉ là HIỂN THỊ. GĐ77 gắn số giây đếm
+  ngược lên nút chiêu: khay desktop (ô chính + ô đa dụng) và nút
+  cảm ứng (fan chiêu + ô phụ), tự xóa khi hết hồi.
+- Suy nhược (mới): đánh quái tích mệt mỏi 0–100 (+1 mỗi 12s giao
+  tranh; −1 mỗi 6s nghỉ, thiền −1 mỗi 3s). Đủ 100 → Suy nhược: gây
+  sát thương ×0,75, chịu sát thương ×1,25; hết khi mệt mỏi <50.
+  Có notice khi bật/tắt, dòng cảnh báo trên thẻ nhân vật (≥70%
+  báo "sắp suy nhược"), mệt mỏi/suy nhược lưu bền (relog không
+  xóa). Chỉ áp cho người thật, không áp đồng môn. MỌI SỐ đều TẠM.
+- Kiểm chứng: probe socket probe_gd77.cjs 13/13 (cast trả cdMs,
+  tung lại bị chặn reason=cooldown, sát thương 11→8 khi suy nhược,
+  hồi phục ở quảng trường an toàn, lưu bền); probe trình duyệt
+  probe_gd77_hud.cjs 8/8 (số hiện trên khay + nút cảm ứng, tự xóa,
+  dòng Suy nhược trên thẻ) + ảnh preview77-cdnum.png (số 1 giữa ô
+  chiêu) và preview77-exhausted.png (notice + dòng đỏ trên thẻ)
+  đã xem bằng mắt. Mấy lần fail đầu đều do probe đo sai (patch
+  thiếu boards, sói dính DoT, đo ở vùng sói bị cắn giữ giao
+  tranh) — đã sửa probe, code game không đổi.
+- CHƯA push (chờ gộp với GĐ74–GĐ76).
+  (GĐ78: suy nhược đã bị GỠ theo yêu cầu người chơi 25/10 — xem GĐ78.)
+
+## GĐ78 — Đói/khát thay Suy nhược (25/10, theo yêu cầu người chơi)
+- GỠ HẲN suy nhược GĐ77 (server + dòng thẻ): không còn mệt mỏi,
+  không còn debuff sát thương. Số giây hồi chiêu của GĐ77 GIỮ LẠI.
+- 2 thanh mới trên thẻ nhân vật: 🍖 Thức ăn + 💧 Nước uống
+  (0–100, bắt đầu 100). Hao khi giao tranh (thức ăn 1/60s, nước
+  1/45s — nước tụt nhanh hơn) và khi chế tạo thành công (−2/−2).
+  KHÔNG tự hồi — chỉ ăn/uống mới lên. Hết 1 trong 2 → thiền
+  không hồi máu/chân nguyên (Tu vi vẫn lên). ≤20% báo "đang
+  đói/khát", =0 báo kiệt sức (mỗi ngưỡng 1 lần tới khi ăn lại).
+- Kim Đan trở lên TỊCH CỐC: 2 thanh ẩn, không hao, ăn/uống vào
+  bị từ chối ("không cần ăn uống nữa").
+- Đồ ăn/uống (giá TẠM): Cơm Nắm +35 (8 LT), Thịt Nướng +60
+  (15 LT), Lương Khô +25 (10 LT); Nước Lọc +40 (5 LT), Trà Thảo
+  Mộc +60 (12 LT), Rượu Gạo +30 (10 LT). Bánh Thịt Thú sẵn có
+  thêm +30 thức ăn kèm 25% HP. Bán ở TỬU LÂU (cửa Quán Ăn,
+  525,841); Thương Nhân Lưu Động bán thêm Lương Khô + Nước Lọc
+  (vào kho luân phiên 10 món, 3 món/ngày).
+- Kiểm chứng: probe socket probe_gd78.cjs 18/18 (hao khi đánh,
+  không tự hồi ở nơi an toàn, mua/ăn/uống ở Tửu Lâu, thiền kiệt
+  sức không hồi máu/mana, Kim Đan đóng băng + từ chối ăn, chế
+  tạo −2/−2); probe trình duyệt probe_gd78_hud.cjs 4/4 (thanh
+  hiện, đánh 10s tụt 100→83, Kim Đan ẩn thanh) + ảnh
+  preview78-needs.png đã xem bằng mắt (thức ăn 83, nước 77).
+  Lỗi probe gặp: lái thẳng tới Tửu Lâu bị kẹt góc nhà — sửa
+  thành đi vòng phía nam; patch file khi server còn chạy bị
+  autosave 15s ghi đè — sửa thành patch sau khi kill server.
+- CHƯA push (chờ gộp với GĐ74–GĐ77).
+
+## GĐ79 — Nhích nút chiêu cảm ứng + 30 tông môn + 20 thành phố (25/10, theo yêu cầu người chơi)
+- Cụm nút chiêu cảm ứng (⚔ + fan 5 nút) nhích sang trái 20px
+  (⚔ cách mép phải 14→34px, fan theo cùng). Khay chiêu desktop
+  vốn căn giữa nên không đổi. Nút Thiền, Né, ô phụ giữ nguyên.
+- 20 THÀNH PHỐ MỚI (MapData 52→72 map, 30 thành phố): 9 Luyện
+  Khí + 9 Trúc Cơ + 2 Kim Đan, theme city, vào được từ Thanh
+  Vân Thành như thành phố cũ (destinationsFor tự liệt kê, không
+  cần code đường đi riêng). Quái vẫn 367 (thành phố an toàn).
+- 30 TÔNG MÔN MỚI (SECTS 2→32): 15 nhỏ (vào từ Luyện Khí,
+  không cần công trạng), 10 vừa (từ Trúc Cơ, công trạng ≥100),
+  5 lớn (từ Kim Đan, công trạng ≥300); chiêu mộ quanh năm (2
+  tông cũ giữ cửa sổ mùa vụ); gia nhập tại Sứ Giả như cũ.
+  Mỗi tông đặt trụ sở ở đúng 1 thành phố — 30 thành phố vừa đủ
+  1 tông/thành (dialog Sứ Giả nhóm theo cỡ + ghi trụ sở).
+  Tên tông/thành và mức công trạng do agent đặt — người chơi
+  cứ đổi. Hệ quả tự động: đệ tử tông mới cũng được hưởng ưu
+  đãi học công pháp tông GĐ54 (−5 điều kiện); Tiệm Tông Môn +
+  đổi công trạng mở cho mọi đệ tử tông.
+- GIỮ LUẬT GĐ57: Thạch Lâm vẫn CHỈ dành Thiên Kiếm/Huyền
+  Thiên — code cổng (dialog, danh sách đi, tổng quan map, qua
+  cổng) siết từ "mọi đệ tử tông" thành 2 tông cũ, để tông nhỏ
+  (vào từ Luyện Khí) không thành cửa sau vào bí cảnh Trúc Cơ.
+  Tông mới CHƯA có công pháp riêng (như 2 tông cũ trước GĐ54
+  — công pháp tông thật vẫn PARKED); gia nhập tại Sứ Giả ở
+  làng, chưa có sứ giả riêng tại từng thành phố.
+- Kiểm chứng: probe socket probe_gd79.cjs 17/17 (đủ 30 tông
+  theo cỡ, trụ sở phủ đúng 30 thành, gia nhập cả 3 bậc, từ
+  chối sai bậc + đã có tông, tông mới không mở cổng Thạch
+  Lâm, du hành tới thành mới theme city); probe trình duyệt
+  probe_gd79_hud.cjs 5/5 (đo đúng ⚔ 34px, fan 108/42px) + ảnh
+  preview79-touch.png đã xem bằng mắt. Lỗi probe gặp: nhân
+  vật spawn ở quảng trường cách Sứ Giả ~117px > 95px nên
+  talk/join lặng lẽ fail — sửa thành lái tới gần Sứ Giả trước
+  mỗi lần nói chuyện/gia nhập.
+- CHƯA push (chờ gộp với GĐ74–GĐ78).
+
+## GĐ80 — Sửa bảng skill cảm ứng + công pháp riêng 30 tông (25/10, theo yêu cầu người chơi)
+- SỬA LỖI fan cảm ứng: trước đây fan luôn vẽ đủ 5 nút và ghi
+  "Chiêu n" lên ô trống — nhân vật Phàm nhân/Luyện Khí chỉ có
+  3 ô nên 2 nút thừa nhìn như skill thật mà bấm không có tác
+  dụng. Nay fan tôn trọng SỐ Ô của nhân vật (Phàm/LK 3, LK7+
+  4, TC 4, TC7+ 5, KD+ 5 — như slotCountFor server): nút vượt
+  số ô thì ẨN hẳn; ô trống trong số ô chỉ hiện số phím + mờ
+  (viền đứt). Khay desktop giữ thiết kế GĐ44 (luôn đủ khung,
+  ô trống mờ + số phím) nên không đổi.
+- 500 CÔNG PHÁP TÔNG RIÊNG (server/data/sect_skills.json,
+  sinh bởi shottools/gen_sect_skills.py): tông nhỏ 10 chiêu
+  (4 Cơ bản + 4 Luyện Khí + 2 Trúc Cơ), tông vừa 20 (6+8+6),
+  tông lớn 30 (8+12+10); tên + id duy nhất toàn cục; mỗi tông
+  1 hệ ngũ hành + bộ từ khóa riêng nên tên không lẫn tông
+  nhau. Hệ số theo bậc như chiêu thường (1,0/1,6/2,2); hồi
+  chiêu Cơ bản ~1–2s, Luyện Khí ~3,5–6,5s, Trúc Cơ ~14–24s;
+  chân nguyên 8–15 / 25–45 / 70–100.
+- Học tại Sứ Giả (via:'sect'), CHỈ đệ tử đúng tông đó (người
+  ngoài tông + đệ tử tông khác đều bị từ chối); Cơ bản trao
+  ngay + tự lắp ô trống; Luyện Khí ngồi 720 phút game, Trúc
+  Cơ 2880 (như chiêu thường, rút ngắn theo Thần thức); cổng
+  cảnh giới: Cơ bản cần đo linh căn, Luyện Khí từ LK trở lên,
+  Trúc Cơ từ TC trở lên; chiêu Luyện Khí tông học TẠI SỨ GIẢ
+  (miễn luật Đạo Quán của chiêu thường). Chiêu tông không gắn
+  vũ khí/lớp, lắp ô chính, sau khi học hiện trong Sổ công pháp
+  để lắp/tháo (học thì chỉ ở Sứ Giả). 2 tông cũ giữ ưu đãi
+  GĐ54 (chưa có chiêu riêng; bản thiết kế công pháp tông thật
+  vẫn PARKED).
+- Kiểm chứng: probe socket probe_gd80.cjs 15/15 (đủ số chiêu
+  theo cỡ, dialog 10/20/30, học Cơ bản trao ngay + tự lắp,
+  tung trúng quái, Sổ có chiêu đã học, từ chối ngoài tông +
+  sai tông, Luyện Khí học tại Sứ Giả, Trúc Cơ học ở TC);
+  probe trình duyệt probe_gd80_hud.cjs 6/6 (Phàm nhân chỉ
+  3 nút 1/2/3 mờ, ô 4/5 ẩn) + ảnh preview80-touch.png đã xem
+  bằng mắt. Lỗi probe gặp: nhân vật đã học chiêu đó nên
+  learn_skill lặng lẽ bỏ qua trước cổng tông — sửa thành thử
+  chiêu cùng tông chưa từng học.
+- CHƯA push (chờ gộp với GĐ74–GĐ79).
+
+## GĐ81 — Fan ẩn ô trống + nút Thiền nhỏ lại + hàng 5 nút dưới đều nhau (25/10, theo yêu cầu người chơi)
+- Fan cảm ứng: GĐ80 mới làm ô trống mờ ghi số — người chơi vẫn
+  thấy thừa nên GĐ81 ẨN HẲN ô trống: fan chỉ hiện chiêu ĐÃ LẮP
+  (chưa có chiêu nào thì chỉ còn nút ⚔; lắp 1 chiêu thì chỉ
+  hiện đúng nút đó). Khay desktop giữ GĐ44 (luôn đủ khung).
+- Nút Thiền cảm ứng: 46×46 → 40×40 (box-sizing border-box
+  để đo đúng 40); desktop giữ 52×52.
+- Hàng 5 nút dưới (💊 + Đ1–Đ4) trước đây lệch: thuốc chỉ 36px
+  trong khi ô đa dụng ~42px, các ô đa dụng dính sát nhau còn
+  thuốc hở riêng, lại vướng margin-left: -17px cũ. Nay cả 5
+  cùng 42px, cùng đáy 45px, hở đều, cân giữa (đo thật: hở
+  8px/8px/8px/8px, lệch tâm 0).
+- Kiểm chứng: probe trình duyệt probe_gd81_hud.cjs 6/6 (fan
+  trống ẩn hết; lắp 1 chiêu chỉ hiện đúng nút đó có icon;
+  Thiền 40×40; hàng dưới đều nhau) + ảnh preview81-touch.png
+  đã xem bằng mắt.
+- CHƯA push (chờ gộp với GĐ74–GĐ80).
+
+## GĐ82 — Nút Thiền kiểu nút Né + hàng 5 nút bằng cỡ Né (25/10, theo yêu cầu người chơi)
+- Nút Thiền cảm ứng: bỏ icon 🧘, vẽ như nút Né — tròn, chữ
+  không (nhãn "Thiền"/"Đứng dậy" vẫn do JS đổi trong span;
+  chữ 8px để "Đứng dậy" vừa hoặc xuống 2 dòng trong nút
+  tròn), cùng cỡ nút Né 36×36. Desktop giữ nguyên (52px,
+  icon + nhãn).
+- Hàng 5 nút dưới (💊 + Đ1–Đ4): 42px → 36px = đúng cỡ nút Né
+  đo thật, hở đều 8px, cân giữa (lệch tâm 0).
+- Nút skill KHÔNG mất: GĐ81 chỉ ẩn ô TRỐNG — nhân vật chưa
+  có chiêu thì fan trống (đúng ảnh GĐ81), nhân vật đã lắp
+  chiêu thì fan hiện đúng nút đó (ảnh GĐ82: Trảm Kiếm lắp ô
+  1 hiện icon cạnh ⚔). Người chơi hỏi nên đã chụp ảnh minh
+  chứng bằng nhân vật có chiêu.
+- Kiểm chứng: probe trình duyệt probe_gd82_hud.cjs 6/6 (Né
+  chuẩn 36×36; Thiền chữ không, tròn, bằng cỡ Né; hàng dưới
+  bằng cỡ Né, hở đều, cân giữa; nhân vật có chiêu hiện nút
+  skill có icon) + ảnh preview82-touch.png đã xem bằng mắt.
+- CHƯA push (chờ gộp với GĐ74–GĐ81).
+
+## GĐ83 — Hiện lại nút chiêu cảm ứng (25/10, theo yêu cầu người chơi)
+- Hoàn lại kiểu GĐ80 sau khi GĐ81 ẩn hẳn ô trống: fan cảm ứng
+  hiện đủ SỐ Ô của nhân vật (Phàm/LK 3, LK7+ 4, TC 4, TC7+ 5,
+  KD+ 5), ô trống chỉ hiện số phím + mờ (viền đứt), không ghi
+  "Chiêu n" như skill thật. Nút Thiền kiểu Né (GĐ82) và hàng
+  5 nút 36px (GĐ82) giữ nguyên.
+- Kiểm chứng: probe trình duyệt probe_gd80_hud.cjs 6/6 (Phàm
+  nhân hiện 3 nút 1/2/3 mờ, ô 4/5 ẩn) + ảnh preview83-touch.png.
+- CHƯA push (chờ gộp với GĐ74–GĐ82).
+
+## GĐ84 — Đan đột phá: mua ở Tiệm Đan + Đan Sư chế từ nguyên liệu (25/10, theo yêu cầu người chơi)
+- Gốc vấn đề tìm được khi kiểm tra: server VẪN bán 3 đan đột phá
+  ở Tiệm Đan, nhưng bản mirror phía client (SHOP_INFO.tiem_dan)
+  thiếu chúng nên UI tiệm không hiện hàng — người chơi không
+  mua được; ITEM_INFO client cũng thiếu tên 3 đan (hàng tiệm
+  tông môn có nguy cơ hiện "undefined"). Cả 2 mirror đã đồng
+  bộ đúng giá server (Trung Cảnh 200/80, Trúc Cơ 800/320,
+  Hộ Mạch 300/120 — số TẠM).
+- Đường chế tạo MỚI (nghề Đan Sư, công thức generic sẵn có —
+  không sửa handler): Trung Cảnh = 10 Nanh Sói + 20 LT, tỉ lệ
+  0,7, bậc Nhập môn (cho đột phá LK 3→4 sơ→trung và 6→7
+  trung→hậu); Trúc Cơ = 20 Nanh Sói + 2 Đá Quý + 50 LT, tỉ lệ
+  0,6, bậc Thợ nghề; Hộ Mạch = 8 Nanh Sói + 2 Cánh Dơi + 15 LT,
+  tỉ lệ 0,75, bậc Thợ nghề. Mọi số TẠM. Nghề khác bị chặn chế
+  (đúng luật nghề). Thông báo thiếu đan khi đột phá đã sửa
+  thành "mua ở Tiệm Đan Dược hoặc luyện chế (nghề Đan Sư)".
+- Thử thách (Thử Luyện Thú / Tâm Ma Ảnh ở Đạo Quán) KHÔNG đổi
+  — vẫn bắt buộc kèm đan.
+- Kiểm chứng: probe socket probe_gd84.cjs 12/12 (chế Trung Cảnh
+  → đột phá 3→4 tiêu đan; mua Trung Cảnh ở tiệm −200 LT; bậc 2
+  chế Trúc Cơ + Hộ Mạch → đột phá Đại LK9→TC1 bằng đan tự chế;
+  nghề khác bị chặn) + probe trình duyệt probe_gd84_hud.cjs
+  6/6 + ảnh preview84-shop.png đã xem bằng mắt (tiệm hiện đủ
+  3 đan + giá, không "undefined").
+- CHƯA push (chờ gộp với GĐ74–GĐ83).
+
+## GĐ85 — Đàn tế triệu hồi trùm map (25/10, phương án B theo yêu cầu "tiếp giai đoạn tiếp theo")
+- Đàn tế ở từng map có trùm (20 map: 19 map trùm GĐ70 +
+  Vô Tận Hư Không): dấu quầng lửa cam + nhãn "🕯️ Đàn Tế" cách
+  cổng dịch chuyển 160px về phía bắc (trong vùng trống decor
+  ≥185px và quái >200px, ngoài tầm E lúc mới tới cổng 56px).
+  Bấm E mở hộp thoại (không trừ tiền ngay — tránh bấm nhầm);
+  nút "Tế 200 LT — triệu hồi" chỉ bật khi đủ điều kiện, kèm
+  lý do khi không tế được.
+- Luật (số TẠM): 200 LT Hạ phẩm/lần, mỗi map 1 lần/ngày game
+  (theo dayIndex của đồng hồ thế giới, lưu bền trong world
+  qua saveWorld — restart vẫn nhớ); mỗi lần triệu hồi đủ số
+  trùm còn thiếu của map (1 con, map đặc biệt 3 con); từ chối
+  khi trùm còn sống / đã tế hôm nay / thiếu đá. Trùm triệu hồi
+  dùng đúng đường sinh tự nhiên (rương như trùm thường: map
+  trùm chắc chắn rương B + Linh thạch Cực phẩm; Vô Tận Hư
+  Không như trùm tự nhiên) và luật hồi sinh tự nhiên đã chống
+  trùng nên không nhân đôi trùm.
+- Kiểm chứng: probe socket probe_gd85.cjs 14/14 (trùm sống →
+  chưa tế được; giết trùm → tế được; tế −200 LT → trùm xuất
+  hiện lại; tế lần 2 trong ngày bị chặn; restart vẫn nhớ;
+  Vô Tận Hư Không 3 Hỗn Độn Thú) + probe trình duyệt
+  probe_gd85_hud.cjs 6/6 + ảnh preview85-altar.png đã xem
+  bằng mắt (hộp thoại + nút khóa + quầng lửa).
+- CHƯA push (chờ gộp với GĐ74–GĐ84).

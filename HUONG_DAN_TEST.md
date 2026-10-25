@@ -120,7 +120,7 @@ sổ là server dừng; mở lại bằng `npm start` thường thì trở về 
 3. **Ra bãi farm** đánh cả 3 loài: Sói Xám (dễ), Dơi Đen (nhanh), Thạch
    Quái (góc đông bắc — trâu, dame to). Chú ý **rương rơi** khi hạ quái:
    đi tới gần là mở; rương của người khác làm rơi mình cũng mở được.
-4. **Bán đồ + mua đan** ở Tiệm Đan / Tiệm Nguyên Liệu; dùng Đan Tụ Khí.
+4. **Bán đồ + mua đan** ở Tiệm Đan / Tiệm Nguyên Liệu; dùng Hồi Xuân Đan (hồi máu) / Đan Hồi Nguyên (hồi chân nguyên). Đan Tụ Khí đã bỏ hẳn từ GĐ76 — túi cũ tự đổi sang Hồi Xuân Đan.
 5. **Panel Công pháp (📖)**: học thêm chiêu khi đủ tầng (ngồi học tốn
    thời gian trong game — bị đánh là mất tiến độ học), xếp chiêu vào
    **2 bảng công pháp** (đổi bảng farm/tu luyện) + 4 ô đa dụng.
@@ -137,7 +137,7 @@ sổ là server dừng; mở lại bằng `npm start` thường thì trở về 
     có loan tin toàn server): xem hàng — giá mỗi ngày mỗi khác, số
     lượng ít; thử **đặt hàng** món không có sẵn.
 12. **Trận Dịch Chuyển (GĐ59 + GĐ60)**: vòng đá phát sáng xanh ở mép
-    đông quảng trường, bấm E mở danh sách 52 bản đồ — đi Thanh Vân
+    đông quảng trường, bấm E mở danh sách 72 bản đồ — đi Thanh Vân
     Thành (cần Luyện Khí 1), dạo các đất nghề; vùng chưa đủ cảnh giới
     sẽ ghi rõ điều kiện còn thiếu. Người ở map khác nhau không thấy
     nhau. Chết ở map khác → về quảng trường làng.
@@ -189,12 +189,13 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   của bản MMO (file thiết kế không ghi) — góp ý "đắt/rẻ" vẫn quý.
 - Quái hồi sinh sau 5 giây (số tạm; file gốc là 120 giây).
 - Chưa có PvP (đánh nhau giữa người chơi); bí cảnh mới có Thạch Lâm
-  (đệ tử tông môn); công pháp RIÊNG của tông môn chưa làm (đang chờ
-  duyệt thiết kế).
+  (đệ tử tông môn); công pháp RIÊNG đã có cho 30 tông môn mới (GĐ80,
+  học tại Sứ Giả), 2 tông cũ (Thiên Kiếm / Huyền Thiên) vẫn chờ duyệt
+  thiết kế riêng.
 - Núi lửa / hang băng trong các map là cảnh + chướng ngại vật,
   CHƯA vào trong được; việc hộ tống thoát game giữa chừng là mất
   chuyến (chưa lưu tiến trình hộ tống).
-- Bản đồ đã có đủ 52 vùng (GĐ59) nhưng phần lớn cần Trúc Cơ / Kim
+- Bản đồ đã có đủ 72 vùng (GĐ59 + 20 thành phố GĐ79) nhưng phần lớn cần Trúc Cơ / Kim
   Đan — đột phá Kim Đan chưa mở nên vùng Kim Đan chưa vào được bằng
   chơi thường; cảnh quan từng vùng là bản dựng theo chủ đề, chưa có
   NPC/cửa hàng riêng; quái vùng mới dùng hành vi cơ bản chung.
@@ -283,3 +284,118 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   trên mặt tiền cũ không còn (điện có biển vàng trống), gợi ý phím
   E vẫn nhận diện Đạo Quán bình thường.
 - Nhà lớn / map thành phố chưa vẽ — vẫn dùng nhà vẽ code.
+
+## GĐ74 — Sửa theo feedback: banner, đồng hồ, pill, trả nhiệm vụ, phiên bền, reset chỉ số
+
+- Vào map chỉ thấy banner tên map **2,5 giây rồi tự mất** (không còn đứng suốt).
+- Đồng hồ ngày/giờ dời vào cuối thẻ nhân vật (trái trên); pill Linh thạch
+  nằm **trong khung minimap**, bấm mở panel ví.
+- Panel cuộn được, chữ nhỏ lại — panel nào dài thì cuộn xuống xem hết.
+- **Trả nhiệm vụ được ngay tại Bảng** treo thưởng, không cần về Nhà
+  Trưởng Làng.
+- Thoát game rồi vào lại **không bị bắt đăng nhập lại** (phiên sống qua
+  cả restart server).
+- Bảng chỉ số có nút **Reset chỉ số (100 Linh thạch Hạ phẩm)**: chỉ hoàn
+  điểm đã cộng từ GĐ74 trở đi.
+
+## GĐ75 — Nút quanh minimap + pill ảnh đá
+
+- 6 nút công cụ chia 2 cụm quanh minimap: trái minimap (Túi đồ / Nhiệm
+  vụ / Công pháp), dưới minimap (Nghề / Thành tựu / Menu); trên điện
+  thoại thành 2 cột kề nhau.
+- Pill Linh thạch dùng **ảnh đá của bản game đơn cũ**, chỉ ghi
+  "Linh thạch: N" với N là số của phẩm đang có nhiều nhất (bằng nhau
+  thì lấy phẩm cao hơn).
+
+## GĐ76 — Tu vi + hồi phục làm lại: bỏ Đan Tụ Khí, thiền tại linh mạch
+
+- **Đánh quái không còn cho Tu vi.** Tu vi giờ từ nhiệm vụ, hộ tống,
+  Phù Tụ Linh, và **ngồi thiền tại điểm linh mạch**.
+- **Không còn hồi chân nguyên tự động** (trong hay ngoài giao tranh).
+  Trong giao tranh chỉ hồi bằng đan: Hồi Xuân Đan (máu), **Đan Hồi
+  Nguyên mới (50% chân nguyên)**.
+- Sau **5 giây rời giao tranh** mới ngồi thiền được (phím **M** / nút
+  🧘): thiền hồi máu 1%/giây + chân nguyên từ từ; thiền tại điểm có
+  marker **✦ Linh mạch** (Tụ Linh Trận + 2 điểm làng + 3 điểm/map)
+  thì **+1 Tu vi/30 giây, tối đa 15/ngày game**.
+- Đan Tụ Khí đã bỏ hẳn: túi cũ tự đổi sang Hồi Xuân Đan, mua đan cũ
+  bị chặn, rương không còn rơi đan cũ.
+
+## GĐ77 — Số giây hồi chiêu hiện trên nút
+
+- Chiêu càng mạnh hồi càng lâu vốn đã có sẵn (Cơ bản ~1,6s, Luyện Khí
+  ~5s, Trúc Cơ ~19s) — giờ **số giây đếm ngược hiện ngay giữa nút
+  chiêu** (khay desktop, ô đa dụng, quạt cảm ứng), hết hồi thì tự mất.
+
+## GĐ78 — Đói/khát thay suy nhược
+
+- Thẻ nhân vật có thêm 2 thanh **🍖 Thức ăn + 💧 Nước uống** (bắt đầu
+  100): hao khi giao tranh và khi chế tạo thành công; **chỉ ăn/uống
+  mới hồi**, không tự hồi.
+- Hết 1 trong 2 thanh thì thiền **không hồi máu/chân nguyên** (Tu vi
+  vẫn lên); ≤20% báo đói/khát, =0 báo kiệt sức.
+- **Kim Đan trở lên tịch cốc**: 2 thanh ẩn, không hao, ăn vào bị từ
+  chối.
+- Đồ ăn/uống mua ở **Tửu Lâu** (cửa Quán Ăn) và Thương Nhân Lưu Động:
+  Cơm Nắm, Thịt Nướng, Lương Khô, Nước Lọc, Trà Thảo Mộc, Rượu Gạo,
+  Bánh Thịt Thú (vừa hồi máu vừa +thức ăn).
+
+## GĐ79 — Cụm chiêu nhích khỏi góc + 30 tông môn + 20 thành phố
+
+- Cụm nút chiêu cảm ứng (⚔ + quạt) **nhích sang trái 20px**, khỏi sát
+  mép phải; khay desktop căn giữa nên không đổi.
+- **20 thành phố mới** (tổng 72 map, 30 thành phố): đi từ Thanh Vân
+  Thành như cũ.
+- **30 tông môn mới** (tổng 32 tông): 15 nhỏ (vào từ Luyện Khí, không
+  cần công trạng), 10 vừa (từ Trúc Cơ, công trạng ≥100), 5 lớn (từ
+  Kim Đan, công trạng ≥300); chiêu mộ quanh năm, gia nhập tại Sứ Giả
+  trong làng; mỗi tông có trụ sở ở đúng 1 thành phố (ghi trong hộp
+  thoại Sứ Giả).
+- Lưu ý: **Thạch Lâm vẫn chỉ dành cho đệ tử Thiên Kiếm / Huyền Thiên**
+  — tông mới không phải cửa sau vào bí cảnh.
+
+## GĐ80 — 500 công pháp riêng của tông môn mới
+
+- Mỗi tông mới có công pháp riêng: nhỏ 10, vừa 20, lớn 30 (tổng 500).
+- **Chỉ đệ tử đúng tông mới học được, học tại Sứ Giả**: Cơ bản học
+  ngay, Luyện Khí ngồi 720 phút game, Trúc Cơ 2880 phút game (chiêu
+  Luyện Khí của tông học ngay tại Sứ Giả, không cần ra Đạo Quán).
+- Sau khi học, chiêu hiện trong Sổ công pháp để lắp/tháo ô như chiêu
+  thường. 2 tông cũ chưa có chiêu riêng (vẫn ưu đãi học Trúc Cơ −5
+  chỉ số như trước). Danh sách đủ 32 tông + 500 chiêu xem file
+  `Tong_mon_va_cong_phap.md` kèm theo.
+
+## GĐ81–83 — Nút chiêu cảm ứng: hiện lại đủ ô + Thiền kiểu nút Né
+
+- Quạt chiêu hiện **đủ số ô của nhân vật** (Luyện Khí 3, Trúc Cơ 4,
+  Kim Đan 5; tầng 7+ thêm 1 ô): ô đã lắp chiêu hiện icon, ô trống
+  hiện số phím + mờ, ô vượt số ô thì ẩn hẳn.
+- Nút **Thiền kiểu nút Né**: tròn, chỉ có chữ (không còn icon 🧘),
+  cỡ bằng nút Né; 5 nút trên thanh máu/chân nguyên (💊 + Đ1–Đ4) đều
+  nhau, cỡ bằng nút Né.
+
+## GĐ84 — Đan đột phá: mua ở Tiệm Đan + Đan Sư chế từ nguyên liệu
+
+- **Tiệm Đan Dược** giờ hiện đủ 3 đan đột phá: Đan Trung Cảnh 200,
+  Đan Trúc Cơ 800, Đan Hộ Mạch 300 Linh thạch (Tiệm Tông Môn rẻ hơn
+  ~15% cho đệ tử tông).
+- **Đan Sư chế được**: Trung Cảnh = 10 Nanh Sói + 20 LT (tỉ lệ 0,7);
+  Trúc Cơ = 20 Nanh Sói + 2 Đá Quý + 50 LT (0,6); Hộ Mạch = 8 Nanh
+  Sói + 2 Cánh Dơi + 15 LT (0,75). Nghề khác không chế được — mua ở
+  tiệm.
+- Đột phá Luyện Khí trung kỳ (3→4) và hậu kỳ (6→7) cần Đan Trung
+  Cảnh + thắng Thử Luyện Thú ở Đạo Quán; đột phá Đại cảnh (LK9→TC1)
+  cần Đan Trúc Cơ + thắng Tâm Ma Ảnh (Đan Hộ Mạch +10% tỉ lệ, tự tiêu
+  hao khi quay). Mọi số trên đều là số tạm.
+
+## GĐ85 — Đàn tế triệu hồi trùm
+
+- Mỗi map có trùm đều có **🕯️ Đàn Tế** ngay phía bắc cổng vào map
+  (cách cổng 160px): tới gần bấm **E** mở hộp thoại, bấm nút triệu
+  hồi để gọi trùm map đó ngay, **200 Linh thạch/lần, mỗi map 1 lần/
+  ngày game** (ngày game tính chung cho mọi người — ai tế trước được
+  trước).
+- Chỉ tế được khi trùm map đã chết hết; trùm còn sống thì nút triệu
+  hồi khóa kèm lý do. Trùm triệu hồi rớt rương như trùm thường
+  (rương trùm có Cực phẩm), không nhân đôi với hồi sinh tự nhiên.
+- Lưu ý: Thạch Lâm và làng không có đàn tế.
