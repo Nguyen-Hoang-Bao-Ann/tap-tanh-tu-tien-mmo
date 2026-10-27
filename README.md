@@ -2129,3 +2129,620 @@ khác và chốt: LẤY CẤU TRÚC, tên nút/nội dung giữ của game mình
   probe_gd85_hud.cjs 6/6 + ảnh preview85-altar.png đã xem
   bằng mắt (hộp thoại + nút khóa + quầng lửa).
 - CHƯA push (chờ gộp với GĐ74–GĐ84).
+
+## GĐ86 — Nội dung sống thành tiến trình (25/10, theo yêu cầu "làm nội dung sống trước")
+- GĐ40 đã có bản thô của cả 3 món; GĐ86 làm sâu thành tiến
+  trình thật, KHÔNG thêm sự kiện xổ số (đúng hướng người chơi
+  chốt 23/10 sau khi gỡ GĐ35):
+  (1) Kẻ thù truyền kiếp: thắng Tu Sĩ Thù Địch (q_tusi) tăng
+  `rivalWins` lưu bền; lần sau hắn quay lại với HP ×(2 +
+  0,5×số lần thắng), tối đa ×5, và thưởng trả nhiệm vụ tăng
+  +25 LT mỗi bậc (lần 1: 100 LT, lần 2: 125 LT...). Nhận lại
+  nhiệm vụ báo trước "quay lại lần thứ N — HP ×...".
+  (2) Bệnh lạ cần điều tra: trò chuyện với Trưởng Làng, Chủ
+  Tiệm Đan, Chủ Tiệm Nguyên Liệu thu đủ 3 manh mối mới mở
+  cờ `benhla_probed`, Chủ Tiệm Đan mới giao phần 1 (phần 2
+  vẫn ẩn cho tới khi trả phần 1 xong, cờ `case_benhla` mở
+  phần 2). Người đã vào chuỗi thì không cần điều tra lại;
+  điều tra xong 1 lần thì vụ tái phát sau này cũng không cần
+  điều tra lại.
+  (3) Thương nhân khách quen: mỗi lần mua hàng ở tiệm lưu
+  động hoặc nhận đơn đặt tăng `merchantRep` lưu bền; rep ≥3
+  được xem/mua món thứ 4 trong kho (kho luôn có 4 món, món
+  thứ 4 khóa với người chưa đủ rep), rep ≥5 giảm 10%, rep ≥10
+  giảm 15% (không cộng dồn với giảm thiện cảm 10%). Giá hiển
+  thị trong hộp thoại + tiệm đã trừ giảm để khớp giá lúc mua.
+- Sửa lỗ hổng GĐ40 phát hiện khi làm probe trình duyệt:
+  thương nhân trước đây KHÔNG có điểm tương tác E nào, mà
+  hộp thoại của ông chỉ mở được từ chính tiệm của ông (vòng
+  tròn) — người chơi không vào được. Nay thêm điểm E
+  `thuongnhan` tại (884,616) mở thẳng hộp thoại (trong đó có
+  nút Vào tiệm + dòng khách quen); gợi ý E chỉ hiện khi hình
+  NPC còn trong làng (vắng làng thì ẩn, bấm E server cũng báo
+  đã rời làng).
+- Mọi số GĐ86 đều TẠM. Kiểm chứng: probe socket probe_gd86.cjs
+  29/29 (thương nhân rep 0→3→5, kho 3→4 món, giá ×0,9, mua
+  trừ đúng giá giảm; duel lần 1 HP 250 → trả 100 LT, lần 2 HP
+  313 → trả 125 LT; bệnh lạ ẩn phần 1 trước điều tra, đủ 3
+  manh mối mở phần 1, hạ 8 dơi, trả 60 LT, phần 2 mở) + probe
+  trình duyệt probe_gd86_hud.cjs 6/6 (lần đầu 4/6 do timing
+  headless, chạy lại 6/6) + ảnh preview86-merchant.png đã xem
+  bằng mắt (hộp thoại + dòng khách quen mức 5 + giá giảm).
+  Bài học probe: nhân vật mới tạo đánh duel ở bãi farm dễ bị
+  sói ké cắn chết trước khi giết xong foe — chết vì quái trial
+  thì server xóa foe (luật GĐ19) nên quest không xong; probe
+  đã patch nhân vật đối đầu lên chỉ số 100 để đo đúng thang
+  cừu hận.
+- CHƯA push (chưa nằm trong zip GĐ74–GĐ85 đã giao tối 25/10;
+  chờ user chốt mới đóng zip mới gộp GĐ86).
+
+## GĐ87 — Mở đột phá Trúc Cơ 9 → Kim Đan (theo mẫu Đại; user chốt 26/10)
+- Cửa duy nhất từng chặn Kim Đan (`blocked_kimdan`) đã mở: `breakInfoFor` trả
+  loại mới `kimdan` cho TC9 (đan `dan_ket_dan`, thử thách `kimdan`,
+  +15 điểm, +100 năm thọ — số TẠM); `globalStep` mở rộng cho kd/na/ht
+  (KD tầng t = bước 18+t, đúng "Kim Đan tầng 19–27" từng ghi).
+- Đan Kết Đan mới: Tiệm Đan 2000 LT Hạ phẩm, Tiệm Tông Môn 1700
+  (giảm ~15% như các đan khác), bán lại 40% (800/680); Đan Sư bậc 2
+  chế từ 30 Nanh Sói + 5 Đá Quý + 200 LT, tỉ lệ 0,5 (số TẠM).
+  Client đã mirror đủ ITEM_INFO + SHOP_INFO + RECIPE_INFO (bài học GĐ84).
+- Thử thách Lôi Kiếp Ảnh tại sân Đạo Quán: HP = elite bước 18 ×8
+  (7688), công ×1,3, chiêu ma pháp ×2,0 (Đại là ×1,6), phase 2 phân
+  thân thành 2 Lôi Kiếp Phân Thân; client nhuộm vàng 0xffd75e
+  (Tâm Ma Ảnh giữ tím). Nút đột phá: "Thử thách: Lôi Kiếp Ảnh" /
+  "ĐỘT PHÁ KIM ĐAN".
+- Tỉ lệ đột phá dùng đúng công thức Đại (0,60 + 0,10 Đan Hộ Mạch
+  + 0,10 chỉ số chính ≥40 − 0,05×(số linh căn−1) + 0,10×thua liên
+  tiếp, kẹp [0,10, 0,95], 3 thua liên tiếp → chắc chắn); phạt thất
+  bại như Đại (mất 30% Tu vi / −10 năm thọ / chỉ số −10% tối đa 3).
+- Trong Kim Đan chỉ có tiểu cảnh (+5 điểm/tầng, số TẠM); KD9 trả
+  `blocked_na` — bấm đột phá báo "Nguyên Anh chưa mở". Tu vi cần:
+  TC9→KD1 = 1373 (200×1,12^17); KD1→KD2 = 1538.
+- Kiểm chứng: probe socket probe_gd87.cjs 19/19 (mua 2000, chế,
+  Lôi Kiếp 7688 HP, đột phá KD1 +15 điểm +100 thọ tiêu đúng 1 đan,
+  tiểu cảnh KD1→KD2, KD9 bị chặn, travel vào Cửu Tiêu Thành)
+  + probe trình duyệt probe_gd87_hud.cjs 6/6 + ảnh preview87-shop.png.
+  Bài học probe: spawn chỉ kẹp trần HP chứ không bơm đầy — nhân vật
+  patch phải kèm hp đầy, không thì chết vì trial là mất luôn boss
+  (luật GĐ19); char_sync mang trialReady trong breakInfo dạng
+  boolean, không phải chuỗi trialKind.
+- CHƯA push (local only; chưa nằm trong zip nào).
+
+## GĐ88 — Kim Đan đủ bộ: ô 6 + thần thông + ngự kiếm + thần thức + hộ thể (user: "làm hết mọi thiết kế về kim đan đi" 26/10)
+- Ô công pháp thứ 6 cho Kim Đan (slotCountFor kd = 6; na/ht giữ 5
+  cho tới đợt Nguyên Anh): desktop khay 6 khung (phím 0 = ô 6),
+  cảm ứng fan 6 nút (tSkill5: right 170px, bottom 100px, 44px);
+  TC trở xuống lắp ô 6 bị chặn "Ô công pháp đã đầy (5/5)".
+- 9 thần thông riêng theo lớp (`KD_SKILLS`, id `kd_<lớp>`): Thể Kim
+  Cang Bá Thể (defPct 50/10s), Phật Phật Quang Phổ Độ (heal 30%),
+  Cốt Vạn Cốt Triều Tông (lifesteal 50%), Sát Vô Ảnh Ám Sát
+  (nextMul 2), Kiếm Vạn Kiếm Quy Tông (aoe), Pháp Ngũ Lôi Oanh
+  Đỉnh, Quỷ Quỷ Vụ Phệ Hồn (lifesteal 100%), Y Hồi Xuân Thánh
+  Thủ (heal 50%), Nho Hạo Nhiên Chính Khí (atkPct 30/12s);
+  hệ số 3,0 (Y tu 2,0), hồi chiêu 30s, tốn 100 chân nguyên, tầm
+  170 (Pháp 200) — mọi số TẠM. Chỉ cấp qua đột phá Kim Đan thật
+  (applyBreak loại kimdan + autoEquipIfFree); nhân vật set tay
+  lên KD không có sẵn. Catalog gắn chiêu đã học (kể cả thần
+  thông); chiêu có fx hỗ trợ/def/heal cũng ngồi được ở ô đa dụng.
+- Ngự Kiếm Phi Hành trên map (phím F, sự kiện `fly_toggle`, KD+):
+  tốc độ ×1,5 đúng thiết kế ("bay 50%"), bỏ qua mọi vật cản,
+  chỉ kẹp biên map; bay là trạng thái tạm (không lưu bền), đổi
+  map/tọa thiền/chết đều tự hạ; client nhấc sprite 14px + nhãn
+  🕊️; quái vẫn đánh trúng người đang bay (không né đòn).
+- Thần Thức Ngoại Phóng (KD4+, na/ht cũng hưởng): `rangeMulOf`
+  = 1,2 nhân vào tầm đánh thường + tầm chiêu; khóa xuyên vật
+  cản vốn đã đúng vì 2 đường đánh không kiểm tra vật cản.
+- Kim Đan Hộ Thể (KD7–9, na/ht cũng hưởng): trong `hitPlayer`,
+  máu tụt tới ≤30% maxHp (và còn sống, hết hồi) thì tự bật khiên
+  10s giảm 50% sát thương (cả cú đánh kích hoạt cũng giảm nửa),
+  hồi chiêu 60s, có notice — mọi số TẠM, dạng khiên là lấp đầy
+  cho spec gốc bị cắt ("tự động...").
+- Kiểm chứng: probe socket probe_gd88.cjs 19/19 (đột phá +15 và
+  lĩnh ngộ thần thông tự lắp ô 1; fly_toggle bật/tắt; tốc độ
+  286 → 429 px/s đúng ×1,50; đi bộ kẹt nhà y=846, bay xuyên tới
+  y=16; tung thần thông ô 0; KD lắp chiêu 6, TC7 bị chặn; KD4
+  trúng ở vành 170–178, KD3 hụt cùng vành; KD7 cắn 5 mất 3 +
+  notice + hoThe=1, KD6 đối chứng mất đủ 5) + probe trình duyệt
+  probe_gd88_hud.cjs 8/8 + ảnh preview88-touch.png.
+  Anomaly đã gỡ: fail Hộ Thể ban đầu là artifact của probe —
+  bản offline luôn đầy máu (spawnOfflineActor cho maxHp) và
+  autosave 15s ghi đè hp patch về file, nên nhân vật nối lại
+  muộn thì đầy máu, cắn đầu không kích khiên là đúng luật game;
+  đo ngay sau restart thì pass. Điểm cửa Tửu Lâu (525,841) nằm
+  sát tán cây [520,860] nên tới trong 8px là không được, dùng
+  dung sai 25px (tiệm vẫn bán bình thường trong tầm 80px).
+- CHƯA push (local only; chưa nằm trong zip nào).
+
+## GĐ89 — Nội dung 30 thành phố: 6000 dân, sứ giả trụ sở, tiệm thành (user chọn "Làm đủ 30 thành" 26/10)
+- Trước GĐ89, 30 thành phố đều trống (chỉ cổng + decor), mỗi thành là
+  trụ sở của đúng 1 trong 30 tông nhưng không có sứ giả tại chỗ.
+  Nay mỗi thành có 200 NPC thật (50 chức năng + 150 dân thường):
+  10 thành cũ dùng `server/data/gdd/NPCData.json` sẵn có, 20 thành
+  mới sinh bởi `shottools/gen_city_npcs.py` → `server/data/gdd/
+  NPCData_new.json` (4000 NPC, tên seed cố định theo id thành;
+  tên mới viết có khoảng trắng chuẩn, khác file cũ dính kiểu
+  'MinhDũng'). Map nghề trong NPCData (15 map) chưa nối.
+- Vị trí do server xếp lúc boot (sau MAP_RUNTIME): chức năng thành
+  lưới quảng trường 10×5 bước 95px phía bắc cổng, dân thường rải
+  seed quanh đó; tránh vật cản (decor map đã seed theo id nên vị
+  trí ổn định qua restart). Client nhận danh sách theo `map_enter`
+  (`npcs`), vẽ sprite người (villager0–4) + nhãn chức năng; nhãn
+  chỉ hiện khi người chơi trong 260px (lưới 95px mà hiện hết nhãn
+  thì chữ chồng nhau che map); dân thường không nhãn. E / ⚔-thành-E
+  dùng chung luồng làng (điểm E theo từng NPC, tầm E 70px).
+- Nói chuyện (`talk_npc` mở nhánh thành phố): thoại 1 câu của NPC;
+  không tăng thiện cảm, không dính manh mối vụ án làng. Vai trò:
+  Chủ Tiệm Đan → tiệm `city_dan`, Chủ Tiệm Nguyên Liệu → tiệm
+  `city_nguyenlieu` (cùng bảng giá tiệm làng; điểm bán do
+  `shopPointFor` tra theo NPC trên map hiện tại, mua/bán đều kiểm
+  tra khoảng cách 80px); Sứ Giả Tông Môn → khối `envoySect` (chỉ
+  tông của thành đó: gia nhập tại chỗ, đệ tử xem chiêu tông riêng
+  + Tiệm Tông Môn mua được tại trụ sở); các vai khác (đấu giá,
+  ngân hàng, giao nhiệm vụ, vũ khí...) đợt này chỉ nói chuyện.
+- `join_sect` chấp nhận thêm Sứ Giả trụ sở của đúng tông đó
+  (trước đây chỉ chấp nhận Sứ Giả làng); gia nhập sai trụ sở /
+  nói chuyện NPC thành khác từ xa / mua tiệm từ xa đều bị chặn
+  đúng luật. Nút Gia nhập trong hộp thoại mở lại đúng NPC vừa nói
+  chuyện (`lastNpcDialogId`, trước đây cứng `npc_sugia`).
+- Sửa lỗi thật tìm thấy khi probe (ngoài phạm vi GĐ89 nhưng cùng
+  luồng): `spawnOfflineActor` không copy `mapId` nên sau restart,
+  autosave 15s ghi đè map của người offline về làng — người chơi
+  logout ở map khác rồi server restart là tỉnh dậy ở làng. Đã sửa
+  1 dòng (copy `mapId`), giữ nguyên hành vi còn lại.
+- Kiểm chứng: probe socket probe_gd89.cjs 20/20 (map_enter 200 NPC
+  cả thành cũ lẫn thành mới; gia nhập tại trụ sở cả 2 loại thành;
+  mua tiệm thành −15 LT, mua tiệm tông tại trụ sở −12 LT; 3 chặn
+  sai đều đúng) + probe trình duyệt probe_gd89_hud.cjs 5/5 (gợi ý
+  E hiện tên sứ giả, hộp thoại + nút Gia nhập, hộp thoại mở lại
+  hiện đã là đệ tử, ⚔ thành E trên cảm ứng) + ảnh
+  preview89-city.png. Bài học probe: vị trí patch trên map thành
+  phố mà rơi vào vật cản thì spawn đẩy về cổng (portal−56) — patch
+  đúng ô NPC (ô đã qua kiểm tra trống) mới đứng cạnh được; probe
+  trình duyệt: `networkidle2` không bao giờ tới vì game giữ socket
+  mở (dùng `domcontentloaded`), nút `#btnGuest` phải chờ visible
+  rồi bấm qua evaluate.
+- CHƯA push (local only; chưa nằm trong zip nào).
+
+## GĐ90 — Nhiệm vụ game: 60 nhiệm vụ thành phố + 8 nhiệm vụ bảng cao cấp (user chọn "Làm cả hai" 26/10)
+- Trước GĐ90 chỉ có ~15 nhiệm vụ, tất cả quanh làng/bãi farm cấp thấp;
+  Người Giao Nhiệm Vụ ở 30 thành (GĐ89) chỉ biết nói chuyện. Nay mỗi
+  thành có **2 nhiệm vụ riêng** (1 diệt + 1 thu thập, theo cảnh giới
+  thành: LK 15 thành, TC 10, KD 5), nhận + trả ngay tại Người Giao
+  Nhiệm Vụ của thành đó qua hộp thoại (nút Nhận / nút Trả), không cần
+  thiện cảm (dân thành phố không tăng thiện cảm). Nhiệm vụ thành phố
+  KHÔNG hiện ở Bảng làng (chỉ hiện ở tracker + hộp thoại), tracker
+  hiện "✓ Trả tại <tên thành>" khi xong.
+- **8 nhiệm vụ bảng cao cấp** (nhận/trả tại Bảng làng như cũ, vẫn tính
+  vào boardQuests/Thư Tiến Cử): Diệt Kiếm Ma (TC, ghi chú cần TC7 mới
+  vào được Cổ Chiến Trường), Huyết Lang, Địa Hành Yêu, Đá Quý TC;
+  Kim Giáp Tê, Thiên Lôi Thú, Hỗn Độn Thú (Vô Tận Hư Không, cần TC9),
+  Đá Quý KD. Mọi số thưởng đều TẠM.
+- Dữ liệu: `server/data/city_quests.json` (60 nhiệm vụ, sinh bởi
+  `shottools/gen_city_quests.py` — chạy lại ghi đè cả JSON lẫn mirror
+  client `client/src/city_quests_info.ts`; mirror bảng nằm trong
+  `QUEST_INFO` của main.ts). Server nạp JSON rồi gộp vào `QUESTS` lúc
+  boot (log `[GĐ90] Đã nối nhiệm vụ thành phố: 60 nhiệm vụ.`).
+- Sửa kèm trong luồng nhiệm vụ (trước đây chỉ tra NPC làng):
+  `questNpcFor` tra NPC theo đúng map (làng hoặc thành phố) cho cả
+  nhận lẫn trả — tra sai map thì báo lỗi thay vì crash; thông báo
+  hoàn thành ghi đúng "Người Giao Nhiệm Vụ ở <tên thành>".
+- Rà cổng khi thiết kế (bài học GĐ90): nhiệm vụ chỉ giao loài mà đúng
+  đối tượng TỚI ĐƯỢC — quái GDD cảnh giới LK toàn spawn ở map khóa
+  TC/KD (Độc Xà TC7, Lâm Trư KD1...) nên thành LK chỉ dùng quái làng
+  (Sói/Dơi/Thạch Quái); thành TC chỉ dùng Huyết Lang (TC1) + Địa Hành
+  Yêu (qua map LK7); Kiếm Ma/Lôi Điểu/Khôi Lỗi/Huyễn Ảnh Miêu không
+  nằm ở nhiệm vụ thành phố (chỉ Kiếm Ma ở lại bảng với ghi chú TC7).
+  Nhiệm vụ thành phố không cho Công trạng (như nhiệm vụ riêng làng).
+- Probe: socket 17/17 (nhận/trả thành phố đủ vòng, săn 8 Thạch Quái,
+  trả sai map bị chặn, bảng TC + Kiếm Ma TC7) + trình duyệt 4/4 + ảnh
+  preview90-city-quest.png (tracker + bảng làng không lẫn quest thành).
+
+## GĐ91 — Map như thật: cây đi xuyên được, đá/núi/hang chặn đường, đứng sau vật cao bị che khuất (user yêu cầu 26/10)
+- Cây cối mọi loại (cây, thông, liễu, tre, cây chết, dừa, xương rồng,
+  cây lớn, hoa đào...) bỏ va chạm: người chơi, NPC, quái đều đi xuyên
+  được — cả cây map GDD (THEME_DECOR: bán kính cây về 0) lẫn cây làng
+  (gốc cây không còn nằm trong OBSTACLES). Đất đá, núi, núi tuyết,
+  hang động, núi lửa, cột đá, nhà, lều giữ nguyên là vật cản — tới đó
+  phải đi vòng.
+- Che khuất: decor map GDD (trước đây vẽ depth -99, luôn nằm dưới nhân
+  vật) chuyển sang vẽ theo chiều sâu (depth = y, như cây/nhà map làng
+  vốn đã vậy; nhân vật cũng sắp xếp theo y mỗi khung hình). Đứng phía
+  sau (phía bắc) cây/tảng đá thì bị che một phần, đứng phía trước
+  (phía nam) thì hiện rõ; marker linh mạch/đàn tế cũng về depth = y.
+- Sửa lỗi thật tìm thấy khi probe (ngoài phạm vi nhưng cùng luồng):
+  code di chuyển người chơi chỉ kiểm rect map làng (hitsObstacle) nên
+  trên map GDD người chơi đi xuyên đá/nhà từ trước tới giờ — quái thì
+  đã kiểm vòng tròn GDD từ lâu. Nay người chơi dùng hitsObstacleIn
+  (đúng map đang đứng); hitsObstacleIn với map không có runtime
+  (Thạch Lâm/bãi farm là vùng trong map làng) đổi fallback từ false
+  sang rect map làng. Vách rừng x=1652 trong REALM_WALLS vẫn giữ cổng
+  Thạch Lâm (không vào được bằng đi bộ).
+- Hệ quả: bỏ cây khỏi vật cản làm bố cục decor các map xáo lại 1 lần
+  (cùng seed, ổn định sau đó; điểm linh mạch sinh sau decor nên cũng
+  dời theo); hốc cây kẹp ông giao nhiệm vụ Thanh Vân Thành tự mở ra
+  (GĐ90 đã ghi chú).
+- Probe: socket 8/8 (xuyên cây thành phố 16px + cây làng 9px; đá/nhà
+  dừng đúng 30px; vách rừng dừng 1629) + trình duyệt 2/2 + ảnh
+  preview91-behind.png (sau cây: chỉ lòi mũi kiếm + góc áo) và
+  preview91-front.png (trước cây: hiện rõ) đã xem bằng mắt. Bài học
+  probe: điểm chụp sau cây đầu tiên (520,830) nằm trong vùng đệm nhà
+  nên spawn fallback về quảng trường — probe nay kiểm tra tọa độ thật
+  trong tick trước khi chụp.
+
+## GĐ92 — Xoay map tự do + camera thông minh tự tránh vật che (user yêu cầu 26/10: "xoay tự do, không khóa 90°" + "AI tự động điều chỉnh lúc nào khóa, lúc nào xoay")
+- Xoay tự do (không khóa bước): giữ phím Q (trái) / R (phải) trên
+  desktop, tốc 150°/s; nút ↺/↻ trong cụm #camBtns dưới minimap
+  (giữ để xoay, dùng được cả desktop lẫn cảm ứng). Nút 🧭 về hướng
+  Bắc (phím T) đồng thời hiện góc hiện tại; nút 🤖 bật/tắt camera
+  tự động (mặc định BẬT). Góc + trạng thái auto lưu localStorage
+  `ttt_cam_v1` — tải lại trang vẫn giữ. Minimap giữ hướng Bắc
+  (không xoay theo) để định hướng.
+- Depth theo góc xoay: thứ tự vẽ lấy từ ma trận camera (screenY =
+  b·x + d·y) — nhân vật + quái + gà/vịt cập nhật mỗi khung hình;
+  decor GDD, nhà/cây làng, NPC, marker linh mạch/đàn tế, rương/drop
+  gắn tag `ry` và áp lại khi góc đổi. Xoay camera mà không xoay
+  depth thì cây vẫn đè lên người như cũ — đây là phần bắt buộc.
+- Di chuyển xoay theo góc nhìn: vector ý định trên màn hình (W =
+  lên màn hình, joystick) đổi sang vector thế giới bằng ma trận
+  camera nghịch đảo (R⁻¹·screen, chuẩn hóa giữ nguyên tốc độ)
+  trước khi gửi `client_input` — server không đổi gì.
+- Camera tự động ("AI" theo luật, không phải học máy): mỗi 400ms,
+  nếu nhân vật bị vật cao trong 170px che (vật ở trước mặt theo
+  hướng nhìn hiện tại + chồng lên vị trí người theo bán kính loại
+  vật, TẠM) thì tween 240°/s tới góc thoáng gần nhất (mẫu 5° cả 2
+  chiều, ưu tiên thoáng hẳn, nếu không thì góc ít che nhất nhưng
+  phải ít hơn hiện tại — không thì đứng yên, không xoay vòng);
+  nếu đã thoáng thì khóa yên. Xoay tay (phím/nút) thắng auto và
+  hoãn auto 5s; tắt 🤖 thì chỉ xoay tay.
+- Sửa kèm khi probe (3 lỗi thật): (1) cos(±90°) ≈ 6e-17 > 0 làm
+  góc thoáng biên bị tính là che — ngưỡng che đổi sang sy' > 1px;
+  (2) mẫu 15° lọt khe cửa sổ thoáng hẹp (~11° giữa cây + nhà) —
+  đổi mẫu 5°; (3) guard của updateCamLabel chặn cả cập nhật đèn
+  nút 🤖 khi góc không đổi — tách đèn ra khỏi guard.
+- Probe trình duyệt 9/9 (port 3224): khóa yên ở chỗ thoáng; giữ ↻
+  xoay được; W dưới góc xoay đi 261px (lệch hướng do trượt mép
+  nhà Tiệm Nguyên Liệu — va chạm đúng luật); 🧭 về 0°; sau cây
+  auto xoay 0° → 270° (đúng góc thoáng tính trước bằng Node);
+  tắt 🤖 + reset về 0° thì 3s sau vẫn 0°. Ảnh preview92-rotate.png
+  (xoay tay, làng xoay chéo), preview92-occluded.png (trước auto:
+  chỉ lòi mũi kiếm sau cây), preview92-auto.png (sau auto: thế
+  giới xoay 90°) đã xem bằng mắt. Giới hạn: rừng rậm nhiều cây
+  chồng nhau có thể vẫn che một phần (auto chọn góc ít che nhất);
+  bán kính che theo loại vật là TẠM.
+
+## GĐ93 — Gỡ xoay map + gỡ vật cản che nhân vật (user yêu cầu 26/10: "nhìn ghê quá")
+- Gỡ SẠCH GĐ92 (client-only, server không đổi): phím Q/R/T, cụm
+  nút #camBtns + CSS, load/save localStorage `ttt_cam_v1`, khối
+  xoay trong update(), map vector input theo ma trận camera, toàn
+  bộ method camera (screenY/applyRotation/setCamAngle/saveCam/
+  resetCamAngle/toggleCamAuto/updateCamLabel/setupCamButtons/
+  buildCamRotDecor/autoCamCheck), tag `ry`, hook map_enter.
+- Gỡ phần che hình (cả GĐ91 lẫn gốc): decor GDD (núi lửa/hang/
+  decor) về depth −99, marker linh mạch/đàn tế về −98, nhà/cây
+  làng từ depth theo y (h.y+h.h / t[1]+12) xuống −90 — dưới mọi
+  nhân vật (y ≥ 0) nhưng trên nền/đốm sáng. Nhân vật/quái/NPC/
+  gà vịt vẫn sắp xếp theo y với nhau (không phải vật cản); rương/
+  drop giữ d.y−1, orb giữ to.y+60/+61 như trước GĐ92.
+- GIỮ NGUYÊN luật va chạm GĐ91: cây đi xuyên được, đá/núi/hang/
+  nhà chặn đường, vách rừng x=1652 giữ cổng Thạch Lâm — user chỉ
+  chê phần nhìn (che hình + xoay), không chê luật đi lại.
+- Probe trình duyệt 4/4 (port 3230): không còn #camBtns/#camReset;
+  bấm Q/R không làm gì; spawn sau cây làng (520,850) + ảnh
+  preview93-behind-tree.png đã xem bằng mắt — nhân vật hiện rõ
+  hoàn toàn trên tán cây, map hướng Bắc, không còn nút xoay.
+- Bổ sung GĐ93 (user làm rõ 26/10: "những thứ sau vật cản không còn
+  bị che nữa"): rà soát thấy marker linh mạch/đàn tế + beacon đích
+  vẫn ở −98, tức vẫn bị cây/nhà (−90) che — nay đưa cả 3 lên lớp
+  10000 (trên mọi vật), bảng treo thưởng từ 660 xuống −90 (vật
+  trang trí, dưới nhân vật) còn nhãn bảng lên 10000 (chữ phải đọc
+  được). Thứ tự vẽ cuối: nền −100/−99, vật cản −90, nhân vật/quái/
+  NPC theo y, rương/drop y−1, marker/beacon/nhãn bảng 10000. Probe
+  3/3 + ảnh preview93-marker.png (nhãn ✦ Linh mạch hiện rõ).
+
+## GĐ94 — Tạo map chừa lối cho nhà, cổng, NPC (user yêu cầu 26/10, chọn "Giữ vật cản nhưng chừa lối")
+- Vấn đề: luật đặt decor cũ chỉ tránh cổng (185px) và vật cản khác
+  (52px) — núi lửa/hang/đá/nhà decor có thể rơi trúng điểm linh
+  mạch, đàn tế, giữa khu dân thành phố, rồi NPC phải né bằng
+  nudge nên có ông bị kẹp 3 mặt (Thanh Vân Thành, GĐ91).
+- Luật mới trong buildMapRuntime (server-only, số TẠM):
+  * Thành phố: vật cản KHÔNG được rơi vào khu dân = lưới chức
+    năng + vùng rải dân thường, chừa lề 70px (rect portal.x±620,
+    portal.y−770..−10). Cây/đèn/biển/hoa (không chặn) vẫn được.
+  * Nhà (house/hut/pavilion, kể cả nhà vs nhà): vật cản khác phải
+    cách ≥ bán kính 2 bên + hành lang 40px — nhà không bao giờ bị
+    tường đá vây kín.
+  * Đàn tế (bắc cổng 160px): decor ≥130px, núi lửa ≥250px, hang
+    ≥200px, hố lửa ≥180px.
+  * Điểm linh mạch: decor ≥ bán kính + 60px, núi lửa ≥155px, hang
+    ≥122px, hố lửa ≥ bán kính + 50px.
+  * Giữ nguyên: cổng 185px, vật cản-vật cản 52px, mọi luật va chạm
+    GĐ91, map làng vẽ tay (đã kiểm: không cửa nào bị nhà chèn).
+- Cạm bẫy: ALTAR_DIST khai báo ở dòng ~450, SAU vòng boot map
+  (dòng ~257) nên buildMapRuntime KHÔNG được dùng trực tiếp —
+  dùng số 160 kèm chú thích, nếu không boot lỗi TDZ.
+- Hệ quả: bố cục decor các map xáo lại 1 lần (cùng seed, chuỗi
+  retry đổi) như GĐ91; vị trí dân thường thành phố có thể xê
+  dịch nhẹ; số lượng decor gần như giữ nguyên (thành phố
+  357–360/360, rừng 650/650).
+- Probe socket 11/11 (port 3240, char Kim Đan patch tay đi 9 map:
+  hub + 2 thành + dung nham + băng + rừng máu + chiến trường +
+  hư không + kim quáng + farm — kiểm tra từ map_enter thật: cổng,
+  khu dân, hành lang nhà, đàn, điểm, vòng 8 hướng quanh NPC) +
+  trình duyệt 3/3 + ảnh preview94-city-plaza.png đã xem bằng mắt
+  (khu dân đất trống hoàn toàn, NPC đứng thoáng).
+
+## GĐ95 — Khung cơ chế lớp + Thể Tu (Nộ Khí)
+
+- Khung chung cho cả 9 hướng tu về sau: mỗi nhân vật có
+  `classRes` lưu bền (Nộ Khí của Thể Tu là field đầu tiên) —
+  đồng bộ qua char_sync và tick, hiện thành thanh riêng trên
+  thẻ nhân vật (chỉ lớp tương ứng mới thấy).
+- Thể Tu (tài liệu 26/10, số tích Nộ TẠM): đánh trúng quái
+  +6 Nộ, bị quái đánh trúng +10 Nộ (chiêu trúng cũng +6);
+  càng nhiều Nộ càng trâu — giảm sát thương nhận tới 30%
+  khi đầy 100; đầy Nộ thì đòn đánh thường cộng thêm sát
+  thương bằng một nửa Vật phòng (khuyến khích lên đồ thủ);
+  máu xuống dưới 20% tự bật Bất khuất 5 giây: miễn choáng,
+  miễn làm chậm, tích Nộ nhanh hơn 50% (hồi 3 phút).
+- Nộ không mất khi chết và không tự tụt theo thời gian (tài
+  liệu không ghi mất) — đánh nhau tiếp là lại đầy.
+- Probe socket 13/13 (port 3250: tích Nộ 2 chiều, giảm dmg
+  đúng công thức ở Nộ 20/50/90/100, đòn đầy Nộ +20 đúng bằng
+  Vật phòng 40 × 0,5, Bất khuất kích + chặn chậm + hết 5s
+  rồi cắn lại gây chậm, Nộ bền qua thoát + autosave +
+  restart + nối lại, Kiếm Tu đánh vẫn Nộ 0) + trình duyệt
+  3/3 + ảnh preview95-rage.png đã xem (thanh Nộ cam đỏ
+  65/100 dưới thanh đói/khát).
+- GĐ96 — Tẩm bổ nấu ăn (phần ngoài chiến đấu của Thể Tu,
+  xong 26/10): quái có thân xác rơi Thịt Thú / Xương Thú
+  ngay tại chỗ gục (tỉ lệ TẠM 50%/50%, đi qua là nhặt như
+  mọi đồ rơi); Thể Tu nấu được 2 món mà KHÔNG cần học nghề
+  (cơ chế lớp, không phải nghề — lớp khác chế/ăn đều bị
+  chặn): Thịt Hầm Tẩm Bổ (3 Thịt Thú + 10 LT, tỉ lệ 90%)
+  ăn vào HP tối đa vĩnh viễn +10; Canh Xương Tẩm Bổ
+  (3 Xương Thú + 10 LT, tỉ lệ 90%) ăn vào Vật phòng vĩnh
+  viễn +2; mỗi món còn hồi 30 thức ăn; cap vĩnh viễn
+  +100 HP / +20 phòng (đạt cap vẫn ăn được để hồi thức
+  ăn, chỉ không tăng thêm); tăng thẳng vào chỉ số gốc nên
+  reset_stats không hoàn lại (đúng nghĩa "vĩnh viễn");
+  tổng Tẩm bổ lưu bền qua restart (đã nối cả 4 điểm
+  persist/spawn/payload/offline actor như bài học GĐ95).
+  Panel nghề hiện mục riêng "🍲 Tẩm bổ nhục thân" cho Thể
+  Tu cả khi chưa có nghề lẫn khi đã có nghề khác; túi đồ
+  có nút Dùng cho 2 món. Probe socket 13/13 (port 3260:
+  30 sói rơi thịt 14–19 / xương 13–18, chế 2 món kể cả
+  khi không nghề, ăn tăng đúng chỉ số + food, cap chặn
+  đúng, Kiếm Tu chế/ăn bị chặn, tamBo bền qua file +
+  rejoin) + trình duyệt 2/2 + ảnh preview96-tambo.png
+  đã xem (mục Tẩm bổ cuối panel nghề).
+
+## GĐ97 — Sát Thủ: Sát Khí + Phản Xạ + Siêu Giác Quan (26/10)
+
+- Sát Thủ có thanh Sát Khí riêng trên thẻ nhân vật (tím,
+  dưới thanh đói/khát, chỉ Sát Thủ mới thấy): đánh trúng
+  quái +3 (chiêu trúng cũng +3), giết quái +25; bị quái
+  đánh trúng +0 (không tích từ chịu đòn); Sát Khí không
+  tự tụt theo thời gian, lưu bền qua restart như Nộ Khí.
+- Phản Xạ (né bị động, giữ cả hai với né Space theo chốt
+  của người chơi): tỉ lệ né đòn từ quái = Sát Khí × 0,75
+  (0% lúc 0, 75% lúc đầy 100); đòn né được không mất máu,
+  không phá buổi lĩnh ngộ, vẫn tính đang giao tranh; chỉ
+  né đòn từ quái (sát thương môi trường/độc/trạng thái
+  không né được). Né Space (dash 520px/s × 190ms ≈ 104px,
+  hồi 2,5s) vẫn giữ nguyên — Space là di chuyển, Phản Xạ
+  là tỉ lệ hụt, hai cơ chế khác nhau.
+- Siêu Giác Quan: khi Sát Khí chạm 100 tự kích hoạt 8 giây
+  (số TẠM): né tuyệt đối mọi đòn quái, mọi đòn đánh/chí
+  mạng ×2 (crit nhân phần sát thương gốc — game trước
+  GĐ97 chưa có crit nên hệ số ×2 là số TẠM), quái quanh
+  người chậm lại một nửa (tốc độ đuổi ×0,5, khoảng cắn
+  ×2; hồi chiêu kỹ năng của trùm thử thách không chậm).
+  Hết 8 giây thì Sát Khí về 0 (tiêu hết, không kích lại
+  ngay); trong lúc ult thì quái vẫn đánh trúng người bay
+  hay không không đổi — chỉ tỉ lệ né là tuyệt đối.
+- Tầm nhìn 1,5×: Sát Thủ phát hiện quái đang ẩn nấp
+  (rắn độc, Địa Hành Yêu, quỷ tàng hình) từ 195px thay vì
+  130px như lớp khác (quái ẩn đứng yên, không đánh được
+  tới khi lộ; lộ rồi thì lao tới như thường).
+- Độc (chế độc + bôi độc) TÁCH RIÊNG sang đợt sau (GĐ98)
+  như cách GĐ95 tách nấu ăn sang GĐ96 — tài liệu không
+  ghi công thức độc nên chưa làm.
+- Probe socket 12/12 (port 3270: dash Space thuần 104px,
+  giết 1 sói = Sát Khí 28 đúng 3+25, đứng yên 5s không
+  tụt, Sát Khí 0 đứng cạnh golem 15s né 0/trúng 31,
+  Sát Khí 40 đứng 45s né 73/trúng 113 = tỉ lệ 0,39 trong
+  band 0,10–0,50 và Sát Khí cuối vẫn 40, đòn 1 thường mất
+  10 máu + kích ult + notice, đòn 2 chí mạng mất 20 máu
+  đúng tỉ lệ 2,00, 5s trong ult máu không đổi + né thêm 5,
+  hết 8s ult tắt + Sát Khí về 0, Sát Thủ thấy quái ẩn ở
+  159px vs Kiếm Tu đối chứng 76px — hai số đều đã trừ
+  đoạn quái lao tới sau khi lộ, bán kính thật ~195/~130,
+  Sát Khí 55 bền qua file + welcome + tick) + trình duyệt
+  3/3 + ảnh preview97-satkhi.png đã xem (thanh tím
+  "Sát Khí 65/100" dưới thanh đói/khát, Kiếm Tu không
+  thấy thanh này).
+
+## GĐ98 — Sát Thủ: Chế độc + bôi độc lên vũ khí (26/10)
+
+- Tài liệu chỉ ghi "chế độc dược (Độc rỉa máu, Độc kích
+  thích) bôi lên vũ khí" — mọi công thức/nguyên liệu/số
+  dưới đây đều TẠM, theo đề xuất đã chốt với người chơi.
+- Nguyên liệu mới Nọc Rắn: Độc Xà rơi tại chỗ gục, tỉ lệ
+  50%. CHÚ Ý: Độc Xà KHÔNG ở map nhà — MonsterData ghi
+  maps [bai_farm, hac_am_dam_lay] nhưng spawn-table bỏ
+  qua map nhà ("map nhà bỏ qua: hệ cũ giữ nguyên") nên
+  rắn chỉ spawn ở Hắc Ám Đầm Lầy (map farm TC7, nối từ
+  Thanh Vân Thành). Sát Thủ muốn chế độc phải lên TC7
+  mới farm được nọc — đây là cổng thật của GĐ98, khác
+  tiền đề "farm từ sớm" lúc đề xuất (user chốt 26/10
+  19:14: GIỮ cổng TC7, không thêm rắn về farm nhà).
+- Chế độc là cơ chế lớp, KHÔNG cần nghề (kiểu Tẩm bổ):
+  panel Nghề thêm mục "☠️ Chế độc" riêng cho Sát Thủ,
+  hiện cả khi chưa có nghề lẫn khi đã có nghề khác;
+  lớp khác chế và dùng đều bị chặn; lọ độc không bán
+  ở tiệm, chỉ chế ra. 2 công thức: Độc Rỉa Máu = 3 Nọc
+  Rắn + 10 LT, Độc Kích Thích = 2 Nọc Rắn + 2 Cánh Dơi
+  + 10 LT, tỉ lệ 90%.
+- Bôi độc: bấm Dùng lọ trong túi → bôi lên vũ khí, 10
+  đòn; lớp bôi lưu trong classRes.coating nên bền qua
+  restart (không cần nối persist thêm — classRes đã nối
+  đủ 4 điểm từ GĐ95); bôi lọ mới thay lớp cũ; hết 10
+  đòn báo notice; tick có field coating dạng
+  "loại:số đòn" (chuỗi để delta-diff chỉ phát khi đổi).
+- Hiệu ứng (chỉ tính đòn thật sự gây sát thương — đòn
+  bị quái né không tốn lượt, không bôi độc; đòn thường
+  + chiêu đều tính): Rỉa Máu bôi dot 5 dps/5s, đánh trúng
+  tiếp chỉ làm mới thời gian (không cộng dồn — lọc dot
+  poison của chính mình theo cờ poison + ownerId, dot
+  kỹ năng giữ nguyên); dot giết quái vẫn tính công +
+  rơi đồ như thường (code sẵn GĐ34). Kích Thích cho +5
+  Sát Khí thêm mỗi đòn trúng (tổng +8 với +3 thường)
+  → nhanh đầy Sát Khí để bật Siêu Giác Quan sớm hơn.
+- Probe socket 8/8 (port 3274: giết 12 Độc Xà → 5 Nọc
+  Rắn trong band 2–10, chế 2 lọ đều ok kể cả không nghề,
+  bôi Rỉa Máu tick ria_mau:10 + notice, 2 đòn trúng
+  golem dot hiện + coating 10→9→8 + rỉa 2s đúng 10 máu
+  (5dps, không cộng dồn) + vẫn rỉa sau 5s từ đòn 1 (làm
+  mới), Kích Thích 1 đòn satKhi đúng 8 + coating 9,
+  9 đòn nữa hết lớp bôi + notice + đòn tiếp satKhi
+  80→83 (chỉ +3), kiếm tu chế/dùng đều bị chặn + lọ
+  còn nguyên, lớp bôi ria_mau:7 bền qua file + welcome
+  + tick) + trình duyệt 3/3 + ảnh preview98-docduoc.png
+  đã xem (panel Chế độc đủ 2 công thức + nút Chế tạo).
+
+## GĐ99 — Kiếm Tu: Ngộ Kiếm + Kiếm Vực + Ultimate + Dưỡng Kiếm (26/10)
+
+- Tài liệu 9 hướng chỉ ghi 4 dòng về Kiếm Tu (Bản Mệnh
+  Kiếm + Điểm Ngộ Kiếm; Dưỡng Kiếm dùng Quặng + Tinh
+  huyết rèn 5 kiếm; Kiếm Ý là nhiệm vụ ẩn; Ultimate
+  Nhân Kiếm Hợp Nhất; Kiếm Vực bị động khi HP <30%) —
+  mọi số dưới đây đều TẠM, theo đề xuất đã chốt với
+  người chơi (làm luôn cả rèn trong 1 đợt; Kiếm Ý ẩn
+  dời đợt sau vì tài liệu chưa có thiết kế cụ thể).
+- Ngộ Kiếm (classRes.ngoKiem 0–100, bền qua restart):
+  đòn trúng +3, giết quái thường +25 (gương Sát Khí);
+  KHÔNG tự kích như Siêu Giác Quan — đủ 100 mới bấm
+  nút Ultimate được. Tick có field ngoKiem.
+- Kiếm Vực (bị động, tự bật khi Kiếm Tu còn 0 < HP <
+  30% máu tối đa): sát thương ×2, mọi chi phí Chân
+  nguyên chuyển sang trừ HP (không tự sát khi tung
+  chiêu — HP phải còn lớn hơn chi phí), đòn trúng hút
+  30% sát thương gây ra (đòn thường + chiêu, cộng dồn
+  với hút máu của Huyết Sát Kiếm). Vực cộng dồn nhân
+  với Ultimate (tối đa ×3,6) và cùng tồn tại với Kim
+  Đan Hộ Thể (khác trục — đã chốt).
+- Ultimate Nhân Kiếm Hợp Nhất: socket kiem_ult, chỉ
+  Kiếm Tu, cần Ngộ Kiếm ≥100 và chưa hiệu lực; kích
+  xong Ngộ Kiếm về 0, hiệu lực 10 phút thật (transient
+  như ult Sát Thủ — mất khi restart): toàn bộ chỉ số
+  +20% và sát thương Kiếm +50% (nhân ×1,8 chung —
+  diễn giải: mọi sát thương của Kiếm Tu đều tính là
+  sát thương Kiếm vì vũ khí của họ là kiếm). Nút
+  #btnKiemUlt chỉ hiện khi Kiếm Tu + Ngộ Kiếm ≥100
+  + chưa bật ult.
+- Dưỡng Kiếm (cơ chế lớp, KHÔNG cần nghề): quái rơi
+  nguyên liệu mới tại chỗ gục, tỉ lệ 50% — Quặng từ
+  Thạch Quái/Thạch Khôi Lỗi, Tinh Huyết từ Sói/Dơi/
+  Huyết Lang/Độc Xà. 5 công thức (mỗi 3 Quặng + 3
+  Tinh Huyết + 10 LT, tỉ lệ 90%, panel Nghề mục
+  "⚔️ Dưỡng Kiếm" riêng Kiếm Tu): rèn xong TRANG BỊ
+  NGAY, không ra vật phẩm túi; rèn kiếm mới thay kiếm
+  cũ (1 kiếm 1 lúc); lớp khác bị chặn.
+- 5 kiếm: Thanh Phong (đánh thường nhanh hơn 20% —
+  hồi chiêu ×0,8); Huyết Sát (hút 20% sát thương);
+  Kim Cương (phản 30% sát thương quái cắn, bỏ qua
+  phòng thủ); Băng Sương (đóng băng: quái đứng yên
+  2s, vẫn cắn được nếu đã trong tầm); Liệt Hỏa (dot
+  thiêu đốt 5 dps/5s, đánh tiếp chỉ làm mới).
+- Probe socket 19/19 + trình duyệt 4/4 + ảnh
+  preview99-kiemtu.png đã xem (panel Dưỡng Kiếm đủ
+  5 công thức + nút Rèn kiếm; thẻ nhân vật có thanh
+  Ngộ Kiếm + tên kiếm đang mang). Số đo chính: Quặng
+  7/12, Tinh Huyết 5/12 (band 2–10); Ngộ Kiếm 1 đòn
+  = 3, giết sói 3 đòn = 37; Vực dmg 16→31 (×1,94),
+  hút máu Vực 8–9 (30% của 31 = 9 trừ cắn); cast Kiếm
+  Khí Trảm tốn 6 MP thường (8 gốc × hệ số lớp Kiếm
+  0,8) và 0 MP trong Vực; ult dmg 16→28 (×1,75) +
+  Ngộ Kiếm về 0 + chặn kích lại; Thanh Phong interval
+  355→304ms; Huyết Sát hút 17 (20% của 87); Kim Cương
+  phản 2 trên cắn 10; Băng Sương st slow; Liệt Hỏa dot
+  + rỉa 2s đúng 10 máu; Ngộ Kiếm 55 + kiếm bền qua
+  file + welcome + tick. CHƯA push — cần zip mới gộp
+  GĐ90–99.
+
+## GĐ100 — Pháp Tu: Biến Dị Linh Căn + Phép Dung Hợp (27/10)
+
+- Tài liệu 9 hướng ghi về Pháp Tu: chỉ dùng Mana
+  (game không có Tinh Tú nên không có gì để bỏ); Biến
+  Dị Linh Căn: lên Trúc Cơ thì 95% Ngũ Hành, 5% Biến
+  Dị (Lôi, Phong, Băng, Nham, Độc, Quang, Ám), biến
+  dị "mở khóa kỹ năng độc quyền"; Đa Tầng 10 ô, tung
+  chiêu B trong 1,5s sau chiêu A thì thành Phép Dung
+  Hợp (Hỏa+Băng = Bạo Phá Băng Hỏa; Lôi+Phong = Lôi
+  Đình Bão Tố), tốn gấp đôi Mana. Mọi số dưới đây đều
+  TẠM, theo đề xuất đã chốt với người chơi (làm luôn
+  cả biến dị + dung hợp trong 1 đợt).
+- Biến Dị roll 1 LẦN duy nhất khi đột phá LK9→TC1
+  (Đại): 5%, đều nhau trong 7 hệ biến dị; lưu
+  classRes.bienDi (undefined = chưa roll, null = đã
+  roll mà không trúng, chuỗi = hệ biến dị). Pháp Tu
+  TC+ mà bienDi còn undefined thì roll bù 1 lần khi
+  vào game (spawnFromCharacter) và lưu file ngay;
+  notice chỉ hiện khi trúng biến dị. Biến dị là hệ
+  PHỤ thêm vào linh căn Ngũ Hành đã đo (không thay
+  linhCan.main).
+- Rider biến dị: mỗi cast gây sát thương của Pháp Tu
+  đều kèm rider của hệ biến dị (toàn cơ chế sẵn có,
+  không chiêu riêng trong đợt này): Lôi choáng 20%
+  1s; Phong 20% đánh thêm 1 lần 50% sát thương; Băng
+  đóng băng (chậm 100% 1,5s); Nham phá giáp +20%
+  sát thương nhận 5s; Độc rỉa máu 5 dps/5s; Quang hồi
+  mana 15% sát thương; Ám hút máu 15% sát thương.
+  Rider lên bản thân (Quang/Ám) vẫn chạy kể cả đòn
+  kết liễu; rider lên quái bỏ qua nếu quái đã chết.
+- Dung Hợp: Pháp Tu tung chiêu KHÁC trong 1500ms
+  sau 1 cast thành công (kể cả cast bị né hết) thì
+  chiêu sau thành Phép Dung Hợp: tốn gấp đôi Mana,
+  sát thương ×1,5, kèm rider của CẢ 2 hệ (hệ của
+  chiêu trước + chiêu sau), notice "✦ Phép Dung
+  Hợp: <tên>!". Tên riêng cho 2 cặp trong tài liệu
+  (Hỏa+Băng = Bạo Phá Băng Hỏa; Lôi+Phong = Lôi Đình
+  Bão Tố), cặp khác tên "Dung hợp X + Y". Hết Mana
+  mức gấp đôi thì lặng lẽ tung thường (không fail).
+  Dung hợp cũng cập nhật lastCast nên nối chuỗi được
+  (mỗi lần đều tốn gấp đôi). Cùng chiêu hoặc quá
+  1,5s thì không dung hợp. Cast lỗi (hồi chiêu/tầm/
+  mana/choáng) không chạm lastCast. Lớp khác không
+  dung hợp.
+- LUẬT Ô GIỮ NGUYÊN — không mở 10 ô cho Pháp Tu
+  (tài liệu ghi 10 ô nhưng phá luật ô chung; dời lại
+  nếu người chơi yêu cầu). Không thêm thanh tài
+  nguyên mới (chỉ Mana, theo tài liệu). Chiêu "Theo
+  linh căn" trong catalog resolve về linhCan.main
+  trước khi tính tên/rider dung hợp.
+- Rider hệ Ngũ Hành (Kim/Mộc/Thủy/Hỏa/Thổ): Kim
+  xuyên phòng +30% (tính trước đòn); Mộc hồi máu
+  10% sát thương; Thủy chậm 30%/2s; Hỏa đốt 5 dps/
+  3s; Thổ tự buff giảm 20% sát thương nhận 5s. Biến
+  dị chỉ roll trong 7 hệ biến dị (không có Ngũ
+  Hành), nên rider Ngũ Hành chỉ tới được qua dung
+  hợp với chiêu catalog mang hệ đó.
+- Hiển thị: thẻ nhân vật + danh sách chọn nhân vật
+  thêm "· ✦ Biến dị: X" khi có biến dị; tick có field
+  bienDi; charSummary có bienDi.
+- Probe socket 21/21 + trình duyệt 3/3 + ảnh
+  preview100-phaptu.png đã xem (thẻ hiện "Linh căn:
+  Hỏa (chính: Hỏa) · ✦ Biến dị: Lôi"). Số đo chính:
+  Băng đóng băng (quái dịch <8px khi rút lui); Nham
+  19→23 (×1,2); Độc rỉa 2s đúng 10 máu; Quang mp
+  +4 (−11 cost +15 hồi); Ám hút 14–15; Lôi choáng
+  6/30 và 8/28 (~20%); Phong đánh thêm 4/15; fusion
+  Hỏa→Băng 153 + cost 28 + tên riêng; fallback mp
+  30→19→5 (B thường 102, cost 14); cùng chiêu/quá
+  1,5s không fusion; nối chuỗi fusion được; Kim
+  fusion 249 (xuyên phòng) đối chứng Thủy 244;
+  Thủy-slow quái đuổi 51px (chỉ chậm); Thổ cắn 9→7;
+  Mộc fusion hút 15 (10% của 153); Hỏa fusion vừa
+  đóng băng vừa đốt (rỉa 10/2s); đột phá LK9→TC1
+  roll và lưu khóa bienDi; catch-up TC1 không roll
+  lại; kiếm tu cast nhanh không fusion. CHƯA push —
+  cần zip mới gộp GĐ90–100.

@@ -2286,7 +2286,7 @@ export function drawPersonPreview(
 // để chi tiết nền ổn định giữa các lần vào.
 export interface MapDecorItem { k: string; x: number; y: number; s: number }
 export interface MapHazard { x: number; y: number; r: number }
-export interface MapFeatures { volcano: { x: number; y: number; r: number } | null; caves: Array<{ x: number; y: number }> }
+export interface MapFeatures { volcano: { x: number; y: number; r: number } | null; caves: Array<{ x: number; y: number }>; ridges: Array<{ x: number; y: number }> }
 export interface MapEnterData {
   mapId: string; isHome?: boolean; name: string; category?: string; safe?: boolean;
   w: number; h: number; theme?: string; portal: { x: number; y: number };
@@ -2294,6 +2294,8 @@ export interface MapEnterData {
   hazards?: MapHazard[]; features?: MapFeatures | null; // GĐ60
   spots?: { x: number; y: number }[]; // GĐ76: điểm linh mạch
   altar?: { x: number; y: number } | null; // GĐ85: đàn tế (chỉ map có trùm)
+  study?: { x: number; y: number } | null; // GĐ105: điểm đọc sách Văn Uyển
+  npcs?: Array<{ id: string; name: string; role: string; kind: string; x: number; y: number; style: string }>; // GĐ89: dân thành phố
 }
 interface ThemeStyle { g1: string; g2: string; accent: string; leaf: string; leaf2: string; rock: string; plaza: string }
 const MAP_THEME_STYLE: Record<string, ThemeStyle> = {
@@ -2545,13 +2547,71 @@ function drawDecorItem(b: CanvasRenderingContext2D, st: ThemeStyle, k: string, x
 function themeStyleOf(def: MapEnterData): ThemeStyle {
   return MAP_THEME_STYLE[def.theme || 'mountain'] || MAP_THEME_STYLE.mountain;
 }
+// GĐ111: khung vừa tối đa cho sprite ngoại cảnh theo nhóm — [rộng, cao]
+// trong hộp 96, neo đáy y≈79. Đồ nhỏ KHÔNG phóng to (scale ≤ 1).
+const DECOR_SPRITE_BOX: Record<string, [number, number]> = {};
+for (const k of ['pine','willow','palm','dead_tree','blood_tree','swamp_tree','mountain','mountain_snow','pavilion','hut','cave','cactus']) DECOR_SPRITE_BOX[k] = [90, 76];
+for (const k of ['rock','stone','lava_rock','ice_shard','tomb','pillar','sword_stone','lamp','banner','furnace','forge','anvil','desk','fence','pond','wave','coral','hay','blossom']) DECOR_SPRITE_BOX[k] = [70, 56];
+for (const k of ['flower','herb','grass','grass_tall','reed','bone','crystal','crystal_gold']) DECOR_SPRITE_BOX[k] = [46, 40];
+// GĐ111 sửa (user chê): nấm tròn đọc to hơn hộp nên thu riêng [36,30]
+// (kẻo lăn hệ số 1.25 lại to ngang cây); tre mới dáng cao nên hộp hẹp
+// cao [40,76] để giữ dáng tre, không bè bè như bụi cũ.
+DECOR_SPRITE_BOX['mushroom'] = [36, 30];
+DECOR_SPRITE_BOX['bamboo'] = [40, 76];
+
 function decorTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle, kind: string): string {
   const key = `decor-${theme}-${kind}`;
   if (scene.textures.exists(key)) return key;
   const BOX = 96;
   const [cv, b] = makeCanvas(BOX * 2, BOX * 2);
   b.scale(2, 2);
-  drawDecorItem(b, st, kind, BOX / 2, BOX * 0.68, 1);
+  // GĐ108: cây/nhà dùng sprite PixelLab của làng (đã load sẵn ở boot) thay
+  // cho hình vẽ code — cùng asset với map nhà, áp cho mọi map khác. Chỉ
+  // đúng kind 'tree'/'house' mới đổi sprite; các kind chủ đề riêng
+  // (dead_tree, blood_tree, tree_big, bamboo, hut, pavilion...) giữ vẽ code
+  // để không mất bản sắc từng theme. Load lỗi thì rơi về vẽ code như cũ.
+  // GĐ109: thu hẹp sprite cây — chỉ theme văn minh (thành phố, vườn, trại,
+  // trận, thư phòng, suối) mới dùng sprite, vì ở đó không còn kiểu cây
+  // vector nào khác. Map hoang/rừng giữ cây vẽ code cùng ngôn ngữ với cây
+  // chủ đề của nó, hết cảnh sprite sáng xen vector tối. 'house' chỉ có ở
+  // theme city nên không cần chặn theme. Chân đế khớp hình vẽ code cũ
+  // (đáy ở y≈79 trong hộp 96).
+  // GĐ110: user chốt rừng sâu cũng dùng cây sprite — thêm deep_forest vào
+  // nhóm sprite; tree_big dùng sprite cao 76px (vừa hộp 96, to hơn tree
+  // 62px để vẫn phân biệt cây to). Các theme hoang khác (cây chết, cây
+  // máu, pine băng...) giữ vector vì sprite xanh không hợp.
+  const SPRITE_TREE_THEMES = ['city', 'garden', 'beast', 'array', 'script', 'stream', 'deep_forest'];
+  let spriteDrawn = false;
+  // GĐ112: liễu dùng sprite riêng (nhánh chung cũ vẽ liễu bằng cây làng
+  // vì hồi đó chưa có sprite liễu) — cây chung giờ chỉ cho kind 'tree'.
+  if (kind === 'tree' && SPRITE_TREE_THEMES.includes(theme) && scene.textures.exists('tree-village-01')) {
+    const img = scene.textures.get('tree-village-01').getSourceImage() as unknown as CanvasImageSource;
+    const h = 62, w = (h * 102) / 114;
+    b.drawImage(img, 13, 8, 102, 114, BOX / 2 - w / 2, 79 - h, w, h);
+    spriteDrawn = true;
+  } else if (kind === 'tree_big' && SPRITE_TREE_THEMES.includes(theme) && scene.textures.exists('tree-village-01')) {
+    const img = scene.textures.get('tree-village-01').getSourceImage() as unknown as CanvasImageSource;
+    const h = 76, w = (h * 102) / 114;
+    b.drawImage(img, 13, 8, 102, 114, BOX / 2 - w / 2, 79 - h, w, h);
+    spriteDrawn = true;
+  } else if (kind === 'house' && scene.textures.exists('house-village-01')) {
+    const img = scene.textures.get('house-village-01').getSourceImage() as unknown as CanvasImageSource;
+    const w = 76, h = (w * 109) / 168;
+    b.drawImage(img, 12, 9, 168, 109, BOX / 2 - w / 2, 79 - h, w, h);
+    spriteDrawn = true;
+  } else if (DECOR_SPRITE_BOX[kind] && scene.textures.exists(`decor-spr-${kind}`)) {
+    // GĐ111: sprite ngoại cảnh sheet A–E — khung vừa theo nhóm (to/vừa/nhỏ),
+    // KHÔNG phóng to (đồ nhỏ như cỏ/hoa giữ nhỏ như bản vẽ code), neo đáy
+    // ở y≈79 như cây/nhà. Load lỗi thì rơi về vẽ code ở dưới.
+    const img = scene.textures.get(`decor-spr-${kind}`).getSourceImage() as unknown as CanvasImageSource;
+    const iw = (img as HTMLImageElement).width, ih = (img as HTMLImageElement).height;
+    const [maxW, maxH] = DECOR_SPRITE_BOX[kind];
+    const sc = Math.min(1, maxW / iw, maxH / ih);
+    const w = iw * sc, h = ih * sc;
+    b.drawImage(img, 0, 0, iw, ih, BOX / 2 - w / 2, 79 - h, w, h);
+    spriteDrawn = true;
+  }
+  if (!spriteDrawn) drawDecorItem(b, st, kind, BOX / 2, BOX * 0.68, 1);
   scene.textures.addCanvas(key, cv);
   // GĐ68: decor vẽ vector mượt ở 2× — dùng LINEAR như map nhà (GĐ29), NEAREST
   // làm viền răng cưa/rung khi camera di chuyển (đó là chỗ "mờ" còn lại).
@@ -2579,6 +2639,19 @@ function plazaTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle): strin
   }
   scene.textures.addCanvas(key, cv);
   scene.textures.get(key).setFilter(0); // GĐ68: LINEAR như decor
+  return key;
+}
+// GĐ116: dãy núi tuyết 1 sprite liền (ghép từ sprite núi tuyết) — vẽ
+// đúng kích thước ảnh (753×231), neo đáy (0.5, 1) ở điểm đất.
+function ridgeTexture(scene: Phaser.Scene): string {
+  const key = 'feat-ridge-snow';
+  if (scene.textures.exists(key)) return key;
+  const img = scene.textures.get('ridge-snow').getSourceImage() as unknown as CanvasImageSource;
+  const iw = (img as HTMLImageElement).width, ih = (img as HTMLImageElement).height;
+  const [cv, b] = makeCanvas(iw, ih);
+  b.drawImage(img, 0, 0, iw, ih);
+  scene.textures.addCanvas(key, cv);
+  scene.textures.get(key).setFilter(0);
   return key;
 }
 function volcanoTexture(scene: Phaser.Scene): string {
@@ -2712,6 +2785,9 @@ export function buildMapObjects(scene: Phaser.Scene, def: MapEnterData): BuiltMa
   }
   for (const c of def.features?.caves || []) {
     objects.push(scene.add.image(c.x, c.y, caveTexture(scene, st)).setOrigin(0.5, 0.72).setDepth(-99));
+  }
+  for (const r of def.features?.ridges || []) {
+    objects.push(scene.add.image(r.x, r.y, ridgeTexture(scene)).setOrigin(0.5, 1).setDepth(-99));
   }
   for (const d of def.decor || []) {
     const img = scene.add.image(d.x, d.y, decorTexture(scene, theme, st, d.k)).setOrigin(0.5, 0.68).setDepth(-99);

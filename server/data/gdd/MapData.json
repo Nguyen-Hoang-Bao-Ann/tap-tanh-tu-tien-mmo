@@ -1260,6 +1260,20 @@
     "thanh_van_thanh"
    ],
    "impl": "planned"
+  },
+  {
+   "id": "van_uyen",
+   "name": "Văn Uyển Tàng Kinh Các",
+   "category": "city",
+   "safe": true,
+   "minRealm": "lk",
+   "minTier": 1,
+   "desc": "Thư viện Nho gia — Nho Tu đọc sách mở Chương, tạo Ý Cảnh",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "live"
   }
  ]
 }

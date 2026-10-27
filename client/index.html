@@ -974,6 +974,18 @@
       #hudFoodFill { background: linear-gradient(90deg, #b45309, #f5a524); }
       #hudWaterFill { background: linear-gradient(90deg, #1d5fd1, #4da3ff); }
       #hudNeeds .bar span { font-size: 10px; }
+      /* GĐ95: thanh Nộ Khí Thể Tu (đỏ cam) trên thẻ nhân vật */
+      #hudRageFill { background: linear-gradient(90deg, #c2410c, #f97316); }
+      #hudRage .bar span { font-size: 10px; }
+      /* GĐ97: thanh Sát Khí Sát Thủ (tím) trên thẻ nhân vật */
+      #hudSatKhiFill { background: linear-gradient(90deg, #581c87, #9333ea); }
+      #hudSatKhi .bar span { font-size: 10px; }
+      #hudNgoKiemFill { background: linear-gradient(90deg, #0e7490, #22d3ee); }
+      #hudNgoKiem .bar span { font-size: 10px; }
+      #hudPetFill { background: linear-gradient(90deg, #a8a29e, #e7e5e4); }
+      #hudPet .bar span { font-size: 10px; }
+      #hudHonKhiFill { background: linear-gradient(90deg, #134e4a, #5eead4); }
+      #hudHonKhi .bar span { font-size: 10px; }
       /* GĐ79: cụm nút chiêu cảm ứng (⚔ + fan 5 nút) nhích sang trái 20px cho khỏi sát góc phải */
       body.touch #tAtk { right: 34px; }
       body.touch #tSkill0 { right: 108px; }
@@ -982,7 +994,11 @@
       body.touch #tSkill3 { right: 116px; }
       body.touch #tSkill4 { right: 64px; }
       /* GĐ83: nút chiêu cảm ứng trống trong số ô — mờ + viền đứt (không ghi "Chiêu n") */
-      body.touch #tSkill0.empty, body.touch #tSkill1.empty, body.touch #tSkill2.empty, body.touch #tSkill3.empty, body.touch #tSkill4.empty { border-style: dashed; opacity: 0.55; }
+      body.touch #tSkill0.empty, body.touch #tSkill1.empty, body.touch #tSkill2.empty, body.touch #tSkill3.empty, body.touch #tSkill4.empty, body.touch #tSkill5.empty { border-style: dashed; opacity: 0.55; }
+      /* GĐ88: nút chiêu thứ 6 (Kim Đan) — đặt ở khoảng trống giữa quạt và
+         hàng nút dưới: cách các nút khác ≥48px, không chạm minimap (trên
+         phải) hay hàng đa dụng (dưới giữa) ở màn ngang hẹp. */
+      body.touch #tSkill5 { width: 44px; height: 44px; right: 170px; bottom: 100px; }
       /* GĐ81: nút Thiền cảm ứng nhỏ lại xíu (46→40px); hàng 5 nút dưới
          (💊 + Đ1–Đ4) đều nhau — cùng cỡ 42px, cùng đáy 45px, hở đều,
          cân giữa (ghi đè margin-left: -17px cũ của ô đa dụng). */
@@ -1024,9 +1040,48 @@
           <div class="bar"><div id="hudFoodFill"></div><span id="hudFoodText">🍖 Thức ăn</span></div>
           <div class="bar"><div id="hudWaterFill"></div><span id="hudWaterText">💧 Nước uống</span></div>
         </div>
+        <div id="hudRage" style="display:none">
+          <div class="bar"><div id="hudRageFill"></div><span id="hudRageText">🔥 Nộ Khí</span></div>
+        </div>
+        <div id="hudSatKhi" style="display:none">
+          <div class="bar"><div id="hudSatKhiFill"></div><span id="hudSatKhiText">🗡️ Sát Khí</span></div>
+        </div>
+        <div id="hudNgoKiem" style="display:none">
+          <div class="bar"><div id="hudNgoKiemFill"></div><span id="hudNgoKiemText">⚔️ Ngộ Kiếm</span></div>
+        </div>
+        <div id="hudPet" style="display:none">
+          <div class="bar"><div id="hudPetFill"></div><span id="hudPetText">🦴 Cốt Vương</span></div>
+        </div>
+        <div id="hudHonKhi" style="display:none">
+          <div class="bar"><div id="hudHonKhiFill"></div><span id="hudHonKhiText">👻 Hồn Khí</span></div>
+        </div>
+        <div id="hudPhat" style="display:none">
+          <span id="hudPhatText" style="font-size:11px;color:#fde68a">☸ Công Đức</span>
+        </div>
         <button id="hudDetailBtn" type="button">▸ Chỉ số</button>
         <div id="hudDetails"><div id="hudStats">—</div></div>
         <button id="hudBreak" type="button">✦ Đột phá cảnh giới ✦</button>
+        <button id="btnKiemUlt" type="button" style="display:none">✦ Nhân Kiếm Hợp Nhất</button>
+        <button id="btnQuySummon" type="button" style="display:none">✦ Triệu Hồi Quỷ Hồn</button>
+        <button id="btnPhatQuang" type="button" style="display:none">☸ Phật Quang Phổ Chiếu</button>
+        <button id="btnThuyetPhap" type="button" style="display:none">📿 Thuyết Pháp</button>
+        <div id="hudYDuc" style="display:none">
+          <span id="hudYDucText" style="font-size:11px;color:#86efac">💚 Y Đức</span>
+        </div>
+        <button id="btnYHeal" type="button" style="display:none">💚 Bổ Khí Huyết</button>
+        <button id="btnYGiftHp" type="button" style="display:none">❤️ Cố Bản Bồi Nguyên</button>
+        <button id="btnYRevive" type="button" style="display:none">💚 Hồi Dương Cứu Nghịch</button>
+        <div id="hudNho" style="display:none">
+          <span id="hudNhoText" style="font-size:11px;color:#fde68a">📖 Hạo Nhiên</span>
+        </div>
+        <button id="btnNhoStudy" type="button" style="display:none">📖 Đọc sách</button>
+        <button id="btnNhoZone1" type="button" style="display:none">🌊 Thanh Tuyền Thạch Thượng</button>
+        <button id="btnNhoZone2" type="button" style="display:none">⚖️ Nghĩa Bạc Vân Thiên</button>
+        <button id="btnNhoZone3" type="button" style="display:none">📜 Ngôn Xuất Pháp Tùy</button>
+        <button id="btnNhoZone4" type="button" style="display:none">🌿 Liễu Ti Vạn Lũ</button>
+        <div id="downedOverlay" style="display:none;position:fixed;left:50%;top:38%;transform:translateX(-50%);z-index:10000;background:rgba(20,10,10,0.88);border:1px solid #f87171;border-radius:12px;padding:14px 20px;text-align:center">
+          <span id="downedOverlayText" style="font-size:14px;color:#fca5a5;font-weight:700">💀 Bạn đã gục ngã</span>
+        </div>
         <button id="hudLearn" type="button" style="display:none;margin-top:5px;width:100%;padding:5px 0;font-size:12px;border-radius:8px;border:1px solid #7a5c2e;background:linear-gradient(#ffe9a8,#f5c85c);color:#4a3205;font-weight:700;cursor:pointer">📖 Ngồi học công pháp</button>
         <div id="questTracker"></div>
         <!-- GĐ74: đồng hồ dời xuống dưới thẻ nhân vật (trái), theo feedback 25/10 -->
@@ -1062,6 +1117,7 @@
         <button class="tbtn" id="tSkill2" type="button">Chiêu 3</button>
         <button class="tbtn" id="tSkill3" type="button">Chiêu 4</button>
         <button class="tbtn" id="tSkill4" type="button">Chiêu 5</button>
+        <button class="tbtn" id="tSkill5" type="button">Chiêu 6</button>
         <button class="tbtn tutil" id="tUtil0" type="button" style="display:none">Đ1</button>
         <button class="tbtn tutil" id="tUtil1" type="button" style="display:none">Đ2</button>
         <button class="tbtn tutil" id="tUtil2" type="button" style="display:none">Đ3</button>
