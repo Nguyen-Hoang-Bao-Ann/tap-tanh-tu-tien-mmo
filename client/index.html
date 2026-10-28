@@ -35,6 +35,7 @@
         position: fixed; right: 12px; top: 64px; width: 268px; z-index: 25; display: none;
         background: rgba(10, 18, 12, 0.93); border: 1px solid rgba(230, 184, 62, 0.55); border-radius: 10px;
         padding: 10px 12px; color: #eaf3ec; font-family: monospace; box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+        max-height: calc(100vh - 80px); overflow-y: auto; /* GĐ119 bước 5: panel dài (Tiệm Rèn) cuộn trong màn hình thay vì tràn */
       }
       .panelHead { display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 700; color: #ffd94d; margin-bottom: 4px; }
       .xBtn { background: transparent; border: 1px solid rgba(255,255,255,0.35); color: #fff; border-radius: 5px; cursor: pointer; padding: 1px 7px; font-family: monospace; }
@@ -233,6 +234,9 @@
       }
       body.ingame #zoneBanner { display: block; }
       #zoneBanner.danger { color: #ff9a9a; border-color: rgba(255,120,120,0.55); }
+      /* GĐ125: lớp phủ chuyển vùng — bước ra khỏi khu an toàn vào bãi quái: tối nhanh rồi sáng lại như bước qua một lớp màn. */
+      #zoneStepFade { position: absolute; inset: 0; z-index: 6; pointer-events: none; background: radial-gradient(ellipse at center, rgba(0,0,0,0.12) 35%, rgba(0,0,0,0.62) 100%); opacity: 0; transition: opacity 0.55s ease; }
+      #zoneStepFade.on { opacity: 1; transition: opacity 0.15s ease; }
       /* ---- GĐ20: đồng hồ thế giới + lớp phủ sáng/tối ---- */
       #hudClock {
         position: absolute; top: 32px; left: 50%; transform: translateX(-50%); z-index: 5; display: none;
@@ -1051,6 +1055,10 @@
         </div>
         <div id="hudPet" style="display:none">
           <div class="bar"><div id="hudPetFill"></div><span id="hudPetText">🦴 Cốt Vương</span></div>
+          <button id="hudPetRelease" type="button" style="display:none">Thả về rừng</button>
+        </div>
+        <div id="hudBuff" style="display:none">
+          <div class="bar"><span id="hudBuffText"></span></div>
         </div>
         <div id="hudHonKhi" style="display:none">
           <div class="bar"><div id="hudHonKhiFill"></div><span id="hudHonKhiText">👻 Hồn Khí</span></div>
@@ -1063,6 +1071,7 @@
         <button id="hudBreak" type="button">✦ Đột phá cảnh giới ✦</button>
         <button id="btnKiemUlt" type="button" style="display:none">✦ Nhân Kiếm Hợp Nhất</button>
         <button id="btnQuySummon" type="button" style="display:none">✦ Triệu Hồi Quỷ Hồn</button>
+        <button id="btnTame" type="button" style="display:none">🐾 Thuần Hóa</button>
         <button id="btnPhatQuang" type="button" style="display:none">☸ Phật Quang Phổ Chiếu</button>
         <button id="btnThuyetPhap" type="button" style="display:none">📿 Thuyết Pháp</button>
         <div id="hudYDuc" style="display:none">
@@ -1090,6 +1099,7 @@
 
       <!-- GĐ17: banner khu vực + minimap + cột nút chức năng + điều khiển cảm ứng -->
       <div id="zoneBanner">📍 Làng Tân Thủ · An toàn</div>
+      <div id="zoneStepFade"></div>
       <div id="touchBars"><div class="tbar"><div id="hudHpFillT"></div><span id="hudHpTextT">HP</span></div><div class="tbar"><div id="hudMpFillT"></div><span id="hudMpTextT">Chân nguyên</span></div></div>
       <div id="bossBar"><div id="bossName">Trùm</div><div class="bossTrack"><div id="bossHpFill"></div><span id="bossHpText"></span></div></div>
       <div id="skillAnnounce"></div>
@@ -1174,7 +1184,14 @@
       <div id="invPanel" class="panel">
         <div class="panelHead"><span>🎒 Túi đồ</span><button class="xBtn" id="invClose" type="button">✕</button></div>
         <div class="panelSub" id="invStones"></div>
+        <div class="panelSub" id="invTabs"><button class="pbtn" id="invTabItems" type="button">Đồ dùng</button> <button class="pbtn" id="invTabGear" type="button">⚔️ Trang bị</button></div>
         <div id="invBody"></div>
+        <div id="invGearBody" style="display:none"></div>
+      </div>
+      <!-- GĐ119 bước 5: panel Tiệm Rèn — mua sẵn + đặt rèn + nhận đồ -->
+      <div id="forgePanel" class="panel">
+        <div class="panelHead"><span>⚒️ Tiệm Rèn</span><button class="xBtn" id="forgeClose" type="button">✕</button></div>
+        <div id="forgeBody"></div>
       </div>
       <!-- GĐ66 sửa nhỏ (2): panel Ví Linh thạch — bấm pill Linh thạch thì mở -->
       <div id="stonesPanel" class="panel">

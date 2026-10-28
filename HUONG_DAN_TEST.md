@@ -735,7 +735,7 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   Bổ Khí Huyết (hồi máu), Cố Bản Bồi Nguyên
   (bồi bổ tăng máu tối đa, có giới hạn), Hồi
   Dương Cứu Nghịch (chỉ cứu người tưởng chết,
-  hồn chưa lìa — khớp cửa sổ gục ngã 60s).
+  hồn chưa lìa — khớp cửa sổ gục ngã 40s, GĐ128).
 - Bổ Khí Huyết: socket y_heal + nút riêng, chỉ Y
   Tu; tốn 20 MP, hồi 5s, hồi người chơi khác gần
   nhất trong 300px (không tự hồi, không hồi
@@ -756,18 +756,19 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   khác không cộng.
 - Hồi Dương Cứu Nghịch + LUẬT CHẾT MỚI (áp
   dụng mọi người chơi): chết do đánh nhau (quái
-  cắn, độc) không về làng ngay mà GỤC NGÃ 60s
-  (hp 0, đứng yên, quái ngó lơ, hiện lớp phủ đếm
-  ngược); Y Tu từng đạt 500 Y Đức (mở khóa vĩnh
-  viễn) trong 300px dùng socket y_revive + nút
-  riêng → người gục dậy tại chỗ, cùng map, 50%
-  máu tối đa, người cứu +100 Y Đức. Hết 60s
-  không ai cứu → về làng như cũ (quảng trường
-  PLAZA 700,560 + ngẫu nhiên 20–95px). Chết do
-  hết thọ nguyên (tọa hóa) vẫn vĩnh viễn, không
-  cứu được. Người gục không đánh/chiêu/thiền/
-  dịch chuyển được; thoát game lúc gục → đăng
-  nhập lại đầy máu (không kẹt 0 máu).
+  cắn, độc) không về làng ngay mà GỤC NGÃ 40s
+  (GĐ128, trước 60s; hp 0, quái ngó lơ, hiện lớp
+  phủ đếm ngược); Y Tu từng đạt 500 Y Đức (mở
+  khóa vĩnh viễn) trong 300px dùng socket
+  y_revive + nút riêng → người gục dậy tại chỗ,
+  cùng map, 50% máu tối đa, người cứu +100 Y
+  Đức. Hết 40s không ai cứu → về làng như cũ
+  (quảng trường PLAZA 700,560 + ngẫu nhiên
+  20–95px). Chết do hết thọ nguyên (tọa hóa) vẫn
+  vĩnh viễn, không cứu được. Người gục không
+  đánh/chiêu/thiền/dịch chuyển/tương tác được;
+  thoát game lúc gục → đăng nhập lại đầy máu
+  (không kẹt 0 máu).
 - HUD riêng chỉ Y Tu thấy: "💚 Y Đức: N" + dấu
   mở khóa Cố Bản/Hồi Dương; nút Bổ Khí Huyết
   luôn hiện cho Y Tu, 2 nút còn lại chỉ hiện khi
@@ -1251,3 +1252,510 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   rêu + Sói Xám sprite) + preview118-
   forest (2 Lâm Trư xanh nanh vàng)
   đã xem. Zip này gộp GĐ90–118.
+
+## GĐ119 — HỆ THỐNG TRANG BỊ (server + giao diện)
+- 9 phẩm (Phàm→Vô Cực, hệ số 1.0→15.0, 0→5 dòng nội tại),
+  9 hướng tu, 9 ô, 30 vũ khí, tên = Tiền tố + Hệ + Ô.
+- Nội tại: 13/hướng (7 tốt +4%/cấp, 6 phế −2%/cấp), roll
+  có trùng, cấp nội tại = cấp phẩm. Lệnh bài 9 hạng,
+  Trấn Áp chênh ×5% trần 30% (mới lưu chỉ số, chưa móc
+  combat vì game chưa có PvP/tranh boss).
+- Luật mặc: hệ Vô ai cũng mặc được, Pháp Tu mặc cả 16
+  hệ, còn lại cần linh căn tương ứng, lỗi đúng chữ
+  "Không thể trang bị". Vũ khí gear chỉ cộng chỉ số,
+  không đổi vũ khí chiến đấu cũ. Crit mới lưu chỉ số.
+- Chỉ số hiệu dụng: công cộng cả vật + pháp công, thủ
+  cộng cả vật + pháp phòng, máu/nguyên cộng phẳng vào
+  max, tốc độ cộng tốc độ chạy + giảm hồi chiêu.
+- 3 nguồn cùng tồn tại: (1) Đặt rèn ở Tiệm Rèn — tự
+  làm thiết kế + đủ nguyên liệu, chờ theo phẩm (Tiên 3
+  ngày … Vô 90 ngày game), tối đa 3 đơn; (2) Kho bán
+  sẵn 8 món/ngày, gieo hạt theo ngày game (mọi người
+  cùng kho, mỗi người 1 lần/món/ngày); (3) Rơi đồ —
+  rương C 10%/B 20%/A 35%/boss 60%, nhiệm vụ bảng 10%/
+  thành phố 20%, đồ theo hướng + hệ người chơi.
+- Giao diện: tab Trang bị trong Túi đồ (kho + 9 ô đang
+  mặc + Mặc/Tháo/Rèn lại + tổng chỉ số); panel Tiệm
+  Rèn (kho + form đặt rèn + đơn chờ + Nhận) mở bằng
+  E cạnh NPC Thợ Rèn ở quảng trường làng (620,560).
+  Mua/đặt/nhận/rèn lại cần đứng trong 80px quanh ông.
+- Phí rèn lại: Tiên 100, Thần 300, Huyết 800, Ma 2000,
+  Vô 5000. Đồ 0 dòng không rèn lại được.
+- Test: probe p119s5 (cổng vị trí + đơn + mua + rèn
+  lại + HUD) PASS; ảnh preview119s5-forge/gear.
+
+## GĐ120 — SPRITE TRANG BỊ
+- Vũ khí dùng lại 28 sprite GĐ16 (sprites/weapons);
+  chỉ thiếu Độc Thơ nên vẽ mới (sách xanh lục +
+  emblem vàng, sprites/weapons/doctho.png). Tay Không
+  vốn không có hình.
+- 8 ô giáp vẽ mới bằng code, pixel 16x16 → 64x64
+  (sprites/gear/ARMOR, PANTS, HAT, CLOAK, SHOES,
+  BROOCH, RING, TOKEN): áo, quần, nón lá, choàng đỏ,
+  giày, bội, nhẫn, lệnh bài. PixelLab đã hết lượt
+  (40/40) nên không vẽ AI được đợt này.
+- Icon hiện trong tab Trang bị, kho Tiệm Rèn và đơn
+  chờ, viền theo màu phẩm. Áo quần mặc lên người
+  (đổi sprite nhân vật) CHƯA làm — cần vẽ lại sprite
+  nhân vật theo lớp đồ, để riêng khi có yêu cầu.
+- Test: probe p120_icons PASS; ảnh preview120-gear
+  (áo Tiên đang mặc + Độc Thơ trong kho).
+
+## GĐ127 — NHIỆM VỤ MỞ RỘNG (950 NHIỆM VỤ)
+- Thêm 950 nhiệm vụ từ file server/data/quests_gd127.json,
+  gộp vào bảng nhiệm vụ cũ: 8 loại thường x 100 (diệt,
+  thu thập, trò chuyện, khám phá, chế tạo, giao hàng,
+  săn trùm, hộ tống) + ẩn/liên/thăng cấp x 50.
+- Ẩn mở bằng manh mối: nói chuyện NPC manh mối (Người
+  Áo Đen, Người Giữ Bí Mật...) hoặc đứng vào điểm manh
+  mối, nhiệm vụ mới hiện trong hội thoại của người giao.
+  Thăng cấp là thang bậc khó dần, KHÔNG khóa cảnh giới
+  khi nhận/trả, tầng sau mở ngay sau khi trả tầng trước.
+- Nhận/trả: trò chuyện/giao hàng/hộ tống xong ở đích
+  rồi về gặp người giao để trả; săn trùm chỉ tính quái
+  có cờ trùm (trùm map/trùm cảnh giới, không tính quái
+  thử thách). Thưởng TẠM theo cảnh giới người giao:
+  Phàm 80 đá/15 tu vi, LK 140/25, TC 320/60, KD 650/120;
+  boss/hộ tống/ẩn x1.5, liên tầng 2 x1.3, thăng cấp
+  x(1+0,3x(tầng-1)).
+- Nhiệm vụ mới KHÔNG hiện trên bảng treo thưởng làng
+  (chỉ nhận qua hội thoại NPC); bảng làng vẫn chỉ có
+  nhiệm vụ cũ.
+- Test: probe p127_quests PASS đủ chân: diệt/thu thập/
+  trò chuyện/khám phá/giao hàng/ẩn/liên/thăng cấp/săn
+  trùm Cốt Binh/hộ tống Băng Phong Cốc + bảng làng
+  không lọt nhiệm vụ mới.
+
+## GĐ128 — CỔNG DỊCH CHUYỂN HIỆN HÌNH + NERF QUỶ HỒN + LINH THỂ
+- Cổng dịch chuyển: trước đây map GDD không vẽ gì ở
+  cổng (chỉ 1 chấm nhỏ trên minimap + gợi ý E trong
+  70px) nên không tìm được. Giờ map nào cũng có quầng
+  sáng xanh + nhãn "Trận Dịch Chuyển" ngay tại cổng
+  (w/2, h-150), như dấu đàn tế/điểm linh mạch.
+- Quỷ Hồn (Quỷ Tu) nerf: trước đánh bằng vatCong cố
+  định 30, khỏe gấp 2–3 lần chủ đầu game. Giờ dmg =
+  1/2 chỉ số công hiệu dụng của chủ (số TẠM, Cốt
+  Vương không đổi vì vốn đã yếu).
+- Chết: cửa sổ gục ngã 60s → 40s. Lúc gục hóa LINH
+  THỂ: nhân vật mờ + nhãn 👻, đi lại được khắp map
+  (xuyên vật cản, quái vẫn ngó lơ), nhưng không
+  đánh/né/chiêu/thiền/dịch chuyển/mua bán/chế
+  tạo/nói chuyện NPC được (server chặn hp <= 0).
+  Còn 5s nữa tự hồi sinh thì hiện thông báo.
+  Được Y Tu cứu thì dậy tại chỗ linh thể đang đứng.
+- Sửa lỗi chết khi đánh boss: trước đây client vẫn
+  phát animation vung vũ khí tại chỗ dù server đã
+  chặn đòn (hp <= 0), mà giữ phím J thì auto-repeat
+  nên xác cứ lặp 1 động tác ở chỗ boss tới khi hết
+  giờ. Giờ client chặn đánh/né/chiêu/tương tác ngay
+  khi đang gục.
+- Test: probe p128 PASS (dmg pet 26 lên sói, gục
+  đúng 40s, linh thể đi được 792px/3s + không nói
+  chuyện được với Trưởng Làng trong khi người sống
+  nói được, dấu cổng ở thành phố, overlay Linh thể
+  39s; ảnh p128_portal/p128_linh).
+
+## GĐ129 — LẤP CỔ THỤ YÊU GIỚI (MAP TRỐNG DUY NHẤT)
+- Trước đây Cổ Thụ Yêu Giới (Kim Đan 1, hệ Mộc,
+  rừng sâu 4000×3000) đi tới được nhưng trống hoàn
+  toàn: 0 quái, 0 NPC, 0 nhiệm vụ, 0 đàn tế.
+- Quái (chỉ sửa data MonsterData, không sửa code):
+  Lâm Trư ×12, Huyễn Điệp ×12, Huyết Lang ×6, cộng
+  1 trùm Huyết Lang + đàn tế tự sinh theo luật map
+  KD có quái thì có trùm. Tổng quái toàn game
+  367 → 398.
+- NPC mới: Ông Lão Giữ Rừng (Người Giao Nhiệm Vụ)
+  đứng gần cổng Cổ Thụ, giao 6 nhiệm vụ riêng
+  (file quests_gd129.json, không đụng 950 quest cũ):
+  diệt Lâm Trư ×12, Huyễn Điệp ×8, Huyết Lang ×6,
+  săn trùm Huyết Lang ×1 (thưởng ×1.5), thu Đá Quý
+  ×3, khám phá Tâm Cổ Thụ. Thưởng theo chuẩn giver
+  KD (650 đá/120 tu vi, trùm 975/180).
+- Sửa lỗi tiềm ẩn từ GĐ89: vòng build NPC trước đây
+  chỉ nhận map 'city' nên NPC 15 map nghề không bao
+  giờ spawn — 205 quest GĐ127 từ giver map nghề
+  không nhận/trả được. Giờ map nào có entry NPCData
+  đều spawn (46 map, 9001 NPC), 205 quest đó sống lại.
+- Quest diệt/trùm có thêm trường targetMap (tùy chọn,
+  quest cũ không có nên không ảnh hưởng): chỉ tính
+  quái đúng map ghi trong nhiệm vụ.
+- Test: probe p129 PASS (spawn đúng 12/12/6 + 1 trùm,
+  dialog đủ 6 quest, giết Lâm Trư ở Thanh Mộc Lâm
+  không tính progress, trả đủ 6 quest đúng đá,
+  travel hub → Cổ Thụ tới đúng (2000,2794), Dược Cốc
+  200 NPC + nhận được quest GĐ127 q127_kill_018).
+
+## GĐ130 — CỬU U BÍ CẢNH (BÍ CẢNH LỚN)
+
+- Tài liệu chỉ ghi "bí cảnh để sau theo Phần B", không định sẵn — thiết kế do
+  mình đề xuất, Bảo chốt 28/10 11:52. Thạch Lâm chỉ là khu nhỏ trong làng,
+  Thâm Hải có trùm nhưng không có tiến trình — bí cảnh lớn phải có cả 3:
+  map riêng + trùm riêng + chuỗi tiến trình riêng.
+- Map mới `cuu_u_bi_canh` "Cửu U Bí Cảnh": category elemental, 4000×3000,
+  theme mộ địa (sprite sẵn, không cần PixelLab), cổng Kim Đan 1, đi bằng
+  dịch chuyển từ thành trung tâm (400 đá chuẩn KD), không phải khu an toàn.
+  Cổng (2000,2850), tới (2000,2794), đàn tế (2000,2690).
+- Quái thường 30 con: Cốt Binh ×6, Đan Ma ×6, Huyễn Ảnh Miêu ×12,
+  Hấp Huyết Quỷ ×6 (tàng hình phục kích tới 130px).
+- Trùm: Cửu U Ma Quân ×3 (loài mới, hp 3500, atk 85, hút máu 30%, tuVi
+  400 — TẠM), dùng lại sprite kiếm khách quỷ (`MON_SPRITE:
+  cuu_u_ma_quan: 'kiem_ma'`, hiển thị ~121px) vì PixelLab hết lượt.
+  Trùm NỐI TAY vào MAP_BOSSES (không qua MAP_SPAWNS): loài boss có maps
+  rỗng nên vòng auto không nhận; nếu để spawn thường thì quái không có cờ
+  mapBoss nên quest trùm không bao giờ nhích (bài học từ Hỗn Độn Thú ở
+  Vô Tận Hư Không — boss-class spawn thường cũng không có cờ). Vòng auto
+  được loại trừ riêng Cửu U để không sinh thêm auto-boss. Nối trước
+  ALTAR_BOSSES nên đàn tế tự sinh theo (200 đá/lần/ngày, bơm đủ số thiếu).
+- Người giữ cổng: Ông Lão Giữ Cổng (tên TẠM, `cuu_u_bi_canh_npc_007`) tại
+  cổng, giao 8 quest (`quests_gd130.json` + mirror client): chuỗi 6 liên
+  hoàn (cổng → Cốt Binh ×10 → Đan Ma ×8 → Huyễn Ảnh Miêu ×8 → 1 Ma Quân
+  → cả 3 Ma Quân, mở bằng requiresFlag/setsFlag cuu_u_t1..t5) + thu thập
+  Đá Quý ×5 + khám phá Tâm Cửu U (2000,1500). Thưởng chuẩn KD 650/120,
+  quest trùm ×1,5 = 975/180.
+- Boot sau GĐ130: 74 map, 47 map có dân / 9002 NPC, 35 cặp spawn,
+  21 map có trùm, 431 quái.
+- Test: probe p130 (port 3339, xem `~/workspace/probes/p130_quests.js`).
+  **Probe p130 ALL PASS (chạy 8, 28/10)**: dialog chỉ hiện chain_1/item/
+  explore trước khi mở chuỗi; trả chain_1 +650 đúng; giết Cốt Binh ở
+  Tử Vong Mộ Địa không nhích progress (targetMap lọc đúng); spawn đúng
+  6/6/12/6 + 3 trùm; chuỗi trả đúng từng bước (chain_2/3/4 mỗi cái +650,
+  chain_5/6 mỗi cái +975); đàn tế bơm lại đủ 3 trùm sau khi giết 1;
+  khám phá Tâm +650; item Đá Quý ×5 trả được; travel hub → Cửu U tới
+  đúng (2000,2794) tuyệt đối; heap probe phẳng ~12MB suốt (không OOM).
+  Bài học probe: (1) chuỗi phải giết → trả → nhận → giết (giết quest
+  chưa nhận thì progress không nhích, vòng giết chạy vô hạn); (2) map
+  nhiều loài chỉ có 1 loài là mục tiêu thì phải giết ghim (pinned) chứ
+  không đánh con gần nhất như GĐ129; (3) không ghim ảo ảnh (-ao-) vì
+  chúng không tính nhiệm vụ; (4) mục tiêu đã trong tầm mà bị con khác
+  chen ngang thì chỉ chờ, không lái lại — lái lại trả về tức thì gây
+  vòng kẹt không chờ, spam log tới OOM 4GB (chạy 7).
+## GĐ131 — NỀN NGHỀ PHỤ: 14 CẤP + SƯ PHỤ + BÁI SƯ + QUEST NGHỀ
+
+- Bảo chốt roadmap mở rộng nghề phụ 28/10, GĐ131 làm nền trước
+  (GĐ132 đào khoáng/hái thuốc, GĐ133 đan dược, GĐ134–137 mở rộng
+  từng nghề làm sau). Nghề phụ vẫn KHÔNG bắt buộc — ai tinh ý phát
+  hiện thì được lợi nhiều, đúng triết lý game.
+- Thang 14 cấp (thay 3 cấp cũ Nhập môn/Thợ nghề/Sư phụ): Nhất Phẩm
+  → Thập Nhị Phẩm (12 phẩm) + 2 cấp đặc biệt Đế Sư, Thánh Sư.
+  Danh hiệu đầy đủ: "Tam Phẩm Đan Sư", "Đế Vương Đan Sư",
+  "Thánh Vương Đan Sư". Ngưỡng theo lượt chế thành công (số TẠM):
+  0/10/30/60/100/160/240/340/460/600/800/1000/1400/2000.
+  Trần theo cảnh giới (TẠM): Phàm→Tứ Phẩm, LK→Thất Phẩm,
+  TC→Thập Phẩm, KD→Thập Nhị Phẩm, NA→Đế Sư, HT→Thánh Sư.
+  Người chơi cũ chuyển tự động theo lượt chế đã có (không migrate
+  file): cấp cũ 2 (50 lượt) → Tam Phẩm, cấp cũ 3 (200 lượt) → Lục
+  Phẩm (trừ khi chạm trần cảnh giới).
+- Công thức cũ cấp 2 remap → Tam Phẩm (5 công thức: Hồi Nguyên,
+  Trúc Cơ, Kết Đan, Hộ Mạch, Phù Tụ Linh) cho khớp thang mới.
+- 5 sư phụ dạy nghề ở làng, hàng phía nam Đạo Quán (y=390, ô trống
+  đã kiểm tra va chạm, cách nhau 120px): Đan Lão (520), Khí Lão
+  (640), Trận Lão (760), Phù Lão (880), Thú Lão (1000). Sprite tạm
+  dùng lại bộ dân làng (elder/villager/envoy) như Thợ Rèn chờ
+  PixelLab. Hộp thoại sư phụ có khối hướng dẫn riêng + nút Bái sư.
+- Bái sư (socket `apprentice_master`, cần đứng ≤95px, linh thể bị
+  chặn như mọi tương tác GĐ128): chưa có nghề thì bái sư = học nghề
+  luôn (vẫn cần đo linh căn trước); đã có nghề này thì chỉ nhận làm
+  đệ tử; đã có nghề khác thì chặn (mỗi người 1 nghề). Đệ tử được
+  bonus chế tạo +5% tỉ lệ thành công (TẠM), hiện cả trong panel
+  Nghề và trong `craft_result.rate` (cả khi chế thất bại — sửa sau
+  khi probe chỉ ra nhánh thất bại thiếu rate).
+- Sư phụ lưu bền: `job.master` copy ở cả 2 chỗ load/lưu nhân vật
+  (quy tắc GĐ89/GĐ95) + payload kèm `title`/`master`; panel Nghề
+  hiện danh hiệu đầy đủ, tên sư phụ, lượt chế, còn bao nhiêu lượt
+  nữa lên phẩm kế (hoặc đã chạm trần cảnh giới).
+- Quest nghề: `server/data/quests_gd131.json` (15 quest — 5 nghề ×
+  chuỗi 3: bái kiến (talk) → chế 5 món cơ bản → chế 15 món bất kỳ
+  của nghề; thưởng 80/15 → 140/25 → 320/60, TẠM) + mirror client
+  `quests_gd131_info.ts` (nhận/trả qua hộp thoại sư phụ, không qua
+  bảng). Chuỗi nối bằng requiresFlag/setsFlag như GĐ130. Engine
+  thêm 2 luật: (1) quest có `jobId` thì dialog chỉ hiện với người
+  cùng nghề và accept chặn sai nghề — kiểm tra nghề TRƯỚC cờ
+  chuỗi để báo đúng lý do (probe bắt được: sai nghề mà báo "hoàn
+  thành phần trước" là sai thông điệp); (2) quest chế không có
+  `recipeId` mà có `jobId` thì tính mọi lần chế thành công cùng
+  nghề (dùng cho Q3 rèn tay nghề).
+- Test: probe p131 (port 3342, xem `~/workspace/probes/p131_quests.js`).
+- Test: probe p131 (port 3342, xem `~/workspace/probes/p131_quests.js`).
+  **Probe p131 ALL PASS (chạy 3, 28/10)**: boot nối 15 quest; 5 sư
+  phụ đúng vị trí (520/640/760/880/1000, y=390); thang 14 cấp đúng
+  cả 7 nấc kiểm tra (0→Nhất Phẩm, 30→Tam Phẩm, 200 Phàm→Tứ Phẩm
+  chạm trần, 200 LK→Lục Phẩm, 1500 KD→Thập Nhị Phẩm chạm trần,
+  1500 NA→Đế Sư/Đế Vương Đan Sư, 2500 HT→Thánh Sư/Thánh Vương
+  Đan Sư); dialog sư phụ có masterInfo, chưa có nghề không thấy
+  quest nghề; chế không nghề → lỗi nghề, bái sư học luôn nghề,
+  bái lại → nhắc đã là đệ tử, bái nghề khác → lỗi đã học nghề;
+  dialog sau bái sư hiện Q1, Q2 ẩn tới khi xong Q1; rank 1 chế công
+  thức Tam Phẩm → lỗi cấp; chuỗi Đan Sư trả đúng +80/+140/+320;
+  tỉ lệ đệ tử 0.95, không bái sư 0.9; nhận quest nghề khác → lỗi
+  nghề; sau restart sư phụ + 20 lượt chế + Nhị Phẩm còn nguyên.
+  Bài học probe: (1) chạy 1 rớt ở nhận quest nghề khác vì
+  requiresFlag chặn trước jobId nên báo sai thông điệp — đã đổi
+  thứ tự: kiểm tra nghề trước cờ chuỗi; (2) chạy 2 rớt ở đối chứng
+  không bái sư vì craft thất bại không kèm rate — đã thêm rate
+  vào cả nhánh thất bại của craft_result.
+
+## GĐ132 — NGHỀ THU THẬP: ĐÀO KHOÁNG + HÁI THUỐC
+
+- 2 nghề mới (mỗi người vẫn 1 nghề): Đào Khoáng Sư (⛏️) + Hái Thuốc
+  Sư (🌿), chung thang 14 cấp GĐ131 (lượt thu thập tính vào
+  job.crafts). Sư phụ nối dài hàng y=390: Khoáng Lão (1120), Thảo
+  Lão (1240), sprite tạm merchant/shopdan (chờ sprite riêng như
+  các sư phụ khác).
+- Điểm tài nguyên: mạch quặng (ore) + bụi thuốc (herb), vị trí CỐ
+  ĐỊNH theo map (seed từ mapId nên không đổi qua mỗi lần boot).
+  Làng 6+6 ở vành đai farm phía đông (x ≥ 1650) cho người mới;
+  map farm + map nguyên tố mỗi map 6+6 (seed, tránh vật cản, cổng,
+  đàn tế, NPC trong 150px); thành phố + map nghề là khu văn minh
+  nên không có điểm hoang.
+- Nguyên liệu theo bậc map (TẠM): Phàm/LK → Quặng Sắt/Thảo Dược;
+  TC → Quặng Đồng/Linh Thảo; KD+ → Quặng Bạc/Tiên Thảo. Mỗi lần thu
+  thập +1–2 nguyên liệu (TẠM).
+- Socket `gather_node`: cổng hp > 0 (linh thể chặn như mọi tương
+  tác GĐ128), đúng map của điểm, ≤80px (INTERACT_RANGE), đúng nghề
+  của điểm, chưa thu thập điểm đó trong ngày (per-player: mỗi
+  người một lịch riêng, người khác đào cùng mạch trong ngày vẫn
+  được). Thành công: nghề +1 lượt, tiến trình quest gather, notice
+  lên cấp nếu có.
+- Client: map_enter gửi `nodes` (cả làng lẫn map hoang); quầng
+  sáng + nhãn điểm (nhãn chỉ hiện trong 260px như NPC thành phố);
+  gợi ý E "Bấm E — Đào/Hái ..." + bấm E gửi gather_node; panel
+  nghề thu thập không có công thức nên hiện hướng dẫn đi thu thập
+  thay cho danh sách trống.
+- Quest nghề thu thập (`quests_gd132.json`, 6 cái, 2 nghề × chuỗi
+  3): gặp sư phụ (80/15) → thu thập 5 (140/25) → thu thập 15
+  (320/60); engine thêm quest kind `gather` (lọc nodeKind
+  ore/herb, jobId gate như GĐ131).
+- Test: probe p132 (port 3344, xem `~/workspace/probes/p132_quests.js`).
+  **Probe p132 ALL PASS (chạy 5, 28/10)**: 62 asserts — boot nối
+  6 quest; 2 sư phụ đúng vị trí; map_enter làng 12 điểm đúng vị
+  trí + đúng nguyên liệu bậc Phàm; bái sư học luôn nghề; hái sai
+  nghề → lỗi nghề; đào ok qty 1–2, nghề +1 lượt; đào lại trong
+  ngày → lỗi ngày; đào mạch xa → lỗi khoảng cách; chuỗi Đào
+  Khoáng trả đúng +80/+140/+320 (Q3 15 lượt qua 3 lần sang ngày,
+  tiến trình 6/12/15); B đào mạch A vừa đào trong ngày vẫn ok
+  (per-player); chuỗi Hái Thuốc Q1 +80, Q2 tiến trình 1/5; map
+  hoang Băng Phong Cốc 12 điểm đúng bậc LK, ô mạch đi được (đứng
+  đúng mạch, lệch 0px, không bị respawn về cổng); sau restart job
+  21 lượt + Nhị Phẩm + gatheredNodes còn trong file.
+  Bài học probe + lỗi game thật: (1) chạy 1–2 rớt ở trả quest vì
+  waitFor chỉ nhận giá trị truthy nên đá = 0 bị coi là chưa đọc
+  được — từ nay chờ điều kiện boolean rồi mới đọc số; (2) chạy 3
+  rớt ở leg restart vì rejoin chỉ có welcome, không có char_sync
+  — đọc job từ welcome.character; (3) chạy 4 rớt ở leg restart vì
+  persistPlayer không ghi gatheredNodes (chỉ 2 chỗ tạo nhân vật có
+  field, chỗ lưu bền thì thiếu) — lỗi game thật: cổng ngày sẽ
+  reset mỗi lần restart; đã thêm dòng ghi vào persistPlayer (đủ
+  bộ 3: tạo lúc đăng nhập + tạo bóng offline + lưu bền); (4)
+  probe treo sau khi server dừng vì socket.io client tự reconnect
+  giữ event loop — finally phải process.exit sau khi dọn server.
+
+## GĐ133 — ĐAN DƯỢC TĂNG CHỈ SỐ CÓ THỜI HẠN
+
+- 5 đan mới của Đan Sư, uống là tăng chỉ số trong X phút THẬT
+  (đồng hồ thật, không phụ thuộc ngày game; bền qua restart vì
+  buffs lưu file): Bạo Lực Đan (Vật công + Pháp công +30%, 30
+  phút), Thiết Bích Đan (Vật phòng + Pháp phòng +30%, 30 phút),
+  Huyết Khí Đan (HP tối đa +200, 60 phút), Nguyên Linh Đan (Chân
+  nguyên tối đa +200, 60 phút), Thần Tốc Đan (Tốc độ +20%, 30
+  phút). Mọi số TẠM.
+- Luật cộng dồn: uống đan khác loại thì cộng dồn cả 5 cùng lúc;
+  uống cùng loại thì LÀM MỚI thời hạn (không cộng dồn — như độc
+  GĐ98).
+- Công thức (Đan Sư, nguyên liệu chính là thảo dược GĐ132 nên tự
+  khóa theo map tới được): Huyết Khí {Thảo Dược 3 + Nanh Sói 2,
+  15 đá, 85%, Tam Phẩm}; Nguyên Linh {Thảo Dược 3 + Cánh Dơi 2,
+  15 đá, 85%, Tam Phẩm}; Bạo Lực {Linh Thảo 2 + Nanh Sói 2, 20 đá,
+  80%, Nhị Phẩm}; Thiết Bích {Linh Thảo 2 + Đá Quý 1, 20 đá, 80%,
+  Nhị Phẩm}; Thần Tốc {Tiên Thảo 2 + Cánh Dơi 2, 30 đá, 75%, Tứ
+  Phẩm}. Tổng công thức 22 → 27.
+- Cơ chế: buff % móc vào effStatsOf (đánh thường, chiêu, pet theo
+  chủ đều ăn cùng lúc); buff máu/mana móc vào maxHpEff/maxMpEff
+  (payload đã có sẵn 2 số này nên HUD hiện đúng max mới không
+  cần sửa thêm); hết hạn: tick dọn key + kẹp máu/mana về max mới
+  + lưu file; quá hạn coi như không có ngay cả trước khi tick dọn
+  (lazy). Field buffs đủ bộ 3 chỗ (đăng nhập + bóng offline +
+  lưu bền, bài học GĐ132).
+- Client: ITEM_INFO + RECIPE_INFO mirror; HUD thêm dòng buff đang
+  còn hạn (icon + tên + phút còn lại). Lưu ý: updateHudBars nhận
+  tick entry nên KHÔNG có buffs — dòng buff phải đọc từ myChar
+  (welcome/sync) mới hiện, đọc nhầm p.buffs là không bao giờ
+  hiện.
+- Test: probe p133 (port 3345, xem `~/workspace/probes/p133_quests.js`).
+  **Probe p133 ALL PASS (chạy 4, 28/10)**: 19 asserts — cổng
+  cấp (cấp 1 lỗi Tam Phẩm, cấp 3 lỗi Tứ Phẩm), cổng nghề (không
+  nghề → lỗi Đan Sư), chế đủ 5 đan mới; sát thương thật lên sói
+  16 → 19 khi có buff Cuồng Bạo → 16 khi hết hạn; làm mới thời
+  hạn khi uống lại cùng loại; cộng dồn 2 buff rồi đủ 5 buff;
+  maxHp 1100 → 1300, maxMp 100 → 300; sau restart đủ 5 buff
+  trong welcome; buff hết hạn thì welcome mất key đó, tick
+  prune xóa key khỏi file.
+  Bài học probe: (1) sát thương đánh thường còn nhân speedK vũ
+  khí (tay không nhanh → ×0,625) nên số đo phải tính cả hệ số
+  này; (2) Nộ Thể Tu bền trong classRes qua các lần chạy probe
+  — đủ 100 Nộ thì đòn thường +vatPhong×0,5 làm lệch số đo
+  (chạy 3 đo 18 thay vì 16) — leg đo sát thương phải xóa
+  classRes + đặt vatPhong 0; (3) đo sát thương nên đọc dòng
+  [combat] trong log server (ghi dmg + target id mỗi đòn) thay
+  vì soi hp qua tick — chính xác hơn khi quái khác chen ngang.
+
+## GĐ134 — LUYỆN KHÍ SƯ TỰ RÈN TRANG BỊ
+
+- Socket `forge_gear` {slot, rarity, weapon?, tokenRank?}:
+  Luyện Khí Sư rèn ngay, không chờ như đặt rèn NPC, hỏng mất
+  nguyên liệu. Khác đặt rèn NPC ở 3 điểm: cần nghề + cấp phẩm,
+  làm ở đâu cũng được (không cần đứng gần Thợ Rèn), phẩm tối đa
+  theo cấp nghề.
+- Phẩm theo cấp (TẠM): Phàm cấp 1, Sơ cấp 2, Linh cấp 4, Bảo cấp
+  6, Tiên cấp 8, Thần cấp 10, Huyết cấp 12, Ma cấp 13, Vô Cực
+  cấp 14. Tỉ lệ thành công (TẠM): 95/90/85/80/75/70/65/60/50%,
+  đệ tử Khí Lão +5% như chế tạo.
+- Nguyên liệu (TẠM): quặng GĐ132 theo phẩm (Sắt → Đồng → Bạc)
+  + Linh thạch (Phàm 10 … Vô Cực 3000; Vô Cực thêm Đá Quý 5 +
+  Tinh Huyết 2).
+- Đồ rèn ra là đồ GĐ119 thật: cùng roller generateGear, theo
+  hướng tu + hệ chính của người rèn (linh căn chuẩn hóa qua
+  normElement), vào gearBag, mặc được ngay; vũ khí chọn loại,
+  lệnh bài chọn hạng 1–9 (Cửu → Nhất phẩm). Rèn thành công +1
+  lượt nghề, tốn 2 thức ăn + 2 nước như chế tạo, tính vào quest
+  nghề jobId-only (chuỗi Luyện Khí Sư). Lưu ý: generateGear
+  throw khi đầu vào sai mà socket không có error boundary nên
+  forge_gear kiểm tra hết (ô/phẩm/vũ khí/hạng/hướng/hệ) trước
+  khi gọi roller.
+- Client: khối Tự rèn trong panel Nghề (chỉ hiện với Luyện Khí
+  Sư): chọn phẩm (khóa phẩm chưa đủ cấp), 9 ô đồ + select vũ
+  khí/lệnh bài, bấm Rèn gửi forge_gear.
+- Test: probe p134 (port 3346, xem `~/workspace/probes/p134_quests.js`).
+  **Probe p134 ALL PASS (chạy 1, 28/10)**: 20 asserts — cổng
+  cấp (cấp 1 lỗi Nhị Phẩm), cổng ô/phẩm/nghề, rèn Phàm ra
+  "Phàm Kim Y" đúng phẩm/ô/hướng/hệ vào gearBag, rèn Vô Cực ra
+  "Vô Cực Kim Chiến Phủ" đủ 5 dòng nội tại, mặc xong attack
+  hiệu dụng 480, chuỗi Luyện Khí Q1 +80 / Q2 +140 / rèn 1 lần →
+  Q3 tiến trình 1/15, sau restart còn đồ + đang mặc + lượt nghề
+  2007.
+
+## GĐ135 — TRẬN PHÁP SƯ BỐ TRẬN
+
+- Socket `array_place` {type} + `array_recall` {}: Trận Pháp Sư
+  bố trận tốn 1 Trận Kỳ mỗi lần (Trận Kỳ chế ở panel Nghề: 4
+  Nanh Sói + 10 Linh thạch, tỉ lệ 0,75, cấp 1; lưu ý Trận Kỳ dùng
+  trực tiếp thì về quảng trường làng — người chơi tự chọn dùng
+  làm trận hay để dành gọi về làng). Mỗi loại 1 trận/người, bố
+  lại thay trận cũ. Cổng cấp (TẠM): dịch chuyển cấp 1, buff cấp
+  2, debuff cấp 4, cấm chế cấp 6; sai nghề/sai loại/thiếu Trận Kỳ
+  đều báo lỗi rõ ràng.
+- 4 loại trận (TẠM): Trận Dịch Chuyển — bố tại chỗ đứng, bấm
+  Gọi về trong panel Nghề là dịch chuyển tức thời về đó, CHỈ
+  CÙNG MAP (khác map báo lỗi), dùng nhiều lần không tốn thêm,
+  BỀN QUA RESTART (lưu teleportArray đủ 3 chỗ như gatheredNodes
+  GĐ132); Trận Cường Công — người trong trận (200px, 60s) gây
+  sát thương ×1,25; Trận Suy Nhược — quái trong trận (200px,
+  60s) gây sát thương ×0,5; Cấm Chế Trận — quái trong trận
+  (150px, 15s) không đi không cắn được (trừ trùm thử thách như
+  Ý Cảnh).
+- Trận chỉ chạy khi chủ trận ở cùng map (mirror cơ chế Ý Cảnh
+  GĐ105: cờ hiệu ứng sống 300ms, chủ trận ngắt là mất); 3 trận
+  tạm hết hạn / thoát / gục / dịch chuyển là mất, riêng Trận
+  Dịch Chuyển giữ lại. Client: vòng tròn + tên trận như vòng Ý
+  Cảnh, khối Bố trận trong panel Nghề (chỉ hiện với Trận Pháp
+  Sư, nút khóa khi chưa đủ cấp/thiếu Trận Kỳ) + nút Gọi về.
+- Test: probe p135 (port 3347, xem `~/workspace/probes/p135_quests.js`).
+  **Probe p135 ALL PASS (chạy 11, 28/10)**: cổng nghề/cấp/
+  loại/Trận Kỳ; bố trận dịch chuyển tại (1700,200) + gọi về tới
+  đúng tuyệt đối + chặn gọi từ map khác; trong trận buff đánh
+  sói 20 (16 × 1,25), hết hạn 60s về lại 16; không trận sói cắn 5,
+  trong trận debuff cắn 3 (5 × 0,5 = 2,5 → 3); 10s trong cấm chế
+  máu không đổi (5069 → 5069) mà sói vẫn đứng trong 60px (bị
+  cấm chế, không phải bỏ đi); sau ngắt kết nối + 17s autosave
+  offline + restart, file còn teleportArray và gọi về đúng
+  (1700,200). Chưa kiểm tra bằng trình duyệt: vòng trận + panel
+  Bố trận mới code-verified, chưa screenshot.
+
+## GĐ136 — PHÙ SƯ 5 BÙA
+
+- 5 bùa mới, chế cần nghề Phù Sư, dùng thì ai cũng dùng được
+  (như đan dược): Phù Độn Thổ (về cổng map đang đứng — điểm tới
+  như travel: làng (1080,664), map GDD portal−56; khác Trận Kỳ
+  về làng và khác Trận Dịch Chuyển cần bố trước), Phù Cuồng Bạo
+  (sát thương ×1,5 trong 60 giây — burst ngắn, khác đan buff dài
+  30 phút), Phù Kim Cang (sát thương nhận ×0,5 trong 60 giây),
+  Phù Định Thân (quái gần nhất trong 300px đứng yên 5 giây),
+  Phù Lôi Kích (sét đánh quái gần nhất trong 300px, 100 sát
+  thương phép xuyên giáp đá, log riêng `[talisman]` để đo).
+- Bùa buff/khiên đi chung bảng buff có thời hạn GĐ133 (cùng cơ
+  chế: bền file, tự dọn hết hạn, tự hiện HUD — không thêm field
+  bền mới): Cuồng Bạo cộng vào chỉ số hiệu dụng qua mode pct
+  (lưu ý: buff % cộng vào CHỈ SỐ rồi mới +10, nên phapCong 20→30
+  cho 21 chứ không phải 16×1,5=24 như nhân thẳng dmg kiểu trận);
+  Kim Cang móc ở hitPlayer (mode shield, không qua chỉ số).
+  Định Thân dùng chung cờ cấm chế của trận GĐ135. Công thức
+  (TẠM): Độn Thổ {Đá Quý 1, Nanh Sói 2} 30 đá cấp 2; Cuồng Bạo
+  {Cánh Dơi 2} 15 đá cấp 1; Kim Cang {Đá Quý 1, Cánh Dơi 2} 20 đá
+  cấp 2; Định Thân {Cánh Dơi 2, Đá Quý 1} 25 đá cấp 2; Lôi Kích
+  {Nanh Sói 3} 20 đá cấp 1; tỉ lệ 0,8–0,85. Client: tên bùa,
+  công thức, nút Dùng trong túi đồ.
+- Test: probe p136 (port 3348, xem `~/workspace/probes/p136_quests.js`).
+  **Probe p136 ALL PASS (chạy 2, 28/10)**: cổng nghề (không nghề
+  chế → lỗi Phù Sư), chế Lôi Kích qua socket ok + kho tăng 1;
+  Độn Thổ về đúng cổng làng (1080,664) + cổng thành (2400,3394);
+  Cuồng Bạo đánh sói 21, hết hạn 60s về lại 16; không khiên sói
+  cắn 5, trong khiên sói cắn 3 + dơi cắn 2 (khiên ở người nên mọi
+  loài đều yếu, không phải trận theo vị trí); Định Thân: sói
+  wolf-2 cắn 5 lần trước bùa, 0 lần trong 4s sau bùa, vẫn đứng
+  gần (bị định thân, không phải bỏ đi); Lôi Kích đánh golem đúng
+  93 (100 qua giáp 8), golem còn 47 máu; trong làng không quái
+  thì 2 bùa nhắm mục tiêu báo lỗi tầm 300px. Chạy 1 rớt ở đo buff
+  vì Pháp Tu đánh thường dùng PHÁP CÔNG (attackStatOf theo
+  dmgType lớp) mà probe chỉ patch Vật Công — bài học đã ghi
+  AGENTS.md. Chưa screenshot trình duyệt (tên bùa/công thức/nút
+  Dùng mới code-verified).
+
+## GĐ137 — THÚ SƯ THUẦN HÓA THÚ HOANG (NGHỀ CUỐI, 7/7)
+
+- Thú Sư thuần hóa thú HOANG thành pet riêng (khác Cốt Vương của
+  Cốt Tu và Quỷ Hồn của Quỷ Tu; Khôi Lỗi vẫn của Cốt Tu): socket
+  `tame_beast` {monsterId} + `tame_release` {}. Cổng theo thứ tự:
+  nghề Thú Sư → chưa có thú → tìm thấy thú → cùng map → không
+  ẩn/trùm/thử thách/ảo ảnh → trong 80px → thú dưới 50% máu (phải
+  đánh yếu trước). Tỉ lệ TẠM 60% + 5% nếu là đệ tử Thú Lão; thất
+  bại chỉ báo notice, thử lại thoải mái không tốn gì.
+- Thú thuần hóa giữ nguyên loài + tên + chỉ số của con hoang gốc
+  (sói 40 máu/atk 5, golem 140 máu/atk 10...), thuần hóa xong hồi
+  đầy máu. Theo mẫu pet Cốt/Quỷ: thực thể players (isCompanion +
+  isTamed), bám chủ (0,36), đánh quái trong 440px quanh chủ, kéo
+  về khi xa chủ quá 560px, taunt 220px, giết tính cho chủ, theo
+  qua map, mất khi chủ thoát, hiện lại khi vào nếu còn sống. Hồi
+  5%/s như Hạch Tâm Cốt Vương (không hồi thì thú yếu chết giữa
+  trận đầu — probe chạy 3 chứng minh). Chết là mất hẳn (không
+  phản phệ như Quỷ Hồn), thuần hóa con khác. Thú hoang gốc biến
+  mất nhưng một con cùng loài sinh lại ngay để bãi không hụt.
+  Bền trong classRes.tamed {active, kind, name, maxHp, atk, def,
+  hp} — classRes lưu wholesale nên không cần field bền mới.
+  Lưu ý kỹ thuật: mã hóa máu qua khiHuyet (100 + khiHuyet×10) có
+  sàn 110 nên thú dưới 100 máu (sói 40, dơi 20) bị thổi lên 110 —
+  đã sửa bằng stats.maxHpOverride (chỉ pet thú dùng, người chơi
+  không có key này nên không đổi hành vi cũ).
+- Client: pet vẽ sprite đúng loài (mon-<kind>, cao ~60px); dòng
+  HUD pet hiện 🐾 + tên thú + máu; nút 🐾 Thuần Hóa chỉ hiện cho
+  Thú Sư khi có thú yếu (<50% máu) trong 80px và chưa có thú;
+  nút Thả về rừng trong dòng HUD pet khi đang có thú.
+- Test: probe p137 (port 3349, xem `~/workspace/probes/p137_quests.js`).
+  **Probe p137 ALL PASS (chạy 5, 28/10)**: cổng nghề (không nghề
+  → lỗi Thú Sư), sói đầy máu → lỗi dưới 50%, sói xa >200px → lỗi
+  trong 80px; đánh yếu sói 40→8 rồi thuần hóa thành công (60%/lần,
+  trong 6 lần); pet xuất hiện đúng loài wolf tên Sói Xám, sói gốc
+  biến mất, bãi vẫn đủ 5 sói (sinh lại), owner tick petIsTamed=1
+  + petName=Sói Xám + petHp khớp pet thật; đã có thú → thuần hóa
+  nữa bị chặn; chủ đi 700px nam, pet di cư theo (Δy=626px) và luôn
+  trong phong bì leash (min 68px); pet tự đánh sói đúng 13 dmg
+  (0,85×15) khi chủ đứng yên; sau disconnect + autosave 17s +
+  restart, file còn tamed.active=true + kind wolf + hp 28, pet
+  hiện lại đúng loài; thả thú (hết petHp + notice) rồi thuần hóa
+  lại thành công. Chạy 1 rớt vì mã hóa khiHuyet thổi sói 40→110
+  máu (bug game thật, đã sửa bằng maxHpOverride); chạy 2–3 rớt
+  vì pet 40 máu không hồi thì chết giữa trận khi tank (đã sửa
+  bằng hồi 5%/s); chạy 4 rớt vì assert pet sát chủ trong 150px
+  sai luật engage (pet ưu tiên đánh quái gần chủ, không về sát
+  chủ) — đã sửa thành đo di cư + phong bì leash. Chưa screenshot
+  trình duyệt (sprite thú/nút Thuần Hóa/nút Thả mới code-verified).
+  Chưa probe: cổng trùm/thử thách/ảo ảnh/ẩn (code-verified 1 dòng
+  mỗi cổng, giống mẫu cũ).

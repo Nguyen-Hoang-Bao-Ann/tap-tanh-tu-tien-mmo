@@ -1102,9 +1102,9 @@ export const LAMP_POSITIONS: [number, number][] = [
 export const WORLD_GEO = {
   W: 1600,
   H: 1200,
-  village: { x: 240, y: 180, w: 920, h: 760 },
+  village: { x: 240, y: 180, w: 1290, h: 760 }, // GĐ126: làng nuốt sân Thanh Phong Môn
   plaza: { x: 700, y: 560 },
-  realm: { x: 1760, y: 240, w: 880, h: 720 }, // GĐ57: Bí Cảnh Thạch Lâm (nướng ở texture riêng 'realm-bg' vì giới hạn cỡ texture)
+  realm: { x: 2360, y: 240, w: 880, h: 720 }, // GĐ57: Bí Cảnh Thạch Lâm (nướng ở texture riêng 'realm-bg' vì giới hạn cỡ texture); GĐ126: dời đông 600
   pond: { x: 990, y: 890, rx: 75, ry: 45 },
   houses: [
     { name: 'Đạo Quán', x: 605, y: 245, w: 190, h: 115, body: '#e9dcbc', roof: '#8a4b2a' },
@@ -1120,10 +1120,10 @@ export const WORLD_GEO = {
     [520, 860], [880, 640], [280, 400], [1120, 400], [640, 215], [760, 905],
     [150, 150], [1450, 150], [150, 1050], [1450, 1050], [120, 600], [1480, 600],
     [800, 80], [80, 80],
-    // GĐ57: dải rừng ngăn phía đông + cây trong bí cảnh — KHỚP TREE_TRUNKS phía server
-    [1680, 150], [1692, 330], [1676, 520], [1690, 700], [1680, 880], [1694, 1050],
-    [1900, 340], [2150, 320], [2450, 360], [1980, 880], [2280, 890], [2520, 860],
-    [2050, 560], [2400, 660],
+    // GĐ57: dải rừng ngăn phía đông + cây trong bí cảnh — KHỚP TREE_TRUNKS phía server; GĐ126: dời đông 600
+    [2280, 150], [2292, 330], [2276, 520], [2290, 700], [2280, 880], [2294, 1050],
+    [2500, 340], [2750, 320], [3050, 360], [2580, 880], [2880, 890], [3120, 860],
+    [2650, 560], [3000, 660],
   ] as Array<readonly [number, number]>,
 };
 export const HOUSE_TEX = { padX: 32, padY: 34 };
@@ -1533,25 +1533,25 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   scene.textures.addCanvas('world-bg', bgC);
 
   // ---------- GĐ57: NỀN PHÍA ĐÔNG (dải rừng ngăn + BÍ CẢNH THẠCH LÂM) ----------
-  // Texture riêng cho x∈[1600,2800] — gộp vào world-bg sẽ quá 4096px,
+  // Texture riêng cho x∈[1600,3400] — gộp vào world-bg sẽ quá 4096px,
   // nhiều GPU điện thoại không nạp nổi. Tọa độ vẽ = tọa độ thế giới,
-  // canvas tự tịnh tiến −1600.
+  // canvas tự tịnh tiến −1600. GĐ126: đông mở rộng 1800 (was 1200).
   {
-    const [rC, r] = makeCanvas(1200 * 2, G.H * 2);
+    const [rC, r] = makeCanvas(1800 * 2, G.H * 2);
     r.scale(2, 2);
     r.translate(-1600, 0);
     const rrnd = seededRand(4242);
     r.fillStyle = '#4a7d3e';
-    r.fillRect(1600, 0, 1200, G.H);
+    r.fillRect(1600, 0, 1800, G.H);
     for (let i = 0; i < 5200; i++) {
       r.fillStyle = pxDet[i % 3];
-      r.fillRect(1600 + Math.floor(rrnd() * 150) * 8, Math.floor(rrnd() * 150) * 8, 8, 8);
+      r.fillRect(1600 + Math.floor(rrnd() * 225) * 8, Math.floor(rrnd() * 150) * 8, 8, 8);
     }
-    // Dải rừng ngăn 1600–1760: nền tối rậm
+    // Dải rừng ngăn 2200–2360: nền tối rậm
     r.fillStyle = 'rgba(24,52,24,0.45)';
-    r.fillRect(1600, 0, 160, G.H);
+    r.fillRect(2200, 0, 160, G.H);
     for (let i = 0; i < 260; i++) {
-      const cx = 1604 + rrnd() * 152, cy = rrnd() * G.H;
+      const cx = 2204 + rrnd() * 152, cy = rrnd() * G.H;
       r.fillStyle = `rgba(18,44,18,${0.12 + rrnd() * 0.15})`;
       r.beginPath(); r.ellipse(cx, cy, 16 + rrnd() * 22, 12 + rrnd() * 16, 0, 0, Math.PI * 2); r.fill();
     }
@@ -1589,31 +1589,31 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
       r.fillStyle = 'rgba(234,255,250,0.9)';
       r.beginPath(); r.moveTo(x, y - 16 * s); r.lineTo(x + 3 * s, y - 2 * s); r.lineTo(x, y + 2 * s); r.lineTo(x - 3 * s, y - 2 * s); r.closePath(); r.fill();
     };
-    const crys: Array<[number, number]> = [[1960, 430], [2320, 420], [2560, 520], [2020, 780], [2480, 800], [2180, 900], [2560, 900], [1900, 700]];
+    const crys: Array<[number, number]> = [[2560, 430], [2920, 420], [3160, 520], [2620, 780], [3080, 800], [2780, 900], [3160, 900], [2500, 700]];
     for (const [cx, cy] of crys) { crystalAt(cx, cy, 0.8 + rrnd() * 0.5); crystalAt(cx + 14, cy + 4, 0.55); }
-    // Đàn đá — nơi Thạch Khôi Lỗi trấn giữ (2200,600)
+    // Đàn đá — nơi Thạch Khôi Lỗi trấn giữ (2800,600) — GĐ126: dời đông 600
     {
       r.fillStyle = 'rgba(126,130,124,0.45)';
-      r.beginPath(); r.arc(2200, 600, 86, 0, Math.PI * 2); r.fill();
+      r.beginPath(); r.arc(2800, 600, 86, 0, Math.PI * 2); r.fill();
       r.strokeStyle = 'rgba(190,196,188,0.5)'; r.lineWidth = 3;
-      r.beginPath(); r.arc(2200, 600, 74, 0, Math.PI * 2); r.stroke();
+      r.beginPath(); r.arc(2800, 600, 74, 0, Math.PI * 2); r.stroke();
       for (let k = 0; k < 6; k++) {
         const a = (k / 6) * Math.PI * 2;
-        rockAt(2200 + Math.cos(a) * 74, 600 + Math.sin(a) * 74, 1.15);
+        rockAt(2800 + Math.cos(a) * 74, 600 + Math.sin(a) * 74, 1.15);
       }
-      crystalAt(2200 - 52, 600 - 40, 1.0); crystalAt(2200 + 52, 600 - 40, 1.0);
-      crystalAt(2200 - 52, 600 + 44, 1.0); crystalAt(2200 + 52, 600 + 44, 1.0);
+      crystalAt(2800 - 52, 600 - 40, 1.0); crystalAt(2800 + 52, 600 - 40, 1.0);
+      crystalAt(2800 - 52, 600 + 44, 1.0); crystalAt(2800 + 52, 600 + 44, 1.0);
     }
-    // Vòng cổng TRỞ VỀ trong bí cảnh (1832,600)
+    // Vòng cổng TRỞ VỀ trong bí cảnh (2432,600) — GĐ126: dời đông 600
     {
-      const pg = r.createRadialGradient(1832, 600, 6, 1832, 600, 74);
+      const pg = r.createRadialGradient(2432, 600, 6, 2432, 600, 74);
       pg.addColorStop(0, 'rgba(190,160,255,0.22)'); pg.addColorStop(1, 'rgba(190,160,255,0)');
       r.fillStyle = pg;
-      r.beginPath(); r.arc(1832, 600, 74, 0, Math.PI * 2); r.fill();
+      r.beginPath(); r.arc(2432, 600, 74, 0, Math.PI * 2); r.fill();
       r.strokeStyle = 'rgba(168,140,250,0.85)'; r.lineWidth = 2;
-      r.beginPath(); r.arc(1832, 600, 44, 0, Math.PI * 2); r.stroke();
+      r.beginPath(); r.arc(2432, 600, 44, 0, Math.PI * 2); r.stroke();
       r.strokeStyle = 'rgba(127,231,220,0.7)'; r.lineWidth = 1.4;
-      r.beginPath(); r.arc(1832, 600, 36, 0, Math.PI * 2); r.stroke();
+      r.beginPath(); r.arc(2432, 600, 36, 0, Math.PI * 2); r.stroke();
     }
     scene.textures.addCanvas('realm-bg', rC);
   }
@@ -2296,6 +2296,7 @@ export interface MapEnterData {
   altar?: { x: number; y: number } | null; // GĐ85: đàn tế (chỉ map có trùm)
   study?: { x: number; y: number } | null; // GĐ105: điểm đọc sách Văn Uyển
   npcs?: Array<{ id: string; name: string; role: string; kind: string; x: number; y: number; style: string }>; // GĐ89: dân thành phố
+  nodes?: Array<{ id: string; kind: string; itemId: string; x: number; y: number }>; // GĐ132: điểm tài nguyên (mạch quặng / bụi thuốc)
 }
 interface ThemeStyle { g1: string; g2: string; accent: string; leaf: string; leaf2: string; rock: string; plaza: string }
 const MAP_THEME_STYLE: Record<string, ThemeStyle> = {
