@@ -2552,7 +2552,7 @@ function themeStyleOf(def: MapEnterData): ThemeStyle {
 // trong hộp 96, neo đáy y≈79. Đồ nhỏ KHÔNG phóng to (scale ≤ 1).
 const DECOR_SPRITE_BOX: Record<string, [number, number]> = {};
 for (const k of ['pine','willow','palm','dead_tree','blood_tree','swamp_tree','mountain','mountain_snow','pavilion','hut','cave','cactus']) DECOR_SPRITE_BOX[k] = [90, 76];
-for (const k of ['rock','stone','lava_rock','ice_shard','tomb','pillar','sword_stone','lamp','banner','furnace','forge','anvil','desk','fence','pond','wave','coral','hay','blossom']) DECOR_SPRITE_BOX[k] = [70, 56];
+for (const k of ['rock','stone','lava_rock','ice_shard','tomb','pillar','sword_stone','lamp','banner','furnace','forge','anvil','desk','fence','pond','wave','coral','hay','blossom','lava_pool','ice_crystal','dune']) DECOR_SPRITE_BOX[k] = [70, 56]; // GĐ166: + 3 decor chủ đề mới
 for (const k of ['flower','herb','grass','grass_tall','reed','bone','crystal','crystal_gold']) DECOR_SPRITE_BOX[k] = [46, 40];
 // GĐ111 sửa (user chê): nấm tròn đọc to hơn hộp nên thu riêng [36,30]
 // (kẻo lăn hệ số 1.25 lại to ngang cây); tre mới dáng cao nên hộp hẹp
@@ -2815,7 +2815,7 @@ export const SKILL_ELEMENT_COLOR: Record<string, string> = {
   Kim: '#dfe7ee', Hỏa: '#f0643c', Mộc: '#58a447', Thủy: '#5aa7c7', Thổ: '#c9a45c',
 };
 const SKILL_TIER_FRAME: Record<string, string> = {
-  coban: '#b08a4a', luyenkhi: '#3fae8e', trucco: '#e8b93a',
+  coban: '#b08a4a', luyenkhi: '#3fae8e', trucco: '#e8b93a', kimdan: '#ffd75e', nguyenanh: '#86c5ff', // GĐ164
 };
 export function skillGlyphFamily(weaponId: string): string {
   switch (weaponId) {

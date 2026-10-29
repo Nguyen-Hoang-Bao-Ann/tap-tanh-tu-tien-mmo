@@ -1771,7 +1771,7 @@
    "id": "kd_satthu_dao_gam_kim",
    "name": "Ẩn thân chí mạng",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Dao găm",
    "weaponIds": [
     "daogam"
@@ -1794,7 +1794,7 @@
    "id": "kd_satthu_dao_gam_moc",
    "name": "Bóng độc Dao",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Dao găm",
    "weaponIds": [
     "daogam"
@@ -1817,7 +1817,7 @@
    "id": "kd_satthu_dao_gam_thuy",
    "name": "Đâm đóng băng",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Dao găm",
    "weaponIds": [
     "daogam"
@@ -1840,7 +1840,7 @@
    "id": "kd_satthu_dao_gam_hoa",
    "name": "Lướt đâm lửa",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Dao găm",
    "weaponIds": [
     "daogam"
@@ -1863,7 +1863,7 @@
    "id": "kd_satthu_dao_gam_tho",
    "name": "Đâm choáng Dao",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Dao găm",
    "weaponIds": [
     "daogam"
@@ -1886,7 +1886,7 @@
    "id": "kd_satthu_song_dao_kim",
    "name": "Hợp kích giảm giáp",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Song đao",
    "weaponIds": [
     "songdao"
@@ -1909,7 +1909,7 @@
    "id": "kd_satthu_song_dao_moc",
    "name": "Mưa lá đao",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Song đao",
    "weaponIds": [
     "songdao"
@@ -1932,7 +1932,7 @@
    "id": "kd_satthu_song_dao_thuy",
    "name": "Xoáy băng Đao",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Song đao",
    "weaponIds": [
     "songdao"
@@ -1955,7 +1955,7 @@
    "id": "kd_satthu_song_dao_hoa",
    "name": "Vòng lửa Đao",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Song đao",
    "weaponIds": [
     "songdao"
@@ -1978,7 +1978,7 @@
    "id": "kd_satthu_song_dao_tho",
    "name": "Chém núi Đao",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Song đao",
    "weaponIds": [
     "songdao"
@@ -2001,7 +2001,7 @@
    "id": "kd_satthu_liem_ngan_kim",
    "name": "Xoáy kim Liêm",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Liêm ngắn",
    "weaponIds": [
     "liemngan"
@@ -2024,7 +2024,7 @@
    "id": "kd_satthu_liem_ngan_moc",
    "name": "Kéo quái Liêm",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Liêm ngắn",
    "weaponIds": [
     "liemngan"
@@ -2047,7 +2047,7 @@
    "id": "kd_satthu_liem_ngan_thuy",
    "name": "Xoáy băng Liêm",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Liêm ngắn",
    "weaponIds": [
     "liemngan"
@@ -2070,7 +2070,7 @@
    "id": "kd_satthu_liem_ngan_hoa",
    "name": "Lốc liêm lửa",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Liêm ngắn",
    "weaponIds": [
     "liemngan"
@@ -2093,7 +2093,7 @@
    "id": "kd_satthu_liem_ngan_tho",
    "name": "Đập choáng Liêm",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Liêm ngắn",
    "weaponIds": [
     "liemngan"
@@ -2116,7 +2116,7 @@
    "id": "kd_satthu_trao_kim",
    "name": "Xé giáp Trảo",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Trảo",
    "weaponIds": [
     "trao"
@@ -2139,7 +2139,7 @@
    "id": "kd_satthu_trao_moc",
    "name": "Rễ cây Trảo",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Trảo",
    "weaponIds": [
     "trao"
@@ -2162,7 +2162,7 @@
    "id": "kd_satthu_trao_thuy",
    "name": "Vuốt băng Trảo",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Trảo",
    "weaponIds": [
     "trao"
@@ -2185,7 +2185,7 @@
    "id": "kd_satthu_trao_hoa",
    "name": "Vuốt lửa Trảo",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Trảo",
    "weaponIds": [
     "trao"
@@ -2208,7 +2208,7 @@
    "id": "kd_satthu_trao_tho",
    "name": "Choáng diện rộng",
    "classId": "satthu",
-   "className": "Sát Thủ",
+   "className": "Ảnh Tu",
    "weaponGroup": "Trảo",
    "weaponIds": [
     "trao"

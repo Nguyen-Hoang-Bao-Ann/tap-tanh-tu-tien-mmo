@@ -415,6 +415,119 @@
      "defSec": 3.0
     },
     "fxText": "Giảm 30% sát thương nhận/3.0s"
+   },
+   {
+    "id": "thetu_taykhong_kd1",
+    "name": "Phá Thiên Quyền",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Tay không — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Tay không.",
+    "weaponId": "taykhong",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "thetu_taykhong_kd2",
+    "name": "Kim Cang Quyền",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Tay không — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "taykhong",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "thetu_taykhong_kd3",
+    "name": "Chiến Huyết Quyền",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Tay không — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "taykhong",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "thetu_taykhong_na1",
+    "name": "Tật Phong Quyền",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Tay không — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "taykhong",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "thetu_taykhong_na2",
+    "name": "Hồi Nguyên Quyền",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Tay không — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "taykhong",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "thetu_taykhong_na3",
+    "name": "Chấn Nhạc Quyền",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Tay không — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "taykhong",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "chienphu": [
@@ -821,6 +934,119 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "thetu_chienphu_kd1",
+    "name": "Phá Thiên Phủ",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Chiến phủ — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Chiến phủ.",
+    "weaponId": "chienphu",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "thetu_chienphu_kd2",
+    "name": "Kim Cang Phủ",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Chiến phủ — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "chienphu",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "thetu_chienphu_kd3",
+    "name": "Chiến Huyết Phủ",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Chiến phủ — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "chienphu",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "thetu_chienphu_na1",
+    "name": "Tật Phong Phủ",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Chiến phủ — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "chienphu",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "thetu_chienphu_na2",
+    "name": "Hồi Nguyên Phủ",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Chiến phủ — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "chienphu",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "thetu_chienphu_na3",
+    "name": "Chấn Nhạc Phủ",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Chiến phủ — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "chienphu",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "cukiem": [
@@ -1227,6 +1453,119 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "thetu_cukiem_kd1",
+    "name": "Phá Thiên Cự Kiếm",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cự kiếm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Cự kiếm.",
+    "weaponId": "cukiem",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "thetu_cukiem_kd2",
+    "name": "Kim Cang Cự Kiếm",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cự kiếm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "cukiem",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "thetu_cukiem_kd3",
+    "name": "Chiến Huyết Cự Kiếm",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cự kiếm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "cukiem",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "thetu_cukiem_na1",
+    "name": "Tật Phong Cự Kiếm",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cự kiếm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "cukiem",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "thetu_cukiem_na2",
+    "name": "Hồi Nguyên Cự Kiếm",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cự kiếm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "cukiem",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "thetu_cukiem_na3",
+    "name": "Chấn Nhạc Cự Kiếm",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cự kiếm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "cukiem",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "daothe": [
@@ -1633,6 +1972,119 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "thetu_daothe_kd1",
+    "name": "Phá Thiên Đao",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Đao — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Đao.",
+    "weaponId": "daothe",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "thetu_daothe_kd2",
+    "name": "Kim Cang Đao",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Đao — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "daothe",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "thetu_daothe_kd3",
+    "name": "Chiến Huyết Đao",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Đao — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "daothe",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "thetu_daothe_na1",
+    "name": "Tật Phong Đao",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Đao — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "daothe",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "thetu_daothe_na2",
+    "name": "Hồi Nguyên Đao",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Đao — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "daothe",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "thetu_daothe_na3",
+    "name": "Chấn Nhạc Đao",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Đao — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "daothe",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "thuongthe": [
@@ -1762,7 +2214,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -2053,6 +2505,119 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "thetu_thuongthe_kd1",
+    "name": "Phá Thiên Thương",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Thương — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Thương.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "thetu_thuongthe_kd2",
+    "name": "Kim Cang Thương",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Thương — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "thetu_thuongthe_kd3",
+    "name": "Chiến Huyết Thương",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Thương — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "thetu_thuongthe_na1",
+    "name": "Tật Phong Thương",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Thương — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "thetu_thuongthe_na2",
+    "name": "Hồi Nguyên Thương",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Thương — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "thetu_thuongthe_na3",
+    "name": "Chấn Nhạc Thương",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Thương — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "thietcon": [
@@ -2177,7 +2742,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -2382,7 +2947,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -2472,6 +3037,119 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "thetu_thietcon_kd1",
+    "name": "Phá Thiên Côn",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Thiết côn — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Thiết côn.",
+    "weaponId": "thietcon",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "thetu_thietcon_kd2",
+    "name": "Kim Cang Côn",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Thiết côn — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "thietcon",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "thetu_thietcon_kd3",
+    "name": "Chiến Huyết Côn",
+    "element": "Thổ",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Thiết côn — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "thietcon",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "thetu_thietcon_na1",
+    "name": "Tật Phong Côn",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Thiết côn — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "thietcon",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "thetu_thietcon_na2",
+    "name": "Hồi Nguyên Côn",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Thiết côn — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "thietcon",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "thetu_thietcon_na3",
+    "name": "Chấn Nhạc Côn",
+    "element": "Thổ",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Thiết côn — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "thietcon",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -2529,7 +3207,7 @@
       "value": 15
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 10
      }
     ],
@@ -2551,7 +3229,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -2633,7 +3311,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -2656,7 +3334,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -2687,7 +3365,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -2768,7 +3446,7 @@
       "value": 30
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -2790,7 +3468,7 @@
     "cost": 115,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -2816,7 +3494,7 @@
     "cost": 105,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -2848,7 +3526,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -2874,7 +3552,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -2909,6 +3587,118 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "phattu_phatchau_kd1",
+    "name": "Phục Ma Châu",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phật châu — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Phật châu.",
+    "weaponId": "phatchau",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_phatchau_kd2",
+    "name": "Minh Vương Châu",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phật châu — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "phatchau",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phattu_phatchau_kd3",
+    "name": "Phổ Độ Châu",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phật châu — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "phatchau",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phattu_phatchau_na1",
+    "name": "Liên Hoa Châu",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phật châu — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "phatchau",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phattu_phatchau_na2",
+    "name": "Từ Bi Châu",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phật châu — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "phatchau",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phattu_phatchau_na3",
+    "name": "Sư Tử Châu",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phật châu — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "phatchau",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "quyentruong": [
@@ -2989,7 +3779,7 @@
       "value": 30
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -3092,7 +3882,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -3122,7 +3912,7 @@
       "value": 30
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -3145,7 +3935,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -3172,7 +3962,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -3252,7 +4042,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      }
     ],
@@ -3303,7 +4093,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -3325,7 +4115,7 @@
     "cost": 110,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -3341,6 +4131,118 @@
      "aoe": 85
     },
     "fxText": "Choáng 1.2s · Đánh vùng"
+   },
+   {
+    "id": "phattu_quyentruong_kd1",
+    "name": "Phục Ma Trượng",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quyền trượng — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Quyền trượng.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_quyentruong_kd2",
+    "name": "Minh Vương Trượng",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quyền trượng — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phattu_quyentruong_kd3",
+    "name": "Phổ Độ Trượng",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quyền trượng — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phattu_quyentruong_na1",
+    "name": "Liên Hoa Trượng",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quyền trượng — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phattu_quyentruong_na2",
+    "name": "Từ Bi Trượng",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quyền trượng — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phattu_quyentruong_na3",
+    "name": "Sư Tử Trượng",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quyền trượng — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "binhbat": [
@@ -3413,7 +4315,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -3437,7 +4339,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -3466,7 +4368,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -3496,7 +4398,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -3523,7 +4425,7 @@
       "value": 15
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 10
      }
     ],
@@ -3645,7 +4547,7 @@
     "cost": 115,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -3673,7 +4575,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -3699,7 +4601,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -3725,7 +4627,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -3758,6 +4660,118 @@
     "weaponId": "binhbat",
     "fx": {},
     "fxText": ""
+   },
+   {
+    "id": "phattu_binhbat_kd1",
+    "name": "Phục Ma Bát",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Bình bát — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Bình bát.",
+    "weaponId": "binhbat",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_binhbat_kd2",
+    "name": "Minh Vương Bát",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Bình bát — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "binhbat",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phattu_binhbat_kd3",
+    "name": "Phổ Độ Bát",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Bình bát — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "binhbat",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phattu_binhbat_na1",
+    "name": "Liên Hoa Bát",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Bình bát — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "binhbat",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phattu_binhbat_na2",
+    "name": "Từ Bi Bát",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Bình bát — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "binhbat",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phattu_binhbat_na3",
+    "name": "Sư Tử Bát",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Bình bát — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "binhbat",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -4043,7 +5057,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -4172,7 +5186,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -4184,6 +5198,119 @@
      "aoe": 85
     },
     "fxText": "Choáng 1.2s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotthuan_kd1",
+    "name": "Cốt Nhận Thuẫn",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt thuẫn — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Cốt thuẫn.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotthuan_kd2",
+    "name": "Cốt Giáp Thuẫn",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt thuẫn — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "cottu_cotthuan_kd3",
+    "name": "Triều Tông Thuẫn",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt thuẫn — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "cottu_cotthuan_na1",
+    "name": "Cốt Ảnh Thuẫn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt thuẫn — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "cottu_cotthuan_na2",
+    "name": "Hoàn Cốt Thuẫn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt thuẫn — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "cottu_cotthuan_na3",
+    "name": "Cốt Ngục Thuẫn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt thuẫn — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "cotchuy": [
@@ -4261,7 +5388,7 @@
       "value": 35
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -4608,6 +5735,119 @@
      "aoe": 85
     },
     "fxText": "Giảm 30% sát thương nhận/3.0s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotchuy_kd1",
+    "name": "Cốt Nhận Chùy",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt chùy — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Cốt chùy.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotchuy_kd2",
+    "name": "Cốt Giáp Chùy",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt chùy — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "cottu_cotchuy_kd3",
+    "name": "Triều Tông Chùy",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt chùy — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "cottu_cotchuy_na1",
+    "name": "Cốt Ảnh Chùy",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt chùy — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "cottu_cotchuy_na2",
+    "name": "Hoàn Cốt Chùy",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt chùy — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "cottu_cotchuy_na3",
+    "name": "Cốt Ngục Chùy",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt chùy — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -4665,7 +5905,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -4766,7 +6006,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -4788,7 +6028,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -4941,7 +6181,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      }
     ],
@@ -5027,6 +6267,891 @@
      "defSec": 3.0
     },
     "fxText": "Giảm 25% sát thương nhận/3.0s"
+   },
+   {
+    "id": "phaptu_phien_lu11",
+    "name": "Tử Điện Phiến",
+    "element": "Lôi",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt dẫn tử điện xé thẳng mục tiêu, điện quang xuyên giáp; Thủ: điện quang hộ thân đẩy đạn nhỏ",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "phaptu_phien_lu12",
+    "name": "Kinh Lôi Phiến",
+    "element": "Lôi",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: quạt gọi kinh lôi nổ tung kèm cháy điện; Thủ: lôi quang quấn thân làm chậm kẻ áp sát",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 15,
+     "dotDps": 6,
+     "dotSec": 2
+    },
+    "fxText": "Xuyên phòng 15% · Đốt/độc 6/s×2s"
+   },
+   {
+    "id": "phaptu_phien_tr6",
+    "name": "Cửu Thiên Thần Lôi Phiến",
+    "element": "Lôi",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: quạt dẫn cửu thiên thần lôi giáng xuống, xuyên giáp và làm choáng; Thủ: lôi vực quanh người hộ thể",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 30,
+     "stun": 1.0
+    },
+    "fxText": "Xuyên phòng 30% · Choáng 1.0s"
+   },
+   {
+    "id": "phaptu_phien_lu13",
+    "name": "Toàn Phong Phiến",
+    "element": "Phong",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt tạo lốc xoáy đẩy lùi kẻ địch; Thủ: gió xoáy chắn bước tiến",
+    "weaponId": "phien",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phien_lu14",
+    "name": "Lưu Vân Phiến",
+    "element": "Phong",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: quạt thả mây gió cuốn chân kẻ địch làm chậm; Thủ: thân pháp nhẹ đi trong gió",
+    "weaponId": "phien",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "phaptu_phien_tr7",
+    "name": "Cửu Thiên Cương Phong Phiến",
+    "element": "Phong",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: quạt gọi cương phong cửu thiên quét cả vùng, hất văng mọi kẻ địch; Thủ: gió lớn ngăn đạn tầm xa",
+    "weaponId": "phien",
+    "fx": {
+     "knock": 60,
+     "aoe": 85
+    },
+    "fxText": "Đẩy lùi · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phien_lu15",
+    "name": "Hàn Băng Phiến",
+    "element": "Băng",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt phóng hàn băng làm chậm mục tiêu; Thủ: sương lạnh giảm tốc kẻ đuổi theo",
+    "weaponId": "phien",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "phaptu_phien_lu16",
+    "name": "Sương Tuyết Phiến",
+    "element": "Băng",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: quạt rải sương tuyết đóng băng mặt đất, kẻ địch trượt chậm hẳn; Thủ: áo sương chống lửa",
+    "weaponId": "phien",
+    "fx": {
+     "slowPct": 35,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 35%/3.0s"
+   },
+   {
+    "id": "phaptu_phien_tr8",
+    "name": "Cực Hàn Băng Ngục Phiến",
+    "element": "Băng",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: quạt dựng băng ngục cực hàn đóng băng cả vùng; Thủ: tường băng hấp thụ sát thương",
+    "weaponId": "phien",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s"
+   },
+   {
+    "id": "phaptu_phien_lu17",
+    "name": "Nham Thiết Phiến",
+    "element": "Nham",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt hóa nham thiết nặng nề giáng xuống, xuyên giáp và đẩy lùi; Thủ: da nham chịu đòn",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 15,
+     "knock": 30
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phien_lu18",
+    "name": "Bàn Thạch Phiến",
+    "element": "Nham",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Thủ: quạt dựng bàn thạch hộ thân giảm sát thương; Công: đá vụn bắn ra quanh người",
+    "weaponId": "phien",
+    "fx": {
+     "defPct": 20,
+     "defSec": 3.0
+    },
+    "fxText": "Giảm 20% sát thương nhận/3.0s"
+   },
+   {
+    "id": "phaptu_phien_tr9",
+    "name": "Thái Sơn Nham Ngục Phiến",
+    "element": "Nham",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: quạt gọi Thái Sơn nham thạch trấn áp cả vùng; Thủ: nham giáp dày hộ thể",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 25,
+     "knock": 60,
+     "aoe": 85
+    },
+    "fxText": "Xuyên phòng 25% · Đẩy lùi · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phien_lu19",
+    "name": "Hủ Độc Phiến",
+    "element": "Độc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt phun hủ độc ăn mòn mục tiêu theo thời gian; Thủ: hơi độc làm kẻ áp sát chùn bước",
+    "weaponId": "phien",
+    "fx": {
+     "dotDps": 6,
+     "dotSec": 4
+    },
+    "fxText": "Đốt/độc 6/s×4s"
+   },
+   {
+    "id": "phaptu_phien_lu20",
+    "name": "Xà Độc Phiến",
+    "element": "Độc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: quạt thả xà độc cắn rồi rút, độc lan và làm chậm; Thủ: máu độc khiến kẻ đánh trúng cũng nhiễm nhẹ",
+    "weaponId": "phien",
+    "fx": {
+     "dotDps": 8,
+     "dotSec": 4,
+     "slowPct": 15,
+     "slowSec": 2.0
+    },
+    "fxText": "Đốt/độc 8/s×4s · Chậm 15%/2.0s"
+   },
+   {
+    "id": "phaptu_phien_tr10",
+    "name": "Vạn Độc Phệ Tâm Phiến",
+    "element": "Độc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: quạt dẫn vạn độc phệ tâm, độc nặng trói chân kẻ địch; Thủ: độc vụ quanh người ngăn áp sát",
+    "weaponId": "phien",
+    "fx": {
+     "dotDps": 12,
+     "dotSec": 5,
+     "root": 1.0
+    },
+    "fxText": "Đốt/độc 12/s×5s · Trói 1.0s"
+   },
+   {
+    "id": "phaptu_phien_lu21",
+    "name": "Thánh Quang Phiến",
+    "element": "Quang",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt chiếu thánh quang thiêu đốt tà khí; Thủ: quang quang hồi phục nhẹ cho bản thân",
+    "weaponId": "phien",
+    "fx": {
+     "healPct": 6
+    },
+    "fxText": "Hồi 6% máu"
+   },
+   {
+    "id": "phaptu_phien_lu22",
+    "name": "Diệu Quang Phiến",
+    "element": "Quang",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: quạt tỏa diệu quang xuyên qua hàng địch; Thủ: ánh sáng chữa lành vết thương",
+    "weaponId": "phien",
+    "fx": {
+     "healPct": 8,
+     "pierce": 10
+    },
+    "fxText": "Xuyên phòng 10% · Hồi 8% máu"
+   },
+   {
+    "id": "phaptu_phien_tr11",
+    "name": "Đại Quang Minh Phiến",
+    "element": "Quang",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: quạt mở đại quang minh phổ chiếu cả vùng; Thủ: quang minh hộ thể và hồi phục mạnh",
+    "weaponId": "phien",
+    "fx": {
+     "healPct": 15,
+     "aoe": 85
+    },
+    "fxText": "Hồi 15% máu · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phien_lu23",
+    "name": "U Ảnh Phiến",
+    "element": "Ám",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt hóa u ảnh vồ tới hút sinh khí của địch; Thủ: bóng tối che mắt kẻ truy đuổi",
+    "weaponId": "phien",
+    "fx": {
+     "lifesteal": 15
+    },
+    "fxText": "Hút 15% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phien_lu24",
+    "name": "Hắc Ám Phiến",
+    "element": "Ám",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: quạt phủ hắc ám làm địch chậm chạp rồi hút máu; Thủ: chìm vào bóng tối tránh đòn",
+    "weaponId": "phien",
+    "fx": {
+     "lifesteal": 25,
+     "slowPct": 15,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 15%/2.0s · Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phien_tr12",
+    "name": "Vĩnh Dạ Ám Ngục Phiến",
+    "element": "Ám",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: quạt giăng vĩnh dạ ám ngục nuốt ánh sáng, hút mạnh sinh khí và làm choáng; Thủ: bóng đêm hộ thân",
+    "weaponId": "phien",
+    "fx": {
+     "lifesteal": 40,
+     "stun": 1.0
+    },
+    "fxText": "Choáng 1.0s · Hút 40% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phien_lu25",
+    "name": "Huyết Khế Phiến",
+    "element": "Huyết",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt ký huyết khế rút máu địch về mình; Thủ: huyết khí sôi trào chịu đòn tốt hơn",
+    "weaponId": "phien",
+    "fx": {
+     "lifesteal": 20
+    },
+    "fxText": "Hút 20% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phien_lu26",
+    "name": "Thực Huyết Phiến",
+    "element": "Huyết",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: quạt thả thực huyết ăn mòn vết thương hở rồi hút lại; Thủ: mùi máu làm quái hung hãn tránh xa",
+    "weaponId": "phien",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3,
+     "lifesteal": 15
+    },
+    "fxText": "Đốt/độc 5/s×3s · Hút 15% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phien_tr13",
+    "name": "Huyết Hải Vô Biên Phiến",
+    "element": "Huyết",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: quạt dâng huyết hải vô biên nuốt cả vùng, hút nửa sát thương thành máu; Thủ: biển máu hộ thể",
+    "weaponId": "phien",
+    "fx": {
+     "lifesteal": 50,
+     "aoe": 85
+    },
+    "fxText": "Hút 50% sát thương thành máu · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phien_lu27",
+    "name": "Lưu Quang Phiến",
+    "element": "Thời Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt bẻ dòng thời gian quanh mục tiêu làm nó chậm hẳn; Thủ: bản thân lướt nhanh một nhịp",
+    "weaponId": "phien",
+    "fx": {
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s"
+   },
+   {
+    "id": "phaptu_phien_lu28",
+    "name": "Ngưng Thời Phiến",
+    "element": "Thời Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: quạt ngưng đọng thời gian một vùng nhỏ, kẻ địch gần như đứng yên; Thủ: thoái lui khỏi khoảnh khắc nguy hiểm",
+    "weaponId": "phien",
+    "fx": {
+     "slowPct": 45,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 45%/3.0s"
+   },
+   {
+    "id": "phaptu_phien_tr14",
+    "name": "Thời Gian Trường Hà Phiến",
+    "element": "Thời Gian",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: quạt mở thời gian trường hà cuốn cả vùng vào dòng chảy ngược, kẻ địch choáng và chậm nặng; Thủ: đứng ngoài dòng thời gian tránh đòn",
+    "weaponId": "phien",
+    "fx": {
+     "stun": 2.0,
+     "slowPct": 40,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 40%/3.0s · Choáng 2.0s"
+   },
+   {
+    "id": "phaptu_phien_lu29",
+    "name": "Hư Không Phiến",
+    "element": "Không Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: quạt xé một vết hư không xuyên thẳng qua giáp; Thủ: dịch chuyển ngắn tránh đòn",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 25
+    },
+    "fxText": "Xuyên phòng 25%"
+   },
+   {
+    "id": "phaptu_phien_lu30",
+    "name": "Phá Không Phiến",
+    "element": "Không Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: quạt phá không gian giáng đòn từ hư vô, xuyên giáp nặng và đẩy lùi; Thủ: nếp gấp không gian chặn đạn",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 35,
+     "knock": 30
+    },
+    "fxText": "Xuyên phòng 35% · Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phien_tr15",
+    "name": "Không Gian Băng Diệt Phiến",
+    "element": "Không Gian",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: quạt làm không gian băng diệt cả vùng, mọi giáp đều bị xé nát; Thủ: ẩn mình giữa các lớp không gian",
+    "weaponId": "phien",
+    "fx": {
+     "pierce": 50,
+     "aoe": 85
+    },
+    "fxText": "Xuyên phòng 50% · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phien_kd1",
+    "name": "Diệt Thiên Phiến",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phiến — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Phiến.",
+    "weaponId": "phien",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phien_kd2",
+    "name": "Hộ Pháp Phiến",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phiến — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "phien",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phaptu_phien_kd3",
+    "name": "Ngũ Hành Phiến",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phiến — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "phien",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phaptu_phien_na1",
+    "name": "Phiêu Vân Phiến",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phiến — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "phien",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phaptu_phien_na2",
+    "name": "Hồi Linh Phiến",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phiến — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "phien",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phaptu_phien_na3",
+    "name": "Trấn Ma Phiến",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phiến — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "phien",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "phaptruong": [
@@ -5105,7 +7230,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      }
     ],
@@ -5152,7 +7277,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -5202,7 +7327,7 @@
       "value": 30
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -5222,7 +7347,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -5249,7 +7374,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -5279,7 +7404,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -5330,7 +7455,7 @@
       "value": 45
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -5354,7 +7479,7 @@
       "value": 45
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -5378,7 +7503,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -5405,7 +7530,7 @@
       "value": 45
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -5425,7 +7550,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 45
      },
      {
@@ -5457,7 +7582,7 @@
       "value": 45
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -5469,6 +7594,891 @@
      "aoe": 85
     },
     "fxText": "Choáng 1.2s · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phaptruong_lu11",
+    "name": "Tử Điện Trượng",
+    "element": "Lôi",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng dẫn tử điện xé thẳng mục tiêu, điện quang xuyên giáp; Thủ: điện quang hộ thân đẩy đạn nhỏ",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "phaptu_phaptruong_lu12",
+    "name": "Kinh Lôi Trượng",
+    "element": "Lôi",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: vung trượng gọi kinh lôi nổ tung kèm cháy điện; Thủ: lôi quang quấn thân làm chậm kẻ áp sát",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 15,
+     "dotDps": 6,
+     "dotSec": 2
+    },
+    "fxText": "Xuyên phòng 15% · Đốt/độc 6/s×2s"
+   },
+   {
+    "id": "phaptu_phaptruong_tr7",
+    "name": "Cửu Thiên Thần Lôi Trượng",
+    "element": "Lôi",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: vung trượng dẫn cửu thiên thần lôi giáng xuống, xuyên giáp và làm choáng; Thủ: lôi vực quanh người hộ thể",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 30,
+     "stun": 1.0
+    },
+    "fxText": "Xuyên phòng 30% · Choáng 1.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_lu13",
+    "name": "Toàn Phong Trượng",
+    "element": "Phong",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng tạo lốc xoáy đẩy lùi kẻ địch; Thủ: gió xoáy chắn bước tiến",
+    "weaponId": "phaptruong",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phaptruong_lu14",
+    "name": "Lưu Vân Trượng",
+    "element": "Phong",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: vung trượng thả mây gió cuốn chân kẻ địch làm chậm; Thủ: thân pháp nhẹ đi trong gió",
+    "weaponId": "phaptruong",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_tr8",
+    "name": "Cửu Thiên Cương Phong Trượng",
+    "element": "Phong",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: vung trượng gọi cương phong cửu thiên quét cả vùng, hất văng mọi kẻ địch; Thủ: gió lớn ngăn đạn tầm xa",
+    "weaponId": "phaptruong",
+    "fx": {
+     "knock": 60,
+     "aoe": 85
+    },
+    "fxText": "Đẩy lùi · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phaptruong_lu15",
+    "name": "Hàn Băng Trượng",
+    "element": "Băng",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng phóng hàn băng làm chậm mục tiêu; Thủ: sương lạnh giảm tốc kẻ đuổi theo",
+    "weaponId": "phaptruong",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "phaptu_phaptruong_lu16",
+    "name": "Sương Tuyết Trượng",
+    "element": "Băng",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: vung trượng rải sương tuyết đóng băng mặt đất, kẻ địch trượt chậm hẳn; Thủ: áo sương chống lửa",
+    "weaponId": "phaptruong",
+    "fx": {
+     "slowPct": 35,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 35%/3.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_tr9",
+    "name": "Cực Hàn Băng Ngục Trượng",
+    "element": "Băng",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: vung trượng dựng băng ngục cực hàn đóng băng cả vùng; Thủ: tường băng hấp thụ sát thương",
+    "weaponId": "phaptruong",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s"
+   },
+   {
+    "id": "phaptu_phaptruong_lu17",
+    "name": "Nham Thiết Trượng",
+    "element": "Nham",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng hóa nham thiết nặng nề giáng xuống, xuyên giáp và đẩy lùi; Thủ: da nham chịu đòn",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 15,
+     "knock": 30
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phaptruong_lu18",
+    "name": "Bàn Thạch Trượng",
+    "element": "Nham",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Thủ: vung trượng dựng bàn thạch hộ thân giảm sát thương; Công: đá vụn bắn ra quanh người",
+    "weaponId": "phaptruong",
+    "fx": {
+     "defPct": 20,
+     "defSec": 3.0
+    },
+    "fxText": "Giảm 20% sát thương nhận/3.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_tr10",
+    "name": "Thái Sơn Nham Ngục Trượng",
+    "element": "Nham",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: vung trượng gọi Thái Sơn nham thạch trấn áp cả vùng; Thủ: nham giáp dày hộ thể",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 25,
+     "knock": 60,
+     "aoe": 85
+    },
+    "fxText": "Xuyên phòng 25% · Đẩy lùi · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phaptruong_lu19",
+    "name": "Hủ Độc Trượng",
+    "element": "Độc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng phun hủ độc ăn mòn mục tiêu theo thời gian; Thủ: hơi độc làm kẻ áp sát chùn bước",
+    "weaponId": "phaptruong",
+    "fx": {
+     "dotDps": 6,
+     "dotSec": 4
+    },
+    "fxText": "Đốt/độc 6/s×4s"
+   },
+   {
+    "id": "phaptu_phaptruong_lu20",
+    "name": "Xà Độc Trượng",
+    "element": "Độc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: vung trượng thả xà độc cắn rồi rút, độc lan và làm chậm; Thủ: máu độc khiến kẻ đánh trúng cũng nhiễm nhẹ",
+    "weaponId": "phaptruong",
+    "fx": {
+     "dotDps": 8,
+     "dotSec": 4,
+     "slowPct": 15,
+     "slowSec": 2.0
+    },
+    "fxText": "Đốt/độc 8/s×4s · Chậm 15%/2.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_tr11",
+    "name": "Vạn Độc Phệ Tâm Trượng",
+    "element": "Độc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: vung trượng dẫn vạn độc phệ tâm, độc nặng trói chân kẻ địch; Thủ: độc vụ quanh người ngăn áp sát",
+    "weaponId": "phaptruong",
+    "fx": {
+     "dotDps": 12,
+     "dotSec": 5,
+     "root": 1.0
+    },
+    "fxText": "Đốt/độc 12/s×5s · Trói 1.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_lu21",
+    "name": "Thánh Quang Trượng",
+    "element": "Quang",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng chiếu thánh quang thiêu đốt tà khí; Thủ: quang quang hồi phục nhẹ cho bản thân",
+    "weaponId": "phaptruong",
+    "fx": {
+     "healPct": 6
+    },
+    "fxText": "Hồi 6% máu"
+   },
+   {
+    "id": "phaptu_phaptruong_lu22",
+    "name": "Diệu Quang Trượng",
+    "element": "Quang",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: vung trượng tỏa diệu quang xuyên qua hàng địch; Thủ: ánh sáng chữa lành vết thương",
+    "weaponId": "phaptruong",
+    "fx": {
+     "healPct": 8,
+     "pierce": 10
+    },
+    "fxText": "Xuyên phòng 10% · Hồi 8% máu"
+   },
+   {
+    "id": "phaptu_phaptruong_tr12",
+    "name": "Đại Quang Minh Trượng",
+    "element": "Quang",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: vung trượng mở đại quang minh phổ chiếu cả vùng; Thủ: quang minh hộ thể và hồi phục mạnh",
+    "weaponId": "phaptruong",
+    "fx": {
+     "healPct": 15,
+     "aoe": 85
+    },
+    "fxText": "Hồi 15% máu · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phaptruong_lu23",
+    "name": "U Ảnh Trượng",
+    "element": "Ám",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng hóa u ảnh vồ tới hút sinh khí của địch; Thủ: bóng tối che mắt kẻ truy đuổi",
+    "weaponId": "phaptruong",
+    "fx": {
+     "lifesteal": 15
+    },
+    "fxText": "Hút 15% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phaptruong_lu24",
+    "name": "Hắc Ám Trượng",
+    "element": "Ám",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: vung trượng phủ hắc ám làm địch chậm chạp rồi hút máu; Thủ: chìm vào bóng tối tránh đòn",
+    "weaponId": "phaptruong",
+    "fx": {
+     "lifesteal": 25,
+     "slowPct": 15,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 15%/2.0s · Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phaptruong_tr13",
+    "name": "Vĩnh Dạ Ám Ngục Trượng",
+    "element": "Ám",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: vung trượng giăng vĩnh dạ ám ngục nuốt ánh sáng, hút mạnh sinh khí và làm choáng; Thủ: bóng đêm hộ thân",
+    "weaponId": "phaptruong",
+    "fx": {
+     "lifesteal": 40,
+     "stun": 1.0
+    },
+    "fxText": "Choáng 1.0s · Hút 40% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phaptruong_lu25",
+    "name": "Huyết Khế Trượng",
+    "element": "Huyết",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng ký huyết khế rút máu địch về mình; Thủ: huyết khí sôi trào chịu đòn tốt hơn",
+    "weaponId": "phaptruong",
+    "fx": {
+     "lifesteal": 20
+    },
+    "fxText": "Hút 20% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phaptruong_lu26",
+    "name": "Thực Huyết Trượng",
+    "element": "Huyết",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: vung trượng thả thực huyết ăn mòn vết thương hở rồi hút lại; Thủ: mùi máu làm quái hung hãn tránh xa",
+    "weaponId": "phaptruong",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3,
+     "lifesteal": 15
+    },
+    "fxText": "Đốt/độc 5/s×3s · Hút 15% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phaptruong_tr14",
+    "name": "Huyết Hải Vô Biên Trượng",
+    "element": "Huyết",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: vung trượng dâng huyết hải vô biên nuốt cả vùng, hút nửa sát thương thành máu; Thủ: biển máu hộ thể",
+    "weaponId": "phaptruong",
+    "fx": {
+     "lifesteal": 50,
+     "aoe": 85
+    },
+    "fxText": "Hút 50% sát thương thành máu · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phaptruong_lu27",
+    "name": "Lưu Quang Trượng",
+    "element": "Thời Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng bẻ dòng thời gian quanh mục tiêu làm nó chậm hẳn; Thủ: bản thân lướt nhanh một nhịp",
+    "weaponId": "phaptruong",
+    "fx": {
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_lu28",
+    "name": "Ngưng Thời Trượng",
+    "element": "Thời Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: vung trượng ngưng đọng thời gian một vùng nhỏ, kẻ địch gần như đứng yên; Thủ: thoái lui khỏi khoảnh khắc nguy hiểm",
+    "weaponId": "phaptruong",
+    "fx": {
+     "slowPct": 45,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 45%/3.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_tr15",
+    "name": "Thời Gian Trường Hà Trượng",
+    "element": "Thời Gian",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: vung trượng mở thời gian trường hà cuốn cả vùng vào dòng chảy ngược, kẻ địch choáng và chậm nặng; Thủ: đứng ngoài dòng thời gian tránh đòn",
+    "weaponId": "phaptruong",
+    "fx": {
+     "stun": 2.0,
+     "slowPct": 40,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 40%/3.0s · Choáng 2.0s"
+   },
+   {
+    "id": "phaptu_phaptruong_lu29",
+    "name": "Hư Không Trượng",
+    "element": "Không Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: vung trượng xé một vết hư không xuyên thẳng qua giáp; Thủ: dịch chuyển ngắn tránh đòn",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 25
+    },
+    "fxText": "Xuyên phòng 25%"
+   },
+   {
+    "id": "phaptu_phaptruong_lu30",
+    "name": "Phá Không Trượng",
+    "element": "Không Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: vung trượng phá không gian giáng đòn từ hư vô, xuyên giáp nặng và đẩy lùi; Thủ: nếp gấp không gian chặn đạn",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 35,
+     "knock": 30
+    },
+    "fxText": "Xuyên phòng 35% · Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phaptruong_tr16",
+    "name": "Không Gian Băng Diệt Trượng",
+    "element": "Không Gian",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: vung trượng làm không gian băng diệt cả vùng, mọi giáp đều bị xé nát; Thủ: ẩn mình giữa các lớp không gian",
+    "weaponId": "phaptruong",
+    "fx": {
+     "pierce": 50,
+     "aoe": 85
+    },
+    "fxText": "Xuyên phòng 50% · Đánh vùng"
+   },
+   {
+    "id": "phaptu_phaptruong_kd1",
+    "name": "Diệt Thiên Trượng",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp trượng — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Pháp trượng.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phaptruong_kd2",
+    "name": "Hộ Pháp Trượng",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp trượng — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phaptu_phaptruong_kd3",
+    "name": "Ngũ Hành Trượng",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp trượng — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phaptu_phaptruong_na1",
+    "name": "Phiêu Vân Trượng",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp trượng — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phaptu_phaptruong_na2",
+    "name": "Hồi Linh Trượng",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp trượng — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phaptu_phaptruong_na3",
+    "name": "Trấn Ma Trượng",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp trượng — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "sachphep": [
@@ -5543,7 +8553,7 @@
     "cost": 55,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -5597,7 +8607,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -5623,7 +8633,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -5706,7 +8716,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -5728,7 +8738,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -5755,7 +8765,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -5786,7 +8796,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -5834,7 +8844,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -5860,7 +8870,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -5883,7 +8893,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -5898,6 +8908,891 @@
      "root": 1.0
     },
     "fxText": "Trói 1.0s"
+   },
+   {
+    "id": "phaptu_sachphep_lu11",
+    "name": "Tử Điện Triện",
+    "element": "Lôi",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách dẫn tử điện xé thẳng mục tiêu, điện quang xuyên giáp; Thủ: điện quang hộ thân đẩy đạn nhỏ",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "phaptu_sachphep_lu12",
+    "name": "Kinh Lôi Triện",
+    "element": "Lôi",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: phất sách gọi kinh lôi nổ tung kèm cháy điện; Thủ: lôi quang quấn thân làm chậm kẻ áp sát",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 15,
+     "dotDps": 6,
+     "dotSec": 2
+    },
+    "fxText": "Xuyên phòng 15% · Đốt/độc 6/s×2s"
+   },
+   {
+    "id": "phaptu_sachphep_tr6",
+    "name": "Cửu Thiên Thần Lôi Triện",
+    "element": "Lôi",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: phất sách dẫn cửu thiên thần lôi giáng xuống, xuyên giáp và làm choáng; Thủ: lôi vực quanh người hộ thể",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 30,
+     "stun": 1.0
+    },
+    "fxText": "Xuyên phòng 30% · Choáng 1.0s"
+   },
+   {
+    "id": "phaptu_sachphep_lu13",
+    "name": "Toàn Phong Triện",
+    "element": "Phong",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách tạo lốc xoáy đẩy lùi kẻ địch; Thủ: gió xoáy chắn bước tiến",
+    "weaponId": "sachphep",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "phaptu_sachphep_lu14",
+    "name": "Lưu Vân Triện",
+    "element": "Phong",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: phất sách thả mây gió cuốn chân kẻ địch làm chậm; Thủ: thân pháp nhẹ đi trong gió",
+    "weaponId": "sachphep",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "phaptu_sachphep_tr7",
+    "name": "Cửu Thiên Cương Phong Triện",
+    "element": "Phong",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: phất sách gọi cương phong cửu thiên quét cả vùng, hất văng mọi kẻ địch; Thủ: gió lớn ngăn đạn tầm xa",
+    "weaponId": "sachphep",
+    "fx": {
+     "knock": 60,
+     "aoe": 85
+    },
+    "fxText": "Đẩy lùi · Đánh vùng"
+   },
+   {
+    "id": "phaptu_sachphep_lu15",
+    "name": "Hàn Băng Triện",
+    "element": "Băng",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách phóng hàn băng làm chậm mục tiêu; Thủ: sương lạnh giảm tốc kẻ đuổi theo",
+    "weaponId": "sachphep",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "phaptu_sachphep_lu16",
+    "name": "Sương Tuyết Triện",
+    "element": "Băng",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: phất sách rải sương tuyết đóng băng mặt đất, kẻ địch trượt chậm hẳn; Thủ: áo sương chống lửa",
+    "weaponId": "sachphep",
+    "fx": {
+     "slowPct": 35,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 35%/3.0s"
+   },
+   {
+    "id": "phaptu_sachphep_tr8",
+    "name": "Cực Hàn Băng Ngục Triện",
+    "element": "Băng",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: phất sách dựng băng ngục cực hàn đóng băng cả vùng; Thủ: tường băng hấp thụ sát thương",
+    "weaponId": "sachphep",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s"
+   },
+   {
+    "id": "phaptu_sachphep_lu17",
+    "name": "Nham Thiết Triện",
+    "element": "Nham",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách hóa nham thiết nặng nề giáng xuống, xuyên giáp và đẩy lùi; Thủ: da nham chịu đòn",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 15,
+     "knock": 30
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi"
+   },
+   {
+    "id": "phaptu_sachphep_lu18",
+    "name": "Bàn Thạch Triện",
+    "element": "Nham",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Thủ: phất sách dựng bàn thạch hộ thân giảm sát thương; Công: đá vụn bắn ra quanh người",
+    "weaponId": "sachphep",
+    "fx": {
+     "defPct": 20,
+     "defSec": 3.0
+    },
+    "fxText": "Giảm 20% sát thương nhận/3.0s"
+   },
+   {
+    "id": "phaptu_sachphep_tr9",
+    "name": "Thái Sơn Nham Ngục Triện",
+    "element": "Nham",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: phất sách gọi Thái Sơn nham thạch trấn áp cả vùng; Thủ: nham giáp dày hộ thể",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 25,
+     "knock": 60,
+     "aoe": 85
+    },
+    "fxText": "Xuyên phòng 25% · Đẩy lùi · Đánh vùng"
+   },
+   {
+    "id": "phaptu_sachphep_lu19",
+    "name": "Hủ Độc Triện",
+    "element": "Độc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách phun hủ độc ăn mòn mục tiêu theo thời gian; Thủ: hơi độc làm kẻ áp sát chùn bước",
+    "weaponId": "sachphep",
+    "fx": {
+     "dotDps": 6,
+     "dotSec": 4
+    },
+    "fxText": "Đốt/độc 6/s×4s"
+   },
+   {
+    "id": "phaptu_sachphep_lu20",
+    "name": "Xà Độc Triện",
+    "element": "Độc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: phất sách thả xà độc cắn rồi rút, độc lan và làm chậm; Thủ: máu độc khiến kẻ đánh trúng cũng nhiễm nhẹ",
+    "weaponId": "sachphep",
+    "fx": {
+     "dotDps": 8,
+     "dotSec": 4,
+     "slowPct": 15,
+     "slowSec": 2.0
+    },
+    "fxText": "Đốt/độc 8/s×4s · Chậm 15%/2.0s"
+   },
+   {
+    "id": "phaptu_sachphep_tr10",
+    "name": "Vạn Độc Phệ Tâm Triện",
+    "element": "Độc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: phất sách dẫn vạn độc phệ tâm, độc nặng trói chân kẻ địch; Thủ: độc vụ quanh người ngăn áp sát",
+    "weaponId": "sachphep",
+    "fx": {
+     "dotDps": 12,
+     "dotSec": 5,
+     "root": 1.0
+    },
+    "fxText": "Đốt/độc 12/s×5s · Trói 1.0s"
+   },
+   {
+    "id": "phaptu_sachphep_lu21",
+    "name": "Thánh Quang Triện",
+    "element": "Quang",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách chiếu thánh quang thiêu đốt tà khí; Thủ: quang quang hồi phục nhẹ cho bản thân",
+    "weaponId": "sachphep",
+    "fx": {
+     "healPct": 6
+    },
+    "fxText": "Hồi 6% máu"
+   },
+   {
+    "id": "phaptu_sachphep_lu22",
+    "name": "Diệu Quang Triện",
+    "element": "Quang",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: phất sách tỏa diệu quang xuyên qua hàng địch; Thủ: ánh sáng chữa lành vết thương",
+    "weaponId": "sachphep",
+    "fx": {
+     "healPct": 8,
+     "pierce": 10
+    },
+    "fxText": "Xuyên phòng 10% · Hồi 8% máu"
+   },
+   {
+    "id": "phaptu_sachphep_tr11",
+    "name": "Đại Quang Minh Triện",
+    "element": "Quang",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: phất sách mở đại quang minh phổ chiếu cả vùng; Thủ: quang minh hộ thể và hồi phục mạnh",
+    "weaponId": "sachphep",
+    "fx": {
+     "healPct": 15,
+     "aoe": 85
+    },
+    "fxText": "Hồi 15% máu · Đánh vùng"
+   },
+   {
+    "id": "phaptu_sachphep_lu23",
+    "name": "U Ảnh Triện",
+    "element": "Ám",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách hóa u ảnh vồ tới hút sinh khí của địch; Thủ: bóng tối che mắt kẻ truy đuổi",
+    "weaponId": "sachphep",
+    "fx": {
+     "lifesteal": 15
+    },
+    "fxText": "Hút 15% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_sachphep_lu24",
+    "name": "Hắc Ám Triện",
+    "element": "Ám",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: phất sách phủ hắc ám làm địch chậm chạp rồi hút máu; Thủ: chìm vào bóng tối tránh đòn",
+    "weaponId": "sachphep",
+    "fx": {
+     "lifesteal": 25,
+     "slowPct": 15,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 15%/2.0s · Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_sachphep_tr12",
+    "name": "Vĩnh Dạ Ám Ngục Triện",
+    "element": "Ám",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: phất sách giăng vĩnh dạ ám ngục nuốt ánh sáng, hút mạnh sinh khí và làm choáng; Thủ: bóng đêm hộ thân",
+    "weaponId": "sachphep",
+    "fx": {
+     "lifesteal": 40,
+     "stun": 1.0
+    },
+    "fxText": "Choáng 1.0s · Hút 40% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_sachphep_lu25",
+    "name": "Huyết Khế Triện",
+    "element": "Huyết",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4500,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách ký huyết khế rút máu địch về mình; Thủ: huyết khí sôi trào chịu đòn tốt hơn",
+    "weaponId": "sachphep",
+    "fx": {
+     "lifesteal": 20
+    },
+    "fxText": "Hút 20% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_sachphep_lu26",
+    "name": "Thực Huyết Triện",
+    "element": "Huyết",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Tốc độ 20",
+    "desc": "Công: phất sách thả thực huyết ăn mòn vết thương hở rồi hút lại; Thủ: mùi máu làm quái hung hãn tránh xa",
+    "weaponId": "sachphep",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3,
+     "lifesteal": 15
+    },
+    "fxText": "Đốt/độc 5/s×3s · Hút 15% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_sachphep_tr13",
+    "name": "Huyết Hải Vô Biên Triện",
+    "element": "Huyết",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: phất sách dâng huyết hải vô biên nuốt cả vùng, hút nửa sát thương thành máu; Thủ: biển máu hộ thể",
+    "weaponId": "sachphep",
+    "fx": {
+     "lifesteal": 50,
+     "aoe": 85
+    },
+    "fxText": "Hút 50% sát thương thành máu · Đánh vùng"
+   },
+   {
+    "id": "phaptu_sachphep_lu27",
+    "name": "Lưu Quang Triện",
+    "element": "Thời Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách bẻ dòng thời gian quanh mục tiêu làm nó chậm hẳn; Thủ: bản thân lướt nhanh một nhịp",
+    "weaponId": "sachphep",
+    "fx": {
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s"
+   },
+   {
+    "id": "phaptu_sachphep_lu28",
+    "name": "Ngưng Thời Triện",
+    "element": "Thời Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 20",
+    "desc": "Công: phất sách ngưng đọng thời gian một vùng nhỏ, kẻ địch gần như đứng yên; Thủ: thoái lui khỏi khoảnh khắc nguy hiểm",
+    "weaponId": "sachphep",
+    "fx": {
+     "slowPct": 45,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 45%/3.0s"
+   },
+   {
+    "id": "phaptu_sachphep_tr14",
+    "name": "Thời Gian Trường Hà Triện",
+    "element": "Thời Gian",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Pháp phòng 30",
+    "desc": "Công: phất sách mở thời gian trường hà cuốn cả vùng vào dòng chảy ngược, kẻ địch choáng và chậm nặng; Thủ: đứng ngoài dòng thời gian tránh đòn",
+    "weaponId": "sachphep",
+    "fx": {
+     "stun": 2.0,
+     "slowPct": 40,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 40%/3.0s · Choáng 2.0s"
+   },
+   {
+    "id": "phaptu_sachphep_lu29",
+    "name": "Hư Không Triện",
+    "element": "Không Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20",
+    "desc": "Công: phất sách xé một vết hư không xuyên thẳng qua giáp; Thủ: dịch chuyển ngắn tránh đòn",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 25
+    },
+    "fxText": "Xuyên phòng 25%"
+   },
+   {
+    "id": "phaptu_sachphep_lu30",
+    "name": "Phá Không Triện",
+    "element": "Không Gian",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5500,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Minh Mẫn 20",
+    "desc": "Công: phất sách phá không gian giáng đòn từ hư vô, xuyên giáp nặng và đẩy lùi; Thủ: nếp gấp không gian chặn đạn",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 35,
+     "knock": 30
+    },
+    "fxText": "Xuyên phòng 35% · Đẩy lùi"
+   },
+   {
+    "id": "phaptu_sachphep_tr15",
+    "name": "Không Gian Băng Diệt Triện",
+    "element": "Không Gian",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Minh Mẫn 30",
+    "desc": "Công: phất sách làm không gian băng diệt cả vùng, mọi giáp đều bị xé nát; Thủ: ẩn mình giữa các lớp không gian",
+    "weaponId": "sachphep",
+    "fx": {
+     "pierce": 50,
+     "aoe": 85
+    },
+    "fxText": "Xuyên phòng 50% · Đánh vùng"
+   },
+   {
+    "id": "phaptu_sachphep_kd1",
+    "name": "Diệt Thiên Triện",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Sách phép — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Sách phép.",
+    "weaponId": "sachphep",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_sachphep_kd2",
+    "name": "Hộ Pháp Triện",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Sách phép — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "sachphep",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phaptu_sachphep_kd3",
+    "name": "Ngũ Hành Triện",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Sách phép — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "sachphep",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phaptu_sachphep_na1",
+    "name": "Phiêu Vân Triện",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Sách phép — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "sachphep",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phaptu_sachphep_na2",
+    "name": "Hồi Linh Triện",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Sách phép — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "sachphep",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phaptu_sachphep_na3",
+    "name": "Trấn Ma Triện",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Sách phép — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "sachphep",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -5951,7 +9846,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      }
     ],
@@ -5998,7 +9893,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -6025,7 +9920,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -6051,7 +9946,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -6079,7 +9974,7 @@
       "value": 30
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      }
     ],
@@ -6101,7 +9996,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -6127,7 +10022,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -6154,7 +10049,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -6178,7 +10073,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -6202,7 +10097,7 @@
     "cost": 120,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      }
     ],
@@ -6222,7 +10117,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -6248,7 +10143,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -6274,7 +10169,7 @@
     "cost": 120,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -6298,7 +10193,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -6311,6 +10206,118 @@
     "weaponId": "colenh",
     "fx": {},
     "fxText": ""
+   },
+   {
+    "id": "quytu_colenh_kd1",
+    "name": "Phệ Hồn Lệnh",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cờ lệnh — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Cờ lệnh.",
+    "weaponId": "colenh",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_colenh_kd2",
+    "name": "Quỷ Giáp Lệnh",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cờ lệnh — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "colenh",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "quytu_colenh_kd3",
+    "name": "Minh Hà Lệnh",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cờ lệnh — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "colenh",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "quytu_colenh_na1",
+    "name": "Quỷ Ảnh Lệnh",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cờ lệnh — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "colenh",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "quytu_colenh_na2",
+    "name": "Hoàn Hồn Lệnh",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cờ lệnh — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "colenh",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "quytu_colenh_na3",
+    "name": "Quỷ Vực Lệnh",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cờ lệnh — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "colenh",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "luoihai": [
@@ -6390,7 +10397,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -6460,7 +10467,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -6517,7 +10524,7 @@
       "value": 15
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 10
      }
     ],
@@ -6643,7 +10650,7 @@
       "value": 35
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -6695,7 +10702,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -6731,6 +10738,119 @@
     "weaponId": "luoihai",
     "fx": {},
     "fxText": ""
+   },
+   {
+    "id": "quytu_luoihai_kd1",
+    "name": "Phệ Hồn Hái",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Lưỡi hái — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Lưỡi hái.",
+    "weaponId": "luoihai",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_luoihai_kd2",
+    "name": "Quỷ Giáp Hái",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Lưỡi hái — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "luoihai",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "quytu_luoihai_kd3",
+    "name": "Minh Hà Hái",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Lưỡi hái — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "luoihai",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "quytu_luoihai_na1",
+    "name": "Quỷ Ảnh Hái",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Lưỡi hái — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "luoihai",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "quytu_luoihai_na2",
+    "name": "Hoàn Hồn Hái",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Lưỡi hái — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "luoihai",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "quytu_luoihai_na3",
+    "name": "Quỷ Vực Hái",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Lưỡi hái — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "luoihai",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "quythuong": [
@@ -6785,7 +10905,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -6833,7 +10953,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -6860,7 +10980,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 10
      }
     ],
@@ -7016,7 +11136,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -7043,7 +11163,7 @@
       "value": 35
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -7067,7 +11187,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -7093,7 +11213,7 @@
       "value": 40
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -7154,6 +11274,119 @@
     "weaponId": "quythuong",
     "fx": {},
     "fxText": ""
+   },
+   {
+    "id": "quytu_quythuong_kd1",
+    "name": "Phệ Hồn Thương",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quỷ thương — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Quỷ thương.",
+    "weaponId": "quythuong",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_quythuong_kd2",
+    "name": "Quỷ Giáp Thương",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quỷ thương — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "quythuong",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "quytu_quythuong_kd3",
+    "name": "Minh Hà Thương",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quỷ thương — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "quythuong",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "quytu_quythuong_na1",
+    "name": "Quỷ Ảnh Thương",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quỷ thương — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "quythuong",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "quytu_quythuong_na2",
+    "name": "Hoàn Hồn Thương",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quỷ thương — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "quythuong",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "quytu_quythuong_na3",
+    "name": "Quỷ Vực Thương",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quỷ thương — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "quythuong",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -7578,6 +11811,119 @@
      "stun": 1.0
     },
     "fxText": "Choáng 1.0s"
+   },
+   {
+    "id": "satthu_daogam_kd1",
+    "name": "Đoạt Mệnh Dao",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Dao găm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Dao găm.",
+    "weaponId": "daogam",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "satthu_daogam_kd2",
+    "name": "Ảnh Độn Dao",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Dao găm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "daogam",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "satthu_daogam_kd3",
+    "name": "Huyết Ảnh Dao",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Dao găm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "daogam",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "satthu_daogam_na1",
+    "name": "Vô Tung Dao",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Dao găm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "daogam",
+    "fx": {
+     "spdPct": 50,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 50% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "satthu_daogam_na2",
+    "name": "Ảnh Hồi Dao",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Dao găm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "daogam",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "satthu_daogam_na3",
+    "name": "Ảnh Phược Dao",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Dao găm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "daogam",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "songdao": [
@@ -7998,6 +12344,119 @@
      "stun": 1.0
     },
     "fxText": "Choáng 1.0s"
+   },
+   {
+    "id": "satthu_songdao_kd1",
+    "name": "Đoạt Mệnh Song Đao",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Song đao — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Song đao.",
+    "weaponId": "songdao",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "satthu_songdao_kd2",
+    "name": "Ảnh Độn Song Đao",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Song đao — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "songdao",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "satthu_songdao_kd3",
+    "name": "Huyết Ảnh Song Đao",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Song đao — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "songdao",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "satthu_songdao_na1",
+    "name": "Vô Tung Song Đao",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Song đao — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "songdao",
+    "fx": {
+     "spdPct": 50,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 50% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "satthu_songdao_na2",
+    "name": "Ảnh Hồi Song Đao",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Song đao — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "songdao",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "satthu_songdao_na3",
+    "name": "Ảnh Phược Song Đao",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Song đao — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "songdao",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "liemngan": [
@@ -8414,6 +12873,119 @@
      "aoe": 85
     },
     "fxText": "Choáng 1.0s · Đánh vùng"
+   },
+   {
+    "id": "satthu_liemngan_kd1",
+    "name": "Đoạt Mệnh Liềm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Liềm ngắn — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Liềm ngắn.",
+    "weaponId": "liemngan",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "satthu_liemngan_kd2",
+    "name": "Ảnh Độn Liềm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Liềm ngắn — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "liemngan",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "satthu_liemngan_kd3",
+    "name": "Huyết Ảnh Liềm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Liềm ngắn — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "liemngan",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "satthu_liemngan_na1",
+    "name": "Vô Tung Liềm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Liềm ngắn — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "liemngan",
+    "fx": {
+     "spdPct": 50,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 50% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "satthu_liemngan_na2",
+    "name": "Ảnh Hồi Liềm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Liềm ngắn — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "liemngan",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "satthu_liemngan_na3",
+    "name": "Ảnh Phược Liềm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Liềm ngắn — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "liemngan",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "trao": [
@@ -8836,6 +13408,119 @@
      "stun": 1.0
     },
     "fxText": "Choáng 1.0s"
+   },
+   {
+    "id": "satthu_trao_kd1",
+    "name": "Đoạt Mệnh Trảo",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Trảo — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Trảo.",
+    "weaponId": "trao",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "satthu_trao_kd2",
+    "name": "Ảnh Độn Trảo",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Trảo — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "trao",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "satthu_trao_kd3",
+    "name": "Huyết Ảnh Trảo",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Trảo — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "trao",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "satthu_trao_na1",
+    "name": "Vô Tung Trảo",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Trảo — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "trao",
+    "fx": {
+     "spdPct": 50,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 50% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "satthu_trao_na2",
+    "name": "Ảnh Hồi Trảo",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Trảo — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "trao",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "satthu_trao_na3",
+    "name": "Ảnh Phược Trảo",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Trảo — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "trao",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -8913,7 +13598,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -8967,7 +13652,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -9022,7 +13707,7 @@
       "value": 30
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -9072,7 +13757,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -9144,7 +13829,7 @@
     "cost": 120,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      },
      {
@@ -9192,7 +13877,7 @@
     "cost": 120,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -9258,6 +13943,119 @@
      "stun": 1.0
     },
     "fxText": "Choáng 1.0s"
+   },
+   {
+    "id": "kiemtu_kiem_kd1",
+    "name": "Vạn Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Kiếm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Kiếm.",
+    "weaponId": "kiem",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_kiem_kd2",
+    "name": "Ngự Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Kiếm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "kiem",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "kiemtu_kiem_kd3",
+    "name": "Kiếm Tâm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Kiếm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "kiem",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "kiemtu_kiem_na1",
+    "name": "Lưu Quang",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Kiếm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "kiem",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "kiemtu_kiem_na2",
+    "name": "Kiếm Ý",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Kiếm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "kiem",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "kiemtu_kiem_na3",
+    "name": "Kiếm Vực",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Kiếm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "kiem",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "songkiem": [
@@ -9440,7 +14238,7 @@
       "value": 30
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -9677,6 +14475,119 @@
     "weaponId": "songkiem",
     "fx": {},
     "fxText": ""
+   },
+   {
+    "id": "kiemtu_songkiem_kd1",
+    "name": "Vạn Kiếm Song Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Song kiếm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Song kiếm.",
+    "weaponId": "songkiem",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_songkiem_kd2",
+    "name": "Ngự Kiếm Song Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Song kiếm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "songkiem",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "kiemtu_songkiem_kd3",
+    "name": "Kiếm Tâm Song Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Song kiếm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "songkiem",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "kiemtu_songkiem_na1",
+    "name": "Lưu Quang Song Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Song kiếm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "songkiem",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "kiemtu_songkiem_na2",
+    "name": "Kiếm Ý Song Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Song kiếm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "songkiem",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "kiemtu_songkiem_na3",
+    "name": "Kiếm Vực Song Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Song kiếm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "songkiem",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "trongkiem": [
@@ -10098,6 +15009,119 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "kiemtu_trongkiem_kd1",
+    "name": "Vạn Kiếm Trọng Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Trọng kiếm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Trọng kiếm.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_trongkiem_kd2",
+    "name": "Ngự Kiếm Trọng Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Trọng kiếm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "kiemtu_trongkiem_kd3",
+    "name": "Kiếm Tâm Trọng Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Trọng kiếm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "kiemtu_trongkiem_na1",
+    "name": "Lưu Quang Trọng Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Trọng kiếm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "kiemtu_trongkiem_na2",
+    "name": "Kiếm Ý Trọng Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Trọng kiếm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "kiemtu_trongkiem_na3",
+    "name": "Kiếm Vực Trọng Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Trọng kiếm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -10151,7 +15175,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -10175,7 +15199,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -10198,7 +15222,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -10225,7 +15249,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -10252,7 +15276,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -10276,7 +15300,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -10303,7 +15327,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -10327,7 +15351,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -10351,7 +15375,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -10380,7 +15404,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -10408,7 +15432,7 @@
     "cost": 150,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10432,7 +15456,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10459,7 +15483,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10486,7 +15510,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10510,7 +15534,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10523,6 +15547,118 @@
     "weaponId": "phattran",
     "fx": {},
     "fxText": ""
+   },
+   {
+    "id": "ytu_phattran_kd1",
+    "name": "Truy Hồn Phất Trần",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phất trần — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Phất trần.",
+    "weaponId": "phattran",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_phattran_kd2",
+    "name": "Hộ Mệnh Phất Trần",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phất trần — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "phattran",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "ytu_phattran_kd3",
+    "name": "Thánh Thủ Phất Trần",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phất trần — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "phattran",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "ytu_phattran_na1",
+    "name": "Phi Châm Phất Trần",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phất trần — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "phattran",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "ytu_phattran_na2",
+    "name": "Tái Sinh Phất Trần",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phất trần — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "phattran",
+    "fx": {
+     "healPct": 55
+    },
+    "fxText": "Hồi 55% máu",
+    "role": "rec"
+   },
+   {
+    "id": "ytu_phattran_na3",
+    "name": "Định Thân Phất Trần",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phất trần — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "phattran",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "kimcham": [
@@ -10578,7 +15714,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -10601,7 +15737,7 @@
     "cost": 55,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -10625,7 +15761,7 @@
     "cost": 60,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      },
      {
@@ -10653,7 +15789,7 @@
       "value": 20
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -10676,7 +15812,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -10700,7 +15836,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -10731,7 +15867,7 @@
       "value": 15
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -10758,7 +15894,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -10784,7 +15920,7 @@
       "value": 15
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      }
     ],
@@ -10808,7 +15944,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      }
     ],
@@ -10832,7 +15968,7 @@
       "value": 35
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -10852,7 +15988,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10879,7 +16015,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10907,7 +16043,7 @@
       "value": 35
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      }
     ],
@@ -10931,7 +16067,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -10944,6 +16080,118 @@
     "weaponId": "kimcham",
     "fx": {},
     "fxText": ""
+   },
+   {
+    "id": "ytu_kimcham_kd1",
+    "name": "Truy Hồn Châm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Kim châm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Kim châm.",
+    "weaponId": "kimcham",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_kimcham_kd2",
+    "name": "Hộ Mệnh Châm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Kim châm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "kimcham",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "ytu_kimcham_kd3",
+    "name": "Thánh Thủ Châm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Kim châm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "kimcham",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "ytu_kimcham_na1",
+    "name": "Phi Châm Châm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Kim châm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "kimcham",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "ytu_kimcham_na2",
+    "name": "Tái Sinh Châm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Kim châm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "kimcham",
+    "fx": {
+     "healPct": 55
+    },
+    "fxText": "Hồi 55% máu",
+    "role": "rec"
+   },
+   {
+    "id": "ytu_kimcham_na3",
+    "name": "Định Thân Châm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Kim châm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "kimcham",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "cocam": [
@@ -10993,7 +16241,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11017,7 +16265,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -11041,7 +16289,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11069,7 +16317,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11093,7 +16341,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11123,7 +16371,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -11149,7 +16397,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -11173,7 +16421,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -11199,7 +16447,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -11227,7 +16475,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -11254,7 +16502,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11281,7 +16529,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11308,7 +16556,7 @@
     "cost": 120,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11332,7 +16580,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11356,7 +16604,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11372,6 +16620,118 @@
      "aoe": 85
     },
     "fxText": "Trói 1.0s · Đánh vùng"
+   },
+   {
+    "id": "ytu_cocam_kd1",
+    "name": "Truy Hồn Cầm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cổ cầm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Cổ cầm.",
+    "weaponId": "cocam",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_cocam_kd2",
+    "name": "Hộ Mệnh Cầm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cổ cầm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "cocam",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "ytu_cocam_kd3",
+    "name": "Thánh Thủ Cầm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cổ cầm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "cocam",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "ytu_cocam_na1",
+    "name": "Phi Châm Cầm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cổ cầm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "cocam",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "ytu_cocam_na2",
+    "name": "Tái Sinh Cầm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cổ cầm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "cocam",
+    "fx": {
+     "healPct": 55
+    },
+    "fxText": "Hồi 55% máu",
+    "role": "rec"
+   },
+   {
+    "id": "ytu_cocam_na3",
+    "name": "Định Thân Cầm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cổ cầm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "cocam",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  },
@@ -11424,7 +16784,7 @@
     "cost": 55,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -11450,7 +16810,7 @@
     "cost": 60,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 35
      },
      {
@@ -11476,7 +16836,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11500,7 +16860,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11528,7 +16888,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11556,7 +16916,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -11583,7 +16943,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -11607,7 +16967,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -11633,7 +16993,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -11661,7 +17021,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -11687,7 +17047,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11713,7 +17073,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11737,7 +17097,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11764,7 +17124,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11788,7 +17148,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -11804,6 +17164,118 @@
      "aoe": 85
     },
     "fxText": "Choáng 1.0s · Đánh vùng"
+   },
+   {
+    "id": "nhotu_ngamtho_kd1",
+    "name": "Tru Ma Thơ",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Ngâm thơ — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Ngâm thơ.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_ngamtho_kd2",
+    "name": "Chính Khí Thơ",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Ngâm thơ — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "nhotu_ngamtho_kd3",
+    "name": "Hạo Nhiên Thơ",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Ngâm thơ — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "nhotu_ngamtho_na1",
+    "name": "Tật Thư Thơ",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Ngâm thơ — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "nhotu_ngamtho_na2",
+    "name": "Dưỡng Tâm Thơ",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Ngâm thơ — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "nhotu_ngamtho_na3",
+    "name": "Trấn Tà Thơ",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Ngâm thơ — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "butphep": [
@@ -11855,7 +17327,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -11881,7 +17353,7 @@
     "cost": 55,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -11905,7 +17377,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11932,7 +17404,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11959,7 +17431,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -11983,7 +17455,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -12007,7 +17479,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -12031,7 +17503,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -12055,7 +17527,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -12082,7 +17554,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -12106,7 +17578,7 @@
     "cost": 120,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12132,7 +17604,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12156,7 +17628,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12183,7 +17655,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12209,7 +17681,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12224,6 +17696,118 @@
      "aoe": 85
     },
     "fxText": "Đánh vùng"
+   },
+   {
+    "id": "nhotu_butphep_kd1",
+    "name": "Tru Ma Bút",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Bút phép — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Bút phép.",
+    "weaponId": "butphep",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_butphep_kd2",
+    "name": "Chính Khí Bút",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Bút phép — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "butphep",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "nhotu_butphep_kd3",
+    "name": "Hạo Nhiên Bút",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Bút phép — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "butphep",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "nhotu_butphep_na1",
+    "name": "Tật Thư Bút",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Bút phép — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "butphep",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "nhotu_butphep_na2",
+    "name": "Dưỡng Tâm Bút",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Bút phép — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "butphep",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "nhotu_butphep_na3",
+    "name": "Trấn Tà Bút",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Bút phép — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "butphep",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ],
   "quyentruc": [
@@ -12272,7 +17856,7 @@
     "cost": 55,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      }
     ],
@@ -12298,7 +17882,7 @@
       "value": 25
      },
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      }
     ],
@@ -12318,7 +17902,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -12346,7 +17930,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -12370,7 +17954,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 20
      },
      {
@@ -12398,7 +17982,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 30
      },
      {
@@ -12422,7 +18006,7 @@
     "cost": 40,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -12448,7 +18032,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -12474,7 +18058,7 @@
     "cost": 45,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 15
      },
      {
@@ -12502,7 +18086,7 @@
     "cost": 50,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 25
      },
      {
@@ -12528,7 +18112,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 45
      },
      {
@@ -12552,7 +18136,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12579,7 +18163,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12603,7 +18187,7 @@
     "cost": 125,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12629,7 +18213,7 @@
     "cost": 130,
     "cond": [
      {
-      "stat": "thanThuc",
+      "stat": "minhMan",
       "value": 40
      },
      {
@@ -12645,6 +18229,118 @@
      "aoe": 85
     },
     "fxText": "Choáng 1.0s · Đánh vùng"
+   },
+   {
+    "id": "nhotu_quyentruc_kd1",
+    "name": "Tru Ma Quyển",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quyển trục — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Quyển trục.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_quyentruc_kd2",
+    "name": "Chính Khí Quyển",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quyển trục — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "nhotu_quyentruc_kd3",
+    "name": "Hạo Nhiên Quyển",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Quyển trục — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "nhotu_quyentruc_na1",
+    "name": "Tật Thư Quyển",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quyển trục — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "nhotu_quyentruc_na2",
+    "name": "Dưỡng Tâm Quyển",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quyển trục — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "nhotu_quyentruc_na3",
+    "name": "Trấn Tà Quyển",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Quyển trục — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
    }
   ]
  }

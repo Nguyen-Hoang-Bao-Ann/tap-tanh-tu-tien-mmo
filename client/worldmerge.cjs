@@ -32,6 +32,7 @@ function createMerger() {
       players: [...players.values()],
       monsters: [...monsters.values()],
       npcs,
+      npcMoves: t.npcMoves || [], // GĐ156: chuyển động NPC thành phố của tick này
       drops: [...drops.values()],
       chests: [...chests.values()],
     };

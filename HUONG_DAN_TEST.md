@@ -546,14 +546,14 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   Lớp khác không nấu/không ăn được 2 món này.
 - Món Tẩm bổ trong túi đồ có nút Dùng như mọi đồ ăn.
 
-## GĐ97 — Sát Thủ: Sát Khí + Phản Xạ + Siêu Giác Quan
+## GĐ97 — Ảnh Tu: Sát Khí + Phản Xạ + Siêu Giác Quan
 
-- Sát Thủ có thêm thanh Sát Khí tím trên thẻ nhân vật
-  (dưới thanh thức ăn/nước uống, chỉ Sát Thủ mới thấy):
+- Ảnh Tu có thêm thanh Sát Khí tím trên thẻ nhân vật
+  (dưới thanh thức ăn/nước uống, chỉ Ảnh Tu mới thấy):
   đánh trúng quái +3, giết quái +25; bị đánh không tăng
   Sát Khí; Sát Khí không tự tụt, giữ nguyên qua thoát
   game rồi vào lại.
-- Phản Xạ: Sát Thủ tự né đòn quái theo lượng Sát Khí —
+- Phản Xạ: Ảnh Tu tự né đòn quái theo lượng Sát Khí —
   càng nhiều Sát Khí càng khó bị đánh trúng, tối đa né
   75% lúc đầy 100. Nút né Space vẫn dùng được như cũ
   (lướt nhanh một đoạn để đổi vị trí).
@@ -562,17 +562,17 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   nào của bạn cũng chí mạng (mạnh gấp đôi), quái quanh
   người chậm lại một nửa. Hết 8 giây thì Sát Khí về 0,
   phải tích lại từ đầu.
-- Sát Thủ nhìn thấy quái đang ẩn nấp (rắn độc, Địa Hành
+- Ảnh Tu nhìn thấy quái đang ẩn nấp (rắn độc, Địa Hành
   Yêu, quỷ tàng hình) từ xa hơn lớp khác một nửa.
-- Chưa có: chế độc + bôi độc cho Sát Thủ — sẽ làm sau.
+- Chưa có: chế độc + bôi độc cho Ảnh Tu — sẽ làm sau.
 
-## GĐ98 — Sát Thủ: Chế độc + bôi độc lên vũ khí
+## GĐ98 — Ảnh Tu: Chế độc + bôi độc lên vũ khí
 
 - Độc Xà rơi Nọc Rắn tại chỗ gục (đi qua là nhặt như
   mọi đồ rơi). Lưu ý: rắn chỉ có ở Hắc Ám Đầm Lầy
   (map farm Trúc Cơ 7, đi từ Thanh Vân Thành) — map
   nhà không có rắn.
-- Sát Thủ mở panel Nghề (nút 🔨) thấy mục riêng "☠️
+- Ảnh Tu mở panel Nghề (nút 🔨) thấy mục riêng "☠️
   Chế độc" — chế được ngay mà KHÔNG cần học nghề:
   Độc Rỉa Máu (3 Nọc Rắn + 10 Linh thạch), Độc Kích
   Thích (2 Nọc Rắn + 2 Cánh Dơi + 10 Linh thạch).
@@ -1496,7 +1496,7 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
 
 ## GĐ132 — NGHỀ THU THẬP: ĐÀO KHOÁNG + HÁI THUỐC
 
-- 2 nghề mới (mỗi người vẫn 1 nghề): Đào Khoáng Sư (⛏️) + Hái Thuốc
+- 2 nghề mới (mỗi người vẫn 1 nghề): Linh Khoáng Sư (⛏️) + Hái Thuốc
   Sư (🌿), chung thang 14 cấp GĐ131 (lượt thu thập tính vào
   job.crafts). Sư phụ nối dài hàng y=390: Khoáng Lão (1120), Thảo
   Lão (1240), sprite tạm merchant/shopdan (chờ sprite riêng như
@@ -1759,3 +1759,1248 @@ chữ khó đọc, nút khó bấm, lag ở đâu (đông người/đông quái 
   trình duyệt (sprite thú/nút Thuần Hóa/nút Thả mới code-verified).
   Chưa probe: cổng trùm/thử thách/ảo ảnh/ẩn (code-verified 1 dòng
   mỗi cổng, giống mẫu cũ).
+
+## GĐ138 — THÀNH TỰU CHUNG (KHUNG + DANH HIỆU + ĐẠO TÍCH + RƯƠNG)
+
+- Thay hẳn 10 mốc GĐ27 (thưởng Linh thạch) bằng khung thành tựu theo
+  tài liệu bản -2: 100 loại / 11 nhóm (Tu luyện, Chiến đấu, Công
+  pháp, Nghề phụ, Khám phá, Quái và trùm, Sinh tồn, Của cải, Nhân
+  duyên, Linh thú/thảo/đan, Ẩn); mỗi loại 3–10 bậc; mỗi bậc nhận 1
+  lần, thưởng 3 thứ: danh hiệu `Tên gốc · Cấp` + 1 Rương Thành Tựu +
+  Đạo Tích. Cấp danh hiệu 1–10 theo công thức trong tài liệu (bậc
+  1 = cấp 1, bậc cuối = cấp 10, giữa rải đều: 5 bậc → 1, 3, 6, 8,
+  10); Đạo Tích mỗi bậc: bậc 1–3 → 1, 4–6 → 2, 7–9 → 3, bậc 10 → 4.
+  Tổng Đạo Tích toàn bộ khung = 816 (khớp đúng bảng tài liệu theo
+  từng nhóm: 83/121/59/85/85/91/71/83/76/40/22). Danh hiệu đeo 1
+  cái, đổi tự do ngoài lúc gục ngã, hiện dưới tên nhân vật cho mọi
+  người thấy (màu theo cấp). Nhóm Ẩn hiện "???" cho tới khi đạt
+  bậc 1. Thành tựu là của tài khoản, không reset — số liệu nằm
+  trong counters của nhân vật, không bao giờ xóa.
+- 71/100 loại đã nối số liệu thật (server tự đo trong lúc chơi);
+  29 loại chưa nối (vườn, thú cưỡi, luân hồi, thư viện, bẫy, treo
+  thưởng, vượt Tường Đá/Trận Bão, rương ẩn, điểm bí mật, tinh
+  thông vũ khí, chiêu max cấp, phẩm đan, mốc riêng từng lớp, xuất
+  khiếu, chơi nhiều hướng, ngân sách, chết vì bẫy, kết bái, đệ
+  tử, NPC đột phá giúp, thân mật/tiến hóa pet, chuỗi Đỏ/Đen/Hư
+  sắc, mộng kiếp trước, ma khí, sách thư viện) vẫn có đủ dữ liệu
+  trong code nhưng ẩn khỏi panel cho tới khi cơ chế của chúng có
+  thật. Đá đã nhận từ 10 mốc GĐ27 cũ không bị thu hồi, mốc cũ
+  không nhận trùng được nữa (socket cũ đã thay bằng socket mới).
+- Rương Thành Tựu có 5 phẩm theo cấp danh hiệu: Đồng/Bạc/Vàng/
+  Ngọc/Thiên. Tài liệu ghi vật phẩm chưa có trong game (hạt giống,
+  Lệnh Tiết Thời, trứng thú, bí tịch) nên nội dung rương là TẠM
+  từ kho đồ đã có: Đồng 1 món thường, Bạc 2 món thường, Vàng 1
+  thường + 1 hiếm, Ngọc 2 thường + 1 hiếm (+15% thêm 1 hiếm),
+  Thiên 2 thường + 1 rất hiếm. Món thường: Nanh Sói, Cánh Dơi,
+  Đá Quý, Hồi Xuân Đan, Đan Hồi Nguyên; hiếm: Khôi Lỗi, Mảnh
+  Xương; rất hiếm: Đan Kết Đan, Khôi Lỗi. Mở rương bằng nút Dùng
+  trong túi như mọi vật phẩm.
+- Chưa làm trong GĐ138 (để giai đoạn sau): thưởng mốc nhóm
+  (15%/40%/75% Đạo Tích nhóm, 3 mốc mỗi nhóm + thưởng hoàn thành
+  nhóm), mốc Đạo Tích vĩnh viễn (20–780), 29 loại chưa nối, hiệu
+  ứng động cho danh hiệu cấp 8–10 (hiện chỉ approximated bằng màu
+  vàng sáng). Sát thương tính thành tựu chỉ tính đòn do chính
+  người chơi gây ra (đánh thường + chiêu + Phật Quang + Lôi
+  Kích); dot/pet/phản đòn không tính.
+- Test: probe p138 (port 3350, xem `~/workspace/probes/p138_quests.js`).
+  **Probe p138 ALL PASS (28/10)**: boot 431 quái; giết 23 sói →
+  ach_cd_kills bậc 1 + claimable; panel ẩn hiện "???" cho thành
+  tựu ẩn, def chưa nối không hiện; nhận bậc 1 được +1 Đạo Tích +
+  rương Đồng trong túi; đeo danh hiệu "Sát Tinh · Tập Sự", tick
+  hiện đúng tên + màu trắng; nấu 10 món tẩm bổ → nhận bậc, tổng
+  Đạo Tích = 2; thuần hóa 1 sói (Thú Sư, đánh yếu 40→8) → nhận
+  bậc; patch questsDone=5 → nhận bậc, tổng Đạo Tích = 3; mở
+  rương Đồng: rương −1, đúng 1 món thường +1; sau disconnect +
+  autosave 17s + restart, file còn đủ 3 bậc + Đạo Tích 3 + danh
+  hiệu đang đeo, vào lại game vẫn thấy danh hiệu dưới tên. Chạy
+  1 rớt ở mở rương vì probe gửi `{id}` trong khi handler use_item
+  đọc `data.itemId` (return lặng, không báo lỗi) — đã sửa probe.
+  Chưa screenshot trình duyệt (panel + danh hiệu dưới tên mới
+  code-verified qua tick/payload).
+
+## GĐ139 — THƯỞNG MỐC NHÓM + HOÀN THÀNH NHÓM + MỐC ĐẠO TÍCH + HIỆU ỨNG DANH HIỆU
+- Nối tiếp GĐ138 (đóng các mục "chưa làm" của GĐ138 trừ 29 loại chưa
+  nối — 29 loại vẫn để giai đoạn sau, xem cuối mục).
+- Thưởng mốc nhóm (tài liệu bản -2: 3 mốc mỗi nhóm = 15%/40%/75%
+  tổng Đạo Tích nhóm, làm tròn 5 — tổng nhóm lấy theo bảng tài liệu,
+  KHÔNG đổi khi nối thêm def mới nên perk đã mở không bao giờ bị thu
+  hồi): Tu luyện 10/35/60, Chiến đấu 20/50/90, Công pháp 10/25/45,
+  Nghề phụ 15/35/65, Khám phá 15/35/65, Quái và trùm 15/35/70,
+  Sinh tồn 10/30/55, Của cải 10/35/60, Nhân duyên 10/30/55,
+  Linh thú 5/15/30, Ẩn 5/10/15. Mốc tự mở khi đủ Đạo Tích NHÓM
+  (tính từ các bậc ĐÃ NHẬN, không cần nhận riêng).
+- Perk nối thật (chỉ những perk map được lên hệ MMO đã có; perk nào
+  trỏ tới hệ chưa có thì panel hiện rõ "(chưa có cơ chế)", KHÔNG bịa
+  cơ chế): Chiến đấu m1 +2% sát thương lên quái (đánh thường + chiêu
+  + Phật Quang + Lôi Kích), m2 +3% hồi máu nhận được (đan Hồi Xuân
+  tính theo người uống, Y Tu hồi tính theo người được hồi); Công pháp
+  m1 −5% thời gian luyện, m3 −5% chân nguyên mọi chiêu (trừ Kiếm Vực
+  trả bằng máu); Nghề phụ m2 +3% tỷ lệ chế tạo (chế thường + tự rèn);
+  Khám phá m1 −5% thời gian đi đường (ngự kiếm/thuyền); Quái và trùm
+  m1 +5% tỷ lệ rơi nguyên liệu, m3 +10% Linh thạch rơi từ quái; Sinh
+  tồn m1 thức ăn/nước giảm chậm 5%, m2 −20% thời gian hồi sinh (40s →
+  32s); Của cải m1 bán +5%, m2 mua −5% (áp sau giảm thiện cảm/khách
+  quen); Tu luyện m2 bế quan +5% Tu vi (tích phần lẻ để không mất khi
+  gained nhỏ); Nhân duyên m1 NPC mới quen bắt đầu +5 thiện cảm (ghi
+  thẳng vào affinity lúc nói chuyện lần đầu, không qua affinityOf để
+  khỏi bị cộng dồn khi tương tác sau).
+- Perk chưa nối (parked, hiện rõ trong panel): Tu luyện m1 (MMO không
+  cộng Tu vi khi giết quái), m3 (không có thời gian chờ thử lại đột
+  phá); Chiến đấu m3, Công pháp m2 (chỉ có 2 bảng chiêu cố định);
+  Nghề phụ m1/m3 (chế tạo tức thời, không hàng chờ); Khám phá m2
+  (chưa có điểm bí mật), m3 (chưa có Tường Đá/Trận Bão); Quái và trùm
+  m2 (mở rương tự động, không chọn ô); Sinh tồn m3 (chết không có
+  hình phạt để miễn); Của cải m3 (túi không giới hạn ô); Nhân duyên
+  m2/m3 (chưa có NPC giúp đột phá / nhờ chỉ điểm); Linh thú cả 3
+  (chưa có thân thiết pet / vườn linh thảo / phẩm đan); Ẩn cả 3 (sự
+  kiện ngẫu nhiên đã gỡ ở GĐ35 theo lệnh người chơi — không làm lại;
+  chưa có thiên phú / manh mối).
+- Hoàn thành nhóm: nhận đủ mọi bậc của mọi thành tựu ĐANG NỐI trong
+  nhóm → 1 Rương Thành Tựu Thiên (1 lần/nhóm) + mở quyền chọn nhân
+  đôi 1 perk của nhóm (socket `ach_choose_boost` {groupId, perk},
+  mỗi nhóm 1 lựa chọn, vĩnh viễn — nhân đôi PHẦN THƯỞNG, ví dụ +2%
+  thành +4%, không nhân đôi ngưỡng mốc). Panel hiện mốc + perk +
+  nút Nhân đôi (chỉ perk đã nối mới có nút; nhóm toàn perk parked
+  thì báo rõ chưa chọn được).
+- Mốc Đạo Tích vĩnh viễn (8 mốc tài liệu): 20/60/120/220/350/500/650
+  hiện rõ là chưa áp dụng (gắn với kiếp sau / túi có ô / thiên phú /
+  Lệnh Tiết Thời — MMO chưa có); mốc 780 nối thật: danh hiệu "Vô
+  Thượng Đạo Tích" đeo được qua `ach_equip_title` {daoTitle:true},
+  cấp 10, màu cầu vồng. LƯU Ý QUAN TRỌNG: tổng Đạo Tích nối được
+  hiện tại chỉ 646 (68 def) nên danh hiệu 780 CHƯA AI ĐẠT ĐƯỢC trong
+  game thật — phải đợi các giai đoạn sau nối thêm ít nhất 134 Đạo
+  Tích từ 32 def chưa nối; probe kiểm tra cơ chế bằng cách patch
+  white-box daoTich=780 (ghi rõ trong probe, không phải chơi thật).
+  Tương tự, mốc nhóm tính theo tổng tài liệu nên vài mốc chưa tới
+  được hôm nay: Công pháp m3 (45, nối được mới 26), Khám phá m3 (65,
+  nối được 63), Linh thú m2/m3, Ẩn m2/m3 — chúng sẽ mở dần khi các
+  def chưa nối được nối thêm. Ngược lại, HOÀN THÀNH NHÓM thì nhóm
+  nào cũng làm được ngay với def đang nối (tiêu chí GĐ139).
+- Hiệu ứng danh hiệu cấp 8–10 (tài liệu bản -2): cấp 8 Siêu Phàm chữ
+  ánh kim chuyển tông vàng (đổi màu theo tick 250ms), cấp 9 Chí Tôn
+  chữ vàng 12px + hào quang, cấp 10 Vô Thượng chữ cầu vồng chuyển
+  động (tự tính HSV→RGB, không dùng helper Phaser vì typings) +
+  hào quang. Chùm tia sáng bay lên khi bước vào bản đồ (cấp 10) CHƯA
+  làm — chỉ có cầu vồng + hào quang, ghi rõ là approximated.
+- SỬA LỖI DỮ LIỆU GĐ138 (phát hiện khi audit để làm hoàn thành nhóm):
+  vài def đang nối có bậc cuối KHÔNG BAO GIỜ tới được (trần cứng của
+  game), khiến nhóm đó không thể hoàn thành — đã sửa ngưỡng, GIỮ
+  NGUYÊN số bậc (để tổng Đạo Tích nhóm vẫn khớp tài liệu):
+  itemsOwned 1200 → 32 (game chỉ có 55 id vật phẩm, char không nghề
+  sở hữu được 32 loại qua rơi/shop/rương/quest); mapsVisited 150 →
+  73 (74 map trừ thach_lam khóa tông môn); questsDone 12000 → 1040
+  (1069 quest trừ 21 quest nghề khác, char không nghề làm được
+  1048); speciesKilled 80 → 22 (đúng 22 loài quái); godskills 9 → 1
+  (1 char chỉ lĩnh ngộ được 1 thần thông của lớp mình — tên def vốn
+  là "Thần thông đầu tiên"). 3 def khái niệm đa nhân vật/đa nghề
+  (directions, master, toprank) chuyển sang TẠM ẨN (enabled:false)
+  — tổng def nối được: 68 (trước 71), tổng Đạo Tích nối được: 646,
+  tổng toàn bộ def (kể cả ẩn) vẫn 816 khớp tài liệu (Công pháp bù
+  lại bằng cách nới def chưa nối weapons 4→6 bậc để giữ tổng 59).
+- Sửa bug thật trong handler đeo danh hiệu: emit {daoTitle:true}
+  không có achId nên rẽ nhầm vào nhánh Tháo (đứng trước) — đã đổi
+  thứ tự: nhánh daoTitle lên trước nhánh Tháo. Probe có hồi quy
+  Tháo sau khi đeo danh hiệu Đạo Tích.
+- Test: probe p139 (port 3351, xem `~/workspace/probes/p139_quests.js`).
+  **Probe p139 ALL PASS (28/10, chạy 2)**: damage control 112 →
+  sau mốc Chiến đấu nhân đôi 116 (sói/dơi; golem 103 → 107); heal
+  3550 → 3627 (+3% mốc 2); bán da_quy 45 → 47 (+5%), mua nanh_soi
+  12 → 11 (−5%); claim 113 bậc (Chiến đấu 73 + Của cải 40) → 2 nhóm
+  hoàn thành, 121 + 71 Đạo Tích, 3/3 mốc cả 2 nhóm, tổng 192, rương
+  Thiên 29 = 27 từ bậc cấp 9–10 + 2 hoàn thành nhóm; chọn nhân đôi
+  perk 1, chọn lần 2 bị chặn; đeo Vô Thượng Đạo Tích, tick
+  achTitleLevel 10; sau disconnect + autosave 17s + restart còn đủ
+  groupComplete/groupBoost/title/daoTich. Chạy 1 rớt 4 chân: (1) probe
+  gõ sai shopId `tiem_nguyenlieu` (đúng là `tiem_nguyen_lieu`) →
+  shop undefined → throw ở `shop.point`, crash-guard nuốt lặng nên
+  không có event nào (bài học: action socket im lặng hoàn toàn thì
+  kiểm tra log server dòng [CRASH-GUARD] + chính tả identifier);
+  (2) assert rương Thiên sai (tưởng chỉ có 2, quên bậc cấp 9–10 cũng
+  cho rương Thiên); (3) bug thứ tự handler daoTitle/Tháo (trên);
+  (4) chân damage S4 rớt 1 lần do quái farm spawn xa, chạy lại PASS
+  (bat-7 −116). Chưa screenshot trình duyệt (panel mốc + hiệu ứng
+  danh hiệu mới code-verified qua tick/payload).
+- Chưa làm (để giai đoạn sau): 32 loại chưa nối (29 từ GĐ138 + 3 mới
+  ẩn ở GĐ139); perk parked + mốc Đạo Tích 20–650 (đợi hệ tương ứng);
+  tia sáng cấp 10 khi vào map; đan GĐ133 ĐÃ CÓ nguồn thảo dược từ
+  GĐ140 (Tiệm Thảo Dược, xem mục GĐ140 dưới) — phát hiện ngoài lề
+  GĐ139 coi như sửa xong.
+
+## GĐ140 — TIỆM THẢO DƯỢC RIÊNG (CHỈ NPC CÓ BẰNG HÁI THUỐC SƯ MỚI ĐƯỢC BÁN)
+- Luật do Bảo chốt 28/10: thảo dược KHÔNG bán ở Tiệm Nguyên Liệu mà
+  có tiệm riêng; người bán phải là NPC có bằng Thải Dược Sư (người
+  chơi thì bán lại thảo dược cho tiệm). Sửa phát hiện ngoài lề GĐ139
+  (đan GĐ133 thiếu nguồn thảo dược) — không cần hệ mới, chỉ thêm tiệm.
+- Tiệm mới `tiem_thao_duoc` (làng, chưa có bản thành phố vì NPC thành
+  phố lấy từ data, chưa có vai Chủ Tiệm Thảo Dược): Chủ Tiệm Thảo Dược
+  ở (700,660), điểm E (724,654) — ô trống đã kiểm tra ngoài mọi rect
+  nhà + pad. NPC mang cờ `herbCert: true`; handler `shop_buy` chặn
+  bán thảo dược khi chủ tiệm của tiệm đó không có bằng (lỗi nhắc đúng
+  bằng Thải Dược Sư). Các tiệm khác vốn không liệt kê thảo dược nên
+  cũng không bán được — cổng kiểm chặn luôn cả trường hợp sau này có
+  tiệm khác thêm thảo dược vào bảng giá.
+- Giá TẠM (thảo dược thường 5 LT theo tài liệu, còn lại TẠM): bán ra
+  Thảo Dược 5 / Linh Thảo 20 / Tiên Thảo 40; thu mua lại 2 / 8 / 16
+  (~40% như các tiệm khác). Thiện cảm +1/giao dịch, giảm 10% khi ≥50,
+  từ chối khi ≤−50 và mốc Của cải GĐ139 áp dụng chung qua handler
+  shop (không code riêng). Client mirror đủ: SHOP_INFO, SHOP_NPC_CLIENT,
+  NPC_NAME_CLIENT, sprite tạm `villager-b`, điểm E, mô tả vật phẩm.
+- Probe p140 ALL PASS (port 3352, env p140_env, script p140_quests.js):
+  điểm tiệm đi được (không respawn về quảng trường), dialog mở đúng
+  Tiệm Thảo Dược, mua 3 thảo dược đúng giá (−5/−20/−40), bán lại +2,
+  Tiệm Nguyên Liệu + Tiệm Đan từ chối thảo dược (không đổi), white-box
+  gỡ `herbCert` → mua bị chặn đúng lỗi bằng + không trừ tiền, khôi
+  phục file byte-identical (md5) → mua lại được, log không CRASH-GUARD.
+  Chạy 1 rớt 2 lần do lỗi cú pháp probe (thiếu `try {` mở đầu main rồi
+  thiếu `}` đóng main) — lỗi probe, không phải lỗi game.
+- Chưa làm: bản thành phố của Tiệm Thảo Dược (cần thêm vai vào data
+  NPC thành phố); sprite riêng cho Chủ Tiệm Thảo Dược (đang dùng tạm
+  villager-b); chưa screenshot trình duyệt.
+
+## Đổi tên nghề (28/10)
+- Đào Khoáng Sư → **Linh Khoáng Sư** (địa mạch = mạch đất, đúng chất tu
+  tiên); Hái Thuốc Sư → **Thải Dược Sư** (thải dược = hái thuốc theo
+  cách nói cổ điển). Chỉ đổi tên hiển thị: JOBS server + client, vai
+  sư phụ, hướng dẫn sư phụ, tên/mô tả 6 quest GĐ132, lỗi bằng GĐ140.
+  Giữ nguyên: jobId (daokhoang/haithuoc), cơ chế nghề, tên sư phụ
+  Khoáng Lão/Thảo Lão, icon. Kiểm chứng: node --check, vite build,
+  grep hết tên cũ trong code, boot server /api/status ok (quái 431,
+  NPC 9002, 0 CRASH-GUARD).
+
+## Đổi tên tiếp (28/10)
+- Địa Mạch Sư bị chê khái quát quá → **Linh Khoáng Sư** (mạch thì cái
+  gì dưới đất cũng là mạch; khoáng mới chỉ đúng quặng, thêm linh cho
+  ra chất tu tiên). Đổi theo ở JOBS, vai sư phụ, hướng dẫn sư phụ,
+  quest GĐ132 (Địa mạch nhập môn/chăm chỉ → Linh khoáng nhập môn/
+  chăm chỉ).
+- Sát Thủ → **Ảnh tu** (Bảo chọn Ảnh Tu trong 3 phương án Ảnh Tu/Vô Ảnh Tu/Dạ Tu; Sát tu từng thử nhưng bị chê không hay; lớp duy nhất phá nếp X tu của 9 hướng; Ảnh tu
+  giữ gốc Sát Khí, khớp Thể tu/Kiếm tu/Pháp tu...). Đổi ở: tên lớp
+  (server CLASSES + client CLASS_LIST), mô tả vật phẩm độc, lỗi chế
+  độc/bôi độc, mô tả quest GĐ127, tên đường gear SAT_THU, className
+  trong SkillData (giờ 9 lớp đều dạng X Tu). Giữ nguyên: classId
+  satthu, cơ chế Sát Khí/né/độc, tên chiêu Vô Ảnh Ám Sát, danh hiệu
+  thành tựu Trùm Sát Thủ (danh hiệu săn trùm, không phải tên lớp).
+- Kiểm chứng: node --check, 4 file JSON hợp lệ, vite build, grep hết
+  tên cũ trong code/data, boot server /api/status ok (quái 431, NPC
+  9002, 0 CRASH-GUARD).
+
+
+## GĐ141 — CẢNH GIỚI ẨN (ENGINE: đếm + mở khóa, chưa gắn phần thưởng)
+
+- Luật Bảo chốt 28/10: ở tầng 9 đã đủ tu vi nhưng không đột phá mà tiếp
+  tục tu luyện thì tích "năm tu thêm": **30 ngày tu luyện = 1 năm**.
+  Mốc mở: **Luyện Khí viên mãn 10 năm (LK9, 300 ngày)**, **Luyện Hồn
+  15 năm (LK9, 450 ngày, cộng dồn)**, **Nhập Đạo 20 năm (KD9, 600 ngày)**.
+- Chỉ đếm ngày có tu luyện THẬT: đang bế quan / thiền ở linh mạch, hoặc
+  nhận tu vi từ quest trong ngày đó. Đồng hồ thế giới chạy cả khi offline
+  nên KHÔNG đếm ngày chỉ trôi qua (chống AFK chờ tài nguyên — đúng triết
+  lý game). Mỗi ngày game tối đa 1 lần (khóa theo lastDay).
+- "Đủ" = tầng 9 + tu vi >= ngưỡng đột phá của bước đó (cùng đường cong
+  tuViNeedStep mà đột phá dùng). KD9 tính theo bước 27 (NA đang bị chặn
+  nên KD9 luôn ở trạng thái "đủ nhưng không độ").
+- Mở khóa một chiều, không thu hồi; mở thì báo notice
+  "✦ Đã mở cảnh giới ẩn: ...!". Trạng thái `anState {lkDays, kdDays,
+  lkLastDay, kdLastDay, vienman, luyenHon, nhapDao}` bền ở cả 3 chỗ
+  (persistPlayer, spawnFromCharacter, spawnOfflineActor) + đi theo
+  characterPayload (welcome + char_sync).
+- Thẻ nhân vật hiện dòng `🌑 Năm tu thêm: X/Y năm → ...` khi đang ở
+  tầng max, và `✦ Cảnh giới ẩn: ...` khi đã mở (kể cả sau khi đã đột
+  phá lên cảnh khác).
+- Probe p141 ALL PASS (port 3353, DAY_REAL_MS=30000): 299→300 mở viên
+  mãn + notice, 449→450 mở Luyện Hồn kèm viên mãn, KD9 599→600 mở
+  Nhập Đạo, cùng ngày không đếm thêm, không tu luyện / chưa đủ tu vi
+  qua 2 ngày vẫn không đếm, bền qua autosave 15s + restart, 0
+  CRASH-GUARD. Dòng thẻ nhân vật mới chỉ code-verified (chưa chụp
+  trình duyệt).
+- GĐ142 (xem dưới) đã làm: chỉ số ẩn Luyện Hồn (bạo kích/may mắn),
+  tăng chỉ số + nghề thứ hai của Nhập Đạo, danh hiệu đường viên mãn.
+  Vẫn CHƯA LÀM (đợi Bảo chốt): loại tu thứ hai / hợp nhất, ô 8-10,
+  bí cảnh riêng, nhánh Ma/Tiên (đã làm ở GĐ143 dưới đây), cơ chế riêng từng đường viên mãn,
+  đường viên mãn cho Cốt/Quỷ/Ảnh/Pháp.
+
+## GĐ142 — PHẦN THƯỞNG CẢNH GIỚI ẨN (Luyện Hồn + Nhập Đạo + danh hiệu đường)
+
+- Luyện Hồn (mở ở LK9 15 năm) mở 2 chỉ số ẩn, số TẠM: **bạo kích
+  10% — đòn thường + chiêu gây ×2 sát thương** (chiêu tung 1 lần
+  cho cả sát thương lẫn ghi nhận thành tựu, tránh 2 lần tung lệch
+  nhau), **may mắn +15% tỉ lệ rơi nguyên liệu** (nhân vào cùng chỗ
+  với mốc Quái/trùm GĐ139). Chỉ số ẩn hiện trong payload `anBonus
+  {crit, luck, stats}` để probe/thẻ nhân vật đọc.
+- Nhập Đạo (mở ở KD9 20 năm): **toàn bộ chỉ số ×1,2** (TẠM, áp sau
+  đồ + đan trong effStatsOf, 7 chỉ số vatCong/phapCong/vatPhong/
+  phapPhong/tocDo/thanThuc/khiHuyet; pet/bot không có anState nên
+  không hưởng) + **học thêm 1 nghề phụ thứ hai**.
+- Nghề thứ hai: `job2` cùng hình dạng với `job`, bền ở cả 3 chỗ
+  (persistPlayer, spawnFromCharacter, spawnOfflineActor) + payload
+  (welcome + char_sync). Mọi cổng nghề chấp nhận cả 2 nghề qua
+  helper `jobOf(p, jobId)` + `jobRankOfJob`/`jobTitleOfJob`: học nghề
+  (chưa Nhập Đạo thì nghề 2 bị chặn, đã đủ 2 nghề thì chặn nghề 3),
+  bái sư theo nghề khớp, nhiệm vụ nghề, chế tạo (lượt/cấp/bonus đệ
+  tử theo nghề khớp; công thức lớp Tẩm bổ/Chế độc/Dưỡng Kiếm/Luyện
+  Lõi giữ cách tính cũ), tự rèn, bố trận, thu thập (lượt vào nghề
+  khớp; gather_result.crafts + notice lên cấp báo theo nghề khớp),
+  thuần hóa, thành tựu topRanks/masters (tính cả nghề 2).
+- Panel Nghề hiện cả 2 nghề: dòng sub thêm nghề thứ hai, công thức/
+  tự rèn/bố trận lọc theo nghề khớp, nghề thu thập thứ hai có hướng
+  dẫn riêng, người đã Nhập Đạo mà chưa có nghề 2 thấy mục học nghề
+  thứ hai (gửi learn_job như nhánh chưa có nghề).
+- Viên mãn: thẻ nhân vật hiện danh hiệu đường theo tài liệu (chỉ có
+  5 đường): Phật → Thánh tăng, Nho → Đại nho, Y → Thần y, Kiếm →
+  Kiếm tâm, Thể → Võ tông sư; kèm dòng bonus Luyện Hồn (🍀 May mắn
+  +15% · 💥 Bạo kích 10%) và Nhập Đạo (⚡ Toàn bộ chỉ số ×1,2).
+  Cốt/Quỷ/Ảnh/Pháp KHÔNG có đường trong tài liệu — chưa bịa, đợi
+  Bảo cho ý.
+- Probe p142 (port 3354) + p142b (port 3355): anBonus crit 0.1 /
+  luck 1.15 / stats 1–1.2; crit ×2 chứng minh qua sói 9/18 (Pháp công
+  7), dơi 7/14 + golem 6/13 (Pháp công 3) + file ach_crits 3 và 8;
+  đối chứng thetu vatCong 20 = 16, Nhập Đạo = 18; học dansu +
+  daokhoang (nghề 2), chặn nghề 3, gather quặng vào job2 (job1 vẫn
+  0), chế Hồi Xuân Đan vào job1 (job2 vẫn 1), chưa Nhập Đạo thì nghề
+  2 bị chặn; bền qua autosave 15s + restart (file + reconnect giữ
+  đủ job/job2/crafts); 0 CRASH-GUARD cả 2 run. Lưu ý probe: chỉ số
+  char mới tạo là RANDOM (đừng giả định chỉ số gốc theo lớp — phải
+  đọc file/patch đúng chỉ số cần đo); chân crit giết sạch sói nên
+  chân đối chứng phải đo trước hoặc trên server mới.
+- May mắn +15% chỉ mới kiểm chứng ở mức payload + code (muốn chứng
+  minh thống kê cần ~1000 lần giết, không làm trong probe).
+- CHƯA LÀM (đợi Bảo chốt): loại tu thứ hai / hợp nhất (Tách/Luyện
+  hóa), ô 8-10, bí cảnh riêng từng người, nhánh Ma/Tiên (đã làm ở GĐ143 dưới đây), cơ chế
+  riêng từng đường viên mãn (vũ khí/chiêu — vũ khí hiện khóa cứng
+  theo lớp), đường viên mãn cho Cốt/Quỷ/Ảnh/Pháp. Dòng thẻ GĐ142
+  mới code-verified + kiểm tra chuỗi trong bundle build (chưa chụp
+  trình duyệt).
+
+## GĐ143 — NHÁNH TIÊN/MA: 2 ĐƯỜNG QUEST (ẩn Luyện Hồn / thường Kim Đan)
+
+- Luật Bảo chốt (28/10, sau 4 lần đổi ý trong tối — event chiến phe
+  PARKED, không còn là cơ chế mở nhánh): nhánh Tiên/Ma dành cho MỌI
+  người, không khóa ẩn, không mở sớm ở Luyện Khí. Ai đạt Luyện Hồn
+  (cảnh giới ẩn GĐ141) thì tự mở nhiệm vụ nhánh ẨN "Tiên/Ma tranh đấu"
+  (đồ phe đặc biệt + buff ẩn); ai chưa có Luyện Hồn thì tới Kim Đan
+  mới mở nhiệm vụ nhánh THƯỜNG (chỉ có thân phận + quest + thưởng
+  thường, KHÔNG buff). Chọn phe 1 lần; đổi phe (tẩy luyện: lễ gột
+  rửa tốn linh thạch, xóa khí, tu lại từ đầu, cả 2 chiều) CHƯA LÀM.
+- Trạng thái: `branch {side: 'tien'|'ma', source: 'hidden'|'normal'}`
+  bền đủ 3 chỗ (đăng nhập + bóng offline + lưu bền) + payload.
+  Socket `branch_choose {side}`: gục thì lỗi; đã chọn thì lỗi 'Bạn
+  đã chọn phe rồi.'; Luyện Hồn → source hidden, Kim Đan+ (realm ≥ kd)
+  → source normal, còn lại lỗi 'Chưa mở Tiên/Ma…'. Trả
+  `branch_choose_result {ok, side, source}`.
+- Quest `server/data/quests_gd143.json` (4 cái, Sứ Giả giao, mirror
+  client `quests_gd143_info.ts`): nhánh ẩn q143_an_1 giết 10 quái bất
+  kỳ (140 LT/25 tuVi, cờ branch_an_1) → q143_an_2 gặp Sứ Giả nhận
+  Lệnh Bài (320/60, cờ branch_hidden_done); nhánh thường q143_thuong_1
+  (650/120) → q143_thuong_2 (650/120). Cổng trong quest_accept (sau
+  cổng jobId): chưa chọn phe → 'Hãy chọn phe Tiên hoặc Ma trước đã.';
+  sai đường → lỗi riêng từng đường; quest sai đường cũng bị ẩn khỏi
+  danh sách dialog ở làng. Nhận Q1 (cả 2 đường) spawn Tướng phe đối
+  địch: người chọn Tiên gặp 'Ma Tướng Tranh Đấu', chọn Ma gặp 'Tiên
+  Tướng Tranh Đấu' (golem ở (1700,200), mang `faction` phe đối địch).
+- Lệnh Bài phe (chỉ nhánh ẩn, trả Q2): đồ TOKEN thật của GĐ119, phẩm
+  DO, hạng 9 Nhất Phẩm, tên 'Tiên Lệnh Nhất Phẩm'/'Ma Lệnh Nhất Phẩm',
+  base {attack 2, defense 2, hp 10} → mặc vào gearStats 14/14/70
+  (DO ×7,0). Cổng mặc: gear.js canEquip chặn đồ có `faction` khác phe
+  người mặc ('Không thể trang bị'). Đeo Lệnh Bài mới dùng được skill
+  phe, mới hưởng dmg +25% lên phe đối địch.
+- Buff ẩn (chỉ khi đã trả Q2 nhánh ẩn, cờ branch_hidden_done): Tu vi
+  ×1,2 cả 2 phe (bế quan + thiền + trả quest + offline — KHÔNG áp cho
+  phù tụ linh vì đó là vật phẩm); Tiên hồi phục ×1,2 (đan Hồi Xuân /
+  Hồi Nguyên + y_heal); Ma dmg gây ra ×1,1 (đòn thường + chiêu +
+  Phật Quang + bùa Lôi Kích). Chú ý thứ tự trong quest_claim:
+  setsFlag đặt TRƯỚC khi cộng tuVi nên chính Q2 đã hưởng ×1,2
+  (60 → 72), không phải 60 như thiết kế probe ban đầu tưởng.
+- Skill phe `faction_skill`: cần đeo Lệnh Bài phe, 20 MP, hồi 5s, quái
+  gần nhất cùng map ≤300px (né được). Tiên 'Tiên Quang' hệ số 1,2 +
+  tự hồi 10% máu tối đa; Ma 'Ma Diệm' hệ số 1,8. Trả
+  `faction_skill_result {ok, skill, dmg}`.
+- Client: thẻ nhân vật thêm dòng nhánh (nút chọn Tiên/Ma khi đủ điều
+  kiện: Luyện Hồn hoặc realm kd/na/ht, chưa chọn phe) + nút skill phe
+  (nhãn theo phe, chỉ hiện khi đeo Lệnh Bài). Chưa chụp trình duyệt.
+- Probe p143 (port 3356) ALL PASS chạy 3 (0 CRASH-GUARD): đối chứng
+  sói 16 (chưa nhánh); LK5 chọn/nhận đều bị chặn; Tiên ẩn chọn +
+  file branch/flag + chọn lần 2 bị chặn; Q1 spawn Tướng Ma; giết 10
+  → Q1 +25; Q2 talk + Tiên Lệnh DO/TOKEN/hạng 9 + flag + tuVi +72;
+  heal 100 → Tiên ẩn 3160 vs thường 2650 (60% vs 50% của 5100); nhận
+  lại Q1 → +30 (25×1,2); KdMa chain thường: chọn Ma/thường, Tướng
+  Tiên, KHÔNG token KHÔNG flag; AnMa Ma Lệnh + gearStats 14/14/70;
+  sói Ma ẩn 18 (16×1,1), Tướng chưa đeo 16 → đeo token 30 (gồm +14
+  công của token ×1,1 ×1,25, def golem 8); Ma Diệm dmg ≥ 70, tốn
+  đúng 20 MP, không token bị chặn; cổng sai đường 2 chiều; bền
+  autosave 17s + restart (file + welcome.branch).
+- Bài học probe (ghi lại để lần sau khỏi vấp): (1) ĐỪNG đánh mù ở
+  bãi farm — chỉ 12 con rải khắp map, đứng sai chỗ là đánh không khí;
+  phải ghim quái SỐNG (steerToLiveMon) và giết theo con gần nhất.
+  (2) Char Luyện Hồn có chí mạng 10% ×2 nên assert dmg phải chịu
+  được crit (sói Ma-ẩn 18/35, Tướng 16/32, đeo token 30/60).
+  (3) quest_accept cần ≤95px từ người giao — nhận lại Q1 phải quay
+  về Sứ Giả trước, đứng ở farm nhận là bị từ chối lặng lẽ.
+  (4) Thạch Quái KHÔNG có giáp đá (giáp đá 50% là của Thạch Khôi
+  Lỗi) — đừng áp physResist vào dmg golem.
+- CHƯA LÀM (đợi Bảo chốt): tẩy luyện đổi phe; thang cảnh giới riêng
+  Ma (Huyết Luyện, Nhập Ma, Ma Tướng, Ma Quân, Ma Tôn) / Tiên (Tiên
+  Cơ, Địa Tiên, Thiên Tiên, Kim Tiên, Đại La) — tên trong tài liệu,
+  số tầng làm sau; bảng hậu quả đột phá theo phe (Ma hỏng nhiều
+  nhưng nặng nhất chỉ mất thọ nguyên, không mất căn cơ; Tiên hỏng
+  ít nhưng có thể mất căn cơ); event chiến phe (đã park, nếu quay
+  lại thì cả 2 đường cùng tham gia, không còn là cơ chế mở nhánh);
+  mục tiêu dmg vs phe ngoài Tướng Q1 (game chưa có PvP nên hiện chỉ
+  có Tướng là mục tiêu thật); screenshot trình duyệt UI nhánh +
+  nút skill phe. GĐ143 local-only, CHƯA có zip mới.
+
+## GĐ144 — MINH MẪN THAY THẦN THỨC + CHỈ SỐ ẨN ĐẠO QUÁN (29/10, probe p144 ALL PASS)
+- Người chơi chốt (29/10): BỎ Thần Thức, thay bằng Minh Mẫn — Minh Mẫn CHỈ
+  tăng chân nguyên + niệm phép nhanh hơn tí (không lĩnh hội chiêu nhanh);
+  lĩnh hội chiêu nhanh + am hiểu chiêu nhanh chuyển hết sang Ngộ Tính.
+- Minh Mẫn (đổi tên 1:1 từ Thần Thức, không mất chỉ số): chân nguyên tối
+  đa = Minh Mẫn × 10; hồi chân nguyên khi thiền = 2 + Minh Mẫn × 0,2/giây;
+  niệm nhanh = giảm hồi chiêu chiêu thức, TẠM 10 điểm = 1%, tối đa 20%,
+  nhân với giảm hồi chiêu từ Tốc Độ. Không áp vào đòn thường hay skill phe.
+  Migration: file cũ có thanThuc được đổi sang minhMan lúc load (cả 3 điểm
+  spawn); skills_catalog.json đổi 182 điều kiện thanThuc → minhMan (không
+  đổi là chiêu kẹt điều kiện cũ).
+- Chỉ số ẩn (field hiddenStats, bền đủ 3 điểm + payload): luôn hiện trên thẻ
+  nhân vật nhưng KHÓA tới khi mở thành tựu ẩn Đạo Quán; chưa mở thì không
+  cộng được bằng điểm (allocate_stats chặn lặng, không trừ điểm).
+  - Cấp 1 "Đạo Quán Là Nhà": thiền/bế quan trong khu Đạo Quán (vòng 120px
+    quanh Tụ Linh (700,196), chỉ tính lúc online) đủ 300 giờ game → mở
+    Ngộ Tính/Phúc Duyên/Bạo Kích/Bạo Thương + 200 điểm tự do.
+  - Cấp 2 "Không Vội Chiến Đấu": đủ 1000 giờ game (lũy tiến) → mở Bản
+    Nguyên/Ý Chí + 400 điểm tự do. Mở 2 cấp một lượt cộng dồn 600 điểm.
+  - Ngộ Tính: thời gian lĩnh ngộ = gốc × 100/(100 + Ngộ Tính) (công thức cũ
+    của Thần Thức chuyển sang); am hiểu: dùng chiêu tích điểm (1 × (1 +
+    Ngộ Tính × 3%)), 100 điểm = 1 cấp, tối đa 10 cấp, mỗi cấp +2% sát thương
+    chiêu và −2% chân nguyên (chiêu, không áp đòn thường).
+  - Phúc Duyên (may mắn): cộng thẳng điểm % vào tỉ lệ đột phá (Đại/Kim
+    Đan) và số món đồ xịn từ rương (mỗi 100 điểm = chắc chắn +1 món, phần
+    lẻ roll thêm, tối đa +2 món ngoài món gốc); tổng tỉ lệ KHÔNG chặn
+    100% (đột phá 100%+ = chắc chắn thành công, notice hiện 100%+).
+  - Bạo Kích/Bạo Thương: giá 10 điểm chỉ số = 1 điểm (điểm tự do, không
+    dùng bể đột phá ×2); Bạo Kích +1% tỉ lệ chí mạng mỗi điểm (tối đa
+    100%, cộng với 10% của Luyện Hồn); Bạo Thương +5% sát thương chí mạng
+    mỗi điểm (gốc ×2, áp cả đòn thường, chiêu và Siêu Giác Quan Ảnh Tu).
+  - Bản Nguyên: +5% điểm chỉ số khi lên cấp (đột phá) mỗi điểm, phần lẻ
+    tích lũy (banNguyenFrac bền file); lưu ý breakthrough_ok báo
+    gainedPoints GỐC, phải đo bằng delta statPoints.
+  - Ý Chí: +2% kháng khống chế (chậm/choáng, không tính độc) mỗi điểm,
+    tối đa 75%; áp tại applyPlayerStatus (quái đánh trúng người chơi).
+  - Bản Nguyên/Ý Chí KHÔNG cộng bằng điểm (allocate chặn); chỉ tăng qua
+    nhiệm vụ ẩn + khảo hạch — CHƯA LÀM (GĐ145).
+- Client: thẻ nhân vật thêm dòng chỉ số ẩn (giờ Đạo Quán + tiến độ cấp +
+  6 chỉ số, khóa hiện 🔒, đã mở hiện nút +1 trừ điểm tự do theo giá).
+  Reset chỉ số không hoàn điểm đã cộng vào chỉ số ẩn.
+- Probe p144 (port 3357, env p144_env) ALL PASS (0 CRASH-GUARD): migration
+  thanThuc 33 → minhMan 33 + maxMp 330; needMin LK 720 (Ngộ Tính 0) →
+  360 (Ngộ Tính 100); thiền ở (700,150) mở cấp 1 +200, mở 2 cấp một lượt
+  +600; allocate: Ngộ Tính 1 điểm, Bạo Kích 10 điểm, Bản Nguyên chặn,
+  tier 0 chặn; crit sói 40 (Bạo Kích 100 + Bạo Thương 10: 16 × 2,5) vs đối
+  chứng 16; Phúc Duyên 60 → đột phá Đại notice 100% (0,6 − 0,2 linh căn
+  5 + 0,6); Bản Nguyên 10: đột phá tiểu +4 rồi +5 (lẻ dồn); am hiểu
+  thetu_1 ≥ 100 sau 6 cast (Ngộ Tính 900) + cast cấp 1 sói −31 (30 × 1,02);
+  Ý Chí 50 (trần 75%): đối chứng bị chậm, char Ý Chí kháng 185 > chậm 6
+  trong 60s đứng chịu Thủy Triều Tinh ở bang_phong_coc; bền file
+  (daoQuan tier, hiddenStats, skillMastery, minhMan) qua autosave +
+  restart. GĐ144 local-only, CHƯA có zip mới.
+- CHƯA LÀM: nhiệm vụ ẩn về tu luyện + khảo hạch tăng Bản Nguyên/Ý Chí
+  (GĐ145); tẩy luyện
+  đổi phe; screenshot trình duyệt dòng chỉ số ẩn trên thẻ.
+
+## GĐ145 — NHIỆM VỤ ẨN TU LUYỆN → KHẢO HẠCH BẢN NGUYÊN/Ý CHÍ (29/10, probe p145 ALL PASS)
+- Chỉ mở khi đạt cấp Đạo Quán 2 (cả dialog Sứ Giả lẫn quest_accept đều
+  chặn: dialog ẩn hẳn, accept báo "chỉ mở khi đạt cấp Đạo Quán 2").
+  Nhận/trả qua Sứ Giả Tông Môn (npc_sugia), thiện cảm yêu cầu 0.
+- 6 nhiệm vụ (server/data/quests_gd145.json + mirror client
+  quests_gd145_info.ts), làm lại được — trả xong nhận lại là có lượt
+  roll mới (quest_claim xóa quest, nhận lại hoạt động như mọi quest):
+  - Bản Nguyên: "Tọa Vong Ngộ Đạo" thiền Đạo Quán 10 giờ game (140 LT/
+    25 Tu vi); "Phá Cảnh Liên Châu" đột phá 3 lần (320/60); "Lĩnh Ngộ
+    Song Pháp" lĩnh ngộ xong 2 chiêu (320/60).
+  - Ý Chí: "Bất Động Như Sơn" thiền Đạo Quán 20 giờ game (320/60);
+    "Vạn Kiếp Bất Ma" đột phá 5 lần (650/120); "Tâm Như Chỉ Thủy"
+    lĩnh ngộ xong 3 chiêu (650/120).
+- Cơ chế tiến độ (3 loại mới, nối vào hook sẵn có, không chế riêng):
+  daoquan = giờ Đạo Quán tích lũy kể từ lúc nhận (ghi startMin lúc
+  accept, tick thiền trong khu cập nhật tiến độ); breakthrough = mỗi lần
+  đột phá thành công +1 (hook trong applyBreak, tính cả Tiểu/Trung/Đại);
+  learn = mỗi lần lĩnh ngộ xong 1 chiêu +1 (hook trong completeLearning,
+  tính cả học online lẫn offline). Trả quest kiểm tra state done như
+  mọi loại quest khác.
+- Khảo hạch (roll lúc trả quest, TẠM 30%): trúng → +1 đúng chỉ số của
+  quest đó (Bản Nguyên hoặc Ý Chí), trượt → notice "chưa thành công —
+  tu luyện thêm rồi thử lại". Điểm cộng bền file qua persistPlayer của
+  claim (roll đặt TRƯỚC persist, không sau). Không cộng bằng điểm tự do
+  (đã chặn từ GĐ144), không giới hạn số lần thử.
+- Probe p145 (port 3358, env p145_env, DAY 10s) ALL PASS (0 CRASH-GUARD):
+  tier 1 dialog không hiện quest + accept chặn đúng cổng; tier 2 dialog
+  hiện available; thiền Đạo Quán trả quest tỉ lệ thật (delta 0/1 + notice
+  khảo hạch); white-box tỉ lệ 100% → Ý Chí +1, tỉ lệ 0% → Bản Nguyên +0
+  (file quest khôi phục byte-identical sau white-box); đột phá 3 lần
+  (chân Kim Đan — chân Luyện Khí bị kẹt bước Trung ở lần thứ 3, bài học
+  probe: bước đột phá đích 4/7/13/16 là Trung, cần đan + trắc nghiệm);
+  lĩnh ngộ 2 chiêu (LK thetu_3 tại Đạo Quán + TC thetu_4) → claim có roll;
+  bền file (Ý Chí = 1, quest đã trả bị xóa, 2 chiêu đã học còn nguyên).
+  GĐ145 local-only, CHƯA có zip mới.
+- CHƯA LÀM: tẩy luyện
+  đổi phe; screenshot trình duyệt dialog Sứ Giả hiện quest khảo hạch.
+
+## GĐ146 — THANG TIÊN/MA (29/10, probe p146 ALL PASS)
+- Thang song song mở khi chọn phe (cả đường ẩn lẫn đường thường đều leo
+  được, không cần cảnh giới chính): Ma 5 cảnh giới × 3 tầng = 15 bước
+  (Huyết Luyện, Nhập Ma, Ma Tướng, Ma Quân, Ma Tôn); Tiên 5 × 9 tầng =
+  45 bước (Tiên Cơ, Địa Tiên, Thiên Tiên, Kim Tiên, Đại La). Tên cảnh
+  giới theo tài liệu; số tầng TẠM (Ma ít tầng = nhanh/mạnh, Tiên nhiều
+  tầng = chậm/bền).
+- Khí phe (branchQi, bền đủ 3 điểm + payload): giết Tướng phe đối địch
+  +50 (hook trong onMonsterKilled, chỉ khi quái có faction khác phe
+  mình); trả nhiệm vụ nhánh (mọi quest có branchSource) +30. Tẩy luyện
+  đổi phe sau này sẽ xóa thang + khí (chưa làm).
+- Đột phá thang (socket branch_breakthrough, nút "✦ Đột phá thang" trên
+  thẻ khi đã chọn phe): tốn 100 Khí/lượt (TẠM); Ma 50%/Tiên 70% (TẠM);
+  thua liên tiếp +10%/lần, 3 lần thua liên tiếp thì lần sau chắc chắn
+  (theo luật đột phá chính). Thất bại chia 3 mức như đột phá chính:
+  nhẹ mất 30% Tu vi; trung bình mất 10 năm tuổi thọ; nặng — Ma chỉ mất
+  thêm 20 năm tuổi thọ (KHÔNG mất căn cơ, đúng tài liệu), Tiên mất căn
+  cơ (chỉ số gốc ×0,9, cộng dồn tối đa 3 lần, như đột phá chính).
+- Bonus thang CHỈ cho đường nhánh ẩn (quyết theo luật GĐ143: đường thường
+  chỉ có thân phận + quest, không buff): Ma ẩn +2% sát thương gây ra mỗi
+  bước; Tiên ẩn +1% hồi phục +1% Tu vi mỗi bước. Nối vào đúng 3 hàm
+  tuviMulOf/healMulOf/branchDmgMulOf nên mọi đường dmg/heal/tu vi đều
+  ăn theo (đòn thường, chiêu, Phật Quang, bùa Lôi Kích, đan hồi, y_heal,
+  thiền/bế quan/quest/offline). Đường thường leo thang vẫn hiện tên
+  cảnh giới + bước + Khí trên thẻ, chỉ không có bonus sức mạnh.
+- Client: thẻ phe thêm "Thang: <tên> (bước/max) · Khí: <n>" + nút đột
+  phá thang (emit branch_breakthrough; kết quả về qua
+  branch_breakthrough_result + notice).
+- Probe p146 (port 3359, env p146_env) ALL PASS (0 CRASH-GUARD): chưa
+  chọn phe bị chặn; thiếu Khí bị chặn; Ma leo bước 1 (tối đa 5 lượt nhờ
+  bảo đảm chuỗi thua), mỗi lượt tốn đúng 100 Khí, notice "Huyết Luyện
+  tầng 1"; Ma thất bại không mất căn cơ (chỉ mất Tu vi hoặc thọ nguyên);
+  Ma ẩn sói 125 ở bước 1 vs 123 ở bước 0 (vatCong 200); Tiên heal 3091
+  ở bước 1 vs 3060 đối chứng (dan_hoi_xuan, maxHp 5100); Tiên trả Q2 Tu
+  vi +73 ở bước 1 vs +72 đối chứng; Ma thường leo bước 1 nhưng sói vẫn
+  -16 (không buff); giết Tướng +50 Khí, trả quest nhánh +30 Khí; bền
+  file (branchStep/branchQi). GĐ146 local-only, CHƯA có zip mới.
+- Bài học probe (3 lần vấp mới PASS): (1) char đo máu thấp ngồi offline
+  qua chân dài sẽ bị autosave ghi đè máu đầy — đo heal phải ngay sau
+  restart; (2) char đo heal đứng ở bãi farm bị quái cắn trước khi uống
+  đan (lệch đúng 4 và 17 máu) — đo trong làng, nơi không có quái;
+  (3) đánh thường trúng quái GẦN NHẤT mọi loài — đo dmg phải khớp đúng
+  id mục tiêu đã ghim, trượt thì thử lại.
+- CHƯA LÀM: tẩy luyện đổi phe (xóa thang + khí); screenshot trình duyệt
+  dòng thang + nút đột phá trên thẻ.
+
+## GĐ147 — Gợi ý ẩn Đạo Quán + tẩy luyện đổi phe (29/10, probe p147 ALL PASS)
+- Gợi ý ẩn Đạo Quán — KHÔNG có dấu hiệu chỉ dẫn, không popup hướng
+  dẫn: chỉ hiện sau khi nhân vật đã đo linh căn, mỗi gợi ý đúng 1 lần
+  duy nhất, phát hiện bằng cách chơi (đúng triết lý "ẩn mở qua quan
+  sát trong thế giới"):
+  + Ở lại tu luyện: lần đầu thiền/bế quan trong khu Đạo Quán → notice
+    bia đá cổ bên Tụ Linh (ngồi đủ lâu sẽ mở "những khiếu huyệt trước
+    nay chưa từng biết" — nhá hàng chỉ số ẩn, không spoil số).
+  + Ra farm quái: lần đầu bước ra khỏi làng trên map nhà → notice vết
+    kiếm cũ (đánh quái/nhặt đồ/làm nhiệm vụ cho thân thể cứng + túi đầy
+    linh thạch, nhưng đi mà không tu tâm sớm muộn gặp bình cảnh).
+  + Lựa chọn không vĩnh viễn: lần đầu tới gần cửa Đạo Quán (nơi học
+    chiêu Luyện Khí) → mảnh giấy của tiền bối (ngồi một chỗ hay đi khắp
+    thiên hạ đều thành đạo được; đường nào cũng có thể quay đầu).
+  Cờ daoHint1/2/3 lưu trong flags (persistPlayer; cờ tự ghi khi phát
+  hiện, không cần tương tác E). Chưa có sổ xem lại gợi ý đã tìm.
+- Tẩy luyện đổi phe (luật tài liệu, trước đây CHƯA LÀM): socket
+  branch_cleanse, cổng: đã chọn phe + đứng gần Sứ Giả (≤95px) + 1000
+  Linh thạch (TẠM). Tác dụng: branch = null, branchQi/branchStep/
+  branchFailStreak = 0, Lệnh Bài phe cũ tháo khỏi ô TOKEN (đồ vẫn giữ
+  trong túi), trừ đúng 1000 LT, notice + branch_cleanse_result. Chọn
+  lại bằng branch_choose như cũ (nguồn tự tính lại theo Luyện Hồn /
+  Kim Đan; cờ chuỗi nhiệm vụ cũ giữ nguyên làm lịch sử). Client: nút
+  "☯ Tẩy luyện đổi phe" cạnh nút đột phá thang, chỉ hiện khi đã chọn
+  phe.
+- Probe p147 (port 3360, env p147_env) ALL PASS (0 CRASH-GUARD): chưa
+  đo linh căn thiền trong khu + ra farm đều không ra hint; đủ 3 hint
+  đúng nội dung + chỉ hiện 1 lần (kiểm tra lại đúng tọa độ sau
+  restart); tẩy luyện bị chặn khi chưa chọn phe / xa Sứ Giả / thiếu
+  LT; tẩy xong branch + khí + thang + chuỗi thua về 0, trừ đúng 1000
+  LT, Lệnh cũ tháo nhưng còn trong túi, chọn lại được phe Tiên nguồn
+  ẩn; bền file (daoHint1/2/3, branch mới). Bài học: dữ liệu giả của
+  probe phải đúng dạng thật — Lệnh Bài thiếu rarity làm boot sập ở
+  spawnOfflineActor→calcGearStats (đồ thật luôn có rarity); linhCan
+  thiếu elements làm client throw ở dòng linh căn và nuốt mất các dòng
+  phe/Đạo Quán phía sau.
+- Screenshot trình duyệt (nhân vật Ma ẩn, thang bước 3, Đạo Quán cấp
+  1): thẻ hiện đủ dòng phe + thang + Khí, dòng Đạo Quán 8 giờ + 4 chỉ
+  số ẩn có nút +1, nút đột phá thang + nút tẩy luyện — xem file
+  probes/p147_shot.png. GĐ147 local-only, CHƯA có zip mới.
+
+## GĐ148 — Sổ xem lại gợi ý Đạo Quán (29/10, probe p148 ALL PASS)
+- Vấn đề GĐ147 để lại: notice gợi ý trôi qua là mất, không xem lại
+  được. Sửa: characterPayload thêm daoHints (lọc từ flags theo thứ tự
+  daoHint1/2/3, chỉ gồm gợi ý đã tìm; không đổi spawn/persist vì cờ
+  đã bền sẵn từ GĐ147). Client: khối Đạo Quán thêm dòng "💡 Gợi ý
+  Đạo Quán đã tìm: X/3" + nút Xem lại/Thu lại; bấm mở ra toàn văn các
+  gợi ý đã tìm (bảng chữ tĩnh phía client, khớp từng chữ với notice
+  server). Trạng thái mở/thu giữ trên dataset của chính phần tử
+  (innerHTML dựng lại mỗi lần sync nên không giữ biến cục bộ được).
+- Probe p148 (port 3362, env p148_env) ALL PASS (0 CRASH-GUARD):
+  payload đúng cờ đã patch (1 + 3, không có 2, giữ thứ tự); chưa tìm
+  thì rỗng; đầu-cuối thiền trong khu → notice → vào lại thấy daoHint1
+  trong payload. Screenshot trình duyệt (JourA, 2/3 gợi ý): dòng sổ +
+  toàn văn 2 gợi ý + nút Thu lại — xem file probes/p148_shot.png.
+- Bài học probe: (1) splash là panel fixed nên offsetParent LUÔN null
+  — kiểm tra nút thấy được phải dùng getBoundingClientRect, không dùng
+  offsetParent; (2) hudName giữ chỗ "—" là chuỗi truthy — đừng dùng
+  textContent trần làm bằng chứng đã vào game, phải loại trừ "—".
+
+## GĐ149 — Ghi file nguyên tử, chống mất dữ liệu khi kill/deploy (29/10)
+- Phát hiện khi chụp GĐ148: file characters.json của env probe bị cắt
+  về 0 byte sau các lần chạy server bị kill — và đường load hỏng thì
+  IM LẶNG về rỗng (catch → {}), tức cắt file = mất sạch nhân vật mà
+  không báo gì. Nguyên nhân gốc: cả 4 file dữ liệu (characters,
+  accounts, sessions, world) đều ghi trực tiếp bằng writeFileSync —
+  kill đúng lúc đang ghi là cắt file. (Live Render dùng Atlas làm
+  chính nên đỡ hơn, nhưng file vẫn là bản dự phòng + máy nhà chạy
+  file thuần thì ăn đủ.)
+- Sửa: helper atomicWriteFile (ghi file tạm cùng thư mục + fsync +
+  rename — rename là nguyên tử trên cùng filesystem) thay cho cả 4
+  chỗ ghi trực tiếp; load characters/accounts hỏng mà file còn dung
+  lượng thì in cảnh báo to. Không còn writeFileSync trực tiếp nào vào
+  4 file dữ liệu. Kiểm chứng: probe p148 chạy lại toàn bộ PASS trên
+  code GĐ149 (nhiều lần restart + persist, file nguyên vẹn).
+  GĐ148 + GĐ149 local-only, CHƯA có zip mới.
+
+## GĐ150 — Bảng tên chữ thường + panel sổ gợi ý + hội thoại NPC liên tục (29/10)
+- Bảng tên về chữ thường (theo ảnh feedback của Bảo): bỏ nền khung +
+  padding ở cả 5 chỗ vẽ nhãn nổi — nhãn NPC làng, nhãn NPC chức năng
+  thành phố, nhãn cổng bí cảnh, biển Bảng Treo Thưởng, biển Trận Dịch
+  Chuyển. Thay bằng chữ thường + viền chữ tối cho dễ đọc trên mọi
+  nền. Các nhãn vốn đã thường (linh mạch, đàn tế, điểm tài nguyên...)
+  giữ nguyên.
+- Sổ gợi ý dời khỏi thẻ sang panel riêng (thẻ đỡ bị chiếm không gian):
+  thẻ chỉ còn dòng "💡 Gợi ý Đạo Quán đã tìm: X/3" + nút Xem lại; bấm
+  mở panel #hintPanel (theo đúng hệ panel sẵn có + nút ✕ đóng) với
+  toàn văn gợi ý đã tìm + dòng khóa cho gợi ý chưa tìm (không spoil:
+  chỉ nhắc để ý những chỗ hay đi qua, cả trong lẫn ngoài làng).
+- Hội thoại liên tục của NPC (chạy phía client, không tốn server):
+  file mới client/src/npc_lines.ts — thoại theo vai trò + map: 16 NPC
+  làng theo id (Trưởng Làng, Sứ Giả, Thợ Rèn, Lái Buôn, thương nhân,
+  3 chủ tiệm, 7 sư phụ nghề), NPC thành phố theo role (Sứ Giả, Tiệm
+  Đan, Tiệm Nguyên Liệu, thương nhân, trưởng lão), dân thường theo
+  map (làng / thành / map nghề, có hương vị riêng theo từ khóa mapId
+  như dược/thảo, thiết/khoáng, đan/lò, thú, trận, phù). Nội dung theo
+  đúng 4 nguồn Bảo dặn: loại nhiệm vụ (bảng treo thưởng, hộ tống,
+  nghề, nhiệm vụ ẩn, chọn phe), hint ẩn (nói bóng gió, không spoil
+  số: ngồi thiền Đạo Quán lâu, đường nào cũng quay đầu được...),
+  chuyện xung quanh và đời sống. Cổng bí cảnh không phải người nên
+  không có thoại. Hiển thị: chữ thường không khung (cùng luật với
+  bảng tên), hiện 4,5s rồi đổi câu sau ~11s (lệch pha theo hash id để
+  không nói đồng loạt), chỉ NPC trong tầm nhìn + ≤520px, tối đa 8
+  người cùng nói. Móc probe: window.tttDialogues() trả danh sách bong
+  bóng đang hiện.
+- Probe trình duyệt p150 (port 3363, env p150_env) ALL PASS: NPC nói
+  (≥1 bong bóng), thoại đổi câu theo thời gian, panel sổ gợi ý mở đủ
+  toàn văn 2 gợi ý và KHÔNG lộ gợi ý chưa tìm. Screenshot
+  probes/p150_shot.png: bảng tên chữ thường, thẻ gọn, panel gợi ý.
+  tsc vẫn đúng 4 lỗi cũ, không thêm lỗi mới. GĐ150 local-only, CHƯA
+  có zip mới.
+
+## GĐ151 — TIỆM THẢO DƯỢC BẢN THÀNH PHỐ (29/10, probe p151 + ảnh trình duyệt ALL PASS)
+
+- GĐ140 mới có tiệm thảo dược ở làng; đợt này nối bản thành phố: mỗi
+  thành phố có dân đều thêm 1 NPC "Chủ Tiệm Thảo Dược" CÓ BẰNG Thải
+  Dược Sư (herbCert) — data GDD không có vai này nên server nối tay lúc
+  boot (như boss GĐ130), đứng nối tiếp lưới NPC chức năng cạnh cổng
+  thành. Tên riêng từng thành theo mẫu tên dân thành phố (ví dụ Thanh
+  Vân Thành: Trần Sâm Ông). Tổng NPC 9002 → 9032 (+30).
+- Ngoại lệ: Văn Uyển (map đọc sách của Nho tu) vốn KHÔNG có dân nào
+  (không có data NPC) nên không có tiệm — giữ nguyên như cũ. Map nghề
+  cũng không có tiệm thảo dược (đúng phạm vi "bản thành phố").
+- Shop city_thao_duoc: CÙNG bảng giá với tiệm làng (mua Thảo Dược 5 /
+  Linh Thảo 20 / Tiên Thảo 40 LT; bán lại 2 / 8 / 16 LT). Nói chuyện
+  với chủ tiệm (phím E) → nút "Vào tiệm" như 2 tiệm thành phố cũ.
+- Cổng bằng nâng cấp theo map: mua thảo dược ở tiệm thành phố thì
+  server tra bằng của NPC chủ tiệm TRÊN MAP HIỆN TẠI của người chơi —
+  đang ở làng mà cố mua tiệm thành phố (hoặc ngược lại sai map) đều bị
+  chặn với thông báo chỉ người có bằng Thải Dược Sư mới được bán.
+  Khoảng cách mua bán vẫn theo NPC chủ tiệm trên map (≤80px) như các
+  tiệm thành phố khác.
+- Client: sprite chủ tiệm = villager-b (cùng bộ tạm với chủ tiệm làng,
+  chờ sprite riêng ở hàng đợi PixelLab GĐ121); có thoại liên tục riêng
+  (pool shopthao trong npc_lines.ts: bằng Thải Dược, thảo hái từ vùng
+  dược, giá như làng, gợi ý bái Thảo Lão học nghề Thải Dược).
+- Cách test nhanh: dịch chuyển tới bất kỳ thành phố nào → đi lên khu
+  NPC chức năng phía bắc cổng (hàng cuối) → gặp Chủ Tiệm Thảo Dược →
+  E → Vào tiệm → mua/bán thảo dược giá như làng. Thử mua thảo ở Tiệm
+  Đan thành phố: không có thảo trong bảng giá, không mua được.
+- Probe p151 (port 3364) ALL PASS: cổng bằng chặn khi sai map; quét
+  đủ 30/30 thành phố có dân — mỗi thành đúng 1 chủ tiệm; map nghề
+  không có; chặn mua từ xa; nói chuyện mở đúng shop; mua đủ 3 loại
+  thảo trừ đúng 5/20/40, bán lại +2; tiệm làng GĐ140 không hồi quy;
+  file bền; 0 CRASH-GUARD. Probe trình duyệt p151_shot (port 3365)
+  ALL PASS + 2 screenshot: chủ tiệm đứng cạnh người chơi, bảng tên
+  chữ thường, nói đúng thoại shopthao, panel Tiệm Thảo Dược mở đủ
+  3 loại thảo (probes/p151_shot1.png + p151_shot.png). tsc vẫn đúng
+  4 lỗi cũ. GĐ151 local-only, CHƯA PUSH (chờ gộp vào zip sau GĐ137).
+- PHÁT HIỆN NGOÀI PHẠM VI (chưa sửa, chờ Bảo chốt): goOffline (GĐ21)
+  khi ngắt kết nối sẽ dời nhân vật về TỌA ĐỘ điểm nghỉ của làng
+  (quanh 700,452) nhưng GIỮ NGUYÊN mapId — thoát game ở thành phố
+  thì đăng nhập lại sẽ đứng ở tọa độ kiểu làng (≈624,452) ngay trong
+  thành phố đó, không phải chỗ cũ cũng không phải Đạo Quán thật.
+  Hai hướng sửa: (a) về hẳn Đạo Quán — đổi cả mapId về làng khi
+  thoát; (b) nghỉ tại chỗ — đang ở map nào thì giữ nguyên tọa độ
+  map đó, chỉ nhân vật ở làng mới về điểm nghỉ Đạo Quán.
+
+## GĐ152 — ĐIỂM NGHỈ OFFLINE THEO MAP ĐANG ĐỨNG (29/10, probe p152 ALL PASS)
+
+- Lỗi cũ (phát hiện ở GĐ151): thoát game ở map khác thì nhân vật bị dời
+  về TỌA ĐỘ điểm nghỉ của làng (~700,452) nhưng giữ nguyên mapId →
+  đăng nhập lại đứng ở tọa độ lạ ngay trong thành phố đó. Bảo chốt
+  hướng: KHÔNG kéo về Đạo Quán làng tân thủ nữa (game lớn dần, người
+  chơi sống ở các thành/map cao cấp), nghỉ theo map đang đứng.
+- Luật mới (goOffline): đang ở LÀNG thì giữ nguyên như cũ (về điểm
+  nghỉ Đạo Quán / Thanh Phong Môn theo nhà, rải chỗ theo thứ tự);
+  đang ở BẤT KỲ map nào khác (thành phố, map nghề, map quái, bí
+  cảnh...) thì nghỉ ngay tại ĐIỂM CỔNG DỊCH CHUYỂN CỦA CHÍNH MAP ĐÓ
+  (điểm người chơi đáp tới, vốn luôn trống), rải chỗ theo số người
+  đang ngủ cùng map (ô đầu −76px, ô sau +38px... như cách rải ở làng).
+  Vào lại game là đứng đúng điểm nghỉ của map đó.
+- Chưa làm đợt này (để giai đoạn sau nếu Bảo muốn): dựng nhà Đạo Quán
+  thật ở mỗi thành phố, và tính giờ Đạo Quán ẩn (chỉ số ẩn GĐ144) khi
+  thiền tại điểm nghỉ thành phố — hiện giờ thiền tính giờ ẩn vẫn chỉ
+  ở Đạo Quán làng như cũ.
+- Cách test nhanh: dịch chuyển tới một thành phố → đi xa khỏi cổng →
+  thoát game → vào lại: nhân vật phải đứng ở khu vực cổng của thành
+  đó (không phải góc lạ, không bị kéo về làng). Thoát ở làng thì vẫn
+  về sân Đạo Quán như trước.
+- Probe p152 (port 3366) ALL PASS: thoát ở Thanh Vân Thành sau khi
+  đi xa điểm tới >250px → file giữ mapId thành phố + tọa độ đúng ô
+  nghỉ ở cổng thành, đăng nhập lại đứng đúng chỗ đó; map nghề Dược
+  Cốc và map farm Băng Phong Cốc cùng luật theo cổng của chính map;
+  ở làng vẫn về điểm nghỉ Đạo Quán (idx 1: 662,452); hai người ngủ
+  cùng một thành phố được rải 2 ô khác nhau (−76 và −38); log ghi
+  "nghỉ tại <tên map>"; 0 CRASH-GUARD. Lần chạy đầu probe tính sai
+  kích thước map (MapData không mang w/h, phải lấy theo bảng
+  MAP_SIZE_BY_CAT) — file nhân vật khi đó đã cho thấy server ghi
+  đúng tọa độ nghỉ ở cả 3 loại map; sửa probe xong chạy lại ALL PASS.
+  GĐ152 local-only, CHƯA PUSH (chờ gộp vào zip sau GĐ137).
+
+## GĐ153 — RÀ SOÁT 5 CƠ CHẾ CŨ CHƯA TỪNG KIỂM CHỨNG (29/10, probe p153 ALL PASS)
+
+- Đợt này không thêm tính năng — đem 5 cơ chế đã code từ các giai đoạn
+  trước mà chưa từng có probe ra kiểm chứng toàn bộ. Kết quả: cả 5 đều
+  chạy đúng như thiết kế, KHÔNG phát hiện lỗi game (mọi lần probe đỏ
+  đều là lỗi của chính probe, đã sửa và chạy lại xanh toàn bộ).
+- 1) Tiên Quang (kỹ năng phe Tiên, GĐ143): sát thương đúng công thức
+  1.2 × (công + 10) qua giáp (144 lên quái def 0, 133 lên golem
+  def 8), trừ đúng 20 Chân nguyên, tự hồi đúng 10% máu tối đa.
+  (Ma Diệm đã đo ở GĐ143; nay phe Tiên cũng đã đo.)
+- 2) Siêu Độ (Phật Tu, GĐ103): bào Hấp Huyết Quỷ (1350 máu ở Cửu U)
+  xuống dưới 10% rồi tung Phật Quang → quỷ biến mất, Công Đức +500,
+  KHÔNG rớt đồ, không tính hạ quái — và quỷ VẪN hồi sinh sau ~30 giây
+  như quái thường. Lưu ý khi test tay: ngưỡng là DƯỚI 10% (dưới 135
+  máu); quỷ hút máu nên có thể hồi qua ngưỡng — bào xuống ~110 cho
+  chắc.
+- 3) Thuyết Pháp (Phật Tu, GĐ103): đứng yên ở thành phố tích +10
+  Công Đức/giây; di chuyển là ngắt; bị đánh trúng cũng ngắt — đã
+  kiểm chứng bằng cách gọi Tu Sĩ Thù Địch (nhiệm vụ đối đầu) ra đánh
+  ngay giữa thành phố: trúng đòn là buổi thuyết pháp dừng, Công Đức
+  ngừng tăng.
+- 4) Cổng thuần hóa (Thú Sư, GĐ137): thuần hóa quỷ đang tàng hình →
+  "Không thấy con thú đó."; thuần hóa trùm map → "Không thuần hóa
+  được trùm." (cổng này chạy trước cả cổng khoảng cách/máu); sói
+  thường đầy máu → chặn ở cổng "dưới 50% máu".
+- 5) Roll biến dị 10 hệ (Pháp Tu, GĐ107): kiểm chứng kiểu hộp trắng —
+  tạm nâng tỉ lệ roll lên 100% cho 30 nhân vật Pháp Tu lên Trúc Cơ:
+  cả 30 lần đều ra hệ thuộc pool 10 hệ (Lôi/Phong/Băng/Nham/Độc/
+  Quang/Ám/Huyết/Thời Gian/Không Gian), đủ mặt cả 3 hệ mới; khôi
+  phục tỉ lệ gốc 5% (kiểm tra md5 file khớp nguyên trạng) thì 20
+  nhân vật tiếp theo gần như không ai biến dị.
+- Cách test tay gợi ý: Phật Tu ra Cửu U bào quỷ xuống ~110 máu rồi
+  Phật Quang (xem notice Siêu độ + Công Đức nhảy +500); Phật Tu vào
+  thành phố bật Thuyết Pháp rồi thử đi bộ (ngắt) và nhận nhiệm vụ
+  Đối đầu Tu Sĩ Thù Địch ra đánh nhau giữa thành (ngắt vì bị đánh).
+- GĐ153 local-only, KHÔNG đổi code game, CHƯA PUSH (không có gì để
+  gộp vào zip — chỉ có thêm tài liệu test này).
+
+## GĐ154 — BIẾN DỊ LINH CĂN ROLL LÚC ĐO, THEO TỪNG HỆ (29/10, probe p154 + p154b ALL PASS)
+
+- Thay đổi LỚN theo chốt của Bảo (29/10): biến dị KHÔNG còn roll 1
+  lần 5% khi lên Trúc Cơ nữa. Nay biến dị tính luôn vào LÚC ĐO LINH
+  CĂN ở Đạo Quán: mỗi hệ trong linh căn của Pháp Tu có 2% cơ hội
+  (TẠM) "nở" thêm 1 hệ biến dị trong pool 10 hệ (Lôi/Phong/Băng/
+  Nham/Độc/Quang/Ám/Huyết/Thời Gian/Không Gian), rút không trùng.
+  Linh căn càng nhiều hệ càng có cơ hội gom nhiều biến dị — ngũ
+  linh căn trúng cả 5 hệ là "tay vàng". Chỉ Pháp Tu mới biến dị
+  (như tài liệu gốc — Bảo vừa chốt lại).
+- Vì roll ngay từ lúc đo, rider của hệ biến dị (hiệu ứng cộng thêm
+  khi tung chiêu gây sát thương) chạy NGAY TỪ LUYỆN KHÍ — người
+  trúng biến dị thấy mình mạnh sớm vì skill tác dụng mạnh hơn hệ
+  thường, đúng ý Bảo. Đo trúng sẽ có thông báo lớn "✦ LINH CĂN
+  BIẾN DỊ" + dòng biến dị hiện ngay trong thông báo đo linh căn và
+  trên thẻ nhân vật ("✦ Biến dị: Lôi, Băng"...).
+- Người chơi cũ: ai từng có biến dị kiểu cũ (roll ở Trúc Cơ) được
+  GIỮ NGUYÊN, tự chuyển sang dạng mới khi vào game; ai đã đo linh
+  căn rồi mà chưa từng có biến dị sẽ được ROLL BÙ 1 lần theo luật
+  mới (2%/hệ) khi vào game; ai chưa đo thì roll tự nhiên lúc đo.
+  Đột phá lên Trúc Cơ từ nay không roll biến dị nữa.
+- Trang bị: các hệ biến dị trong linh căn đều tính là hệ người
+  chơi đang có khi xét mặc trang bị theo hệ (trước đây chỉ tính
+  hệ biến dị đầu tiên kiểu cũ).
+- Đã kiểm chứng bằng probe p154 (cổng 3368) + p154b (cổng 3369,
+  chạy lại 2 chân đột phá/rider sau khi sửa lỗi harness của chính
+  probe): đo ở tỉ lệ hộp trắng 100% → Pháp Tu ra đủ số biến dị =
+  số hệ trong linh căn, thuộc pool, không trùng; Thể Tu đo không
+  có biến dị; migrate người cũ giữ đúng hệ Lôi; roll bù người cũ
+  ra biến dị; đột phá LK9→TC thành công ở tỉ lệ 100% vẫn KHÔNG
+  sinh biến dị (cả payload lẫn file); rider Ám (hút 15% sát thương
+  thành máu) chạy ngay ở Luyện Khí tầng 1 — tung chiêu dmg 70, hồi
+  máu biến dị 11, trừ đúng 12 máu bị cắn trong cửa sổ đo, delta
+  khớp tuyệt đối; tỉ lệ thật 2%/hệ: 10 người đo liên tiếp 0 biến
+  dị (đúng kỳ vọng hiếm); biến dị bền qua restart; 0 CRASH-GUARD.
+- Cách test tay gợi ý: tạo nhân vật Pháp Tu mới, ra Đạo Quán đo
+  linh căn — đa số sẽ không có biến dị (tỉ lệ 2%/hệ là hiếm thật);
+  nếu trúng sẽ thấy thông báo biến dị ngay lúc đo và dòng "✦ Biến
+  dị" trên thẻ nhân vật, tung chiêu Luyện Khí đã có hiệu ứng rider.
+- GĐ154 local-only, CHƯA PUSH (sẽ gộp vào zip sau zip GĐ131–137
+  cùng GĐ138–153).
+
+## SỬA LỖI CHIỀU 29/10 — 4 lỗi TypeScript + nút Thuần Hóa mất tích
+
+- 4 lỗi TypeScript trên máy Bảo (ảnh chụp màn hình VS Code) đã sửa
+  hết, `tsc` sạch hoàn toàn, build lại bình thường. Ba lỗi là chuyện
+  kiểu dữ liệu trong code (forgeMeta/forgeStock + sprite của thú
+  thuần hóa dùng Image thay vì Sprite).
+- Lỗi thứ tư đào ra một BUG THẬT chôn từ GĐ137: nút "🐾 Thuần Hóa"
+  KHÔNG BAO GIỜ hiện cho Thú Sư — client đọc nghề từ dữ liệu tick
+  (vốn không chứa nghề) thay vì từ hồ sơ nhân vật. Đã sửa: từ nay
+  nhân vật có nghề Thú Sư (nghề chính hoặc nghề phụ thứ hai) sẽ
+  thấy nút Thuần Hóa trên HUD như thiết kế.
+- Cách test tay: vào bằng nhân vật Thú Sư → nút 🐾 Thuần Hóa phải
+  hiện trên thanh HUD.
+
+## RÀ SOÁT ĐỢT 2 — 4 cơ chế còn lại chưa từng kiểm chứng (29/10, probe p155 + p155b + p155c)
+
+- Đọc sách Nho Tu BỊ NGẮT khi bị đánh (điểm duy nhất còn thiếu của
+  GĐ105 sau GĐ153): cho 2 nhân vật đấu tay đôi (duel) ngay tại điểm
+  đọc sách trong Văn Uyển — Hạo Nhiên đang tăng thì đứng yên, có
+  thông báo "📖 Đọc sách bị ngắt vì bạn bị đánh." (Lưu ý theo lời
+  Bảo: trong Văn Uyển vốn không có quái, đọc sách ở đó là an toàn
+  tuyệt đối; đọc ở nơi khác mới có rủi ro — đúng thiết kế.)
+- Cổng thuần hóa với quái THỬ THÁCH (trial): Thú Sư thuần hóa quái
+  gọi ra bằng nhiệm vụ đấu tay đôi → bị chặn, quái còn nguyên,
+  không có thú. Thông báo hiển thị là "Không thuần hóa được trùm."
+  vì quái thử thách mang cờ trùm thử thách nên cổng trùm chặn
+  trước cổng trial — kết quả đúng như luật (không thuần hóa được
+  quái nhiệm vụ/thử thách).
+- Phúc Duyên (chỉ số ẩn Đạo Quán) mở rương: nhân vật Phúc Duyên 250
+  mở rương C → nhận CHẮC CHẮN 2 món trang bị thưởng thêm (mở được
+  2 món ⚔️), nhân vật đối chứng Phúc Duyên 0 → 0 món thưởng. Đúng
+  công thức: mỗi 100 điểm = +1 món chắc chắn (trần +2), phần lẻ
+  roll thêm theo %.
+- May mắn Luyện Hồn (đường ẩn, GĐ142): hệ số trong hồ sơ nhân vật
+  đúng 1.15 (đối chứng 1.0); đo thống kê 200 kill/mẫu bằng tồn kho
+  thực nhận: tỉ lệ rơi của người Luyện Hồn cao hơn đối chứng rõ
+  rệt (1.71 món/kill so với 1.57 trên cùng phương pháp đo — cả hai
+  đều cao hơn bảng rơi sói gốc vì đòn đánh lan sang dơi/golem gần
+  đó, nhưng phép so sánh cùng điều kiện nên kết luận đứng vững).
+  Lần đo đầu đếm đồ rơi trên mặt đất qua tick bị hụt nặng (đồ bị
+  nhặt ngay trong cùng tick) — đã làm lại bằng tồn kho + quét nhặt
+  sạch, số mới là số tin được.
+- Cả 4 cơ chế đều ĐÚNG như thiết kế, không phải sửa code game.
+
+## GĐ155 — SIÊU ĐỘ THÀNH KỸ NĂNG RIÊNG, DÙNG CHO MỌI ĐỐI TƯỢNG (29/10, probe p156 ALL PASS)
+
+- Theo hướng Bảo nêu 29/10: Siêu Độ tách khỏi Phật Quang thành
+  công pháp riêng của Phật Tu — bấm nút "🕯️ Siêu Độ" trên HUD
+  (cạnh nút Thuyết Pháp). Phật Quang từ nay là chiêu sát thương
+  thuần như cũ, không còn nhánh siêu độ ẩn bên trong.
+- Siêu Độ tự chọn ĐỐI TƯỢNG GẦN NHẤT trong tầm 300px và tác dụng
+  theo loại đối tượng (mọi số TẠM): tốn 20 Chân nguyên, hồi chiêu
+  5 giây — chỉ tốn khi thật sự có tác dụng, chỗ vắng sẽ báo "Không
+  có đối tượng nào trong tầm Siêu Độ." và không tốn gì.
+  - Quái dưới 10% máu → SIÊU THOÁT: tan biến, không rớt đồ, không
+    tính hạ gục nhưng VẪN tính tiến độ nhiệm vụ diệt quái; quái
+    thường +50 Công Đức, riêng Hấp Huyết Quỷ vẫn +500 Công Đức
+    như luật cũ.
+  - Quái còn khỏe → chịu sát thương phật pháp (cùng công thức
+    Phật Quang), +10 Công Đức.
+  - Người chơi khác → hồi 15% máu tối đa, +20 Công Đức (người
+    được hồi nhận thông báo; đầy máu thì không tác dụng).
+  - Thú/đồng hành/hộ tống → hồi 20% máu tối đa, +10 Công Đức.
+  - NPC → +2 thiện cảm với NPC đó, +10 Công Đức.
+  - Điểm tài nguyên ĐÃ HÁI hôm nay → cỏ cây/mỏ mọc lại, hái tiếp
+    được ngay trong ngày, +15 Công Đức.
+  - Không dùng lên được: quái đang ẩn thân, ảo ảnh, quái thử
+    thách/nhiệm vụ, quái bí cảnh khác cõi.
+- Đã kiểm chứng probe p156 (cổng 3371) ALL PASS: sát thương đúng
+  công thức 122 lên Thạch Quái; siêu thoát dưới 10% máu cho +50,
+  không rớt đồ, nhiệm vụ 4/5 → hoàn thành; Phật Quang lên quái
+  <10% nay là hạ gục thường (hết nhánh ẩn); quỷ Cửu U siêu thoát
+  +500; hồi đồng đội đúng +165 (15% của 1100 máu); NPC +2 thiện
+  cảm; node hái rồi mọc lại hái tiếp được; lớp khác bị chặn;
+  0 CRASH-GUARD.
+- Cách test tay gợi ý: Phật Tu đứng cạnh Thạch Quái còn khỏe bấm
+  Siêu Độ (thấy sát thương + Công Đức nhảy ít), bào quái xuống
+  sắp chết rồi bấm lại (quái tan biến, Công Đức nhảy nhiều); đứng
+  cạnh bạn thiếu máu bấm Siêu Độ để hồi cho bạn; hái 1 điểm thảo
+  dược rồi siêu độ lên đúng điểm đó để hái lại.
+- GĐ155 local-only, CHƯA PUSH (gộp vào zip sau zip GĐ131–137).
+
+## GĐ156 — THUYẾT PHÁP CÓ KHÁN GIẢ + GIỚI HẠN MỖI NGÀY (29/10, probe p157 + p157b ALL PASS)
+
+- Theo yêu cầu của Bảo 29/10: khi Phật Tu thuyết pháp ở thành
+  phố, NPC trong vòng ~600px TỰ ĐI BỘ TỚI NGHE, đứng thành vòng
+  quanh người thuyết; thuyết xong thì ai về chỗ nấy (client đã
+  nối: hình NPC di chuyển thật trên màn hình, bong bóng thoại và
+  điểm tương tác E đi theo vị trí sống của NPC).
+- Công Đức không còn phẳng 10/giây: nay = 10 + 2 × số người đang
+  nghe (người nghe = NPC đứng trong ~400px), tối đa tính 30
+  người → trần 70 Công Đức/giây ở quảng trường đông. Mọi số TẠM.
+  Người mới vào thành giữa buổi thuyết cũng thấy NPC đang đứng
+  nghe đúng vị trí.
+- GIỚI HẠN MỖI NGÀY: mỗi ngày game chỉ thuyết pháp được tổng
+  cộng 5 PHÚT THẬT (TẠM) — chạm trần là tự dừng kèm thông báo,
+  trong ngày không bắt đầu lại được; qua ngày mới lại thuyết
+  tiếp. Thời gian đã thuyết lưu bền theo nhân vật.
+- Đã kiểm chứng probe p157 + p157b (cổng 3374/3375): 47 NPC rời
+  chỗ gốc >50px tụ về quanh người thuyết ở Thanh Vân Thành; tốc
+  độ Công Đức đo thật 70.4/giây tại 47 người nghe (trần 30 →
+  kỳ vọng 70) và 59.6/giây tại 25 người nghe (kỳ vọng 60) — bám
+  đúng công thức ở cả hai điểm đo; khán giả vành ngoài tăng từ
+  9 → 25 người sau khi đi bộ tới; dừng thuyết → 47/47 NPC về
+  đúng chỗ cũ; vá sẵn 299.5/300 giây → thuyết tự dừng + chặn mở
+  lại trong ngày; ở làng vẫn bị chặn như luật cũ; 0 CRASH-GUARD.
+- Cách test tay gợi ý: Phật Tu ra quảng trường thành phố bấm
+  Thuyết Pháp, đứng yên xem dân từ từ kéo tới vây quanh và Công
+  Đức nhảy nhanh dần; đi bộ 1 bước là ngắt và dân tản về chỗ cũ.
+- GĐ156 local-only, CHƯA PUSH (gộp vào zip sau zip GĐ131–137).
+
+## GĐ157 — BẢO CHỐT TÊN 9 ĐƯỜNG ẨN + VŨ KHÍ NHO TU "NGÔN LINH" (29/10)
+
+- Danh hiệu đường ẩn (viên mãn/Luyện Hồn/Nhập Đạo) nay đủ cả 9
+  lớp theo chốt của Bảo: Phật = Thánh tăng, Nho = **Văn Thánh**
+  (người truyền bá học thức), Y = Thần y, Kiếm = **Kiếm Thánh**
+  (đổi từ Kiếm tâm), Thể = **Võ Vương** (đổi từ Võ tông sư),
+  Pháp = **Đại Thiên Sư**, Cốt = **Khô Lâu Vương**, Quỷ =
+  **Minh Thần Đế**, Ảnh = **Dạ Ảnh Thần Minh**. Tên hiện trên
+  thẻ nhân vật khi nhân vật đi đường ẩn. Cơ chế đường ẩn vốn đã
+  chạy cho cả 9 lớp từ GĐ141–142, nay chỉ bổ sung tên.
+- Vũ khí trang bị của Nho Tu: "Độc Thơ" đổi thành **Ngôn Linh**
+  — đọc chữ thành vũ khí, đúng chất Nho Tu (2 loại còn lại giữ
+  nguyên: Bút Phép, Quyển Trúc). Đồ đã rèn mang tên cũ không
+  bị ảnh hưởng gì ngoài tên hiển thị của loại vũ khí khi rèn mới.
+- Sprite PixelLab (Thợ Rèn, icon trang bị, Cốt Vương đội vương
+  miện, Quỷ Hồn): spec đã sẵn đủ 4 bản (kể cả 2 spec mới viết
+  cho pet), nhưng API PixelLab vẫn báo hết lượt (40/40, credits
+  0) khi thử vẽ ngày 29/10 — lượt miễn phí chưa nạp lại. Khi nào
+  tài khoản có lượt, chỉ cần báo là vẽ + nối vào game ngay.
+  Trong lúc chờ, game vẫn dùng sprite tạm như cũ.
+
+## GĐ158 — SPRITE VẼ BẰNG CÔNG CỤ CỦA CLAUDE (29/10, CHỜ BẢO DUYỆT MỚI NỐI VÀO GAME)
+
+- Bối cảnh: PixelLab hết lượt trial (40/40). Tra bảng giá: gói
+  free sau trial còn 5 lượt vẽ CHẬM mỗi ngày nhưng chỉ bấm được
+  trên web (API vẫn báo hết); gói trả phí rẻ nhất $12/tháng.
+  Bảo chốt: vẽ bằng công cụ ảnh của Muse trước.
+- Đã vẽ đủ 4 mục tồn của hàng chờ GĐ121/GĐ157, lấy sprite sẵn
+  trong game làm ảnh mẫu style: Thợ Rèn (tạp dề nâu, cầm búa),
+  Cốt Vương (vương miện vàng, choàng đỏ, cốt kiếm — khác hẳn
+  Cốt Binh), Quỷ Hồn (ma nữ tóc đen, áo trắng, đuôi khói lơ
+  lửng), tấm 8 icon trang bị (áo/quần/nón/choàng/giày/trâm/
+  nhẫn/lệnh bài).
+- Đã xử lý xong: tách nền, dọn mảnh vụn, thu đúng khung game
+  (Thợ Rèn 96×96 nội dung cao 68 như mọi NPC; Cốt Vương + Quỷ
+  Hồn 128×128; icon 64×64). File thành phẩm nằm ở
+  `~/workspace/asset-src/claudegen/final/` (kèm preview_finals.png
+  và script process_sprites.py để xử lý lại khi cần).
+- CHƯA nối vào game: chờ Bảo duyệt ảnh (luật cũ: duyệt xong mới
+  nối). Khi duyệt: Thợ Rèn thay sprite dân làng mượn tạm
+  (SPRITE_SETS 'blacksmith' + NPC_SPRITE_SET npc_ren), Cốt
+  Vương/Quỷ Hồn thay sprite mượn của quái ở nhánh petMon, 8 icon
+  đè lên bộ icon vẽ code tạm GĐ120 (giữ bản sao lưu).
+- ĐÃ NỐI VÀO GAME (Bảo duyệt 29/10 18:33): bộ blacksmith đủ 24
+  khung (1 ảnh mặt trước cho mọi khung, NPC đứng yên tại lò) vào
+  `client/public/sprites/blacksmith/` + SPRITE_SETS thêm
+  'blacksmith' + npc_ren trỏ sang 'blacksmith'; Cốt Vương/Quỷ
+  Hồn vào `sprites/monsters/cot_vuong.png` + `quy_hon.png`
+  (MON_SPRITE thêm 2 khóa chỉ để nạp texture) và petMon trỏ
+  sang sprite riêng; 8 icon gear đè lên bộ tạm (bản tạm đã sao
+  lưu ở `~/workspace/asset-src/gear_placeholder_backup/`).
+  tsc 0 + vite build OK. Probe ảnh p158 (port 3376) ALL PASS:
+  Thợ Rèn hiện đúng sprite tạp dề nâu + nhãn "Thợ Rèn — Rèn
+  trang bị" giữa quảng trường, kèm thoại lò rèn. Cốt Vương/Quỷ
+  Hồn + icon gear: kiểm chứng bằng code/build (đường nạp texture
+  y hệt quái thường), Bảo test tay khi triệu hồi bạn đồng hành
+  và mở tab Trang bị. GĐ158 local-only, CHƯA PUSH (gộp zip sau).
+
+## GĐ159 — TỈ LỆ THẬT CHO QUÁI + VẬT TRIỆU HỒI TO HƠN (29/10, Bảo yêu cầu)
+
+- Quái hoang nhỏ lại theo cỡ thật so với người chơi (hiện ~57px),
+  trước đây mọi loài đều khổng lồ ~104–114px: MON_BASE_H mới —
+  họ sói 77 (Sói Xám hiện ~38px), họ dơi 49 (Dơi Đen ~30px), họ
+  thạch 92 (Thạch Quái ~80px, Khôi Lỗi ~88px), họ người 65 (Kiếm
+  Ma/Cốt Binh ~51–57px, ngang người chơi). Tỉ lệ tương đối giữa
+  các loài (vis.scale, khôi lỗi ×1.15) giữ nguyên nên loài khổng
+  lồ vẫn khổng lồ (Băng Tinh Cự Nhân ~136px, Hỗn Độn Thú ~135px).
+  Tính chung qua monSpriteScale/monBaseForKind trong main.ts.
+- Thú thuần hóa (Thú Sư) dùng cùng công thức — ngang cỡ đồng
+  loại hoang dã (trước cố định cao 60px khung).
+- Ngược lại, Cốt Vương/Quỷ Hồn TO LÊN vì là vật triệu hồi: khung
+  64 → 84px, hiện ~74px ≈ 1,3× người chơi.
+- Kiểm chứng: tsc 0 + build OK; probe ảnh p159 (port 3377) ALL
+  PASS — ảnh tây: sói nhỏ hơn hẳn người chơi, dơi bé xíu; ảnh
+  đông: Huyết Lang cỡ chó, Kiếm Ma cao ngang người chơi, thạch
+  quái vẫn khổng lồ ở mép khung. Cốt Vương/Quỷ Hồn mới kiểm
+  chứng bằng code/build — Bảo test tay khi triệu hồi. GĐ159
+  local-only, CHƯA PUSH (gộp zip sau zip GĐ131–137).
+
+## GĐ160 — MỞ NGUYÊN ANH: ĐỘT PHÁ + Ô CHIÊU 7 + NGHỀ THỨ BA (29/10, probe p160 ALL PASS)
+
+Theo bảng mở khóa của tài liệu: Nguyên Anh (9 tầng) = ô công pháp
+thứ 7 + nghề phụ cấp 3 + thú cưỡi; thưởng đột phá "tăng mạnh toàn
+bộ chỉ số". Đợt này làm 3/4 (thú cưỡi chờ Bảo chốt thiết kế riêng):
+- Đột phá KD9 → NA theo mẫu Đại: cần **Đan Hóa Anh** (tên TẠM —
+  tài liệu không đặt tên; Đan Sư luyện: 50 Nanh Sói + 10 Da Quỷ +
+  500 LT, tỉ lệ 45%, cần cấp nghề 5 — số TẠM; tiệm bán 5000/mua
+  lại 2000 — TẠM) + thắng **Thiên Kiếp Ảnh** (tên TẠM) ở sân Đạo
+  Quán: HP = tinh anh bước 27 ×10 ≈ 26.660, chiêu ×2.4, HP ≤ 50%
+  phân thân 2 Thiên Kiếp Phân Thân, client nhuộm xanh kiếp. Tỉ lệ
+  như Đại (60% + phụ trợ, thua có hậu quả như cũ). Thưởng: +18
+  điểm chỉ số (TẠM, thang 12→15→18) + 150 năm thọ (TẠM, 50→100→150).
+- Trong Nguyên Anh chỉ có tiểu cảnh (+6 điểm, thang 3/4/5/6);
+  NA9 bấm đột phá báo "Đột phá Hóa Thần chưa mở".
+- Ô công pháp thứ 7 khi đạt Nguyên Anh (server + client khớp nhau).
+- Nghề thứ ba: trần nghề = Nguyên Anh thì 3 (mọi người lên NA đều
+  học được nghề 3 — kể cả chưa đi đường Nhập Đạo; Nhập Đạo vẫn cho
+  nghề 2 sớm từ Kim Đan). job3 nối đủ: learn_job + bái sư lấp ô
+  trống đầu tiên, jobOf tính cả 3 nghề (chế tạo/bố trận/tự rèn/
+  thuần hóa đều dùng được nghề 3), bền qua persist + actor offline,
+  panel Nghề hiện nghề thứ ba + mục học thêm khi đã Nguyên Anh.
+- Probe p160 (port 3378) ALL PASS 17 chân: cổng đan đúng tên, boss
+  đúng tên/HP, đột phá thành công (lần 2 ở lượt chạy đầu — có 1 lần
+  thua trung bình −10 thọ đúng luật), +18 điểm, +150 thọ ròng theo
+  số lần thua, ô 7, tiểu cảnh +6, chặn Hóa Thần, học/chế nghề 3,
+  chặn nghề 4, job3 bền trong file, 0 CRASH-GUARD.
+- CHƯA LÀM: thú cưỡi (tài liệu chỉ ghi từ khóa, không có thiết kế
+  chi tiết — chờ Bảo chốt phương án). GĐ160 local-only, CHƯA PUSH.
+
+## GĐ161 — THÚ CƯỠI: MUA Ở TRẠI / THUẦN HÓA HỘ / TRỨNG ẤP (29/10, probe p161 + p161_shot ALL PASS)
+
+Theo ý Bảo (29/10 tối): thú cưỡi lấy ở map luyện thú sư, nhờ Ngự
+Thú Sư thuần hóa hộ, hoặc mua trứng tự ấp hên xui. Mở từ Nguyên Anh.
+- Điểm bán: NPC **Mã Vân — Chủ Trại Ngự Thú** ở **Ngự Thú Sơn Trang**
+  (nói chuyện → nút "Vào trại"). Ba đường sở hữu:
+  1. **Mua thẳng** (có ngay, tốc độ chuẩn): Huyền Quy ×1,3 —
+     15.000 LT; Linh Mã ×1,5 — 30.000; Thanh Vân Hạc ×1,75 — 80.000.
+  2. **Đặt thuần hóa hộ**: trại bắt thú hoang thuần sẵn, chờ ngày
+     game rồi tới trại nhận — Lâm Trư ×1,35 (7.000, 1 ngày), Sói
+     Xám ×1,4 (8.000, 1 ngày), Huyết Lang ×1,5 (18.000, 2 ngày),
+     Thiên Lôi Thú ×1,65 (35.000, 3 ngày). Tốc độ từng con hên xui
+     ±10%. (Bản người chơi bán cho người chơi chờ hệ thống giao
+     dịch — chưa có; bản này NPC trại đóng vai người thuần hóa hộ.)
+  3. **Trứng Linh Thú** 5.000 LT: mua ở trại → Túi đồ bấm Dùng để
+     ấp → 1 ngày game sau mở panel cho nở. Hên xui: 15% nở ra con
+     KHÔNG thuần hóa được (bỏ chạy mất); ra loài theo tỉ lệ sói/lâm
+     trư/huyết lang/linh mã/thiên lôi/vân hạc, tốc độ ±10%.
+- Cưỡi: panel Thú Cưỡi (Menu → 🐴 Thú cưỡi) — tối đa 3 con (TẠM);
+  lên lưng tăng tốc chạy theo hệ số của con thú (không cộng dồn
+  ngự kiếm — lấy hệ số cao hơn). Ra đòn/tung chiêu là tự xuống
+  thú; bị đánh trúng cũng bị hất xuống. Phóng sinh có hỏi lại.
+- Sprite: Linh Mã/Huyền Quy/Thanh Vân Hạc vẽ bằng công cụ của
+  Muse (thư mục sprites/mounts/), loài hoang dùng lại sprite
+  quái. Người chơi hiện trên lưng thú, lật hình theo hướng chạy.
+- Thành tựu "Thú cưỡi" (nhóm Linh Thú) đã nối thật (đếm số loài
+  đã sở hữu; mốc 1/3/6 đạt được với 7 loài hiện có, mốc 10 chờ
+  thêm loài sau). Mọi con số trong đợt này đều TẠM.
+- Kiểm chứng: probe p161 (20 chân: cổng Nguyên Anh, cổng khoảng
+  cách trại, mua/trừ tiền đúng, đo tốc độ cưỡi ≈ ×1,5, ra đòn tự
+  xuống, phóng sinh, đặt thuần + nhận sau ngày game, trứng nở ra
+  thú thật, bền trong file) + p161_shot (đi đường UI thật: panel
+  liệt kê thú, bấm Lên lưng → nhân vật cưỡi Linh Mã giữa Ngự Thú
+  Sơn Trang, ảnh p161_shot_panel.png + p161_shot_ride.png).
+  GĐ161 local-only, CHƯA PUSH.
+
+## GĐ162 — THẦN THÔNG NGUYÊN ANH + TRANG BỊ BẬC NGUYÊN ANH (29/10, probe p162 ALL PASS)
+
+- **Chiêu Nguyên Anh**: tài liệu không liệt kê chiêu NA nên đợt này
+  bổ sung theo đúng mẫu thần thông Kim Đan — mỗi lớp **1 thần thông
+  Nguyên Anh, tự lĩnh ngộ ngay khi đột phá Nguyên Anh thành công**
+  (tự lắp vào ô chiêu nếu còn trống, hiện trong Sổ Công pháp như
+  thần thông Kim Đan). Tên + số đều TẠM (khung nhỉnh hơn Kim Đan 1
+  bậc: hệ số 3.6 so với 3.0, hồi chiêu 45s so với 30s, tốn 150 chân
+  nguyên so với 100):
+  Thể — Bất Diệt Chiến Thể (giảm 60% sát thương nhận, 12s) · Phật —
+  Như Lai Thần Chưởng (đánh mọi quái trong tầm + hồi 35% máu) ·
+  Cốt — Cốt Hải Triều Thiên (đánh vùng + hút 60% sát thương thành
+  máu) · Ảnh — Dạ Ảnh Tuyệt Sát (hệ số 4.4, đòn kế tiếp ×2.5) ·
+  Kiếm — Thiên Ngoại Phi Tiên (đánh vùng, xuyên 30% phòng) · Pháp —
+  Thiên Lôi Diệt Thế (hệ số 3.8, tầm 220, choáng 1.5s) · Quỷ —
+  Minh Hà Phệ Thiên (đánh vùng + hút 75%) · Y — Tái Sinh Thánh Thủ
+  (hệ số 2.6, hồi 70% máu) · Nho — Thiên Địa Chính Khí (tăng 40%
+  công, 15s).
+- **Trang bị bậc Nguyên Anh**: từ Nguyên Anh trở đi, MỌI món đồ
+  người chơi nhận được (mở rương, thưởng nhiệm vụ, mua ở Tiệm Rèn,
+  tự rèn, nhận đồ đặt rèn) đều mang **bậc Nguyên Anh**: tên món thêm
+  "· Nguyên Anh", **chỉ số cuối ×1.6** (TẠM), và **dưới Nguyên Anh
+  không mặc được** (báo đúng câu "Không thể trang bị" — kể cả nhặt/
+  được cho từ người khác). Đồ nhận trước khi lên Nguyên Anh giữ
+  nguyên bậc thường. Tẩy luyện giữ nguyên bậc.
+- Kiểm chứng: probe p162 ALL PASS (18 chân: đột phá TC9→KD vẫn
+  nhận thần thông Kim Đan (hồi quy), KD9→NA nhận Thiên Lôi Diệt
+  Thế + tự lắp ô 1, tung chiêu log combat 1558 dmg/tốn 150 MP,
+  mua cùng 1 món kho: bản NA có bậc + tên nhãn + chỉ số ×1.6 đúng
+  tỉ lệ, NA mặc được, KD mặc bị chặn "Không thể trang bị", bậc
+  bền trong file). GĐ162 local-only, CHƯA PUSH.
+
+## GĐ163 — CHIÊU BIẾN DỊ CHO PHÁP TU: 10 HỆ × 3 CHIÊU × 3 ĐƯỜNG VŨ KHÍ (29/10, probe p163 ALL PASS)
+
+- Ma trận công pháp đầy đủ là HƯỚNG TU × VŨ KHÍ × HỆ: phần 5 hệ cơ
+  bản đã có sẵn từ trước (mỗi đường vũ khí đủ 3 chiêu/hệ cơ bản).
+  Đợt này lấp phần còn thiếu: **10 hệ biến dị** (Lôi, Phong, Băng,
+  Nham, Độc, Quang, Ám, Huyết, Thời Gian, Không Gian) — mỗi hệ 3
+  chiêu (2 Luyện Khí + 1 Trúc Cơ, đúng khung 3 chiêu của hệ cơ bản)
+  cho **3 đường vũ khí của Pháp Tu** (Phiến/Pháp Trượng/Sách Phép)
+  = **90 chiêu mới**, catalog 511 → 601 chiêu. Tên + mô tả là TẠM,
+  sinh theo bộ hiệu ứng chuẩn từng hệ (Lôi xuyên giáp, Băng làm
+  chậm/choáng, Độc ăn mòn, Ám/Huyết hút máu, Thời Gian chậm nặng/
+  choáng, Không Gian xuyên giáp mạnh...) nhân kiểu vũ khí; số theo
+  khung bậc chung (hệ số 1.6/2.2, điều kiện chỉ số như chiêu thường).
+- **Cổng học**: chiêu biến dị chỉ lĩnh ngộ được khi linh căn có
+  ĐÚNG biến dị đó (báo rõ "công pháp biến dị hệ X — cần linh căn
+  biến dị hệ X"); trong Sổ Công pháp, chiêu chưa đủ biến dị hiện
+  điều kiện "Cần linh căn biến dị hệ X" và không bấm học được.
+  Theo luật Bảo chốt, biến dị chỉ Pháp Tu mới roll được khi đo
+  linh căn → 27 đường vũ khí của 8 lớp còn lại KHÔNG làm chiêu biến
+  dị (không ai học được, làm là dữ liệu chết; khi nào mở biến dị
+  cho mọi lớp thì sinh nốt 810 chiêu bằng cùng bộ mẫu trong 1 lần).
+  Chiêu lớp cũ mang tên hệ (vd Lôi Đình Phá của Pháp Tu) không bị
+  cổng này — vẫn học bình thường như trước.
+- Kiểm chứng: probe p163 ALL PASS (Sổ hiện đủ 30 chiêu biến dị/
+  đường, chiêu Ám đủ biến dị thì học được — chiêu Lôi thiếu biến
+  dị bị chặn đúng câu, Kiếm Tu bị chặn ở cổng lớp/vũ khí, tung
+  Vĩnh Dạ Ám Ngục Phiến (Ám bậc Trúc Cơ) gây 902 sát thương qua
+  log combat). GĐ163 local-only, CHƯA PUSH.
+
+## GĐ164 — THẦN THÔNG THEO LỚP × VŨ KHÍ: 30 ĐƯỜNG × 6 VAI (29/10, probe p164 ALL PASS)
+
+- Bảo đổi hướng giữa chừng: bỏ phương án "thần thông theo lớp 54
+  chiêu", làm **theo lớp × vũ khí**. Mỗi đường vũ khí (30 đường) có
+  bộ **6 thần thông theo vai**: đạt **Kim Đan** lĩnh ngộ 3 chiêu
+  **Tấn công / Phòng thủ / Cân bằng**; đạt **Nguyên Anh** lĩnh ngộ
+  thêm 3 chiêu **Tốc độ / Hồi phục / Khống chế**. Tổng **180 chiêu
+  mới**, catalog 601 → 781. Tên + mô tả TẠM, sinh theo mẫu từng lớp
+  (gốc tên theo vai × tên vũ khí, vd đường Kiếm: Vạn Kiếm, Ngự Kiếm,
+  Kiếm Tâm, Lưu Quang, Kiếm Ý, Kiếm Vực).
+- Khung số (TẠM, theo thần thông sẵn có): Kim Đan hệ số 3.0, hồi
+  chiêu 30s, tốn 100 chân nguyên; Nguyên Anh hệ số 3.6 (Tốc độ 3.4,
+  Hồi phục 2.6), hồi chiêu 45s, tốn 150. Hiệu ứng theo vai: Tấn công
+  = đánh vùng (vũ khí xa) hoặc đẩy lùi + xuyên giáp (cận chiến);
+  Phòng thủ = giảm 50% sát thương nhận trong 10s; Cân bằng = hút
+  35% sát thương thành máu; Tốc độ = **tăng tốc chạy +40% trong 8s**
+  (Ảnh Tu +50%) — hiệu ứng tăng tốc là cơ chế MỚI (fx spdPct, nhân
+  thêm vào tốc độ chạy, không cộng dồn kiểu khác); Hồi phục = hồi
+  ngay 45% máu (Y Tu 55%); Khống chế = choáng 1,5s + chậm 30%/3s.
+- Cách nhận: **tự lĩnh ngộ khi đột phá** đạt cảnh giới (nhảy thẳng
+  lên Nguyên Anh thì nhận cả 2 bộ), nhân vật cũ đã đạt cảnh giới thì
+  **tự bù khi đăng nhập** — chỉ bộ của vũ khí đang cầm (mỗi nhân vật
+  1 đường vũ khí cố định). Thần thông **không học theo thời gian**:
+  bấm nút Học trong Sổ sẽ báo rõ "là thần thông — không học theo
+  thời gian, sẽ tự lĩnh ngộ khi đột phá". Sổ hiện nhãn bậc mới "Kim
+  Đan · Thần thông" / "Nguyên Anh · Thần thông" đúng màu khung
+  (trước đây chiêu Kim Đan bị hiện nhầm nhãn "Trúc Cơ" — đã sửa).
+  Thần thông lớp riêng của GĐ88/GĐ162 (1 chiêu/lớp) vẫn giữ nguyên.
+- Kiểm chứng: probe p164 ALL PASS (đăng nhập Nguyên Anh bù đủ bộ 6
+  chiêu đường Phiến; đột phá lên Nguyên Anh nhận cả 2 bộ; đột phá
+  Kim Đan chỉ nhận bộ Kim Đan; chặn học theo thời gian đúng câu;
+  đổi vũ khí sang Sách Phép đăng nhập lại nhận bộ mới; tung chiêu
+  Tốc độ Phiêu Vân Triện đo tốc độ chạy thật **392 vs 286 px/s ≈
+  ×1,37** khớp buff +40%). GĐ164 local-only, CHƯA PUSH.
+
+## GĐ165 — TRANG BỊ THEO ĐƯỜNG VŨ KHÍ (29/10, probe p165 ALL PASS)
+
+- Trước GĐ165: đồ ô VŨ KHÍ chỉ theo hướng tu — rơi/mua được Song
+  Kiếm trong khi đang cầm Kiếm vẫn mặc bừa, và đồ rơi ngẫu nhiên
+  trong hướng tu nên hay thành đồ chết. Nay đồng bộ ma trận với
+  thần thông GĐ164: **đồ ô VŨ KHÍ phải đúng đường vũ khí đang cầm
+  mới mặc được**, sai đường báo đúng câu "Không thể trang bị".
+- Ba chỗ nối: (1) **Cổng mặc** trong gear.js — đối chiếu vũ khí của
+  món đồ với đường vũ khí của nhân vật qua bảng nối id game → gear
+  (30 đường; 3 ngoại lệ: Đao Thế→DAO, Thương Thể→THUONG, Ngâm
+  Thơ→NGON_LINH); các ô khác (áo/mũ/giày...) không đổi. (2) **Đồ
+  rơi rương/thưởng nhiệm vụ**: ô vũ khí sinh theo đúng vũ khí người
+  mở đang cầm, không ngẫu nhiên nữa. (3) **Shop Thợ Rèn**: kho gieo
+  hạt giữ nguyên cho mọi người xem, nhưng món ô vũ khí CÙNG hướng
+  tu với người mua thì lúc giao được rèn lại sang đúng vũ khí người
+  mua (đổi cả tên, giữ nguyên phẩm/hệ/nội tại/bậc); khác hướng tu
+  thì giữ nguyên món gốc (mua về ngắm, mặc không được). Tự rèn +
+  đặt rèn vẫn tự thiết kế tự do như cũ — cổng mặc là nơi chốt luật.
+- Hệ quả cần biết: **đồ vũ khí cũ trong túi** (sinh trước GĐ165)
+  nếu khác đường vũ khí đang cầm thì từ giờ mặc sẽ bị chặn — đúng
+  luật mới, không phải lỗi.
+- Kiểm chứng: probe p165 ALL PASS 13 chân — unit gear.js (bảng nối
+  + cổng mặc 4 trường hợp + rèn lại giữ hậu tố bậc Nguyên Anh +
+  khác hướng không đổi) và socket thật (Kiếm Tu mặc đồ Kiếm được /
+  đồ Song Kiếm bị chặn đúng câu / áo mặc bình thường; mua shop cùng
+  hướng giao đúng Phiến, khác hướng giữ nguyên Quyển Trúc và mặc
+  bị chặn). Riêng đường đồ rơi dùng chung hàm nối đã test unit +
+  cổng mặc socket — chưa quay trúng rương rơi ô vũ khí để xác nhận
+  trực tiếp. GĐ165 local-only, CHƯA PUSH.
+
+## GĐ166 — FULL MAP: THÊM QUÁI + ĐỊA HÌNH THEO CHỦ ĐỀ (29/10, probe p166 + p166_shot ALL PASS)
+
+- Trước GĐ166: 74 map và 26 map hoang dã đều có quái, nhưng mỗi map
+  chỉ 1–3 loài (22 loài chia cho 26 map) và địa hình theo chủ đề mới
+  ở mức decor chung. Đợt này làm "full" theo luật map của Bảo:
+- **Quái: 22 → 31 loài.** Thêm 9 loài mới có sprite vẽ bằng công cụ
+  của Muse (kiểu PixelLab, Bảo duyệt qua ảnh chụp trong game):
+  Tuyết Hồ + Băng Xà (băng), Hỏa Thử (lửa), Sa Mạc Hạt (sa mạc),
+  Sâm Lâm Cự Mãng (rừng, PHỤC KÍCH), Thủy Yêu Ngư (biển sâu),
+  Lôi Xà (lôi), Địa Kim Thử (kim), Dung Nham Giải (dung nham).
+  Chỉ số nội suy theo loài cùng bậc (TẠM), tuViReward đúng bảng bậc
+  sẵn có. Băng Xà + Cự Mãng phục kích như Độc Xà (cờ ambush nay đọc
+  từ dữ liệu). Gán bổ sung loài sẵn có cho các map mỏng theo chủ đề
+  (dơi vào các map hang động, sói vào sơn mạch sa mạc, cốt binh vào
+  kiếm trủng/chiến trường...) — **mọi map hoang dã giờ có ≥3 loài**;
+  3 map từng gán tay (Băng Phong Cốc, Hỏa Diễm Sơn, Vạn Thú Sơn
+  Mạch) đã chuyển hẳn vào dữ liệu. Tổng quái toàn thế giới
+  **431 → 1121** (79 cặp map/loài) theo đúng luật mật độ cũ (map
+  Luyện Khí ×3, Trúc Cơ ×2) — lưu ý theo dõi FPS/độ nặng server bản
+  free khi bạn bè vào test đông.
+- **Địa hình theo chủ đề:** theme lửa thêm **hố dung nham** (để ngắm
+  như ao, không cản đường), theme băng thêm **cụm tinh thể băng
+  lớn** (cản đường r=20), theme sa mạc thêm **đụn cát**; đã cân lại
+  trọng số decor từng theme (tổng vẫn 1.00). Sprite 3 loại decor
+  cũng vẽ mới cùng đợt.
+- Kiểm chứng: boot log "79 cặp map/loài, tổng 1121 quái" khớp tính
+  tay; probe socket tuần tra thật ở Băng Phong Cốc gặp đủ 3 loài
+  (kể cả Tuyết Hồ + Băng Xà mới) và Hỏa Diễm Sơn đủ 3 loài (kể cả
+  Hỏa Thử); ảnh chụp trình duyệt: Hỏa Diễm Sơn thấy 3 hố dung nham
+  quanh cổng + dơi, Băng Phong Cốc thấy cụm tinh thể băng + 2 Tuyết
+  Hồ có nhãn tên cạnh Thủy Triều Tinh. GĐ166 local-only, CHƯA PUSH.
+
+## GĐ167 — ÂM THANH: NHẠC NỀN + HIỆU ỨNG (29/10, probe p167 ALL PASS)
+
+- Trước GĐ167 game câm hoàn toàn (tài liệu B15 vẫn nợ ~10 hiệu ứng +
+  2–3 bản nhạc nền). Đợt này làm bằng WebAudio tổng hợp tại chỗ —
+  KHÔNG cần file nhạc ngoài, không tốn dung lượng, chạy offline:
+  module mới client/src/sound.ts.
+- **Nhạc nền generative:** tiếng đàn gảy (thuật toán Karplus-Strong
+  nghe như đàn tranh) chạy trên thang ngũ cung + lớp đệm pad êm.
+  Nhạc không lặp một bài cố định mà tự sinh giai điệu mỗi lúc một
+  khác, theo 3 tâm trạng tự chuyển: **làng/thành phố/khu an toàn**
+  (sáng, thư thả), **map hoang dã** (trầm, thưa nốt hơn), **đang
+  thiền/bế quan** (rất thưa, tĩnh). Âm lượng/mật độ nốt đều TẠM.
+- **18 hiệu ứng:** vung vũ khí, trúng đòn, đòn nặng, bị thương,
+  tung chiêu, quái vận đòn cảnh báo (khi quái gần mình nhuộm đỏ),
+  nhặt đồ, mở rương, mua đồ ở Tiệm Rèn, học chiêu/đo linh căn,
+  đột phá thành công (dàn chuông đi lên), đột phá thất bại (trầm
+  xuống), gục ngã/tọa hóa, được cứu dậy, dịch chuyển đổi map, né,
+  hạ quái, bấm nút. Tiếng đánh trúng/bị thương do client tự suy từ
+  tick (máu quái tụt ngay sau đòn của mình / máu mình tụt).
+- **Điều khiển:** Menu (⚙) có 2 nút mới "🎵 Nhạc nền: Đang bật/tắt"
+  và "🔔 Hiệu ứng: Đang bật/tắt", lưu lựa chọn vào máy người chơi.
+  Trình duyệt chỉ cho phát âm thanh sau thao tác đầu tiên nên nhạc
+  bắt đầu từ cú bấm/chạm đầu tiên vào game — đây là luật trình
+  duyệt, không phải lỗi.
+- Kiểm chứng p167 (trình duyệt thật): AudioContext chạy sau thao
+  tác đầu; cả 18 hiệu ứng tổng hợp không lỗi; đánh quái thật ở bãi
+  farm — bị cắn phát tiếng bị thương, vung kiếm có tiếng swing,
+  trúng đòn có tiếng hit; nút Menu tắt/bật + đổi nhãn đúng. Bảo
+  cần nghe thử bằng tai trên máy mình để chỉnh âm lượng/khẩu vị.
+  GĐ167 local-only, CHƯA PUSH.

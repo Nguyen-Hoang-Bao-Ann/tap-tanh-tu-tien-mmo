@@ -5055,7 +5055,7 @@
   },
   "q127_craft_015": {
     "name": "Chế Độc Rỉa Máu cho Người Giao Nhiệm Vụ ở Cổ Mộc Thành",
-    "desc": "Chế thành công 3 Độc Rỉa Máu (chỉ Sát Thủ) rồi về gặp Người Giao Nhiệm Vụ ở Cổ Mộc Thành trả nhiệm vụ.",
+    "desc": "Chế thành công 3 Độc Rỉa Máu (chỉ Ảnh Tu) rồi về gặp Người Giao Nhiệm Vụ ở Cổ Mộc Thành trả nhiệm vụ.",
     "target": 3,
     "rewardStones": 140,
     "tuViReward": 25,
@@ -5066,7 +5066,7 @@
   },
   "q127_craft_016": {
     "name": "Luyện Độc Kích Thích",
-    "desc": "Chế thành công 1 Độc Kích Thích (chỉ Sát Thủ) rồi về gặp Người Giao Nhiệm Vụ ở Cửu Tiêu Thành trả nhiệm vụ.",
+    "desc": "Chế thành công 1 Độc Kích Thích (chỉ Ảnh Tu) rồi về gặp Người Giao Nhiệm Vụ ở Cửu Tiêu Thành trả nhiệm vụ.",
     "target": 1,
     "rewardStones": 650,
     "tuViReward": 120,
@@ -5297,7 +5297,7 @@
   },
   "q127_craft_037": {
     "name": "Chế Độc Rỉa Máu cho Người Giao Nhiệm Vụ ở Tàng Kinh Các",
-    "desc": "Chế thành công 1 Độc Rỉa Máu (chỉ Sát Thủ) rồi về gặp Người Giao Nhiệm Vụ ở Tàng Kinh Các trả nhiệm vụ.",
+    "desc": "Chế thành công 1 Độc Rỉa Máu (chỉ Ảnh Tu) rồi về gặp Người Giao Nhiệm Vụ ở Tàng Kinh Các trả nhiệm vụ.",
     "target": 1,
     "rewardStones": 140,
     "tuViReward": 25,
@@ -5308,7 +5308,7 @@
   },
   "q127_craft_038": {
     "name": "Luyện Độc Kích Thích",
-    "desc": "Chế thành công 2 Độc Kích Thích (chỉ Sát Thủ) rồi về gặp Người Giao Nhiệm Vụ ở Thanh Hà Thành trả nhiệm vụ.",
+    "desc": "Chế thành công 2 Độc Kích Thích (chỉ Ảnh Tu) rồi về gặp Người Giao Nhiệm Vụ ở Thanh Hà Thành trả nhiệm vụ.",
     "target": 2,
     "rewardStones": 140,
     "tuViReward": 25,
@@ -5539,7 +5539,7 @@
   },
   "q127_craft_059": {
     "name": "Chế Độc Rỉa Máu cho Thợ Rèn",
-    "desc": "Chế thành công 2 Độc Rỉa Máu (chỉ Sát Thủ) rồi về gặp Thợ Rèn trả nhiệm vụ.",
+    "desc": "Chế thành công 2 Độc Rỉa Máu (chỉ Ảnh Tu) rồi về gặp Thợ Rèn trả nhiệm vụ.",
     "target": 2,
     "rewardStones": 80,
     "tuViReward": 15,
@@ -5550,7 +5550,7 @@
   },
   "q127_craft_060": {
     "name": "Luyện Độc Kích Thích",
-    "desc": "Chế thành công 3 Độc Kích Thích (chỉ Sát Thủ) rồi về gặp Người Giao Nhiệm Vụ ở Bạch Hổ Thành trả nhiệm vụ.",
+    "desc": "Chế thành công 3 Độc Kích Thích (chỉ Ảnh Tu) rồi về gặp Người Giao Nhiệm Vụ ở Bạch Hổ Thành trả nhiệm vụ.",
     "target": 3,
     "rewardStones": 320,
     "tuViReward": 60,
@@ -5781,7 +5781,7 @@
   },
   "q127_craft_081": {
     "name": "Chế Độc Rỉa Máu cho Người Giao Nhiệm Vụ ở Long Ngâm Thành",
-    "desc": "Chế thành công 3 Độc Rỉa Máu (chỉ Sát Thủ) rồi về gặp Người Giao Nhiệm Vụ ở Long Ngâm Thành trả nhiệm vụ.",
+    "desc": "Chế thành công 3 Độc Rỉa Máu (chỉ Ảnh Tu) rồi về gặp Người Giao Nhiệm Vụ ở Long Ngâm Thành trả nhiệm vụ.",
     "target": 3,
     "rewardStones": 320,
     "tuViReward": 60,
@@ -5792,7 +5792,7 @@
   },
   "q127_craft_082": {
     "name": "Luyện Độc Kích Thích",
-    "desc": "Chế thành công 1 Độc Kích Thích (chỉ Sát Thủ) rồi về gặp Người Giao Nhiệm Vụ ở Luyện Đan Phòng trả nhiệm vụ.",
+    "desc": "Chế thành công 1 Độc Kích Thích (chỉ Ảnh Tu) rồi về gặp Người Giao Nhiệm Vụ ở Luyện Đan Phòng trả nhiệm vụ.",
     "target": 1,
     "rewardStones": 140,
     "tuViReward": 25,
@@ -9941,7 +9941,7 @@
   },
   "q127_hid_025": {
     "name": "Dấu vết Chuông Đồng",
-    "desc": "🔍 Người áo đen ở Kỳ Môn Động thì thầm về chuyện chuông đồng... Nhiệm vụ ẩn: chế thành công 1 Độc Rỉa Máu (chỉ Sát Thủ) — trả tại Người Giao Nhiệm Vụ ở Kỳ Môn Động.",
+    "desc": "🔍 Người áo đen ở Kỳ Môn Động thì thầm về chuyện chuông đồng... Nhiệm vụ ẩn: chế thành công 1 Độc Rỉa Máu (chỉ Ảnh Tu) — trả tại Người Giao Nhiệm Vụ ở Kỳ Môn Động.",
     "target": 1,
     "rewardStones": 210,
     "tuViReward": 38,

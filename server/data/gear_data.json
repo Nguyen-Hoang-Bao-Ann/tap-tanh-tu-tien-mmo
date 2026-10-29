@@ -1,1316 +1,1323 @@
 {
-  "meta": {
-    "version": "1.0",
-    "game": "Tập Tành Tu Tiên — Hệ thống Trang Bị",
-    "note": "Mọi thông số trong spec của user giữ nguyên tuyệt đối. Các mục đánh dấu TẠM/đề xuất là do AI tự điền vì spec chưa chốt (base stats, phí rèn lại, hiệu ứng NPC của lệnh bài, cấp nội tại theo phẩm)."
+ "meta": {
+  "version": "1.0",
+  "game": "Tập Tành Tu Tiên — Hệ thống Trang Bị",
+  "note": "Mọi thông số trong spec của user giữ nguyên tuyệt đối. Các mục đánh dấu TẠM/đề xuất là do AI tự điền vì spec chưa chốt (base stats, phí rèn lại, hiệu ứng NPC của lệnh bài, cấp nội tại theo phẩm)."
+ },
+ "rarities": {
+  "TRANG": {
+   "name": "Phàm",
+   "multiplier": 1.0,
+   "talent_lines": 0,
+   "prefixes": [
+    "Phàm"
+   ]
   },
-  "rarities": {
-    "TRANG": {
-      "name": "Phàm",
-      "multiplier": 1.0,
-      "talent_lines": 0,
-      "prefixes": [
-        "Phàm"
-      ]
-    },
-    "XAM": {
-      "name": "Sơ",
-      "multiplier": 1.3,
-      "talent_lines": 0,
-      "prefixes": [
-        "Cương"
-      ]
-    },
-    "LUC": {
-      "name": "Linh",
-      "multiplier": 1.8,
-      "talent_lines": 0,
-      "prefixes": [
-        "Huyền",
-        "Tinh",
-        "Linh"
-      ]
-    },
-    "LAM": {
-      "name": "Bảo",
-      "multiplier": 2.5,
-      "talent_lines": 0,
-      "prefixes": [
-        "Tử",
-        "Băng",
-        "Lôi"
-      ]
-    },
-    "TIM": {
-      "name": "Tiên",
-      "multiplier": 3.5,
-      "talent_lines": 1,
-      "prefixes": [
-        "Thiên",
-        "Nguyệt",
-        "Vân"
-      ]
-    },
-    "CAM": {
-      "name": "Thần",
-      "multiplier": 5.0,
-      "talent_lines": 2,
-      "prefixes": [
-        "Phá",
-        "Diệt",
-        "Cửu"
-      ]
-    },
-    "DO": {
-      "name": "Huyết",
-      "multiplier": 7.0,
-      "talent_lines": 3,
-      "prefixes": [
-        "Huyết",
-        "Ma",
-        "Sát"
-      ]
-    },
-    "DEN": {
-      "name": "Ma",
-      "multiplier": 10.0,
-      "talent_lines": 4,
-      "prefixes": [
-        "Tịch",
-        "U",
-        "Thần"
-      ]
-    },
-    "VO": {
-      "name": "Vô Cực",
-      "multiplier": 15.0,
-      "talent_lines": 5,
-      "prefixes": [
-        "Thái Sơ",
-        "Hỗn Độn",
-        "Vô Cực"
-      ]
-    }
+  "XAM": {
+   "name": "Sơ",
+   "multiplier": 1.3,
+   "talent_lines": 0,
+   "prefixes": [
+    "Cương"
+   ]
   },
-  "talent_level_by_rarity": {
-    "TIM": 1,
-    "CAM": 2,
-    "DO": 3,
-    "DEN": 4,
-    "VO": 5
+  "LUC": {
+   "name": "Linh",
+   "multiplier": 1.8,
+   "talent_lines": 0,
+   "prefixes": [
+    "Huyền",
+    "Tinh",
+    "Linh"
+   ]
   },
-  "elements": {
-    "basic": {
-      "KIM": "Kim",
-      "MOC": "Mộc",
-      "THUY": "Thủy",
-      "HOA": "Hỏa",
-      "THO": "Thổ",
-      "VO": "Vô"
-    },
-    "mutation": {
-      "LOI": "Lôi",
-      "PHONG": "Phong",
-      "BANG": "Băng",
-      "NHAM": "Nham",
-      "DOC": "Độc",
-      "QUANG": "Quang",
-      "AM": "Ám",
-      "HUYET": "Huyết",
-      "THOI_GIAN": "Thời Gian",
-      "KHONG_GIAN": "Không Gian"
-    },
-    "universal": "VO",
-    "all_access_path": "PHAP_TU"
+  "LAM": {
+   "name": "Bảo",
+   "multiplier": 2.5,
+   "talent_lines": 0,
+   "prefixes": [
+    "Tử",
+    "Băng",
+    "Lôi"
+   ]
   },
-  "paths": [
-    "THE_TU",
-    "PHAP_TU",
-    "PHAT_TU",
-    "COT_TU",
-    "SAT_THU",
-    "KIEM_TU",
-    "QUY_TU",
-    "Y_TU",
-    "NHO_TU"
-  ],
-  "path_names": {
-    "THE_TU": "Thể Tu",
-    "PHAP_TU": "Pháp Tu",
-    "PHAT_TU": "Phật Tu",
-    "COT_TU": "Cốt Tu",
-    "SAT_THU": "Sát Thủ",
-    "KIEM_TU": "Kiếm Tu",
-    "QUY_TU": "Quỷ Tu",
-    "Y_TU": "Y Tu",
-    "NHO_TU": "Nho Tu"
+  "TIM": {
+   "name": "Tiên",
+   "multiplier": 3.5,
+   "talent_lines": 1,
+   "prefixes": [
+    "Thiên",
+    "Nguyệt",
+    "Vân"
+   ]
   },
-  "slots": [
-    "WEAPON",
-    "ARMOR",
-    "PANTS",
-    "HAT",
-    "CLOAK",
-    "SHOES",
-    "BROOCH",
-    "RING",
-    "TOKEN"
-  ],
-  "slot_names": {
-    "ARMOR": {
-      "THE_TU": "Y",
-      "PHAP_TU": "Pháp Y",
-      "PHAT_TU": "Cà Sa",
-      "COT_TU": "Cốt Giáp",
-      "SAT_THU": "Dạ Y",
-      "KIEM_TU": "Kiếm Bào",
-      "QUY_TU": "U Y",
-      "Y_TU": "Y Bào",
-      "NHO_TU": "Nho Bào"
-    },
-    "PANTS": {
-      "THE_TU": "Khố",
-      "PHAP_TU": "Pháp Khố",
-      "PHAT_TU": "Tăng Khố",
-      "COT_TU": "Cốt Khố",
-      "SAT_THU": "Dạ Khố",
-      "KIEM_TU": "Kiếm Khố",
-      "QUY_TU": "U Khố",
-      "Y_TU": "Y Khố",
-      "NHO_TU": "Nho Khố"
-    },
-    "HAT": {
-      "THE_TU": "Cân",
-      "PHAP_TU": "Quan",
-      "PHAT_TU": "Tỳ Lô",
-      "COT_TU": "Cốt Khôi",
-      "SAT_THU": "Dạ Cân",
-      "KIEM_TU": "Kiếm Quan",
-      "QUY_TU": "U Quan",
-      "Y_TU": "Y Quan",
-      "NHO_TU": "Nho Quan"
-    },
-    "CLOAK": {
-      "*": "Phi Phong"
-    },
-    "SHOES": {
-      "*": "Ngoa"
-    },
-    "BROOCH": {
-      "*": "Bội"
-    },
-    "RING": {
-      "*": "Giới"
-    },
-    "TOKEN": {
-      "*": "Lệnh Bài"
-    }
+  "CAM": {
+   "name": "Thần",
+   "multiplier": 5.0,
+   "talent_lines": 2,
+   "prefixes": [
+    "Phá",
+    "Diệt",
+    "Cửu"
+   ]
   },
-  "weapons": {
-    "THE_TU": [
-      {
-        "id": "TAY_KHONG",
-        "name": "Tay Không"
-      },
-      {
-        "id": "CHIEN_PHU",
-        "name": "Chiến Phủ"
-      },
-      {
-        "id": "CU_KIEM",
-        "name": "Cự Kiếm"
-      },
-      {
-        "id": "DAO",
-        "name": "Đao"
-      },
-      {
-        "id": "THUONG",
-        "name": "Thương"
-      },
-      {
-        "id": "THIET_CON",
-        "name": "Thiết Côn"
-      }
-    ],
-    "PHAP_TU": [
-      {
-        "id": "PHIEN",
-        "name": "Phiên"
-      },
-      {
-        "id": "PHAP_TRUONG",
-        "name": "Pháp Trượng"
-      },
-      {
-        "id": "SACH_PHEP",
-        "name": "Sách Phép"
-      }
-    ],
-    "PHAT_TU": [
-      {
-        "id": "PHAT_CHAU",
-        "name": "Phật Châu"
-      },
-      {
-        "id": "QUYEN_TRUONG",
-        "name": "Quyền Trượng"
-      },
-      {
-        "id": "BINH_BAT",
-        "name": "Bình Bát"
-      }
-    ],
-    "COT_TU": [
-      {
-        "id": "COT_THUAN",
-        "name": "Cốt Thuẫn"
-      },
-      {
-        "id": "COT_CHUY",
-        "name": "Cốt Chùy"
-      }
-    ],
-    "SAT_THU": [
-      {
-        "id": "DAO_GAM",
-        "name": "Dao Găm"
-      },
-      {
-        "id": "SONG_DAO",
-        "name": "Song Dao"
-      },
-      {
-        "id": "LIEM_NGAN",
-        "name": "Liềm Ngắn"
-      },
-      {
-        "id": "TRAO",
-        "name": "Trảo"
-      }
-    ],
-    "KIEM_TU": [
-      {
-        "id": "KIEM",
-        "name": "Kiếm"
-      },
-      {
-        "id": "SONG_KIEM",
-        "name": "Song Kiếm"
-      },
-      {
-        "id": "TRONG_KIEM",
-        "name": "Trọng Kiếm"
-      }
-    ],
-    "QUY_TU": [
-      {
-        "id": "CO_LENH",
-        "name": "Cờ Lệnh"
-      },
-      {
-        "id": "LUOI_HAI",
-        "name": "Lưỡi Hái"
-      },
-      {
-        "id": "QUY_THUONG",
-        "name": "Quỷ Thương"
-      }
-    ],
-    "Y_TU": [
-      {
-        "id": "PHAT_TRAN",
-        "name": "Phất Trần"
-      },
-      {
-        "id": "KIM_CHAM",
-        "name": "Kim Châm"
-      },
-      {
-        "id": "CO_CAM",
-        "name": "Cổ Cầm"
-      }
-    ],
-    "NHO_TU": [
-      {
-        "id": "DOC_THO",
-        "name": "Độc Thơ"
-      },
-      {
-        "id": "BUT_PHEP",
-        "name": "Bút Phép"
-      },
-      {
-        "id": "QUYEN_TRUC",
-        "name": "Quyển Trúc"
-      }
-    ]
+  "DO": {
+   "name": "Huyết",
+   "multiplier": 7.0,
+   "talent_lines": 3,
+   "prefixes": [
+    "Huyết",
+    "Ma",
+    "Sát"
+   ]
   },
-  "base_stats": {
-    "WEAPON": {
-      "attack": 20
-    },
-    "ARMOR": {
-      "defense": 15
-    },
-    "PANTS": {
-      "defense": 10
-    },
-    "HAT": {
-      "defense": 8
-    },
-    "CLOAK": {
-      "defense": 8
-    },
-    "SHOES": {
-      "speed": 6
-    },
-    "BROOCH": {
-      "hp": 100
-    },
-    "RING": {
-      "mp": 80
-    },
-    "TOKEN": {}
+  "DEN": {
+   "name": "Ma",
+   "multiplier": 10.0,
+   "talent_lines": 4,
+   "prefixes": [
+    "Tịch",
+    "U",
+    "Thần"
+   ]
   },
-  "talent_rates": {
-    "good_pct_per_level": 0.04,
-    "bad_pct_per_level": -0.02
-  },
-  "reroll_cost": {
-    "TIM": 100,
-    "CAM": 300,
-    "DO": 800,
-    "DEN": 2000,
-    "VO": 5000
-  },
-  "token": {
-    "ranks": [
-      {
-        "tier": 1,
-        "name": "Cửu Phẩm"
-      },
-      {
-        "tier": 2,
-        "name": "Bát Phẩm"
-      },
-      {
-        "tier": 3,
-        "name": "Thất Phẩm"
-      },
-      {
-        "tier": 4,
-        "name": "Lục Phẩm"
-      },
-      {
-        "tier": 5,
-        "name": "Ngũ Phẩm"
-      },
-      {
-        "tier": 6,
-        "name": "Tứ Phẩm"
-      },
-      {
-        "tier": 7,
-        "name": "Tam Phẩm"
-      },
-      {
-        "tier": 8,
-        "name": "Nhị Phẩm"
-      },
-      {
-        "tier": 9,
-        "name": "Nhất Phẩm"
-      }
-    ],
-    "suppression_per_tier": 0.05,
-    "suppression_cap": 0.3,
-    "npc_trade_discount_per_tier": 0.01,
-    "npc_hidden_quest_per_tier": 0.01
-  },
-  "talent_pools": {
-    "THE_TU": {
-      "tot": [
-        {
-          "id": "PHAN_CHAN",
-          "name": "Phản Chấn",
-          "stat": "defense",
-          "desc": "Phản lại một phần sát thương nhận vào cho kẻ ra đòn."
-        },
-        {
-          "id": "DU_CHAN",
-          "name": "Dư Chấn",
-          "stat": "attack",
-          "desc": "Đòn đánh lan chấn động ra xung quanh mục tiêu."
-        },
-        {
-          "id": "SINH_TU_KHE",
-          "name": "Sinh Tử Khế",
-          "stat": "hp",
-          "desc": "Khi sắp gục, hồi lại một phần máu (một lần mỗi trận)."
-        },
-        {
-          "id": "BACH_CHIEN",
-          "name": "Bách Chiến",
-          "stat": "attack",
-          "desc": "Đánh càng lâu, sát thương càng tăng."
-        },
-        {
-          "id": "HUYET_NO",
-          "name": "Huyết Nộ",
-          "stat": "attack",
-          "desc": "Máu càng thấp, sát thương càng cao."
-        },
-        {
-          "id": "TOAI_COT",
-          "name": "Toái Cốt",
-          "stat": "attack",
-          "desc": "Đòn đánh có cơ hội phá giáp mục tiêu."
-        },
-        {
-          "id": "TU_CHIEN",
-          "name": "Tử Chiến",
-          "stat": "crit",
-          "desc": "Chí mạng tăng mạnh khi máu xuống dưới ngưỡng."
-        }
-      ],
-      "phe": [
-        {
-          "id": "DUONG_SINH",
-          "name": "Dưỡng Sinh",
-          "stat": "speed",
-          "desc": "Chỉ lo dưỡng sinh, giảm tốc độ ra đòn."
-        },
-        {
-          "id": "KET_LIEU_XA",
-          "name": "Kết Liễu Xa",
-          "stat": "attack",
-          "desc": "Đòn kết liễu yếu đi, khó dứt điểm đối thủ."
-        },
-        {
-          "id": "VO_ANH_BO",
-          "name": "Vô Ảnh Bộ",
-          "stat": "speed",
-          "desc": "Bộ pháp loạn nhịp, giảm tốc độ di chuyển."
-        },
-        {
-          "id": "TINH_TAM",
-          "name": "Tĩnh Tâm",
-          "stat": "crit",
-          "desc": "Tâm quá tĩnh, giảm tỉ lệ chí mạng."
-        },
-        {
-          "id": "HAP_TINH",
-          "name": "Hấp Tinh",
-          "stat": "mp",
-          "desc": "Hấp tinh không trọn, giảm linh lực tối đa."
-        },
-        {
-          "id": "KIM_THAN",
-          "name": "Kim Thân",
-          "stat": "defense",
-          "desc": "Kim thân rỗng ruột, giảm phòng thủ thật."
-        }
-      ]
-    },
-    "PHAP_TU": {
-      "tot": [
-        {
-          "id": "LINH_TRIEU",
-          "name": "Linh Triều",
-          "stat": "mp",
-          "desc": "Linh lực cuộn trào, tăng linh lực tối đa."
-        },
-        {
-          "id": "PHAP_HAI",
-          "name": "Pháp Hải",
-          "stat": "mp",
-          "desc": "Biển pháp mênh mông, chiêu thức tốn ít linh lực hơn."
-        },
-        {
-          "id": "CONG_HUONG",
-          "name": "Cộng Hưởng",
-          "stat": "attack",
-          "desc": "Cộng hưởng nguyên tố, tăng sát thương phép."
-        },
-        {
-          "id": "LIEN_CHAU",
-          "name": "Liên Châu",
-          "stat": "attack",
-          "desc": "Phép nối phép, đòn sau mạnh hơn đòn trước."
-        },
-        {
-          "id": "PHAP_AN",
-          "name": "Pháp Ấn",
-          "stat": "crit",
-          "desc": "Pháp ấn khắc sâu, tăng tỉ lệ chí mạng phép."
-        },
-        {
-          "id": "BIEN_DI_CONG_MINH",
-          "name": "Biến Dị Cộng Minh",
-          "stat": "attack",
-          "desc": "Linh căn biến dị cộng hưởng, tăng sát thương hệ biến dị."
-        },
-        {
-          "id": "NGUYEN_TO_TRIEU",
-          "name": "Nguyên Tố Triều",
-          "stat": "mp",
-          "desc": "Triều nguyên tố dâng, hồi linh lực nhanh hơn."
-        }
-      ],
-      "phe": [
-        {
-          "id": "PHAP_PHE",
-          "name": "Pháp Phệ",
-          "stat": "mp",
-          "desc": "Pháp phệ ngược chủ, giảm linh lực tối đa."
-        },
-        {
-          "id": "LINH_TAN",
-          "name": "Linh Tán",
-          "stat": "mp",
-          "desc": "Linh lực tán loạn, chiêu thức tốn thêm linh lực."
-        },
-        {
-          "id": "CHU_TRE",
-          "name": "Chú Trệ",
-          "stat": "speed",
-          "desc": "Niệm chú trì trệ, giảm tốc độ thi pháp."
-        },
-        {
-          "id": "PHAP_HOI",
-          "name": "Pháp Hồi",
-          "stat": "attack",
-          "desc": "Pháp hồi không kịp, giảm sát thương phép."
-        },
-        {
-          "id": "NGUYEN_TO_NHIEU",
-          "name": "Nguyên Tố Nhiễu",
-          "stat": "attack",
-          "desc": "Nguyên tố nhiễu loạn, phép dễ trệch hướng."
-        },
-        {
-          "id": "TINH_PHAP",
-          "name": "Tĩnh Pháp",
-          "stat": "crit",
-          "desc": "Pháp tĩnh lặng quá mức, giảm chí mạng phép."
-        }
-      ]
-    },
-    "PHAT_TU": {
-      "tot": [
-        {
-          "id": "PHAT_QUANG_HO_THE",
-          "name": "Phật Quang Hộ Thể",
-          "stat": "defense",
-          "desc": "Phật quang hộ thể, giảm sát thương nhận vào."
-        },
-        {
-          "id": "DO_HOA",
-          "name": "Độ Hóa",
-          "stat": "attack",
-          "desc": "Độ hóa chúng sinh, sát thương lên quái Quỷ/Ma tăng."
-        },
-        {
-          "id": "KIM_CANG",
-          "name": "Kim Cang",
-          "stat": "defense",
-          "desc": "Thân như kim cang, khó bị phá phòng."
-        },
-        {
-          "id": "TU_BI",
-          "name": "Từ Bi",
-          "stat": "hp",
-          "desc": "Lòng từ bi vô lượng, tăng máu tối đa."
-        },
-        {
-          "id": "THIEN_DINH",
-          "name": "Thiền Định",
-          "stat": "mp",
-          "desc": "Thiền định sâu, tăng linh lực tối đa."
-        },
-        {
-          "id": "PHO_DO",
-          "name": "Phổ Độ",
-          "stat": "hp",
-          "desc": "Phổ độ chúng sinh, hiệu quả hồi phục tăng."
-        },
-        {
-          "id": "BAT_DONG",
-          "name": "Bất Động",
-          "stat": "defense",
-          "desc": "Bất động như núi, miễn nhiễm đẩy lùi nhẹ."
-        }
-      ],
-      "phe": [
-        {
-          "id": "KHO_HANH",
-          "name": "Khổ Hạnh",
-          "stat": "attack",
-          "desc": "Khổ hạnh quá độ, thân thể suy nhược, giảm sát thương."
-        },
-        {
-          "id": "VO_TRANH",
-          "name": "Vô Tranh",
-          "stat": "crit",
-          "desc": "Vô tranh với đời, giảm ý chí chí mạng."
-        },
-        {
-          "id": "GIOI_LUAT",
-          "name": "Giới Luật",
-          "stat": "speed",
-          "desc": "Giới luật trói buộc, giảm tốc độ hành động."
-        },
-        {
-          "id": "THANH_TINH",
-          "name": "Thanh Tịnh",
-          "stat": "attack",
-          "desc": "Thanh tịnh vô vi, sát thương giảm."
-        },
-        {
-          "id": "TICH_DIET",
-          "name": "Tịch Diệt",
-          "stat": "hp",
-          "desc": "Tịch diệt thân xác, giảm máu tối đa."
-        },
-        {
-          "id": "VO_DUC",
-          "name": "Vô Dục",
-          "stat": "crit",
-          "desc": "Vô dục vô cầu, không còn khát vọng chí mạng."
-        }
-      ]
-    },
-    "COT_TU": {
-      "tot": [
-        {
-          "id": "COT_GIAP",
-          "name": "Cốt Giáp",
-          "stat": "defense",
-          "desc": "Xương hóa giáp, tăng phòng thủ."
-        },
-        {
-          "id": "HACH_TAM",
-          "name": "Hạch Tâm",
-          "stat": "hp",
-          "desc": "Hạch tâm vững chắc, tăng máu tối đa."
-        },
-        {
-          "id": "VONG_HON",
-          "name": "Vong Hồn",
-          "stat": "attack",
-          "desc": "Vong hồn trợ chiến, tăng sát thương."
-        },
-        {
-          "id": "COT_VUONG_UY",
-          "name": "Cốt Vương Uy",
-          "stat": "attack",
-          "desc": "Uy của Cốt Vương, tăng sát thương của pet."
-        },
-        {
-          "id": "TAI_SINH",
-          "name": "Tái Sinh",
-          "stat": "hp",
-          "desc": "Xương tái sinh, tăng tốc độ hồi máu."
-        },
-        {
-          "id": "XUONG_TRANG",
-          "name": "Xương Trắng",
-          "stat": "defense",
-          "desc": "Xương trắng tinh luyện, tăng phòng thủ."
-        },
-        {
-          "id": "COT_HAI",
-          "name": "Cốt Hải",
-          "stat": "attack",
-          "desc": "Biển xương vô tận, tăng sát thương diện rộng."
-        }
-      ],
-      "phe": [
-        {
-          "id": "XUONG_KHO",
-          "name": "Xương Khô",
-          "stat": "hp",
-          "desc": "Xương khô giòn, giảm máu tối đa."
-        },
-        {
-          "id": "MUC_RUA",
-          "name": "Mục Rữa",
-          "stat": "defense",
-          "desc": "Xương mục rữa, giảm phòng thủ."
-        },
-        {
-          "id": "COT_TAN",
-          "name": "Cốt Tán",
-          "stat": "attack",
-          "desc": "Cốt tán loạn, giảm sát thương."
-        },
-        {
-          "id": "AM_KHI",
-          "name": "Âm Khí",
-          "stat": "speed",
-          "desc": "Âm khí nặng nề, giảm tốc độ di chuyển."
-        },
-        {
-          "id": "VONG_QUEN",
-          "name": "Vong Quên",
-          "stat": "mp",
-          "desc": "Vong hồn lãng quên, giảm linh lực tối đa."
-        },
-        {
-          "id": "COT_LANH",
-          "name": "Cốt Lãnh",
-          "stat": "crit",
-          "desc": "Xương lạnh vô hồn, giảm chí mạng."
-        }
-      ]
-    },
-    "SAT_THU": {
-      "tot": [
-        {
-          "id": "NHAT_KICH",
-          "name": "Nhất Kích",
-          "stat": "crit",
-          "desc": "Một kích tất sát, tăng mạnh chí mạng."
-        },
-        {
-          "id": "AN_SAT",
-          "name": "Ẩn Sát",
-          "stat": "attack",
-          "desc": "Ẩn mình ám sát, đòn đầu tiên tăng sát thương."
-        },
-        {
-          "id": "HUYET_ANH",
-          "name": "Huyết Ảnh",
-          "stat": "speed",
-          "desc": "Huyết ảnh trùng trùng, tăng tốc độ."
-        },
-        {
-          "id": "DOC_TAM",
-          "name": "Độc Tâm",
-          "stat": "attack",
-          "desc": "Tâm địa độc ác, độc tăng sát thương theo thời gian."
-        },
-        {
-          "id": "QUY_BO",
-          "name": "Quỷ Bộ",
-          "stat": "speed",
-          "desc": "Bước chân quỷ mị, tăng tốc độ và né tránh."
-        },
-        {
-          "id": "SAT_Y",
-          "name": "Sát Ý",
-          "stat": "crit",
-          "desc": "Sát ý ngút trời, tăng chí mạng."
-        },
-        {
-          "id": "TUYET_MENH",
-          "name": "Tuyệt Mệnh",
-          "stat": "crit",
-          "desc": "Đòn tuyệt mệnh, chí mạng gây thêm sát thương."
-        }
-      ],
-      "phe": [
-        {
-          "id": "LO_DIEN",
-          "name": "Lộ Diện",
-          "stat": "speed",
-          "desc": "Hành tung lộ diện, giảm tốc độ ẩn nấp."
-        },
-        {
-          "id": "ANH_TAN",
-          "name": "Ảnh Tàn",
-          "stat": "attack",
-          "desc": "Ảnh tàn không trọn, giảm sát thương."
-        },
-        {
-          "id": "HUYET_TAN",
-          "name": "Huyết Tán",
-          "stat": "hp",
-          "desc": "Huyết tán loạn, giảm máu tối đa."
-        },
-        {
-          "id": "DOC_PHE",
-          "name": "Độc Phệ",
-          "stat": "attack",
-          "desc": "Độc phệ ngược chủ, giảm sát thương."
-        },
-        {
-          "id": "SAT_LO",
-          "name": "Sát Lộ",
-          "stat": "crit",
-          "desc": "Sát khí lộ liễu, mục tiêu dễ đề phòng, giảm chí mạng."
-        },
-        {
-          "id": "BO_PHAP_LOAN",
-          "name": "Bộ Pháp Loạn",
-          "stat": "speed",
-          "desc": "Bộ pháp loạn nhịp, giảm tốc độ di chuyển."
-        }
-      ]
-    },
-    "KIEM_TU": {
-      "tot": [
-        {
-          "id": "KIEM_Y",
-          "name": "Kiếm Ý",
-          "stat": "attack",
-          "desc": "Kiếm ý thông thiên, tăng sát thương kiếm."
-        },
-        {
-          "id": "KIEM_TAM",
-          "name": "Kiếm Tâm",
-          "stat": "crit",
-          "desc": "Kiếm tâm trong sáng, tăng chí mạng."
-        },
-        {
-          "id": "VAN_KIEM",
-          "name": "Vạn Kiếm",
-          "stat": "attack",
-          "desc": "Vạn kiếm quy tông, tăng sát thương diện rộng."
-        },
-        {
-          "id": "NGU_KIEM",
-          "name": "Ngự Kiếm",
-          "stat": "speed",
-          "desc": "Ngự kiếm phi hành, tăng tốc độ."
-        },
-        {
-          "id": "KIEM_VUC",
-          "name": "Kiếm Vực",
-          "stat": "attack",
-          "desc": "Kiếm vực mở ra, sát thương trong vực tăng."
-        },
-        {
-          "id": "PHA_KIEM",
-          "name": "Phá Kiếm",
-          "stat": "attack",
-          "desc": "Một kiếm phá vạn pháp, tăng sát thương lên khiên."
-        },
-        {
-          "id": "KIEM_HON",
-          "name": "Kiếm Hồn",
-          "stat": "crit",
-          "desc": "Kiếm hồn thức tỉnh, tăng chí mạng."
-        }
-      ],
-      "phe": [
-        {
-          "id": "KIEM_GAY",
-          "name": "Kiếm Gãy",
-          "stat": "attack",
-          "desc": "Kiếm gãy mũi, giảm sát thương."
-        },
-        {
-          "id": "KIEM_CUN",
-          "name": "Kiếm Cùn",
-          "stat": "attack",
-          "desc": "Kiếm cùn lưỡi, giảm sát thương."
-        },
-        {
-          "id": "KIEM_NANG",
-          "name": "Kiếm Nặng",
-          "stat": "speed",
-          "desc": "Kiếm nặng tay, giảm tốc độ ra chiêu."
-        },
-        {
-          "id": "KIEM_LECH",
-          "name": "Kiếm Lệch",
-          "stat": "crit",
-          "desc": "Kiếm lệch tâm, giảm chí mạng."
-        },
-        {
-          "id": "KIEM_TAN",
-          "name": "Kiếm Tán",
-          "stat": "mp",
-          "desc": "Kiếm khí tán loạn, giảm linh lực tối đa."
-        },
-        {
-          "id": "VO_KIEM",
-          "name": "Vô Kiếm",
-          "stat": "attack",
-          "desc": "Tâm vô kiếm, kiếm vô hồn, giảm sát thương."
-        }
-      ]
-    },
-    "QUY_TU": {
-      "tot": [
-        {
-          "id": "HON_HAI",
-          "name": "Hồn Hải",
-          "stat": "mp",
-          "desc": "Biển hồn mênh mông, tăng linh lực tối đa."
-        },
-        {
-          "id": "QUY_VUC",
-          "name": "Quỷ Vực",
-          "stat": "attack",
-          "desc": "Quỷ vực mở ra, tăng sát thương."
-        },
-        {
-          "id": "PHE_HON",
-          "name": "Phệ Hồn",
-          "stat": "attack",
-          "desc": "Phệ hồn kẻ địch, hồi máu theo sát thương."
-        },
-        {
-          "id": "AM_DUONG",
-          "name": "Âm Dương",
-          "stat": "defense",
-          "desc": "Âm dương cân bằng, tăng phòng thủ."
-        },
-        {
-          "id": "QUY_VUONG_UY",
-          "name": "Quỷ Vương Uy",
-          "stat": "attack",
-          "desc": "Uy của Quỷ Vương, tăng sát thương của Quỷ Hồn."
-        },
-        {
-          "id": "HON_HOA",
-          "name": "Hồn Hỏa",
-          "stat": "attack",
-          "desc": "Hồn hỏa thiêu đốt, đòn đánh kèm thiêu đốt."
-        },
-        {
-          "id": "VAN_QUY",
-          "name": "Vạn Quỷ",
-          "stat": "hp",
-          "desc": "Vạn quỷ triều bái, tăng máu tối đa."
-        }
-      ],
-      "phe": [
-        {
-          "id": "PHAN_PHE",
-          "name": "Phản Phệ",
-          "stat": "hp",
-          "desc": "Quỷ phản phệ chủ, giảm máu tối đa."
-        },
-        {
-          "id": "HON_TAN",
-          "name": "Hồn Tán",
-          "stat": "mp",
-          "desc": "Hồn tán loạn, giảm linh lực tối đa."
-        },
-        {
-          "id": "QUY_KHOC",
-          "name": "Quỷ Khóc",
-          "stat": "attack",
-          "desc": "Quỷ khóc thảm thiết, giảm sát thương."
-        },
-        {
-          "id": "AM_SUY",
-          "name": "Âm Suy",
-          "stat": "defense",
-          "desc": "Âm khí suy bại, giảm phòng thủ."
-        },
-        {
-          "id": "HON_LANH",
-          "name": "Hồn Lãnh",
-          "stat": "speed",
-          "desc": "Hồn lạnh buốt giá, giảm tốc độ."
-        },
-        {
-          "id": "QUY_ME",
-          "name": "Quỷ Mê",
-          "stat": "crit",
-          "desc": "Quỷ mê hoặc tâm, giảm chí mạng."
-        }
-      ]
-    },
-    "Y_TU": {
-      "tot": [
-        {
-          "id": "DIEU_THU",
-          "name": "Diệu Thủ",
-          "stat": "hp",
-          "desc": "Diệu thủ hồi xuân, tăng hiệu quả chữa trị."
-        },
-        {
-          "id": "HOI_XUAN",
-          "name": "Hồi Xuân",
-          "stat": "hp",
-          "desc": "Hồi xuân chi thuật, tăng máu tối đa."
-        },
-        {
-          "id": "NHAN_TAM",
-          "name": "Nhân Tâm",
-          "stat": "mp",
-          "desc": "Nhân tâm nhân thuật, tăng linh lực tối đa."
-        },
-        {
-          "id": "Y_DUC",
-          "name": "Y Đức",
-          "stat": "mp",
-          "desc": "Y đức vô lượng, tích Y Đức nhanh hơn."
-        },
-        {
-          "id": "SINH_CO",
-          "name": "Sinh Cơ",
-          "stat": "hp",
-          "desc": "Sinh cơ bừng bừng, tăng tốc độ hồi máu."
-        },
-        {
-          "id": "HOI_DUONG",
-          "name": "Hồi Dương",
-          "stat": "hp",
-          "desc": "Hồi dương cứu nghịch, hồi sinh mạnh hơn."
-        },
-        {
-          "id": "THANH_THU",
-          "name": "Thánh Thủ",
-          "stat": "mp",
-          "desc": "Thánh thủ nhân y, giảm linh lực tiêu hao khi chữa."
-        }
-      ],
-      "phe": [
-        {
-          "id": "DUOC_DOC",
-          "name": "Dược Độc",
-          "stat": "hp",
-          "desc": "Dược lẫn độc, chữa trị kèm giảm máu tối đa."
-        },
-        {
-          "id": "CHAM_LECH",
-          "name": "Châm Lệch",
-          "stat": "crit",
-          "desc": "Châm lệch huyệt, giảm hiệu quả bạo kích trị liệu."
-        },
-        {
-          "id": "BENH_KHI",
-          "name": "Bệnh Khí",
-          "stat": "hp",
-          "desc": "Bệnh khí nhiễm thân, giảm máu tối đa."
-        },
-        {
-          "id": "TAM_LOAN",
-          "name": "Tâm Loạn",
-          "stat": "mp",
-          "desc": "Tâm loạn tay run, giảm linh lực tối đa."
-        },
-        {
-          "id": "DUOC_TAN",
-          "name": "Dược Tán",
-          "stat": "mp",
-          "desc": "Dược tán loạn, chữa trị tốn thêm linh lực."
-        },
-        {
-          "id": "Y_LO",
-          "name": "Y Lộ",
-          "stat": "speed",
-          "desc": "Y lộ xa xôi, giảm tốc độ di chuyển."
-        }
-      ]
-    },
-    "NHO_TU": {
-      "tot": [
-        {
-          "id": "HAO_NHIEN",
-          "name": "Hạo Nhiên",
-          "stat": "attack",
-          "desc": "Hạo nhiên chính khí, tăng sát thương."
-        },
-        {
-          "id": "VAN_UYEN",
-          "name": "Văn Uyển",
-          "stat": "mp",
-          "desc": "Văn uyển sâu dày, tăng linh lực tối đa."
-        },
-        {
-          "id": "CHUONG_NGHIA",
-          "name": "Chương Nghĩa",
-          "stat": "attack",
-          "desc": "Chương nghĩa thấu triệt, tăng sát thương Ý Cảnh."
-        },
-        {
-          "id": "NGON_LINH",
-          "name": "Ngôn Linh",
-          "stat": "crit",
-          "desc": "Ngôn xuất pháp tùy, tăng chí mạng."
-        },
-        {
-          "id": "CHINH_KHI",
-          "name": "Chính Khí",
-          "stat": "defense",
-          "desc": "Chính khí hộ thân, tăng phòng thủ."
-        },
-        {
-          "id": "THANH_HIEN",
-          "name": "Thánh Hiền",
-          "stat": "mp",
-          "desc": "Thánh hiền chỉ dạy, tăng tốc độ đọc sách."
-        },
-        {
-          "id": "NGHIA_KHI",
-          "name": "Nghĩa Khí",
-          "stat": "hp",
-          "desc": "Nghĩa khí ngút trời, tăng máu tối đa."
-        }
-      ],
-      "phe": [
-        {
-          "id": "HU_NHO",
-          "name": "Hủ Nho",
-          "stat": "attack",
-          "desc": "Hủ nho cổ hủ, giảm sát thương."
-        },
-        {
-          "id": "VAN_TAN",
-          "name": "Văn Tán",
-          "stat": "mp",
-          "desc": "Văn chương tán loạn, giảm linh lực tối đa."
-        },
-        {
-          "id": "NGON_TRE",
-          "name": "Ngôn Trệ",
-          "stat": "speed",
-          "desc": "Ngôn từ trì trệ, giảm tốc độ niệm chú."
-        },
-        {
-          "id": "NGHIA_LECH",
-          "name": "Nghĩa Lệch",
-          "stat": "crit",
-          "desc": "Nghĩa lệch tâm, giảm chí mạng."
-        },
-        {
-          "id": "CHUONG_LON",
-          "name": "Chương Lộn",
-          "stat": "attack",
-          "desc": "Chương lộn thứ tự, Ý Cảnh yếu đi."
-        },
-        {
-          "id": "NHO_ME",
-          "name": "Nho Mê",
-          "stat": "defense",
-          "desc": "Nho mê văn tự, lơ là phòng thủ."
-        }
-      ]
-    }
-  },
-  "shop_price": {
-    "TRANG": 20,
-    "XAM": 50,
-    "LUC": 120,
-    "LAM": 250,
-    "TIM": 500,
-    "CAM": 1500,
-    "DO": 4000,
-    "DEN": 10000,
-    "VO": 30000
-  },
-  "forge_days": {
-    "TRANG": 1,
-    "XAM": 1,
-    "LUC": 1,
-    "LAM": 2,
-    "TIM": 3,
-    "CAM": 7,
-    "DO": 15,
-    "DEN": 30,
-    "VO": 90
-  },
-  "forge_materials": {
-    "TRANG": {
-      "da_soi": 3
-    },
-    "XAM": {
-      "da_soi": 5
-    },
-    "LUC": {
-      "da_soi": 3,
-      "nanh_soi": 3
-    },
-    "LAM": {
-      "nanh_soi": 5,
-      "nanh_tinh": 2
-    },
-    "TIM": {
-      "da_quy": 5
-    },
-    "CAM": {
-      "da_quy": 8,
-      "nanh_tinh": 3
-    },
-    "DO": {
-      "da_quy": 12,
-      "quang": 5
-    },
-    "DEN": {
-      "da_quy": 20,
-      "tinh_huyet": 5
-    },
-    "VO": {
-      "da_quy": 30,
-      "tinh_huyet": 10,
-      "quang": 5
-    }
-  },
-  "chest_gear": {
-    "C": {
-      "chance": 0.1,
-      "pool": [
-        "TRANG",
-        "XAM",
-        "LUC"
-      ]
-    },
-    "B": {
-      "chance": 0.2,
-      "pool": [
-        "XAM",
-        "LUC",
-        "LAM",
-        "TIM"
-      ]
-    },
-    "A": {
-      "chance": 0.35,
-      "pool": [
-        "LAM",
-        "TIM",
-        "CAM",
-        "DO"
-      ]
-    },
-    "boss": {
-      "chance": 0.6,
-      "pool": [
-        "TIM",
-        "CAM",
-        "DO",
-        "DEN"
-      ]
-    }
-  },
-  "quest_gear": {
-    "board": {
-      "chance": 0.1,
-      "pool": [
-        "TRANG",
-        "XAM",
-        "LUC"
-      ]
-    },
-    "city": {
-      "chance": 0.2,
-      "pool": [
-        "LUC",
-        "LAM",
-        "TIM"
-      ]
-    }
-  },
-  "shop_stock": {
-    "count": 8,
-    "rarity_weights": {
-      "TRANG": 25,
-      "XAM": 25,
-      "LUC": 20,
-      "LAM": 15,
-      "TIM": 8,
-      "CAM": 4,
-      "DO": 2,
-      "DEN": 0.7,
-      "VO": 0.3
-    }
+  "VO": {
+   "name": "Vô Cực",
+   "multiplier": 15.0,
+   "talent_lines": 5,
+   "prefixes": [
+    "Thái Sơ",
+    "Hỗn Độn",
+    "Vô Cực"
+   ]
   }
+ },
+ "talent_level_by_rarity": {
+  "TIM": 1,
+  "CAM": 2,
+  "DO": 3,
+  "DEN": 4,
+  "VO": 5
+ },
+ "elements": {
+  "basic": {
+   "KIM": "Kim",
+   "MOC": "Mộc",
+   "THUY": "Thủy",
+   "HOA": "Hỏa",
+   "THO": "Thổ",
+   "VO": "Vô"
+  },
+  "mutation": {
+   "LOI": "Lôi",
+   "PHONG": "Phong",
+   "BANG": "Băng",
+   "NHAM": "Nham",
+   "DOC": "Độc",
+   "QUANG": "Quang",
+   "AM": "Ám",
+   "HUYET": "Huyết",
+   "THOI_GIAN": "Thời Gian",
+   "KHONG_GIAN": "Không Gian"
+  },
+  "universal": "VO",
+  "all_access_path": "PHAP_TU"
+ },
+ "paths": [
+  "THE_TU",
+  "PHAP_TU",
+  "PHAT_TU",
+  "COT_TU",
+  "SAT_THU",
+  "KIEM_TU",
+  "QUY_TU",
+  "Y_TU",
+  "NHO_TU"
+ ],
+ "path_names": {
+  "THE_TU": "Thể Tu",
+  "PHAP_TU": "Pháp Tu",
+  "PHAT_TU": "Phật Tu",
+  "COT_TU": "Cốt Tu",
+  "SAT_THU": "Ảnh Tu",
+  "KIEM_TU": "Kiếm Tu",
+  "QUY_TU": "Quỷ Tu",
+  "Y_TU": "Y Tu",
+  "NHO_TU": "Nho Tu"
+ },
+ "slots": [
+  "WEAPON",
+  "ARMOR",
+  "PANTS",
+  "HAT",
+  "CLOAK",
+  "SHOES",
+  "BROOCH",
+  "RING",
+  "TOKEN"
+ ],
+ "slot_names": {
+  "ARMOR": {
+   "THE_TU": "Y",
+   "PHAP_TU": "Pháp Y",
+   "PHAT_TU": "Cà Sa",
+   "COT_TU": "Cốt Giáp",
+   "SAT_THU": "Dạ Y",
+   "KIEM_TU": "Kiếm Bào",
+   "QUY_TU": "U Y",
+   "Y_TU": "Y Bào",
+   "NHO_TU": "Nho Bào"
+  },
+  "PANTS": {
+   "THE_TU": "Khố",
+   "PHAP_TU": "Pháp Khố",
+   "PHAT_TU": "Tăng Khố",
+   "COT_TU": "Cốt Khố",
+   "SAT_THU": "Dạ Khố",
+   "KIEM_TU": "Kiếm Khố",
+   "QUY_TU": "U Khố",
+   "Y_TU": "Y Khố",
+   "NHO_TU": "Nho Khố"
+  },
+  "HAT": {
+   "THE_TU": "Cân",
+   "PHAP_TU": "Quan",
+   "PHAT_TU": "Tỳ Lô",
+   "COT_TU": "Cốt Khôi",
+   "SAT_THU": "Dạ Cân",
+   "KIEM_TU": "Kiếm Quan",
+   "QUY_TU": "U Quan",
+   "Y_TU": "Y Quan",
+   "NHO_TU": "Nho Quan"
+  },
+  "CLOAK": {
+   "*": "Phi Phong"
+  },
+  "SHOES": {
+   "*": "Ngoa"
+  },
+  "BROOCH": {
+   "*": "Bội"
+  },
+  "RING": {
+   "*": "Giới"
+  },
+  "TOKEN": {
+   "*": "Lệnh Bài"
+  }
+ },
+ "weapons": {
+  "THE_TU": [
+   {
+    "id": "TAY_KHONG",
+    "name": "Tay Không"
+   },
+   {
+    "id": "CHIEN_PHU",
+    "name": "Chiến Phủ"
+   },
+   {
+    "id": "CU_KIEM",
+    "name": "Cự Kiếm"
+   },
+   {
+    "id": "DAO",
+    "name": "Đao"
+   },
+   {
+    "id": "THUONG",
+    "name": "Thương"
+   },
+   {
+    "id": "THIET_CON",
+    "name": "Thiết Côn"
+   }
+  ],
+  "PHAP_TU": [
+   {
+    "id": "PHIEN",
+    "name": "Phiên"
+   },
+   {
+    "id": "PHAP_TRUONG",
+    "name": "Pháp Trượng"
+   },
+   {
+    "id": "SACH_PHEP",
+    "name": "Sách Phép"
+   }
+  ],
+  "PHAT_TU": [
+   {
+    "id": "PHAT_CHAU",
+    "name": "Phật Châu"
+   },
+   {
+    "id": "QUYEN_TRUONG",
+    "name": "Quyền Trượng"
+   },
+   {
+    "id": "BINH_BAT",
+    "name": "Bình Bát"
+   }
+  ],
+  "COT_TU": [
+   {
+    "id": "COT_THUAN",
+    "name": "Cốt Thuẫn"
+   },
+   {
+    "id": "COT_CHUY",
+    "name": "Cốt Chùy"
+   }
+  ],
+  "SAT_THU": [
+   {
+    "id": "DAO_GAM",
+    "name": "Dao Găm"
+   },
+   {
+    "id": "SONG_DAO",
+    "name": "Song Dao"
+   },
+   {
+    "id": "LIEM_NGAN",
+    "name": "Liềm Ngắn"
+   },
+   {
+    "id": "TRAO",
+    "name": "Trảo"
+   }
+  ],
+  "KIEM_TU": [
+   {
+    "id": "KIEM",
+    "name": "Kiếm"
+   },
+   {
+    "id": "SONG_KIEM",
+    "name": "Song Kiếm"
+   },
+   {
+    "id": "TRONG_KIEM",
+    "name": "Trọng Kiếm"
+   }
+  ],
+  "QUY_TU": [
+   {
+    "id": "CO_LENH",
+    "name": "Cờ Lệnh"
+   },
+   {
+    "id": "LUOI_HAI",
+    "name": "Lưỡi Hái"
+   },
+   {
+    "id": "QUY_THUONG",
+    "name": "Quỷ Thương"
+   }
+  ],
+  "Y_TU": [
+   {
+    "id": "PHAT_TRAN",
+    "name": "Phất Trần"
+   },
+   {
+    "id": "KIM_CHAM",
+    "name": "Kim Châm"
+   },
+   {
+    "id": "CO_CAM",
+    "name": "Cổ Cầm"
+   }
+  ],
+  "NHO_TU": [
+   {
+    "id": "NGON_LINH",
+    "name": "Ngôn Linh"
+   },
+   {
+    "id": "BUT_PHEP",
+    "name": "Bút Phép"
+   },
+   {
+    "id": "QUYEN_TRUC",
+    "name": "Quyển Trúc"
+   }
+  ]
+ },
+ "base_stats": {
+  "WEAPON": {
+   "attack": 20
+  },
+  "ARMOR": {
+   "defense": 15
+  },
+  "PANTS": {
+   "defense": 10
+  },
+  "HAT": {
+   "defense": 8
+  },
+  "CLOAK": {
+   "defense": 8
+  },
+  "SHOES": {
+   "speed": 6
+  },
+  "BROOCH": {
+   "hp": 100
+  },
+  "RING": {
+   "mp": 80
+  },
+  "TOKEN": {}
+ },
+ "talent_rates": {
+  "good_pct_per_level": 0.04,
+  "bad_pct_per_level": -0.02
+ },
+ "reroll_cost": {
+  "TIM": 100,
+  "CAM": 300,
+  "DO": 800,
+  "DEN": 2000,
+  "VO": 5000
+ },
+ "token": {
+  "ranks": [
+   {
+    "tier": 1,
+    "name": "Cửu Phẩm"
+   },
+   {
+    "tier": 2,
+    "name": "Bát Phẩm"
+   },
+   {
+    "tier": 3,
+    "name": "Thất Phẩm"
+   },
+   {
+    "tier": 4,
+    "name": "Lục Phẩm"
+   },
+   {
+    "tier": 5,
+    "name": "Ngũ Phẩm"
+   },
+   {
+    "tier": 6,
+    "name": "Tứ Phẩm"
+   },
+   {
+    "tier": 7,
+    "name": "Tam Phẩm"
+   },
+   {
+    "tier": 8,
+    "name": "Nhị Phẩm"
+   },
+   {
+    "tier": 9,
+    "name": "Nhất Phẩm"
+   }
+  ],
+  "suppression_per_tier": 0.05,
+  "suppression_cap": 0.3,
+  "npc_trade_discount_per_tier": 0.01,
+  "npc_hidden_quest_per_tier": 0.01
+ },
+ "talent_pools": {
+  "THE_TU": {
+   "tot": [
+    {
+     "id": "PHAN_CHAN",
+     "name": "Phản Chấn",
+     "stat": "defense",
+     "desc": "Phản lại một phần sát thương nhận vào cho kẻ ra đòn."
+    },
+    {
+     "id": "DU_CHAN",
+     "name": "Dư Chấn",
+     "stat": "attack",
+     "desc": "Đòn đánh lan chấn động ra xung quanh mục tiêu."
+    },
+    {
+     "id": "SINH_TU_KHE",
+     "name": "Sinh Tử Khế",
+     "stat": "hp",
+     "desc": "Khi sắp gục, hồi lại một phần máu (một lần mỗi trận)."
+    },
+    {
+     "id": "BACH_CHIEN",
+     "name": "Bách Chiến",
+     "stat": "attack",
+     "desc": "Đánh càng lâu, sát thương càng tăng."
+    },
+    {
+     "id": "HUYET_NO",
+     "name": "Huyết Nộ",
+     "stat": "attack",
+     "desc": "Máu càng thấp, sát thương càng cao."
+    },
+    {
+     "id": "TOAI_COT",
+     "name": "Toái Cốt",
+     "stat": "attack",
+     "desc": "Đòn đánh có cơ hội phá giáp mục tiêu."
+    },
+    {
+     "id": "TU_CHIEN",
+     "name": "Tử Chiến",
+     "stat": "crit",
+     "desc": "Chí mạng tăng mạnh khi máu xuống dưới ngưỡng."
+    }
+   ],
+   "phe": [
+    {
+     "id": "DUONG_SINH",
+     "name": "Dưỡng Sinh",
+     "stat": "speed",
+     "desc": "Chỉ lo dưỡng sinh, giảm tốc độ ra đòn."
+    },
+    {
+     "id": "KET_LIEU_XA",
+     "name": "Kết Liễu Xa",
+     "stat": "attack",
+     "desc": "Đòn kết liễu yếu đi, khó dứt điểm đối thủ."
+    },
+    {
+     "id": "VO_ANH_BO",
+     "name": "Vô Ảnh Bộ",
+     "stat": "speed",
+     "desc": "Bộ pháp loạn nhịp, giảm tốc độ di chuyển."
+    },
+    {
+     "id": "TINH_TAM",
+     "name": "Tĩnh Tâm",
+     "stat": "crit",
+     "desc": "Tâm quá tĩnh, giảm tỉ lệ chí mạng."
+    },
+    {
+     "id": "HAP_TINH",
+     "name": "Hấp Tinh",
+     "stat": "mp",
+     "desc": "Hấp tinh không trọn, giảm linh lực tối đa."
+    },
+    {
+     "id": "KIM_THAN",
+     "name": "Kim Thân",
+     "stat": "defense",
+     "desc": "Kim thân rỗng ruột, giảm phòng thủ thật."
+    }
+   ]
+  },
+  "PHAP_TU": {
+   "tot": [
+    {
+     "id": "LINH_TRIEU",
+     "name": "Linh Triều",
+     "stat": "mp",
+     "desc": "Linh lực cuộn trào, tăng linh lực tối đa."
+    },
+    {
+     "id": "PHAP_HAI",
+     "name": "Pháp Hải",
+     "stat": "mp",
+     "desc": "Biển pháp mênh mông, chiêu thức tốn ít linh lực hơn."
+    },
+    {
+     "id": "CONG_HUONG",
+     "name": "Cộng Hưởng",
+     "stat": "attack",
+     "desc": "Cộng hưởng nguyên tố, tăng sát thương phép."
+    },
+    {
+     "id": "LIEN_CHAU",
+     "name": "Liên Châu",
+     "stat": "attack",
+     "desc": "Phép nối phép, đòn sau mạnh hơn đòn trước."
+    },
+    {
+     "id": "PHAP_AN",
+     "name": "Pháp Ấn",
+     "stat": "crit",
+     "desc": "Pháp ấn khắc sâu, tăng tỉ lệ chí mạng phép."
+    },
+    {
+     "id": "BIEN_DI_CONG_MINH",
+     "name": "Biến Dị Cộng Minh",
+     "stat": "attack",
+     "desc": "Linh căn biến dị cộng hưởng, tăng sát thương hệ biến dị."
+    },
+    {
+     "id": "NGUYEN_TO_TRIEU",
+     "name": "Nguyên Tố Triều",
+     "stat": "mp",
+     "desc": "Triều nguyên tố dâng, hồi linh lực nhanh hơn."
+    }
+   ],
+   "phe": [
+    {
+     "id": "PHAP_PHE",
+     "name": "Pháp Phệ",
+     "stat": "mp",
+     "desc": "Pháp phệ ngược chủ, giảm linh lực tối đa."
+    },
+    {
+     "id": "LINH_TAN",
+     "name": "Linh Tán",
+     "stat": "mp",
+     "desc": "Linh lực tán loạn, chiêu thức tốn thêm linh lực."
+    },
+    {
+     "id": "CHU_TRE",
+     "name": "Chú Trệ",
+     "stat": "speed",
+     "desc": "Niệm chú trì trệ, giảm tốc độ thi pháp."
+    },
+    {
+     "id": "PHAP_HOI",
+     "name": "Pháp Hồi",
+     "stat": "attack",
+     "desc": "Pháp hồi không kịp, giảm sát thương phép."
+    },
+    {
+     "id": "NGUYEN_TO_NHIEU",
+     "name": "Nguyên Tố Nhiễu",
+     "stat": "attack",
+     "desc": "Nguyên tố nhiễu loạn, phép dễ trệch hướng."
+    },
+    {
+     "id": "TINH_PHAP",
+     "name": "Tĩnh Pháp",
+     "stat": "crit",
+     "desc": "Pháp tĩnh lặng quá mức, giảm chí mạng phép."
+    }
+   ]
+  },
+  "PHAT_TU": {
+   "tot": [
+    {
+     "id": "PHAT_QUANG_HO_THE",
+     "name": "Phật Quang Hộ Thể",
+     "stat": "defense",
+     "desc": "Phật quang hộ thể, giảm sát thương nhận vào."
+    },
+    {
+     "id": "DO_HOA",
+     "name": "Độ Hóa",
+     "stat": "attack",
+     "desc": "Độ hóa chúng sinh, sát thương lên quái Quỷ/Ma tăng."
+    },
+    {
+     "id": "KIM_CANG",
+     "name": "Kim Cang",
+     "stat": "defense",
+     "desc": "Thân như kim cang, khó bị phá phòng."
+    },
+    {
+     "id": "TU_BI",
+     "name": "Từ Bi",
+     "stat": "hp",
+     "desc": "Lòng từ bi vô lượng, tăng máu tối đa."
+    },
+    {
+     "id": "THIEN_DINH",
+     "name": "Thiền Định",
+     "stat": "mp",
+     "desc": "Thiền định sâu, tăng linh lực tối đa."
+    },
+    {
+     "id": "PHO_DO",
+     "name": "Phổ Độ",
+     "stat": "hp",
+     "desc": "Phổ độ chúng sinh, hiệu quả hồi phục tăng."
+    },
+    {
+     "id": "BAT_DONG",
+     "name": "Bất Động",
+     "stat": "defense",
+     "desc": "Bất động như núi, miễn nhiễm đẩy lùi nhẹ."
+    }
+   ],
+   "phe": [
+    {
+     "id": "KHO_HANH",
+     "name": "Khổ Hạnh",
+     "stat": "attack",
+     "desc": "Khổ hạnh quá độ, thân thể suy nhược, giảm sát thương."
+    },
+    {
+     "id": "VO_TRANH",
+     "name": "Vô Tranh",
+     "stat": "crit",
+     "desc": "Vô tranh với đời, giảm ý chí chí mạng."
+    },
+    {
+     "id": "GIOI_LUAT",
+     "name": "Giới Luật",
+     "stat": "speed",
+     "desc": "Giới luật trói buộc, giảm tốc độ hành động."
+    },
+    {
+     "id": "THANH_TINH",
+     "name": "Thanh Tịnh",
+     "stat": "attack",
+     "desc": "Thanh tịnh vô vi, sát thương giảm."
+    },
+    {
+     "id": "TICH_DIET",
+     "name": "Tịch Diệt",
+     "stat": "hp",
+     "desc": "Tịch diệt thân xác, giảm máu tối đa."
+    },
+    {
+     "id": "VO_DUC",
+     "name": "Vô Dục",
+     "stat": "crit",
+     "desc": "Vô dục vô cầu, không còn khát vọng chí mạng."
+    }
+   ]
+  },
+  "COT_TU": {
+   "tot": [
+    {
+     "id": "COT_GIAP",
+     "name": "Cốt Giáp",
+     "stat": "defense",
+     "desc": "Xương hóa giáp, tăng phòng thủ."
+    },
+    {
+     "id": "HACH_TAM",
+     "name": "Hạch Tâm",
+     "stat": "hp",
+     "desc": "Hạch tâm vững chắc, tăng máu tối đa."
+    },
+    {
+     "id": "VONG_HON",
+     "name": "Vong Hồn",
+     "stat": "attack",
+     "desc": "Vong hồn trợ chiến, tăng sát thương."
+    },
+    {
+     "id": "COT_VUONG_UY",
+     "name": "Cốt Vương Uy",
+     "stat": "attack",
+     "desc": "Uy của Cốt Vương, tăng sát thương của pet."
+    },
+    {
+     "id": "TAI_SINH",
+     "name": "Tái Sinh",
+     "stat": "hp",
+     "desc": "Xương tái sinh, tăng tốc độ hồi máu."
+    },
+    {
+     "id": "XUONG_TRANG",
+     "name": "Xương Trắng",
+     "stat": "defense",
+     "desc": "Xương trắng tinh luyện, tăng phòng thủ."
+    },
+    {
+     "id": "COT_HAI",
+     "name": "Cốt Hải",
+     "stat": "attack",
+     "desc": "Biển xương vô tận, tăng sát thương diện rộng."
+    }
+   ],
+   "phe": [
+    {
+     "id": "XUONG_KHO",
+     "name": "Xương Khô",
+     "stat": "hp",
+     "desc": "Xương khô giòn, giảm máu tối đa."
+    },
+    {
+     "id": "MUC_RUA",
+     "name": "Mục Rữa",
+     "stat": "defense",
+     "desc": "Xương mục rữa, giảm phòng thủ."
+    },
+    {
+     "id": "COT_TAN",
+     "name": "Cốt Tán",
+     "stat": "attack",
+     "desc": "Cốt tán loạn, giảm sát thương."
+    },
+    {
+     "id": "AM_KHI",
+     "name": "Âm Khí",
+     "stat": "speed",
+     "desc": "Âm khí nặng nề, giảm tốc độ di chuyển."
+    },
+    {
+     "id": "VONG_QUEN",
+     "name": "Vong Quên",
+     "stat": "mp",
+     "desc": "Vong hồn lãng quên, giảm linh lực tối đa."
+    },
+    {
+     "id": "COT_LANH",
+     "name": "Cốt Lãnh",
+     "stat": "crit",
+     "desc": "Xương lạnh vô hồn, giảm chí mạng."
+    }
+   ]
+  },
+  "SAT_THU": {
+   "tot": [
+    {
+     "id": "NHAT_KICH",
+     "name": "Nhất Kích",
+     "stat": "crit",
+     "desc": "Một kích tất sát, tăng mạnh chí mạng."
+    },
+    {
+     "id": "AN_SAT",
+     "name": "Ẩn Sát",
+     "stat": "attack",
+     "desc": "Ẩn mình ám sát, đòn đầu tiên tăng sát thương."
+    },
+    {
+     "id": "HUYET_ANH",
+     "name": "Huyết Ảnh",
+     "stat": "speed",
+     "desc": "Huyết ảnh trùng trùng, tăng tốc độ."
+    },
+    {
+     "id": "DOC_TAM",
+     "name": "Độc Tâm",
+     "stat": "attack",
+     "desc": "Tâm địa độc ác, độc tăng sát thương theo thời gian."
+    },
+    {
+     "id": "QUY_BO",
+     "name": "Quỷ Bộ",
+     "stat": "speed",
+     "desc": "Bước chân quỷ mị, tăng tốc độ và né tránh."
+    },
+    {
+     "id": "SAT_Y",
+     "name": "Sát Ý",
+     "stat": "crit",
+     "desc": "Sát ý ngút trời, tăng chí mạng."
+    },
+    {
+     "id": "TUYET_MENH",
+     "name": "Tuyệt Mệnh",
+     "stat": "crit",
+     "desc": "Đòn tuyệt mệnh, chí mạng gây thêm sát thương."
+    }
+   ],
+   "phe": [
+    {
+     "id": "LO_DIEN",
+     "name": "Lộ Diện",
+     "stat": "speed",
+     "desc": "Hành tung lộ diện, giảm tốc độ ẩn nấp."
+    },
+    {
+     "id": "ANH_TAN",
+     "name": "Ảnh Tàn",
+     "stat": "attack",
+     "desc": "Ảnh tàn không trọn, giảm sát thương."
+    },
+    {
+     "id": "HUYET_TAN",
+     "name": "Huyết Tán",
+     "stat": "hp",
+     "desc": "Huyết tán loạn, giảm máu tối đa."
+    },
+    {
+     "id": "DOC_PHE",
+     "name": "Độc Phệ",
+     "stat": "attack",
+     "desc": "Độc phệ ngược chủ, giảm sát thương."
+    },
+    {
+     "id": "SAT_LO",
+     "name": "Sát Lộ",
+     "stat": "crit",
+     "desc": "Sát khí lộ liễu, mục tiêu dễ đề phòng, giảm chí mạng."
+    },
+    {
+     "id": "BO_PHAP_LOAN",
+     "name": "Bộ Pháp Loạn",
+     "stat": "speed",
+     "desc": "Bộ pháp loạn nhịp, giảm tốc độ di chuyển."
+    }
+   ]
+  },
+  "KIEM_TU": {
+   "tot": [
+    {
+     "id": "KIEM_Y",
+     "name": "Kiếm Ý",
+     "stat": "attack",
+     "desc": "Kiếm ý thông thiên, tăng sát thương kiếm."
+    },
+    {
+     "id": "KIEM_TAM",
+     "name": "Kiếm Tâm",
+     "stat": "crit",
+     "desc": "Kiếm tâm trong sáng, tăng chí mạng."
+    },
+    {
+     "id": "VAN_KIEM",
+     "name": "Vạn Kiếm",
+     "stat": "attack",
+     "desc": "Vạn kiếm quy tông, tăng sát thương diện rộng."
+    },
+    {
+     "id": "NGU_KIEM",
+     "name": "Ngự Kiếm",
+     "stat": "speed",
+     "desc": "Ngự kiếm phi hành, tăng tốc độ."
+    },
+    {
+     "id": "KIEM_VUC",
+     "name": "Kiếm Vực",
+     "stat": "attack",
+     "desc": "Kiếm vực mở ra, sát thương trong vực tăng."
+    },
+    {
+     "id": "PHA_KIEM",
+     "name": "Phá Kiếm",
+     "stat": "attack",
+     "desc": "Một kiếm phá vạn pháp, tăng sát thương lên khiên."
+    },
+    {
+     "id": "KIEM_HON",
+     "name": "Kiếm Hồn",
+     "stat": "crit",
+     "desc": "Kiếm hồn thức tỉnh, tăng chí mạng."
+    }
+   ],
+   "phe": [
+    {
+     "id": "KIEM_GAY",
+     "name": "Kiếm Gãy",
+     "stat": "attack",
+     "desc": "Kiếm gãy mũi, giảm sát thương."
+    },
+    {
+     "id": "KIEM_CUN",
+     "name": "Kiếm Cùn",
+     "stat": "attack",
+     "desc": "Kiếm cùn lưỡi, giảm sát thương."
+    },
+    {
+     "id": "KIEM_NANG",
+     "name": "Kiếm Nặng",
+     "stat": "speed",
+     "desc": "Kiếm nặng tay, giảm tốc độ ra chiêu."
+    },
+    {
+     "id": "KIEM_LECH",
+     "name": "Kiếm Lệch",
+     "stat": "crit",
+     "desc": "Kiếm lệch tâm, giảm chí mạng."
+    },
+    {
+     "id": "KIEM_TAN",
+     "name": "Kiếm Tán",
+     "stat": "mp",
+     "desc": "Kiếm khí tán loạn, giảm linh lực tối đa."
+    },
+    {
+     "id": "VO_KIEM",
+     "name": "Vô Kiếm",
+     "stat": "attack",
+     "desc": "Tâm vô kiếm, kiếm vô hồn, giảm sát thương."
+    }
+   ]
+  },
+  "QUY_TU": {
+   "tot": [
+    {
+     "id": "HON_HAI",
+     "name": "Hồn Hải",
+     "stat": "mp",
+     "desc": "Biển hồn mênh mông, tăng linh lực tối đa."
+    },
+    {
+     "id": "QUY_VUC",
+     "name": "Quỷ Vực",
+     "stat": "attack",
+     "desc": "Quỷ vực mở ra, tăng sát thương."
+    },
+    {
+     "id": "PHE_HON",
+     "name": "Phệ Hồn",
+     "stat": "attack",
+     "desc": "Phệ hồn kẻ địch, hồi máu theo sát thương."
+    },
+    {
+     "id": "AM_DUONG",
+     "name": "Âm Dương",
+     "stat": "defense",
+     "desc": "Âm dương cân bằng, tăng phòng thủ."
+    },
+    {
+     "id": "QUY_VUONG_UY",
+     "name": "Quỷ Vương Uy",
+     "stat": "attack",
+     "desc": "Uy của Quỷ Vương, tăng sát thương của Quỷ Hồn."
+    },
+    {
+     "id": "HON_HOA",
+     "name": "Hồn Hỏa",
+     "stat": "attack",
+     "desc": "Hồn hỏa thiêu đốt, đòn đánh kèm thiêu đốt."
+    },
+    {
+     "id": "VAN_QUY",
+     "name": "Vạn Quỷ",
+     "stat": "hp",
+     "desc": "Vạn quỷ triều bái, tăng máu tối đa."
+    }
+   ],
+   "phe": [
+    {
+     "id": "PHAN_PHE",
+     "name": "Phản Phệ",
+     "stat": "hp",
+     "desc": "Quỷ phản phệ chủ, giảm máu tối đa."
+    },
+    {
+     "id": "HON_TAN",
+     "name": "Hồn Tán",
+     "stat": "mp",
+     "desc": "Hồn tán loạn, giảm linh lực tối đa."
+    },
+    {
+     "id": "QUY_KHOC",
+     "name": "Quỷ Khóc",
+     "stat": "attack",
+     "desc": "Quỷ khóc thảm thiết, giảm sát thương."
+    },
+    {
+     "id": "AM_SUY",
+     "name": "Âm Suy",
+     "stat": "defense",
+     "desc": "Âm khí suy bại, giảm phòng thủ."
+    },
+    {
+     "id": "HON_LANH",
+     "name": "Hồn Lãnh",
+     "stat": "speed",
+     "desc": "Hồn lạnh buốt giá, giảm tốc độ."
+    },
+    {
+     "id": "QUY_ME",
+     "name": "Quỷ Mê",
+     "stat": "crit",
+     "desc": "Quỷ mê hoặc tâm, giảm chí mạng."
+    }
+   ]
+  },
+  "Y_TU": {
+   "tot": [
+    {
+     "id": "DIEU_THU",
+     "name": "Diệu Thủ",
+     "stat": "hp",
+     "desc": "Diệu thủ hồi xuân, tăng hiệu quả chữa trị."
+    },
+    {
+     "id": "HOI_XUAN",
+     "name": "Hồi Xuân",
+     "stat": "hp",
+     "desc": "Hồi xuân chi thuật, tăng máu tối đa."
+    },
+    {
+     "id": "NHAN_TAM",
+     "name": "Nhân Tâm",
+     "stat": "mp",
+     "desc": "Nhân tâm nhân thuật, tăng linh lực tối đa."
+    },
+    {
+     "id": "Y_DUC",
+     "name": "Y Đức",
+     "stat": "mp",
+     "desc": "Y đức vô lượng, tích Y Đức nhanh hơn."
+    },
+    {
+     "id": "SINH_CO",
+     "name": "Sinh Cơ",
+     "stat": "hp",
+     "desc": "Sinh cơ bừng bừng, tăng tốc độ hồi máu."
+    },
+    {
+     "id": "HOI_DUONG",
+     "name": "Hồi Dương",
+     "stat": "hp",
+     "desc": "Hồi dương cứu nghịch, hồi sinh mạnh hơn."
+    },
+    {
+     "id": "THANH_THU",
+     "name": "Thánh Thủ",
+     "stat": "mp",
+     "desc": "Thánh thủ nhân y, giảm linh lực tiêu hao khi chữa."
+    }
+   ],
+   "phe": [
+    {
+     "id": "DUOC_DOC",
+     "name": "Dược Độc",
+     "stat": "hp",
+     "desc": "Dược lẫn độc, chữa trị kèm giảm máu tối đa."
+    },
+    {
+     "id": "CHAM_LECH",
+     "name": "Châm Lệch",
+     "stat": "crit",
+     "desc": "Châm lệch huyệt, giảm hiệu quả bạo kích trị liệu."
+    },
+    {
+     "id": "BENH_KHI",
+     "name": "Bệnh Khí",
+     "stat": "hp",
+     "desc": "Bệnh khí nhiễm thân, giảm máu tối đa."
+    },
+    {
+     "id": "TAM_LOAN",
+     "name": "Tâm Loạn",
+     "stat": "mp",
+     "desc": "Tâm loạn tay run, giảm linh lực tối đa."
+    },
+    {
+     "id": "DUOC_TAN",
+     "name": "Dược Tán",
+     "stat": "mp",
+     "desc": "Dược tán loạn, chữa trị tốn thêm linh lực."
+    },
+    {
+     "id": "Y_LO",
+     "name": "Y Lộ",
+     "stat": "speed",
+     "desc": "Y lộ xa xôi, giảm tốc độ di chuyển."
+    }
+   ]
+  },
+  "NHO_TU": {
+   "tot": [
+    {
+     "id": "HAO_NHIEN",
+     "name": "Hạo Nhiên",
+     "stat": "attack",
+     "desc": "Hạo nhiên chính khí, tăng sát thương."
+    },
+    {
+     "id": "VAN_UYEN",
+     "name": "Văn Uyển",
+     "stat": "mp",
+     "desc": "Văn uyển sâu dày, tăng linh lực tối đa."
+    },
+    {
+     "id": "CHUONG_NGHIA",
+     "name": "Chương Nghĩa",
+     "stat": "attack",
+     "desc": "Chương nghĩa thấu triệt, tăng sát thương Ý Cảnh."
+    },
+    {
+     "id": "NGON_LINH",
+     "name": "Ngôn Linh",
+     "stat": "crit",
+     "desc": "Ngôn xuất pháp tùy, tăng chí mạng."
+    },
+    {
+     "id": "CHINH_KHI",
+     "name": "Chính Khí",
+     "stat": "defense",
+     "desc": "Chính khí hộ thân, tăng phòng thủ."
+    },
+    {
+     "id": "THANH_HIEN",
+     "name": "Thánh Hiền",
+     "stat": "mp",
+     "desc": "Thánh hiền chỉ dạy, tăng tốc độ đọc sách."
+    },
+    {
+     "id": "NGHIA_KHI",
+     "name": "Nghĩa Khí",
+     "stat": "hp",
+     "desc": "Nghĩa khí ngút trời, tăng máu tối đa."
+    }
+   ],
+   "phe": [
+    {
+     "id": "HU_NHO",
+     "name": "Hủ Nho",
+     "stat": "attack",
+     "desc": "Hủ nho cổ hủ, giảm sát thương."
+    },
+    {
+     "id": "VAN_TAN",
+     "name": "Văn Tán",
+     "stat": "mp",
+     "desc": "Văn chương tán loạn, giảm linh lực tối đa."
+    },
+    {
+     "id": "NGON_TRE",
+     "name": "Ngôn Trệ",
+     "stat": "speed",
+     "desc": "Ngôn từ trì trệ, giảm tốc độ niệm chú."
+    },
+    {
+     "id": "NGHIA_LECH",
+     "name": "Nghĩa Lệch",
+     "stat": "crit",
+     "desc": "Nghĩa lệch tâm, giảm chí mạng."
+    },
+    {
+     "id": "CHUONG_LON",
+     "name": "Chương Lộn",
+     "stat": "attack",
+     "desc": "Chương lộn thứ tự, Ý Cảnh yếu đi."
+    },
+    {
+     "id": "NHO_ME",
+     "name": "Nho Mê",
+     "stat": "defense",
+     "desc": "Nho mê văn tự, lơ là phòng thủ."
+    }
+   ]
+  }
+ },
+ "shop_price": {
+  "TRANG": 20,
+  "XAM": 50,
+  "LUC": 120,
+  "LAM": 250,
+  "TIM": 500,
+  "CAM": 1500,
+  "DO": 4000,
+  "DEN": 10000,
+  "VO": 30000
+ },
+ "forge_days": {
+  "TRANG": 1,
+  "XAM": 1,
+  "LUC": 1,
+  "LAM": 2,
+  "TIM": 3,
+  "CAM": 7,
+  "DO": 15,
+  "DEN": 30,
+  "VO": 90
+ },
+ "forge_materials": {
+  "TRANG": {
+   "da_soi": 3
+  },
+  "XAM": {
+   "da_soi": 5
+  },
+  "LUC": {
+   "da_soi": 3,
+   "nanh_soi": 3
+  },
+  "LAM": {
+   "nanh_soi": 5,
+   "nanh_tinh": 2
+  },
+  "TIM": {
+   "da_quy": 5
+  },
+  "CAM": {
+   "da_quy": 8,
+   "nanh_tinh": 3
+  },
+  "DO": {
+   "da_quy": 12,
+   "quang": 5
+  },
+  "DEN": {
+   "da_quy": 20,
+   "tinh_huyet": 5
+  },
+  "VO": {
+   "da_quy": 30,
+   "tinh_huyet": 10,
+   "quang": 5
+  }
+ },
+ "chest_gear": {
+  "C": {
+   "chance": 0.1,
+   "pool": [
+    "TRANG",
+    "XAM",
+    "LUC"
+   ]
+  },
+  "B": {
+   "chance": 0.2,
+   "pool": [
+    "XAM",
+    "LUC",
+    "LAM",
+    "TIM"
+   ]
+  },
+  "A": {
+   "chance": 0.35,
+   "pool": [
+    "LAM",
+    "TIM",
+    "CAM",
+    "DO"
+   ]
+  },
+  "boss": {
+   "chance": 0.6,
+   "pool": [
+    "TIM",
+    "CAM",
+    "DO",
+    "DEN"
+   ]
+  }
+ },
+ "quest_gear": {
+  "board": {
+   "chance": 0.1,
+   "pool": [
+    "TRANG",
+    "XAM",
+    "LUC"
+   ]
+  },
+  "city": {
+   "chance": 0.2,
+   "pool": [
+    "LUC",
+    "LAM",
+    "TIM"
+   ]
+  }
+ },
+ "shop_stock": {
+  "count": 8,
+  "rarity_weights": {
+   "TRANG": 25,
+   "XAM": 25,
+   "LUC": 20,
+   "LAM": 15,
+   "TIM": 8,
+   "CAM": 4,
+   "DO": 2,
+   "DEN": 0.7,
+   "VO": 0.3
+  }
+ },
+ "realm_bands": {
+  "na": {
+   "multiplier": 1.6,
+   "label": "Nguyên Anh",
+   "min_realm": "na"
+  }
+ }
 }

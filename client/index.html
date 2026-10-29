@@ -1066,6 +1066,13 @@
         <div id="hudPhat" style="display:none">
           <span id="hudPhatText" style="font-size:11px;color:#fde68a">☸ Công Đức</span>
         </div>
+        <div id="hudAnRealm" style="display:none;font-size:11px;color:#c4b5fd;margin:1px 0 2px;"></div>
+        <div id="hudBranch" style="display:none;font-size:11px;color:#fda4af;margin:1px 0 2px;"></div>
+        <div id="hudHiddenStats" style="display:none;font-size:11px;color:#a5f3fc;margin:1px 0 2px;"></div>
+        <button id="btnBranchTien" type="button" style="display:none">☯ Chọn phe Tiên</button>
+        <button id="btnBranchMa" type="button" style="display:none">☯ Chọn phe Ma</button>
+        <button id="btnBranchBreak" type="button" style="display:none">✦ Đột phá thang</button>
+        <button id="btnBranchCleanse" type="button" style="display:none">☯ Tẩy luyện đổi phe</button>
         <button id="hudDetailBtn" type="button">▸ Chỉ số</button>
         <div id="hudDetails"><div id="hudStats">—</div></div>
         <button id="hudBreak" type="button">✦ Đột phá cảnh giới ✦</button>
@@ -1073,7 +1080,9 @@
         <button id="btnQuySummon" type="button" style="display:none">✦ Triệu Hồi Quỷ Hồn</button>
         <button id="btnTame" type="button" style="display:none">🐾 Thuần Hóa</button>
         <button id="btnPhatQuang" type="button" style="display:none">☸ Phật Quang Phổ Chiếu</button>
+        <button id="btnSieuDo" type="button" style="display:none">☸ Siêu Độ</button>
         <button id="btnThuyetPhap" type="button" style="display:none">📿 Thuyết Pháp</button>
+        <button id="btnFactionSkill" type="button" style="display:none">✦ Kỹ năng phe</button>
         <div id="hudYDuc" style="display:none">
           <span id="hudYDucText" style="font-size:11px;color:#86efac">💚 Y Đức</span>
         </div>
@@ -1177,6 +1186,10 @@
         <div class="panelHead"><span id="questTitle">Nhiệm vụ</span><button class="xBtn" id="questClose" type="button">✕</button></div>
         <div id="questBody"></div>
       </div>
+      <div id="hintPanel" class="panel">
+        <div class="panelHead"><span id="hintTitle">💡 Gợi ý Đạo Quán</span><button class="xBtn" id="hintClose" type="button">✕</button></div>
+        <div id="hintBody"></div>
+      </div>
       <div id="boardPanel" class="panel">
         <div class="panelHead"><span>🏆 Bảng Vàng · 🎯 Bảng Truy Nã</span><button class="xBtn" id="boardClose" type="button">✕</button></div>
         <div id="boardBody"></div>
@@ -1193,6 +1206,11 @@
         <div class="panelHead"><span>⚒️ Tiệm Rèn</span><button class="xBtn" id="forgeClose" type="button">✕</button></div>
         <div id="forgeBody"></div>
       </div>
+      <!-- GĐ161: panel Thú Cưỡi — chuồng của mình + trại Ngự Thú -->
+      <div id="mountPanel" class="panel">
+        <div class="panelHead"><span>🐴 Thú Cưỡi</span><button class="xBtn" id="mountClose" type="button">✕</button></div>
+        <div id="mountBody"></div>
+      </div>
       <!-- GĐ66 sửa nhỏ (2): panel Ví Linh thạch — bấm pill Linh thạch thì mở -->
       <div id="stonesPanel" class="panel">
         <div class="panelHead"><span>💠 Linh thạch</span><button class="xBtn" id="stonesClose" type="button">✕</button></div>
@@ -1205,6 +1223,9 @@
         <div class="panelHead"><span>⚙ Menu</span><button class="xBtn" id="menuClose" type="button">✕</button></div>
         <label>Màu áo nhân vật</label>
         <div class="swatches" id="menuRobeSwatches"></div>
+        <button class="menuAction" id="menuMountBtn" type="button">🐴 Thú cưỡi</button>
+        <button class="menuAction" id="menuMusicBtn" type="button">🎵 Nhạc nền: Đang bật</button>
+        <button class="menuAction" id="menuSfxBtn" type="button">🔔 Hiệu ứng: Đang bật</button>
         <button class="menuAction" id="menuExitBtn" type="button">🚪 Thoát về màn hình chính</button>
         <button class="menuAction danger" id="menuLogoutBtn" type="button">Đăng xuất</button>
         <div class="note">Đổi màu áo áp dụng ngay và được lưu lại. Thoát về màn hình chính giữ nguyên phiên đăng nhập.</div>

@@ -92,6 +92,28 @@ const CLASS_TO_PATH = {
   kiemtu: 'KIEM_TU', phaptu: 'PHAP_TU', quytu: 'QUY_TU', ytu: 'Y_TU', nhotu: 'NHO_TU',
 };
 
+// GĐ165: id đường vũ khí trong game (weaponId, chữ thường) -> id vũ khí
+// trong spec trang bị. Có 3 ngoại lệ không suy ra bằng viết hoa được:
+// daothe -> DAO, thuongthe -> THUONG, ngamtho -> NGON_LINH (vũ khí Nho
+// Tu đã đổi tên Ngôn Linh ở GĐ157, id đường vẫn là ngamtho).
+const GAME_WEAPON_TO_GEAR = {
+  taykhong: 'TAY_KHONG', chienphu: 'CHIEN_PHU', cukiem: 'CU_KIEM', daothe: 'DAO',
+  thuongthe: 'THUONG', thietcon: 'THIET_CON',
+  phatchau: 'PHAT_CHAU', quyentruong: 'QUYEN_TRUONG', binhbat: 'BINH_BAT',
+  cotthuan: 'COT_THUAN', cotchuy: 'COT_CHUY',
+  colenh: 'CO_LENH', luoihai: 'LUOI_HAI', quythuong: 'QUY_THUONG',
+  daogam: 'DAO_GAM', songdao: 'SONG_DAO', liemngan: 'LIEM_NGAN', trao: 'TRAO',
+  kiem: 'KIEM', songkiem: 'SONG_KIEM', trongkiem: 'TRONG_KIEM',
+  phien: 'PHIEN', phaptruong: 'PHAP_TRUONG', sachphep: 'SACH_PHEP',
+  phattran: 'PHAT_TRAN', kimcham: 'KIM_CHAM', cocam: 'CO_CAM',
+  ngamtho: 'NGON_LINH', butphep: 'BUT_PHEP', quyentruc: 'QUYEN_TRUC',
+};
+// Id vũ khí gear của đường vũ khí người chơi đang cầm (null nếu không rõ).
+function gearWeaponFor(player) {
+  if (!player) return null;
+  return GAME_WEAPON_TO_GEAR[player.weaponId] || null;
+}
+
 // Tên hệ tiếng Việt trong game (linhCan.main/elements, bienDi) -> id hệ spec.
 const DISPLAY_TO_ID = {
   Kim: 'KIM', Mộc: 'MOC', Thủy: 'THUY', Hỏa: 'HOA', Thổ: 'THO', Vô: 'VO',
@@ -120,6 +142,13 @@ function playerElementIds(p) {
   const bd = p.classRes && p.classRes.bienDi;
   const bdId = normElement(bd);
   if (bdId) out.add(bdId);
+  // GĐ154: biến dị nay là DANH SÁCH trong linhCan.mutations (roll lúc đo linh căn)
+  if (Array.isArray(lc.mutations)) {
+    for (const m of lc.mutations) {
+      const id = normElement(m);
+      if (id) out.add(id);
+    }
+  }
   return out;
 }
 
@@ -203,9 +232,36 @@ function generateGear(opts) {
   };
 }
 
-// Chỉ số cuối = Base × Hệ số phẩm × (1 + tổng bonus nội tại), bonus theo từng chỉ số.
+// GĐ165: rèn lại vũ khí của 1 món ô WEAPON sang đường vũ khí khác CÙNG
+// hướng tu (dùng khi giao đồ shop: kho gieo hạt giữ nguyên cho mọi
+// người xem, bản giao cho người mua cùng hướng tu được đổi sang đúng
+// vũ khí người mua đang cầm + đặt lại tên, giữ nguyên hậu tố bậc).
+function restampWeaponGear(item, gearWeaponId) {
+  if (!item || item.slot !== 'WEAPON' || !gearWeaponId) return item;
+  const match = (WEAPONS[item.path] || []).find((w) => w.id === gearWeaponId);
+  if (!match || item.weapon === gearWeaponId) return item;
+  const bandSuffix = item.band && GEAR_DATA.realm_bands && GEAR_DATA.realm_bands[item.band]
+    ? ` · ${GEAR_DATA.realm_bands[item.band].label}` : '';
+  item.weapon = match.id;
+  item.name = `${item.prefix} ${ELEMENTS[item.element]} ${match.name}${bandSuffix}`;
+  return item;
+}
+
+// GĐ162: đóng dấu BẬC CẢNH GIỚI lên món đồ (vd đồ sinh cho người chơi
+// Nguyên Anh trở lên mang bậc 'na'). Tên món thêm nhãn bậc để người
+// chơi nhìn là biết; hệ số nhân nằm ở calcGearStats; cổng mặc ở canEquip.
+function applyBand(item, band) {
+  const cfg = GEAR_DATA.realm_bands && GEAR_DATA.realm_bands[band];
+  if (!cfg || !item || item.band) return item;
+  item.band = band;
+  item.name = `${item.name} · ${cfg.label}`;
+  return item;
+}
+
+// Chỉ số cuối = Base × Hệ số phẩm × Hệ số bậc cảnh giới × (1 + tổng bonus nội tại), bonus theo từng chỉ số.
 function calcGearStats(item) {
-  const mult = RARITIES[item.rarity].multiplier;
+  const bandMul = (item.band && GEAR_DATA.realm_bands && GEAR_DATA.realm_bands[item.band]) ? GEAR_DATA.realm_bands[item.band].multiplier : 1;
+  const mult = RARITIES[item.rarity].multiplier * bandMul;
   const bonus = {};
   for (const line of item.talents || []) {
     bonus[line.stat] = (bonus[line.stat] || 0) + line.bonusPct;
@@ -222,7 +278,20 @@ function calcGearStats(item) {
 // Luật mặc đồ (đúng spec): hệ VO ai cũng mặc được; Pháp Tu mặc cả 16 hệ;
 // còn lại cần linh căn tương ứng. Sai -> { ok: false, message: 'Không thể trang bị' }.
 function canEquip(player, item) {
+  // GĐ162: đồ mang bậc cảnh giới thì phải đạt cảnh giới đó mới mặc được
+  if (item.band && GEAR_DATA.realm_bands && GEAR_DATA.realm_bands[item.band]) {
+    const ORDER = { pham: 0, lk: 1, tc: 2, kd: 3, na: 4, ht: 5 };
+    const need = GEAR_DATA.realm_bands[item.band].min_realm;
+    if ((ORDER[player.realm] ?? 0) < (ORDER[need] ?? 0)) return { ok: false, message: 'Không thể trang bị' };
+  }
+  // GĐ165: đồ ô VŨ KHÍ phải đúng đường vũ khí đang cầm mới mặc được
+  // (cầm Kiếm mà mặc đồ Song Kiếm thì không dùng được).
+  if (item.slot === 'WEAPON' && item.weapon) {
+    const mine = gearWeaponFor(player);
+    if (mine && item.weapon !== mine) return { ok: false, message: 'Không thể trang bị' };
+  }
   const pathId = CLASS_TO_PATH[player.classId] || player.path;
+  if (item.faction && (!player.branch || player.branch.side !== item.faction)) return { ok: false, message: 'Không thể trang bị' }; // GĐ143: Lệnh Bài phe chỉ phe đó đeo được
   if (item.element === GEAR_DATA.elements.universal) return { ok: true };
   if (pathId === GEAR_DATA.elements.all_access_path) return { ok: true };
   if (playerElementIds(player).has(item.element)) return { ok: true };
@@ -253,7 +322,8 @@ module.exports = {
   TALENT_LEVEL, REROLL_COST, TOKEN, CLASS_TO_PATH,
   SHOP_PRICE, FORGE_DAYS, FORGE_MATERIALS, CHEST_GEAR, QUEST_GEAR, SHOP_STOCK_CFG,
   normElement, playerElementIds, gearUid, rollTalents, generateGear,
-  calcGearStats, canEquip, tokenSuppression, tokenNpcBonus,
+  calcGearStats, canEquip, applyBand, tokenSuppression, tokenNpcBonus,
+  GAME_WEAPON_TO_GEAR, gearWeaponFor, restampWeaponGear,
   mulberry32, pickRand, weightedRand, shopStockGear, shopStockItem, shopStockForDay,
   chestGearFor, questGearFor,
 };
