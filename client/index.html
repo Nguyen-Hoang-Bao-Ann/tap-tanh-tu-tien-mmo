@@ -68,7 +68,7 @@
       /* ---- Thanh công pháp + gợi ý tương tác ---- */
       /* GĐ42: thanh chiêu neo đáy giữa kiểu Võ Lâm Truyền Kỳ — ô nhỏ, gọn */
       #skillBar {
-        position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+        position: absolute; bottom: 12px; right: 150px; /* GĐ176d: cách mép phải 150px (Bảo chốt lại sau các bản 10/76/100/300) */
         display: none; gap: 6px; z-index: 5;
       }
       .slot {
@@ -673,7 +673,7 @@
       }
       #journeyBar { top: 112px; }
       #gameLog {
-        position: absolute; left: 10px; bottom: 10px; width: 312px; z-index: 5; display: none;
+        position: absolute; left: 10px; bottom: 190px; width: 312px; z-index: 5; display: none; /* GĐ176: nhường sát đáy cho ô chat */
         pointer-events: none;
       }
       body.ingame #gameLog { display: block; }
@@ -683,6 +683,30 @@
         transition: opacity 1.2s;
       }
       body.ingame #invBtn { display: none; } /* GĐ61: trùng nút Túi đồ ở hàng công cụ phải trên */
+      /* GĐ168: ô chat người chơi — trên nhật ký, góc trái dưới */
+      #chatBox { position: absolute; left: 10px; bottom: 10px; width: 330px; z-index: 6; display: none; } /* GĐ176: sát đáy */
+      body.ingame #chatBox { display: block; }
+      #chatMsgs { display: flex; flex-direction: column; gap: 3px; max-height: 132px; overflow: hidden; margin-bottom: 5px; pointer-events: none; }
+      #chatMsgs .cLine { padding: 3px 8px; border-radius: 8px; font-size: 11.5px; line-height: 1.35; color: #e8f2e9; background: rgba(7, 13, 10, 0.55); width: max-content; max-width: 100%; word-break: break-word; }
+      #chatMsgs .cLine .cName { color: #8be9c9; font-weight: 700; }
+      #chatMsgs .cLine.world .cName { color: #ffd94d; }
+      #chatRow { display: flex; gap: 5px; }
+      #chatChBtn { background: rgba(7, 13, 10, 0.72); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; color: #d9e8dc; padding: 6px 8px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+      #chatInput { flex: 1; min-width: 0; background: rgba(7, 13, 10, 0.72); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; color: #fff; padding: 6px 9px; font-size: 12.5px; outline: none; }
+      body.touch #chatBox { bottom: 128px; width: 252px; } /* GĐ176 */
+      /* GĐ178: chồng thông báo nhỏ sát mép phải — hạ gục quái + nhặt đồ */
+      #sideNotes { position: absolute; right: 10px; top: 302px; width: 236px; z-index: 6; display: none; flex-direction: column; align-items: flex-end; gap: 4px; pointer-events: none; }
+      body.ingame #sideNotes { display: flex; }
+      #sideNotes .sideNote { background: rgba(7, 13, 10, 0.62); color: #f2f6f0; font-size: 12px; line-height: 1.35; padding: 4px 9px; border-radius: 8px; max-width: 100%; word-break: break-word; transition: opacity 0.7s; text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+      body.touch #sideNotes { top: 252px; width: 196px; }
+      /* GĐ180: màn hoạt ảnh thoát thai hoán cốt (tự chạy khi lôi kiếp giáng) */
+      #rebirthOverlay { position: absolute; inset: 0; z-index: 40; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 14px; background: radial-gradient(ellipse at center, rgba(10,8,20,0.12) 30%, rgba(5,4,14,0.66) 100%); pointer-events: none; text-align: center; }
+      #rebirthOverlay.show { display: flex; }
+      #rebirthOverlay .rbLine1 { color: #e7e5e4; font-size: 17px; text-shadow: 0 2px 8px #000; opacity: 0; transition: opacity 1.1s; }
+      #rebirthOverlay .rbLine2 { color: #fcd34d; font-size: 21px; font-weight: 700; line-height: 1.5; text-shadow: 0 2px 10px #000; opacity: 0; transition: opacity 1.1s; }
+      #rebirthOverlay.on1 .rbLine1 { opacity: 1; }
+      #rebirthOverlay.on2 .rbLine2 { opacity: 1; }
+      body.touch #sideNotes .sideNote { font-size: 10.5px; padding: 3px 7px; }
       #skillBar .slot { border-radius: 14px; background: rgba(7, 13, 10, 0.7); border: 1px solid rgba(255, 255, 255, 0.17); }
       #skillBar .slot.util { border-radius: 12px; }
       #skillBar .slot .key { background: rgba(0, 0, 0, 0.5); border-radius: 4px; padding: 0 3px; top: 3px; left: 3px; }
@@ -711,7 +735,7 @@
       body.touch #sideBtns button span { font-size: 7.5px; }
       body.touch #bossBar { top: 58px; width: 52vw; }
       body.touch #journeyBar { top: 100px; }
-      body.touch #gameLog { bottom: 122px; width: 208px; }
+      body.touch #gameLog { bottom: 306px; width: 208px; } /* GĐ176: trên ô chat */
       body.touch #gameLog .logLine { font-size: 9.5px; padding: 3px 7px; }
       body.touch #skillAnnounce { font-size: 23px; top: 21%; }
       /* ===== GĐ62 (24/10, theo góp ý mobile của người chơi): =====
@@ -969,6 +993,58 @@
       #meditateBtn span { font-size: 8.5px; color: #cfe3d4; margin-top: 2px; }
       #meditateBtn.active { border-color: #7df2dc; box-shadow: 0 0 14px rgba(125, 242, 220, 0.65); }
       #meditateBtn:active { transform: scale(0.93); }
+      /* GĐ170: nút mời giao dịch (hiện khi có người chơi khác ở gần) */
+      #tradeBtn {
+        position: absolute; right: 16px; bottom: 196px; z-index: 6; display: none;
+        width: 52px; height: 52px; border-radius: 14px; padding: 3px 0 2px;
+        background: rgba(7, 13, 10, 0.68); border: 1px solid rgba(255, 217, 77, 0.45);
+        font-size: 20px; line-height: 1.1; flex-direction: column;
+        align-items: center; justify-content: center; cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); color: #ffe9a8;
+      }
+      #tradeBtn.show { display: flex; }
+      /* GĐ194: nút Xã hội (luôn hiện, dưới nút Giao dịch) + nút tương tác người gần nhất */
+      #socialBtn { position: absolute; right: 16px; bottom: 258px; z-index: 6; display: flex; width: 52px; height: 52px; border-radius: 14px; padding: 3px 0 2px; background: rgba(7, 13, 10, 0.68); border: 1px solid rgba(139, 233, 201, 0.45); font-size: 20px; line-height: 1.1; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); color: #8be9c9; }
+      #socialBtn span { font-size: 8.5px; color: #8be9c9; margin-top: 2px; }
+      #socialBtn .bdg { position: absolute; top: -5px; right: -5px; background: #e5484d; color: #fff; border-radius: 9px; font-size: 10px; padding: 1px 6px; display: none; margin: 0; }
+      #nearBtn { position: absolute; right: 16px; bottom: 320px; z-index: 6; display: none; width: 52px; height: 52px; border-radius: 14px; padding: 3px 0 2px; background: rgba(7, 13, 10, 0.68); border: 1px solid rgba(255, 255, 255, 0.35); font-size: 20px; line-height: 1.1; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); color: #d7e8dd; }
+      #nearBtn.show { display: flex; }
+      #nearBtn span { font-size: 8px; color: #d7e8dd; margin-top: 2px; max-width: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      #socialPanel { width: 600px; max-width: 95vw; }
+      #playerCardPanel { width: 450px; max-width: 94vw; }
+      #socialInvite { width: 330px; max-width: 92vw; }
+      #nearPanel { width: 300px; max-width: 92vw; }
+      .socTabs { display: flex; gap: 6px; margin-bottom: 10px; }
+      .socTabs .pbtn.on, .boardTabs .pbtn.on { background: #ffd94d; color: #222; }
+      .boardTabs { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+      .socRow { display: flex; align-items: center; gap: 8px; padding: 5px 6px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 12.5px; color: #d7e8dd; }
+      .socRow .grow { flex: 1; min-width: 0; }
+      .socRow .mini { font-size: 10.5px; padding: 3px 8px; }
+      .onDot { color: #7df2dc; } .offDot { color: #8a9a90; }
+      .rankMe { background: rgba(255, 217, 77, 0.12); border-radius: 6px; }
+      .hpMini { height: 5px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; margin-top: 3px; }
+      .hpMini i { display: block; height: 100%; background: #7dd87d; }
+      #friendNameInput { flex: 1; background: rgba(7, 13, 10, 0.72); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; color: #fff; padding: 6px 9px; font-size: 12.5px; }
+      .cLine.party .cName { color: #8be9c9; }
+      #tradeBtn span { font-size: 8.5px; color: #ffe9a8; margin-top: 2px; }
+      #tradeBtn:active { transform: scale(0.93); }
+      /* GĐ170: panel giao dịch */
+      #tradePanel { width: 680px; max-width: 95vw; }
+      #tradeInvite { width: 330px; max-width: 92vw; }
+      .tCols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+      .tBox { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 8px 10px; }
+      .tBox h4 { margin: 0 0 6px; font-size: 12.5px; color: #ffd94d; }
+      .tBox.theirs h4 { color: #8be9c9; }
+      .tRow { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; padding: 2.5px 0; color: #d7e8dd; }
+      .tRow.clickable { cursor: pointer; border-radius: 6px; padding: 2.5px 4px; }
+      .tRow.clickable:hover { background: rgba(255, 255, 255, 0.07); }
+      .tRow .tQty { color: #ffd94d; white-space: nowrap; }
+      .tEmpty { font-size: 11.5px; color: #9db8a6; font-style: italic; }
+      .tSection { font-size: 12px; color: #cfe3d4; margin: 8px 0 4px; }
+      #tradeStonesInput { width: 130px; background: rgba(7, 13, 10, 0.72); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 8px; color: #fff; padding: 5px 8px; font-size: 12.5px; }
+      .tFoot { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+      .tStatus { flex: 1; font-size: 12px; color: #cfe3d4; }
+      .tradeBtns { display: flex; gap: 8px; margin-top: 10px; }
       body.touch #meditateBtn { bottom: 170px; width: 46px; height: 46px; }
       /* GĐ77: số giây hồi chiêu còn lại, giữa nút chiêu (desktop + cảm ứng) */
       .slot .cdnum { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); font-size: 16px; font-weight: 800; color: #fff; text-shadow: 0 1px 3px #000, 0 0 6px #000; pointer-events: none; z-index: 2; }
@@ -1073,6 +1149,13 @@
         <button id="btnBranchMa" type="button" style="display:none">☯ Chọn phe Ma</button>
         <button id="btnBranchBreak" type="button" style="display:none">✦ Đột phá thang</button>
         <button id="btnBranchCleanse" type="button" style="display:none">☯ Tẩy luyện đổi phe</button>
+        <div id="hudTanDang" style="display:none;font-size:11px;color:#fcd34d;margin:1px 0 2px;"></div>
+        <button id="btnTanDang" type="button" style="display:none">🕯 Đi đường Tàn Đăng (không thăng cảnh)</button>
+        <div id="hudPhapTuong" style="display:none;font-size:11px;color:#f0abfc;margin:1px 0 2px;"></div>
+        <button id="btnPhapTuong" type="button" style="display:none">✦ Hiện hình Pháp Tướng</button>
+        <button id="btnPtTrial" type="button" style="display:none">🌀 Vào Ảo Cảnh Pháp Tướng</button>
+        <button id="btnPtOffer" type="button" style="display:none">🔥 Tế luyện (10 Linh thạch Thượng)</button>
+        <button id="btnXuatKhieu" type="button" style="display:none">👻 Xuất khiếu</button>
         <button id="hudDetailBtn" type="button">▸ Chỉ số</button>
         <div id="hudDetails"><div id="hudStats">—</div></div>
         <button id="hudBreak" type="button">✦ Đột phá cảnh giới ✦</button>
@@ -1113,6 +1196,16 @@
       <div id="bossBar"><div id="bossName">Trùm</div><div class="bossTrack"><div id="bossHpFill"></div><span id="bossHpText"></span></div></div>
       <div id="skillAnnounce"></div>
       <div id="gameLog"></div>
+      <div id="sideNotes"></div>
+      <div id="rebirthOverlay"><div class="rbLine1">🕯 Thọ nguyên đã tận — đèn tàn trước gió…</div><div class="rbLine2">✦ THOÁT THAI HOÁN CỐT ✦<br/>Thân già rũ bỏ · Tuổi xuân trở về như ngày đầu Nguyên Anh</div></div>
+      <!-- GĐ168: chat người chơi (Enter để gõ, nút đổi kênh Gần/Thế giới) -->
+      <div id="chatBox">
+        <div id="chatMsgs"></div>
+        <div id="chatRow">
+          <button id="chatChBtn" type="button" title="Đổi kênh chat">📍 Gần</button>
+          <input id="chatInput" type="text" maxlength="200" placeholder="Nhấn Enter để chat…" autocomplete="off" />
+        </div>
+      </div>
       <div id="nightOverlay"></div>
       <!-- GĐ75: nút bao quanh minimap — cột trái 3 nút + hàng dưới 3 nút -->
       <div id="sideBtnsL">
@@ -1128,6 +1221,9 @@
       </div>
       <!-- GĐ76: nút ngồi thiền — chỉ hiện khi ngoài giao tranh 5s (client ước lượng, server kiểm tra thật) -->
       <button id="meditateBtn" type="button" title="Ngồi thiền (M)"><span>Thiền</span></button>
+      <button id="tradeBtn" type="button" title="Mời giao dịch người chơi gần nhất">🤝<span>Giao dịch</span></button>
+      <button id="socialBtn" type="button" title="Bạn bè · Tổ đội · Bảng xếp hạng">👥<span>Xã hội</span><span class="bdg" id="socialBdg"></span></button>
+      <button id="nearBtn" type="button" title="Tương tác với người chơi gần nhất">👤<span id="nearBtnName">Người chơi</span></button>
       <div id="touchUI">
         <div id="joy"><div id="joyKnob"></div></div>
         <button class="tbtn" id="tAct" type="button">E</button>
@@ -1207,6 +1303,61 @@
         <div id="forgeBody"></div>
       </div>
       <!-- GĐ161: panel Thú Cưỡi — chuồng của mình + trại Ngự Thú -->
+      <!-- GĐ170: lời mời + bàn giao dịch người chơi -->
+      <div id="tradeInvite" class="panel">
+        <div class="panelHead"><span>🤝 Lời mời giao dịch</span></div>
+        <div id="tradeInviteBody"></div>
+        <div class="tradeBtns"><button class="pbtn gold" id="tradeAcceptBtn" type="button">Đồng ý</button><button class="pbtn" id="tradeDeclineBtn" type="button">Từ chối</button></div>
+      </div>
+      <!-- GĐ194: lời mời xã hội (kết bạn / tổ đội) -->
+      <div id="socialInvite" class="panel">
+        <div class="panelHead"><span id="socialInviteTitle">Lời mời</span></div>
+        <div id="socialInviteBody"></div>
+        <div class="tradeBtns"><button class="pbtn gold" id="socialAcceptBtn" type="button">Đồng ý</button><button class="pbtn" id="socialDeclineBtn" type="button">Từ chối</button></div>
+      </div>
+      <!-- GĐ194: menu tương tác với người chơi gần nhất -->
+      <div id="nearPanel" class="panel">
+        <div class="panelHead"><span id="nearTitle">Người chơi</span><button class="xBtn" id="nearClose" type="button">✕</button></div>
+        <div class="tradeBtns" style="flex-wrap: wrap">
+          <button class="pbtn" id="nearViewBtn" type="button">👁 Xem thông tin</button>
+          <button class="pbtn" id="nearFriendBtn" type="button">👥 Kết bạn</button>
+          <button class="pbtn" id="nearPartyBtn" type="button">⚔ Mời tổ đội</button>
+          <button class="pbtn" id="nearTradeBtn" type="button">🤝 Giao dịch</button>
+        </div>
+      </div>
+      <!-- GĐ194+GĐ195: panel Xã hội — Bạn bè / Tổ đội / Bảng xếp hạng -->
+      <div id="socialPanel" class="panel">
+        <div class="panelHead"><span>👥 Xã hội</span><button class="xBtn" id="socialClose" type="button">✕</button></div>
+        <div class="socTabs">
+          <button class="pbtn on" id="tabFriends" type="button">Bạn bè</button>
+          <button class="pbtn" id="tabParty" type="button">Tổ đội</button>
+          <button class="pbtn" id="tabBoard" type="button">🏆 Xếp hạng</button>
+        </div>
+        <div id="socFriends">
+          <div style="display: flex; gap: 6px; margin-bottom: 8px"><input id="friendNameInput" type="text" placeholder="Nhập đúng tên nhân vật muốn kết bạn..." maxlength="24"><button class="pbtn gold" id="friendAddBtn" type="button">Kết bạn</button></div>
+          <div id="friendReqs"></div>
+          <div id="friendList"></div>
+        </div>
+        <div id="socParty" style="display: none"><div id="partyBody"></div></div>
+        <div id="socBoard" style="display: none">
+          <div class="boardTabs">
+            <button class="pbtn on" data-board="tuvi" type="button">Tu vi</button>
+            <button class="pbtn" data-board="gear" type="button">Trang bị</button>
+            <button class="pbtn" data-board="mount" type="button">Thú cưỡi</button>
+            <button class="pbtn" data-board="phaptuong" type="button">Pháp thân</button>
+          </div>
+          <div id="boardBody"></div>
+        </div>
+      </div>
+      <!-- GĐ194: thẻ thông tin người chơi khác -->
+      <div id="playerCardPanel" class="panel">
+        <div class="panelHead"><span id="cardTitle">Thông tin</span><button class="xBtn" id="cardClose" type="button">✕</button></div>
+        <div id="cardBody"></div>
+      </div>
+      <div id="tradePanel" class="panel">
+        <div class="panelHead"><span id="tradeTitle">🤝 Giao dịch</span><button class="xBtn" id="tradeClose" type="button">✕</button></div>
+        <div id="tradeBody"></div>
+      </div>
       <div id="mountPanel" class="panel">
         <div class="panelHead"><span>🐴 Thú Cưỡi</span><button class="xBtn" id="mountClose" type="button">✕</button></div>
         <div id="mountBody"></div>

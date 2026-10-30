@@ -1099,31 +1099,38 @@ export const LAMP_POSITIONS: [number, number][] = [
   [420, 528], [980, 528], [420, 596], [980, 596],
 ];
 
+// GĐ175: map làng phóng diện tích ×5 (mỗi chiều ×√5) — khớp hs175 phía
+// server. Nhân TỌA ĐỘ bố cục, giữ nguyên cỡ vật thể (nhà/ao/bán kính).
+const HS175 = Math.sqrt(5);
+const hs = (v: number) => Math.round(v * HS175);
 export const WORLD_GEO = {
-  W: 1600,
-  H: 1200,
-  village: { x: 240, y: 180, w: 1290, h: 760 }, // GĐ126: làng nuốt sân Thanh Phong Môn
-  plaza: { x: 700, y: 560 },
-  realm: { x: 2360, y: 240, w: 880, h: 720 }, // GĐ57: Bí Cảnh Thạch Lâm (nướng ở texture riêng 'realm-bg' vì giới hạn cỡ texture); GĐ126: dời đông 600
-  pond: { x: 990, y: 890, rx: 75, ry: 45 },
+  W: hs(3400),
+  H: hs(1200),
+  SPLIT: hs(1600), // điểm cắt 2 texture nền (tây/đông)
+  village: { x: hs(240), y: hs(180), w: hs(1290), h: hs(760) }, // GĐ126: làng nuốt sân Thanh Phong Môn
+  plaza: { x: hs(700), y: hs(560) },
+  realm: { x: hs(2360), y: hs(240), w: hs(880), h: hs(720) }, // GĐ57: Bí Cảnh Thạch Lâm (nướng ở texture riêng 'realm-bg' vì giới hạn cỡ texture); GĐ126: dời đông 600
+  pond: { x: hs(990), y: hs(890), rx: 75, ry: 45 },
+  tulinh: { x: hs(700), y: hs(196) }, // GĐ175
+  sect: { x: hs(1230), y: hs(420), w: hs(300), h: hs(240) }, // GĐ175
   houses: [
-    { name: 'Đạo Quán', x: 605, y: 245, w: 190, h: 115, body: '#e9dcbc', roof: '#8a4b2a' },
-    { name: 'Nhà Trưởng Làng', x: 320, y: 425, w: 135, h: 100, body: '#eadfc6', roof: '#b5502f' },
-    { name: 'Tiệm Đan Dược', x: 945, y: 425, w: 135, h: 100, body: '#eadfc6', roof: '#b5502f' },
-    { name: 'Tiệm Rèn', x: 930, y: 695, w: 140, h: 105, body: '#e6d9c0', roof: '#a34a30' },
-    { name: 'Quán Ăn', x: 455, y: 725, w: 140, h: 100, body: '#eadfc6', roof: '#b5502f' },
-    { name: 'Tiệm Nguyên Liệu', x: 330, y: 262, w: 125, h: 95, body: '#eadfc6', roof: '#b5502f' },
-    { name: 'Thanh Phong Môn', x: 1300, y: 440, w: 170, h: 110, body: '#e2ecd9', roof: '#2e6f6a' }, // GĐ22: môn phái nhỏ
+    { name: 'Đạo Quán', x: hs(605), y: hs(245), w: 190, h: 115, body: '#e9dcbc', roof: '#8a4b2a' },
+    { name: 'Nhà Trưởng Làng', x: hs(320), y: hs(425), w: 135, h: 100, body: '#eadfc6', roof: '#b5502f' },
+    { name: 'Tiệm Đan Dược', x: hs(945), y: hs(425), w: 135, h: 100, body: '#eadfc6', roof: '#b5502f' },
+    { name: 'Tiệm Rèn', x: hs(930), y: hs(695), w: 140, h: 105, body: '#e6d9c0', roof: '#a34a30' },
+    { name: 'Quán Ăn', x: hs(455), y: hs(725), w: 140, h: 100, body: '#eadfc6', roof: '#b5502f' },
+    { name: 'Tiệm Nguyên Liệu', x: hs(330), y: hs(262), w: 125, h: 95, body: '#eadfc6', roof: '#b5502f' },
+    { name: 'Thanh Phong Môn', x: hs(1300), y: hs(440), w: 170, h: 110, body: '#e2ecd9', roof: '#2e6f6a' }, // GĐ22: môn phái nhỏ
   ] as Array<{ name: string; x: number; y: number; w: number; h: number; body: string; roof: string }>,
   trees: [
-    [280, 220], [1120, 220], [280, 900], [1120, 905], [520, 300], [880, 300],
-    [520, 860], [880, 640], [280, 400], [1120, 400], [640, 215], [760, 905],
-    [150, 150], [1450, 150], [150, 1050], [1450, 1050], [120, 600], [1480, 600],
-    [800, 80], [80, 80],
+    [hs(280), hs(220)], [hs(1120), hs(220)], [hs(280), hs(900)], [hs(1120), hs(905)], [hs(520), hs(300)], [hs(880), hs(300)],
+    [hs(520), hs(860)], [hs(880), hs(640)], [hs(280), hs(400)], [hs(1120), hs(400)], [hs(640), hs(215)], [hs(760), hs(905)],
+    [hs(150), hs(150)], [hs(1450), hs(150)], [hs(150), hs(1050)], [hs(1450), hs(1050)], [hs(120), hs(600)], [hs(1480), hs(600)],
+    [hs(800), hs(80)], [hs(80), hs(80)],
     // GĐ57: dải rừng ngăn phía đông + cây trong bí cảnh — KHỚP TREE_TRUNKS phía server; GĐ126: dời đông 600
-    [2280, 150], [2292, 330], [2276, 520], [2290, 700], [2280, 880], [2294, 1050],
-    [2500, 340], [2750, 320], [3050, 360], [2580, 880], [2880, 890], [3120, 860],
-    [2650, 560], [3000, 660],
+    [hs(2280), hs(150)], [hs(2292), hs(330)], [hs(2276), hs(520)], [hs(2290), hs(700)], [hs(2280), hs(880)], [hs(2294), hs(1050)],
+    [hs(2500), hs(340)], [hs(2750), hs(320)], [hs(3050), hs(360)], [hs(2580), hs(880)], [hs(2880), hs(890)], [hs(3120), hs(860)],
+    [hs(2650), hs(560)], [hs(3000), hs(660)],
   ] as Array<readonly [number, number]>,
 };
 export const HOUSE_TEX = { padX: 32, padY: 34 };
@@ -1227,30 +1234,29 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
 
   // ---------- NỀN ĐẤT TOÀN BẢN ĐỒ ----------
   // GĐ28: nướng nền ở độ phân giải 2× (supersample) — pixelSnap ×2 cho texel 1px thế giới, nét như sprite nhân vật
-  const [bgC, b] = makeCanvas(G.W * 2, G.H * 2);
-  b.scale(2, 2);
+  const [bgC, b] = makeCanvas(G.SPLIT, G.H); // GĐ175: nướng 1× (map to, 2× vượt 4096px)
   b.fillStyle = '#58a447';
-  b.fillRect(0, 0, G.W, G.H);
+  b.fillRect(0, 0, G.SPLIT, G.H);
   for (let wb = 0; wb < 30; wb++) {
-    const wx = rnd() * G.W, wy = rnd() * G.H, wr = 260 + rnd() * 620;
+    const wx = rnd() * G.SPLIT, wy = rnd() * G.H, wr = 260 + rnd() * 620;
     b.fillStyle = wb % 2 ? 'rgba(52,72,40,0.05)' : 'rgba(246,240,214,0.05)';
     b.beginPath(); b.ellipse(wx, wy, wr, wr * 0.62, rnd() * 3, 0, Math.PI * 2); b.fill();
   }
   const pxTones = ['rgba(30,84,28,0.16)', 'rgba(190,235,140,0.13)', 'rgba(140,105,50,0.12)'];
   for (let pi = 0; pi < 11000; pi++) {
-    const px = Math.floor(rnd() * (G.W / 16)) * 16, py = Math.floor(rnd() * (G.H / 16)) * 16;
+    const px = Math.floor(rnd() * (G.SPLIT / 16)) * 16, py = Math.floor(rnd() * (G.H / 16)) * 16;
     b.fillStyle = pxTones[pi % 3];
     b.fillRect(px, py, 16, 16);
   }
   const pxDet = ['rgba(24,74,24,0.20)', 'rgba(168,230,120,0.16)', 'rgba(240,220,90,0.10)'];
   for (let pd = 0; pd < 5200; pd++) {
-    const px = Math.floor(rnd() * (G.W / 8)) * 8, py = Math.floor(rnd() * (G.H / 8)) * 8;
+    const px = Math.floor(rnd() * (G.SPLIT / 8)) * 8, py = Math.floor(rnd() * (G.H / 8)) * 8;
     b.fillStyle = pxDet[pd % 3];
     b.fillRect(px, py, 8, 8);
   }
   for (let i = 0; i < 4200; i++) {
     b.fillStyle = rnd() > 0.5 ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,220,0.05)';
-    b.fillRect(rnd() * G.W, rnd() * G.H, 3, 5);
+    b.fillRect(rnd() * G.SPLIT, rnd() * G.H, 3, 5);
   }
   // Nền làng sáng hơn nền farm
   b.fillStyle = 'rgba(216,234,174,0.15)';
@@ -1295,7 +1301,7 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   // GĐ23: TỤ LINH TRẬN ở Thiền Phòng phía sau Đạo Quán (700,196) — vòng trận
   // phát sáng ngọc lục, nơi người chơi đứng vào BẾ QUAN (+3 Tu vi/ngày)
   {
-    const TX = 700, TY = 196;
+    const TX = G.tulinh.x, TY = G.tulinh.y; // GĐ175
     b.fillStyle = 'rgba(150,160,150,0.30)';
     b.beginPath(); b.arc(TX, TY, 52, 0, Math.PI * 2); b.fill();
     b.strokeStyle = 'rgba(46,180,160,0.75)';
@@ -1313,7 +1319,7 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   }
   // GĐ22: sân Thanh Phong Môn — nền đất nện riêng phía đông làng (vùng an toàn)
   {
-    const SX = 1230, SY = 420, SW = 300, SH = 240;
+    const SX = G.sect.x, SY = G.sect.y, SW = G.sect.w, SH = G.sect.h; // GĐ175
     b.fillStyle = 'rgba(186, 178, 128, 0.20)';
     b.fillRect(SX, SY, SW, SH);
     b.strokeStyle = 'rgba(90, 80, 50, 0.35)';
@@ -1325,8 +1331,8 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
       b.fillRect(px, py, 3.5, 2.2);
     }
   }
-  paintRoad(0, 545, G.W, 30);
-  paintRoad(685, 0, 30, G.H);
+  paintRoad(0, G.plaza.y - 15, G.SPLIT, 30); // GĐ175
+  paintRoad(G.plaza.x - 15, 0, 30, G.H); // GĐ175
 
   // ---------- QUẢNG TRƯỜNG ĐÁ ----------
   const P = G.plaza;
@@ -1380,14 +1386,14 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   b.strokeStyle = '#d8d2c0'; b.lineWidth = 3;
   b.beginPath(); b.ellipse(PD.x, PD.y, PD.rx, PD.ry, 0, 0, Math.PI * 2); b.stroke();
   b.fillStyle = '#3f9e4d';
-  [[955, 875, 9], [1010, 905, 10], [985, 865, 8], [1030, 880, 8], [948, 902, 7]].forEach(([lx, ly, lr]) => {
+  [[PD.x - 35, PD.y - 15, 9], [PD.x + 20, PD.y + 15, 10], [PD.x - 5, PD.y - 25, 8], [PD.x + 40, PD.y - 10, 8], [PD.x - 42, PD.y + 12, 7]].forEach(([lx, ly, lr]) => {
     b.beginPath(); b.arc(lx, ly, lr, 0, Math.PI * 2); b.fill();
     b.fillStyle = '#359145';
     b.beginPath(); b.arc(lx - 2, ly - 2, lr * 0.55, 0, Math.PI * 2); b.fill();
     b.fillStyle = '#3f9e4d';
   });
   b.fillStyle = '#f2a7c3';
-  [[965, 880], [1015, 900]].forEach(([lx, ly]) => { b.beginPath(); b.arc(lx, ly, 4, 0, Math.PI * 2); b.fill(); });
+  [[PD.x - 25, PD.y - 10], [PD.x + 25, PD.y + 10]].forEach(([lx, ly]) => { b.beginPath(); b.arc(lx, ly, 4, 0, Math.PI * 2); b.fill(); }); // GĐ175: hoa sen theo tâm ao
   b.fillStyle = 'rgba(255,255,255,0.55)';
   for (let si = 0; si < 9; si++) { b.fillRect(PD.x - 60 + rnd() * 120, PD.y - 32 + rnd() * 64, 3, 1.6); }
 
@@ -1395,10 +1401,10 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   const V = G.village;
   const posts: Array<[number, number]> = [];
   for (let x = V.x; x <= V.x + V.w; x += 34) {
-    if (Math.abs(x - 700) > 26) { posts.push([x, V.y]); posts.push([x, V.y + V.h]); }
+    if (Math.abs(x - G.plaza.x) > 26) { posts.push([x, V.y]); posts.push([x, V.y + V.h]); }
   }
   for (let y = V.y; y <= V.y + V.h; y += 34) {
-    if (Math.abs(y - 560) > 26) { posts.push([V.x, y]); posts.push([V.x + V.w, y]); }
+    if (Math.abs(y - G.plaza.y) > 26) { posts.push([V.x, y]); posts.push([V.x + V.w, y]); }
   }
   b.strokeStyle = 'rgba(122,90,52,0.85)'; b.lineWidth = 3;
   const postSet = new Set(posts.map(([x, y]) => x + ',' + y));
@@ -1516,16 +1522,16 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   // GĐ57: vòng cổng BÍ CẢNH ở sân Thanh Phong Môn (1470,600) — vẽ cùng
   // ngôn ngữ với vòng trận pháp quảng trường nhưng tông tím huyền bí
   {
-    const pg = b.createRadialGradient(1470, 600, 6, 1470, 600, 74);
+    const pg = b.createRadialGradient(hs(1470), hs(600), 6, hs(1470), hs(600), 74);
     pg.addColorStop(0, 'rgba(190,160,255,0.22)'); pg.addColorStop(1, 'rgba(190,160,255,0)');
     b.fillStyle = pg;
-    b.beginPath(); b.arc(1470, 600, 74, 0, Math.PI * 2); b.fill();
+    b.beginPath(); b.arc(hs(1470), hs(600), 74, 0, Math.PI * 2); b.fill();
     b.strokeStyle = 'rgba(168,140,250,0.85)'; b.lineWidth = 2;
-    b.beginPath(); b.arc(1470, 600, 44, 0, Math.PI * 2); b.stroke();
+    b.beginPath(); b.arc(hs(1470), hs(600), 44, 0, Math.PI * 2); b.stroke();
     b.strokeStyle = 'rgba(127,231,220,0.7)'; b.lineWidth = 1.4;
-    b.beginPath(); b.arc(1470, 600, 36, 0, Math.PI * 2); b.stroke();
+    b.beginPath(); b.arc(hs(1470), hs(600), 36, 0, Math.PI * 2); b.stroke();
     b.fillStyle = '#efe9ff';
-    b.beginPath(); b.arc(1470, 600, 2.6, 0, Math.PI * 2); b.fill();
+    b.beginPath(); b.arc(hs(1470), hs(600), 2.6, 0, Math.PI * 2); b.fill();
   }
   // Viền bản đồ
   b.strokeStyle = 'rgba(24,46,24,0.5)'; b.lineWidth = 10;
@@ -1537,21 +1543,20 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   // nhiều GPU điện thoại không nạp nổi. Tọa độ vẽ = tọa độ thế giới,
   // canvas tự tịnh tiến −1600. GĐ126: đông mở rộng 1800 (was 1200).
   {
-    const [rC, r] = makeCanvas(1800 * 2, G.H * 2);
-    r.scale(2, 2);
-    r.translate(-1600, 0);
+    const [rC, r] = makeCanvas(G.W - G.SPLIT, G.H); // GĐ175: nướng 1×
+    r.translate(-G.SPLIT, 0); // GĐ175
     const rrnd = seededRand(4242);
     r.fillStyle = '#4a7d3e';
-    r.fillRect(1600, 0, 1800, G.H);
+    r.fillRect(G.SPLIT, 0, G.W - G.SPLIT, G.H);
     for (let i = 0; i < 5200; i++) {
       r.fillStyle = pxDet[i % 3];
-      r.fillRect(1600 + Math.floor(rrnd() * 225) * 8, Math.floor(rrnd() * 150) * 8, 8, 8);
+      r.fillRect(G.SPLIT + Math.floor(rrnd() * ((G.W - G.SPLIT) / 8)) * 8, Math.floor(rrnd() * 150) * 8, 8, 8);
     }
     // Dải rừng ngăn 2200–2360: nền tối rậm
     r.fillStyle = 'rgba(24,52,24,0.45)';
-    r.fillRect(2200, 0, 160, G.H);
+    r.fillRect(hs(2200), 0, hs(160), G.H); // GĐ175
     for (let i = 0; i < 260; i++) {
-      const cx = 2204 + rrnd() * 152, cy = rrnd() * G.H;
+      const cx = hs(2200) + 4 + rrnd() * (hs(160) - 8), cy = rrnd() * G.H; // GĐ175
       r.fillStyle = `rgba(18,44,18,${0.12 + rrnd() * 0.15})`;
       r.beginPath(); r.ellipse(cx, cy, 16 + rrnd() * 22, 12 + rrnd() * 16, 0, 0, Math.PI * 2); r.fill();
     }
@@ -1591,29 +1596,29 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
     };
     const crys: Array<[number, number]> = [[2560, 430], [2920, 420], [3160, 520], [2620, 780], [3080, 800], [2780, 900], [3160, 900], [2500, 700]];
     for (const [cx, cy] of crys) { crystalAt(cx, cy, 0.8 + rrnd() * 0.5); crystalAt(cx + 14, cy + 4, 0.55); }
-    // Đàn đá — nơi Thạch Khôi Lỗi trấn giữ (2800,600) — GĐ126: dời đông 600
+    // Đàn đá — nơi Thạch Khôi Lỗi trấn giữ (hs(2800),600) — GĐ126: dời đông 600
     {
       r.fillStyle = 'rgba(126,130,124,0.45)';
-      r.beginPath(); r.arc(2800, 600, 86, 0, Math.PI * 2); r.fill();
+      r.beginPath(); r.arc(hs(2800), hs(600), 86, 0, Math.PI * 2); r.fill();
       r.strokeStyle = 'rgba(190,196,188,0.5)'; r.lineWidth = 3;
-      r.beginPath(); r.arc(2800, 600, 74, 0, Math.PI * 2); r.stroke();
+      r.beginPath(); r.arc(hs(2800), hs(600), 74, 0, Math.PI * 2); r.stroke();
       for (let k = 0; k < 6; k++) {
         const a = (k / 6) * Math.PI * 2;
-        rockAt(2800 + Math.cos(a) * 74, 600 + Math.sin(a) * 74, 1.15);
+        rockAt(hs(2800) + Math.cos(a) * 74, hs(600) + Math.sin(a) * 74, 1.15);
       }
-      crystalAt(2800 - 52, 600 - 40, 1.0); crystalAt(2800 + 52, 600 - 40, 1.0);
-      crystalAt(2800 - 52, 600 + 44, 1.0); crystalAt(2800 + 52, 600 + 44, 1.0);
+      crystalAt(hs(2800) - 52, hs(600) - 40, 1.0); crystalAt(hs(2800) + 52, hs(600) - 40, 1.0);
+      crystalAt(hs(2800) - 52, hs(600) + 44, 1.0); crystalAt(hs(2800) + 52, hs(600) + 44, 1.0);
     }
     // Vòng cổng TRỞ VỀ trong bí cảnh (2432,600) — GĐ126: dời đông 600
     {
-      const pg = r.createRadialGradient(2432, 600, 6, 2432, 600, 74);
+      const pg = r.createRadialGradient(hs(2432), hs(600), 6, hs(2432), hs(600), 74);
       pg.addColorStop(0, 'rgba(190,160,255,0.22)'); pg.addColorStop(1, 'rgba(190,160,255,0)');
       r.fillStyle = pg;
-      r.beginPath(); r.arc(2432, 600, 74, 0, Math.PI * 2); r.fill();
+      r.beginPath(); r.arc(hs(2432), hs(600), 74, 0, Math.PI * 2); r.fill();
       r.strokeStyle = 'rgba(168,140,250,0.85)'; r.lineWidth = 2;
-      r.beginPath(); r.arc(2432, 600, 44, 0, Math.PI * 2); r.stroke();
+      r.beginPath(); r.arc(hs(2432), hs(600), 44, 0, Math.PI * 2); r.stroke();
       r.strokeStyle = 'rgba(127,231,220,0.7)'; r.lineWidth = 1.4;
-      r.beginPath(); r.arc(2432, 600, 36, 0, Math.PI * 2); r.stroke();
+      r.beginPath(); r.arc(hs(2432), hs(600), 36, 0, Math.PI * 2); r.stroke();
     }
     scene.textures.addCanvas('realm-bg', rC);
   }

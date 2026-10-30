@@ -76,12 +76,12 @@ const ACH138 = [
   { id: 'ach_cd_fullhp', group: 'chien_dau', name: 'Chiến thắng vô thương', desc: 'Số trận kết thúc khi còn đủ trên 90% máu', base: 'Bất Bại Thân', tiers: [10, 50, 200, 800], key: 'fullHpKills' },
   // Nhóm Công pháp (8)
   { id: 'ach_cp_learned', group: 'cong_phap', name: 'Học rộng', desc: 'Số công pháp đã học', base: 'Bách Gia Tinh Thông', tiers: [3, 10, 20, 40, 80, 150, 250, 400, 600], key: 'skillsLearned' },
-  { id: 'ach_cp_maxed', group: 'cong_phap', name: 'Luyện đến cùng', desc: 'Số công pháp đã luyện đến cấp tối đa', base: 'Chiêu Thức Đại Sư', tiers: [1, 3, 8, 20, 40], key: 'skillsMaxed', enabled: false },
+  { id: 'ach_cp_maxed', group: 'cong_phap', name: 'Luyện đến cùng', desc: 'Số công pháp đã luyện đến cấp tối đa', base: 'Chiêu Thức Đại Sư', tiers: [1, 3, 8, 20, 40], key: 'skillsMaxed' },
   { id: 'ach_cp_fusion', group: 'cong_phap', name: 'Dung hợp công pháp', desc: 'Số lần dung hợp thành công', base: 'Sáng Pháp Giả', tiers: [1, 3, 10, 25, 60], key: 'fusions' },
   { id: 'ach_cp_godskills', group: 'cong_phap', name: 'Thần thông đầu tiên', desc: 'Số thần thông đã lĩnh ngộ', base: 'Thần Thông Giả', tiers: [1], key: 'godSkills' }, // GĐ139: 1 char chỉ lĩnh ngộ được đúng 1 thần thông (của lớp mình) — bậc 3/6/9 cũ không bao giờ tới được,
   { id: 'ach_cp_weapons', group: 'cong_phap', name: 'Đủ bộ vũ khí', desc: 'Số loại vũ khí đã dùng đến cấp luyện thuần thục', base: 'Bách Binh', tiers: [1, 3, 5, 8, 12, 16], key: 'weaponsMastered', enabled: false }, // GĐ139: nới 4→6 bậc (+4 Đạo Tích) để tổng nhóm Công pháp khớp tài liệu (59) sau khi godskills về 1 bậc
   { id: 'ach_cp_paths', group: 'cong_phap', name: 'Đạo riêng', desc: 'Số mốc cơ chế riêng của hướng tu đã mở', base: 'Đạo Thống', tiers: [4, 8, 12, 16], key: 'pathMilestones', enabled: false },
-  { id: 'ach_cp_xuatkhieu', group: 'cong_phap', name: 'Xuất khiếu', desc: 'Số lần xuất khiếu (Nguyên Anh) thành công', base: 'Nguyên Thần Du Hành', tiers: [1, 5, 20, 60], key: 'xuatKhieu', enabled: false },
+  { id: 'ach_cp_xuatkhieu', group: 'cong_phap', name: 'Xuất khiếu', desc: 'Số lần xuất khiếu (Nguyên Anh) thành công', base: 'Nguyên Thần Du Hành', tiers: [1, 5, 20, 60], key: 'xuatKhieu' },
   { id: 'ach_cp_directions', group: 'cong_phap', name: 'Trải qua mọi hướng', desc: 'Số hướng tu đã từng chơi đến Trúc Cơ trở lên', base: 'Vạn Đạo Quy Nhất', tiers: [1, 3, 5, 7, 9], key: 'directions', enabled: false }, // GĐ139: TẠM ẨN — cần hệ đa nhân vật/đa hướng (1 tài khoản hiện chỉ 1 char),
   // Nhóm Nghề phụ (10)
   { id: 'ach_np_dan', group: 'nghe_phu', name: 'Luyện đan sư', desc: 'Số viên đan đã luyện thành công', base: 'Đan Sư', tiers: [10, 100, 500, 2000, 10000, 30000, 100000, 300000], key: 'danCrafts' },
@@ -109,7 +109,7 @@ const ACH138 = [
   { id: 'ach_qt_boss', group: 'quai_trum', name: 'Thợ săn trùm', desc: 'Số trùm đã hạ (mọi loại)', base: 'Trùm Sát Thủ', tiers: [1, 3, 10, 25, 60, 150, 300, 600, 1000, 2000], key: 'bossKills' },
   { id: 'ach_qt_species', group: 'quai_trum', name: 'Từng loại quái', desc: 'Số loại quái khác nhau đã hạ ít nhất một lần', base: 'Bách Quái Đồ', tiers: [5, 10, 15, 18, 22], key: 'speciesKilled' }, // GĐ139: game có đúng 22 loài quái khác nhau (3 bãi farm + 19 GDD),
   { id: 'ach_qt_elite', group: 'quai_trum', name: 'Tinh anh', desc: 'Số quái tinh anh đã hạ', base: 'Tinh Anh Chiến Sĩ', tiers: [5, 30, 150, 600, 2500, 8000, 20000, 50000], key: 'eliteKills' },
-  { id: 'ach_qt_bounty', group: 'quai_trum', name: 'Mục Tiêu truy nã', desc: 'Số quái Mục Tiêu (truy nã) đã hạ', base: 'Thợ Săn Tiền Thưởng', tiers: [1, 5, 20, 60, 150], key: 'bountyKills', enabled: false },
+  { id: 'ach_qt_bounty', group: 'quai_trum', name: 'Mục Tiêu truy nã', desc: 'Số quái Mục Tiêu (truy nã) đã hạ', base: 'Thợ Săn Tiền Thưởng', tiers: [1, 5, 20, 60, 150], key: 'bountyKills' },
   { id: 'ach_qt_rare', group: 'quai_trum', name: 'Quái hiếm', desc: 'Số quái hiếm hoặc biến dị đã hạ', base: 'Kỳ Thú Săn Giả', tiers: [1, 5, 20, 60], key: 'rareKills', enabled: false },
   { id: 'ach_qt_oneshot', group: 'quai_trum', name: 'Một chiêu hạ gục', desc: 'Số trùm hạ chỉ bằng một chiêu hoặc chuỗi thần thông ngắn (≤3 đòn)', base: 'Nhất Kích Tất Sát', tiers: [1, 3, 10, 25], key: 'oneShotBoss' },
   { id: 'ach_qt_speed', group: 'quai_trum', name: 'Trùm nhanh', desc: 'Hạ trùm trong ít hơn số giây cho trước (mốc giảm dần: 120, 90, 60, 40, 25)', base: 'Tốc Chiến', tiers: [1, 2, 3, 4, 5], key: 'speedKills' },
@@ -156,7 +156,8 @@ const ACH138 = [
   { id: 'ach_lt_loyal', group: 'linh_thu', name: 'Linh thú trung thành', desc: 'Số linh thú đã đạt độ thân thiết tối đa', base: 'Thú Tình Thâm', tiers: [1, 3, 8, 20], key: 'loyalPets', enabled: false },
   // Nhóm Ẩn (6) — hiện "???" tới khi đạt bậc 1
   { id: 'ach_an_firstfail', group: 'an', name: '???: lần đầu thất bại', desc: 'Thất bại đột phá ở lần đầu tiên của một kiếp (ẩn cho đến khi gặp)', base: 'Vấp Ngã Thành Đạo', tiers: [1, 3, 10], key: 'firstFails', hidden: true },
-  { id: 'ach_an_secret', group: 'an', name: '???: bí mật ẩn', desc: 'Hoàn thành chuỗi nhiệm vụ ẩn mở ra Đỏ sắc, Đen sắc hoặc Hư sắc (mở khóa thiên phú)', base: 'Cơ Duyên Thâm Hậu', tiers: [1, 2, 3], key: 'secretChains', hidden: true, enabled: false },
+  { id: 'ach_an_tandang', group: 'an', name: '???: đến cuối vẫn còn chăm chỉ', desc: 'Nguyên Anh tầng 9 không thăng cảnh, tu đến cuối thọ nguyên trên đường Tàn Đăng và thoát thai hoán cốt (ẩn cho đến khi đạt)', base: 'Tàn Đăng Bất Diệt', tiers: [1], key: 'tandang', hidden: true }, // GĐ180: tên thành tựu do Bảo đặt
+  { id: 'ach_an_secret', group: 'an', name: '???: bí mật ẩn', desc: 'Hoàn thành chuỗi nhiệm vụ ẩn mở ra Đỏ sắc, Đen sắc hoặc Hư sắc (mở khóa thiên phú)', base: 'Cơ Duyên Thâm Hậu', tiers: [1, 2, 3], key: 'secretChains', hidden: true },
   { id: 'ach_an_dream', group: 'an', name: '???: giấc mơ kiếp trước', desc: 'Gặp ký ức kiếp trước (cần chơi nhiều kiếp)', base: 'Luân Hồi Giả', tiers: [1, 3, 5, 10], key: 'pastDreams', hidden: true, enabled: false },
   { id: 'ach_an_demon', group: 'an', name: '???: ma khí và chính đạo', desc: 'Giữ mức ma khí thấp suốt một kiếp (ẩn)', base: 'Chính Đạo', tiers: [1, 3, 5], key: 'lowDemonLives', hidden: true, enabled: false },
   { id: 'ach_an_books', group: 'an', name: '???: đọc hết sách', desc: 'Đọc hết sách trong Thư viện, tìm ra bí tịch ẩn', base: 'Bác Học Giả', tiers: [1, 3, 6, 10], key: 'booksRead', hidden: true, enabled: false },

@@ -528,6 +528,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_thetu_taykhong_1",
+    "name": "Phá Thiên Quyền",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Tay không) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "taykhong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_taykhong_2",
+    "name": "Trấn Nhạc Quyền",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Tay không) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "taykhong",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_taykhong_3",
+    "name": "Kim Thân Quyền",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Tay không) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "taykhong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "chienphu": [
@@ -1047,6 +1114,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_thetu_chienphu_1",
+    "name": "Phá Thiên Phủ",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Chiến phủ) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "chienphu",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_chienphu_2",
+    "name": "Trấn Nhạc Phủ",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Chiến phủ) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "chienphu",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_chienphu_3",
+    "name": "Kim Thân Phủ",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Chiến phủ) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "chienphu",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "cukiem": [
@@ -1566,6 +1700,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_thetu_cukiem_1",
+    "name": "Phá Thiên Cự Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Cự kiếm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cukiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_cukiem_2",
+    "name": "Trấn Nhạc Cự Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Cự kiếm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cukiem",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_cukiem_3",
+    "name": "Kim Thân Cự Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Cự kiếm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cukiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "daothe": [
@@ -2085,6 +2286,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_thetu_daothe_1",
+    "name": "Phá Thiên Đao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Đao) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "daothe",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_daothe_2",
+    "name": "Trấn Nhạc Đao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Đao) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "daothe",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_daothe_3",
+    "name": "Kim Thân Đao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Đao) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "daothe",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "thuongthe": [
@@ -2618,6 +2886,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_thetu_thuongthe_1",
+    "name": "Phá Thiên Thương",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Thương) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_thuongthe_2",
+    "name": "Trấn Nhạc Thương",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Thương) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_thuongthe_3",
+    "name": "Kim Thân Thương",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Thương) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "thuongthe",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "thietcon": [
@@ -3150,6 +3485,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_thetu_thietcon_1",
+    "name": "Phá Thiên Côn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Thiết côn) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "thietcon",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_thietcon_2",
+    "name": "Trấn Nhạc Côn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Thiết côn) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "thietcon",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_thetu_thietcon_3",
+    "name": "Kim Thân Côn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Thiết côn) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "thietcon",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -3699,6 +4101,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_phattu_phatchau_1",
+    "name": "Hàng Ma Châu",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Phật châu) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phatchau",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_phatchau_2",
+    "name": "Phật Vực Châu",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Phật châu) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phatchau",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_phatchau_3",
+    "name": "Đại Bi Châu",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Phật châu) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phatchau",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "quyentruong": [
@@ -4243,6 +4712,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_phattu_quyentruong_1",
+    "name": "Hàng Ma Trượng",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Quyền trượng) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_quyentruong_2",
+    "name": "Phật Vực Trượng",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Quyền trượng) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_quyentruong_3",
+    "name": "Đại Bi Trượng",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Quyền trượng) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quyentruong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "binhbat": [
@@ -4772,6 +5308,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_phattu_binhbat_1",
+    "name": "Hàng Ma Bát",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Bình bát) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "binhbat",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_binhbat_2",
+    "name": "Phật Vực Bát",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Bình bát) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "binhbat",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_binhbat_3",
+    "name": "Đại Bi Bát",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Bình bát) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "binhbat",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -5311,6 +5914,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_cottu_cotthuan_1",
+    "name": "Diệt Cốt Thuẫn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Cốt thuẫn) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotthuan_2",
+    "name": "Cốt Vực Thuẫn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Cốt thuẫn) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotthuan_3",
+    "name": "Bất Tử Thuẫn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Cốt thuẫn) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotthuan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "cotchuy": [
@@ -5848,6 +6518,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_cottu_cotchuy_1",
+    "name": "Diệt Cốt Chùy",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Cốt chùy) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotchuy_2",
+    "name": "Cốt Vực Chùy",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Cốt chùy) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotchuy_3",
+    "name": "Bất Tử Chùy",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Cốt chùy) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotchuy",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -7152,6 +7889,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_phaptu_phien_1",
+    "name": "Diệt Thế Phiến",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Phiến) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phien",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phien_2",
+    "name": "Pháp Vực Phiến",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Phiến) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phien",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phien_3",
+    "name": "Hộ Thiên Phiến",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Phiến) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phien",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "phaptruong": [
@@ -8479,6 +9283,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_phaptu_phaptruong_1",
+    "name": "Diệt Thế Trượng",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Pháp trượng) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phaptruong_2",
+    "name": "Pháp Vực Trượng",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Pháp trượng) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phaptruong_3",
+    "name": "Hộ Thiên Trượng",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Pháp trượng) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phaptruong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "sachphep": [
@@ -9793,6 +10664,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_phaptu_sachphep_1",
+    "name": "Diệt Thế Triện",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Sách phép) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "sachphep",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_sachphep_2",
+    "name": "Pháp Vực Triện",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Sách phép) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "sachphep",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_sachphep_3",
+    "name": "Hộ Thiên Triện",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Sách phép) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "sachphep",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -10318,6 +11256,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_quytu_colenh_1",
+    "name": "Diệt Hồn Lệnh",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Cờ lệnh) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "colenh",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_colenh_2",
+    "name": "Minh Vực Lệnh",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Cờ lệnh) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "colenh",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_colenh_3",
+    "name": "Bất Diệt Lệnh",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Cờ lệnh) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "colenh",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "luoihai": [
@@ -10851,6 +11856,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_quytu_luoihai_1",
+    "name": "Diệt Hồn Hái",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Lưỡi hái) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "luoihai",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_luoihai_2",
+    "name": "Minh Vực Hái",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Lưỡi hái) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "luoihai",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_luoihai_3",
+    "name": "Bất Diệt Hái",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Lưỡi hái) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "luoihai",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "quythuong": [
@@ -11387,6 +12459,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_quytu_quythuong_1",
+    "name": "Diệt Hồn Thương",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Quỷ thương) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quythuong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_quythuong_2",
+    "name": "Minh Vực Thương",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Quỷ thương) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quythuong",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_quythuong_3",
+    "name": "Bất Diệt Thương",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Quỷ thương) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quythuong",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -11924,6 +13063,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_satthu_daogam_1",
+    "name": "Tuyệt Mệnh Dao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Dao găm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "daogam",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_daogam_2",
+    "name": "Ảnh Vực Dao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Dao găm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "daogam",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_daogam_3",
+    "name": "Vô Hình Dao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Dao găm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "daogam",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "songdao": [
@@ -12457,6 +13663,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_satthu_songdao_1",
+    "name": "Tuyệt Mệnh Song Đao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Song đao) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "songdao",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_songdao_2",
+    "name": "Ảnh Vực Song Đao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Song đao) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "songdao",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_songdao_3",
+    "name": "Vô Hình Song Đao",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Song đao) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "songdao",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "liemngan": [
@@ -12986,6 +14259,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_satthu_liemngan_1",
+    "name": "Tuyệt Mệnh Liềm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Liềm ngắn) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "liemngan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_liemngan_2",
+    "name": "Ảnh Vực Liềm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Liềm ngắn) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "liemngan",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_liemngan_3",
+    "name": "Vô Hình Liềm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Liềm ngắn) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "liemngan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "trao": [
@@ -13521,6 +14861,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_satthu_trao_1",
+    "name": "Tuyệt Mệnh Trảo",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Trảo) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "trao",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_trao_2",
+    "name": "Ảnh Vực Trảo",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Trảo) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "trao",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_satthu_trao_3",
+    "name": "Vô Hình Trảo",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Trảo) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "trao",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -14056,6 +15463,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_kiemtu_kiem_1",
+    "name": "Tru Thần",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Kiếm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "kiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_kiem_2",
+    "name": "Kiếm Vực",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Kiếm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "kiem",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_kiem_3",
+    "name": "Kiếm Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Kiếm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "kiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "songkiem": [
@@ -14588,6 +16062,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_kiemtu_songkiem_1",
+    "name": "Tru Thần Song Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Song kiếm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "songkiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_songkiem_2",
+    "name": "Kiếm Vực Song Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Song kiếm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "songkiem",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_songkiem_3",
+    "name": "Kiếm Hồn Song Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Song kiếm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "songkiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "trongkiem": [
@@ -15122,6 +16663,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_kiemtu_trongkiem_1",
+    "name": "Tru Thần Trọng Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Trọng kiếm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_trongkiem_2",
+    "name": "Kiếm Vực Trọng Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Trọng kiếm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_trongkiem_3",
+    "name": "Kiếm Hồn Trọng Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Trọng kiếm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "trongkiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -15659,6 +17267,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_ytu_phattran_1",
+    "name": "Đoạt Mệnh Phất Trần",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Phất trần) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phattran",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_phattran_2",
+    "name": "Sinh Vực Phất Trần",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Phất trần) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phattran",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_phattran_3",
+    "name": "Hồi Thiên Phất Trần",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Phất trần) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phattran",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "kimcham": [
@@ -16192,6 +17867,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_ytu_kimcham_1",
+    "name": "Đoạt Mệnh Châm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Kim châm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "kimcham",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_kimcham_2",
+    "name": "Sinh Vực Châm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Kim châm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "kimcham",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_kimcham_3",
+    "name": "Hồi Thiên Châm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Kim châm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "kimcham",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "cocam": [
@@ -16732,6 +18474,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_ytu_cocam_1",
+    "name": "Đoạt Mệnh Cầm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Cổ cầm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cocam",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_cocam_2",
+    "name": "Sinh Vực Cầm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Cổ cầm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cocam",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_cocam_3",
+    "name": "Hồi Thiên Cầm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Cổ cầm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cocam",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  },
@@ -17276,6 +19085,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_nhotu_ngamtho_1",
+    "name": "Tru Thiên Thơ",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Ngâm thơ) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_ngamtho_2",
+    "name": "Thánh Vực Thơ",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Ngâm thơ) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_ngamtho_3",
+    "name": "Chính Tâm Thơ",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Ngâm thơ) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "ngamtho",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "butphep": [
@@ -17808,6 +19684,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_nhotu_butphep_1",
+    "name": "Tru Thiên Bút",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Bút phép) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "butphep",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_butphep_2",
+    "name": "Thánh Vực Bút",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Bút phép) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "butphep",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_butphep_3",
+    "name": "Chính Tâm Bút",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Bút phép) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "butphep",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ],
   "quyentruc": [
@@ -18341,6 +20284,73 @@
     },
     "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
     "role": "ctl"
+   },
+   {
+    "id": "pt_nhotu_quyentruc_1",
+    "name": "Tru Thiên Quyển",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Quyển trục) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_quyentruc_2",
+    "name": "Thánh Vực Quyển",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Quyển trục) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_quyentruc_3",
+    "name": "Chính Tâm Quyển",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Quyển trục) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quyentruc",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
    }
   ]
  }

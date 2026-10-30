@@ -18,7 +18,7 @@ export type Mood = 'village' | 'wild' | 'meditate';
 export type SfxName =
   | 'swing' | 'hit' | 'crit' | 'hurt' | 'cast' | 'warn' | 'pickup'
   | 'chest' | 'coin' | 'learn' | 'breakOk' | 'breakFail' | 'death'
-  | 'revive' | 'teleport' | 'dodge' | 'click' | 'kill';
+  | 'revive' | 'teleport' | 'dodge' | 'click' | 'kill' | 'thunder';
 
 const PREF_KEY = 'ttt_sound_v1';
 
@@ -223,7 +223,7 @@ class SoundEngine {
 
   // ---------------- HIỆU ỨNG ----------------
   private throttleMs: Partial<Record<SfxName, number>> = {
-    swing: 70, hit: 80, hurt: 200, click: 50, pickup: 150, warn: 350, dodge: 150, kill: 120,
+    swing: 70, hit: 80, hurt: 200, click: 50, pickup: 150, warn: 350, dodge: 150, kill: 120, thunder: 250,
   };
 
   play(name: SfxName): void {
@@ -253,6 +253,7 @@ class SoundEngine {
       case 'dodge': this.noiseSweep(500, 1700, 0.12, 0.09); break;
       case 'click': this.tone('square', 760, 700, 0.03, 0.035); break;
       case 'kill': this.tone('triangle', 300, 150, 0.1, 0.16); this.tone('sine', 520, 520, 0.09, 0.08, 0.05); break;
+      case 'thunder': this.noiseSweep(420, 55, 0.85, 0.5); this.tone('sine', 66, 36, 0.8, 0.42, 0.02); this.noiseSweep(900, 200, 0.16, 0.2); break; // GĐ172: sấm lôi kiếp
     }
   }
 

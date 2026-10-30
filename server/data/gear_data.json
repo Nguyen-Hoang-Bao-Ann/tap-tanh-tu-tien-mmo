@@ -377,6 +377,84 @@
   "good_pct_per_level": 0.04,
   "bad_pct_per_level": -0.02
  },
+ "unique_talent_chance": 0.1,
+ "unique_talents": {
+  "generic": [
+   {"id": "u_sinh_co", "name": "Sinh Cơ Bất Tuyệt", "fx": {"regenHp": 0.003}, "desc": "Hồi 0,3% máu tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+   {"id": "u_hoi_nguyen", "name": "Hồi Nguyên Mạch", "fx": {"regenMp": 0.004}, "desc": "Hồi 0,4% chân nguyên tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+   {"id": "u_song_tuyen", "name": "Sinh Nguyên Tuyền", "fx": {"regenHp": 0.0015, "regenMp": 0.002}, "desc": "Hồi 0,15% máu + 0,2% chân nguyên tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+   {"id": "u_phuc_duyen", "name": "Phúc Duyên Thiên Tứ", "fx": {"dropPct": 0.15}, "desc": "Tỉ lệ rơi nguyên liệu từ quái +15%"},
+   {"id": "u_sat_co", "name": "Sát Cơ Hồi Thể", "fx": {"killHealPct": 0.01}, "desc": "Hạ quái hồi 1% máu tối đa"},
+   {"id": "u_linh_tuc", "name": "Linh Tức Bất Đoạn", "fx": {"killMpPct": 0.012}, "desc": "Hạ quái hồi 1,2% chân nguyên tối đa"},
+   {"id": "u_chien_y", "name": "Chiến Ý Vô Song", "fx": {"dmgPct": 0.05}, "desc": "Sát thương gây ra +5%"},
+   {"id": "u_bat_dong", "name": "Bất Động Minh Vương", "fx": {"takenPct": 0.05}, "desc": "Sát thương nhận vào -5%"},
+   {"id": "u_dot_pha", "name": "Đạo Tâm Viên Mãn", "fx": {"breakPct": 0.02}, "desc": "Tỉ lệ đột phá cảnh giới lớn +2%"},
+   {"id": "u_thien_y", "name": "Thiền Ý Thâm Sâu", "fx": {"medPct": 0.2}, "desc": "Ngồi thiền hồi máu/chân nguyên nhanh hơn 20%"},
+   {"id": "u_danh_nhanh", "name": "Tật Phong Liên Kích", "fx": {"atkSpeedPct": 0.05}, "desc": "Tốc độ đánh thường +5%"}
+  ],
+  "by_path": {
+   "KIEM_TU": [
+    {"id": "u_kiem_tam", "name": "Kiếm Tâm Thông Minh", "fx": {"critRate": 0.06}, "desc": "+6% tỉ lệ chí mạng"},
+    {"id": "u_ngu_kiem", "name": "Ngự Kiếm Thừa Phong", "fx": {"speedPct": 0.08}, "desc": "Tốc độ di chuyển +8%"},
+    {"id": "u_kiem_lan", "name": "Kiếm Khí Tung Hoành", "fx": {"cleavePct": 0.4}, "desc": "Đòn thường lan 40% sát thương sang con quái gần nhất cạnh mục tiêu"},
+    {"id": "u_kiem_the", "name": "Kiếm Thế Liên Hoàn", "fx": {"atkSpeedPct": 0.1}, "desc": "Tốc độ đánh thường +10%"}
+   ],
+   "THE_TU": [
+    {"id": "u_huyet_chien", "name": "Huyết Chiến Bất Khuất", "fx": {"lifesteal": 0.03}, "desc": "Đòn thường hút 3% sát thương thành máu"},
+    {"id": "u_phan_chan", "name": "Phản Chấn Cương Cốt", "fx": {"thornsPct": 0.15}, "desc": "Phản 15% sát thương nhận vào lên con quái vừa đánh mình"},
+    {"id": "u_kim_cang", "name": "Kim Cang Bất Hoại", "fx": {"dodgePct": 0.05}, "desc": "+5% né tránh đòn của quái"},
+    {"id": "u_the_nhu", "name": "Thể Như Bàn Thạch", "fx": {"takenPct": 0.08}, "desc": "Sát thương nhận vào -8%"}
+   ],
+   "PHAT_TU": [
+    {"id": "u_tu_bi", "name": "Từ Bi Sinh Cơ", "fx": {"regenHp": 0.0035}, "desc": "Hồi 0,35% máu tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+    {"id": "u_thien_tam", "name": "Thiền Tâm Hồi Nguyên", "fx": {"regenMp": 0.0045}, "desc": "Hồi 0,45% chân nguyên tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+    {"id": "u_bat_nha", "name": "Bát Nhã Hộ Thể", "fx": {"manaShieldPct": 0.2}, "desc": "20% sát thương nhận vào trừ vào chân nguyên thay vì máu"},
+    {"id": "u_phat_tam", "name": "Phật Tâm Thiền Định", "fx": {"medPct": 0.3}, "desc": "Ngồi thiền hồi máu/chân nguyên nhanh hơn 30%"}
+   ],
+   "COT_TU": [
+    {"id": "u_kho_cot", "name": "Khô Cốt Bất Diệt", "fx": {"regenHp": 0.003}, "desc": "Hồi 0,3% máu tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+    {"id": "u_am_sat", "name": "Âm Sát Cốt", "fx": {"critDmg": 0.3}, "desc": "Sát thương chí mạng +30%"},
+    {"id": "u_thi_khi", "name": "Thi Khí Nuốt Nguyên", "fx": {"manasteal": 0.03}, "desc": "Đòn thường hút 3% sát thương thành chân nguyên"},
+    {"id": "u_tu_khi", "name": "Tử Khí Tăng Phúc", "fx": {"dmgPct": 0.04}, "desc": "Sát thương gây ra +4%"}
+   ],
+   "SAT_THU": [
+    {"id": "u_anh_sat", "name": "Ảnh Sát Vô Thanh", "fx": {"critRate": 0.08}, "desc": "+8% tỉ lệ chí mạng"},
+    {"id": "u_tat_anh", "name": "Tật Ảnh Vô Tung", "fx": {"speedPct": 0.1}, "desc": "Tốc độ di chuyển +10%"},
+    {"id": "u_quy_anh", "name": "Quỷ Ảnh Vô Tung", "fx": {"dodgePct": 0.07}, "desc": "+7% né tránh đòn của quái"},
+    {"id": "u_sat_phat", "name": "Sát Phạt Liên Hoàn", "fx": {"atkSpeedPct": 0.12}, "desc": "Tốc độ đánh thường +12%"}
+   ],
+   "PHAP_TU": [
+    {"id": "u_phap_nguyen", "name": "Pháp Nguyên Vô Biên", "fx": {"regenMp": 0.005}, "desc": "Hồi 0,5% chân nguyên tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+    {"id": "u_thien_phat", "name": "Thiên Phạt Lôi Tâm", "fx": {"critDmg": 0.3}, "desc": "Sát thương chí mạng +30%"},
+    {"id": "u_phap_tiet", "name": "Tiết Pháp Tâm", "fx": {"cdrPct": 0.1}, "desc": "Hồi chiêu mọi chiêu -10%"},
+    {"id": "u_phap_bao", "name": "Pháp Bảo Tiết Nguyên", "fx": {"manaCostPct": 0.12}, "desc": "Chiêu thức tốn ít chân nguyên hơn 12%"}
+   ],
+   "QUY_TU": [
+    {"id": "u_phe_huyet", "name": "Phệ Huyết Quỷ Tâm", "fx": {"lifesteal": 0.04}, "desc": "Đòn thường hút 4% sát thương thành máu"},
+    {"id": "u_minh_nguyen", "name": "Minh Nguyên Bất Tận", "fx": {"regenMp": 0.0035}, "desc": "Hồi 0,35% chân nguyên tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+    {"id": "u_huyet_phe", "name": "Huyết Phệ Nguyên", "fx": {"manasteal": 0.04}, "desc": "Đòn thường hút 4% sát thương thành chân nguyên"},
+    {"id": "u_quy_the", "name": "Quỷ Thế Lâm Đầu", "fx": {"dmgPct": 0.05}, "desc": "Sát thương gây ra +5%"}
+   ],
+   "Y_TU": [
+    {"id": "u_dieu_thu", "name": "Diệu Thủ Sinh Cơ", "fx": {"regenHp": 0.004}, "desc": "Hồi 0,4% máu tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình"},
+    {"id": "u_truong_sinh", "name": "Trường Sinh Ngộ Đạo", "fx": {"tuviPct": 0.06}, "desc": "Tu vi nhận được +6%"},
+    {"id": "u_duoc_khi", "name": "Dược Khí Hộ Thân", "fx": {"manaShieldPct": 0.15}, "desc": "15% sát thương nhận vào trừ vào chân nguyên thay vì máu"},
+    {"id": "u_duoc_tam", "name": "Dược Tâm Thông Đạo", "fx": {"breakPct": 0.03}, "desc": "Tỉ lệ đột phá cảnh giới lớn +3%"}
+   ],
+   "NHO_TU": [
+    {"id": "u_van_khi", "name": "Văn Khí Trường Tồn", "fx": {"tuviPct": 0.08}, "desc": "Tu vi nhận được +8%"},
+    {"id": "u_hao_nhien", "name": "Hạo Nhiên Chính Khí", "fx": {"critRate": 0.05}, "desc": "+5% tỉ lệ chí mạng"},
+    {"id": "u_van_tiet", "name": "Văn Tiết Bất Tốn", "fx": {"cdrPct": 0.08}, "desc": "Hồi chiêu mọi chiêu -8%"},
+    {"id": "u_van_phach", "name": "Văn Phách Tiết Nguyên", "fx": {"manaCostPct": 0.1}, "desc": "Chiêu thức tốn ít chân nguyên hơn 10%"}
+   ]
+  },
+  "by_weapon_group": {
+   "nhon": [{"id": "u_xuyen_tam", "name": "Mũi Nhọn Xuyên Tâm", "fx": {"critDmg": 0.25}, "desc": "Sát thương chí mạng +25% (vũ khí nhọn)"}, {"id": "u_linh_phong", "name": "Linh Phong Bộ", "fx": {"dodgePct": 0.03}, "desc": "+3% né tránh đòn của quái (vũ khí nhọn)"}, {"id": "u_nhon_phong", "name": "Nhọn Phong Xa Thích", "fx": {"rangePct": 0.12}, "desc": "Tầm đánh và tầm chiêu +12% (vũ khí nhọn)"}],
+   "chem": [{"id": "u_luoi_sac", "name": "Lưỡi Sắc Vô Song", "fx": {"critRate": 0.04}, "desc": "+4% tỉ lệ chí mạng (vũ khí chém)"}, {"id": "u_chem_lan", "name": "Chém Lan Vô Địch", "fx": {"cleavePct": 0.3}, "desc": "Đòn thường lan 30% sát thương sang con quái gần nhất cạnh mục tiêu (vũ khí chém)"}, {"id": "u_chem_nhanh", "name": "Chém Nhanh Như Gió", "fx": {"atkSpeedPct": 0.06}, "desc": "Tốc độ đánh thường +6% (vũ khí chém)"}],
+   "nang": [{"id": "u_trong_khi", "name": "Trọng Khí Hộ Thân", "fx": {"regenHp": 0.002}, "desc": "Hồi 0,2% máu tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình (vũ khí nặng)"}, {"id": "u_trong_thuan", "name": "Trọng Thuẫn Khí", "fx": {"manaShieldPct": 0.1}, "desc": "10% sát thương nhận vào trừ vào chân nguyên thay vì máu (vũ khí nặng)"}, {"id": "u_nang_the", "name": "Nặng Thế Hộ Thân", "fx": {"takenPct": 0.04}, "desc": "Sát thương nhận vào -4% (vũ khí nặng)"}],
+   "phap": [{"id": "u_phap_khi", "name": "Pháp Khí Thông Linh", "fx": {"regenMp": 0.0025}, "desc": "Hồi 0,25% chân nguyên tối đa mỗi giây — vẫn hồi khi Pháp Tướng hiện hình (pháp cụ)"}, {"id": "u_thong_tiet", "name": "Thông Linh Tiết Pháp", "fx": {"cdrPct": 0.06}, "desc": "Hồi chiêu mọi chiêu -6% (pháp cụ)"}, {"id": "u_phap_tam2", "name": "Pháp Tâm Tiết Kiệm", "fx": {"manaCostPct": 0.08}, "desc": "Chiêu thức tốn ít chân nguyên hơn 8% (pháp cụ)"}]
+  }
+ },
  "reroll_cost": {
   "TIM": 100,
   "CAM": 300,
@@ -1318,6 +1396,11 @@
    "multiplier": 1.6,
    "label": "Nguyên Anh",
    "min_realm": "na"
+  },
+  "ht": {
+   "multiplier": 2.0,
+   "label": "Hóa Thần",
+   "min_realm": "ht"
   }
  }
 }

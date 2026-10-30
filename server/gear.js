@@ -162,8 +162,29 @@ function slotDisplayName(pathId, slot, weaponName) {
   return names[pathId] || names['*'];
 }
 
+// GĐ191: nhóm vũ khí (theo id đồ) cho pool nội tại độc nhất riêng của ô VŨ KHÍ
+const UNIQUE_WEAPON_GROUP = {
+  THUONG: 'nhon', QUY_THUONG: 'nhon', DAO_GAM: 'nhon', KIM_CHAM: 'nhon',
+  KIEM: 'chem', SONG_KIEM: 'chem', TRONG_KIEM: 'chem', DAO: 'chem', SONG_DAO: 'chem', CHIEN_PHU: 'chem', CU_KIEM: 'chem', LUOI_HAI: 'chem', LIEM_NGAN: 'chem', TRAO: 'chem', PHIEN: 'chem', PHAT_TRAN: 'chem',
+  TAY_KHONG: 'nang', THIET_CON: 'nang', COT_CHUY: 'nang', COT_THUAN: 'nang',
+  PHAT_CHAU: 'phap', QUYEN_TRUONG: 'phap', BINH_BAT: 'phap', CO_LENH: 'phap', PHAP_TRUONG: 'phap', SACH_PHEP: 'phap', CO_CAM: 'phap', NGON_LINH: 'phap', BUT_PHEP: 'phap', QUYEN_TRUC: 'phap',
+};
+// Pool dòng ĐỘC NHẤT mà 1 món có thể rút: dùng chung + riêng hướng tu +
+// (nếu là ô vũ khí) riêng nhóm vũ khí.
+function uniquePoolFor(pathId, slot, weaponId) {
+  const U = GEAR_DATA.unique_talents || {};
+  let out = [].concat(U.generic || [], (U.by_path || {})[pathId] || []);
+  if (slot === 'WEAPON' && weaponId) {
+    const grp = UNIQUE_WEAPON_GROUP[weaponId];
+    if (grp) out = out.concat(((U.by_weapon_group || {})[grp]) || []);
+  }
+  return out;
+}
+
 // Roll nội tại ẩn từ Pool của Path. Lấy ngẫu nhiên CÓ TRÙNG (đúng spec).
-function rollTalents(pathId, rarity, rand) {
+// GĐ191: mỗi dòng còn có tỉ lệ thành dòng NỘI TẠI ĐỘC NHẤT (data:
+// unique_talent_chance, TẠM 10%) — tối đa 1 dòng độc nhất trên 1 món.
+function rollTalents(pathId, rarity, rand, slot, weaponId) {
   const rnd = rand || Math.random;
   const count = RARITIES[rarity].talent_lines;
   const level = TALENT_LEVEL[rarity] || 0;
@@ -171,8 +192,18 @@ function rollTalents(pathId, rarity, rand) {
   const totIds = new Set(pool.tot.map((t) => t.id));
   const all = pool.tot.concat(pool.phe);
   const rates = GEAR_DATA.talent_rates;
+  const upool = uniquePoolFor(pathId, slot, weaponId);
+  const uchance = GEAR_DATA.unique_talent_chance ?? 0.1;
+  let uniqueUsed = false;
   const lines = [];
   for (let i = 0; i < count; i++) {
+    if (!uniqueUsed && upool.length && rnd() < uchance) {
+      const u = upool[Math.floor(rnd() * upool.length)];
+      lines.push({ id: u.id, name: u.name, kind: 'docnhat', stat: null, level,
+                   bonusPct: 0, fx: u.fx || {}, desc: u.desc });
+      uniqueUsed = true;
+      continue;
+    }
     const t = all[Math.floor(rnd() * all.length)];
     const kind = totIds.has(t.id) ? 'tot' : 'phe';
     const rate = kind === 'tot' ? rates.good_pct_per_level : rates.bad_pct_per_level;
@@ -180,6 +211,23 @@ function rollTalents(pathId, rarity, rand) {
                  bonusPct: rate * level, desc: t.desc });
   }
   return lines;
+}
+
+// GĐ191: tổng hiệu ứng các dòng ĐỘC NHẤT trên đồ ĐANG MẶC của người chơi
+// (mỗi món tối đa 1 dòng; cộng dồn qua các món là chủ đích).
+function uniqueFxOf(player) {
+  const fx = { regenHp: 0, regenMp: 0, lifesteal: 0, manasteal: 0, critRate: 0, critDmg: 0, speedPct: 0, tuviPct: 0, thornsPct: 0, dodgePct: 0, manaShieldPct: 0, dropPct: 0, cleavePct: 0, killHealPct: 0, killMpPct: 0, cdrPct: 0, dmgPct: 0, takenPct: 0, atkSpeedPct: 0, rangePct: 0, manaCostPct: 0, breakPct: 0, medPct: 0 }; // GĐ192: thêm 8 loại hiệu ứng — dòng độc nhất LUÔN dùng được, kể cả khi Pháp Tướng hiện hình (Bảo chốt)
+  const bag = (player && player.gearBag) || {};
+  const worn = (player && player.gear) || {};
+  for (const uid of Object.values(worn)) {
+    const item = bag[uid];
+    if (!item) continue;
+    for (const t of item.talents || []) {
+      if (t.kind !== 'docnhat' || !t.fx) continue;
+      for (const k of Object.keys(fx)) if (t.fx[k]) fx[k] += t.fx[k];
+    }
+  }
+  return fx;
 }
 
 // Sinh trang bị. Tên = [Prefix phẩm] + [Tên hệ] + [Tên slot].
@@ -228,7 +276,7 @@ function generateGear(opts) {
     uid: gearUid(), path: pathId, element, rarity, slot, weapon, name, prefix,
     tokenRank, tokenRankName,
     baseStats: { ...BASE_STATS[slot] },
-    talents: rollTalents(pathId, rarity, rand),
+    talents: rollTalents(pathId, rarity, rand, slot, weapon), // GĐ191: slot/vũ khí để rút pool độc nhất riêng
   };
 }
 
@@ -264,6 +312,7 @@ function calcGearStats(item) {
   const mult = RARITIES[item.rarity].multiplier * bandMul;
   const bonus = {};
   for (const line of item.talents || []) {
+    if (!line.stat) continue; // GĐ191: dòng độc nhất có fx riêng, không cộng % chỉ số
     bonus[line.stat] = (bonus[line.stat] || 0) + line.bonusPct;
   }
   const final = {};
@@ -280,7 +329,7 @@ function calcGearStats(item) {
 function canEquip(player, item) {
   // GĐ162: đồ mang bậc cảnh giới thì phải đạt cảnh giới đó mới mặc được
   if (item.band && GEAR_DATA.realm_bands && GEAR_DATA.realm_bands[item.band]) {
-    const ORDER = { pham: 0, lk: 1, tc: 2, kd: 3, na: 4, ht: 5 };
+    const ORDER = { pham: 0, lk: 1, tc: 2, kd: 3, na: 4, ht: 5, ph: 6 }; // GĐ183: bỏ Vô Danh — thang NA → Hóa Thần → Phản Hư
     const need = GEAR_DATA.realm_bands[item.band].min_realm;
     if ((ORDER[player.realm] ?? 0) < (ORDER[need] ?? 0)) return { ok: false, message: 'Không thể trang bị' };
   }
@@ -322,7 +371,7 @@ module.exports = {
   TALENT_LEVEL, REROLL_COST, TOKEN, CLASS_TO_PATH,
   SHOP_PRICE, FORGE_DAYS, FORGE_MATERIALS, CHEST_GEAR, QUEST_GEAR, SHOP_STOCK_CFG,
   normElement, playerElementIds, gearUid, rollTalents, generateGear,
-  calcGearStats, canEquip, applyBand, tokenSuppression, tokenNpcBonus,
+  calcGearStats, canEquip, applyBand, tokenSuppression, tokenNpcBonus, uniqueFxOf, uniquePoolFor,
   GAME_WEAPON_TO_GEAR, gearWeaponFor, restampWeaponGear,
   mulberry32, pickRand, weightedRand, shopStockGear, shopStockItem, shopStockForDay,
   chestGearFor, questGearFor,

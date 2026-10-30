@@ -3004,3 +3004,366 @@ Thú Sư thuần hóa hộ, hoặc mua trứng tự ấp hên xui. Mở từ Ngu
   trúng đòn có tiếng hit; nút Menu tắt/bật + đổi nhãn đúng. Bảo
   cần nghe thử bằng tai trên máy mình để chỉnh âm lượng/khẩu vị.
   GĐ167 local-only, CHƯA PUSH.
+
+## GĐ168 — CHAT GIỮA NGƯỜI CHƠI (29/10, probe p168 ALL PASS)
+
+- Ô chat mới ở góc trái dưới (trên nhật ký): 2 kênh — **📍 Gần**
+  (chỉ người cùng map nghe) và **🌐 Thế giới** (toàn server), đổi
+  kênh bằng nút cạnh ô nhập. Bấm **Enter** để mở ô gõ, Enter lần
+  nữa để gửi, Esc hủy. Đang gõ thì nhân vật đứng yên và mọi phím
+  game (WASD/J/chiêu/E...) đều khóa — gõ chữ không lo nhân vật tự
+  chạy hay vung kiếm.
+- Tin chat hiện thành **bong bóng trên đầu** nhân vật ~4 giây (kèm
+  dòng trong ô chat, giữ 40 dòng gần nhất). Chống spam phía server:
+  tối thiểu 900ms giữa 2 tin, tối đa 200 ký tự/tin (số TẠM).
+
+## GĐ169 — SỐ SÁT THƯƠNG NỔI (29/10, probe p169 ALL PASS)
+
+- Mọi đòn trúng quái hiện **số trắng bay lên** trên đầu quái; đòn
+  nặng (>= 20% máu tối đa của mục tiêu) số to màu cam; sát thương
+  lên người chơi/pet hiện **số đỏ có dấu trừ**. Số là số THẬT từ
+  công thức sát thương phía server (gom theo tick 100ms nên đòn
+  liên hoàn trong cùng tick cộng thành 1 số), không phải số đoán
+  phía client. Kiểm chứng: sói 40 máu nhận 2 số tổng 68 (đòn cuối
+  đánh thừa), sói cắn người chơi hiện đúng -4.
+
+## GĐ170 — GIAO DỊCH NGƯỜI CHƠI ↔ NGƯỜI CHƠI (29/10, probe p170 ALL PASS)
+
+- Đứng gần người chơi khác (<= 220px) thì nút **🤝 Giao dịch**
+  hiện ở góc phải dưới. Bấm để mời; đối tác có 30 giây Đồng ý /
+  Từ chối. Bàn giao dịch 2 cột: bấm món trong túi để đưa lên bàn,
+  bấm món trên bàn (cột trái) để bớt, nhập số Linh thạch, thú cưỡi
+  bấm để đưa/gỡ. **Đổi bất cứ thứ gì là hủy xác nhận của cả hai**;
+  cả hai cùng ✔ Xác nhận mới trao — server kiểm lại toàn bộ lúc
+  trao (cùng map, khoảng cách, đồ còn trong túi, chuồng còn chỗ),
+  sai là hủy kèm lý do chứ không trao nửa vời.
+- Giao được: vật phẩm thường + Linh thạch (Hạ) + **thú cưỡi**
+  (mở khóa vụ người chơi bán thú cho nhau; con đang cưỡi không
+  đưa lên bàn được). Trang bị chưa giao dịch được ở đợt này.
+- Kiểm chứng probe: trao 4 nanh + 200 thạch + 1 Linh Mã ↔ 2 da
+  quỷ + 60 thạch khớp từng con số 2 phía; đặt 999 nanh bị kẹp
+  còn đúng 10 (số có trong túi); chuồng đầy 3 con thì hủy an
+  toàn, đồ nguyên vẹn.
+
+## GĐ171 — GÓI HIỆU ỨNG (29/10, probe p171 ALL PASS phần số liệu)
+
+- **Chiêu quái có vòng báo trước**: quái vận chiêu diện rộng (Cự
+  Nhân Băng dậm băng, quái húc lao...) hiện **vòng đỏ trên mặt
+  đất nở dần** theo đúng bán kính + thời gian vận chiêu thật của
+  server (Cự Nhân: 120px / 850ms — probe tick khớp từng số), chiêu
+  tung ra thì vòng nổ tung. Đứng trong vòng khi nó đầy là ăn đòn.
+- **Phi kiếm**: người Kim Đan+ ngự kiếm bay giờ có **thanh kiếm
+  bạc lơ lửng dưới chân** đung đưa theo nhịp (bỏ dấu 🕊️ trên tên).
+- **Cưỡi thú có nhịp**: thú và người nhấp nhô theo bước đi thay vì
+  trượt phẳng.
+- **Đánh/chiêu có chạm nổ**: đạn chiêu chạm đích nổ vòng sáng theo
+  màu hệ + tia lửa; đòn thường gần cũng có tia nổ nhỏ; chiêu
+  buff/hồi không mục tiêu có vòng sáng quanh người tung. Người
+  chơi khác và pet (Cốt Vương / Quỷ Hồn / thú thuần hóa) khi đánh
+  thường sẽ **lao người vào mục tiêu** thay vì đứng yên vung tay.
+
+## GĐ172 — HIỆU ỨNG LUYỆN ĐAN + ĐỘT PHÁ + LÔI KIẾP (29/10, probe p172 + p172b ALL PASS)
+
+- **Luyện chế**: thành công thì lò bùng vòng lửa vàng 2 nhịp
+  quanh người + tiếng xu; hỏng thì khói xám + tiếng xì. (Trước
+  đợt này client không hề nghe sự kiện craft_result — chỉ có
+  dòng chữ của server; nay có thêm hình + tiếng.)
+- **Đột phá theo cỡ**: Tiểu = cột sáng vàng nhỏ; Trung = 1 tia
+  sét + cột sáng; **Đại / Kim Đan / Nguyên Anh = LÔI KIẾP**: 3
+  tia sét răng cưa giáng từ trời xuống (kèm tiếng sấm tổng hợp +
+  rung màn hình + chớp sáng), rồi cột sáng lớn bừng lên. Người
+  đứng cạnh cũng THẤY hiệu ứng của người đột phá (server gửi kèm
+  loại đột phá trong sự kiện chung). Sửa kèm: toast đột phá của
+  người khác trước đây hiện sai tên cảnh giới Kim Đan/Nguyên
+  Anh thành "Luyện Khí" — đã đúng.
+- Kiểm chứng: luồng thử thách thật ở sân Đạo Quán (start_trial
+  -> giết Tâm Ma Ảnh HP 2082 -> breakthrough_ok type=dai, +12
+  điểm, +50 năm thọ; Thử Luyện Thú trung +5 điểm/+5 thọ, trừ
+  đúng 1 Đan Trung Cảnh). Ảnh tĩnh bắt không kịp tia sét (nó
+  chỉ ~0,3s) — xem trực tiếp khi chơi sẽ rõ, nhất là lôi kiếp
+  Đại kéo dài ~2,3 giây.
+
+## GĐ173 — ĐAN ĐỘT PHÁ TỪNG CẢNH: LẤP LỖ HỔNG TRUNG CẢNH KIM ĐAN/NGUYÊN ANH (29/10, probe p173 ALL PASS)
+
+- Rà soát phát hiện **lỗi thật**: đột phá Trung cảnh (tầng 3→4,
+  6→7) của **Kim Đan và Nguyên Anh trước đây rơi xuống Tiểu
+  cảnh** — không cần Đan Trung Cảnh, không có thử thách, thiếu
+  điểm + thọ của bậc trung (do 2 nhánh return sớm trong bảng
+  đột phá đứng chắn trước nhánh trung). Đã sửa: trung cảnh áp
+  cho cả 4 cảnh, điểm theo thang 5 (LK) / 6 (TC) / 7 (KD) / 8
+  (NA), thọ +5 / +10 / +20 / +30 (số KD/NA là TẠM theo đà thang).
+- Kiểm chứng đủ 3 ca thật qua luồng thử thách: KD3→4 (+7 điểm,
+  +20 thọ), NA6→7 (+8, +30), TC3→4 hồi quy (+6, +10) — đều trừ
+  đúng 1 Đan Trung Cảnh.
+- Các đan còn lại đã đủ từ trước và không đổi: Trúc Cơ (luyện:
+  20 nanh + 2 da quỷ, tỉ lệ 60%, Đan Sư cấp 3; tiệm 800), Kết
+  Đan (30 nanh + 5 da quỷ, 50%, cấp 3; tiệm 2000), Hóa Anh
+  (50 nanh + 10 da quỷ, 45%, cấp 5; tiệm 5000), Hộ Mạch (+10%
+  tỉ lệ Đại, tiệm 300, tự trừ khi đột phá Đại).
+
+## GĐ174 — NHÃN THEO TẦM GẦN + THOẠI NPC THƯA (30/10, probe p174 ALL PASS; Bảo chê rối chữ từ ảnh giao dịch)
+
+- **Mọi nhãn tên chỉ hiện khi người chơi đứng trong 240px** (số
+  TẠM, thống nhất 1 tầm cho tất cả): NPC làng + cổng bí cảnh,
+  NPC thành phố (cũ 260px), điểm tài nguyên, người chơi khác +
+  pet (tên của chính mình luôn hiện), nhãn Bảng Treo Thưởng,
+  nhãn Trận Dịch Chuyển ở làng, nhãn đàn tế / cổng / điểm đọc
+  sách trên map GDD. Xa hơn là ẩn hết — ảnh chụp đối chứng:
+  đứng nam làng chỉ còn tên mình + người đứng cạnh; vào giữa
+  quảng trường tên các NPC gần mới hiện.
+- **Thoại NPC thưa hẳn**: tầm nghe 520 → 230px, tối đa cùng lúc
+  8 → **2 người**, mỗi NPC ~28–42 giây mới nói lại 1 câu (trước
+  ~11–15s). Lấy mẫu 30 giây giữa quảng trường đông: tối đa 2
+  người cùng nói, tổng chỉ 2–3 câu mới.
+- Chưa đụng: tên quái (vẫn hiện như cũ — Bảo chỉ nói NPC +
+  người chơi), nhãn "Linh mạch" trên nền map.
+
+## GĐ175 — MỌI MAP RỘNG ×5 DIỆN TÍCH (30/10, Bảo chốt "diện tích ×5 — mỗi chiều ×2,24"; probe p175 + p175_shot ALL PASS)
+
+- **Cách nhân**: mọi tọa độ bố cục ×√5 ≈ 2,236 (hàm hs175 ở cả
+  server + client); kích thước vật thể (nhà, ao, bán kính) GIỮ
+  NGUYÊN → nhà cửa/cây cối/NPC tự thưa ra đúng ý. Kích thước:
+  làng 3400×1200 → **7603×2683**; thành phố → **10733×8050**;
+  map nghề → 4919×3689; farm → 8497×6373; nguyên tố → 8944×6708.
+- Map GDD: cổng/khu dân/dãy nhà/decor/quái/node đều suy từ kích
+  thước nên tự giãn; lưới NPC chức năng giãn bước 150 → 335px
+  (NPC xa cổng nhất đo được 9075px so với ~1009px ở lưới cũ —
+  có cả dân thường rải toàn map). Số quái giữ nguyên 1121 →
+  mật độ thưa đi 5 lần (chủ đích "thưa"; nếu test thấy vắng quá
+  thì tăng số lượng sau — chưa tăng vì Render free đã phải gánh
+  1121 quái tick 10Hz).
+- Map làng: nhân toàn bộ bố cục (nhà, NPC, cổng, quảng trường,
+  Đạo Quán, bí cảnh Thạch Lâm, vùng farm, điểm nghỉ, điểm tương
+  tác E phía client). Nền nướng lại ở 1× chia 2 texture tại
+  x=3578 (bản 2× cũ vượt giới hạn 4096px của GPU).
+- **Đào ra + sửa 1 lỗi hệ quả**: cổng kiểm tra "đứng ở sân Đạo
+  Quán" của thử thách đột phá neo theo cửa (160px) — sân giãn
+  ra làm tâm sân cách cửa 166px nên bấm bắt đầu thử thách bị
+  từ chối oan; đã neo lại theo tâm sân (200px) + cửa (160px).
+- **Nhân vật cũ tự dịch tọa độ ×√5 đúng 1 lần** khi đăng nhập
+  (cờ geo175 trong hồ sơ) — ai đang đứng đâu ở bản cũ sẽ hiện
+  ở đúng vị trí tương ứng trên bản đồ mới, không bị kẹt trong
+  nhà/tường.
+- Test tay gợi ý: vào làng đi từ quảng trường lên Đạo Quán —
+  đường dài hẳn; mở bản đồ tổng quan (bấm minimap) xem làng +
+  bí cảnh; ra farm phía đông tìm sói (thưa hơn trước nhiều);
+  vào 1 thành phố đi từ cổng lên khu dân.
+
+## GĐ176 — DỜI KHAY CHIÊU SANG PHẢI + CHAT SÁT ĐÁY (30/10, probe p176 ALL PASS; Bảo gửi ảnh khoanh vùng dưới màn hình)
+
+- Khay chiêu desktop: từ neo đáy giữa → **phía phải dưới**,
+  cách mép phải 300px (sát mép 10px bị chê kì, 76–100px Bảo bảo nhìn không khác gì).
+  Đáy giữa trống hoàn toàn cho bảng nhiệm vụ.
+- Ô chat: từ bottom 158px → **sát đáy 10px**; nhật ký game dời
+  lên trên ô chat (bottom 190px) — hoán đổi vị trí, tổng chiều
+  cao cụm trái dưới không đổi. Bản cảm ứng hoán đổi tương tự
+  (chat 292→128px, nhật ký 122→306px) — cần Bảo test tay trên
+  điện thoại vì sandbox không kiểm chứng được cảm ứng.
+- Đo thật trên trình duyệt 1280×800: khay chiêu right=1270,
+  bottom=790; chat bottom=790; nhật ký không chồng chat.
+
+## GĐ177 — SỐ SÁT THƯƠNG NỔI + FX THEO ẢNH MẪU (30/10, probe p177 ALL PASS; Bảo gửi ảnh mẫu game khác: chùm số vàng to đậm giữa vòng skill)
+
+- Khay chiêu chốt cách mép phải **150px** (sau các bản 10/76/100/300px).
+- Số nổi viết lại: chữ đậm to (16 thường / 22 đòn nặng / **27 chí
+  mạng**), viền đen dày 5–6, màu vàng kem → cam → **vàng rực khi
+  chí mạng**; xuất hiện kiểu "nảy" phồng 0,45 → 1,15–1,3 → 1 rồi
+  bay lên; lệch vị trí ngẫu nhiên để chùm số không dính nhau; trần
+  80 số cùng lúc (chí mạng luôn hiện). LƯU Ý: các ảnh chụp thử của
+  agent gửi trùng tên file có thể bị app hiện cache ảnh cũ — từ
+  nay ảnh đối chứng luôn đặt tên riêng từng bản.
+- Server: số nổi KHÔNG cộng gộp theo mục tiêu trong tick nữa —
+  **mỗi đòn một số riêng** (trần 120 số/map/tick, giữ đòn to nhất);
+  hurtMonster thêm cờ crit, đòn thường + tung chiêu của người chơi
+  truyền critMul>1 vào → client hiện số chí mạng. DoT/pet không
+  gắn cờ (số thường).
+- FX chạm đích (impactFx): thêm chớp trắng ở tâm + vòng phụ đuổi
+  theo + tia lửa 5 → 11 tia xa hơn; thêm chớp sáng tại người tung
+  chiêu khi cast (cả mình lẫn người khác).
+- Kiểm chứng: socket — nhân vật Bạo Kích 100 điểm: mọi số nổi trên
+  golem đều mang cờ chí mạng, dmg đều nhau; browser — 16 số nổi
+  hiện trong 1 trận farm, ảnh thấy số cam đậm + số đỏ -4/-5 khi bị
+  dơi cắn + chớp nổ vàng trên mục tiêu.
+
+## GĐ178 — BỎ SỐ NỔI LÊN NGƯỜI CHƠI + THÔNG BÁO NHỎ MÉP PHẢI (30/10, probe p178 ALL PASS; Bảo góp ý từ ảnh GĐ177)
+
+- Sát thương lên NGƯỜI CHƠI không hiện số nổi nữa (server ngừng
+  phát t='p', client cũng bỏ qua) — đỡ rối mắt; số nổi chỉ trên quái.
+- Banner to giữa màn "⚔ Sói wolf-1122 đã bị tiêu diệt bởi BẠN!"
+  BỎ HẲN (trước đây còn lộ id nội bộ + ghi "Sói" cho mọi loài).
+  Server monster_killed nay kèm `name` = tên loài tử tế (Sói Xám,
+  Dơi Đen...); chỉ NGƯỜI HẠ thấy dòng nhỏ: "Bạn đã hạ gục 1 Sói Xám".
+- Chồng thông báo #sideNotes sát mép phải (right 10px, top 302px
+  dưới minimap): chữ trắng 12px nền mờ, tối đa 6 dòng, tự mờ sau
+  ~3,6s. Nơi hiện: hạ gục quái + NHẶT ĐỒ RƠI (trước đây nhặt đồ
+  im lặng, nay server gửi pickup_note: "+4 Linh thạch" / "Nhặt
+  được Xương Thú") + loot rương (bỏ toast giữa màn, giữ nhật ký).
+- Kiểm chứng: máu tụt trong trận mà 0 số nổi t='p'; pickup_note
+  nhận đủ; browser thấy dòng hạ gục cách mép phải đúng 10px.
+
+## GĐ179 — NGỘ KIỆM TÍCH CHẬM LẠI (30/10, probe p179 ALL PASS; Bảo thấy phàm nhân đã 80/100 thì hỏi "lẹ vậy")
+
+- Ngộ Kiếm là thanh tích lũy cho hợp nhất kiếm (đầy 100 dùng →
+  về 0), không phải chỉ số tu luyện. Tốc độ cũ TẠM: trúng +3,
+  hạ +25 (đầy sau ~4 mạng). Bảo chốt chậm lại: **trúng +1, hạ
+  quái +10** (NGOKIEM_HIT/NGOKIEM_KILL) → đầy sau ~10 mạng hoặc
+  ~50 đòn trúng.
+- Kiểm chứng đếm từng đòn: 4 đòn trúng + 1 mạng sói → Ngộ Kiếm
+  đúng 14 (công thức cũ sẽ là 37).
+
+## GĐ180 — THANG CẢNH MỚI + ĐƯỜNG ẨN "TÀN ĐĂNG" + THOÁT THAI HOÁN CỐT (30/10, probe p180 + p180_shot ALL PASS; Bảo thiết kế)
+
+- THANG CẢNH ĐỔI (Bảo chốt): Nguyên Anh → **Vô Danh** (cảnh trung
+  gian CHƯA có tên — "Vô Danh" là tên TẠM agent đặt, chờ Bảo đặt
+  tên thật) → **Phản Hư** → **Hóa Thân** (đổi tên từ Hóa Thần theo
+  chữ Bảo viết). REALM_ORDER tg 5 / ph 6 / ht 7; globalStep dịch
+  theo (tg 36+, ph 45+, ht 54+). Nội dung Vô Danh + Hóa Thân vẫn
+  khóa như Hóa Thần trước đây.
+- ĐƯỜNG TÀN ĐĂNG (ẩn): NA tầng 9 + thọ còn ≤10 năm → tàn thư gợi ý
+  ẩn ở Đạo Quán (thiền ở đó / lại gần cửa) → nút "🕯 Đi đường Tàn
+  Đăng" trên thẻ (chọn 1 lần, không quay lại). Đang đi đường này:
+  đột phá tay bị khóa. Thọ còn ≤3 năm → TỰ lên NA tầng 10 (viên
+  mãn). Thọ còn ≤1 năm → thành tựu ẩn "Đến cuối vẫn còn chăm chỉ"
+  (tên Bảo đặt, nhóm Ẩn, danh hiệu "Tàn Đăng Bất Diệt") + TỰ
+  THOÁT THAI HOÁN CỐT.
+- HOÁN CỐT: tuổi + thọ nguyên quay về ĐÚNG thời điểm vừa đột phá
+  Nguyên Anh tầng 1 (server chụp ageAtNa1/lifespanAtNa1 lúc đột
+  phá Nguyên Anh; nhân vật cũ không có mốc thì lấy lúc chọn đường
+  — TẠM migrate). Tu vi giữ NA viên mãn. Hoạt ảnh TỰ CHẠY (Bảo
+  yêu cầu): ở map nhà thì dời ra sân Đạo Quán đón kiếp, cả map
+  thấy 3 tia sét + cột sáng lớn; chính chủ thêm màn chữ 2 dòng
+  "Thọ nguyên đã tận — đèn tàn trước gió… / THOÁT THAI HOÁN CỐT".
+- Sau hoán cốt: đầy tu vi → thử thách Phản Hư Kiếp Ảnh (HP ×12
+  thang cũ, công kiếp ×2,6 — TẠM) → đột phá THẲNG Phản Hư (bỏ qua
+  Vô Danh), tỉ lệ như Đại cảnh, KHÔNG cần đan (chưa có đan Phản
+  Hư — TẠM), thưởng +21 điểm / +200 năm thọ (TẠM theo thang).
+  Phản Hư giữ 7 ô chiêu + bay như NA (TẠM).
+- SỬA LUÔN LỖI CŨ (từ GĐ160): thẻ nhân vật của Nguyên Anh bị hiện
+  nhầm "Luyện Khí tầng 9" vì client thiếu nhánh 'na' — đã viết lại
+  nhãn đủ cả thang mới ở 2 chỗ (thẻ chính + thẻ chi tiết).
+- Kiểm chứng toàn trình bằng nhân vật vá: gợi ý → chọn → khóa nút
+  → NA10 → hoán cốt (tuổi 190→100, thọ còn 8→160) → giết boss
+  99.348 máu → Phản Hư tầng 1 (+200 thọ, +21 điểm). Ảnh hoạt ảnh
+  chụp trực tiếp khi kiếp giáng lúc đang online.
+
+## GĐ181 (30/10) — Đích đường Tàn Đăng đổi thành HÓA THẦN + quà đường (Bảo chốt lại theo thang truyện chuẩn)
+- Sau thoát thai hoán cốt, đột phá thẳng lên **Hóa Thần** (không nhảy lên Phản Hư nữa). Thang cảnh hiển thị: Nguyên Anh → Vô Danh → **Hóa Thần → Phản Hư** (Hóa Thần trước Phản Hư như truyện chuẩn; Vô Danh vẫn là tên tạm chờ Bảo đặt).
+- **Quà đường Tàn Đăng** khi đột phá Hóa Thần: **+10% Tu vi từ mọi nguồn VĨNH VIỄN** + **tặng 30 điểm cộng chỉ số** (số điểm là tạm).
+- Sửa luôn 1 lỗi cũ từ GĐ180: phân thân của trùm thử thách (mọi loại kiếp ảnh) bị mất vị trí/máu do lỗi code — giờ phân thân hiện đúng, có máu riêng.
+- Cách test: đi hết đường Tàn Đăng như mục GĐ180 → sau hoán cốt, thử thách đổi tên **Hóa Thần Kiếp Ảnh**, thắng → đột phá → vào Hóa Thần tầng 1, có dòng quà 🎁 + điểm tăng 51 (21 + 30).
+
+## GĐ182 (30/10) — HÓA THẦN đầy đủ: cảnh giới + skill + trang bị
+1. **Tiến trình trong cảnh**: Hóa Thần tu tiếp tầng 1→9 như các cảnh khác — tiểu cảnh +7 điểm/tầng; **trung cảnh** ở tầng 3→4 và 6→7 (+9 điểm, +40 năm thọ — số tạm; cần Đan Trung Cảnh + thắng Thử Luyện Thú như thường). Tầng 9 là đỉnh hiện tại: nút đột phá báo "Cảnh giới Phản Hư chưa mở".
+2. **Ô chiêu thứ 8**: Hóa Thần lắp được 8 ô công pháp (Nguyên Anh 7).
+3. **Skill**: (a) **9 thần thông theo LỚP** tự lĩnh ngộ khi lên Hóa Thần — vd Kiếm tu "Vạn Kiếm Hóa Thần", Y tu "Hồi Thiên Thần Thủ" (hồi 85% máu); khung tạm: hồi chiêu 60s, tốn 200 chân nguyên. (b) **90 thần thông theo ĐƯỜNG VŨ KHÍ** (mỗi đường +3: Diệt/Vực/Sinh) tự lĩnh ngộ khi lên Hóa Thần nếu đang cầm đúng vũ khí — tổng catalog 871 chiêu.
+4. **Trang bị bậc Hóa Thần**: đồ sinh ra (rương/nhiệm vụ/rèn/mua) khi người chơi đã Hóa Thần mang hậu tố **"· Hóa Thần"**, chỉ số nhân **×2,0** (Nguyên Anh ×1,6); người dưới Hóa Thần KHÔNG mặc được đồ bậc này. Sửa kèm: bảng thứ hạng cảnh giới trong luật mặc đồ bị thiếu cảnh mới (Phản Hư mặc đồ Hóa Thần bị chặn oan — đã sửa).
+- Cách test nhanh: nhân vật Hóa Thần mở Sổ công pháp xem 2 nhóm thần thông mới + lắp đủ 8 ô; mở rương/mua đồ ở Tiệm Rèn xem món "· Hóa Thần"; nhân vật Nguyên Anh thử mặc món đó → bị báo "Không thể trang bị".
+
+## GĐ183 (30/10) — BỎ HẲN cảnh trung gian "Vô Danh" (Bảo chốt)
+- Thang cảnh giờ gọn đúng chuẩn truyện: **… Nguyên Anh → Hóa Thần → Phản Hư**. Không còn cảnh "Vô Danh" ở bất kỳ đâu (thẻ nhân vật, sổ, luật mặc đồ, ô chiêu, bay).
+- Hệ quả quan trọng: **Nguyên Anh tầng 9 đường thường giờ đột phá THẲNG lên Hóa Thần** như một đột phá lớn bình thường (thắng Hóa Thần Kiếp Ảnh, +21 điểm, +200 năm thọ — số tạm) — trước đây bị chặn "chưa mở". Trùm của NA9 thường yếu hơn chút (88.704 máu) so với người đi đường Tàn Đăng viên mãn (99.348) vì tính theo bước cảnh giới.
+- **Đường Tàn Đăng giữ nguyên** và giờ là con đường "đi vòng lấy quà": cùng đích Hóa Thần nhưng người đi hết đường (thoát thai hoán cốt) mới nhận **quà +10% tu vi vĩnh viễn + 30 điểm**; đường thường lên thẳng thì KHÔNG có quà (probe đo đúng: thường +21 điểm, đường ẩn +51).
+- Cách test: nhân vật NA9 thường, đầy tu vi → nút đột phá hiện thử thách Hóa Thần Kiếp Ảnh → thắng → lên Hóa Thần. Nhân vật NA9 đã chọn đường Tàn Đăng thì nút vẫn khóa theo thọ nguyên như cũ.
+
+## GĐ184 (30/10) — PHÁP TƯỚNG thay thần thông Hóa Thần (Bảo chốt thiết kế)
+- **BỎ TOÀN BỘ thần thông Hóa Thần của GĐ182** (9 chiêu lớp + 90 chiêu đường vũ khí). Thần thông Kim Đan/Nguyên Anh giữ nguyên. Thay vào đó: lên Hóa Thần là **ngưng tụ 1 Pháp Tướng của riêng mình**.
+- **Hệ của pháp tướng KHÓA CỨNG** theo linh căn chính tại thời khắc đột phá Hóa Thần (có bao nhiêu linh căn cũng chỉ lấy hệ đó; Pháp Tu có biến dị thì biến dị lấn hệ chính). Hình dáng trong game: hình tượng khổng lồ sau lưng (cùng bộ sprite nhân vật, phóng to theo giai đoạn, nhuộm màu theo hệ) — hiện hình là thấy ngay.
+- **5 giai đoạn**: Sơ Hình ×1 → Chân Thân ×1,3 → Viên Mãn ×1,7 → Chung Cực ×2,2 → Thần Vị ×3 — nhân **toàn bộ chỉ số** (công/phòng/tốc độ/máu/chân nguyên tối đa đều nhân; ảnh test: máu 200.100 → 340.170 ở Viên Mãn).
+- **Hiện hình (nút trên thẻ nhân vật)**: tốn ngay 15% máu + 20% chân nguyên tối đa; duy trì −1% máu và −1,2% chân nguyên mỗi giây (số đã chỉnh sau probe: bản đầu 1,8% làm cửa sổ hiện hình ngắn quá, không đánh nổi ải 1). **Không hồi chiêu**, bật tắt tự do; cạn máu/chân nguyên thì tự tắt (drain không giết).
+- **Đang hiện hình KHÔNG hồi phục được bằng bất cứ cách nào**: thiền không hồi, đan hồi máu/hồi nguyên bị chặn (không mất đan), chiêu hồi máu/hút máu vô hiệu — **ngoại lệ duy nhất là dòng hồi nội tại độc nhất của trang bị: CHƯA LÀM, Bảo dặn làm sau**.
+- **Dưới 20% máu hoặc chân nguyên**: bấm bật lần 1 chỉ hiện cảnh báo nguy hiểm tính mạng; bấm lần nữa (trong 10s) là CỐ BẬT → duy trì bằng **đốt thọ nguyên ~9 ngày thọ/giây (≈1 năm mỗi 40 giây)**, máu/chân nguyên không tụt nữa; thọ sắp cạn thì tự tắt.
+- **Nuôi pháp tướng (tu dưỡng)**: trích 20% Tu vi nhận được (nhiệm vụ/offline/thiền...); mở pháp tướng ngồi thiền +60/giây; giao chiến khi đang hiện hình +6/giây; học chiêu pháp tướng +2.000; đột phá tầng trong cảnh Hóa Thần +5.000; tế luyện bằng Linh thạch Thượng (nút trên thẻ, 1 viên = +50). Mốc lên giai đoạn (tạm): 30.000 / 120.000 / 400.000 / 1.200.000.
+- **Lên giai đoạn qua Ảo Cảnh Pháp Tướng** (nút hiện trên thẻ khi đủ tu dưỡng + đang hiện hình, vào ải ở sân Đạo Quán): trùm "Ảo Ảnh Pháp Tướng" có lực chiến = chỉ số gốc của chính mình ×1,7 (mỗi đòn của nó ≈ 1,8% máu gốc của bạn — đã giảm từ 5,5% sau probe vì không qua nổi). **Tắt pháp tướng giữa ải hoặc gục ngã = thua ải**; thắng = lên 1 giai đoạn.
+- **Chiêu của pháp tướng**: 90 chiêu mới (30 đường vũ khí × 3), học bằng lĩnh ngộ như thường nhưng có cổng giai đoạn (chiêu 1/2/3 cần giai đoạn 1/2/3), thiên về đánh VÙNG quanh mình; **chỉ tung được khi đang hiện hình** — lúc đó cả khay chiêu tự đổi thành bộ chiêu pháp tướng. Hệ của chiêu = hệ đã khóa (Hỏa kèm đốt, Băng làm chậm...). Chưa học chiêu nào thì hiện hình gần như chỉ để phòng thủ như Bảo nói.
+- Cách test nhanh: nhân vật Hóa Thần → thẻ có dòng 🔮 Pháp Tướng + nút Hiện hình → bật lên ngắm hình khổng lồ sau lưng, mở Túi/Sổ học chiêu Pháp Tướng của vũ khí đang cầm, qua sân Đạo Quán vào Ảo Cảnh khi đủ tu dưỡng (tế luyện bằng Linh thạch Thượng cho nhanh).
+
+## GĐ185 (30/10) — Thông báo THÀNH TỰU sang mép PHẢI (Bảo yêu cầu)
+- Mọi thông báo 🏆 Thành tựu (lên bậc, hoàn thành nhóm, thành tựu ẩn mở khóa...) giờ hiện ở **chồng thông báo mép phải** — cùng chỗ với dòng hạ gục/nhặt đồ của GĐ178 — không còn dồn vào nhật ký bên trái + toast giữa màn hình nữa. Các thông báo khác giữ nguyên.
+
+## GĐ186 (30/10) — CÂN BẰNG LẠI PHÁP TƯỚNG (Bảo tự chốt)
+- **Bật + duy trì Pháp Tướng KHÔNG tốn gì nữa** — bỏ hết phí mở (15% máu/20% chân nguyên), drain duy trì, cảnh báo dưới 20% và chế độ đốt thọ nguyên. Máu thọ nguyên để nguyên vẹn; bật tắt tự do tuyệt đối.
+- **Chi phí dồn vào CHIÊU của pháp tướng**: mỗi chiêu tốn **cả chân nguyên lẫn máu** — chân nguyên gốc 180/220/300 (lớn hơn thần thông Nguyên Anh 150; vào game còn nhân hệ số chân nguyên theo lớp như mọi chiêu catalog, vd Kiếm ×0,8 → 144/176/240) **cộng thêm 4%/6%/10% máu tối đa**. Máu không đủ trả thì tung không ra (không tự sát). Số đều là TẠM do agent đặt theo yêu cầu "lớn hơn chiêu thường".
+- **Giữ nguyên** luật đang hiện hình thì không hồi phục được (thiền/đan/chiêu hồi đều chặn) — chi phí máu của chiêu vì thế là áp lực thật. Nếu Bảo muốn bỏ luật chặn hồi này thì nói, gỡ 5 phút.
+- Cách test: nhân vật Hóa Thần bật tướng để yên bao lâu cũng không tụt máu/chân nguyên; vào bãi quái tung chiêu Pháp Tướng sẽ thấy cả 2 thanh cùng tụt một khúc lớn.
+
+## GĐ187 (30/10) — DUY TRÌ NHẸ TRỞ LẠI (Bảo chốt: không phí mở, chỉ tốn duy trì + chiêu)
+- Bật Pháp Tướng vẫn **miễn phí**; duy trì tốn nhẹ **0,5% máu + 0,8% chân nguyên tối đa mỗi giây** (TẠM) — đầy cây hiện hình được khoảng 2 phút, cạn thì tướng tự tắt (không chết vì drain). Nhẹ hơn hẳn bản drain cũ của GĐ184 (1% + 1,2%/giây kèm phí mở 15%/20%).
+- Chiêu của pháp tướng giữ nguyên chi phí lớn của GĐ186 (cả chân nguyên lẫn % máu).
+- Cách test: bật tướng đứng yên xem 2 thanh tụt chậm đều; vào Ảo Cảnh đánh trọn ải vẫn thừa thời gian.
+
+## GĐ188 (30/10) — GÓI FEEDBACK CỦA DRAX: COMBO ĐÒN ĐÁNH + NỚI ĐẦU GAME + TĂNG MẬT ĐỘ QUÁI
+- **Combo đòn thường**: đánh thường giờ luân phiên 3 nhịp tư thế theo nhóm vũ khí (nghỉ quá 2,5s thì về nhịp đầu). Thương: **đâm thẳng → QUÉT NGANG → bổ dọc**; kiếm/rìu/chùy: chém xuôi → chém ngược → bổ trên xuống; pháp cụ: giơ thẳng → chếch trái → chếch phải; khiên: đẩy + nghiêng theo nhịp. Chỉ là hoạt ảnh, không đổi sát thương/cân bằng. Song kiếm/song đao tay phụ vẫn vung trễ nửa nhịp như cũ.
+- **Nới độ khó đầu game** (số TẠM): tầm đánh gần 50 → **65px** (đỡ phải đứng sát); Sói Xám công 5 → **3**, tốc đuổi 120 → **100**; Dơi Đen công 4 → **3**, tốc đuổi 175 → **145**.
+- **Mật độ quái**: bãi farm làng Sói 5 → **10**, Dơi 4 → **8**, Thạch Quái 3 → **5**; map hoang Luyện Khí hệ số ×3 → **×4**, Trúc Cơ ×2 → **×3** (Kim Đan+ giữ nguyên vì Render free). Tổng quái toàn server 1.121 → **1.403** — để ý buổi test bạn bè xem server có lag không, lag thì hạ lại.
+- Cách test: tạo nhân vật Thể Tu cầm thương, ra bãi farm đánh liên tục 3 đòn — đòn 2 phải thấy thương quét ngang rõ. Người mới đánh sói phải đỡ ngộp hơn trước.
+
+## GĐ189 (30/10) — BỔ SUNG COMBO: SONG ĐAO/SONG KIẾM + TAY KHÔNG + ĐẠN ĐÁNH XA
+- Kiểm tra lại theo câu hỏi của Bảo thì combo GĐ188 có 2 lỗ hổng: **song đao/song kiếm** (Ảnh Tu/Kiếm Tu) và **tay không** bị rơi vào kiểu "giơ pháp cụ" — tay phụ của song đao đứng yên. Đã sửa: song vũ khí về nhóm **chém** (2 tay vung lệch nhịp nhau), tay không về nhóm **đấm/đâm**.
+- **Đòn đánh xa** (13 vũ khí tầm xa): tư thế đã có combo từ GĐ188 (quạt quét như chém; trượng/sách/bút giơ chếch theo nhịp; kim châm đâm). Nay thêm biến thể cho **viên đạn**: nhịp 1 bay thẳng, nhịp 2 (quét) bay **vòng cung**, nhịp 3 đạn **to hơn**. Sát thương không đổi — chỉ hình ảnh.
+- Cách test: Ảnh Tu cầm song đao đánh 3 đòn liên tiếp — phải thấy 2 lưỡi đao vung lệch nhau; Pháp Tu bắn 3 đòn — viên đạn thứ 2 bay cong.
+
+## GĐ190 (30/10) — COMBO ĐẶC TRƯNG TỪNG VŨ KHÍ (30/30 món)
+- Mỗi vũ khí giờ có **bộ 3 nhịp riêng** thay cho combo theo nhóm: tay không đấm liên hoàn (móc trái → móc phải → đấm thẳng nặng); rìu/cự kiếm/trọng kiếm quét cực rộng rồi bổ; kiếm đúng kiếm pháp (chém → **đâm** → chém ngược); côn quét 2 chiều rồi đâm; phật châu nhịp cuối **xoay châu**; quỷ thương đâm xa + đòn cuối **đâm xoay**; khiên nhịp cuối là **húc khiên**; sách phép nhịp cuối **lật trang**; cổ cầm **gảy đàn**; bút phép vẩy 2 chiều rồi **chấm bút**; quyển trục có nhịp **mở trục**; kim châm 2 châm nhanh + 1 châm sâu; dao găm đâm nhanh + cứa; trảo/liềm cào móc liên tiếp...
+- Vẫn chỉ là hoạt ảnh (không đổi sát thương/cân bằng); đạn xa vẫn theo nhịp như GĐ189 (nhịp 2 cong, nhịp 3 to — khớp với nhịp "quét" của từng món).
+- Cách test: đổi qua vài món vũ khí khác nhau, đánh 3 đòn liên tục mỗi món — cảm giác phải khác nhau rõ, không còn "cùng một kiểu vung".
+
+## GĐ191 (30/10) — DÒNG NỘI TẠI ĐỘC NHẤT CHO TRANG BỊ (theo hướng tu + nhóm vũ khí)
+- Trang bị phẩm **Tím trở lên** (có dòng nội tại) mỗi dòng có **10%** cơ hội (TẠM) thành dòng **ĐỘC NHẤT** — tối đa **1 dòng/món**, hiện trong tab Trang bị với tiền tố "✦ ĐỘC NHẤT". Rèn lại (tẩy luyện) cũng rút được.
+- Pool rút theo món: **3 dòng chung** (hồi máu/chân nguyên theo giây) + **2 dòng riêng của hướng tu** món đồ + (nếu là vũ khí) **1 dòng riêng của nhóm vũ khí** (nhọn/chém/nặng/pháp cụ). Tổng 25 dòng.
+- Hiệu ứng: hồi theo giây (Sinh Cơ, Hồi Nguyên, Từ Bi, Pháp Nguyên Vô Biên...), hút máu đòn thường (Thể Tu 3%, Quỷ Tu 4%), chí mạng + tỉ lệ/+ sát thương (Kiếm, Ảnh, Cốt, Pháp, Nho), tốc độ chạy (Kiếm +8%, Ảnh +10%), Tu vi +% (Y +6%, Nho +8%), phản chấn 15% (Thể Tu).
+- **Luật Pháp Tướng**: chỉ các dòng HỒI THEO GIÂY mới hồi được khi đang hiện hình (đúng ngoại lệ Bảo chốt ở GĐ184) — hút máu vẫn bị chặn như thường. Drain duy trì 0,5%/0,8% mà có đồ hồi 0,3%/0,4% thì ròng chỉ còn -0,2%/-0,4% mỗi giây.
+- Cách test: kiếm 1 món Tím+ có dòng ✦ (mở rương/rèn lại nhiều lần), mặc vào, để ý máu tự hồi dù không thiền không đan; lên Hóa Thần bật Pháp Tướng xem máu tụt chậm hơn hẳn người không có đồ.
+
+## GĐ192 (30/10) — DÒNG ĐỘC NHẤT: THÊM 16 LOẠI + LUÔN LUÔN DÙNG ĐƯỢC
+- **Luật mới (Bảo chốt)**: hiệu ứng của dòng ĐỘC NHẤT **luôn luôn dùng được** — kể cả hút máu/hồi khi hạ quái cũng chạy trong lúc Pháp Tướng hiện hình (bản GĐ191 từng chặn hút máu, nay gỡ). Chỉ các nguồn hồi THƯỜNG (thiền/đan/chiêu) mới bị Pháp Tướng chặn.
+- Thêm 16 dòng → tổng **41 dòng độc nhất**: hút chân nguyên (Cốt/Quỷ), né tránh +% (Thể/Ảnh/vũ khí nhọn), trừ sát thương vào chân nguyên (Phật 20%/Y 15%/vũ khí nặng 10%), chém lan sang quái cạnh mục tiêu (Kiếm 40%/vũ khí chém 30%), hạ quái hồi máu/chân nguyên (dòng chung), rơi nguyên liệu +15% (dòng chung), giảm hồi chiêu mọi chiêu (Pháp -10%/Nho -8%/pháp cụ -6%).
+- Cách test: mặc đồ có dòng ✦ rồi lên Hóa Thần bật Pháp Tướng và đánh quái — máu vẫn được hút về như thường; đồ chém lan thì đứng giữa bầy sói đánh 1 con, con bên cạnh cũng mất máu.
+
+## GĐ193 (30/10) — THÊM 18 DÒNG ĐỘC NHẤT (tổng 59)
+- 7 cơ chế mới: sát thương tổng +%, giảm sát thương nhận -%, tốc độ đánh thường +%, tầm đánh/tầm chiêu +%, chiêu tốn ít chân nguyên hơn, tỉ lệ đột phá +điểm %, thiền hồi nhanh hơn. Mỗi hướng tu thêm 1 dòng riêng, mỗi nhóm vũ khí thêm 1, chung thêm 5.
+- Cách test: rút đồ Vô nhiều lần sẽ thấy các dòng ✦ mới (Chiến Ý Vô Song, Thể Như Bàn Thạch, Kiếm Thế Liên Hoàn...); mặc đồ giảm tốn chân nguyên thì tung chiêu thấy MP tụt ít hơn hẳn.
+
+## GĐ194–195 (30/10) — KẾT BẠN / TỔ ĐỘI / XEM THÔNG TIN / BẢNG XẾP HẠNG
+- Nút **👥 Xã hội** (cạnh nút Giao dịch): 3 thẻ Bạn bè / Tổ đội / Xếp hạng. Nút **👤** hiện khi đứng gần người chơi khác: Xem thông tin / Kết bạn / Mời tổ đội / Giao dịch.
+- **Kết bạn**: nhập đúng tên nhân vật (kể cả người đang offline — họ nhận lời mời khi đăng nhập); huy hiệu đỏ trên nút Xã hội báo số lời mời chờ. Xóa bạn là xóa 2 chiều.
+- **Tổ đội** tối đa 5 người (TẠM), chỉ đội trưởng mời thêm/ mời ra; rời game = rời đội; chat có thêm kênh **⚔ Đội** (bấm nút kênh chat để xoay Gần → Thế giới → Đội). Panel tổ đội hiện máu từng thành viên.
+- **Xem thông tin**: thẻ hiện lớp/cảnh giới, lực chiến, điểm trang bị, tông môn, nhánh Tiên/Ma, pháp thân, thú cưỡi, và từng món đồ đang mặc (kèm dòng độc nhất trên đồ).
+- **Bảng xếp hạng** (tính cả người offline, cập nhật mỗi 30s): Tu vi (cảnh giới), Trang bị (điểm đồ — dòng độc nhất cộng nhiều điểm), Thú cưỡi (số con + tốc độ), Pháp thân (giai đoạn + tu dưỡng); luôn hiện hạng của chính mình.
+- Cách test: 2 tài khoản đứng cạnh nhau → kết bạn qua nút 👤, lập đội, chat kênh Đội, mở BXH so hạng.
+
+## GĐ196 (30/10) — 7 GỢI Ý ẨN MỚI + SỬA LỖI NHIỆM VỤ BẢNG
+- **SỬA LỖI QUAN TRỌNG**: từ đợt phóng to map (GĐ175), điểm nhận/trả NHIỆM VỤ BẢNG và Nhà Trưởng Làng bị sót tỉ lệ — đứng ở bảng thật cũng không nhận/trả được nhiệm vụ bảng. Đã sửa; test: ra Bảng Treo Thưởng nhận "Trừ khử Sói Xám", làm xong quay lại bảng trả — phải được.
+- 7 gợi ý ẩn mới (nâng tổng lên 10, xem lại trong Sổ gợi ý trên thẻ nhân vật), bật từ hành vi thật: có món đồ mang dòng ĐỘC NHẤT đầu tiên; có thú cưỡi đầu tiên; suýt chết trong giao chiến; ra bãi farm ban đêm; có bạn đầu tiên; lần đầu rời map quê; lần đầu gục ngã. Không gợi ý nào chỉ đường cụ thể — toàn là lời người xưa để tự ngẫm.
+
+## GĐ197 (30/10) — BẬT 3 THÀNH TỰU TỪNG BỊ KHÓA
+- "Luyện đến cùng" (có chiêu luyện tới am hiểu cấp 10), "Mục Tiêu truy nã" (hạ quái của nhiệm vụ bảng — tính khi trả nhiệm vụ), và thành tựu ẨN "???: bí mật ẩn" (hoàn thành chuỗi nhiệm vụ ẩn — xem GĐ198). Các thành tựu còn khóa đều thuộc hệ chưa có trong game (vườn thuốc, thú tiến hóa, đầu thai...) — để dành khi các hệ đó ra đời.
+
+## GĐ198–199 (30/10) — CHUỖI NHIỆM VỤ ẨN CÓ CỐT TRUYỆN
+- **Di Thư Tiền Bối** (3 phần): đứng thiền/ngắm ở Tụ Linh Trận sẽ thấy phong thư niêm sáp dưới chân bia đá → mang cho Sứ Giả mở thư → mang 2 Hồi Xuân Đan cho Trưởng Làng thay lời hồi âm → dọn 5 Thạch Quái quanh mộ phần tiền bối ở bãi Thạch Quái. Phần thưởng cuối: **1 món đồ Cam CHẮC CHẮN có dòng độc nhất** + mở thành tựu ẩn "bí mật ẩn". KHÔNG có dấu chỉ đường — phải tự phát hiện phong thư.
+- **Cây Búa Của Cha** (Thợ Rèn, 2 phần): nghe Chủ Tiệm Nguyên Liệu kể chuyện (nói chuyện với bà ấy) → nhận nhiệm vụ ở Thợ Rèn: hạ 8 Sói Xám tìm búa rơi → mang 5 Quặng Sắt về rèn lại búa.
+- **Đoàn Xe Năm Xưa** (Thương Nhân, 2 phần): đứng ở cổng làng thấy vệt bánh xe cũ → hỏi Thương Nhân Lưu Động → hạ 10 Dơi Đen cho vong linh đoàn xe yên nghỉ.
+- Cách test nhanh chuỗi Di Thư: thiền ở Tụ Linh vài giây → thấy thông báo 🔍 manh mối → gặp Sứ Giả (nhận + nói chuyện + trả) → Trưởng Làng → Sứ Giả → săn Thạch Quái ở bãi farm đông bắc → về Sứ Giả nhận đồ độc nhất.
+
+## GĐ200 (30/10) — GIAO DỊCH TRANG BỊ GIỮA NGƯỜI CHƠI
+- Bàn giao dịch có thêm mục **⚔️ Trang bị trong túi**: bấm món để đưa lên bàn, bấm lại để gỡ; cả hai phía đều thấy tên đồ nhuộm màu phẩm + bậc (Nguyên Anh/Hóa Thần) + dòng ✦ ĐỘC NHẤT của món — xem kỹ trước khi khóa bàn.
+- **Đồ đang mặc không giao dịch được** (hàng đó ghi rõ "đang mặc — tháo ra mới giao dịch được"); muốn bán phải tháo ra trước.
+- An toàn: đang thương lượng mà mặc luôn món đang trên bàn (hoặc đồ trên bàn thay đổi) thì giao dịch tự HỦY, không trao gì cả — tránh mất đồ oan.
+- Cách test: 2 tài khoản đứng gần → Giao dịch → mỗi bên đưa 1 món gear + ít Linh thạch → cả hai Xác nhận → kiểm tra túi đồ hai phía đã đổi món cho nhau.
+
+## GĐ201 (30/10) — TỔ ĐỘI CHIA SẺ TIẾN ĐỘ NHIỆM VỤ SĂN QUÁI
+- Đồng đội **cùng map, trong vòng 800px quanh chỗ quái gục** (số TẠM) được tính tiến độ nhiệm vụ săn quái (cả nhiệm vụ thường lẫn săn trùm) y như người ra đòn kết liễu — kể cả khi họ không đánh con quái đó. Hoàn thành nhờ đồng đội vẫn có thông báo ✔ như thường, kèm dòng "⚔ Đồng đội X vừa hạ ... — nhiệm vụ săn quái của bạn cũng tiến thêm" (tối đa 1 dòng/5 giây).
+- Ở xa hơn 800px hoặc khác map: không tính. Đồ rơi vẫn ai nhặt người đó được; thành tựu cá nhân và hồi độc nhất vẫn chỉ tính cho người kết liễu.
+- Lưu ý thiết kế: hạ quái vốn không cho Tu vi (luật từ GĐ76 — Tu vi đến từ linh mạch/thiền/nhiệm vụ) nên không có Tu vi để chia; cái chia nhau là TIẾN ĐỘ NHIỆM VỤ.
+- Cách test: 2 tài khoản cùng nhận "Trừ khử Sói Xám", lập đội, đi săn CÙNG nhau (đứng gần nhau) — một người đánh, người kia mở panel nhiệm vụ sẽ thấy số đếm tăng theo.
+
+## GĐ202 (30/10) — NGUYÊN ANH XUẤT KHIẾU
+- Từ **Nguyên Anh** trở lên, thẻ nhân vật có nút **👻 Xuất khiếu** (mọi số đều TẠM): tốn 30% chân nguyên tối đa, nguyên thần rời thân tối đa 45 giây, hồi chiêu 180 giây.
+- Nguyên thần: bay nhanh (×1.8, cộng cả ngự kiếm), **xuyên vật cản**, **quái không nhìn thấy** — hợp để do thám map nguy hiểm, tới điểm khám phá/manh mối ẩn ở nơi quái mạnh. Thân xác ngồi yên tại chỗ (người khác nhìn thấy như một bản sao đang thiền).
+- Nguyên thần **không** đánh, không tung chiêu, không dùng đồ, không giao dịch được. Hết 45 giây, bay xa thân xác quá 2000 bước, hoặc bước sang map khác → **tự nhập thể** về đúng vị trí thân xác. Bấm nút lần nữa (🌕 Nhập thể) để về sớm. Rời game giữa chừng cũng tự nhập thể.
+- Thành tựu "Xuất khiếu" (nhóm Công pháp, từng bị khóa) nay đã bật — xuất khiếu đủ số lần là lên bậc.
+- Cách test: nhân vật Nguyên Anh ở quảng trường → bấm Xuất khiếu → bay một vòng quanh làng, thử bay xuyên nhà, bay thẳng về phía đông quá xa sẽ bị kéo về thân xác; để ý nhân vật mờ đi và thân xác còn ngồi ở quảng trường (nhờ tài khoản thứ hai nhìn giúp).
+
+## GĐ203 (30/10) — THÊM 4 LOÀI THÚ CƯỚI + HIỆU ỨNG CƯỚI
+- Trại Ngự Thú (Mã Vân, Ngự Thú Sơn Trang) nhận thuần hóa hộ thêm 4 loài (số TẠM): **Địa Kim Thử** ×1.35 (12k, 1 ngày), **Sa Mạc Hạt** ×1.40 (16k, 1 ngày), **Hỏa Thử** ×1.45 (20k, 2 ngày), **Tuyết Hồ** ×1.60 (28k, 2 ngày). Tổng **11 loài** — mốc thành tựu "10 loài thú cưỡi" giờ với tới được. Trứng thú cũng có tỉ lệ nhỏ nở ra 4 loài mới.
+- **Hiệu ứng cưỡi**: khi chạy, dưới chân thú có vệt khói/bụi theo hệ của loài (Thiên Lôi Thú tím điện + tia lửa, Hỏa Thử cam + than lửa bay, Tuyết Hồ trắng tuyết, Thanh Vân Hạc mây lớn trôi chậm, loài thường bụi đất). Lên thú có vòng sáng màu của loài, xuống thú có bụp khói nhỏ.
+- Cách test: tới trại đặt thuần hóa Tuyết Hồ, hôm sau (ngày game) nhận rồi cưỡi chạy quanh làng — nhìn vệt dưới chân thú và so màu giữa các loài; cưỡi thử Hỏa Thử/Thiên Lôi Thú để thấy tia lửa.
