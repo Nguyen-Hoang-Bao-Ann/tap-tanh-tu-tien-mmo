@@ -97,6 +97,7 @@ interface CharacterData {
   statPoints: number;
   hiddenStats?: Record<string, number>; // GĐ144: chỉ số ẩn
   daoQuan?: { min: number; tier: number }; // GĐ144: giờ Đạo Quán + cấp thành tựu ẩn
+  festival?: { big: any; mini: any } | null; // GĐ217: trạng thái lễ hội (server gửi kèm)
   skillMastery?: Record<string, number>; // GĐ144: am hiểu từng chiêu
   hp: number;
   maxHp: number;
@@ -265,6 +266,49 @@ const ITEM_INFO: Record<string, { name: string; desc?: string }> = {
   ruong_thanh_tuu_ngoc: { name: 'Rương Thành Tựu Ngọc', desc: 'Mở: nhận 3 vật phẩm, chắc chắn 1 món hiếm (GĐ138)' },
   ruong_thanh_tuu_thien: { name: 'Rương Thành Tựu Thiên', desc: 'Mở: nhận 3 vật phẩm, chắc chắn 1 món rất hiếm (GĐ138)' },
   canh_doi: { name: 'Cánh Dơi', desc: 'Cánh của Dơi Đen — bán ở Tiệm Nguyên Liệu, dùng trả nhiệm vụ' }, // GĐ38
+  dong_le_hoi: { name: 'Đồng Lễ Hội', desc: 'Tiền tệ lễ bốn mùa — đổi quà ở Lão Tư Lễ tại quảng trường' }, // GĐ217
+  phao_hoa_le: { name: 'Pháo Hoa Lễ', desc: 'Dùng: bắn pháo hoa ăn mừng tại chỗ' }, // GĐ217
+  banh_le: { name: 'Bánh Lễ', desc: 'Dùng: hồi 25% HP và 25% Chân nguyên' }, // GĐ217
+  tui_qua_le: { name: 'Túi Quà Lễ', desc: 'Dùng: mở ra nhận Linh thạch + quà vặt' }, // GĐ217
+  hat_linh_xuan: { name: 'Hạt Linh Xuân', desc: 'Gieo ở điểm đất trống quanh quảng trường (bấm E) — thiền gần để tưới' }, // GĐ218
+  linh_thuy: { name: 'Linh Thủy', desc: 'Hứng ở Tụ Linh Trận — tưới rễ cây đào tiên' }, // GĐ218
+  hoa_linh_xuan: { name: 'Hoa Linh Xuân', desc: 'Hoa từ cây Ươm Mầm nở rộ' }, // GĐ218
+  canh_dao_tien: { name: 'Cành Đào Tiên', desc: 'Kỷ niệm cứu cây đào tiên của làng' }, // GĐ218
+  phao_hoa_dao: { name: 'Pháo Hoa Đào', desc: 'Dùng: bắn pháo hoa hồng như mưa cánh đào' }, // GĐ218
+  banh_hoa_dao: { name: 'Bánh Hoa Đào', desc: 'Dùng: hồi 25% HP/MP, thiền hồi nhanh hơn trong 4 giờ game' }, // GĐ218
+  mat_hoa_xuan: { name: 'Mật Hoa Xuân', desc: 'Nguyên liệu mùa xuân — để dành luyện đan' }, // GĐ218
+  giay_den_linh: { name: 'Giấy Đèn Linh', desc: 'Thả đèn sông ban đêm ở bờ ao sen — ghi điều ước (lễ Hạ)' }, // GĐ219
+  den_song_lon: { name: 'Đèn Sông Lớn', desc: 'Đèn lớn cháy lâu gấp đôi — thả ở bờ ao sen vào ban đêm lễ Hạ' }, // GĐ219
+  che_dau_xanh: { name: 'Chè Đậu Xanh Linh', desc: 'Uống giải nhiệt: hồi 40 đói/khát và 10% HP' }, // GĐ219
+  vo_so_linh: { name: 'Vỏ Sò Linh', desc: 'Nguyên liệu vẽ phù, vật kỷ niệm lễ Hạ' }, // GĐ219
+  lua_linh: { name: 'Lúa Linh', desc: 'Gặt ở ruộng lễ mùa Thu — nấu Bánh Thu Nguyệt với Nguyệt Nương' }, // GĐ220
+  hat_sen_linh: { name: 'Hạt Sen Linh', desc: 'Nấu cùng Lúa Linh thành Bánh Thu Nguyệt' }, // GĐ220
+  den_long_linh: { name: 'Đèn Lồng Linh', desc: 'Dùng để thắp: hào quang sáng quanh người 4 giờ game' }, // GĐ220
+  banh_thu_nguyet: { name: 'Bánh Thu Nguyệt', desc: 'Ăn hồi 30%, người gần được chia 15% — bánh đoàn viên' }, // GĐ220
+  trang_khuyet_phu: { name: 'Trăng Khuyết Phù', desc: 'Nguyên liệu mùa thu' }, // GĐ220
+  sung_linh_loc: { name: 'Sừng Linh Lộc', desc: 'Kỷ vật truyện lễ Thu (kết đánh đuổi)' }, // GĐ220
+  chuong_dong_nho: { name: 'Chuông Đồng Nhỏ', desc: 'Kỷ vật truyện lễ Thu (kết dụ đi)' }, // GĐ220
+  canh_mai_linh: { name: 'Cành Mai Linh', desc: 'Mai nở giữa tuyết — kỷ niệm Hàn Mai Tế' }, // GĐ221
+  nen_huong_tram: { name: 'Nén Hương Trầm', desc: 'Hương thắp lễ cuối năm' }, // GĐ221
+  bao_li_xi: { name: 'Bao Lì Xì', desc: 'Dùng để mở: lộc đầu năm ngẫu nhiên' }, // GĐ221
+  canh_gung_linh: { name: 'Canh Gừng Linh', desc: 'Uống ấm người: hồi 40 đói/khát và 15% HP' }, // GĐ221
+  manh_cau_chuc: { name: 'Mảnh Câu Chúc', desc: 'Lời chúc viết tay sưu tầm từ lì xì' }, // GĐ221
+  chuong_le: { name: 'Chuông Lễ', desc: 'Chuông đền vớt từ ao sen đóng băng (vật truyện)' }, // GĐ221
+  an_nguoi_giu_le: { name: 'Ấn Người Giữ Lễ', desc: 'Danh hiệu Người Giữ Lễ — khép đủ 4 truyện lễ bốn mùa' }, // GĐ222
+  cuon_don_xuan: { name: 'Cuộn “Người Đón Xuân”', desc: 'Dùng: nhận danh hiệu mùa Xuân, hiện trên thẻ' }, // GĐ223
+  cuon_tha_den: { name: 'Cuộn “Người Thả Đèn”', desc: 'Dùng: nhận danh hiệu mùa Hạ, hiện trên thẻ' }, // GĐ223
+  cuon_ngam_trang: { name: 'Cuộn “Người Ngắm Trăng”', desc: 'Dùng: nhận danh hiệu mùa Thu, hiện trên thẻ' }, // GĐ223
+  cuon_don_tuyet: { name: 'Cuộn “Người Đón Tuyết”', desc: 'Dùng: nhận danh hiệu mùa Đông, hiện trên thẻ' }, // GĐ223
+  ruou_que_hoa: { name: 'Rượu Quế Hoa', desc: 'Uống: thiền +30% Tu vi trong 1 giờ game' }, // GĐ223
+  hat_giong_vu_thu: { name: 'Hạt Giống Vụ Thu', desc: 'Gieo ở ruộng Mạ Linh đã gặt để thêm vụ riêng' }, // GĐ223
+  den_trang_giay: { name: 'Đèn Trăng Giấy', desc: 'Thắp: hào quang quanh người 1 giờ game' }, // GĐ223
+  cau_doi_do: { name: 'Câu Đối Đỏ', desc: 'Dùng: nhận câu đối viết tay, hiện trên thẻ' }, // GĐ223
+  banh_chung_linh: { name: 'Bánh Chưng Linh', desc: 'Ăn: no lâu — 4 giờ game không tốn đói' }, // GĐ223
+  than_hong_linh: { name: 'Than Hồng Linh', desc: 'Nguyên liệu rèn/luyện, tiệm thu mua giá tốt' }, // GĐ223
+  tui_qua_xuan: { name: 'Túi Quà Xuân', desc: 'Mở: linh thạch + quà mùa Xuân' }, // GĐ223
+  tui_qua_ha: { name: 'Túi Quà Hạ', desc: 'Mở: linh thạch + quà mùa Hạ' }, // GĐ223
+  tui_qua_thu: { name: 'Túi Quà Thu', desc: 'Mở: linh thạch + quà mùa Thu' }, // GĐ223
+  tui_qua_dong: { name: 'Túi Quà Đông', desc: 'Mở: linh thạch + quà mùa Đông' }, // GĐ223
   da_quy: { name: 'Đá Quý', desc: 'Rơi từ Thạch Quái — bán được giá cao' }, // GĐ38
   quang_sat: { name: 'Quặng Sắt', desc: 'Nguyên liệu đào khoáng — dùng rèn, luyện khí' }, // GĐ132
   quang_dong: { name: 'Quặng Đồng', desc: 'Nguyên liệu đào khoáng — dùng rèn, luyện khí' }, // GĐ132
@@ -480,6 +524,10 @@ const QUEST_INFO: Record<string, { name: string; desc: string; target: number; r
   bq_thienloi: { name: 'Diệt Thiên Lôi Thú (Kim Đan)', desc: 'Hạ 5 Thiên Lôi Thú ở Thiên Cương Kim Sơn (+120 Tu vi)', target: 5, reward: 800, kind: 'kill' },
   bq_hondon: { name: 'Diệt Hỗn Độn Thú (Kim Đan)', desc: 'Hạ 1 Hỗn Độn Thú ở Vô Tận Hư Không (+150 Tu vi)', target: 1, reward: 1200, kind: 'kill' },
   bq_daquy_kd: { name: 'Thu thập Đá Quý (Kim Đan)', desc: 'Mang theo 15 Đá Quý tới trả (+80 Tu vi)', target: 15, reward: 500, kind: 'item', itemId: 'da_quy' },
+  bq_nguyetsat: { name: 'Diệt Nguyệt Sát Lang (Nguyên Anh)', desc: 'Hạ 5 Nguyệt Sát Lang ở vùng Nguyên Anh (+200 Tu vi)', target: 5, reward: 1500, kind: 'kill' },
+  bq_khaithien: { name: 'Diệt Khai Thiên Tê (Hóa Thần)', desc: 'Hạ 3 Khai Thiên Tê ở vùng Hóa Thần (+280 Tu vi)', target: 3, reward: 2400, kind: 'kill' },
+  bq_vanco: { name: 'Diệt Vạn Cổ Thần Thú (Phản Hư)', desc: 'Hạ 1 Vạn Cổ Thần Thú ở Vạn Cổ Chiến Trường (cần Phản Hư mới vào được, +400 Tu vi)', target: 1, reward: 4500, kind: 'kill' },
+  bq_hondon_ph: { name: 'Thu thập Hỗn Độn Thạch (Phản Hư)', desc: 'Mang theo 15 Hỗn Độn Thạch tới trả (+250 Tu vi)', target: 15, reward: 2600, kind: 'item', itemId: 'hon_don_thach' },
   ...QUEST_INFO_CITY, // GĐ90: 60 nhiệm vụ thành phố — chỉ hiện ở tracker, bảng làng bỏ qua (nhận/trả qua hộp thoại Người Giao Nhiệm Vụ)
   ...QUEST_INFO_GD127, // GĐ127: 950 nhiệm vụ mở rộng — chỉ hiện ở tracker, bảng làng bỏ qua (nhận/trả qua hộp thoại người giao)
   ...QUEST_INFO_GD129, // GĐ129: 6 nhiệm vụ Cổ Thụ — như GĐ127 (tracker only, không qua bảng)
@@ -518,6 +566,36 @@ const INTERACTS: Array<{ type: string; x: number; y: number; shopId?: string }> 
   { type: 'laibuan', x: hs175(1005), y: hs175(545) }, // GĐ60: Lái Buôn — nhận việc hộ tống thương nhân
   { type: 'thuongnhan', x: hs175(884), y: hs175(616) }, // GĐ86: Thương Nhân Lưu Động — trước đây không có điểm E nên hộp thoại/tiệm của ông không vào được
   { type: 'forge', x: hs175(620), y: hs175(560) }, // GĐ119 bước 5: Tiệm Rèn (Thợ Rèn ở quảng trường làng)
+  { type: 'tule', x: hs175(640), y: hs175(620) }, // GĐ218: Lão Tư Lễ (chỉ có mặt khi lễ mở — gợi ý E khóa theo hình NPC)
+  { type: 'tieudao', x: hs175(612), y: hs175(668) }, // GĐ218: Tiểu Đào bán hoa (chỉ mùa Xuân)
+  { type: 'laongu', x: hs175(948), y: hs175(899) }, // GĐ219: Lão Ngư ở bờ ao sen (chỉ mùa Hạ)
+  { type: 'nguyetnuong', x: hs175(430), y: hs175(700) }, // GĐ220: Nguyệt Nương ở ruộng nam (chỉ mùa Thu)
+  { type: 'tuyetong', x: hs175(760), y: hs175(470) }, // GĐ221: Tuyết Ông ở sân Đạo Quán (chỉ mùa Đông)
+  { type: 'thaydo', x: hs175(760), y: hs175(620) }, // GĐ222: Thầy Đồ ở quảng trường (mọi mùa lễ)
+];
+// GĐ218: điểm đất gieo Hạt Linh Xuân quanh quảng trường (khớp PLANT_SPOTS phía server)
+// GĐ219: điểm rác sông + bờ thả đèn — KHỚP DEBRIS_SPOTS/POND_C phía server
+const DEBRIS_SPOTS_CLIENT = [
+  { id: 0, x: hs175(900), y: hs175(863) }, { id: 1, x: hs175(948), y: hs175(828) }, { id: 2, x: hs175(998), y: hs175(863) },
+];
+const LANTERN_BANK = { x: hs175(920), y: hs175(865) };
+// GĐ220: ruộng Mạ Linh + vết chân thú + hang thú — KHỚP phía server
+const FEST_FIELD_SPOTS_CLIENT = [
+  { id: 0, x: hs175(400), y: hs175(750) }, { id: 1, x: hs175(550), y: hs175(820) },
+  { id: 2, x: hs175(300), y: hs175(650) }, { id: 3, x: hs175(700), y: hs175(880) },
+];
+const TRACK_SPOTS_CLIENT = [
+  { id: 0, x: hs175(425), y: hs175(715) }, { id: 1, x: hs175(514), y: hs175(796) }, { id: 2, x: hs175(340), y: hs175(680) },
+];
+const DEN_SPOT_CLIENT = { x: hs175(180), y: hs175(480) };
+// GĐ221: bụi Hương Thảo quanh làng — KHỚP DONG_HERB_SPOTS phía server
+const DONG_HERB_SPOTS_CLIENT = [
+  { id: 0, x: hs175(300), y: hs175(300) }, { id: 1, x: hs175(500), y: hs175(250) }, { id: 2, x: hs175(900), y: hs175(600) },
+];
+const PLANT_SPOTS_CLIENT = [
+  { id: 0, x: hs175(600), y: hs175(600) }, { id: 1, x: hs175(800), y: hs175(600) },
+  { id: 2, x: hs175(540), y: hs175(540) }, { id: 3, x: hs175(860), y: hs175(540) },
+  { id: 4, x: hs175(640), y: hs175(680) }, { id: 5, x: hs175(760), y: hs175(680) },
 ];
 
 // GĐ59: hình cho các loài GDD mới — mượn khung sẵn có + nhuộm màu + tỉ lệ
@@ -547,6 +625,132 @@ const GDD_MONSTER_VISUAL: Record<string, { base: 'wolf' | 'bat' | 'golem' | 'riv
   diem_hoa_phuong: { base: 'bat', tint: 0xf08a3c, scale: 1.5 },
   thien_loi_thu: { base: 'wolf', tint: 0x9a86f0, scale: 1.4 },
   hon_don_thu: { base: 'golem', tint: 0x6a5aa8, scale: 1.7 },
+  // GĐ207: 100 loài NA/HT (sinh bởi shottools/gen_gd207.py — sprite mượn loài gốc + nhuộm/cỡ riêng)
+  thien_lang: { base: 'wolf', tint: 0xf2d24b, scale: 1.02 },
+  nguyet_sat_lang: { base: 'wolf', tint: 0x4a7ec2, scale: 1.17 },
+  viem_vi_lang: { base: 'wolf', tint: 0xe0643c, scale: 1.0 },
+  huyen_bang_lang: { base: 'wolf', tint: 0x4a7ec2, scale: 1.21 },
+  co_son_lang: { base: 'wolf', tint: 0xb08954, scale: 0.91 },
+  huyet_duc_buc: { base: 'bat', tint: 0xe0643c, scale: 0.96 },
+  da_minh_buc: { base: 'bat', tint: 0x4a7ec2, scale: 1.04 },
+  loi_vu_buc: { base: 'bat', tint: 0xf2d24b, scale: 1.02 },
+  thien_nien_xa_yeu: { base: 'wolf', tint: 0x6aa84f, scale: 1.32 },
+  bich_lam_mang: { base: 'wolf', tint: 0x6aa84f, scale: 1.14 },
+  hoa_van_mang: { base: 'wolf', tint: 0xe0643c, scale: 1.2 },
+  huyen_thuy_xa: { base: 'wolf', tint: 0x4a7ec2, scale: 1.05 },
+  kim_si_dieu: { base: 'bat', tint: 0xf2d24b, scale: 1.2 },
+  thanh_loan: { base: 'bat', tint: 0x6aa84f, scale: 1.26 },
+  phong_bao_ung: { base: 'bat', tint: 0xf2d24b, scale: 1.03 },
+  hoa_vu_phuong_anh: { base: 'bat', tint: 0xe0643c, scale: 1.34 },
+  son_than_khoi: { base: 'golem', tint: 0xb08954, scale: 1.39 },
+  co_thach_cu_nhan: { base: 'golem', tint: 0xb08954, scale: 1.18 },
+  kim_cuong_tuong: { base: 'golem', tint: 0xf2d24b, scale: 1.17 },
+  thiet_giap_te: { base: 'golem', tint: 0xf2d24b, scale: 1.1 },
+  man_hoang_cu_tuong: { base: 'golem', tint: 0xb08954, scale: 1.26 },
+  son_tieu: { base: 'wolf', tint: 0x6aa84f, scale: 0.98 },
+  tu_kim_hat: { base: 'wolf', tint: 0xf2d24b, scale: 1.0 },
+  ngoc_giap_trung: { base: 'wolf', tint: 0x6aa84f, scale: 0.94 },
+  thien_tuc_ngo_cong: { base: 'wolf', tint: 0x6aa84f, scale: 1.22 },
+  huyen_thuy_giao: { base: 'wolf', tint: 0x4a7ec2, scale: 1.37 },
+  bich_ba_ngu_yeu: { base: 'wolf', tint: 0x4a7ec2, scale: 0.93 },
+  tham_hai_cu_giai: { base: 'golem', tint: 0x4a7ec2, scale: 1.13 },
+  hu_cot_chien_si: { base: 'rival', tint: 0xb08954, scale: 1.04 },
+  u_minh_quy_tot: { base: 'rival', tint: 0x4a7ec2, scale: 1.05 },
+  bach_cot_phu_nhan: { base: 'rival', tint: 0xf2d24b, scale: 1.28 },
+  thuc_nhan_hoa_yeu: { base: 'bat', tint: 0x6aa84f, scale: 1.04 },
+  co_thu_tinh: { base: 'bat', tint: 0x6aa84f, scale: 1.13 },
+  huyet_dang_yeu: { base: 'bat', tint: 0xe0643c, scale: 1.0 },
+  van_loc: { base: 'wolf', tint: 0x6aa84f, scale: 0.96 },
+  ngoc_ky_lan: { base: 'wolf', tint: 0xf2d24b, scale: 1.27 },
+  thien_ma: { base: 'wolf', tint: 0x4a7ec2, scale: 1.09 },
+  cuu_vi_ho: { base: 'wolf', tint: 0xe0643c, scale: 1.31 },
+  son_quan_ho: { base: 'wolf', tint: 0xf2d24b, scale: 1.21 },
+  linh_mieu_anh: { base: 'rival', tint: 0x4a7ec2, scale: 1.08 },
+  da_xoa: { base: 'rival', tint: 0xf2d24b, scale: 1.14 },
+  la_sat_anh: { base: 'rival', tint: 0xe0643c, scale: 1.04 },
+  huyet_ma_tot: { base: 'rival', tint: 0xe0643c, scale: 0.98 },
+  hoa_linh: { base: 'wolf', tint: 0xe0643c, scale: 1.0 },
+  bang_linh: { base: 'wolf', tint: 0x4a7ec2, scale: 1.05 },
+  loi_linh: { base: 'wolf', tint: 0xf2d24b, scale: 1.14 },
+  tho_linh: { base: 'wolf', tint: 0xb08954, scale: 1.03 },
+  thien_lang_vuong_that: { base: 'wolf', tint: 0xf2d24b, scale: 1.61 },
+  giao_long_chua: { base: 'wolf', tint: 0x4a7ec2, scale: 1.52 },
+  co_thu_than: { base: 'bat', tint: 0x6aa84f, scale: 1.62 },
+  hon_don_cu_thu: { base: 'golem', tint: 0xb08954, scale: 1.48 },
+  khai_thien_te: { base: 'golem', tint: 0xf2d24b, scale: 1.27 },
+  hu_khong_thu: { base: 'golem', tint: 0x4a7ec2, scale: 1.26 },
+  thon_thien_mang: { base: 'wolf', tint: 0xb08954, scale: 1.54 },
+  chuc_long_anh: { base: 'wolf', tint: 0xe0643c, scale: 1.3 },
+  ba_xa: { base: 'wolf', tint: 0x4a7ec2, scale: 1.24 },
+  toan_nghe: { base: 'bat', tint: 0xe0643c, scale: 1.36 },
+  dao_ngot: { base: 'golem', tint: 0xb08954, scale: 1.15 },
+  cung_ky: { base: 'wolf', tint: 0xf2d24b, scale: 1.26 },
+  hon_don_ma_vien: { base: 'wolf', tint: 0xb08954, scale: 1.2 },
+  kim_si_dai_bang: { base: 'bat', tint: 0xf2d24b, scale: 1.61 },
+  con_bang_anh: { base: 'wolf', tint: 0x4a7ec2, scale: 1.36 },
+  huyen_vu_tan_giap: { base: 'golem', tint: 0x4a7ec2, scale: 1.16 },
+  thanh_long_tan_anh: { base: 'wolf', tint: 0x6aa84f, scale: 1.52 },
+  chu_tuoc_diem: { base: 'bat', tint: 0xe0643c, scale: 1.25 },
+  bach_ho_sat_khi: { base: 'wolf', tint: 0xf2d24b, scale: 1.16 },
+  ky_lan_than_anh: { base: 'wolf', tint: 0xf2d24b, scale: 1.26 },
+  thien_cau: { base: 'wolf', tint: 0xe0643c, scale: 1.07 },
+  nguyet_tho_than: { base: 'wolf', tint: 0x4a7ec2, scale: 1.05 },
+  thien_binh_tan_anh: { base: 'rival', tint: 0xf2d24b, scale: 1.02 },
+  co_ma_tan_hon: { base: 'rival', tint: 0xe0643c, scale: 1.15 },
+  vuc_ngoai_thien_ma: { base: 'rival', tint: 0xe0643c, scale: 1.61 },
+  minh_ha_quy_tuong: { base: 'rival', tint: 0x4a7ec2, scale: 1.3 },
+  than_loi_cu_nhan: { base: 'golem', tint: 0xf2d24b, scale: 1.28 },
+  diem_than_chien_tuong: { base: 'golem', tint: 0xe0643c, scale: 1.15 },
+  bang_than_xa: { base: 'wolf', tint: 0x4a7ec2, scale: 1.23 },
+  kim_than_giap_trung: { base: 'wolf', tint: 0xf2d24b, scale: 1.07 },
+  huyet_than_ma_lang: { base: 'wolf', tint: 0xe0643c, scale: 1.2 },
+  co_than_thu_tinh: { base: 'bat', tint: 0x6aa84f, scale: 1.35 },
+  tham_uyen_cu_giai: { base: 'golem', tint: 0x4a7ec2, scale: 1.17 },
+  loi_than_dieu: { base: 'bat', tint: 0xf2d24b, scale: 1.24 },
+  hoa_than_phuong: { base: 'bat', tint: 0xe0643c, scale: 1.6 },
+  tho_than_khoi: { base: 'golem', tint: 0xb08954, scale: 1.01 },
+  da_than_buc: { base: 'bat', tint: 0x4a7ec2, scale: 1.02 },
+  doc_than_hat: { base: 'wolf', tint: 0x6aa84f, scale: 1.01 },
+  moc_than_dang: { base: 'bat', tint: 0x6aa84f, scale: 1.0 },
+  thuy_than_ngu: { base: 'wolf', tint: 0x4a7ec2, scale: 1.02 },
+  phong_than_ung: { base: 'bat', tint: 0x6aa84f, scale: 1.21 },
+  am_than_quy_tot: { base: 'rival', tint: 0x4a7ec2, scale: 0.98 },
+  duong_than_chien_si: { base: 'rival', tint: 0xf2d24b, scale: 0.95 },
+  tinh_than_tieu_yeu: { base: 'wolf', tint: 0xe0643c, scale: 0.95 },
+  thach_than_tuong: { base: 'golem', tint: 0xb08954, scale: 1.21 },
+  thien_hoa_su: { base: 'wolf', tint: 0xe0643c, scale: 1.16 },
+  han_bang_ho: { base: 'wolf', tint: 0x4a7ec2, scale: 1.03 },
+  tu_la_chien_ma: { base: 'rival', tint: 0xf2d24b, scale: 1.31 },
+  la_hau_ma_anh: { base: 'rival', tint: 0xe0643c, scale: 1.0 },
+  huyet_ha_ma_buc: { base: 'bat', tint: 0xe0643c, scale: 1.08 },
+  coi_am_sat_thu: { base: 'rival', tint: 0x4a7ec2, scale: 1.17 },
+  van_co_doc_trung: { base: 'wolf', tint: 0x6aa84f, scale: 1.21 },
+  thien_dao_thu_ho: { base: 'golem', tint: 0xf2d24b, scale: 1.48 },
+  // GĐ208: 24 loài PHẢN HƯ (gen_gd208.py)
+  hu_khong_lang: { base: 'wolf', tint: 0x4a7ec2, scale: 1.22 },
+  thoi_gian_thu: { base: 'golem', tint: 0xf2d24b, scale: 1.29 },
+  khong_gian_xa: { base: 'wolf', tint: 0x4a7ec2, scale: 1.16 },
+  phan_hu_ma_anh: { base: 'rival', tint: 0xe0643c, scale: 1.37 },
+  dao_thien_te: { base: 'golem', tint: 0xb08954, scale: 1.17 },
+  van_co_than_thu: { base: 'wolf', tint: 0xf2d24b, scale: 1.56 },
+  hon_don_phuong: { base: 'bat', tint: 0xe0643c, scale: 1.6 },
+  thien_cuc_cu_ngu: { base: 'wolf', tint: 0x4a7ec2, scale: 1.35 },
+  huyen_thien_ho: { base: 'wolf', tint: 0x4a7ec2, scale: 1.2 },
+  dao_kiem_ma_than: { base: 'rival', tint: 0xf2d24b, scale: 1.38 },
+  vo_hinh_quy: { base: 'rival', tint: 0x4a7ec2, scale: 1.05 },
+  luc_dao_chien_hon: { base: 'rival', tint: 0xb08954, scale: 1.15 },
+  thien_ngoai_cu_buc: { base: 'bat', tint: 0xe0643c, scale: 1.0 },
+  hon_don_giap_trung: { base: 'wolf', tint: 0xf2d24b, scale: 1.01 },
+  dao_nguoc_mang: { base: 'wolf', tint: 0x6aa84f, scale: 1.16 },
+  van_ly_doc_hat: { base: 'wolf', tint: 0x6aa84f, scale: 1.0 },
+  thien_thu_tinh: { base: 'bat', tint: 0x6aa84f, scale: 1.36 },
+  nghich_thien_su: { base: 'wolf', tint: 0xe0643c, scale: 1.24 },
+  hon_don_khoi: { base: 'golem', tint: 0xb08954, scale: 1.27 },
+  phan_hu_than_binh: { base: 'rival', tint: 0xf2d24b, scale: 1.07 },
+  thoi_luu_ngu: { base: 'wolf', tint: 0x4a7ec2, scale: 0.95 },
+  hu_anh_mieu: { base: 'rival', tint: 0x4a7ec2, scale: 1.09 },
+  van_co_hoa_thu: { base: 'wolf', tint: 0xe0643c, scale: 0.92 },
+  thien_dao_thu_than: { base: 'golem', tint: 0xf2d24b, scale: 1.6 },
 };
 
 // GĐ159: TỈ LỆ THẬT (Bảo yêu cầu 29/10) — quái nhỏ lại theo cỡ thật so với
@@ -578,11 +782,12 @@ const MOUNT_TEX: Record<string, string> = {
   linh_ma: 'mount-linh_ma', thanh_van_hac: 'mount-thanh_van_hac', huyen_quy: 'mount-huyen_quy',
   soi: 'mon-wolf', huyet_lang: 'mon-huyetlang', lam_tru: 'mon-lam_tru', thien_loi_thu: 'mon-thien_loi_thu',
   tuyet_ho: 'mon-tuyet_ho', hoa_thu: 'mon-hoa_thu', sa_mac_hat: 'mon-sa_mac_hat', dia_kim_thu: 'mon-dia_kim_thu', // GĐ203
+  thien_lang: 'mon-thien_lang', huyen_thuy_giao: 'mon-huyen_thuy_giao', cuu_vi_ho: 'mon-cuu_vi_ho', thien_cau: 'mon-thien_cau', cung_ky: 'mon-cung_ky', // GĐ207
 };
-const MOUNT_H: Record<string, number> = { linh_ma: 64, thanh_van_hac: 78, huyen_quy: 56, soi: 44, huyet_lang: 46, lam_tru: 44, thien_loi_thu: 52, tuyet_ho: 44, hoa_thu: 38, sa_mac_hat: 40, dia_kim_thu: 38 }; // chiều cao hiển thị (px); GĐ203: + 4 loài (TẠM theo cỡ sprite)
-const MOUNT_LIFT: Record<string, number> = { linh_ma: -36, thanh_van_hac: -40, huyen_quy: -40, soi: -26, huyet_lang: -27, lam_tru: -26, thien_loi_thu: -30, tuyet_ho: -26, hoa_thu: -22, sa_mac_hat: -24, dia_kim_thu: -22 }; // độ nâng thân người khi cưỡi từng loài; GĐ203: + 4 loài
+const MOUNT_H: Record<string, number> = { linh_ma: 64, thanh_van_hac: 78, huyen_quy: 56, soi: 44, huyet_lang: 46, lam_tru: 44, thien_loi_thu: 52, tuyet_ho: 44, hoa_thu: 38, sa_mac_hat: 40, dia_kim_thu: 38, thien_lang: 48, huyen_thuy_giao: 52, cuu_vi_ho: 46, thien_cau: 46, cung_ky: 54 }; // chiều cao hiển thị (px); GĐ203: + 4 loài (TẠM theo cỡ sprite); GĐ207: + 5 loài
+const MOUNT_LIFT: Record<string, number> = { linh_ma: -36, thanh_van_hac: -40, huyen_quy: -40, soi: -26, huyet_lang: -27, lam_tru: -26, thien_loi_thu: -30, tuyet_ho: -26, hoa_thu: -22, sa_mac_hat: -24, dia_kim_thu: -22, thien_lang: -28, huyen_thuy_giao: -30, cuu_vi_ho: -27, thien_cau: -27, cung_ky: -32 }; // độ nâng thân người khi cưỡi từng loài; GĐ203: + 4 loài; GĐ207: + 5 loài
 // GĐ203: màu vệt/hào quang khi cưỡi theo hệ của loài (bụi đất thường = xám ấm)
-const MOUNT_FX_COLOR: Record<string, string> = { thien_loi_thu: '#c792ff', thanh_van_hac: '#bfeaff', hoa_thu: '#ff8a4d', tuyet_ho: '#eaf6ff', huyet_lang: '#ff7a7a', dia_kim_thu: '#ffd75e', sa_mac_hat: '#e8c98a', linh_ma: '#ffe9a8', huyen_quy: '#9fd8c9', soi: '#d8d8d8', lam_tru: '#d8c9a8' };
+const MOUNT_FX_COLOR: Record<string, string> = { thien_loi_thu: '#c792ff', thanh_van_hac: '#bfeaff', hoa_thu: '#ff8a4d', tuyet_ho: '#eaf6ff', huyet_lang: '#ff7a7a', dia_kim_thu: '#ffd75e', sa_mac_hat: '#e8c98a', linh_ma: '#ffe9a8', huyen_quy: '#9fd8c9', soi: '#d8d8d8', lam_tru: '#d8c9a8', thien_lang: '#ffe28a', huyen_thuy_giao: '#7ec3ff', cuu_vi_ho: '#ffb37e', thien_cau: '#ff9a5c', cung_ky: '#ffd75e' }; // GĐ207: + 5 loài
 // GĐ161: bảng giá phía client (chỉ để hiển thị — server MOUNT_SPECIES là luật thật)
 const MOUNT_SHOP_CLIENT: { species: string; name: string; speed: number; price: number }[] = [
   { species: 'huyen_quy', name: 'Huyền Quy', speed: 1.3, price: 15000 },
@@ -598,9 +803,17 @@ const MOUNT_TAME_CLIENT: { species: string; name: string; speed: number; fee: nu
   { species: 'sa_mac_hat', name: 'Sa Mạc Hạt', speed: 1.4, fee: 16000, days: 1 },
   { species: 'hoa_thu', name: 'Hỏa Thử', speed: 1.45, fee: 20000, days: 2 },
   { species: 'tuyet_ho', name: 'Tuyết Hồ', speed: 1.6, fee: 28000, days: 2 },
+  { species: 'thien_lang', name: 'Thiên Lang', speed: 1.7, fee: 45000, days: 3 }, // GĐ207
+  { species: 'huyen_thuy_giao', name: 'Huyền Thủy Giao', speed: 1.75, fee: 55000, days: 3 },
+  { species: 'cuu_vi_ho', name: 'Cửu Vĩ Hồ', speed: 1.8, fee: 60000, days: 3 },
+  { species: 'thien_cau', name: 'Thiên Cẩu', speed: 1.72, fee: 50000, days: 3 },
+  { species: 'cung_ky', name: 'Cùng Kỳ', speed: 1.9, fee: 90000, days: 4 },
 ];
 const MOUNT_SPECIES_NAME: Record<string, string> = Object.fromEntries([...MOUNT_SHOP_CLIENT, ...MOUNT_TAME_CLIENT].map((s) => [s.species, s.name]));
 
+// GĐ207: màu nhuộm + hệ số cỡ theo NHÁNH quái (server gửi br trong tick)
+const BRANCH_TINT: Record<string, number> = { kim: 0xffe28a, moc: 0x9fe870, thuy: 0x8ac2ff, hoa: 0xff9a5c, tho: 0xd8b98a, vuong: 0xffd700 };
+const BRANCH_SCALE: Record<string, number> = { non: 0.8, tinh: 1.12, vuong: 1.3 };
 const MON_SPRITE: Record<string, string> = {
   wolf: 'soi_xam', bat: 'doi_den', golem: 'thach_quai', khoiloi: 'thach_khoi_loi',
   huyetlang: 'huyet_lang', kiemma: 'kiem_ma', doc_xa: 'doc_xa', lam_tru: 'lam_tru',
@@ -610,6 +823,132 @@ const MON_SPRITE: Record<string, string> = {
   bang_tinh_cu_nhan: 'bang_tinh_cu_nhan', diem_hoa_phuong: 'diem_hoa_phuong',
   thien_loi_thu: 'thien_loi_thu', hon_don_thu: 'hon_don_thu',
   cuu_u_ma_quan: 'kiem_ma', // GĐ130: Ma Quân dùng lại sprite kiếm khách quỷ (PixelLab hết lượt, không vẽ mới)
+  // GĐ207: 100 loài mới dùng lại file sprite của loài gốc (tên file theo kind gốc)
+  thien_lang: 'soi_xam',
+  nguyet_sat_lang: 'soi_xam',
+  viem_vi_lang: 'soi_xam',
+  huyen_bang_lang: 'soi_xam',
+  co_son_lang: 'soi_xam',
+  huyet_duc_buc: 'doi_den',
+  da_minh_buc: 'doi_den',
+  loi_vu_buc: 'doi_den',
+  thien_nien_xa_yeu: 'doc_xa',
+  bich_lam_mang: 'sam_lam_cu_mang',
+  hoa_van_mang: 'sam_lam_cu_mang',
+  huyen_thuy_xa: 'bang_xa',
+  kim_si_dieu: 'loi_dieu',
+  thanh_loan: 'diem_hoa_phuong',
+  phong_bao_ung: 'loi_dieu',
+  hoa_vu_phuong_anh: 'diem_hoa_phuong',
+  son_than_khoi: 'thach_khoi_loi',
+  co_thach_cu_nhan: 'thach_quai',
+  kim_cuong_tuong: 'thach_quai',
+  thiet_giap_te: 'kim_giap_te',
+  man_hoang_cu_tuong: 'kim_giap_te',
+  son_tieu: 'lam_tru',
+  tu_kim_hat: 'sa_mac_hat',
+  ngoc_giap_trung: 'dia_kim_thu',
+  thien_tuc_ngo_cong: 'sa_mac_hat',
+  huyen_thuy_giao: 'thuy_yeu_ngu',
+  bich_ba_ngu_yeu: 'thuy_yeu_ngu',
+  tham_hai_cu_giai: 'dung_nham_cua',
+  hu_cot_chien_si: 'cot_binh',
+  u_minh_quy_tot: 'quy_hon',
+  bach_cot_phu_nhan: 'cot_vuong',
+  thuc_nhan_hoa_yeu: 'huyen_diep',
+  co_thu_tinh: 'huyen_diep',
+  huyet_dang_yeu: 'huyen_diep',
+  van_loc: 'thien_loi_thu',
+  ngoc_ky_lan: 'thien_loi_thu',
+  thien_ma: 'thien_loi_thu',
+  cuu_vi_ho: 'tuyet_ho',
+  son_quan_ho: 'tuyet_ho',
+  linh_mieu_anh: 'huyen_anh_mieu',
+  da_xoa: 'kiem_ma',
+  la_sat_anh: 'hap_huyet_quy',
+  huyet_ma_tot: 'dan_ma',
+  hoa_linh: 'hoa_thu',
+  bang_linh: 'bang_xa',
+  loi_linh: 'loi_xa',
+  tho_linh: 'dia_kim_thu',
+  thien_lang_vuong_that: 'soi_xam',
+  giao_long_chua: 'thuy_yeu_ngu',
+  co_thu_than: 'huyen_diep',
+  hon_don_cu_thu: 'hon_don_thu',
+  khai_thien_te: 'kim_giap_te',
+  hu_khong_thu: 'hon_don_thu',
+  thon_thien_mang: 'sam_lam_cu_mang',
+  chuc_long_anh: 'loi_xa',
+  ba_xa: 'sam_lam_cu_mang',
+  toan_nghe: 'diem_hoa_phuong',
+  dao_ngot: 'kim_giap_te',
+  cung_ky: 'tuyet_ho',
+  hon_don_ma_vien: 'lam_tru',
+  kim_si_dai_bang: 'loi_dieu',
+  con_bang_anh: 'thuy_yeu_ngu',
+  huyen_vu_tan_giap: 'hon_don_thu',
+  thanh_long_tan_anh: 'loi_xa',
+  chu_tuoc_diem: 'diem_hoa_phuong',
+  bach_ho_sat_khi: 'tuyet_ho',
+  ky_lan_than_anh: 'thien_loi_thu',
+  thien_cau: 'soi_xam',
+  nguyet_tho_than: 'thien_loi_thu',
+  thien_binh_tan_anh: 'kiem_ma',
+  co_ma_tan_hon: 'quy_hon',
+  vuc_ngoai_thien_ma: 'hap_huyet_quy',
+  minh_ha_quy_tuong: 'cot_vuong',
+  than_loi_cu_nhan: 'thach_khoi_loi',
+  diem_than_chien_tuong: 'kim_giap_te',
+  bang_than_xa: 'bang_xa',
+  kim_than_giap_trung: 'dia_kim_thu',
+  huyet_than_ma_lang: 'soi_xam',
+  co_than_thu_tinh: 'huyen_diep',
+  tham_uyen_cu_giai: 'dung_nham_cua',
+  loi_than_dieu: 'loi_dieu',
+  hoa_than_phuong: 'diem_hoa_phuong',
+  tho_than_khoi: 'thach_quai',
+  da_than_buc: 'doi_den',
+  doc_than_hat: 'sa_mac_hat',
+  moc_than_dang: 'huyen_diep',
+  thuy_than_ngu: 'thuy_yeu_ngu',
+  phong_than_ung: 'loi_dieu',
+  am_than_quy_tot: 'quy_hon',
+  duong_than_chien_si: 'cot_binh',
+  tinh_than_tieu_yeu: 'hoa_thu',
+  thach_than_tuong: 'thach_quai',
+  thien_hoa_su: 'tuyet_ho',
+  han_bang_ho: 'tuyet_ho',
+  tu_la_chien_ma: 'kiem_ma',
+  la_hau_ma_anh: 'dan_ma',
+  huyet_ha_ma_buc: 'doi_den',
+  coi_am_sat_thu: 'huyen_anh_mieu',
+  van_co_doc_trung: 'dia_kim_thu',
+  thien_dao_thu_ho: 'thach_khoi_loi',
+  // GĐ208: 24 loài Phản Hư dùng lại file sprite loài gốc
+  hu_khong_lang: 'soi_xam',
+  thoi_gian_thu: 'hon_don_thu',
+  khong_gian_xa: 'loi_xa',
+  phan_hu_ma_anh: 'kiem_ma',
+  dao_thien_te: 'kim_giap_te',
+  van_co_than_thu: 'thien_loi_thu',
+  hon_don_phuong: 'diem_hoa_phuong',
+  thien_cuc_cu_ngu: 'thuy_yeu_ngu',
+  huyen_thien_ho: 'tuyet_ho',
+  dao_kiem_ma_than: 'kiem_ma',
+  vo_hinh_quy: 'quy_hon',
+  luc_dao_chien_hon: 'cot_vuong',
+  thien_ngoai_cu_buc: 'doi_den',
+  hon_don_giap_trung: 'dia_kim_thu',
+  dao_nguoc_mang: 'sam_lam_cu_mang',
+  van_ly_doc_hat: 'sa_mac_hat',
+  thien_thu_tinh: 'huyen_diep',
+  nghich_thien_su: 'tuyet_ho',
+  hon_don_khoi: 'thach_khoi_loi',
+  phan_hu_than_binh: 'cot_binh',
+  thoi_luu_ngu: 'thuy_yeu_ngu',
+  hu_anh_mieu: 'huyen_anh_mieu',
+  van_co_hoa_thu: 'hoa_thu',
+  thien_dao_thu_than: 'thach_khoi_loi',
   tuyet_ho: 'tuyet_ho', bang_xa: 'bang_xa', hoa_thu: 'hoa_thu', sa_mac_hat: 'sa_mac_hat',
   sam_lam_cu_mang: 'sam_lam_cu_mang', thuy_yeu_ngu: 'thuy_yeu_ngu', loi_xa: 'loi_xa',
   dia_kim_thu: 'dia_kim_thu', dung_nham_cua: 'dung_nham_cua', // GĐ166: 9 loài mới, sprite vẽ bằng công cụ của Muse
@@ -885,6 +1224,39 @@ interface TradeOffer {
 }
 
 // GĐ184: màu phát sáng của Pháp Tướng theo hệ đã khóa
+const AMB_CONF: Record<string, { tint: number; n: number; vy: number; vx: number; sway: number; scale: number; alpha: number }> = { // GĐ225: hạt không khí theo chủ đề map (vy âm = bay lên)
+  petal: { tint: 0xffd9ec, n: 18, vy: 13, vx: 1, sway: 0.5, scale: 0.15, alpha: 0.55 },
+  leaf: { tint: 0xa8e063, n: 24, vy: 17, vx: 2, sway: 0.8, scale: 0.15, alpha: 0.6 },
+  bloodleaf: { tint: 0xff6b5e, n: 24, vy: 17, vx: 2, sway: 0.8, scale: 0.15, alpha: 0.6 },
+  ice: { tint: 0xffffff, n: 28, vy: 15, vx: 3, sway: 0.6, scale: 0.12, alpha: 0.85 },
+  ember: { tint: 0xff9a4d, n: 22, vy: -20, vx: 2, sway: 0.5, scale: 0.14, alpha: 0.8 },
+  sand: { tint: 0xe8cf8f, n: 24, vy: 7, vx: 55, sway: 0.3, scale: 0.12, alpha: 0.5 },
+  spore: { tint: 0x9fe870, n: 20, vy: 9, vx: 1, sway: 0.7, scale: 0.13, alpha: 0.55 },
+  spark: { tint: 0xbfe3ff, n: 26, vy: 65, vx: 8, sway: 0.2, scale: 0.11, alpha: 0.6 },
+  void: { tint: 0xb46aff, n: 20, vy: -8, vx: 1, sway: 0.5, scale: 0.15, alpha: 0.6 },
+  bubble: { tint: 0x8ae6ff, n: 20, vy: -14, vx: 1, sway: 0.6, scale: 0.12, alpha: 0.55 },
+  wisp: { tint: 0xaef2e4, n: 14, vy: -5, vx: 1, sway: 0.9, scale: 0.17, alpha: 0.5 },
+  ash: { tint: 0xcfcfcf, n: 22, vy: 11, vx: 2, sway: 0.5, scale: 0.12, alpha: 0.5 },
+  dust: { tint: 0xffe9b0, n: 14, vy: 6, vx: 1, sway: 0.4, scale: 0.11, alpha: 0.4 },
+  mote: { tint: 0xffe28a, n: 16, vy: -6, vx: 1, sway: 0.6, scale: 0.13, alpha: 0.5 },
+};
+function ambThemeKey(theme?: string): string { // GĐ225: tên theme map → khóa hạt
+  const t = (theme || '').toLowerCase();
+  if (t.includes('ice')) return 'ice';
+  if (t.includes('lava') || t.includes('forge')) return 'ember';
+  if (t.includes('desert')) return 'sand';
+  if (t.includes('blood')) return 'bloodleaf';
+  if (t.includes('swamp') || t.includes('ghost')) return 'spore';
+  if (t.includes('forest') || t.includes('garden')) return 'leaf';
+  if (t.includes('storm') || t.includes('metal') || t.includes('sword')) return 'spark';
+  if (t.includes('void')) return 'void';
+  if (t.includes('sea') || t.includes('stream')) return 'bubble';
+  if (t.includes('grave')) return 'wisp';
+  if (t.includes('battle')) return 'ash';
+  if (t.includes('city')) return 'dust';
+  return 'mote';
+}
+const AMB_FLY_THEMES = new Set(['petal', 'leaf', 'bloodleaf', 'spore', 'bubble']); // GĐ225: chủ đề có đom đóm đêm
 const PT_EL_TINT: Record<string, number> = { Kim: 0xffd75e, 'Mộc': 0x7dd87d, 'Thủy': 0x6ab8ff, 'Hỏa': 0xff7a4d, 'Thổ': 0xc9a06a, 'Lôi': 0xc792ff, 'Băng': 0xbfeaff, 'Độc': 0x9dff57, Phong: 0xa8e6cf, Nham: 0xb08968, Quang: 0xfff6bf, 'Ám': 0x8a7dff, 'Huyết': 0xff4d5e, 'Thời Gian': 0xe8e8f0, 'Không Gian': 0xb46aff };
 
 interface Actor {
@@ -923,6 +1295,10 @@ interface Actor {
   lastFxX?: number; lastFxY?: number; // GĐ203: vị trí render lần trước (đo di chuyển)
   bubble: Phaser.GameObjects.Text; // GĐ168: bong bóng chat trên đầu
   ptImg?: Phaser.GameObjects.Image; // GĐ184: hình Pháp Tướng khổng lồ sau lưng
+  ptAura?: Phaser.GameObjects.Image; // GĐ226: hào quang theo hệ sau lưng tướng
+  ptSigil?: Phaser.GameObjects.Image; // GĐ226: pháp ấn xoay dưới chân tướng
+  ptOrbs?: Phaser.GameObjects.Image[]; // GĐ226: hạt nguyên tố quấn quanh tướng
+  lantImg?: Phaser.GameObjects.Image; // GĐ220: hào quang đèn lồng
   bubbleUntil: number; // GĐ168: mốc ẩn bong bóng (Phaser time)
 }
 
@@ -1087,6 +1463,7 @@ interface MonsterActor {
   teleRing?: Phaser.GameObjects.Arc; // GĐ171: vòng đỏ báo trước trên mặt đất
   maxHp?: number; // GĐ169: máu tối đa (để cỡ chữ số sát thương nổi)
   hiddenShown?: boolean; // GĐ60: trạng thái ẩn của quái phục kích đang hiển thị
+  glowImg?: Phaser.GameObjects.Image; // GĐ227: quầng quang theo hệ nhánh
   container: Phaser.GameObjects.Container;
   sprite: Phaser.GameObjects.Image;
   barFg: Phaser.GameObjects.Rectangle;
@@ -1165,6 +1542,7 @@ interface NpcDialogData {
     rep?: number;
     repDiscount?: number;
   } | null; // GĐ40+, GĐ86: khách quen
+  festivalInfo?: any; // GĐ217: chỉ có khi nói chuyện với Lão Tư Lễ
   masterInfo?: {
     jobId: string; jobName: string;
     hasJob: boolean; hasOtherJob: boolean; otherJobName: string | null;
@@ -1191,7 +1569,8 @@ class GameScene extends Phaser.Scene {
   private dodgeCdEnd = 0; // GĐ46: mốc hết hồi Né (khớp DODGE_CD_MS phía server)
   private sndPrevInvTotal: number | null = null; // GĐ167: tổng số vật phẩm lần sync trước (phát hiện nhặt đồ)
   private chatOpen = false; // GĐ168: đang gõ trong ô chat (khóa phím game)
-  private chatCh: 'near' | 'world' | 'party' = 'near'; // GĐ168: kênh chat hiện tại; GĐ194: thêm kênh Tổ đội
+  private chatCh: 'near' | 'world' | 'party' | 'sect' = 'near'; // GĐ168: kênh chat hiện tại; GĐ194: thêm kênh Tổ đội; GĐ224: thêm kênh Tông
+  private sectState: { mySect: { id: string; name: string; intro: string; myRole: string; myRoleName: string; members: { token: string; name: string; role: string; roleName: string; realm: string; online: boolean }[]; applicants: { token: string; name: string }[] } | null; invites: { sectId: string; sectName: string }[]; myApplies: string[]; directory: { id: string; name: string; intro: string; count: number; leader: string }[]; cost: number } | null = null; // GĐ224
   // GĐ170: giao dịch người chơi
   private tradeNearId: string | null = null;
   // GĐ194: trạng thái xã hội phía client
@@ -1255,7 +1634,7 @@ class GameScene extends Phaser.Scene {
   private dialogueState = new Map<string, { idx: number; nextAt: number; until: number }>();
   private lastDialogueCheck = 0;
   private dropActors = new Map<string, Phaser.GameObjects.Container>();
-  private openPanel: 'shop' | 'quest' | 'inv' | 'job' | 'ach' | 'learn' | 'bangvang' | 'stones' | 'altar' | 'forge' | 'hint' | 'mount' | null = null;
+  private openPanel: 'shop' | 'quest' | 'inv' | 'job' | 'ach' | 'learn' | 'bangvang' | 'stones' | 'altar' | 'forge' | 'hint' | 'mount' | 'sect' | null = null; // GĐ224: + sect
   private mountShopMode = false; // GĐ161: panel thú cưỡi mở từ trại (hiện mục mua bán) hay từ Menu (chỉ chuồng của mình)
   private currentShop = '';
   private invTab: 'items' | 'gear' = 'items'; // GĐ119: tab Túi đồ đang mở
@@ -1506,6 +1885,18 @@ class GameScene extends Phaser.Scene {
         g.fillRect(0, 0, 256, 256);
         ct.refresh();
       }
+      { // GĐ226: nướng texture PHÁP ẤN (vòng + 12 vạch + 4 kim cương) — tô màu theo hệ khi dùng
+        const ct2 = this.textures.createCanvas('ptSigil', 256, 256);
+        if (ct2) {
+          const g2 = ct2.getContext();
+          g2.strokeStyle = 'rgba(255,255,255,0.92)';
+          g2.lineWidth = 5; g2.beginPath(); g2.arc(128, 128, 112, 0, Math.PI * 2); g2.stroke();
+          g2.lineWidth = 3; g2.beginPath(); g2.arc(128, 128, 84, 0, Math.PI * 2); g2.stroke();
+          for (let i = 0; i < 12; i++) { const a = (i * Math.PI) / 6; g2.lineWidth = i % 3 === 0 ? 6 : 3; g2.beginPath(); g2.moveTo(128 + Math.cos(a) * 96, 128 + Math.sin(a) * 96); g2.lineTo(128 + Math.cos(a) * 124, 128 + Math.sin(a) * 124); g2.stroke(); }
+          for (let i = 0; i < 4; i++) { const a = (i * Math.PI) / 2 + Math.PI / 4; g2.save(); g2.translate(128 + Math.cos(a) * 98, 128 + Math.sin(a) * 98); g2.rotate(a); g2.fillStyle = 'rgba(255,255,255,0.92)'; g2.fillRect(-6, -6, 12, 12); g2.restore(); }
+          ct2.refresh();
+        }
+      }
       const sheen = (x: number, y: number, w: number, h: number, base: number, tint: number, pond = false) => {
         const s = this.add
           .image(x, y, 'moonGlow')
@@ -1584,6 +1975,7 @@ class GameScene extends Phaser.Scene {
     wire('forgeClose', () => this.closePanels()); // GĐ119 bước 5: Tiệm Rèn
     wire('mountClose', () => this.closePanels()); // GĐ161: Trại Thú Cưỡi
     wire('stonesClose', () => this.closePanels());
+    wire('sectClose', () => this.closePanels()); // GĐ224
     wire('invBtn', () => this.toggleInv());
 
     // ---- Kết nối Socket.io tới Backend ----
@@ -1769,6 +2161,17 @@ class GameScene extends Phaser.Scene {
       this.showToast(`${d.delta > 0 ? '💛' : '💔'} Thiện cảm với ${d.name}: ${d.delta > 0 ? '+' : ''}${d.delta} (hiện ${d.value})`);
     });
     this.socket.on('npc_dialog', (d: NpcDialogData) => this.openNpcDialog(d));
+    this.socket.on('world_fx', (f: { kind: string; x: number; y: number; season?: string | null }) => { // GĐ217: pháo hoa lễ
+      if (f && f.kind === 'firework') this.fireworkFx(f.x, f.y, f.season || null);
+    });
+    this.socket.on('festival_plants', (d: { plants: any[] }) => { // GĐ218: cây Ươm Mầm của cả làng
+      this.festPlants = (d && d.plants) || [];
+      this.renderFestPlants();
+    });
+    this.socket.on('festival_lanterns', (d: { lanterns: any[] }) => { // GĐ219: đèn sông đang trôi
+      this.festLanternsData = (d && d.lanterns) || [];
+      this.renderFestLanterns();
+    });
     // GĐ59: server báo vào map (lúc đăng nhập + mỗi lần dịch chuyển)
     this.socket.on('map_enter', (d: MapEnterData) => this.onMapEnter(d));
     this.socket.on('travel_info', (d: { from: string; list: TravelDest[] }) => this.openTravelDialog(d));
@@ -1802,6 +2205,9 @@ class GameScene extends Phaser.Scene {
       this.sndPrevInvTotal = invTotal;
       this.myChar = c;
       (window as unknown as { tttChar?: CharacterData }).tttChar = c;
+      this.refreshFestivalFx(); // GĐ217
+      this.festHuntData = (c as unknown as { festivalHunt?: { season?: string; item?: string; found?: number; total?: number; spots?: { id: number; x: number; y: number }[] } }).festivalHunt || null; // GĐ222
+      this.renderFestHunt(); // GĐ222
       this.renderHudCharStatic();
       this.renderSkillBar();
       this.refreshPanels();
@@ -1844,6 +2250,7 @@ class GameScene extends Phaser.Scene {
     });
     this.socket.on('friend_request_in', (d: { from: string }) => this.showSocialInvite('friend', d.from));
     this.socket.on('party_invite_in', (d: { fromId: string; fromName: string }) => this.showSocialInvite('party', d.fromName));
+    this.socket.on('sect_state', (d: typeof this.sectState) => { this.sectState = d; if (this.openPanel === 'sect') this.renderSectPanel(); }); // GĐ224
     this.socket.on('party_update', (d: { party: PartyState | null }) => { this.myParty = d.party; this.renderParty(); });
     this.socket.on('player_card', (card: PlayerCard) => this.renderPlayerCard(card));
     this.socket.on('leaderboard_data', (d: { board: string; top: BoardRow[]; me: (BoardRow & { rank: number }) | null }) => this.renderBoard(d));
@@ -1973,7 +2380,7 @@ class GameScene extends Phaser.Scene {
       sound.play('breakOk'); // GĐ167
       this.cameras.main.flash(300, 255, 215, 77);
       // GĐ172: hiệu ứng theo cỡ đột phá — Đại/Kim Đan/Nguyên Anh có LÔI KIẾP
-      const lvl = r.type === 'dai' || r.type === 'kimdan' || r.type === 'nguyenanh' || r.type === 'hoathan' ? 2 : r.type === 'trung' ? 1 : 0; // GĐ181: Hóa Thần cũng lôi kiếp
+      const lvl = r.type === 'dai' || r.type === 'kimdan' || r.type === 'nguyenanh' || r.type === 'hoathan' || r.type === 'phanhu' ? 2 : r.type === 'trung' ? 1 : 0; // GĐ181: Hóa Thần cũng lôi kiếp; GĐ204: + Phản Hư
       this.breakthroughFx(this.myId, lvl);
       const realmName = ({ lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư' } as Record<string, string>) // GĐ183: bỏ Vô Danh[r.realm || 'lk'] || 'Luyện Khí';
       const thoTxt = r.lifespanGain ? ` · +${r.lifespanGain} năm tuổi thọ` : '';
@@ -1991,7 +2398,7 @@ class GameScene extends Phaser.Scene {
         const rn = ({ lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư' } as Record<string, string>) // GĐ183: bỏ Vô Danh[info.realm || 'lk'] || 'Luyện Khí';
         this.showToast(`✦ ${info.name} vừa đột phá lên ${rn} tầng ${info.tier}!`);
         // GĐ172: người xung quanh cũng thấy cột sáng / lôi kiếp của họ
-        const lvl = info.type === 'dai' || info.type === 'kimdan' || info.type === 'nguyenanh' || info.type === 'hoathan' ? 2 : info.type === 'trung' || info.type === 'tandang10' ? 1 : 0; // GĐ181
+        const lvl = info.type === 'dai' || info.type === 'kimdan' || info.type === 'nguyenanh' || info.type === 'hoathan' || info.type === 'phanhu' ? 2 : info.type === 'trung' || info.type === 'tandang10' ? 1 : 0; // GĐ181; GĐ204: + Phản Hư
         this.breakthroughFx(info.id, lvl);
       }
     });
@@ -2285,6 +2692,8 @@ class GameScene extends Phaser.Scene {
         const ptOn = (p as unknown as { ptActive?: number }).ptActive === 1;
         if (ptOn && !actor.ptImg) {
           actor.ptImg = this.add.image(actor.container.x, actor.container.y - 60, actor.sprite.texture.key).setAlpha(0.5).setDepth((actor.container.depth || 10) - 1);
+          const elB = (p as unknown as { ptEl?: string | null }).ptEl; // GĐ226: vòng sáng bùng lúc hiện hình
+          this.impactFx(actor.container.x, actor.container.y - 30, '#' + (elB ? (PT_EL_TINT[elB] ?? 0xffffff) : 0xffffff).toString(16).padStart(6, '0'), 130);
         }
         if (actor.ptImg) {
           if (!ptOn) { actor.ptImg.destroy(); actor.ptImg = undefined; }
@@ -2299,7 +2708,32 @@ class GameScene extends Phaser.Scene {
             actor.ptImg.displayHeight = h;
             actor.ptImg.displayWidth = h * (actor.ptImg.width / Math.max(1, actor.ptImg.height));
             actor.ptImg.setPosition(actor.container.x, actor.container.y - h * 0.38);
+            // GĐ226: hào quang + pháp ấn + hạt nguyên tố theo hệ của tướng
+            const elCol = el ? (PT_EL_TINT[el] ?? 0xffffff) : 0xffffff;
+            const cd2 = actor.container.depth || 10;
+            if (!actor.ptAura) actor.ptAura = this.add.image(actor.container.x, actor.container.y - h * 0.38, 'moonGlow').setDepth(cd2 - 2);
+            actor.ptAura.setTint(elCol).setDisplaySize(h * 1.85, h * 1.85).setPosition(actor.container.x, actor.container.y - h * 0.38);
+            if (!actor.ptSigil) actor.ptSigil = this.add.image(actor.container.x, actor.container.y + 4, 'ptSigil').setDepth(cd2 - 3);
+            actor.ptSigil.setTint(elCol).setAlpha(0.5).setDisplaySize(h * 1.0, h * 0.5).setPosition(actor.container.x, actor.container.y + 4);
+            if (!actor.ptOrbs) { actor.ptOrbs = []; for (let oi = 0; oi < 6; oi++) actor.ptOrbs.push(this.add.image(actor.container.x, actor.container.y, 'fx-orb-neutral').setScale(0.16).setDepth(cd2 - 1)); }
+            for (const o of actor.ptOrbs) o.setTint(elCol);
           }
+        }
+        if (!ptOn) { // GĐ226: tắt hình thì dọn hết FX tướng
+          if (actor.ptAura) { actor.ptAura.destroy(); actor.ptAura = undefined; }
+          if (actor.ptSigil) { actor.ptSigil.destroy(); actor.ptSigil = undefined; }
+          if (actor.ptOrbs) { for (const o of actor.ptOrbs) o.destroy(); actor.ptOrbs = undefined; }
+        }
+      }
+      // GĐ220: hào quang đèn lồng quanh người đang thắp (cờ tick lantern)
+      {
+        const lantOn = (p as unknown as { lantern?: number }).lantern === 1;
+        if (lantOn && !actor.lantImg) {
+          actor.lantImg = this.add.image(actor.container.x, actor.container.y - 14, 'moonGlow').setTint(0xffc46b).setScale(0.85).setAlpha(0.55).setDepth((actor.container.depth || 10) - 1);
+        }
+        if (actor.lantImg) {
+          if (!lantOn) { actor.lantImg.destroy(); actor.lantImg = undefined; }
+          else actor.lantImg.setPosition(actor.container.x, actor.container.y - 14);
         }
       }
       // GĐ161: đồng bộ hình thú cưỡi theo tick — có loài thì hiện thú dưới
@@ -2549,6 +2983,9 @@ class GameScene extends Phaser.Scene {
       const hh = String(w.hour).padStart(2, '0');
       const mm = String(w.minute).padStart(2, '0');
       el.textContent = `${w.isNight ? moonIcon : '☀️'} Ngày ${w.day} · Tháng ${w.month} · Năm ${w.year} — Giờ ${w.canh} (${hh}:${mm})`;
+      const fest217 = (this.myChar as any)?.festival; // GĐ217: đang có lễ thì ghi thêm vào pill đồng hồ
+      if (fest217?.big) el.textContent += ` · ${fest217.big.icon} ${fest217.big.name} (còn ${fest217.big.daysLeft + 1} ngày)`;
+      else if (fest217?.mini) el.textContent += ` · 🎉 ${fest217.mini.name}`;
     }
     // Độ tối theo phút trong ngày: đêm sâu 0.34 (22:00–04:30), rạng đông/chạng
     // vạng chuyển dần trong ~2 giờ game, ban ngày trong suốt.
@@ -2570,6 +3007,7 @@ class GameScene extends Phaser.Scene {
       s.setAlpha(a);
       s.setVisible(a > 0.004);
     }
+    for (const g of this.ambGlows) { const ga = 0.55 * nf; g.setAlpha(ga); g.setVisible(ga > 0.01); } // GĐ225: đèn NPC sáng dần khi trời tối
   }
 
   // ---------------- Giao diện nhân vật (DOM) ----------------
@@ -2962,6 +3400,8 @@ class GameScene extends Phaser.Scene {
     if (menuClose && gameMenu) menuClose.onclick = () => (gameMenu.style.display = 'none');
     const menuMount = byId('menuMountBtn'); // GĐ161: mở panel thú cưỡi từ Menu
     if (menuMount && gameMenu) menuMount.onclick = () => { gameMenu.style.display = 'none'; this.openMountPanel(false); };
+    const menuSect = byId('menuSectBtn'); // GĐ224: mở panel Tông môn người chơi từ Menu
+    if (menuSect && gameMenu) menuSect.onclick = () => { gameMenu.style.display = 'none'; this.toggleSectPanel(); };
     // GĐ167: nút bật/tắt Nhạc nền / Hiệu ứng trong Menu + mở khóa
     // AudioContext ở thao tác đầu tiên (trình duyệt chặn tự phát)
     const menuMusic = byId('menuMusicBtn');
@@ -2974,9 +3414,9 @@ class GameScene extends Phaser.Scene {
     const chatChBtn = document.getElementById('chatChBtn');
     if (chatChBtn && chatInput) {
       chatChBtn.onclick = () => {
-        const order: Array<'near' | 'world' | 'party'> = ['near', 'world', 'party']; // GĐ194: thêm kênh Đội
+        const order: Array<'near' | 'world' | 'party' | 'sect'> = ['near', 'world', 'party', 'sect']; // GĐ194: thêm kênh Đội; GĐ224: thêm kênh Tông
         this.chatCh = order[(order.indexOf(this.chatCh) + 1) % order.length];
-        chatChBtn.textContent = this.chatCh === 'near' ? '📍 Gần' : this.chatCh === 'world' ? '🌐 Thế giới' : '⚔ Đội';
+        chatChBtn.textContent = this.chatCh === 'near' ? '📍 Gần' : this.chatCh === 'world' ? '🌐 Thế giới' : this.chatCh === 'party' ? '⚔ Đội' : '🏯 Tông';
         chatInput.focus();
       };
     }
@@ -3197,6 +3637,286 @@ class GameScene extends Phaser.Scene {
   // đạn chiêu chạm đích, chiêu quái tung ra, đòn gần chạm đích.
   // GĐ203: vệt dưới chân thú cưỡi — mây khói mềm theo màu hệ của loài;
   // loài hệ Hỏa thêm tia lửa nhỏ bay lên, Thanh Vân Hạc là mây lớn trôi chậm.
+  // GĐ217: PHÁO HOA LỄ — chùm nổ nhiều màu theo mùa, cả vùng cùng thấy
+  private fireworkFx(x: number, y: number, season: string | null): void {
+    const PALETTES: Record<string, string[]> = {
+      xuan: ['#ff9ecb', '#ffd6ec', '#ffffff'], ha: ['#ffd166', '#ffb26b', '#fff3b0'],
+      thu: ['#ffb26b', '#ff8fa3', '#ffe5b4'], dong: ['#bfe3ff', '#ffffff', '#9ecbff'],
+    };
+    const cols = PALETTES[season || ''] || ['#ffd873', '#ffb26b', '#ffffff'];
+    for (let ringI = 0; ringI < 3; ringI++) {
+      const col = parseInt(cols[ringI % cols.length].replace('#', ''), 16);
+      const ring = this.add.circle(x, y - 60, 30 + ringI * 16).setStrokeStyle(3, col, 0.95).setDepth(9999).setScale(0.3);
+      this.tweens.add({ targets: ring, scale: 1.6, alpha: 0, duration: 620, delay: ringI * 110, ease: 'Quad.Out', onComplete: () => ring.destroy() });
+    }
+    for (let i = 0; i < 18; i++) {
+      const col = parseInt(cols[i % cols.length].replace('#', ''), 16);
+      const sp = this.add.image(x, y - 60, 'fx-orb-neutral').setDepth(9999).setScale(0.3 + Math.random() * 0.3).setTint(col);
+      const ang = (i / 18) * Math.PI * 2 + Math.random() * 0.4;
+      const dist = 55 + Math.random() * 65;
+      this.tweens.add({ targets: sp, x: x + Math.cos(ang) * dist, y: y - 60 + Math.sin(ang) * dist + 26, alpha: 0, duration: 780 + Math.random() * 260, ease: 'Quad.Out', onComplete: () => sp.destroy() });
+    }
+  }
+
+  // GĐ218: cây Ươm Mầm Linh — hình theo giai đoạn (mầm/nụ/hoa) + tên chủ cây
+  private festPlants: Array<{ id: string; spotId: number; x: number; y: number; ownerName: string; stage: number }> = [];
+  private festLanternsData: any[] = []; // GĐ219: đèn sông đang trôi trên ao
+  private festLanternObjs = new Map<string, { c: Phaser.GameObjects.Container; label: Phaser.GameObjects.Text; baseY: number }>(); // GĐ219
+  private festPondObj: Phaser.GameObjects.Container | null = null; // GĐ219: vòng đèn quanh ao mùa Hạ
+  private festRiteObj: Phaser.GameObjects.Container | null = null; // GĐ221: bệ hương sân Đạo Quán mùa Đông
+  private festHuntObj: Phaser.GameObjects.Container | null = null; // GĐ222: hình vật lễ ẩn quanh làng
+  private festHuntData: { season?: string; item?: string; found?: number; total?: number; spots?: { id: number; x: number; y: number }[] } | null = null; // GĐ222
+  private festHuntSig = ''; // GĐ222
+  private festPlantObjs: Phaser.GameObjects.Text[] = [];
+  private festTreeObj: Phaser.GameObjects.Container | null = null;
+  private renderFestPlants(): void {
+    for (const o of this.festPlantObjs) o.destroy();
+    this.festPlantObjs = [];
+    if (!this.mapState?.isHome) return;
+    for (const pl of this.festPlants) {
+      const emoji = pl.stage >= 2 ? '🌸' : pl.stage === 1 ? '🌷' : '🌱';
+      const t = this.add.text(pl.x, pl.y, emoji, { fontSize: pl.stage >= 2 ? '30px' : '22px' }).setOrigin(0.5, 0.85).setDepth(-50);
+      const lb = this.add.text(pl.x, pl.y + 10, pl.ownerName, { fontFamily: 'Palatino, Georgia, serif', fontSize: '9px', color: '#ffd6ec' }).setOrigin(0.5, 0).setDepth(-50);
+      this.festPlantObjs.push(t, lb);
+    }
+  }
+  // GĐ219: đèn sông đang trôi — vị trí suy từ bornAt (mọi máy khớp nhau):
+  // trôi chậm về đông, kẹp trong lòng ao, lắc nhẹ theo sóng.
+  private renderFestLanterns(): void {
+    const seen = new Set<string>();
+    for (const l of this.festLanternsData) {
+      seen.add(l.id);
+      if (this.festLanternObjs.has(l.id)) continue;
+      const glow = this.add.image(0, 0, 'moonGlow').setTint(0xffd166).setScale(l.big ? 0.55 : 0.36).setAlpha(0.85);
+      const core = this.add.circle(0, 0, l.big ? 9 : 6, 0xffe9a8, 0.95);
+      const label = this.add.text(0, 16, `${l.wish}\n— ${l.ownerName}`, { fontFamily: 'sans-serif', fontSize: '10px', color: '#ffe9a8', align: 'center' }).setOrigin(0.5, 0).setAlpha(0);
+      const c = this.add.container(l.x, l.y, [glow, core, label]).setDepth(-48);
+      this.festLanternObjs.set(l.id, { c, label, baseY: l.y });
+    }
+    for (const [id, o] of [...this.festLanternObjs]) if (!seen.has(id)) { o.c.destroy(); this.festLanternObjs.delete(id); }
+  }
+  private updateFestLanterns(): void {
+    if (!this.festLanternObjs.size) return;
+    const now = Date.now();
+    const px = this.myContainer?.x ?? -9999, py = this.myContainer?.y ?? -9999;
+    for (const l of this.festLanternsData) {
+      const o = this.festLanternObjs.get(l.id); if (!o) continue;
+      const ageS = Math.max(0, (now - (l.bornAt || now)) / 1000);
+      const x = Math.min(l.x + ageS * 3, hs175(915) + 140);
+      o.c.setPosition(x, o.baseY + Math.sin(now / 900 + x * 0.05) * 3);
+      const near = Math.hypot(px - x, py - o.baseY) <= 240;
+      o.label.setAlpha(near ? 1 : 0); // đứng gần mới đọc được điều ước của nhau
+    }
+  }
+  // GĐ219: vòng đèn tĩnh quanh ao sen suốt mùa Hạ
+  private renderFestPond(want: boolean): void {
+    if (want && !this.festPondObj && this.textures.exists('moonGlow')) {
+      const cx = hs175(915) + 75, cy = hs175(845) + 45;
+      const parts: Phaser.GameObjects.GameObject[] = [];
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        parts.push(this.add.image(Math.cos(a) * 95, Math.sin(a) * 62, 'moonGlow').setTint(0xffc46b).setScale(0.30).setAlpha(0.8));
+        parts.push(this.add.circle(Math.cos(a) * 95, Math.sin(a) * 62, 4, 0xffe9a8, 0.9));
+      }
+      parts.push(this.add.text(0, -86, '🏮 Giang Đăng Hội — thả đèn ở bờ ao vào ban đêm', { fontFamily: 'sans-serif', fontSize: '12px', color: '#ffd9a0' }).setOrigin(0.5));
+      this.festPondObj = this.add.container(cx, cy, parts).setDepth(-55);
+    } else if (!want && this.festPondObj) { this.festPondObj.destroy(); this.festPondObj = null; }
+  }
+  // GĐ219: panel ghi điều ước khi thả đèn
+  private openWishPanel(): void {
+    const panel = document.getElementById('festWishPanel'); if (!panel) return;
+    const inv: any = (this.myChar as any)?.inventory || {};
+    const hasN = (inv.giay_den_linh || 0) > 0, hasB = (inv.den_song_lon || 0) > 0;
+    const note = document.getElementById('festWishNote');
+    if (note) note.textContent = 'Đèn chỉ thả được ban đêm (18h–6h giờ game). Đêm đã thả đèn, thiền được +Tu vi. Đứng gần bờ mới đọc được ước của nhau.';
+    const chips = document.getElementById('festWishChips');
+    if (chips) {
+      chips.innerHTML = '';
+      for (const w of ['An bình', 'Sớm đột phá', 'Nhớ người xưa', 'Gia đạo yên vui', 'Tu hành tinh tấn']) {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = w;
+        b.onclick = () => { const inp = document.getElementById('festWishInput') as HTMLInputElement | null; if (inp) inp.value = w; };
+        chips.appendChild(b);
+      }
+    }
+    const mk = (id: string, itemId: string, has: boolean) => {
+      const b = document.getElementById(id) as HTMLButtonElement | null; if (!b) return;
+      b.disabled = !has; b.style.opacity = has ? '1' : '0.45';
+      b.onclick = () => {
+        const inp = document.getElementById('festWishInput') as HTMLInputElement | null;
+        this.socket.emit('festival_release_lantern', { itemId, wish: inp ? inp.value : '' });
+        panel.style.display = 'none';
+      };
+    };
+    mk('festWishNormal', 'giay_den_linh', hasN);
+    mk('festWishBig', 'den_song_lon', hasB);
+    const close = document.getElementById('festWishClose');
+    if (close) close.onclick = () => { panel.style.display = 'none'; };
+    panel.style.display = 'block';
+  }
+
+  // GĐ221: bệ hương + biển Tế Lễ ở sân Đạo Quán suốt mùa Đông
+  // GĐ222: vật lễ ẩn quanh làng — chấm sáng + emoji mùa tại các điểm CHƯA nhặt
+  private renderFestHunt(): void {
+    const h = this.festHuntData;
+    const sig = h && h.spots ? h.spots.map((sp) => sp.id).join(',') + '|' + (h.season || '') : '';
+    if (sig === this.festHuntSig) return;
+    this.festHuntSig = sig;
+    if (this.festHuntObj) { this.festHuntObj.destroy(); this.festHuntObj = null; }
+    if (!h || !h.spots || !h.spots.length || !this.textures.exists('moonGlow')) return;
+    const emoji = (h.item || '✦').split(' ')[0];
+    const parts: Phaser.GameObjects.GameObject[] = [];
+    for (const sp of h.spots) {
+      const g = this.add.image(sp.x, sp.y, 'moonGlow').setTint(0xffe9a8).setScale(0.4).setAlpha(0.75);
+      const t = this.add.text(sp.x, sp.y - 4, emoji, { fontSize: '17px' }).setOrigin(0.5);
+      parts.push(g, t);
+    }
+    this.festHuntObj = this.add.container(0, 0, parts).setDepth(-54);
+  }
+
+  private renderFestRite(want: boolean): void {
+    if (want && !this.festRiteObj && this.textures.exists('moonGlow')) {
+      const cx = hs175(700), cy = hs175(452);
+      const parts: Phaser.GameObjects.GameObject[] = [];
+      for (const dx of [-120, 120]) {
+        parts.push(this.add.image(dx, 46, 'moonGlow').setTint(0xff9a3c).setScale(0.5).setAlpha(0.8));
+        parts.push(this.add.circle(dx, 46, 7, 0xffc46b, 0.95));
+        parts.push(this.add.text(dx, 66, '🔥', { fontSize: '16px' }).setOrigin(0.5));
+      }
+      parts.push(this.add.text(0, -64, '❄️ Tế Lễ Hàn Mai — tối 18h, ra sân thiền dự lễ cùng cả làng', { fontFamily: 'sans-serif', fontSize: '12px', color: '#cfe8ff' }).setOrigin(0.5));
+      this.festRiteObj = this.add.container(cx, cy, parts).setDepth(-55);
+    } else if (!want && this.festRiteObj) { this.festRiteObj.destroy(); this.festRiteObj = null; }
+  }
+
+  private renderFestTree(want: boolean): void {
+    if (want && !this.festTreeObj) {
+      const x = hs175(700), y = hs175(500);
+      const trunk = this.add.rectangle(0, 6, 12, 52, 0x6b4a2f).setOrigin(0.5, 1);
+      const c1 = this.add.circle(-26, -38, 30, 0xff9ecb, 0.85);
+      const c2 = this.add.circle(24, -44, 34, 0xffb7dd, 0.9);
+      const c3 = this.add.circle(0, -66, 30, 0xff9ecb, 0.85);
+      const lb = this.add.text(0, 16, 'Cây Đào Tiên', { fontFamily: 'Palatino, Georgia, serif', fontSize: '11px', color: '#ffd6ec' }).setOrigin(0.5, 0);
+      this.festTreeObj = this.add.container(x, y, [trunk, c1, c2, c3, lb]).setDepth(-55);
+    } else if (!want && this.festTreeObj) {
+      this.festTreeObj.destroy();
+      this.festTreeObj = null;
+    }
+  }
+
+  // GĐ217: HẠT MÙA rơi quanh người chơi ở làng khi lễ lớn đang mở
+  private festFlakes: Phaser.GameObjects.Image[] = [];
+  private ambParts: Phaser.GameObjects.Image[] = []; // GĐ225: hạt không khí theo chủ đề map
+  private ambFlies: Phaser.GameObjects.Image[] = []; // GĐ225: đom đóm ban đêm
+  private ambGlows: Phaser.GameObjects.Image[] = []; // GĐ225: quầng đèn tại NPC thành phố (hiện về đêm)
+  private ambKey = ''; // GĐ225: khóa trạng thái FX (map|đêm|lễ) để chỉ dựng lại khi đổi
+  private monGlowList: Phaser.GameObjects.Image[] = []; // GĐ227: quầng hệ của quái biến thể
+  private festFlakeSeason: string | null = null;
+  private refreshFestivalFx(): void {
+    const fest = (this.myChar as any)?.festival;
+    const season = this.mapState?.isHome && fest?.big ? (fest.big.id as string) : null;
+    if (season === this.festFlakeSeason) return;
+    this.festFlakeSeason = season;
+    for (const f of this.festFlakes) f.destroy();
+    this.festFlakes = [];
+    this.renderFestTree(season === 'xuan'); // GĐ218: cây đào tiên chỉ hiện mùa Xuân (gọi trước return để gỡ cây khi hết mùa)
+    this.renderFestPond(season === 'ha'); // GĐ219: vòng đèn quanh ao chỉ hiện mùa Hạ
+    this.renderFestRite(season === 'dong'); // GĐ221: bệ hương sân Đạo Quán chỉ hiện mùa Đông
+    if (!season || !this.myContainer) return;
+    const CONF: Record<string, { tint: number; scale: number }> = {
+      xuan: { tint: 0xffb7dd, scale: 0.2 }, ha: { tint: 0xffe066, scale: 0.16 },
+      thu: { tint: 0xffab5e, scale: 0.24 }, dong: { tint: 0xffffff, scale: 0.15 },
+    };
+    const cfg = CONF[season] || CONF.xuan;
+    for (let i = 0; i < 26; i++) {
+      const img = this.add.image(this.myContainer.x + (Math.random() * 1500 - 750), this.myContainer.y + (Math.random() * 1100 - 550), 'fx-orb-neutral')
+        .setDepth(9992).setScale(cfg.scale * (0.7 + Math.random() * 0.7)).setTint(cfg.tint).setAlpha(0.75);
+      (img as any).festVy = 14 + Math.random() * 22;
+      (img as any).festPh = Math.random() * Math.PI * 2;
+      this.festFlakes.push(img);
+    }
+  }
+  private updateFestivalFx(delta: number): void {
+    this.updateFestLanterns(); // GĐ219
+    if (!this.festFlakes.length || !this.myContainer) return;
+    const t = Date.now() / 1000;
+    for (const f of this.festFlakes) {
+      const vy = (f as any).festVy || 18;
+      f.y += (vy * delta) / 1000;
+      f.x += Math.sin(t * 1.3 + ((f as any).festPh || 0)) * 0.35;
+      if (f.y > this.myContainer.y + 580) { f.y = this.myContainer.y - 580; f.x = this.myContainer.x + (Math.random() * 1500 - 750); }
+      if (Math.abs(f.x - this.myContainer.x) > 820) f.x = this.myContainer.x + (Math.random() * 1500 - 750);
+    }
+  }
+
+  // GĐ225: dựng lại hạt không khí khi đổi map / ngày-đêm / mùa lễ (mẫu hạt lễ GĐ217)
+  private refreshAmbientFx(): void {
+    const key = (this.mapState?.mapId || 'home') + '|' + (this.worldState?.isNight ? 'n' : 'd') + '|' + (this.festFlakeSeason ? 'f' : '');
+    if (key === this.ambKey) return;
+    this.ambKey = key;
+    for (const f of this.ambParts) f.destroy();
+    for (const f of this.ambFlies) f.destroy();
+    this.ambParts = [];
+    this.ambFlies = [];
+    if (!this.myContainer || this.festFlakeSeason) return; // mùa lễ lớn ở làng: hạt lễ riêng đã phủ
+    const themeKey = !this.mapState || this.mapState.isHome ? 'petal' : ambThemeKey(this.mapState.theme);
+    const cfg = AMB_CONF[themeKey];
+    if (cfg) {
+      for (let i = 0; i < cfg.n; i++) {
+        const img = this.add.image(this.myContainer.x + (Math.random() * 1500 - 750), this.myContainer.y + (Math.random() * 1100 - 550), 'fx-orb-neutral')
+          .setDepth(9992).setScale(cfg.scale * (0.7 + Math.random() * 0.7)).setTint(cfg.tint).setAlpha(cfg.alpha);
+        (img as any).ambVy = cfg.vy; (img as any).ambVx = cfg.vx; (img as any).ambSw = cfg.sway; (img as any).ambPh = Math.random() * Math.PI * 2;
+        this.ambParts.push(img);
+      }
+    }
+    if (this.worldState?.isNight && AMB_FLY_THEMES.has(themeKey)) {
+      for (let i = 0; i < 12; i++) {
+        const img = this.add.image(this.myContainer.x + (Math.random() * 700 - 350), this.myContainer.y + (Math.random() * 500 - 250), 'fx-orb-neutral')
+          .setDepth(9993).setScale(0.13).setTint(0xd8ff9a).setAlpha(0.5);
+        (img as any).flyAx = img.x; (img as any).flyAy = img.y; (img as any).ambPh = Math.random() * Math.PI * 2;
+        this.ambFlies.push(img);
+      }
+    }
+  }
+
+  // GĐ225–227: chuyển động mỗi khung — hạt map, đom đóm, pháp ấn/hào quang Pháp Tướng, quầng quái
+  private updateAmbientFx(delta: number): void {
+    const t = Date.now() / 1000;
+    if (this.myContainer && this.ambParts.length) {
+      const cx = this.myContainer.x, cy = this.myContainer.y;
+      for (const f of this.ambParts) {
+        const vy = (f as any).ambVy || 10, vx = (f as any).ambVx || 0, ph = (f as any).ambPh || 0;
+        f.y += (vy * delta) / 1000;
+        f.x += (vx * delta) / 1000 + Math.sin(t * 1.2 + ph) * ((f as any).ambSw || 0.5) * 0.4;
+        if (f.y > cy + 580) { f.y = cy - 580; f.x = cx + (Math.random() * 1500 - 750); }
+        if (f.y < cy - 580) { f.y = cy + 580; f.x = cx + (Math.random() * 1500 - 750); }
+        if (f.x > cx + 840) f.x = cx - 840;
+        if (f.x < cx - 840) f.x = cx + 840;
+      }
+    }
+    if (this.myContainer && this.ambFlies.length) {
+      const cx = this.myContainer.x, cy = this.myContainer.y;
+      for (const f of this.ambFlies) {
+        let ax = (f as any).flyAx as number, ay = (f as any).flyAy as number;
+        if (Math.hypot(ax - cx, ay - cy) > 520) { ax = cx + (Math.random() * 700 - 350); ay = cy + (Math.random() * 500 - 250); (f as any).flyAx = ax; (f as any).flyAy = ay; }
+        const ph = (f as any).ambPh || 0;
+        f.x = ax + Math.sin(t * 0.7 + ph) * 38;
+        f.y = ay + Math.cos(t * 0.55 + ph * 1.7) * 24;
+        f.setAlpha(0.3 + 0.3 * (0.5 + 0.5 * Math.sin(t * 2.1 + ph)));
+      }
+    }
+    for (const a of this.actors.values()) { // GĐ226: pháp ấn xoay + hào quang thở + hạt nguyên tố quấn quanh tướng
+      if (a.ptSigil) a.ptSigil.rotation += delta * 0.0006;
+      if (a.ptAura) a.ptAura.setAlpha(0.25 + 0.07 * (0.5 + 0.5 * Math.sin(t * 2.2)));
+      if (a.ptOrbs && a.ptImg) {
+        const h = a.ptImg.displayHeight, cx = a.container.x, cy = a.container.y - h * 0.38;
+        a.ptOrbs.forEach((o, i) => { const ang = t * 0.9 + (i * Math.PI) / 3; o.setPosition(cx + Math.cos(ang) * h * 0.44, cy + Math.sin(ang) * h * 0.3); });
+      }
+    }
+    if (this.monGlowList.length) { // GĐ227: quầng hệ của quái đập nhịp nhẹ
+      this.monGlowList = this.monGlowList.filter((g) => g.active);
+      for (const g of this.monGlowList) g.setAlpha(0.23 + 0.1 * (0.5 + 0.5 * Math.sin(t * 2.4 + ((g as any).glowPh || 0))));
+    }
+  }
+
   private mountDustFx(x: number, y: number, species: string): void {
     const colHex = MOUNT_FX_COLOR[species] || '#d8cbb0';
     const col = parseInt(colHex.replace('#', ''), 16) || 0xd8cbb0;
@@ -3292,7 +4012,7 @@ class GameScene extends Phaser.Scene {
         rows.push(`<div class="tRow"><span>🐴 ${esc(m.name)}</span><span class="tQty">tốc ×${m.speedMul}</span></div>`);
       }
       for (const g of o.gear || []) {
-        rows.push(`<div class="tRow${clickable ? ' clickable' : ''}" ${clickable ? `data-tgoff="${g.uid}" title="Bấm để gỡ khỏi bàn"` : ''}><span>⚔️ <b style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${esc(g.name)}</b>${g.band ? ` <span style="color:#c9a86a">${g.band === 'na' ? '· Nguyên Anh' : '· Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? ` <span style="color:#ffd75e">✦ ${g.unique.map(esc).join(', ')}</span>` : ''}</span><span class="tQty">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`);
+        rows.push(`<div class="tRow${clickable ? ' clickable' : ''}" ${clickable ? `data-tgoff="${g.uid}" title="Bấm để gỡ khỏi bàn"` : ''}><span>⚔️ <b style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${esc(g.name)}</b>${g.band ? ` <span style="color:#c9a86a">${g.band === 'na' ? '· Nguyên Anh' : g.band === 'ph' ? '· Phản Hư' : '· Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? ` <span style="color:#ffd75e">✦ ${g.unique.map(esc).join(', ')}</span>` : ''}</span><span class="tQty">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`);
       }
       if (o.stones > 0) rows.push(`<div class="tRow"><span>💠 Linh thạch</span><span class="tQty">${o.stones}</span></div>`);
       return rows.length ? rows.join('') : '<div class="tEmpty">Chưa có gì trên bàn</div>';
@@ -3409,7 +4129,7 @@ class GameScene extends Phaser.Scene {
     if (title) title.textContent = `👤 ${card.name}`;
     const box = document.getElementById('cardBody');
     if (!box) return;
-    const gearRows = card.gear.length ? card.gear.map((g) => `<div class="socRow"><span class="grow" style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${socEsc(g.name)}${g.band ? ` <span style="color:#ffd94d">· ${g.band === 'na' ? 'Nguyên Anh' : 'Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? `<div style="color:#8be9c9;font-size:11px">✦ ${g.unique.map(socEsc).join(', ')}</div>` : ''}</span><span style="color:#9db8a6;font-size:11px">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`).join('') : '<div class="tEmpty">Chưa mặc trang bị nào.</div>';
+    const gearRows = card.gear.length ? card.gear.map((g) => `<div class="socRow"><span class="grow" style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${socEsc(g.name)}${g.band ? ` <span style="color:#ffd94d">· ${g.band === 'na' ? 'Nguyên Anh' : g.band === 'ph' ? 'Phản Hư' : 'Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? `<div style="color:#8be9c9;font-size:11px">✦ ${g.unique.map(socEsc).join(', ')}</div>` : ''}</span><span style="color:#9db8a6;font-size:11px">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`).join('') : '<div class="tEmpty">Chưa mặc trang bị nào.</div>';
     box.innerHTML = `
       <div class="socRow"><span class="grow"><span class="${card.online ? 'onDot' : 'offDot'}">●</span> <b>${socEsc(card.name)}</b> — ${SOC_CLASS[card.classId] || ''}</span><span>${card.online ? 'Đang online' : 'Offline'}</span></div>
       <div class="socRow"><span class="grow">Cảnh giới</span><span>${SOC_REALM[card.realm] || ''} tầng ${card.tier}</span></div>
@@ -3613,7 +4333,12 @@ class GameScene extends Phaser.Scene {
     if (name) name.textContent = c.name;
     if (cls) {
       const base = c.weaponName ? `${c.className} · ${c.weaponName}` : c.className;
-      cls.textContent = c.path === 'sect' ? `${base} · 🏯 Thanh Phong Môn` : base;
+      let line = c.path === 'sect' ? `${base} · 🏯 Thanh Phong Môn` : base;
+      const tt = (c as unknown as { title?: string }).title; // GĐ223: danh hiệu mùa đang đeo
+      if (tt) line += ` · 🏮 ${tt}`;
+      const cd = (c as unknown as { cauDoi?: string }).cauDoi; // GĐ223: câu đối Tuyết Ông tặng
+      if (cd) line += ` · 📜 ${cd}`;
+      cls.textContent = line;
     }
     if (realm) {
       // GĐ59: thêm Kim Đan (map KD vào được rồi — thẻ phải gọi đúng cảnh giới)
@@ -3700,6 +4425,9 @@ class GameScene extends Phaser.Scene {
         } else if (bi && bi.type === 'hoathan') { // GĐ181: viên mãn Tàn Đăng → thẳng Hóa Thần
           brk.textContent = bi.trialReady ? '✦ ĐỘT PHÁ HÓA THẦN ✦' : '⚔ Thử thách: Hóa Thần Kiếp Ảnh';
           brk.onclick = () => this.socket.emit(bi.trialReady ? 'breakthrough' : 'start_trial');
+        } else if (bi && bi.type === 'phanhu') { // GĐ204: Hóa Thần 9 → Phản Hư
+          brk.textContent = bi.trialReady ? '✦ ĐỘT PHÁ PHẢN HƯ ✦' : '⚔ Thử thách: Hư Không Kiếp Ảnh';
+          brk.onclick = () => this.socket.emit(bi.trialReady ? 'breakthrough' : 'start_trial');
         } else {
           brk.textContent = '✦ Đột phá Tiểu cảnh ✦';
           brk.onclick = () => this.socket.emit('breakthrough');
@@ -3763,7 +4491,7 @@ class GameScene extends Phaser.Scene {
     }
     // GĐ184: Pháp Tướng trên thẻ — dòng trạng thái + 3 nút (hiện hình / Ảo Cảnh / tế luyện)
     {
-      const pt = (c as unknown as { phapTuong?: { stage: number; stageName: string; mul: number; element: string; progress: number; nextNeed: number | null; active: boolean; inTrial: boolean } | null }).phapTuong;
+      const pt = (c as unknown as { phapTuong?: { stage: number; stageName: string; mul: number; element: string; progress: number; nextNeed: number | null; active: boolean; inTrial: boolean; soulPower?: number; soulNeed?: number | null; shapeNeed?: number | null; divineArt?: { name: string; mode?: string | null; desc?: string | null; cdLeft: number } | null } | null }).phapTuong;
       const ptEl = document.getElementById('hudPhapTuong');
       const ptBtn = document.getElementById('btnPhapTuong') as HTMLButtonElement | null;
       const ptTrial = document.getElementById('btnPtTrial') as HTMLButtonElement | null;
@@ -3771,7 +4499,7 @@ class GameScene extends Phaser.Scene {
       if (ptEl) {
         if (pt) {
           ptEl.style.display = 'block';
-          ptEl.textContent = `🔮 Pháp Tướng · ${pt.stageName} · hệ ${pt.element} · Tu dưỡng ${pt.progress}${pt.nextNeed != null ? `/${pt.nextNeed}` : ' (tối đa)'}${pt.active ? ' · ĐANG HIỆN HÌNH' : ''}`;
+          ptEl.textContent = `🔮 Pháp Tướng · ${pt.stageName} · hệ ${pt.element} · Tu dưỡng ${pt.progress}${pt.nextNeed != null ? `/${pt.nextNeed}` : ''}${pt.soulNeed != null ? ` · Hồn lực ${pt.soulPower || 0}/${pt.soulNeed} (thiền hiện hình tại Đạo Quán)` : ''}${pt.shapeNeed != null ? ` · Nặn hình (Sơ Ảnh): tu dưỡng ${pt.progress}/${pt.shapeNeed}` : ''}${pt.divineArt ? ` · 🌟 ${pt.divineArt.name}` : ''}${pt.active ? ' · ĐANG HIỆN HÌNH' : ''}`;
         } else ptEl.style.display = 'none';
       }
       if (ptBtn) {
@@ -3787,6 +4515,32 @@ class GameScene extends Phaser.Scene {
       if (ptOffer) {
         ptOffer.style.display = pt ? 'inline-block' : 'none';
         if (!ptOffer.dataset.bound) { ptOffer.dataset.bound = '1'; ptOffer.onclick = () => this.socket.emit('phaptuong_offer', { amount: 10 }); }
+      }
+      // GĐ205: đường CHÂN THÂN BÁN THẦN — nút theo giai đoạn (chỉ ở cảnh Phản Hư)
+      const ptAdv = document.getElementById('btnPtAdvance') as HTMLButtonElement | null;
+      const ptDiet = document.getElementById('btnPtDietThan') as HTMLButtonElement | null;
+      const ptHop = document.getElementById('btnPtHopNhat') as HTMLButtonElement | null;
+      const ttBtn = document.getElementById('btnThanThuat') as HTMLButtonElement | null;
+      const isPh = (c as unknown as { realm: string }).realm === 'ph';
+      if (ptAdv) {
+        const show = !!pt && isPh && (pt.stage === 5 || pt.stage === 6);
+        ptAdv.style.display = show ? 'inline-block' : 'none';
+        if (show && pt) ptAdv.textContent = pt.stage === 5 ? `✦ Tọa Hồn (hồn lực ${pt.soulPower || 0}/${pt.soulNeed})` : `✦ Sơ Ảnh (tu dưỡng ${pt.progress}/${pt.shapeNeed})`;
+        if (!ptAdv.dataset.bound) { ptAdv.dataset.bound = '1'; ptAdv.onclick = () => this.socket.emit('phaptuong_advance'); }
+      }
+      if (ptDiet) {
+        ptDiet.style.display = pt && pt.stage === 7 && pt.active ? 'inline-block' : 'none';
+        if (!ptDiet.dataset.bound) { ptDiet.dataset.bound = '1'; ptDiet.onclick = () => this.socket.emit('phaptuong_dietthan'); }
+      }
+      if (ptHop) {
+        ptHop.style.display = pt && pt.stage === 8 && pt.active ? 'inline-block' : 'none';
+        if (!ptHop.dataset.bound) { ptHop.dataset.bound = '1'; ptHop.onclick = () => this.socket.emit('phaptuong_hopnhat'); }
+      }
+      if (ttBtn) {
+        const show = !!pt && !!pt.divineArt && pt.active;
+        ttBtn.style.display = show ? 'inline-block' : 'none';
+        if (show && pt && pt.divineArt) { ttBtn.textContent = pt.divineArt.cdLeft > 0 ? `🌟 ${pt.divineArt.name} (hồi ${Math.ceil(pt.divineArt.cdLeft / 1000)}s)` : `🌟 Thần Thuật: ${pt.divineArt.name}`; if (pt.divineArt.desc) ttBtn.title = pt.divineArt.desc; }
+        if (!ttBtn.dataset.bound) { ttBtn.dataset.bound = '1'; ttBtn.onclick = () => this.socket.emit('cast_than_thuat'); }
       }
       // GĐ202: nút Xuất khiếu — hiện từ Nguyên Anh trở lên
       const xkBtn = document.getElementById('btnXuatKhieu') as HTMLButtonElement | null;
@@ -3916,9 +4670,11 @@ class GameScene extends Phaser.Scene {
                <button class="allocOk" id="allocOk">✔ OK</button>
              </div>`
           : `<div style="margin-top:3px">Điểm tự do: <b>0</b> · Điểm đột phá: <b>0</b></div>`)
-        // GĐ74: reset chỉ số bằng Linh thạch (100 LT Hạ phẩm, phí TẠM) —
-        // hoàn điểm đã cộng về bể điểm. Server kiểm tra số dư + sổ điểm.
-        + `<div style="margin-top:6px;display:flex;gap:6px;align-items:center"><button class="allocReset" id="statResetBtn">↺ Reset chỉ số (100 LT)</button><span style="font-size:11px;color:#a9cbb6">Hoàn điểm đã cộng về bể điểm</span></div>`;
+        // GĐ74: reset chỉ số bằng Linh thạch — hoàn điểm đã cộng về bể
+        // điểm. GĐ212: nhãn theo trạng thái Thần Thuật — còn lượt tặng
+        // của Thần Thuật = MIỄN PHÍ; đã mở thuật + hết lượt = 1.000 LT
+        // (gấp 10); chưa mở thuật = 100 LT. Server là nơi chốt phí.
+        + `<div style="margin-top:6px;display:flex;gap:6px;align-items:center"><button class="allocReset" id="statResetBtn">↺ Reset chỉ số (${(() => { const da: any = (c as any).phapTuong && (c as any).phapTuong.divineArt; return da ? (da.freeReset ? 'MIỄN PHÍ — lượt Thần Thuật' : '100 LT Thượng phẩm') : '100 LT'; })()})</button><span style="font-size:11px;color:#a9cbb6">Hoàn điểm đã cộng về bể điểm</span></div>`;
       // GĐ55: bấm +/− = 1 điểm ngay; GIỮ = lặp theo tick qua statHold
       // (updateHudBars điều khiển) — vẽ lại bằng paintStats, không dựng lại DOM.
       stats.querySelectorAll<HTMLButtonElement>('[data-adj]').forEach((b) => {
@@ -4317,6 +5073,40 @@ class GameScene extends Phaser.Scene {
       this.socket.emit('gather_node', { nodeId: near.nodeId }); // GĐ132: thu thập điểm tài nguyên
     } else if (near.type === 'citynpc' && near.npcId) {
       this.socket.emit('talk_npc', { npcId: near.npcId }); // GĐ89: dân thành phố
+    } else if (near.type === 'tule') {
+      this.socket.emit('talk_npc', { npcId: 'npc_tule' }); // GĐ218 (điểm E bổ sung cho GĐ217)
+    } else if (near.type === 'tieudao') {
+      this.socket.emit('talk_npc', { npcId: 'npc_tieudao' }); // GĐ218
+    } else if (near.type === 'laongu') {
+      this.socket.emit('talk_npc', { npcId: 'npc_laongu' }); // GĐ219
+    } else if (near.type === 'lantern') {
+      this.openWishPanel(); // GĐ219: mở panel ghi điều ước
+    } else if (near.type === 'debris' && (near as any).spotId !== undefined) {
+      this.socket.emit('festival_ha_debris', { spotId: (near as any).spotId }); // GĐ219
+    } else if (near.type === 'nguyetnuong') {
+      this.socket.emit('talk_npc', { npcId: 'npc_nguyetnuong' }); // GĐ220
+    } else if (near.type === 'thuField' && (near as any).spotId !== undefined) {
+      this.socket.emit('festival_thu_gather', { spotId: (near as any).spotId }); // GĐ220
+    } else if (near.type === 'track' && (near as any).spotId !== undefined) {
+      this.socket.emit('festival_thu_track', { spotId: (near as any).spotId }); // GĐ220
+    } else if (near.type === 'beastden') {
+      this.socket.emit('festival_thu_den'); // GĐ220
+    } else if (near.type === 'tuyetong') {
+      this.socket.emit('talk_npc', { npcId: 'npc_tuyetong' }); // GĐ221
+    } else if (near.type === 'dongbell') {
+      this.socket.emit('festival_dong_bell'); // GĐ221
+    } else if (near.type === 'dongherb' && (near as any).spotId !== undefined) {
+      this.socket.emit('festival_dong_herb', { spotId: (near as any).spotId }); // GĐ221
+    } else if (near.type === 'thaydo') {
+      this.socket.emit('talk_npc', { npcId: 'npc_thaydo' }); // GĐ222
+    } else if (near.type === 'huntitem' && (near as any).spotId !== undefined) {
+      this.socket.emit('festival_hunt_pick', { spotId: (near as any).spotId }); // GĐ222
+    } else if (near.type === 'peachtree') {
+      this.socket.emit('festival_story_fight'); // GĐ218: tưới Linh Thủy + đánh Hàn Khí
+    } else if (near.type === 'plantspot' && near.spotId !== undefined) {
+      this.socket.emit('festival_plant', { spotId: near.spotId }); // GĐ218
+    } else if (near.type === 'plantharvest' && near.plantId) {
+      this.socket.emit('festival_harvest', { plantId: near.plantId }); // GĐ218
     }
   }
 
@@ -4580,11 +5370,11 @@ class GameScene extends Phaser.Scene {
   }
 
   // ---------------- GĐ8: NPC + đồ rơi + panel ----------------
-  private nearestInteract(): { type: string; x: number; y: number; shopId?: string; npcId?: string; name?: string; role?: string; nodeId?: string; kind?: string } | null {
+  private nearestInteract(): { type: string; x: number; y: number; shopId?: string; npcId?: string; name?: string; role?: string; nodeId?: string; kind?: string; spotId?: number; plantId?: string } | null {
     if (!this.myContainer) return null;
     // GĐ59: ở map khác thì chỉ còn Trận Dịch Chuyển; ở làng có thêm các điểm cũ
     const isHome = !this.mapState || this.mapState.isHome;
-    const cands: Array<{ type: string; x: number; y: number; shopId?: string; npcId?: string; name?: string; role?: string; nodeId?: string; kind?: string }> = isHome ? [...INTERACTS] : [];
+    const cands: Array<{ type: string; x: number; y: number; shopId?: string; npcId?: string; name?: string; role?: string; nodeId?: string; kind?: string; spotId?: number; plantId?: string }> = isHome ? [...INTERACTS] : [];
     const portal = this.mapState?.portal || { x: hs175(1080), y: hs175(600) }; // GĐ175
     cands.push({ type: 'travel', x: portal.x, y: portal.y });
     // GĐ85: đàn tế trên map có trùm (server gửi vị trí theo map_enter)
@@ -4597,6 +5387,35 @@ class GameScene extends Phaser.Scene {
       for (const n of this.mapState.npcs) {
         const live = this.cityNpcById.get(n.id);
         cands.push({ type: 'citynpc', npcId: n.id, name: n.name, role: n.role, x: live ? live.x : n.x, y: live ? live.y : n.y });
+      }
+    }
+    // GĐ218: điểm gieo/hái Ươm Mầm + cây đào tiên (chỉ ở làng)
+    if (isHome) {
+      for (const sp of PLANT_SPOTS_CLIENT) {
+        const pl = this.festPlants.find((q) => q.spotId === sp.id);
+        if (pl) { if (pl.stage >= 2) cands.push({ type: 'plantharvest', plantId: pl.id, x: sp.x, y: sp.y }); }
+        else if (((this.myChar as any)?.inventory?.hat_linh_xuan || 0) > 0) cands.push({ type: 'plantspot', spotId: sp.id, x: sp.x, y: sp.y });
+      }
+      const festC = (this.myChar as any)?.festival;
+      if (festC?.big?.id === 'xuan') cands.push({ type: 'peachtree', x: hs175(700), y: hs175(500) });
+      // GĐ219: rác sông (khi truyện Hạ ở bước vớt rác) + bờ thả đèn (khi có giấy đèn/đèn lớn)
+      const festStoryC = (this.myChar as any)?.festivalStory;
+      if (festC?.big?.id === 'ha' && festStoryC?.season === 'ha' && festStoryC?.stage === 3)
+        for (const sp of DEBRIS_SPOTS_CLIENT) cands.push({ type: 'debris', spotId: sp.id, x: sp.x, y: sp.y } as any);
+      if (festC?.big?.id === 'ha' && (((this.myChar as any)?.inventory?.giay_den_linh || 0) > 0 || ((this.myChar as any)?.inventory?.den_song_lon || 0) > 0))
+        cands.push({ type: 'lantern', x: LANTERN_BANK.x, y: LANTERN_BANK.y });
+      // GĐ220: ruộng Mạ Linh (mùa Thu) + vết chân (truyện giai đoạn 1) + hang thú (giai đoạn 2)
+      if (festC?.big?.id === 'thu') for (const sp of FEST_FIELD_SPOTS_CLIENT) cands.push({ type: 'thuField', spotId: sp.id, x: sp.x, y: sp.y } as any);
+      if (festC?.big?.id === 'thu' && festStoryC?.season === 'thu' && festStoryC?.stage === 1)
+        for (const sp of TRACK_SPOTS_CLIENT) cands.push({ type: 'track', spotId: sp.id, x: sp.x, y: sp.y } as any);
+      if (festC?.big?.id === 'thu' && festStoryC?.season === 'thu' && festStoryC?.stage === 2)
+        cands.push({ type: 'beastden', x: DEN_SPOT_CLIENT.x, y: DEN_SPOT_CLIENT.y });
+      // GĐ221: chuông dưới băng + hương thảo (truyện Đông giai đoạn 2)
+      // GĐ222: vật lễ ẩn hôm nay (điểm chưa nhặt)
+      if (this.festHuntData?.spots) for (const sp of this.festHuntData.spots) cands.push({ type: 'huntitem', spotId: sp.id, x: sp.x, y: sp.y } as any);
+      if (festC?.big?.id === 'dong' && festStoryC?.season === 'dong' && festStoryC?.stage === 2) {
+        if (!festStoryC.bell) cands.push({ type: 'dongbell', x: LANTERN_BANK.x, y: LANTERN_BANK.y });
+        for (const sp of DONG_HERB_SPOTS_CLIENT) cands.push({ type: 'dongherb', spotId: sp.id, x: sp.x, y: sp.y } as any);
       }
     }
     // GĐ132: điểm tài nguyên — điểm E theo từng mạch/bụi (server gửi theo map_enter, cả làng lẫn map hoang)
@@ -4784,7 +5603,7 @@ class GameScene extends Phaser.Scene {
 
   private closePanels(): void {
     this.openPanel = null;
-    for (const id of ['shopPanel', 'questPanel', 'invPanel', 'npcDialog', 'jobPanel', 'achPanel', 'learnPanel', 'boardPanel', 'stonesPanel', 'altarPanel', 'forgePanel', 'hintPanel', 'mountPanel', 'socialPanel', 'playerCardPanel', 'nearPanel', 'socialInvite']) { // GĐ194: + panel xã hội
+    for (const id of ['shopPanel', 'questPanel', 'invPanel', 'npcDialog', 'jobPanel', 'achPanel', 'learnPanel', 'boardPanel', 'stonesPanel', 'altarPanel', 'forgePanel', 'hintPanel', 'mountPanel', 'socialPanel', 'playerCardPanel', 'nearPanel', 'socialInvite', 'sectPanel']) { // GĐ194: + panel xã hội; GĐ224: + panel tông môn
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
     }
@@ -5002,6 +5821,8 @@ class GameScene extends Phaser.Scene {
         { type: 'buff', name: 'Trận Cường Công', rank: 2, desc: 'Người trong trận (200px, 60s) gây sát thương ×1,25' },
         { type: 'debuff', name: 'Trận Suy Nhược', rank: 4, desc: 'Quái trong trận (200px, 60s) gây sát thương ×0,5' },
         { type: 'seal', name: 'Cấm Chế Trận', rank: 6, desc: 'Quái trong trận (150px, 15s) không đi không cắn được' },
+        { type: 'regen', name: 'Trận Hồi Linh', rank: 8, desc: 'Người trong trận (200px, 60s) hồi 2% HP + 2% chân nguyên mỗi giây' }, // GĐ207
+        { type: 'ward', name: 'Trận Hộ Thể', rank: 10, desc: 'Người trong trận (200px, 60s) nhận sát thương ×0,6' }, // GĐ207
       ];
       const tranKy = invNow['tran_ky'] || 0;
       html += `<div class="prow" style="font-weight:bold">🔮 Bố trận — mỗi loại 1 trận/người (bố lại thay trận cũ), tốn 1 Trận Kỳ/lần (chế ở trên: 4 Nanh Sói + 10 LT; Trận Kỳ dùng trực tiếp thì về làng)</div>`;
@@ -5300,12 +6121,17 @@ class GameScene extends Phaser.Scene {
     if (this.mapState && this.mapState.mapId !== def.mapId) sound.play('teleport');
     sound.setMapMood(def.category, !!(def.safe || def.isHome));
     this.mapState = def;
+    this.refreshFestivalFx(); // GĐ217
+    this.renderFestPlants(); // GĐ218
     this.dialogueState.clear(); // GĐ150: đổi map xóa lịch thoại cũ (container cũ đã hủy)
     for (const o of this.nhoZoneObjs.values()) { o.circle.destroy(); o.label.destroy(); } // GĐ105: đổi map xóa vòng Ý Cảnh cũ
     this.nhoZoneObjs.clear();
     const isHome = !!def.isHome;
     for (const o of this.homeObjects) (o as Phaser.GameObjects.Image).setVisible(isHome);
     for (const s of this.moonSheens) s.setVisible(isHome);
+    for (const g of this.ambGlows) g.destroy(); // GĐ225: quầng đèn NPC theo map
+    this.ambGlows = [];
+    if (!isHome && def.npcs) for (const n of def.npcs) { const g = this.add.image(n.x, n.y - 26, 'moonGlow').setTint(0xffc46b).setScale(0.34).setAlpha(0).setDepth(5); this.ambGlows.push(g); }
     for (const b of this.birds) b.img.setVisible(isHome);
     if (isHome) {
       if (this.mapBg) this.mapBg.setVisible(false);
@@ -5453,7 +6279,7 @@ class GameScene extends Phaser.Scene {
     if (textEl) textEl.textContent = 'Dịch chuyển tức thì nhưng tốn Linh thạch (về làng/thành miễn phí). Kim Đan có thể ngự kiếm — miễn phí nhưng chậm. Đảo ngoài biển chỉ đi thuyền từ Thanh Vân Thành. Thiếu Linh thạch thì gặp Lái Buôn nhận việc hộ tống.';
     const btns = document.getElementById('npcDlgBtns');
     if (!btns) return;
-    const CAT_LABEL: Record<string, string> = { city: 'Thành thị', profession: 'Đất nghề', farm: 'Bãi săn', elemental: 'Vùng ngũ hành', current: 'Làng' };
+    const CAT_LABEL: Record<string, string> = { city: 'Thành thị', profession: 'Đất nghề', farm: 'Bãi săn', elemental: 'Vùng ngũ hành', current: 'Làng', fortress: 'Thành trì', village: 'Làng' }; // GĐ207: + thành trì/làng
     const canFly = (this.myChar?.realm === 'kd' || this.myChar?.realm === 'na' || this.myChar?.realm === 'ht' || this.myChar?.realm === 'ph'); // GĐ183: bỏ Vô Danh
     let html = '';
     for (const t of d.list) {
@@ -5797,6 +6623,51 @@ class GameScene extends Phaser.Scene {
         html += `<div class="prow"><span class="pname">🌀 Cổng Trở Về<span class="pdesc">Qua cổng là về sân Thanh Phong Môn, Làng Tân Thủ.</span></span><button class="pbtn gold" data-realm="exit">Về làng</button></div>`;
       }
     }
+    // GĐ220: LỰA CHỌN kết truyện Thu (hộp thoại hang thú)
+    if ((d as any).thuChoice) {
+      html += `<div class="prow"><span class="pname">⚔️ Đánh đuổi Linh Lộc Mẹ<span class="pdesc">Giữ ruộng cho làng — nó sẽ dẫn con đi nơi khác</span></span><button class="pbtn" data-thuchoice="fight">Đánh đuổi</button></div>`;
+      html += `<div class="prow"><span class="pname">🌕 Dụ đi bằng Bánh Thu Nguyệt<span class="pdesc">Cần 1 bánh trong túi — chữa thương, đưa cả nhà nó vào rừng sâu</span></span><button class="pbtn gold" data-thuchoice="lure">Dụ đi</button></div>`;
+    }
+    // GĐ217: mục LỄ HỘI — đổi quà + mốc lễ nhỏ + nộp vật tích trữ
+    const fi = (d as any).festivalInfo;
+    if (fi) {
+      html += `<div class="prow"><span class="pname">🎉 Đồng Lễ Hội: ${fi.coins}<span class="pdesc">Quà lễ thuần vui, không tăng sức mạnh — đúng chất lễ hội.</span></span></div>`;
+      if (fi.story) {
+        const storyTitle = fi.story.season === 'ha' ? '🏮 Truyện: Chiếc Đèn Của Người Chài' : fi.story.season === 'thu' ? '🌕 Truyện: Con Thú Phá Ruộng' : fi.story.season === 'dong' ? '❄️ Truyện: Mùa Đông Cuối Của Người Gác Đền' : '🌸 Truyện: Cây Đào Tiên Không Nở'; // GĐ219–GĐ221
+        const storyBtn = fi.story.stage === 0 ? '<button class="pbtn gold" data-feststory="1">Nghe chuyện</button>' : (fi.story.stage === 1 && (d as any).npcId === 'npc_laongu' ? '<button class="pbtn gold" data-feststory2="1">Nghe Lão Ngư kể</button>' : (fi.story.stage === 1 && (d as any).npcId === 'npc_tuyetong' ? '<button class="pbtn gold" data-feststory3="1">Nghe ông dặn</button>' : '')); // GĐ219 + GĐ221
+        html += `<div class="prow"><span class="pname">${storyTitle}<span class="pdesc">${fi.story.text}</span></span>${storyBtn}</div>`;
+      }
+      const qz = (fi as unknown as { quiz?: { asked: number; correct: number; done: boolean; question: { text: string; options: string[] } | null; last: { ok: boolean; explain: string } | null } }).quiz; // GĐ222
+      if (qz) {
+        if (qz.last) html += `<div class="prow"><span class="pname">${qz.last.ok ? '✅ Trả lời đúng!' : '❌ Chưa đúng'}<span class="pdesc">${qz.last.explain}</span></span></div>`;
+        if (qz.question) {
+          html += `<div class="prow"><span class="pname">🎓 Câu đố (${qz.asked + 1}/3 hôm nay)<span class="pdesc">${qz.question.text}</span></span></div>`;
+          qz.question.options.forEach((op: string, i: number) => { html += `<div class="prow"><span class="pname">${op}</span><button class="pbtn" data-quizans="${i}">Chọn</button></div>`; });
+        } else if (qz.done) {
+          html += `<div class="prow"><span class="pname">🎓 Đố vui hôm nay: đúng ${qz.correct}/3 câu<span class="pdesc">Mai Thầy Đồ lại đố tiếp — đúng mỗi câu +2 Đồng Lễ Hội.</span></span></div>`;
+        } else {
+          html += `<div class="prow"><span class="pname">🎓 Đố vui hôm nay: đã hỏi ${qz.asked}/3 · đúng ${qz.correct}<span class="pdesc">Đúng mỗi câu +2 Đồng Lễ Hội; sai Thầy giảng đáp án.</span></span><button class="pbtn gold" data-quizstart="1">${qz.asked ? 'Câu tiếp theo' : 'Bắt đầu đố'}</button></div>`;
+        }
+      }
+      if ((d as any).npcId === 'npc_nguyetnuong') { // GĐ220: nấu bánh tại quầy Nguyệt Nương
+        html += `<div class="prow"><span class="pname">🍰 Nấu Bánh Thu Nguyệt<span class="pdesc">Cần 2 Lúa Linh + 1 Hạt Sen Linh — ăn chia sức cho người gần</span></span><button class="pbtn gold" data-festcook="1">Nấu bánh</button></div>`;
+      }
+      if (fi.mini) {
+        html += `<div class="prow"><span class="pname">🏮 Lễ nhỏ: ${fi.mini.name}<span class="pdesc">Tiến độ của bạn: ${fi.mini.count} ${fi.mini.unit}</span></span></div>`;
+        for (let i = 0; i < fi.mini.tiers.length; i++) {
+          const t = fi.mini.tiers[i];
+          if (t.claimed) html += `<div class="prow"><span class="pname">✔ Mốc ${i + 1} (${t.need})<span class="pdesc">Đã nhận ${t.coins} Đồng Lễ Hội</span></span></div>`;
+          else if (t.claimable) html += `<div class="prow"><span class="pname">🎁 Mốc ${i + 1} (${t.need})<span class="pdesc">Thưởng ${t.coins} Đồng Lễ Hội</span></span><button class="pbtn gold" data-festclaim="1">Nhận</button></div>`;
+          else html += `<div class="prow"><span class="pname">Mốc ${i + 1} (${t.need})<span class="pdesc">Thưởng ${t.coins} Đồng Lễ Hội</span></span></div>`;
+        }
+        if (fi.mini.focusType === 'deliver' && fi.mini.items) {
+          for (const it of fi.mini.items) html += `<div class="prow"><span class="pname">📦 Nộp ${ITEM_INFO[it]?.name || it}<span class="pdesc">Nộp 1 vào kho làng = +1 tiến độ</span></span><button class="pbtn" data-festdeliver="${it}">Nộp 1</button></div>`;
+        }
+      }
+      for (const g of fi.gifts) {
+        html += `<div class="prow"><span class="pname">🎁 ${g.name}<span class="pdesc">${ITEM_INFO[g.itemId]?.desc || ''}</span></span><button class="pbtn gold" data-festbuy="${g.id}">${g.price} Đồng</button></div>`;
+      }
+    }
     btns.innerHTML = html || '<div class="prow">Không có việc gì thêm lúc này.</div>';
     btns.querySelectorAll<HTMLButtonElement>('[data-claim]').forEach((b) => {
       b.onclick = () => { this.socket.emit('quest_claim', { questId: b.dataset.claim }); this.closePanels(); };
@@ -5825,6 +6696,37 @@ class GameScene extends Phaser.Scene {
     });
     btns.querySelectorAll<HTMLButtonElement>('[data-exchange]').forEach((b) => {
       b.onclick = () => { this.socket.emit('exchange_merit'); setTimeout(() => this.socket.emit('talk_npc', { npcId: 'npc_sugia' }), 350); };
+    });
+    // GĐ217: nút lễ hội — server trả hộp thoại mới qua npc_dialog, giữ nguyên panel
+    btns.querySelectorAll<HTMLButtonElement>('[data-festbuy]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_buy', { giftId: b.dataset.festbuy }); };
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-festclaim]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_claim_mini'); };
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-festdeliver]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_deliver', { itemId: b.dataset.festdeliver }); };
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-feststory]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_story_start'); };
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-feststory2]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_ha_begin'); }; // GĐ219
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-quizstart]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_quiz_start'); }; // GĐ222
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-quizans]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_quiz_answer', { choice: Number(b.dataset.quizans) }); }; // GĐ222
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-feststory3]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_dong_begin'); }; // GĐ221
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-festcook]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_thu_cook'); }; // GĐ220
+    });
+    btns.querySelectorAll<HTMLButtonElement>('[data-thuchoice]').forEach((b) => {
+      b.onclick = () => { this.socket.emit('festival_thu_choice', { mode: b.dataset.thuchoice }); this.closePanels(); }; // GĐ220
     });
     // GĐ54: học công pháp tông môn — bắt đầu lĩnh ngộ như học thường (đóng hộp thoại, nhân vật ngồi học tại chỗ)
     btns.querySelectorAll<HTMLButtonElement>('[data-sectlearn]').forEach((b) => {
@@ -6044,6 +6946,86 @@ class GameScene extends Phaser.Scene {
   // thiết kế. MMO hiện chỉ có 1 số dư thật (Hạ phẩm = c.stones, mọi
   // giao dịch đều dùng nó); 3 phẩm cao chưa có cách kiếm/đổi trong
   // code nên hiện 0 kèm ghi chú, KHÔNG bịa số.
+  // GĐ224: panel TÔNG MÔN NGƯỜI CHƠI — tạo tông / danh sách / thành viên / đơn / mời
+  private toggleSectPanel(): void {
+    if (!this.myChar) return;
+    if (this.openPanel === 'sect') { this.closePanels(); return; }
+    this.closePanels();
+    this.openPanel = 'sect';
+    const p = document.getElementById('sectPanel');
+    if (p) p.style.display = 'block';
+    this.socket.emit('sect_get');
+    this.renderSectPanel();
+  }
+
+  private renderSectPanel(): void {
+    const body = document.getElementById('sectBody');
+    if (!body) return;
+    const st = this.sectState;
+    if (!st) { body.innerHTML = '<div class="prow"><span class="pname">Đang tải…</span></div>'; return; }
+    const esc = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    let html = '';
+    if (st.mySect) {
+      const g = st.mySect;
+      const officer = g.myRole === 'chu' || g.myRole === 'pho';
+      html += `<div class="prow"><span class="pname">🏯 ${esc(g.name)}<span class="pdesc">Bạn là ${g.myRoleName} · ${g.members.length} thành viên</span></span></div>`;
+      html += `<div class="prow"><span class="pname">${esc(g.intro) || '<i>Chưa có lời giới thiệu.</i>'}${officer ? `<span class="pdesc">Sửa giới thiệu:</span>` : ''}</span>${officer ? `<input id="sectIntroInput" maxlength="120" style="flex:1;min-width:120px" placeholder="Lời giới thiệu tông…"><button class="pbtn" data-sect="intro">Lưu</button>` : ''}</div>`;
+      if (officer) html += `<div class="prow"><span class="pname">Mời người vào tông<span class="pdesc">Gõ đúng tên nhân vật — mời được cả người đang offline</span></span><input id="sectInviteInput" maxlength="32" style="flex:1;min-width:120px" placeholder="Tên nhân vật…"><button class="pbtn" data-sect="invite">Mời</button></div>`;
+      if (g.applicants.length) {
+        html += '<div class="prow"><span class="pname">📥 Đơn xin gia nhập</span></div>';
+        for (const a of g.applicants) html += `<div class="prow"><span class="pname">${esc(a.name)}</span><button class="pbtn gold" data-sect="apply-ok" data-token="${a.token}">Duyệt</button><button class="pbtn" data-sect="apply-no" data-token="${a.token}">Từ chối</button></div>`;
+      }
+      html += '<div class="prow"><span class="pname">👥 Thành viên</span></div>';
+      for (const m of g.members) {
+        const acts: string[] = [];
+        if (g.myRole === 'chu' && m.role !== 'chu') {
+          if (m.role !== 'pho') acts.push(`<button class="pbtn" data-sect="role" data-role="pho" data-token="${m.token}">Phong Phó</button>`);
+          if (m.role !== 'truonglao') acts.push(`<button class="pbtn" data-sect="role" data-role="truonglao" data-token="${m.token}">Phong Trưởng lão</button>`);
+          if (m.role !== 'detu') acts.push(`<button class="pbtn" data-sect="role" data-role="detu" data-token="${m.token}">Xuống Đệ tử</button>`);
+          acts.push(`<button class="pbtn" data-sect="transfer" data-token="${m.token}">Truyền ngôi</button>`);
+        }
+        if ((g.myRole === 'chu' && m.role !== 'chu') || (g.myRole === 'pho' && (m.role === 'detu' || m.role === 'truonglao'))) acts.push(`<button class="pbtn" data-sect="kick" data-token="${m.token}">Trục xuất</button>`);
+        html += `<div class="prow"><span class="pname">${m.online ? '🟢' : '⚪'} ${esc(m.name)}<span class="pdesc">${m.roleName} · ${esc(m.realm)}</span></span>${acts.join('')}</div>`;
+      }
+      if (g.myRole === 'chu') html += `<div class="prow"><span class="pname">Giải tán tông môn<span class="pdesc">Mất hết thành viên — không hoàn phí lập tông</span></span><button class="pbtn" data-sect="disband">Giải tán</button></div>`;
+      else html += `<div class="prow"><span class="pname">Rời tông môn</span><button class="pbtn" data-sect="leave">Rời tông</button></div>`;
+    } else {
+      html += `<div class="prow"><span class="pname">🏯 Khai tông lập phái<span class="pdesc">Phí lập tông ${st.cost} Linh thạch — đặt tên tông (3–24 ký tự, không trùng)</span></span></div>`;
+      html += `<div class="prow"><input id="sectNameInput" maxlength="24" style="flex:1;min-width:140px" placeholder="Tên tông môn…"><input id="sectIntroInput" maxlength="120" style="flex:1;min-width:140px" placeholder="Lời giới thiệu…"><button class="pbtn gold" data-sect="create">Lập tông</button></div>`;
+      if (st.invites.length) {
+        html += '<div class="prow"><span class="pname">📩 Lời mời vào tông</span></div>';
+        for (const iv of st.invites) html += `<div class="prow"><span class="pname">🏯 ${esc(iv.sectName)}</span><button class="pbtn gold" data-sect="inv-ok" data-id="${iv.sectId}">Gia nhập</button><button class="pbtn" data-sect="inv-no" data-id="${iv.sectId}">Từ chối</button></div>`;
+      }
+      html += '<div class="prow"><span class="pname">📜 Các tông môn trong cõi</span></div>';
+      if (!st.directory.length) html += '<div class="prow"><span class="pname"><i>Chưa có tông môn nào — hãy là người đầu tiên khai tông!</i></span></div>';
+      for (const d of st.directory) {
+        const applied = st.myApplies.includes(d.id);
+        html += `<div class="prow"><span class="pname">🏯 ${esc(d.name)}<span class="pdesc">Tông chủ ${esc(d.leader)} · ${d.count} thành viên${d.intro ? ' · ' + esc(d.intro) : ''}</span></span>${applied ? '<span class="pdesc">Đã gửi đơn…</span>' : `<button class="pbtn" data-sect="apply" data-id="${d.id}">Xin vào</button>`}</div>`;
+      }
+    }
+    body.innerHTML = html;
+    body.querySelectorAll<HTMLButtonElement>('[data-sect]').forEach((b) => {
+      b.onclick = () => {
+        const act = b.dataset.sect;
+        const token = b.dataset.token;
+        const id = b.dataset.id;
+        if (act === 'create') { const n = (document.getElementById('sectNameInput') as HTMLInputElement | null)?.value || ''; const i = (document.getElementById('sectIntroInput') as HTMLInputElement | null)?.value || ''; this.socket.emit('sect_create', { name: n, intro: i }); }
+        else if (act === 'intro') { const i = (document.getElementById('sectIntroInput') as HTMLInputElement | null)?.value || ''; this.socket.emit('sect_set_intro', { intro: i }); }
+        else if (act === 'invite') { const n = (document.getElementById('sectInviteInput') as HTMLInputElement | null)?.value || ''; this.socket.emit('sect_invite', { name: n }); }
+        else if (act === 'apply') this.socket.emit('sect_apply', { sectId: id });
+        else if (act === 'inv-ok') this.socket.emit('sect_invite_respond', { sectId: id, accept: true });
+        else if (act === 'inv-no') this.socket.emit('sect_invite_respond', { sectId: id, accept: false });
+        else if (act === 'apply-ok') this.socket.emit('sect_apply_respond', { token, accept: true });
+        else if (act === 'apply-no') this.socket.emit('sect_apply_respond', { token, accept: false });
+        else if (act === 'role') this.socket.emit('sect_set_role', { token, role: b.dataset.role });
+        else if (act === 'kick') this.socket.emit('sect_kick', { token });
+        else if (act === 'transfer') this.socket.emit('sect_transfer', { token });
+        else if (act === 'leave') this.socket.emit('sect_leave');
+        else if (act === 'disband') this.socket.emit('sect_disband');
+      };
+    });
+  }
+
   private toggleStonesPanel(): void {
     if (!this.myChar) return;
     if (this.openPanel === 'stones') { this.closePanels(); return; }
@@ -6602,6 +7584,8 @@ class GameScene extends Phaser.Scene {
       { key: 'buff', flag: 'tranBuff', x: 'tranBuffX', y: 'tranBuffY', r: 200, color: 0xf2d24b, icon: '⚔️', name: 'Trận Cường Công' },
       { key: 'debuff', flag: 'tranDebuff', x: 'tranDebuffX', y: 'tranDebuffY', r: 200, color: 0xa678d8, icon: '🟣', name: 'Trận Suy Nhược' },
       { key: 'seal', flag: 'tranSeal', x: 'tranSealX', y: 'tranSealY', r: 150, color: 0xef4444, icon: '🔒', name: 'Cấm Chế Trận' },
+      { key: 'regen', flag: 'tranRegen', x: 'tranRegenX', y: 'tranRegenY', r: 200, color: 0x4ade80, icon: '💚', name: 'Trận Hồi Linh' }, // GĐ207
+      { key: 'ward', flag: 'tranWard', x: 'tranWardX', y: 'tranWardY', r: 200, color: 0x60a5fa, icon: '🛡️', name: 'Trận Hộ Thể' }, // GĐ207
       { key: 'teleport', flag: 'tranTeleport', x: 'tranTeleportX', y: 'tranTeleportY', r: 24, color: 0x22d3ee, icon: '🌀', name: 'Trận Dịch Chuyển' },
     ] as const;
     for (const pl of players) {
@@ -6796,11 +7780,25 @@ class GameScene extends Phaser.Scene {
       if (m.kind === 'huyetlang') sprite.setTint(0xe58a8a); // GĐ57: Huyết Lang nhuộm đỏ
       if (vis) sprite.setTint(vis.tint); // GĐ59
     }
-    const tintN: number | null = monKey ? null : vis ? vis.tint : m.kind === 'khoiloi' ? 0xa8c4de : m.kind === 'huyetlang' ? 0xe58a8a : isTrial && (m.trial === 'dai' || m.trial === 'kimdan' || m.trial === 'nguyenanh') ? (m.trial === 'nguyenanh' ? 0x86c5ff : m.trial === 'kimdan' ? 0xffd75e : 0x9a86d8) : null;
+    let tintN: number | null = monKey ? null : vis ? vis.tint : m.kind === 'khoiloi' ? 0xa8c4de : m.kind === 'huyetlang' ? 0xe58a8a : isTrial && (m.trial === 'dai' || m.trial === 'kimdan' || m.trial === 'nguyenanh') ? (m.trial === 'nguyenanh' ? 0x86c5ff : m.trial === 'kimdan' ? 0xffd75e : 0x9a86d8) : null;
+    // GĐ207: nhánh quái — nhuộm theo hệ nhánh + chỉnh cỡ (Non nhỏ, Tinh Anh lớn, Vương lớn nhất)
+    const brId = (m as unknown as { br?: string | null }).br || null;
+    if (brId) {
+      if (BRANCH_TINT[brId]) { sprite.setTint(BRANCH_TINT[brId]); tintN = BRANCH_TINT[brId]; } // cả tintN để sau nháy trúng đòn khôi phục đúng màu nhánh
+      if (BRANCH_SCALE[brId]) sprite.setScale(sprite.scaleX * BRANCH_SCALE[brId], sprite.scaleY * BRANCH_SCALE[brId]);
+    }
+    // GĐ227: quầng quang theo hệ nhánh đặt SAU lưng quái — nhìn từ xa biết ngay hệ (chỉ số không đổi)
+    const glowCol = brId ? (BRANCH_TINT[brId] ?? (brId === 'tinhanh' ? 0xf2f2f2 : null)) : null;
+    let glowImg: Phaser.GameObjects.Image | undefined;
+    if (glowCol !== null && glowCol !== undefined) {
+      glowImg = this.add.image(0, -sprite.displayHeight * 0.42, 'moonGlow').setTint(glowCol).setAlpha(0.3).setDisplaySize(sprite.displayHeight * 1.7, sprite.displayHeight * 1.7);
+      (glowImg as any).glowPh = Math.random() * Math.PI * 2;
+      this.monGlowList.push(glowImg);
+    }
     const barY = monKey ? -(sprite.displayHeight / 2 + 10) : base === 'rival' ? (rivalSet ? -62 : -48) : base === 'golem' ? -56 : -30;
     const barBg = this.add.rectangle(0, barY, 38, 7, 0x101418).setAlpha(0.6);
     const barFg = this.add.rectangle(-18, barY, 36, 5, 0x53d769).setOrigin(0, 0.5);
-    const parts: Phaser.GameObjects.GameObject[] = [sprite, barBg, barFg];
+    const parts: Phaser.GameObjects.GameObject[] = glowImg ? [glowImg, sprite, barBg, barFg] : [sprite, barBg, barFg]; // GĐ227: quầng nằm dưới sprite
     if (m.name) {
       parts.push(
         this.add
@@ -6812,7 +7810,7 @@ class GameScene extends Phaser.Scene {
     const container = this.add.container(m.x, m.y, parts);
     container.setDepth(m.y);
     return {
-      container, sprite, barFg, dir: m.direction, face, curTex: key, trial: m.trial || null, kind: m.kind, rivalSet, base, tintN, monSprite: !!monKey, // GĐ59, GĐ118
+      container, sprite, barFg, dir: m.direction, face, curTex: key, trial: m.trial || null, kind: m.kind, rivalSet, base, tintN, monSprite: !!monKey, glowImg, // GĐ59, GĐ118, GĐ227
       // (gán tiếp các trường còn lại ở dòng dưới của return gốc)
       walkPhase: 0, lastX: m.x, lastY: m.y, lastHp: m.hp,
       flashUntil: 0, lungeUntil: 0, nextLunge: 0,
@@ -6820,6 +7818,8 @@ class GameScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number): void {
+    this.updateFestivalFx(delta); // GĐ217
+    this.refreshAmbientFx(); this.updateAmbientFx(delta); // GĐ225–227
     // Vòng quẻ của trận pháp xoay chậm liên tục
     if (this.formTrig) this.formTrig.rotation += delta * 0.00012;
     if (this.formStar) this.formStar.rotation -= delta * 0.00018;
@@ -6918,6 +7918,40 @@ class GameScene extends Phaser.Scene {
             text = near.kind === 'ore' ? `⛏️ Bấm E — Đào ${near.name} (mỗi mạch ngày 1 lần)` : `🌿 Bấm E — Hái ${near.name} (mỗi bụi ngày 1 lần)`;
           } else if (near.type === 'citynpc') {
             text = `✦ Bấm E — ${near.name} (${near.role})`; // GĐ89: dân thành phố
+          } else if (near.type === 'tule') {
+            text = this.npcActors.has('npc_tule') ? '🎉 Bấm E — Lão Tư Lễ Vân Du (lễ hội bốn mùa)' : '';
+          } else if (near.type === 'tieudao') {
+            text = this.npcActors.has('npc_tieudao') ? '🌸 Bấm E — Tiểu Đào (quầy hoa xuân)' : '';
+          } else if (near.type === 'laongu') {
+            text = this.npcActors.has('npc_laongu') ? '🏮 Bấm E — Lão Ngư (quầy đèn + giữ nghề thả đèn)' : '';
+          } else if (near.type === 'lantern') {
+            text = '🏮 Bấm E — Thả đèn sông, ghi điều ước (chỉ ban đêm)';
+          } else if (near.type === 'debris') {
+            text = '🗑 Bấm E — Vớt rác sông';
+          } else if (near.type === 'nguyetnuong') {
+            text = this.npcActors.has('npc_nguyetnuong') ? '🌕 Bấm E — Nguyệt Nương (quầy thu + nấu bánh)' : '';
+          } else if (near.type === 'thuField') {
+            text = '🌾 Bấm E — Gặt Mạ Linh (+2 Lúa Linh, mỗi đám 1 lần/ngày)';
+          } else if (near.type === 'track') {
+            text = '🐾 Bấm E — Xem dấu vết của thú';
+          } else if (near.type === 'beastden') {
+            text = '🦌 Hang thú — bấm E để đối mặt sự thật';
+          } else if (near.type === 'tuyetong') {
+            text = this.npcActors.has('npc_tuyetong') ? '❄️ Bấm E — Tuyết Ông (quầy đông + gác đền)' : '';
+          } else if (near.type === 'dongbell') {
+            text = '🔔 Bấm E — Vớt Chuông Lễ dưới băng ao sen';
+          } else if (near.type === 'dongherb') {
+            text = '🌿 Bấm E — Hái Hương Thảo';
+          } else if (near.type === 'thaydo') {
+            text = this.npcActors.has('npc_thaydo') ? '🎓 Bấm E — Thầy Đồ (đố vui lễ hội)' : '';
+          } else if (near.type === 'huntitem') {
+            text = `✨ Bấm E — Nhặt ${this.festHuntData?.item || 'Vật Lễ'} (${this.festHuntData?.found || 0}/${this.festHuntData?.total || 5} hôm nay)`;
+          } else if (near.type === 'peachtree') {
+            text = '🌸 Cây Đào Tiên — mang 3 Linh Thủy tới, bấm E tưới rễ (truyện lễ Xuân)';
+          } else if (near.type === 'plantspot') {
+            text = '🌱 Bấm E — Gieo Hạt Linh Xuân';
+          } else if (near.type === 'plantharvest') {
+            text = '🌸 Bấm E — Hái Hoa Linh Xuân';
           }
         }
         hint.textContent = text;

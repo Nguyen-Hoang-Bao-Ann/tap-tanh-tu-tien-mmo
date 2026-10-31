@@ -52,7 +52,8 @@ const GROUP_NAMES = {
 const ACH138 = [
   // Nhóm Tu luyện (10)
   { id: 'ach_tl_break', group: 'tu_luyen', name: 'Bước vào đạo', desc: 'Số lần đột phá thành công (mọi cảnh giới)', base: 'Người Đạo Tâm', tiers: [1, 5, 10, 20, 37], key: 'breakthroughs' },
-  { id: 'ach_tl_realm', group: 'tu_luyen', name: 'Ngàn dặm khởi đầu', desc: 'Cảnh giới cao nhất từng đạt (1 Luyện Khí, 2 Trúc Cơ, 3 Kim Đan, 4 Nguyên Anh)', base: 'Nguyên Anh Chân Nhân', tiers: [1, 2, 3, 4], key: 'realmMax' },
+  { id: 'ach_tl_realm', group: 'tu_luyen', name: 'Ngàn dặm khởi đầu', desc: 'Cảnh giới cao nhất từng đạt (1 Luyện Khí, 2 Trúc Cơ, 3 Kim Đan, 4 Nguyên Anh, 5 Hóa Thần, 6 Phản Hư)', base: 'Nguyên Anh Chân Nhân', tiers: [1, 2, 3, 4, 5, 6], key: 'realmMax' }, // GĐ216: + bậc Hóa Thần + Phản Hư
+  { id: 'ach_tl_phaptuong', group: 'tu_luyen', name: 'Pháp Tướng chân thân', desc: 'Giai đoạn Pháp Tướng cao nhất từng đạt (5 Viên Mãn, 9 Chân Ảnh)', base: 'Chân Thân Bán Thần', tiers: [1, 3, 5, 7, 9], key: 'ptStage' }, // GĐ216
   { id: 'ach_tl_bequan', group: 'tu_luyen', name: 'Bế quan khổ tu', desc: 'Tổng số ngày game bế quan', base: 'Khổ Tu Sĩ', tiers: [30, 100, 365, 1000, 3000, 10000, 20000, 40000], key: 'bequanDays' },
   { id: 'ach_tl_firstbreak', group: 'tu_luyen', name: 'Một hơi vào đạo', desc: 'Đột phá thành công ngay lần đầu, cộng dồn số lần', base: 'Thiên Tư', tiers: [1, 3, 5, 10, 20], key: 'firstBreaks' },
   { id: 'ach_tl_hardbreak', group: 'tu_luyen', name: 'Gió ngược dòng', desc: 'Đột phá thành công sau khi đã thất bại từ 3 lần trở lên', base: 'Bách Chiết', tiers: [1, 3, 5], key: 'hardBreaks' },
@@ -95,7 +96,8 @@ const ACH138 = [
   { id: 'ach_np_profstones', group: 'nghe_phu', name: 'Kiếm sống bằng nghề', desc: 'Linh thạch kiếm được từ bán sản phẩm nghề phụ (đơn vị: hạ phẩm)', base: 'Phú Thương', tiers: [1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000], key: 'profStones' },
   { id: 'ach_np_failthen', group: 'nghe_phu', name: 'Thất bại là mẹ', desc: 'Số lần chế tạo thất bại rồi chế lại thành công ngay', base: 'Bất Khuất Tượng Nhân', tiers: [3, 20, 100, 400], key: 'failThenSuccess' },
   // Nhóm Khám phá (10)
-  { id: 'ach_kp_maps', group: 'kham_pha', name: 'Dấu chân', desc: 'Số khu vực bản đồ đã khám phá', base: 'Du Lịch Giả', tiers: [3, 8, 15, 30, 45, 60, 73], key: 'mapsVisited' }, // GĐ139: game có 74 map, trừ thach_lam khóa tông môn (không phải char nào cũng vào được),
+  { id: 'ach_kp_maps', group: 'kham_pha', name: 'Dấu chân', desc: 'Số khu vực bản đồ đã khám phá', base: 'Du Lịch Giả', tiers: [3, 8, 15, 30, 45, 60, 73, 100, 140, 200], key: 'mapsVisited' }, // GĐ216: thế giới nay 200 map (GĐ139: 74 map)
+  { id: 'ach_kp_phmaps', group: 'kham_pha', name: 'Chân đạp hư không', desc: 'Số bản đồ cõi Phản Hư đã đặt chân tới', base: 'Hư Không Hành Giả', tiers: [1, 5, 15, 30], key: 'phMaps' }, // GĐ216
   { id: 'ach_kp_dist', group: 'kham_pha', name: 'Quãng đường', desc: 'Tổng quãng đường đã đi (đơn vị: km trong game)', base: 'Vạn Lý Hành', tiers: [10, 100, 500, 2000, 10000, 30000, 80000, 200000], key: 'distKm' },
   { id: 'ach_kp_dungeon', group: 'kham_pha', name: 'Bí cảnh', desc: 'Số bí cảnh đã vào và hoàn thành', base: 'Bí Cảnh Chinh Phục', tiers: [1, 3, 6, 12, 25], key: 'dungeons' },
   { id: 'ach_kp_hiddenchest', group: 'kham_pha', name: 'Tìm kho báu', desc: 'Số rương ẩn tìm thấy', base: 'Thợ Săn Kho Báu', tiers: [1, 5, 15, 40, 100], key: 'hiddenChests', enabled: false },
@@ -156,6 +158,11 @@ const ACH138 = [
   { id: 'ach_lt_loyal', group: 'linh_thu', name: 'Linh thú trung thành', desc: 'Số linh thú đã đạt độ thân thiết tối đa', base: 'Thú Tình Thâm', tiers: [1, 3, 8, 20], key: 'loyalPets', enabled: false },
   // Nhóm Ẩn (6) — hiện "???" tới khi đạt bậc 1
   { id: 'ach_an_firstfail', group: 'an', name: '???: lần đầu thất bại', desc: 'Thất bại đột phá ở lần đầu tiên của một kiếp (ẩn cho đến khi gặp)', base: 'Vấp Ngã Thành Đạo', tiers: [1, 3, 10], key: 'firstFails', hidden: true },
+  { id: 'ach_an_divineart', group: 'an', name: '???: thần cách riêng', desc: 'Hoàn thiện Chân Ảnh — sinh Thần Thuật riêng theo hồ sơ chỉ số của chính mình (ẩn cho đến khi đạt)', base: 'Thần Cách', tiers: [1], key: 'hasArt', hidden: true }, // GĐ216
+  { id: 'ach_nd_feststories', group: 'nhan_duyen', name: 'Dự đủ bốn mùa', desc: 'Khép cốt truyện lễ của các mùa (Xuân cây đào, Hạ người chài, Thu con thú, Đông người gác đền) — đủ 4 là Người Giữ Lễ', base: 'Người Giữ Lễ', tiers: [1, 2, 3, 4], key: 'festStories' }, // GĐ222
+  { id: 'ach_nd_festquiz', group: 'nhan_duyen', name: 'Học rộng lễ làng', desc: 'Tổng số câu đố vui của Thầy Đồ trả lời đúng', base: 'Hiếu Học', tiers: [3, 10, 30, 90], key: 'festQuiz' }, // GĐ222
+  { id: 'ach_nd_festhunt', group: 'nhan_duyen', name: 'Mắt tinh tìm lễ', desc: 'Tổng số vật lễ ẩn quanh làng đã nhặt trong các mùa lễ', base: 'Tầm Lễ Giả', tiers: [5, 20, 60], key: 'festHunt' }, // GĐ222
+  { id: 'ach_an_festverse', group: 'an', name: '???: sưu tầm câu chúc', desc: 'Mở Bao Lì Xì trúng Mảnh Câu Chúc viết tay (ẩn cho đến khi đạt)', base: 'Người Giữ Chữ', tiers: [1, 6, 15], key: 'festVerse', hidden: true }, // GĐ222
   { id: 'ach_an_tandang', group: 'an', name: '???: đến cuối vẫn còn chăm chỉ', desc: 'Nguyên Anh tầng 9 không thăng cảnh, tu đến cuối thọ nguyên trên đường Tàn Đăng và thoát thai hoán cốt (ẩn cho đến khi đạt)', base: 'Tàn Đăng Bất Diệt', tiers: [1], key: 'tandang', hidden: true }, // GĐ180: tên thành tựu do Bảo đặt
   { id: 'ach_an_secret', group: 'an', name: '???: bí mật ẩn', desc: 'Hoàn thành chuỗi nhiệm vụ ẩn mở ra Đỏ sắc, Đen sắc hoặc Hư sắc (mở khóa thiên phú)', base: 'Cơ Duyên Thâm Hậu', tiers: [1, 2, 3], key: 'secretChains', hidden: true },
   { id: 'ach_an_dream', group: 'an', name: '???: giấc mơ kiếp trước', desc: 'Gặp ký ức kiếp trước (cần chơi nhiều kiếp)', base: 'Luân Hồi Giả', tiers: [1, 3, 5, 10], key: 'pastDreams', hidden: true, enabled: false },

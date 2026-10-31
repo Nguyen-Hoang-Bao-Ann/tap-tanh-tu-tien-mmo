@@ -1155,6 +1155,10 @@
         <button id="btnPhapTuong" type="button" style="display:none">✦ Hiện hình Pháp Tướng</button>
         <button id="btnPtTrial" type="button" style="display:none">🌀 Vào Ảo Cảnh Pháp Tướng</button>
         <button id="btnPtOffer" type="button" style="display:none">🔥 Tế luyện (10 Linh thạch Thượng)</button>
+        <button id="btnPtAdvance" type="button" style="display:none">✦ Tọa Hồn</button>
+        <button id="btnPtDietThan" type="button" style="display:none">💥 Diệt Thân — đối mặt Pháp Tướng cũ</button>
+        <button id="btnPtHopNhat" type="button" style="display:none">☯ Hợp Nhất — hoàn thiện Chân Ảnh</button>
+        <button id="btnThanThuat" type="button" style="display:none">🌟 Thần Thuật</button>
         <button id="btnXuatKhieu" type="button" style="display:none">👻 Xuất khiếu</button>
         <button id="hudDetailBtn" type="button">▸ Chỉ số</button>
         <div id="hudDetails"><div id="hudStats">—</div></div>
@@ -1278,6 +1282,18 @@
         <div id="npcDlgText" style="padding:8px 2px; font-size:13.5px; line-height:1.55"></div>
         <div id="npcDlgBtns"></div>
       </div>
+      <div id="festWishPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>🏮 Thả Đèn Sông — ghi điều ước</span><button class="xBtn" id="festWishClose" type="button">✕</button></div>
+        <div style="padding:10px 12px">
+          <input id="festWishInput" type="text" maxlength="60" placeholder="Điều ước của bạn (tối đa 60 chữ)..." style="width:100%;box-sizing:border-box" />
+          <div id="festWishChips" style="margin:8px 0;display:flex;gap:6px;flex-wrap:wrap"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button id="festWishNormal" class="btn" type="button">Thả đèn thường</button>
+            <button id="festWishBig" class="btn" type="button">Thả Đèn Sông Lớn</button>
+          </div>
+          <div id="festWishNote" style="opacity:.85;font-size:12px;margin-top:8px"></div>
+        </div>
+      </div>
       <div id="questPanel" class="panel">
         <div class="panelHead"><span id="questTitle">Nhiệm vụ</span><button class="xBtn" id="questClose" type="button">✕</button></div>
         <div id="questBody"></div>
@@ -1363,6 +1379,11 @@
         <div id="mountBody"></div>
       </div>
       <!-- GĐ66 sửa nhỏ (2): panel Ví Linh thạch — bấm pill Linh thạch thì mở -->
+      <div id="sectPanel" class="panel">
+        <div class="panelHead"><span>🏯 Tông môn</span><button class="xBtn" id="sectClose" type="button">✕</button></div>
+        <div id="sectBody"></div>
+      </div>
+
       <div id="stonesPanel" class="panel">
         <div class="panelHead"><span>💠 Linh thạch</span><button class="xBtn" id="stonesClose" type="button">✕</button></div>
         <div id="stonesBody"></div>
@@ -1375,6 +1396,7 @@
         <label>Màu áo nhân vật</label>
         <div class="swatches" id="menuRobeSwatches"></div>
         <button class="menuAction" id="menuMountBtn" type="button">🐴 Thú cưỡi</button>
+        <button class="menuAction" id="menuSectBtn" type="button">🏯 Tông môn (người chơi lập)</button>
         <button class="menuAction" id="menuMusicBtn" type="button">🎵 Nhạc nền: Đang bật</button>
         <button class="menuAction" id="menuSfxBtn" type="button">🔔 Hiệu ứng: Đang bật</button>
         <button class="menuAction" id="menuExitBtn" type="button">🚪 Thoát về màn hình chính</button>

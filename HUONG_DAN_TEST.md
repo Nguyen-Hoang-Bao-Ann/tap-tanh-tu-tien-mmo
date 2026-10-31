@@ -3367,3 +3367,121 @@ Thú Sư thuần hóa hộ, hoặc mua trứng tự ấp hên xui. Mở từ Ngu
 - Trại Ngự Thú (Mã Vân, Ngự Thú Sơn Trang) nhận thuần hóa hộ thêm 4 loài (số TẠM): **Địa Kim Thử** ×1.35 (12k, 1 ngày), **Sa Mạc Hạt** ×1.40 (16k, 1 ngày), **Hỏa Thử** ×1.45 (20k, 2 ngày), **Tuyết Hồ** ×1.60 (28k, 2 ngày). Tổng **11 loài** — mốc thành tựu "10 loài thú cưỡi" giờ với tới được. Trứng thú cũng có tỉ lệ nhỏ nở ra 4 loài mới.
 - **Hiệu ứng cưỡi**: khi chạy, dưới chân thú có vệt khói/bụi theo hệ của loài (Thiên Lôi Thú tím điện + tia lửa, Hỏa Thử cam + than lửa bay, Tuyết Hồ trắng tuyết, Thanh Vân Hạc mây lớn trôi chậm, loài thường bụi đất). Lên thú có vòng sáng màu của loài, xuống thú có bụp khói nhỏ.
 - Cách test: tới trại đặt thuần hóa Tuyết Hồ, hôm sau (ngày game) nhận rồi cưỡi chạy quanh làng — nhìn vệt dưới chân thú và so màu giữa các loài; cưỡi thử Hỏa Thử/Thiên Lôi Thú để thấy tia lửa.
+
+## GĐ204–206 — chờ Bảo chốt (kế hoạch Phản Hư ở THIET_KE_PHAN_HU.md, chưa làm)
+
+## GĐ207 (30/10) — MỞ RỘNG THẾ GIỚI NGUYÊN ANH + HÓA THẦN (đợt lớn)
+- **+66 map mới → tổng 140 map** (mỗi cảnh NA/HT 33 map): 9 bãi săn, 5 thành trì, 4 làng, 8 thành phố, 4 thành nghề phụ, 3 vùng đặc biệt. Đi lại như cũ: Làng → Thanh Vân Thành → chọn đích (khóa theo cảnh giới). Map có dân có 48 NPC/map (chủ tiệm + sứ giả + dân thường) — riêng vai nghề đặc biệt (Đan Sư/Phù Sư...) hiện mới có người + thoại, hàng chuyên sâu nối sau.
+- **+100 loài quái mới** (50 NA + 50 HT) → tổng 131 loài, tổng quái toàn server **2140**. Mỗi loài có **7 nhánh** (5 nhánh lệch hệ Kim/Mộc/Thủy/Hỏa/Thổ + Non + Tinh Anh + Vương = 700 nhánh): nhánh khác TÊN (vd "Hỏa Thiên Lang", "Dạ Minh Bức Non", "Thiên Lang Vương"), khác màu/cỡ trên hình, khác máu/công (Non ×0.7, Tinh Anh ×1.5, Vương ×2.2). Hình quái mượn sprite loài sẵn có + nhuộm màu theo hệ (chưa có sprite riêng — chờ đợt vẽ).
+- **Vật phẩm mới**: khoáng sản **Quặng Kim** (đào ở map NA) + **Thần Thiết** (map HT); linh thảo **Thần Thảo** (NA) + **Thánh Thảo** (HT) — node khai thác tự có trên mọi bãi săn NA/HT, bán ở Tiệm Thảo Dược/Tiệm Nguyên Liệu. **10 đan mới**: Đại Hồi Xuân/Đại Hồi Nguyên (hồi 80%), Nguyên Thần +50% công, Huyền Giáp +50% phòng, Thần Huyết +800 HP, Thần Nguyên +800 MP, Phong Thần +35% tốc, Cửu Chuyển (đầy HP + 50% MP), Thiên Lực/Thiên Giáp +80% (HT) — Đan Sư chế được, Tiệm Đan có bán. **4 phù mới**: Thiên Lôi (1500 sát thương, tầm 400), Ẩn Thân (tàng hình 15s), Vạn Lý (về Thanh Vân Thành), Thiên Cang (nhận ×0.3 sát thương, 90s). **2 trận mới** (Trận Pháp Sư): Hồi Linh (cấp 8 — trong trận hồi 2% HP/MP mỗi giây), Hộ Thể (cấp 10 — trong trận nhận ×0.6 sát thương). **5 thú cưỡi mới** thuần hóa hộ ở Trại Ngự Thú: Thiên Lang ×1.7, Huyền Thủy Giao ×1.75, Cửu Vĩ Hồ ×1.8, Thiên Cẩu ×1.72, Cùng Kỳ ×1.9 (tổng 16 loài; trứng cũng nở được 3 loài NA hiếm). MỌI con số đều TẠM.
+- Cách test: nhân vật Nguyên Anh/Hóa Thần → Trận Dịch Chuyển ở Thanh Vân Thành → mở danh sách thấy các map NA/HT → vào Thiên Mộc Lâm (NA) / Hỗn Độn Nguyên (HT) đánh quái, để ý tên nhánh + màu quái; đào quặng ở node đá, hái thuốc ở node cỏ; vào Đan Vương Cốc nói chuyện với Đan Sư; dùng thử Phù Vạn Lý từ bãi farm về thành.
+- Lưu ý tải server: 2140 quái — buổi test bạn bè để ý lag ở bãi đông quái (Render free); nếu nặng sẽ giảm mật độ map NA/HT sau.
+
+## GĐ208 (31/10) — THÊM 60 MAP NỮA: 30 MAP PHẢN HƯ ĐẦU TIÊN + 30 MAP HÓA THẦN
+- **Tổng 200 map, 2.492 quái, 155 loài.** Đợt này chưa push — bản live vẫn là GĐ131–203; muốn chơi thử map mới phải chờ zip GĐ131–208.
+- **30 map Phản Hư** (cảnh giới chưa mở đột phá — vào thử bằng nút Admin): 10 bãi săn chủ đề hư không/thời gian (Phản Hư Nguyên, Thời Gian Hành Lang, Không Gian Lỗi, Đạo Ngược Sơn, Vạn Cổ Chiến Trường...), 5 thành trì, 4 làng, 7 thành phố (trung tâm = **Phản Hư Thành**), 4 thành nghề (Đạo Đan Cung, Đạo Khí Lâu, Vạn Phù Điện, Đạo Trận Sơn). Phí dịch chuyển vào map PH: **2500 linh thạch**.
+- **24 loài quái bậc PH mới** (Hư Không Lang, Thời Gian Thú, Hỗn Độn Phượng, Thiên Đạo Thủ Thần...) — mỗi loài 7 nhánh như đợt trước (nhánh hệ + Non/Tinh Anh/Vương), máu/công tiếp thang (quái thường HP ~20–33 nghìn, trùm ~80 nghìn). Sprite mượn loài gốc + nhuộm màu, chờ đợt vẽ riêng.
+- **30 map Hóa Thần nữa**: 10 bãi săn mới (Huyết Hải, Chư Thiên Chiến Trường, Cổ Tiên Lâm, Thủy Thần Đầm...) dùng loài HT sẵn có làm nhà thứ hai, 5 thành trì, 4 làng, 7 thành phố, 4 thành nghề. Map có dân đều có đủ NPC (chủ tiệm, sứ giả, dược sư + 40 dân thường).
+- **Khai thác bậc PH**: node ở bãi săn PH cho **Hỗn Độn Thạch** (Tiệm Nguyên Liệu thu mua 400) và **Hư Không Thảo** (Tiệm Thảo Dược bán 800/thu mua 320).
+- Cách test: Admin Hóa Thần/Phản Hư → Dịch chuyển → vào Phản Hư Nguyên đánh quái xem nhánh/màu, đào Hỗn Độn Thạch; vào Phản Hư Thành dạo NPC; nhân vật Hóa Thần thử vào map PH sẽ bị chặn "Cần Phản Hư tầng 1".
+- Lưu ý tải: 2.492 quái còn nặng hơn đợt trước — khi nào push đợt này lên Render phải để ý lag kỹ hơn.
+
+## GĐ223 (31/10) — BỔ SUNG VẬT PHẨM LỄ CÒN THIẾU THEO THIẾT KẾ (chưa push)
+
+Rà soát theo đúng bản thiết kế lễ hội, bổ sung nốt những món quầy còn thiếu:
+
+- **Cuộn danh hiệu mùa** (15 Đồng, mỗi quầy bán cuộn của mùa mình): Người Đón Xuân · Người Thả Đèn · Người Ngắm Trăng · Người Đón Tuyết. Dùng cuộn → danh hiệu hiện trên **thẻ nhân vật**; mua cuộn mùa khác thì đeo thay.
+- **Túi Quà riêng từng mùa** (8 Đồng): mở ra linh thạch + 40% thêm quà đặc trưng mùa (Hoa Linh Xuân / Vỏ Sò / Hạt Sen / Bao Lì Xì).
+- **Thu thêm:** Rượu Quế Hoa (uống: thiền +30% Tu vi trong 1 giờ game) · Hạt Giống Vụ Thu (gieo ở ruộng Mạ Linh đã gặt để thêm vụ riêng +2 Lúa; Tiệm Thảo Dược thu mua 40) · Đèn Trăng Giấy (hào quang 1 giờ game).
+- **Đông thêm:** Câu Đối Đỏ (dùng: Tuyết Ông viết tặng câu đối gắn tên bạn — hiện trên thẻ nhân vật) · Bánh Chưng Linh (ăn: 4 giờ game không tốn đói) · Than Hồng Linh (nguyên liệu — Tiệm Nguyên Liệu thu mua 100).
+
+## GĐ222 (31/10) — ĐỢT 6 LỄ HỘI: ĐỐ VUI + TÌM VẬT LỄ + NGƯỜI GIỮ LỄ — TRỌN GÓI LỄ HỘI (chưa push)
+
+Chạy trong mọi đợt lễ lớn:
+
+- **Thầy Đồ** ở quảng trường mở **Đố vui tu tiên**: 3 câu/ngày về làng và cõi tu (địa danh, quái, cảnh giới, tích mùa lễ). Đúng +2 Đồng Lễ Hội; sai Thầy giảng đáp án ngay trong hộp thoại — đố mà học.
+- **Tìm vật lễ**: mỗi ngày lễ có **5 vật theo mùa** (🌸 Hoa Đào Rơi / 🏮 Đèn Nhỏ Lạc / 🌕 Đèn Trăng Rơi / ❄️ Bông Mai Tuyết) giấu quanh làng, chỗ giấu mỗi người mỗi khác và đổi theo ngày. Đi dạo thấy chấm sáng thì bấm E nhặt: +1 Đồng/món, đủ 5 món thưởng thêm 3 Đồng.
+- **Thành tựu lễ hội** (panel Thành tựu): *Dự đủ bốn mùa* (khép truyện lễ từng mùa — đủ 4 nhận danh hiệu **Người Giữ Lễ**), *Học rộng lễ làng* (đố vui đúng), *Mắt tinh tìm lễ* (nhặt vật lễ), và một thành tựu **ẩn** cho người sưu tầm Mảnh Câu Chúc từ lì xì.
+- **Danh hiệu NGƯỜI GIỮ LỄ**: khép truyện lễ thứ 4 (bất kỳ mùa nào là truyện cuối) → nhận **Ấn Người Giữ Lễ** + thông báo toàn làng. Đây là đích dài hạn của cả hệ lễ hội: 4 mùa × 14 ngày thật ≈ gần 2 tháng đồng hành.
+
+## GĐ221 (31/10) — ĐÔNG TRỌN GÓI: TẾ LỄ HÀN MAI + LÌ Xì + TRUYỆN NGƯỜI GÁC ĐỀN (chưa push)
+
+Chỉ chạy khi đợt **Hàn Mai Tế** đang mở.
+
+- **Tuyết Ông** ở sân Đạo Quán — quầy: Cành Mai Linh 5 Đồng, Nén Hương Trầm 4, Bao Lì Xì 5, Canh Gừng Linh 4 (uống ấm người, hồi đói/khát + 15% HP).
+- **Bao Lì Xì**: mở ra nhận lộc ngẫu nhiên (linh thạch / Đồng / **Mảnh Câu Chúc** viết tay — cứ giữ sưu tầm, sẽ dùng về sau). **Trưởng Làng lì xì 1 bao/ngày** cho người tới thăm trong mùa Đông.
+- **TẾ LỄ HÀN MAI — nghi lễ chung cả làng**: mỗi tối từ **18h giờ game**, ra **sân Đạo Quán thiền 20 giây** là dự lễ xong: pháo hoa trên sân, và đêm đó thiền được **+20% Tu vi** nhờ phúc lễ. Ai đang làm truyện thì buổi lễ là một bước của truyện.
+- **Truyện "Mùa Đông Cuối Của Người Gác Đền"** (nghe ở Lão Tư Lễ): giúp Tuyết Ông yếu chuẩn bị lễ cuối năm — vớt **Chuông Lễ** dưới băng ao sen, hái **3 bụi Hương Thảo**, đưa **thư cuối năm** cho Trưởng Làng; bàn giao cho ông, tối ra sân dự Tế Lễ: giữa lễ, ông **trao chìa khóa đền cho đứa trẻ trong làng** — việc làng sang tay thế hệ mới. Về gặp Tư Lễ nhận 15 Đồng + 2 Bao Lì Xì, và nghe ông thú thật mùa lễ cuối của mình (mở đường cho danh hiệu **Người Giữ Lễ** ở đợt sau).
+
+## GĐ220 (31/10) — THU TRỌN GÓI: MÙA GẶT LINH + TRUYỆN CON THÚ PHÁ RUỘNG 2 KẾT (chưa push)
+
+Chỉ chạy khi đợt **Thu Nguyệt Hội** đang mở.
+
+- **Nguyệt Nương** ở ruộng phía nam làng — quầy: Đèn Lồng Linh 6 Đồng (dùng: hào quang sáng quanh người 4 giờ game), Hạt Sen Linh 3, Bánh Thu Nguyệt 9, Trăng Khuyết Phù 5.
+- **Mùa Gặt Linh**: suốt lễ Thu, thu thập ở điểm tài nguyên có **25% thêm +1 sản lượng**; thêm 4 đám **ruộng Mạ Linh** quanh làng (bấm E: +2 Lúa Linh, mỗi đám 1 lần/ngày). Mang **2 Lúa Linh + 1 Hạt Sen** tới Nguyệt Nương bấm **"Nấu bánh"** → Bánh Thu Nguyệt: ăn hồi 30%, **người đứng gần trong 300px được chia 15%** — bánh đoàn viên đúng nghĩa.
+- **Truyện "Con Thú Phá Ruộng"** (nghe ở Lão Tư Lễ): (1) xem **3 dấu vết** quanh ruộng; (2) lần tới **hang thú ở vành rừng phía tây** — sự thật là Linh Lộc Mẹ bị thương nuôi 2 con; (3) **LỰA CHỌN**: ⚔️ *Đánh đuổi* nó giữ ruộng (đánh 1 trận) hoặc 🌕 *Dụ đi* bằng 1 Bánh Thu Nguyệt (chữa thương, đưa cả nhà vào rừng). (4) Về gặp Nguyệt Nương nhận quà: 15 Đồng + 3 Lúa Linh + kỷ vật theo kết (**Sừng Linh Lộc** / **Chuông Đồng Nhỏ**). Thưởng hai ngả ngang nhau — chọn theo lòng mình.
+
+## GĐ219 (31/10) — HẠ TRỌN GÓI: THẢ ĐÈN SÔNG + TRUYỆN NGƯỜI CHÀI (chưa push)
+
+Chỉ chạy khi đợt **Giang Đăng Hội** đang mở (đợt thật nối tiếp sau Vạn Hoa Hội).
+
+- **Lão Ngư** ở bờ ao sen (nam làng) khi lễ Hạ mở — quầy: Giấy Đèn Linh 3 Đồng, Đèn Sông Lớn 8, Chè Đậu Xanh Linh 4 (uống hồi đói/khát), Vỏ Sò Linh 6. Quanh ao có vòng đèn sáng suốt mùa.
+- **Thả Đèn Sông**: mua giấy đèn → **ban đêm (18h–6h giờ game)** ra bờ ao bấm **E** → ghi điều ước (tự viết hoặc chọn mẫu) → thả. Đèn trôi trên mặt ao ~10 phút (đèn lớn 20 phút), **người khác đứng gần bờ sẽ đọc được điều ước của bạn**. Đêm đã thả đèn, đi thiền được cộng thêm Tu vi (phúc sông nước).
+- **Truyện "Chiếc Đèn Của Người Chài"** (nghe ở Lão Tư Lễ): (1) xuống ao gặp Lão Ngư nghe ông kể; (2) dọn **3 Thủy Quái Nghẽn Sông** trong ao; (3) vớt **3 đống rác** quanh bờ ao (bấm E); (4) quay lại — Lão Ngư trao **Đèn Sông Lớn** của người vợ quá cố; (5) đêm xuống thả chiếc đèn đó → **Đêm Trăm Đèn**: cả ao bừng sáng, +15 Đồng + 3 Vỏ Sò Linh. Mỗi đợt Hạ làm 1 lần.
+
+## GĐ218 (31/10) — XUÂN TRỌN GÓI: ƯƠM MẦM LINH + TRUYỆN CÂY ĐÀO TIÊN (chưa push)
+
+Chỉ chạy khi đợt **Vạn Hoa Hội** đang mở (đợt thật đầu tiên từ 02/11/2026).
+
+- **Tiểu Đào** (cô bán hoa) đứng ở quảng trường phía nam khi lễ Xuân mở — quầy riêng 4 món: Hạt Linh Xuân 6 Đồng, Pháo Hoa Đào 4, Bánh Hoa Đào 5 (ăn: hồi 25% + thiền hồi nhanh hơn 50% trong 4 giờ game), Mật Hoa Xuân 7.
+- **Ươm Mầm Linh**: mua hạt → tới 1 trong 6 điểm đất quanh quảng trường, bấm **E** gieo. **Thiền gần cây** = tưới linh khí (ai tưới hộ cũng được); cây lớn theo ngày game + nước tưới: mầm → nụ → nở hoa (thường 1–2 ngày game nếu tưới đủ). Chủ cây bấm E hái: +1 Hoa Linh Xuân + 5 Đồng (+30% thêm Mật Hoa Xuân). Cây hiện cho cả làng kèm tên người trồng; cây đào tiên lớn cũng xuất hiện ở quảng trường suốt mùa Xuân.
+- **Truyện "Cây Đào Tiên Không Nở"** (tại Lão Tư Lễ, nút "Nghe chuyện"): (1) hỏi Trưởng Làng + Chủ Tiệm Thảo Dược; (2) lên **Tụ Linh Trận thiền ~10 giây** hứng 3 Linh Thủy (đi vòng phía đông Đạo Quán — nhà chắn lối giữa); (3) tới gốc cây đào tiên giữa quảng trường bấm **E**: tưới + đánh **Hàn Khí Tàn Đông** (mạnh theo cảnh giới của bạn); thắng → cây bung nở + pháo hoa + thưởng 15 Đồng, 1 Cành Đào Tiên, 1 Hoa Linh Xuân. Mỗi đợt Xuân làm lại được 1 lần.
+- Điểm E của Lão Tư Lễ cũng đã có (đợt trước thiếu — nay đứng gần bấm E là nói chuyện được).
+
+## GĐ217 (31/10) — KHUNG LỄ HỘI BỐN MÙA (chưa push)
+
+Thiết kế đầy đủ: `THIET_KE_LE_HOI.md` (Bảo chốt phương án A: lễ lớn theo đợt thật). Đợt này mới là KHUNG — nội dung riêng từng mùa (Ươm Mầm, Thả Đèn, cốt truyện…) làm ở các đợt sau.
+
+- **Lễ lớn theo ĐỢT THẬT**: mỗi đợt 14 ngày ngoài đời, luân phiên Vạn Hoa Hội (Xuân) → Giang Đăng Hội (Hạ) → Thu Nguyệt Hội (Thu) → Hàn Mai Tế (Đông), vòng 56 ngày tính từ 02/11/2026. Đang lễ nào thì pill đồng hồ trên cùng hiện tên lễ + số ngày còn lại, làng có hạt mùa rơi (hoa/tuyết/lá/đom đóm theo mùa) và **Lão Tư Lễ Vân Du** đứng ở quảng trường (gần Thợ Rèn) — không lễ thì ông vắng.
+- **Đồng Lễ Hội**: tiền tệ lễ (trong túi đồ). Kiếm từ: nhận mốc lễ nhỏ + tỉ lệ rơi 15% khi hạ quái/thu thập trong kỳ lễ lớn (trần 20/ngày game). Đổi quà tại Tư Lễ: Pháo Hoa Lễ 3 (dùng = bắn pháo hoa cả vùng cùng thấy), Bánh Lễ 5 (hồi 25% HP/MP), Túi Quà Lễ 8 (mở ra Linh thạch + quà vặt). Quà thuần vui, không tăng sức mạnh.
+- **Lễ nhỏ (mỗi mùa 2 cái, theo ngày game, thiên về cày)**: cửa sổ ngày 8–12 tháng đầu mùa + ngày 16–20 tháng hai của mùa. Tiến độ cá nhân + 3 mốc 10/30/60 → thưởng 5/12/25 Đồng (+ Túi Quà ở mốc cuối), nhận tại Tư Lễ. Tám lễ: Săn Đầu Mùa (sói/dơi), Hái Thuốc Xuân, Trừ Thủy Quái (hệ Thủy), Đào Khoáng Hạ, Săn Thú Lớn (quái mạnh+), Luyện Chế Vụ Thu (chế tạo/rèn), Trừ Tà (hệ Ám), Tích Trữ Qua Đông (nộp vật vào kho làng tại Tư Lễ).
+- Cách test nhanh: để ý pill đồng hồ + tới quảng trường gặp Tư Lễ khi có lễ; đợt lễ thật đầu tiên (Vạn Hoa Hội) bắt đầu 02/11/2026.
+
+## GĐ214–216 (31/10) — DỌN NỐT PHẢN HƯ (chưa push)
+- **Trang bị bậc Phản Hư**: đồ sinh ra khi bạn ở Phản Hư (mở rương/thưởng, tự rèn, đặt rèn, mua kho Tiệm Rèn) mang bậc "· Phản Hư" — chỉ số ×2,5 (Nguyên Anh ×1,6, Hóa Thần ×2,0). Chưa đạt Phản Hư thì không mặc được đồ bậc này.
+- **Nhiệm vụ thành phố cho 30 thành mới** (các thành Nguyên Anh/Hóa Thần/Phản Hư thêm ở GĐ207/208): mỗi thành giờ có **Người Giao Nhiệm Vụ** riêng với 2 nhiệm vụ (diệt quái đúng bậc ở bãi farm gần thành + thu thập quặng bậc: Quặng Kim / Thần Thiết / Hỗn Độn Thạch). Riêng Phản Hư Thành: diệt Hỗn Độn Giáp Trùng ở Đạo Ngược Sơn (2.200 LT) + nộp 8 Hỗn Độn Thạch (1.300 LT).
+- **Nhiệm vụ bảng bậc cao** ở Bảng treo thưởng làng: Diệt Nguyệt Sát Lang (Nguyên Anh), Diệt Khai Thiên Tê (Hóa Thần), Diệt Vạn Cổ Thần Thú + Thu thập Hỗn Độn Thạch (Phản Hư).
+- **Thành tựu mới/mở rộng**: "Ngàn dặm khởi đầu" thêm bậc Hóa Thần + Phản Hư; "Dấu chân" thêm mốc tới 200 bản đồ; thêm "Pháp Tướng chân thân" (theo giai đoạn Pháp Tướng, tối đa Chân Ảnh), "Chân đạp hư không" (số map Phản Hư đã tới) và một thành tựu **ẩn** chỉ mở khi sinh được Thần Thuật.
+
+## GĐ204 + GĐ205 (31/10) — MỞ CẢNH PHẢN HƯ + CHÂN THÂN BÁN THẦN + THẦN THUẬT (chưa push)
+- **Đột phá Phản Hư**: Hóa Thần tầng 9 đầy Tu vi → nút đổi thành "Thử thách: Hư Không Kiếp Ảnh" — trùm kiếp mạnh nhất tới nay (phân thân 2 bóng ở nửa máu, chiêu ×2,8), thắng xong bấm Đột phá theo tỉ lệ như Đại cảnh → **Phản Hư tầng 1: +24 điểm, +250 năm thọ**, không cần đan. Trong cảnh PH: tiểu +8 điểm, trung cảnh ở tầng 3→4 và 6→7 (+10 điểm, +50 thọ, vẫn Đan Trung Cảnh + Thử Luyện Thú). Phản Hư tầng 9 là đỉnh hiện tại (Độ Kiếp chưa mở).
+- **Củng cố Pháp Tướng**: hễ lên Phản Hư, phí duy trì hiện hình **giảm một nửa** (0,25% máu + 0,4% chân nguyên mỗi giây).
+- **Đường Chân Thân Bán Thần** (trên thẻ nhân vật, chỉ ở cảnh Phản Hư, Pháp Tướng phải đạt Thần Vị trước): **Tọa Hồn** — hiện hình rồi THIỀN tại Đạo Quán cho tới khi hồn lực đủ 500 (dòng trạng thái có đếm), bấm nút Tọa Hồn → chỉ số ×3,5. **Sơ Ảnh** — dồn tu dưỡng Pháp Tướng tới 3.000.000 (thiền/giao chiến/tế luyện đều tính) → ×4,1. **Diệt Thân** — nút Diệt Thân ở sân Đạo Quán: đấu với **Pháp Tướng Cũ của chính mình**, thắng → ×4,9 (tắt tướng hoặc gục giữa ải = thua). **Chân Ảnh** — nút Hợp Nhất tại sân Đạo Quán khi đang hiện hình → ×5,5 và **thức tỉnh THẦN THUẬT**.
+- **Thần Thuật**: mỗi người đúng 1 thuật, sinh theo hồ sơ **7 chỉ số cơ bản** của chính mình (không tính chỉ số ẩn). Xếp hạng chỉ số rơi vào đúng 1 trong **9 nhánh**: **Toàn Năng** (cả 7 chỉ số cân bằng nhau → "Vạn Pháp Toàn Năng": đòn + thuẫn + lướt + hồi chiêu cùng hiện, mỗi phần 55% lực); **Lục/Ngũ/Tứ/Tam Chủ** (6/5/4/3 chỉ số cùng cao → họ chính 62/66/72/80% + 5/4/3/2 tính phụ); **Song Chủ** (2 chỉ số ngang nhau → cả hai họ cùng hiện 85% lực, và có **tên riêng theo cặp** — vd Vật Công + Tốc Độ = "Thuấn Ảnh Thần Kích"); **Cực Chủ** (1 chỉ số áp đảo gấp đôi chỉ số nhì → 1 họ duy nhất ở 150% lực); **Thuần Chủ** (1 chỉ số vượt trội → 1 họ duy nhất 125% lực); **Đơn Chủ** (còn lại → họ chính + 1 tính phụ). 7 họ theo chỉ số chính: Vật Công → Phá Giáp Thần Kích (xuyên giáp), Pháp Công → Nguyên Tố Thần Phạt (nổ diện rộng theo hệ Pháp Tướng), Khí Huyết → Huyết Thuẫn (thuẫn đỡ đòn), Vật Phòng → Bất Động Thần Thể (giảm nửa sát thương + phản chấn), Pháp Phòng → Kết Giới (đẩy lùi + làm chậm + thuẫn), Tốc Độ → Thuấn Ảnh (lướt xa + làm chậm), Minh Mẫn → Vạn Pháp Quy Tông (xóa hết hồi chiêu + chiêu Pháp Tướng miễn phí máu 15s). Tính phụ theo chỉ số nhì: Vật Công +15% sát thương thuật, Pháp Công kèm nổ nhỏ, Khí Huyết thêm thuẫn, Vật Phòng phản chấn nhẹ, Pháp Phòng làm chậm quanh mình, Tốc Độ lướt ngắn, Minh Mẫn hồi chiêu thuật nhanh hơn (90s thay vì 120s). Hơn nữa thuật còn tính theo **đúng thứ hạng của cả 7 chỉ số** (phép hoán vị): chỉ số hạng thấp vẫn góp một "tàn ý" rất nhỏ theo đúng vị trí của nó — đảo thứ hạng bất kỳ hai chỉ số nào là thuật đã khác (khác chữ ký, khác hiệu ứng tàn ý). Tổng cộng **5.040 hoán vị chặt** (7 giai thừa), tính cả các trường hợp có chỉ số ngang nhau là **47.293 mẫu thứ hạng** — gần như không có hai người chơi nào trùng thuật hoàn toàn. Thuật **không khóa chết**: tẩy điểm (reset chỉ số) hay cộng điểm làm hồ sơ đổi hẳn thứ hạng/nhánh thì thuật **tự sinh lại** theo hồ sơ mới (có thông báo 🔄) — đổi build là đổi thuật, đúng ý "không gò bó cách nâng"; hồi chiêu của thuật được giữ nguyên khi sinh lại. Riêng lúc **mở Thần Thuật** (Hợp Nhất thành công), bạn được **tặng 1 lượt reset chỉ số MIỄN PHÍ** — giữ mãi, dùng lúc nào cũng được (nút Reset trong bảng Chỉ số sẽ ghi "MIỄN PHÍ — lượt Thần Thuật"); dùng hết lượt đó thì reset tốn **100 Linh thạch Thượng phẩm** (tiền tệ bậc cao — người chưa mở Thần Thuật vẫn trả phí thường 100 LT Hạ phẩm). Kiểu build được ghi ngay trong mô tả thuật: máu trâu, công phá, thủ vững như núi, pháp bạo, nhanh như chớp... kèm chuỗi thứ hạng đầy đủ. Chỉ dùng khi đang hiện hình Chân Ảnh; tốn 300 chân nguyên + 10% máu. Cộng lẻ không đổi thứ hạng thì thuật giữ nguyên. Di chuột lên nút Thần Thuật trên thẻ để xem thuật của mình thuộc nhánh nào.
+- Cách test: Admin Hóa Thần 9 đầy Tu vi → thắng Hư Không Kiếp Ảnh → Đột phá; lên PH rồi thiền hiện hình ở Đạo Quán xem hồn lực tăng; đi hết 4 bước Chân Thân; tung Thần Thuật lên quái bãi farm.
+- Mọi con số đều TẠM (máu trùm kiếp ×14, hồn lực 500, mốc Sơ Ảnh 3.000.000, phí/hồi chiêu Thần Thuật).
+
+## GĐ224 — TÔNG MÔN NGƯỜI CHƠI v1 (theo feedback của người chơi: "muốn tự tạo tông môn riêng") (probe p218 ALL PASS 15/15)
+- Mở từ **Menu ⚙ → 🏯 Tông môn (người chơi lập)**. Hệ này ĐỘC LẬP với tông NPC Thanh Phong Môn (đường tu/sect cũ giữ nguyên, ở cả hai cùng lúc được).
+- **Lập tông**: tên 3–24 ký tự, không trùng (không phân biệt hoa thường), phí **5.000 Linh thạch Hạ** (TẠM), người lập là Tông chủ. Thành viên neo theo nhân vật (bền qua restart, lưu trong world save).
+- **Vào tông**: Tông chủ/Phó tông **mời theo tên nhân vật — mời được cả người đang offline** (đăng nhập là thấy lời mời trong panel); hoặc người ngoài **gửi đơn xin vào** từ danh sách "Các tông môn trong cõi" → Phó tông trở lên duyệt.
+- **Chức vụ**: Tông chủ → Phó tông chủ → Trưởng lão → Đệ tử. Tông chủ: phong/hạ chức, truyền ngôi, trục xuất, giải tán. Phó tông: mời/duyệt đơn, trục xuất Trưởng lão/Đệ tử, sửa giới thiệu. Tông chủ không tự rời tông (phải truyền ngôi/giải tán trước).
+- **Chat kênh 🏯 Tông**: bấm nút kênh chat để vòng tới kênh Tông — chỉ người trong tông đọc được.
+- Cách test: 2 tài khoản — A lập tông → mời B (kể cả lúc B offline) → B vào panel nhận lời; C xin vào → A duyệt; chat kênh Tông; phong chức/trục xuất/truyền ngôi; F5/đăng nhập lại thấy tông còn nguyên.
+- Để đợt v2 (chưa làm): kho chung, nhiệm vụ tông, điểm cống hiến + quầy tông, lãnh địa/trụ sở, tông chiến, hiện tên tông cạnh tên nhân vật.
+
+## GĐ225–227 — GÓI ĐỒ HÓA (Bảo chọn 31/10: "tăng đồ họa đi", làm cả gói 1→3; client-only, kiểm chứng bằng ảnh headless shot225/226/227)
+- **GĐ225 Không khí bản đồ**: mọi map có hạt bay theo CHỦ ĐỀ (bảng AMB_CONF + ambThemeKey theo theme map): dung nham/lò rèn = tàn lửa bay lên, băng nguyên = tuyết rơi, sa mạc = cát bay ngang, rừng = lá rơi (rừng huyết = lá đỏ), đầm lầy/rừng ma = bào tử xanh, bão/kiếm = tia lửa mưa nhanh, hư không = tử quang bay lên, biển/suối = bọt khí, mộ địa = ma trơi, chiến trường = tro, thành = bụi vàng, làng = cánh hoa. Ban đêm thêm **đom đóm** ở các map thiên nhiên + **quầng đèn vàng tại vị trí NPC thành phố** sáng dần theo độ tối. Mùa lễ lớn ở làng thì hạt lễ riêng phủ thay (không chồng hai hệ).
+- **GĐ226 Pháp Tướng có thần thái**: hào quang màu hệ sau lưng tướng (đập nhịp thở), **pháp ấn xoay** dưới chân (texture nướng sẵn, tô màu theo hệ), **6 hạt nguyên tố quấn quanh** thân tướng theo quỹ đạo elip, và vòng sáng bùng đúng màu hệ lúc hiện hình. Hệ nào màu nấy theo bảng màu hệ sẵn có (Hỏa cam đỏ, Băng xanh nhạt, Lôi tím...).
+- **GĐ227 Quái biến thể có quầng hệ**: quái mang nhánh hệ (Kim/Mộc/Thủy/Hỏa/Thổ/Vương/Tinh Anh) có quầng quang đúng màu hệ sau lưng, đập nhịp nhẹ — nhìn từ xa biết ngay hệ, chỉ số không đổi (đúng luật "khác hệ phải phân biệt được ngay").
+- Cách test: vào map dung nham xem tàn lửa, băng nguyên xem tuyết; đứng cạnh NPC thành phố lúc 19h+ xem quầng đèn; Hóa Thần hiện hình xem pháp ấn + hạt quấn; ra bãi farm tìm quái có quầng màu sau lưng.
+- Số TẠM để chỉnh theo mắt: độ đậm/cỡ hạt + quầng (AMB_CONF, alpha quầng quái 0,23–0,33) — Bảo xem trên máy thật rồi dặn tăng/giảm.
+
+## GĐ228 — Thu nhỏ cục lát đá 'stone' (31/10, theo mắt Bảo từ ảnh thành phố đêm)
+- Bảo chỉ ảnh GĐ225 hỏi "cục đá gì to vậy" → đó là decor 'stone' (sprite ô lát đá vuông, hộp vẽ 70×56 — to gấp đôi ý đồ vì texture nướng ở tỉ lệ 2×). Bảo chọn thu một nửa thay vì vẽ lại: `DECOR_SPRITE_BOX['stone'] = [35, 28]` trong gfx.ts (tách khỏi nhóm 70×56). Ảnh kiểm chứng shot228_stone: cục đá còn ~78×62px trên ảnh 1280 (trước ~166×145), và quầng đèn NPC ở Thiên Khu Thành hiện rõ cạnh Chủ Tiệm Đan.
+
+## GĐ229 — MAP DÀY HƠN (31/10, Bảo: "cho nhiều thứ lên, map hơi bị trống"; server sinh decor + client mặt đất)
+- Nguyên nhân trống: map giãn ×5 diện tích từ GĐ175 nhưng TRẦN số decor giữ nguyên (420/650/280) → mật độ thưa 5 lần. Nay: trần thường 420→**1300** (theo diện tích /8000), rừng 650→**1500** (/5000), băng 280→**700** (/14000 — băng vẫn thưa nhất cho đúng chất). Đo thật: Thiên Khu Thành 410→**1222**, Hoa Vân Cốc →**1121**, Băng Nguyên Đại →**692**.
+- Kèm: vật rải nhỏ không chặn (hoa/cỏ/thảo/bụi) được xếp gần nhau 48px thay vì 120px nên mặt đất dày hẳn; vật chặn giữ nguyên luật clearance GĐ94/117 (cổng/đàn tế/khu dân/nhà không bị lấn). Kiểm vị trí chuyển qua lưới ô → boot không chậm lại (đo 4,9s cho 200 map sau tối ưu; bản chưa tối ưu từng chạm 20,8s).
+- Mặt đất: mỗi ô nền nướng thêm chi tiết theo theme (lá cỏ ở theme xanh, sỏi + đốm màu chủ đề ở các theme khác) — đất hết trơn.
+- Cách test: vào Hoa Vân Cốc/Băng Nguyên Đại đi sâu vào trong map (quanh cổng vẫn thoáng theo luật chừa lối) — thấy đá/núi/tinh thể dày hơn hẳn; thành phố đông nhà + decor hơn. Số mật độ đều TẠM, Bảo xem rồi dặn tăng/giảm tiếp.

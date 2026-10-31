@@ -2557,7 +2557,8 @@ function themeStyleOf(def: MapEnterData): ThemeStyle {
 // trong hộp 96, neo đáy y≈79. Đồ nhỏ KHÔNG phóng to (scale ≤ 1).
 const DECOR_SPRITE_BOX: Record<string, [number, number]> = {};
 for (const k of ['pine','willow','palm','dead_tree','blood_tree','swamp_tree','mountain','mountain_snow','pavilion','hut','cave','cactus']) DECOR_SPRITE_BOX[k] = [90, 76];
-for (const k of ['rock','stone','lava_rock','ice_shard','tomb','pillar','sword_stone','lamp','banner','furnace','forge','anvil','desk','fence','pond','wave','coral','hay','blossom','lava_pool','ice_crystal','dune']) DECOR_SPRITE_BOX[k] = [70, 56]; // GĐ166: + 3 decor chủ đề mới
+for (const k of ['rock','lava_rock','ice_shard','tomb','pillar','sword_stone','lamp','banner','furnace','forge','anvil','desk','fence','pond','wave','coral','hay','blossom','lava_pool','ice_crystal','dune']) DECOR_SPRITE_BOX[k] = [70, 56]; // GĐ166: + 3 decor chủ đề mới
+DECOR_SPRITE_BOX['stone'] = [35, 28]; // GĐ228 (31/10): Bảo chê cục lát đá 'stone' to và chướng — thu còn một nửa (sprite nó là ô lát đá vuông nên càng to càng lộ)
 for (const k of ['flower','herb','grass','grass_tall','reed','bone','crystal','crystal_gold']) DECOR_SPRITE_BOX[k] = [46, 40];
 // GĐ111 sửa (user chê): nấm tròn đọc to hơn hộp nên thu riêng [36,30]
 // (kẻo lăn hệ số 1.25 lại to ngang cây); tre mới dáng cao nên hộp hẹp
@@ -2748,6 +2749,27 @@ function groundTileTexture(scene: Phaser.Scene, def: MapEnterData, st: ThemeStyl
     for (let i = 0; i < 30; i++) { b.fillStyle = 'rgba(240,100,60,0.35)'; b.beginPath(); b.arc(rnd() * w, rnd() * h, 1.6 + rnd() * 2.4, 0, Math.PI * 2); b.fill(); }
   } else if (def.theme === 'ice' || def.theme === 'ice_plain' || def.theme === 'deep_sea') {
     for (let i = 0; i < 34; i++) { b.fillStyle = 'rgba(255,255,255,0.4)'; b.fillRect(rnd() * w, rnd() * h, 2.2, 2.2); }
+  }
+  // GĐ229: chi tiết rải mặt đất theo theme (nướng theo seed của ô) — lá cỏ /
+  // sỏi / đốm sáng cho mặt đất hết trơn tru; theme xanh nhiều lá cỏ, theme
+  // khác thiên sỏi + đốm màu chủ đề.
+  {
+    const th = def.theme || 'mountain';
+    const leafy = ['garden', 'city', 'beast', 'mountain', 'swamp', 'blood_forest', 'graveyard', 'script', 'deep_forest', 'ghost_forest', 'stream'].includes(th);
+    const detailN = Math.round((w * h) / 9000);
+    for (let i = 0; i < detailN; i++) {
+      const dx = rnd() * w, dy = rnd() * h, r = rnd();
+      if (leafy && r < 0.55) {
+        b.strokeStyle = st.leaf; b.globalAlpha = 0.35; b.lineWidth = 1.6;
+        b.beginPath(); b.moveTo(dx, dy); b.lineTo(dx + (rnd() * 4 - 2), dy - 4 - rnd() * 4); b.stroke();
+      } else if (r < 0.82) {
+        b.fillStyle = st.rock; b.globalAlpha = 0.3;
+        b.beginPath(); b.ellipse(dx, dy, 1.6 + rnd() * 2.2, 1.2 + rnd() * 1.4, rnd() * 3, 0, Math.PI * 2); b.fill();
+      } else {
+        b.fillStyle = st.accent; b.globalAlpha = 0.28; b.fillRect(dx, dy, 2.2, 2.2);
+      }
+    }
+    b.globalAlpha = 1;
   }
   // viền biên thế giới chỉ vẽ ở ô chạm biên
   b.strokeStyle = 'rgba(0,0,0,0.45)'; b.lineWidth = 12;
