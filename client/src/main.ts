@@ -216,7 +216,7 @@ interface PartyMemberRow { id: string; name: string; classId: string; realm: str
 interface PartyState { id: string; leaderId: string; members: PartyMemberRow[] }
 interface BoardRow { name: string; classId: string; realm: string; tier: number; score: number; tuVi?: number; mountCount?: number; bestMul?: number; stage?: number; progress?: number }
 interface PlayerCard { name: string; classId: string; weaponId: string; realm: string; tier: number; online: boolean; mapId: string | null; sect: string | null; branch: string | null; power: number; gearScore: number; gear: Array<{ name: string; rarity: string; slot: string; band: string | null; unique: string[] }>; mounts: string[]; phapTuong: { stage: number; element: string | null } | null; achCount: number; friendCount: number; isFriend: boolean; isSelf: boolean }
-const SOC_REALM: Record<string, string> = { pham: 'Phàm nhân', lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư' };
+const SOC_REALM: Record<string, string> = { pham: 'Phàm nhân', lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư', dk: 'Độ Kiếp', tn: 'Tiên Nhân', dt: 'Địa Tiên' }; // GĐ231: + Tiên Nhân/Địa Tiên // GĐ230: + Độ Kiếp
 const SOC_CLASS: Record<string, string> = { thetu: 'Thể Tu', phattu: 'Phật Tu', cottu: 'Cốt Tu', quytu: 'Quỷ Tu', satthu: 'Ảnh Tu', kiemtu: 'Kiếm Tu', phaptu: 'Pháp Tu', ytu: 'Y Tu', nhotu: 'Nho Tu' };
 const socEsc = (t: string): string => String(t || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] as string));
 
@@ -313,6 +313,10 @@ const ITEM_INFO: Record<string, { name: string; desc?: string }> = {
   quang_sat: { name: 'Quặng Sắt', desc: 'Nguyên liệu đào khoáng — dùng rèn, luyện khí' }, // GĐ132
   quang_dong: { name: 'Quặng Đồng', desc: 'Nguyên liệu đào khoáng — dùng rèn, luyện khí' }, // GĐ132
   quang_bac: { name: 'Quặng Bạc', desc: 'Nguyên liệu đào khoáng — dùng rèn, luyện khí' }, // GĐ132
+  kiep_van_thach: { name: 'Kiếp Vân Thạch', desc: 'Khoáng sản kết tinh trong mây kiếp ở cõi Độ Kiếp' }, // GĐ233
+  kiep_tam_thao: { name: 'Kiếp Tâm Thảo', desc: 'Linh thảo mọc trong Tâm Ma Cảnh, hái ở cõi Độ Kiếp' }, // GĐ233
+  tinh_ha_thach: { name: 'Tinh Hà Thạch', desc: 'Khoáng sản rơi từ dải ngân hà xuống Tiên Giới' }, // GĐ233
+  tien_linh_chi: { name: 'Tiên Linh Chi', desc: 'Linh chi của Tiên Giới, hái ở vùng tiên linh' }, // GĐ233
   thao_duoc: { name: 'Thảo Dược', desc: 'Nguyên liệu hái thuốc — dùng luyện đan; mua bán ở Tiệm Thảo Dược' }, // GĐ132, GĐ140
   linh_thao: { name: 'Linh Thảo', desc: 'Nguyên liệu hái thuốc — dùng luyện đan; mua bán ở Tiệm Thảo Dược' }, // GĐ132, GĐ140
   tien_thao: { name: 'Tiên Thảo', desc: 'Nguyên liệu hái thuốc — dùng luyện đan cao cấp; mua bán ở Tiệm Thảo Dược' }, // GĐ132, GĐ140
@@ -528,6 +532,17 @@ const QUEST_INFO: Record<string, { name: string; desc: string; target: number; r
   bq_khaithien: { name: 'Diệt Khai Thiên Tê (Hóa Thần)', desc: 'Hạ 3 Khai Thiên Tê ở vùng Hóa Thần (+280 Tu vi)', target: 3, reward: 2400, kind: 'kill' },
   bq_vanco: { name: 'Diệt Vạn Cổ Thần Thú (Phản Hư)', desc: 'Hạ 1 Vạn Cổ Thần Thú ở Vạn Cổ Chiến Trường (cần Phản Hư mới vào được, +400 Tu vi)', target: 1, reward: 4500, kind: 'kill' },
   bq_hondon_ph: { name: 'Thu thập Hỗn Độn Thạch (Phản Hư)', desc: 'Mang theo 15 Hỗn Độn Thạch tới trả (+250 Tu vi)', target: 15, reward: 2600, kind: 'item', itemId: 'hon_don_thach' },
+  // GĐ234: nhiệm vụ bảng bậc Độ Kiếp + Tiên Giới
+  bq_loikieplang: { name: 'Diệt Lôi Kiếp Lang (Độ Kiếp)', desc: 'Hạ 8 Lôi Kiếp Lang ở Lôi Kiếp Nguyên (cần Độ Kiếp mới vào được, +450 Tu vi)', target: 8, reward: 5000, kind: 'kill' },
+  bq_tammaanh: { name: 'Diệt Tâm Ma Ảnh (Độ Kiếp)', desc: 'Hạ 5 Tâm Ma Ảnh ở Tâm Ma Cảnh (cần Độ Kiếp mới vào được, +480 Tu vi)', target: 5, reward: 5500, kind: 'kill' },
+  bq_vankiep: { name: 'Diệt Vạn Kiếp Thần Thú (Độ Kiếp)', desc: 'Hạ 1 Vạn Kiếp Thần Thú ở cõi Độ Kiếp (+600 Tu vi)', target: 1, reward: 7000, kind: 'kill' },
+  bq_kiepvan: { name: 'Thu thập Kiếp Vân Thạch (Độ Kiếp)', desc: 'Mang theo 15 Kiếp Vân Thạch tới trả (+350 Tu vi)', target: 15, reward: 3800, kind: 'item', itemId: 'kiep_van_thach' },
+  bq_kieptam: { name: 'Thu thập Kiếp Tâm Thảo (Độ Kiếp)', desc: 'Mang theo 15 Kiếp Tâm Thảo tới trả (+350 Tu vi)', target: 15, reward: 3800, kind: 'item', itemId: 'kiep_tam_thao' },
+  bq_tienphuong: { name: 'Diệt Tiên Phượng (Tiên Giới)', desc: 'Hạ 1 Tiên Phượng ở Tiên Giới (chỉ Tiên Nhân mới vào được, +800 Tu vi)', target: 1, reward: 9500, kind: 'kill' },
+  bq_kylan: { name: 'Diệt Kỳ Lân Tiên Thú (Tiên Giới)', desc: 'Hạ 2 Kỳ Lân Tiên Thú ở Kỳ Lân Nguyên (chỉ Tiên Nhân mới vào được, +750 Tu vi)', target: 2, reward: 9000, kind: 'kill' },
+  bq_thientien: { name: 'Diệt Thiên Tiên Thủ Thần (Tiên Giới)', desc: 'Hạ 1 Thiên Tiên Thủ Thần ở Tiên Giới (chỉ Tiên Nhân mới vào được, +800 Tu vi)', target: 1, reward: 9500, kind: 'kill' },
+  bq_tinhha: { name: 'Thu thập Tinh Hà Thạch (Tiên Giới)', desc: 'Mang theo 15 Tinh Hà Thạch tới trả (+500 Tu vi)', target: 15, reward: 5500, kind: 'item', itemId: 'tinh_ha_thach' },
+  bq_tienlinhchi: { name: 'Thu thập Tiên Linh Chi (Tiên Giới)', desc: 'Mang theo 15 Tiên Linh Chi tới trả (+500 Tu vi)', target: 15, reward: 5500, kind: 'item', itemId: 'tien_linh_chi' },
   ...QUEST_INFO_CITY, // GĐ90: 60 nhiệm vụ thành phố — chỉ hiện ở tracker, bảng làng bỏ qua (nhận/trả qua hộp thoại Người Giao Nhiệm Vụ)
   ...QUEST_INFO_GD127, // GĐ127: 950 nhiệm vụ mở rộng — chỉ hiện ở tracker, bảng làng bỏ qua (nhận/trả qua hộp thoại người giao)
   ...QUEST_INFO_GD129, // GĐ129: 6 nhiệm vụ Cổ Thụ — như GĐ127 (tracker only, không qua bảng)
@@ -751,6 +766,53 @@ const GDD_MONSTER_VISUAL: Record<string, { base: 'wolf' | 'bat' | 'golem' | 'riv
   hu_anh_mieu: { base: 'rival', tint: 0x4a7ec2, scale: 1.09 },
   van_co_hoa_thu: { base: 'wolf', tint: 0xe0643c, scale: 0.92 },
   thien_dao_thu_than: { base: 'golem', tint: 0xf2d24b, scale: 1.6 },
+  // GĐ232: 46 loài Độ Kiếp / Tiên Môn / Tiên Giới (gen_gd232.py)
+  loi_kiep_lang: { base: 'wolf', tint: 0xf2d24b, scale: 1.2 },
+  thien_hoa_dieu: { base: 'bat', tint: 0xe0643c, scale: 1.29 },
+  tam_ma_anh: { base: 'rival', tint: 0x4a7ec2, scale: 1.33 },
+  phong_kiep_hac: { base: 'bat', tint: 0xf2d24b, scale: 1.06 },
+  dia_kiep_te: { base: 'golem', tint: 0xb08954, scale: 1.22 },
+  thuy_kiep_mang: { base: 'wolf', tint: 0x4a7ec2, scale: 1.22 },
+  kim_kiep_thu: { base: 'wolf', tint: 0xf2d24b, scale: 1.03 },
+  huyet_kiep_buc: { base: 'bat', tint: 0xe0643c, scale: 1.01 },
+  bang_kiep_ho: { base: 'wolf', tint: 0x4a7ec2, scale: 1.19 },
+  hon_kiep_xa: { base: 'wolf', tint: 0x6aa84f, scale: 1.09 },
+  kiep_van_khoi: { base: 'golem', tint: 0xb08954, scale: 1.33 },
+  thien_kiem_kiep_anh: { base: 'rival', tint: 0xf2d24b, scale: 1.34 },
+  van_kiep_than_thu: { base: 'wolf', tint: 0xf2d24b, scale: 1.58 },
+  kiep_hoa_phuong: { base: 'bat', tint: 0xe0643c, scale: 1.57 },
+  kiep_hai_cu_ngu: { base: 'wolf', tint: 0x4a7ec2, scale: 1.32 },
+  kiep_anh_mieu: { base: 'rival', tint: 0x4a7ec2, scale: 0.98 },
+  thien_the_thu_ho: { base: 'golem', tint: 0xf2d24b, scale: 1.35 },
+  tien_mon_kiem_si: { base: 'rival', tint: 0xf2d24b, scale: 1.34 },
+  van_dao_tuong: { base: 'rival', tint: 0xb08954, scale: 1.51 },
+  dang_tien_ho_phap: { base: 'rival', tint: 0xf2d24b, scale: 1.26 },
+  thien_uy_giao: { base: 'wolf', tint: 0x4a7ec2, scale: 1.55 },
+  tien_mon_linh_thu: { base: 'wolf', tint: 0x6aa84f, scale: 1.22 },
+  tien_linh_lang: { base: 'wolf', tint: 0x6aa84f, scale: 1.2 },
+  dao_tri_ngu: { base: 'wolf', tint: 0x4a7ec2, scale: 0.93 },
+  tien_phuong: { base: 'bat', tint: 0xe0643c, scale: 1.62 },
+  ky_lan_tien_thu: { base: 'golem', tint: 0xf2d24b, scale: 1.53 },
+  van_hai_hac: { base: 'bat', tint: 0x4a7ec2, scale: 1.06 },
+  bong_lai_te: { base: 'golem', tint: 0xb08954, scale: 1.23 },
+  tien_thu_ho: { base: 'wolf', tint: 0xe0643c, scale: 1.19 },
+  bich_lac_mang: { base: 'wolf', tint: 0x4a7ec2, scale: 1.15 },
+  tinh_ha_hat: { base: 'wolf', tint: 0x6aa84f, scale: 1.1 },
+  tien_kiem_hon: { base: 'rival', tint: 0xf2d24b, scale: 1.29 },
+  dao_tri_lien_tinh: { base: 'bat', tint: 0x6aa84f, scale: 1.03 },
+  thien_ha_khoi: { base: 'golem', tint: 0xb08954, scale: 1.32 },
+  tien_gioi_chien_hon: { base: 'rival', tint: 0xf2d24b, scale: 1.15 },
+  linh_van_buc: { base: 'bat', tint: 0x4a7ec2, scale: 1.05 },
+  tien_hoa_thu: { base: 'wolf', tint: 0xe0643c, scale: 1.03 },
+  con_luan_su: { base: 'wolf', tint: 0xf2d24b, scale: 1.21 },
+  dao_tri_cu_ngu: { base: 'wolf', tint: 0x4a7ec2, scale: 1.36 },
+  tien_vu_dieu: { base: 'bat', tint: 0x6aa84f, scale: 1.0 },
+  thien_tien_thu_than: { base: 'golem', tint: 0xf2d24b, scale: 1.62 },
+  dao_hoa_tinh: { base: 'bat', tint: 0xe0643c, scale: 0.97 },
+  linh_mieu_tien: { base: 'rival', tint: 0x4a7ec2, scale: 1.01 },
+  van_tien_quy: { base: 'rival', tint: 0x4a7ec2, scale: 1.03 },
+  thien_binh_hon: { base: 'rival', tint: 0xf2d24b, scale: 1.06 },
+  bich_hai_giao: { base: 'wolf', tint: 0x4a7ec2, scale: 1.35 },
 };
 
 // GĐ159: TỈ LỆ THẬT (Bảo yêu cầu 29/10) — quái nhỏ lại theo cỡ thật so với
@@ -949,6 +1011,53 @@ const MON_SPRITE: Record<string, string> = {
   hu_anh_mieu: 'huyen_anh_mieu',
   van_co_hoa_thu: 'hoa_thu',
   thien_dao_thu_than: 'thach_khoi_loi',
+  // GĐ232: 46 loài mới dùng lại file sprite loài gốc
+  loi_kiep_lang: 'soi_xam',
+  thien_hoa_dieu: 'loi_dieu',
+  tam_ma_anh: 'dan_ma',
+  phong_kiep_hac: 'huyen_diep',
+  dia_kiep_te: 'kim_giap_te',
+  thuy_kiep_mang: 'sam_lam_cu_mang',
+  kim_kiep_thu: 'dia_kim_thu',
+  huyet_kiep_buc: 'doi_den',
+  bang_kiep_ho: 'tuyet_ho',
+  hon_kiep_xa: 'doc_xa',
+  kiep_van_khoi: 'thach_khoi_loi',
+  thien_kiem_kiep_anh: 'kiem_ma',
+  van_kiep_than_thu: 'thien_loi_thu',
+  kiep_hoa_phuong: 'diem_hoa_phuong',
+  kiep_hai_cu_ngu: 'thuy_yeu_ngu',
+  kiep_anh_mieu: 'huyen_anh_mieu',
+  thien_the_thu_ho: 'thach_khoi_loi',
+  tien_mon_kiem_si: 'kiem_ma',
+  van_dao_tuong: 'cot_vuong',
+  dang_tien_ho_phap: 'cot_binh',
+  thien_uy_giao: 'loi_xa',
+  tien_mon_linh_thu: 'tuyet_ho',
+  tien_linh_lang: 'soi_xam',
+  dao_tri_ngu: 'thuy_yeu_ngu',
+  tien_phuong: 'diem_hoa_phuong',
+  ky_lan_tien_thu: 'kim_giap_te',
+  van_hai_hac: 'huyen_diep',
+  bong_lai_te: 'kim_giap_te',
+  tien_thu_ho: 'tuyet_ho',
+  bich_lac_mang: 'sam_lam_cu_mang',
+  tinh_ha_hat: 'sa_mac_hat',
+  tien_kiem_hon: 'kiem_ma',
+  dao_tri_lien_tinh: 'huyen_diep',
+  thien_ha_khoi: 'thach_khoi_loi',
+  tien_gioi_chien_hon: 'cot_vuong',
+  linh_van_buc: 'doi_den',
+  tien_hoa_thu: 'hoa_thu',
+  con_luan_su: 'tuyet_ho',
+  dao_tri_cu_ngu: 'thuy_yeu_ngu',
+  tien_vu_dieu: 'loi_dieu',
+  thien_tien_thu_than: 'thach_khoi_loi',
+  dao_hoa_tinh: 'huyen_diep',
+  linh_mieu_tien: 'huyen_anh_mieu',
+  van_tien_quy: 'quy_hon',
+  thien_binh_hon: 'cot_binh',
+  bich_hai_giao: 'loi_xa',
   tuyet_ho: 'tuyet_ho', bang_xa: 'bang_xa', hoa_thu: 'hoa_thu', sa_mac_hat: 'sa_mac_hat',
   sam_lam_cu_mang: 'sam_lam_cu_mang', thuy_yeu_ngu: 'thuy_yeu_ngu', loi_xa: 'loi_xa',
   dia_kim_thu: 'dia_kim_thu', dung_nham_cua: 'dung_nham_cua', // GĐ166: 9 loài mới, sprite vẽ bằng công cụ của Muse
@@ -1976,6 +2085,9 @@ class GameScene extends Phaser.Scene {
     wire('mountClose', () => this.closePanels()); // GĐ161: Trại Thú Cưỡi
     wire('stonesClose', () => this.closePanels());
     wire('sectClose', () => this.closePanels()); // GĐ224
+    const pathCloseEl = document.getElementById('pathClose'); if (pathCloseEl) pathCloseEl.onclick = () => { const pp = document.getElementById('pathPanel'); if (pp) pp.style.display = 'none'; };
+    const pathThangEl = document.getElementById('pathThangBtn'); if (pathThangEl) pathThangEl.onclick = () => { this.socket.emit('choose_path', { path: 'thang' }); const pp = document.getElementById('pathPanel'); if (pp) pp.style.display = 'none'; };
+    const pathDiaEl = document.getElementById('pathDiaBtn'); if (pathDiaEl) pathDiaEl.onclick = () => { this.socket.emit('choose_path', { path: 'dia' }); const pp = document.getElementById('pathPanel'); if (pp) pp.style.display = 'none'; };
     wire('invBtn', () => this.toggleInv());
 
     // ---- Kết nối Socket.io tới Backend ----
@@ -2380,9 +2492,9 @@ class GameScene extends Phaser.Scene {
       sound.play('breakOk'); // GĐ167
       this.cameras.main.flash(300, 255, 215, 77);
       // GĐ172: hiệu ứng theo cỡ đột phá — Đại/Kim Đan/Nguyên Anh có LÔI KIẾP
-      const lvl = r.type === 'dai' || r.type === 'kimdan' || r.type === 'nguyenanh' || r.type === 'hoathan' || r.type === 'phanhu' ? 2 : r.type === 'trung' ? 1 : 0; // GĐ181: Hóa Thần cũng lôi kiếp; GĐ204: + Phản Hư
+      const lvl = r.type === 'dai' || r.type === 'kimdan' || r.type === 'nguyenanh' || r.type === 'hoathan' || r.type === 'phanhu' || r.type === 'dokiep1' || r.type === 'dokiep2' || r.type === 'dokiep3' || r.type === 'tienmon' || r.type === 'dangtien' ? 2 : r.type === 'trung' ? 1 : 0; // GĐ231: Đăng Tiên dùng hiệu ứng lớn // GĐ230: cổng kiếp dùng hiệu ứng lớn // GĐ181: Hóa Thần cũng lôi kiếp; GĐ204: + Phản Hư
       this.breakthroughFx(this.myId, lvl);
-      const realmName = ({ lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư' } as Record<string, string>) // GĐ183: bỏ Vô Danh[r.realm || 'lk'] || 'Luyện Khí';
+      const realmName = ({ lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư', dk: 'Độ Kiếp', tn: 'Tiên Nhân', dt: 'Địa Tiên' } as Record<string, string>) // GĐ231: + Tiên Nhân/Địa Tiên // GĐ230: + Độ Kiếp // GĐ183: bỏ Vô Danh[r.realm || 'lk'] || 'Luyện Khí';
       const thoTxt = r.lifespanGain ? ` · +${r.lifespanGain} năm tuổi thọ` : '';
       this.showToast(`✦ ĐỘT PHÁ THÀNH CÔNG → ${realmName} tầng ${r.tier}! Nhận ${r.gainedPoints} điểm đột phá (mỗi điểm +2)${thoTxt}`);
     });
@@ -2395,10 +2507,10 @@ class GameScene extends Phaser.Scene {
 
     this.socket.on('player_breakthrough', (info: { id: string; name: string; tier: number; realm?: string; type?: string }) => {
       if (info.id !== this.myId) {
-        const rn = ({ lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư' } as Record<string, string>) // GĐ183: bỏ Vô Danh[info.realm || 'lk'] || 'Luyện Khí';
+        const rn = ({ lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư', dk: 'Độ Kiếp', tn: 'Tiên Nhân', dt: 'Địa Tiên' } as Record<string, string>) // GĐ231: + Tiên Nhân/Địa Tiên // GĐ230: + Độ Kiếp // GĐ183: bỏ Vô Danh[info.realm || 'lk'] || 'Luyện Khí';
         this.showToast(`✦ ${info.name} vừa đột phá lên ${rn} tầng ${info.tier}!`);
         // GĐ172: người xung quanh cũng thấy cột sáng / lôi kiếp của họ
-        const lvl = info.type === 'dai' || info.type === 'kimdan' || info.type === 'nguyenanh' || info.type === 'hoathan' || info.type === 'phanhu' ? 2 : info.type === 'trung' || info.type === 'tandang10' ? 1 : 0; // GĐ181; GĐ204: + Phản Hư
+        const lvl = info.type === 'dai' || info.type === 'kimdan' || info.type === 'nguyenanh' || info.type === 'hoathan' || info.type === 'phanhu' || info.type === 'dokiep1' || info.type === 'dokiep2' || info.type === 'dokiep3' || info.type === 'tienmon' ? 2 : info.type === 'trung' || info.type === 'tandang10' ? 1 : 0; // GĐ231: Tiên Môn dùng hiệu ứng lớn // GĐ230: cổng kiếp dùng hiệu ứng lớn // GĐ181; GĐ204: + Phản Hư
         this.breakthroughFx(info.id, lvl);
       }
     });
@@ -3273,7 +3385,7 @@ class GameScene extends Phaser.Scene {
         cv.height = 96;
         const info = document.createElement('div');
         info.className = 'cinfo';
-        const realmTxt = !c.linhCanMain ? 'Phàm nhân' : c.realm === 'na' ? (c.tier >= 10 ? 'Nguyên Anh · Viên mãn' : `Nguyên Anh tầng ${c.tier}`) : c.realm === 'ph' ? `Phản Hư tầng ${c.tier}` : c.realm === 'ht' ? `Hóa Thần tầng ${c.tier}` : c.realm === 'kd' ? `Kim Đan tầng ${c.tier}` : c.realm === 'tc' ? `Trúc Cơ tầng ${c.tier}` : `Luyện Khí tầng ${c.tier}`; // GĐ59 + GĐ180: gọi đúng cảnh giới cả thang mới
+        const realmTxt = !c.linhCanMain ? 'Phàm nhân' : c.realm === 'na' ? (c.tier >= 10 ? 'Nguyên Anh · Viên mãn' : `Nguyên Anh tầng ${c.tier}`) : c.realm === 'tn' ? `Tiên Nhân tầng ${c.tier}` : c.realm === 'dt' ? `Địa Tiên tầng ${c.tier}` : c.realm === 'dk' ? `Độ Kiếp · ${['', 'Bán Thần', 'Độ Kiếp', 'Chứng Thần'][c.tier] || 'Bán Thần'}` : c.realm === 'ph' ? `Phản Hư tầng ${c.tier}` : c.realm === 'ht' ? `Hóa Thần tầng ${c.tier}` : c.realm === 'kd' ? `Kim Đan tầng ${c.tier}` : c.realm === 'tc' ? `Trúc Cơ tầng ${c.tier}` : `Luyện Khí tầng ${c.tier}`; // GĐ59 + GĐ180: gọi đúng cảnh giới cả thang mới
         info.innerHTML = `<div class="cname"></div><div class="cmeta">${c.className}${c.weaponName ? ' · ' + c.weaponName : ''} · ${realmTxt}${c.linhCanMain ? ' · Linh căn ' + c.linhCanMain : ''}${c.bienDi ? ' · ✦ Biến dị ' + c.bienDi : ''} · ${c.gender === 'nu' ? 'Nữ' : 'Nam'}</div>`;
         (info.querySelector('.cname') as HTMLElement).textContent = c.name;
         const play = document.createElement('button');
@@ -4012,7 +4124,7 @@ class GameScene extends Phaser.Scene {
         rows.push(`<div class="tRow"><span>🐴 ${esc(m.name)}</span><span class="tQty">tốc ×${m.speedMul}</span></div>`);
       }
       for (const g of o.gear || []) {
-        rows.push(`<div class="tRow${clickable ? ' clickable' : ''}" ${clickable ? `data-tgoff="${g.uid}" title="Bấm để gỡ khỏi bàn"` : ''}><span>⚔️ <b style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${esc(g.name)}</b>${g.band ? ` <span style="color:#c9a86a">${g.band === 'na' ? '· Nguyên Anh' : g.band === 'ph' ? '· Phản Hư' : '· Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? ` <span style="color:#ffd75e">✦ ${g.unique.map(esc).join(', ')}</span>` : ''}</span><span class="tQty">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`);
+        rows.push(`<div class="tRow${clickable ? ' clickable' : ''}" ${clickable ? `data-tgoff="${g.uid}" title="Bấm để gỡ khỏi bàn"` : ''}><span>⚔️ <b style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${esc(g.name)}</b>${g.band ? ` <span style="color:#c9a86a">${g.band === 'na' ? '· Nguyên Anh' : g.band === 'ph' ? '· Phản Hư' : g.band === 'dk' ? '· Độ Kiếp' : g.band === 'dt' ? '· Địa Tiên' : g.band === 'tn' ? '· Tiên Nhân' : '· Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? ` <span style="color:#ffd75e">✦ ${g.unique.map(esc).join(', ')}</span>` : ''}</span><span class="tQty">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`);
       }
       if (o.stones > 0) rows.push(`<div class="tRow"><span>💠 Linh thạch</span><span class="tQty">${o.stones}</span></div>`);
       return rows.length ? rows.join('') : '<div class="tEmpty">Chưa có gì trên bàn</div>';
@@ -4129,7 +4241,7 @@ class GameScene extends Phaser.Scene {
     if (title) title.textContent = `👤 ${card.name}`;
     const box = document.getElementById('cardBody');
     if (!box) return;
-    const gearRows = card.gear.length ? card.gear.map((g) => `<div class="socRow"><span class="grow" style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${socEsc(g.name)}${g.band ? ` <span style="color:#ffd94d">· ${g.band === 'na' ? 'Nguyên Anh' : g.band === 'ph' ? 'Phản Hư' : 'Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? `<div style="color:#8be9c9;font-size:11px">✦ ${g.unique.map(socEsc).join(', ')}</div>` : ''}</span><span style="color:#9db8a6;font-size:11px">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`).join('') : '<div class="tEmpty">Chưa mặc trang bị nào.</div>';
+    const gearRows = card.gear.length ? card.gear.map((g) => `<div class="socRow"><span class="grow" style="color:${GEAR_RARITY_COLOR[g.rarity] || '#fff'}">${socEsc(g.name)}${g.band ? ` <span style="color:#ffd94d">· ${g.band === 'na' ? 'Nguyên Anh' : g.band === 'ph' ? 'Phản Hư' : g.band === 'dk' ? 'Độ Kiếp' : g.band === 'dt' ? 'Địa Tiên' : g.band === 'tn' ? 'Tiên Nhân' : 'Hóa Thần'}</span>` : ''}${g.unique && g.unique.length ? `<div style="color:#8be9c9;font-size:11px">✦ ${g.unique.map(socEsc).join(', ')}</div>` : ''}</span><span style="color:#9db8a6;font-size:11px">${GEAR_RARITY_NAME[g.rarity] || g.rarity}</span></div>`).join('') : '<div class="tEmpty">Chưa mặc trang bị nào.</div>';
     box.innerHTML = `
       <div class="socRow"><span class="grow"><span class="${card.online ? 'onDot' : 'offDot'}">●</span> <b>${socEsc(card.name)}</b> — ${SOC_CLASS[card.classId] || ''}</span><span>${card.online ? 'Đang online' : 'Offline'}</span></div>
       <div class="socRow"><span class="grow">Cảnh giới</span><span>${SOC_REALM[card.realm] || ''} tầng ${card.tier}</span></div>
@@ -4351,6 +4463,12 @@ class GameScene extends Phaser.Scene {
           ? c.tier >= 10
             ? 'Nguyên Anh · Viên mãn'
             : `Nguyên Anh tầng ${c.tier}`
+          : c.realm === 'tn'
+            ? `Tiên Nhân tầng ${c.tier}`
+          : c.realm === 'dt'
+            ? `Địa Tiên tầng ${c.tier}`
+          : c.realm === 'dk'
+            ? `Độ Kiếp · ${['', 'Bán Thần', 'Độ Kiếp', 'Chứng Thần'][c.tier] || 'Bán Thần'}`
           : c.realm === 'ph'
               ? `Phản Hư tầng ${c.tier}`
               : c.realm === 'ht'
@@ -4428,6 +4546,21 @@ class GameScene extends Phaser.Scene {
         } else if (bi && bi.type === 'phanhu') { // GĐ204: Hóa Thần 9 → Phản Hư
           brk.textContent = bi.trialReady ? '✦ ĐỘT PHÁ PHẢN HƯ ✦' : '⚔ Thử thách: Hư Không Kiếp Ảnh';
           brk.onclick = () => this.socket.emit(bi.trialReady ? 'breakthrough' : 'start_trial');
+        } else if (bi && bi.type === 'dokiep1') { // GĐ230: cổng kiếp 1 → Bán Thần
+          brk.textContent = bi.trialReady ? '✦ ĐỘT PHÁ → BÁN THẦN ✦' : '⚔ Cổng kiếp: Thiên Lôi Kiếp Ảnh';
+          brk.onclick = () => this.socket.emit(bi.trialReady ? 'breakthrough' : 'start_trial');
+        } else if (bi && bi.type === 'dokiep2') { // GĐ230: cổng kiếp 2 → Độ Kiếp
+          brk.textContent = bi.trialReady ? '✦ ĐỘT PHÁ → ĐỘ KIẾP ✦' : '⚔ Cổng kiếp: Tam Kiếp Liên Hoàn';
+          brk.onclick = () => this.socket.emit(bi.trialReady ? 'breakthrough' : 'start_trial');
+        } else if (bi && bi.type === 'tienmon') { // GĐ231: Tiên Môn → Tiên Nhân
+          brk.textContent = bi.trialReady ? '✦ THĂNG THIÊN ✦' : '⚔ Thử thách: Hộ Vệ Tiên Môn';
+          brk.onclick = () => this.socket.emit(bi.trialReady ? 'breakthrough' : 'start_trial');
+        } else if (bi && bi.type === 'dangtien') { // GĐ231: điểm rẽ hai con đường
+          brk.textContent = '✦ LỄ ĐĂNG TIÊN — CHỌN CON ĐƯỜNG ✦';
+          brk.onclick = () => { const pp = document.getElementById('pathPanel'); if (pp) pp.style.display = 'block'; };
+        } else if (bi && bi.type === 'dokiep3') { // GĐ230: cổng kiếp 3 → Chứng Thần
+          brk.textContent = bi.trialReady ? '✦ ĐỘT PHÁ → CHỨNG THẦN ✦' : '⚔ Cổng kiếp: Thần Kiếp Ảnh';
+          brk.onclick = () => this.socket.emit(bi.trialReady ? 'breakthrough' : 'start_trial');
         } else {
           brk.textContent = '✦ Đột phá Tiểu cảnh ✦';
           brk.onclick = () => this.socket.emit('breakthrough');
@@ -4499,7 +4632,7 @@ class GameScene extends Phaser.Scene {
       if (ptEl) {
         if (pt) {
           ptEl.style.display = 'block';
-          ptEl.textContent = `🔮 Pháp Tướng · ${pt.stageName} · hệ ${pt.element} · Tu dưỡng ${pt.progress}${pt.nextNeed != null ? `/${pt.nextNeed}` : ''}${pt.soulNeed != null ? ` · Hồn lực ${pt.soulPower || 0}/${pt.soulNeed} (thiền hiện hình tại Đạo Quán)` : ''}${pt.shapeNeed != null ? ` · Nặn hình (Sơ Ảnh): tu dưỡng ${pt.progress}/${pt.shapeNeed}` : ''}${pt.divineArt ? ` · 🌟 ${pt.divineArt.name}` : ''}${pt.active ? ' · ĐANG HIỆN HÌNH' : ''}`;
+          ptEl.textContent = `🔮 Pháp Tướng · ${pt.stageName} · hệ ${pt.element} · Tu dưỡng ${pt.progress}${pt.nextNeed != null ? `/${pt.nextNeed}` : ''}${pt.soulNeed != null ? ` · Hồn lực ${pt.soulPower || 0}/${pt.soulNeed} (thiền hiện hình tại Đạo Quán)` : ''}${pt.shapeNeed != null ? ` · Nặn hình (Sơ Ảnh): tu dưỡng ${pt.progress}/${pt.shapeNeed}` : ''}${pt.divineArt ? ` · 🌟 ${pt.divineArt.name}` : ''}${(pt as any).kiep ? ` · ⚡ Lôi Tôi tầng ${(pt as any).kiep}` : ''}${pt.active ? ' · ĐANG HIỆN HÌNH' : ''}`;
         } else ptEl.style.display = 'none';
       }
       if (ptBtn) {
@@ -4557,7 +4690,7 @@ class GameScene extends Phaser.Scene {
       const qi = (c as any).branchQi || 0;
       const tpr = br.side === 'ma' ? 3 : 9;
       const max = 5 * tpr;
-      const names = br.side === 'ma' ? ['Huyết Luyện', 'Nhập Ma', 'Ma Tướng', 'Ma Quân', 'Ma Tôn'] : ['Tiên Cơ', 'Địa Tiên', 'Thiên Tiên', 'Kim Tiên', 'Đại La'];
+      const names = br.side === 'ma' ? ['Huyết Luyện', 'Nhập Ma', 'Ma Tướng', 'Ma Quân', 'Ma Tôn'] : ['Tiên Cơ', 'Tán Tiên', 'Thiên Tiên', 'Kim Tiên', 'Đại La'] // GĐ230: Tán Tiên (tránh trùng cảnh Địa Tiên);
       const lad = step <= 0 ? 'Chưa lên thang' : `${names[Math.floor((step - 1) / tpr)]} tầng ${((step - 1) % tpr) + 1}`;
       brEl.textContent += ` · Thang: ${lad} (${step}/${max}) · Khí: ${qi}`;
     }
@@ -4781,6 +4914,9 @@ class GameScene extends Phaser.Scene {
     if (c.realm === 'kd') return 6;
     if (c.realm === 'na') return 7; // GĐ160: Nguyên Anh 7 ô (mirror server)
     if (c.realm === 'ph') return 7; // GĐ183: Phản Hư 7 ô (mirror server)
+    if (c.realm === 'dk') return 7; // GĐ230: Độ Kiếp 7 ô (mirror server)
+    if (c.realm === 'tn') return 8; // GĐ231: Tiên Nhân 8 ô (mirror server)
+    if (c.realm === 'dt') return 7; // GĐ231: Địa Tiên 7 ô (mirror server)
     if (c.realm === 'ht') return 8; // GĐ182: Hóa Thần 8 ô (mirror server)
     return 3;
   }

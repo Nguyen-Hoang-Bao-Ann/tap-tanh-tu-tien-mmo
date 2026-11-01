@@ -1836,6 +1836,21 @@
    "multiplier": 2.5,
    "label": "Phản Hư",
    "min_realm": "ph"
+  },
+  "dk": {
+   "multiplier": 3.0,
+   "label": "Độ Kiếp",
+   "min_realm": "dk"
+  },
+  "dt": {
+   "multiplier": 3.5,
+   "label": "Địa Tiên",
+   "min_realm": "dt"
+  },
+  "tn": {
+   "multiplier": 4.0,
+   "label": "Tiên Nhân",
+   "min_realm": "tn"
   }
  }
 }

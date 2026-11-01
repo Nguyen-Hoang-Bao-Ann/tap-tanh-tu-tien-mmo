@@ -329,7 +329,7 @@ function calcGearStats(item) {
 function canEquip(player, item) {
   // GĐ162: đồ mang bậc cảnh giới thì phải đạt cảnh giới đó mới mặc được
   if (item.band && GEAR_DATA.realm_bands && GEAR_DATA.realm_bands[item.band]) {
-    const ORDER = { pham: 0, lk: 1, tc: 2, kd: 3, na: 4, ht: 5, ph: 6 }; // GĐ183: bỏ Vô Danh — thang NA → Hóa Thần → Phản Hư
+    const ORDER = { pham: 0, lk: 1, tc: 2, kd: 3, na: 4, ht: 5, ph: 6, dk: 7, tn: 8, dt: 8 }; // GĐ231: + Độ Kiếp + Tiên Nhân/Địa Tiên // GĐ183: bỏ Vô Danh — thang NA → Hóa Thần → Phản Hư
     const need = GEAR_DATA.realm_bands[item.band].min_realm;
     if ((ORDER[player.realm] ?? 0) < (ORDER[need] ?? 0)) return { ok: false, message: 'Không thể trang bị' };
   }

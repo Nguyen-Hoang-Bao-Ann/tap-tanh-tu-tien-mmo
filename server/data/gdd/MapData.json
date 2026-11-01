@@ -3471,6 +3471,936 @@
    ],
    "impl": "live",
    "npcProfile": "city"
+  },
+  {
+   "id": "tien_mon_ngoai_vien",
+   "name": "Tiên Môn Ngoại Viện",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 0,
+   "theme": "void",
+   "desc": "Sân đáp đầu tiên của Tiên Giới — nơi Tiên Nhân mới thăng thiên đặt chân tới. (GĐ231)",
+   "monsterSet": [],
+   "connectsTo": [
+    "thanh_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "loi_kiep_nguyen",
+   "name": "Lôi Kiếp Nguyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Nguyên dã lôi kiếp, sấm sét thiên đạo không ngày nào dứt.",
+   "theme": "storm",
+   "monsterSet": [
+    "loi_kiep_lang",
+    "kiep_van_khoi"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "thien_hoa_vuc",
+   "name": "Thiên Hỏa Vực",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Vực thiên hỏa, lửa trời đốt cả linh khí.",
+   "theme": "lava",
+   "monsterSet": [
+    "thien_hoa_dieu",
+    "thien_kiem_kiep_anh"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "tam_ma_canh",
+   "name": "Tâm Ma Cảnh",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Cõi tâm ma, nơi bóng của chính mình quay lại cắn chủ.",
+   "theme": "graveyard",
+   "monsterSet": [
+    "tam_ma_anh",
+    "van_kiep_than_thu"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "phong_kiep_coc",
+   "name": "Phong Kiếp Cốc",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Thung lũng phong kiếp, gió xé nát cả đá núi.",
+   "theme": "mountain",
+   "monsterSet": [
+    "phong_kiep_hac",
+    "kiep_hoa_phuong"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "dia_kiep_uyen",
+   "name": "Địa Kiếp Uyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 2,
+   "desc": "Uyên sâu địa kiếp, đất nứt nuốt người.",
+   "theme": "badland",
+   "monsterSet": [
+    "dia_kiep_te",
+    "kiep_hai_cu_ngu"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "thuy_kiep_trach",
+   "name": "Thủy Kiếp Trạch",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Đầm thủy kiếp, nước nặng như lưỡi dao.",
+   "theme": "swamp",
+   "monsterSet": [
+    "thuy_kiep_mang",
+    "kiep_anh_mieu"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "kim_kiep_son",
+   "name": "Kim Kiếp Sơn",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 2,
+   "desc": "Núi kim kiếp, vạn kiếm trời treo lơ lửng.",
+   "theme": "metal",
+   "monsterSet": [
+    "kim_kiep_thu",
+    "van_kiep_than_thu"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "huyet_kiep_hai",
+   "name": "Huyết Kiếp Hải",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 2,
+   "desc": "Biển huyết kiếp, sóng máu mang theo oán khí độ kiếp giả đã ngã.",
+   "theme": "blood_forest",
+   "monsterSet": [
+    "huyet_kiep_buc",
+    "kiep_hoa_phuong"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "bang_kiep_nguyen",
+   "name": "Băng Kiếp Nguyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Nguyên băng kiếp, hàn khí đóng băng cả thời gian.",
+   "theme": "ice",
+   "monsterSet": [
+    "bang_kiep_ho"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "hon_kiep_lam",
+   "name": "Hỗn Kiếp Lâm",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 3,
+   "desc": "Rừng hỗn kiếp sâu nhất cõi Độ Kiếp, quy tắc vặn xoắn.",
+   "theme": "deep_forest",
+   "monsterSet": [
+    "hon_kiep_xa"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "kiep_van_tri",
+   "name": "Kiếp Vân Trì",
+   "category": "fortress",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Thành trì trong mây kiếp, trạm dừng của người đang độ.",
+   "theme": "storm",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "do_kiep_quan",
+   "name": "Độ Kiếp Quan",
+   "category": "fortress",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Ải quan độ kiếp, qua được ải này mới gần Tiên Môn.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "tran_kiep_bao",
+   "name": "Trấn Kiếp Bảo",
+   "category": "fortress",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 2,
+   "desc": "Pháo đài trấn kiếp, tường đồng vách sắt chống thiên lôi.",
+   "theme": "metal",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "kiep_ha_thon",
+   "name": "Kiếp Hạ Thôn",
+   "category": "village",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Làng dưới chân mây kiếp, dân ở đây quen nghe sấm trời.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "vo_kiep_thon",
+   "name": "Vô Kiếp Thôn",
+   "category": "village",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Ngôi làng kỳ lạ không bao giờ bị kiếp giáng xuống.",
+   "theme": "garden",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "kiep_van_thanh",
+   "name": "Kiếp Vân Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Đô thành cõi Độ Kiếp, mây kiếp là mái nhà chung.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "thien_kiep_co_thanh",
+   "name": "Thiên Kiếp Cổ Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 2,
+   "desc": "Thành cổ bị thiên kiếp đánh suốt vạn năm vẫn chưa sụp.",
+   "theme": "storm",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "do_sinh_thanh",
+   "name": "Độ Sinh Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Thành độ sinh, nơi người vượt kiếp mở tiệc tiễn kẻ ở lại.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "kiep_dan_cung",
+   "name": "Kiếp Đan Cung",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Cung luyện đan độ kiếp, đan dược tôi trong thiên lôi.",
+   "theme": "garden",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "thien_loi_khi_lau",
+   "name": "Thiên Lôi Khí Lâu",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "dk",
+   "minTier": 1,
+   "desc": "Lầu rèn khí dùng sấm trời làm búa.",
+   "theme": "forge",
+   "monsterSet": [],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "thien_the",
+   "name": "Thiên Thê",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 3,
+   "desc": "Bậc thang trời dẫn lên Tiên Môn, mỗi bậc một lần lột xác.",
+   "theme": "mountain",
+   "monsterSet": [
+    "thien_the_thu_ho",
+    "thien_uy_giao"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "tien_mon_tien_sanh",
+   "name": "Tiên Môn Tiền Sảnh",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 3,
+   "desc": "Tiền sảnh của Tiên Môn, thủ hộ ở đây không nể mặt ai.",
+   "theme": "city",
+   "monsterSet": [
+    "tien_mon_kiem_si",
+    "tien_mon_linh_thu"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "van_dao_dai",
+   "name": "Vấn Đạo Đài",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 3,
+   "desc": "Đài vấn đạo trước cổng trời — trả lời được mới qua, không thì đánh.",
+   "theme": "array",
+   "monsterSet": [
+    "van_dao_tuong"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "dang_tien_dai",
+   "name": "Đăng Tiên Đài",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "dk",
+   "minTier": 3,
+   "desc": "Đài đăng tiên, đứng ở đây đã thấy mây của Tiên Giới.",
+   "theme": "void",
+   "monsterSet": [
+    "dang_tien_ho_phap"
+   ],
+   "connectsTo": [
+    "kiep_van_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "tien_linh_nguyen",
+   "name": "Tiên Linh Nguyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Nguyên dã tiên linh, cỏ cây đều có linh tính.",
+   "theme": "garden",
+   "monsterSet": [
+    "tien_linh_lang",
+    "tien_gioi_chien_hon"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "van_hai_tien",
+   "name": "Vân Hải Tiên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Biển mây Tiên Giới, suối chảy giữa trời.",
+   "theme": "stream",
+   "monsterSet": [
+    "dao_tri_ngu",
+    "linh_van_buc"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "dao_tri_hai",
+   "name": "Dao Trì Hải",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Hải vực quanh Dao Trì, cự thú tiên giới canh giữ.",
+   "theme": "deep_sea",
+   "monsterSet": [
+    "tien_phuong",
+    "tien_hoa_thu"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "phuong_lam",
+   "name": "Phượng Lâm",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Rừng phượng hoàng làm tổ, lá rơi cũng hóa lửa lành.",
+   "theme": "deep_forest",
+   "monsterSet": [
+    "ky_lan_tien_thu",
+    "con_luan_su"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "ky_lan_nguyen",
+   "name": "Kỳ Lân Nguyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 2,
+   "desc": "Nguyên dã kỳ lân, thấy được nó là có phúc.",
+   "theme": "mountain",
+   "monsterSet": [
+    "van_hai_hac",
+    "dao_tri_cu_ngu"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "tien_thu_coc",
+   "name": "Tiên Thú Cốc",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Thung lũng tiên thú, đàn thú của trời.",
+   "theme": "beast",
+   "monsterSet": [
+    "bong_lai_te",
+    "tien_vu_dieu"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "dao_son",
+   "name": "Dao Sơn",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 2,
+   "desc": "Núi Dao, ngọc đá trên núi đều là tiên liệu.",
+   "theme": "mountain",
+   "monsterSet": [
+    "tien_phuong",
+    "tien_thu_ho",
+    "thien_tien_thu_than"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "bich_lac_hai",
+   "name": "Bích Lạc Hải",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 3,
+   "desc": "Biển Bích Lạc sâu thẳm, đáy biển là một tầng trời khác.",
+   "theme": "deep_sea",
+   "monsterSet": [
+    "ky_lan_tien_thu",
+    "bich_lac_mang",
+    "dao_hoa_tinh"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "tinh_ha_nguyen",
+   "name": "Tinh Hà Nguyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 3,
+   "desc": "Nguyên dã ven dải ngân hà, sao rơi thành thú.",
+   "theme": "void",
+   "monsterSet": [
+    "tinh_ha_hat",
+    "linh_mieu_tien"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "dao_hoa_nguyen",
+   "name": "Đào Hoa Nguyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Nguyên hoa đào tiên, mười dặm hoa không một bóng người.",
+   "theme": "garden",
+   "monsterSet": [
+    "tien_kiem_hon",
+    "van_tien_quy"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "con_luan_son",
+   "name": "Côn Luân Sơn",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 5,
+   "desc": "Núi Côn Luân, tổ sơn của Tiên Giới, càng lên cao càng gần trời.",
+   "theme": "mountain",
+   "monsterSet": [
+    "dao_tri_lien_tinh",
+    "thien_tien_thu_than",
+    "thien_binh_hon"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "thien_ha_nguyen",
+   "name": "Thiên Hà Nguyên",
+   "category": "farm",
+   "safe": false,
+   "minRealm": "tn",
+   "minTier": 2,
+   "desc": "Nguyên ven Thiên Hà, sấm tiên gầm quanh năm.",
+   "theme": "storm",
+   "monsterSet": [
+    "thien_ha_khoi",
+    "bich_hai_giao"
+   ],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live"
+  },
+  {
+   "id": "lang_tieu_tri",
+   "name": "Lăng Tiêu Trì",
+   "category": "fortress",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Thành trì dưới Lăng Tiêu Điện, gác cửa trời.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "dao_tri_bao",
+   "name": "Dao Trì Bảo",
+   "category": "fortress",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Pháo đài canh Dao Trì, khách không mời đừng tới.",
+   "theme": "deep_sea",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "bong_lai_quan",
+   "name": "Bồng Lai Quan",
+   "category": "fortress",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 2,
+   "desc": "Ải quan Bồng Lai, một người giữ ải vạn người khó qua.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "thien_cung_ve",
+   "name": "Thiên Cung Vệ",
+   "category": "fortress",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 3,
+   "desc": "Đồn vệ Thiên Cung, giáp trụ toàn bằng tiên thiết.",
+   "theme": "metal",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "tien_an_thon",
+   "name": "Tiên Ẩn Thôn",
+   "category": "village",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Làng của tiên nhân về ẩn, ngày ngày câu mây.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "dao_nguyen_thon",
+   "name": "Đào Nguyên Thôn",
+   "category": "village",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Thôn đào nguyên, người trong thôn không hỏi chuyện ngoài.",
+   "theme": "garden",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "van_lai_thon",
+   "name": "Vân Lai Thôn",
+   "category": "village",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Làng mây tới, nhà xây trên lưng mây.",
+   "theme": "stream",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "tinh_tu_thon",
+   "name": "Tinh Tú Thôn",
+   "category": "village",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 2,
+   "desc": "Làng dưới chòm sao, đêm nào cũng như hội.",
+   "theme": "void",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "lang_tieu_thanh",
+   "name": "Lăng Tiêu Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Đô thành bậc nhất Tiên Giới, dưới chân Lăng Tiêu Bảo Điện.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "dao_tri_thanh",
+   "name": "Dao Trì Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Thành bên Dao Trì, tiên nữ qua lại như mây.",
+   "theme": "deep_sea",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "con_luan_thanh",
+   "name": "Côn Luân Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 3,
+   "desc": "Thành dưới chân Côn Luân, cổ nhất Tiên Giới.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "bong_lai_thanh",
+   "name": "Bồng Lai Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Thành Bồng Lai, tiên sơn trong biển mây.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "thien_cung_thanh",
+   "name": "Thiên Cung Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 5,
+   "desc": "Thành Thiên Cung, gần trời nhất, luật trời nghiêm nhất.",
+   "theme": "void",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "doanh_chau_thanh",
+   "name": "Doanh Châu Thành",
+   "category": "city",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 2,
+   "desc": "Thành Doanh Châu, chợ tiên họp quanh năm.",
+   "theme": "city",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "tien_dan_cung",
+   "name": "Tiên Đan Cung",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Cung luyện tiên đan, một viên đáng giá một cõi.",
+   "theme": "garden",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "thien_khi_dien",
+   "name": "Thiên Khí Điện",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Điện rèn tiên khí, thần binh xếp như củi.",
+   "theme": "forge",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "tien_phu_cac",
+   "name": "Tiên Phù Các",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 1,
+   "desc": "Các chứa tiên phù, một lá phù đổi một mạng.",
+   "theme": "script",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
+  },
+  {
+   "id": "tien_tran_dai",
+   "name": "Tiên Trận Đài",
+   "category": "profession",
+   "safe": true,
+   "minRealm": "tn",
+   "minTier": 2,
+   "desc": "Đài tiên trận, trận pháp vận hành cả một vùng trời.",
+   "theme": "array",
+   "monsterSet": [],
+   "connectsTo": [
+    "lang_tieu_thanh"
+   ],
+   "impl": "live",
+   "npcProfile": "city"
   }
  ]
 }

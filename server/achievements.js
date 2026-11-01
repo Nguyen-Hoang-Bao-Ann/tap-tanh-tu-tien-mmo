@@ -52,7 +52,7 @@ const GROUP_NAMES = {
 const ACH138 = [
   // Nhóm Tu luyện (10)
   { id: 'ach_tl_break', group: 'tu_luyen', name: 'Bước vào đạo', desc: 'Số lần đột phá thành công (mọi cảnh giới)', base: 'Người Đạo Tâm', tiers: [1, 5, 10, 20, 37], key: 'breakthroughs' },
-  { id: 'ach_tl_realm', group: 'tu_luyen', name: 'Ngàn dặm khởi đầu', desc: 'Cảnh giới cao nhất từng đạt (1 Luyện Khí, 2 Trúc Cơ, 3 Kim Đan, 4 Nguyên Anh, 5 Hóa Thần, 6 Phản Hư)', base: 'Nguyên Anh Chân Nhân', tiers: [1, 2, 3, 4, 5, 6], key: 'realmMax' }, // GĐ216: + bậc Hóa Thần + Phản Hư
+  { id: 'ach_tl_realm', group: 'tu_luyen', name: 'Ngàn dặm khởi đầu', desc: 'Cảnh giới cao nhất từng đạt (1 Luyện Khí, 2 Trúc Cơ, 3 Kim Đan, 4 Nguyên Anh, 5 Hóa Thần, 6 Phản Hư, 7 Độ Kiếp, 8 Tiên Nhân/Địa Tiên)', base: 'Nguyên Anh Chân Nhân', tiers: [1, 2, 3, 4, 5, 6, 7, 8], key: 'realmMax' }, // GĐ216: + bậc Hóa Thần + Phản Hư; GĐ231: + Độ Kiếp (7) + Tiên Nhân/Địa Tiên (8)
   { id: 'ach_tl_phaptuong', group: 'tu_luyen', name: 'Pháp Tướng chân thân', desc: 'Giai đoạn Pháp Tướng cao nhất từng đạt (5 Viên Mãn, 9 Chân Ảnh)', base: 'Chân Thân Bán Thần', tiers: [1, 3, 5, 7, 9], key: 'ptStage' }, // GĐ216
   { id: 'ach_tl_bequan', group: 'tu_luyen', name: 'Bế quan khổ tu', desc: 'Tổng số ngày game bế quan', base: 'Khổ Tu Sĩ', tiers: [30, 100, 365, 1000, 3000, 10000, 20000, 40000], key: 'bequanDays' },
   { id: 'ach_tl_firstbreak', group: 'tu_luyen', name: 'Một hơi vào đạo', desc: 'Đột phá thành công ngay lần đầu, cộng dồn số lần', base: 'Thiên Tư', tiers: [1, 3, 5, 10, 20], key: 'firstBreaks' },

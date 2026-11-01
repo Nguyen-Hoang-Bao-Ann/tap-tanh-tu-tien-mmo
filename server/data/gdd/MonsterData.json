@@ -9815,6 +9815,3415 @@
     }
    ],
    "spriteBase": "thach_khoi_loi"
+  },
+  {
+   "id": "loi_kiep_lang",
+   "name": "Lôi Kiếp Lang",
+   "realm": "dk",
+   "hp": 82014,
+   "atk": 2951,
+   "tuViReward": 2454,
+   "maps": [
+    "loi_kiep_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Lôi Kiếp Lang",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Lôi Kiếp Lang",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Lôi Kiếp Lang",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Lôi Kiếp Lang",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Lôi Kiếp Lang Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Lôi Kiếp Lang",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Lôi Kiếp Lang Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "soi_xam"
+  },
+  {
+   "id": "thien_hoa_dieu",
+   "name": "Thiên Hỏa Điểu",
+   "realm": "dk",
+   "hp": 123421,
+   "atk": 3577,
+   "tuViReward": 4416,
+   "maps": [
+    "thien_hoa_vuc"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Thiên Hỏa Điểu",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Thiên Hỏa Điểu",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Thiên Hỏa Điểu",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Thiên Hỏa Điểu",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thiên Hỏa Điểu Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thiên Hỏa Điểu",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thiên Hỏa Điểu Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "loi_dieu"
+  },
+  {
+   "id": "tam_ma_anh",
+   "name": "Tâm Ma Ảnh",
+   "realm": "dk",
+   "hp": 125215,
+   "atk": 3675,
+   "tuViReward": 4596,
+   "maps": [
+    "tam_ma_canh"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tâm Ma Ảnh",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Tâm Ma Ảnh",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tâm Ma Ảnh",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tâm Ma Ảnh",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tâm Ma Ảnh Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tâm Ma Ảnh",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tâm Ma Ảnh Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "dan_ma"
+  },
+  {
+   "id": "phong_kiep_hac",
+   "name": "Phong Kiếp Hạc",
+   "realm": "dk",
+   "hp": 49719,
+   "atk": 2544,
+   "tuViReward": 1409,
+   "maps": [
+    "phong_kiep_coc"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Phong Kiếp Hạc",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Phong Kiếp Hạc",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Phong Kiếp Hạc",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Phong Kiếp Hạc",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Phong Kiếp Hạc Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Phong Kiếp Hạc",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Phong Kiếp Hạc Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "huyen_diep"
+  },
+  {
+   "id": "dia_kiep_te",
+   "name": "Địa Kiếp Tê",
+   "realm": "dk",
+   "hp": 78852,
+   "atk": 2950,
+   "tuViReward": 2626,
+   "maps": [
+    "dia_kiep_uyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Địa Kiếp Tê",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Địa Kiếp Tê",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Địa Kiếp Tê",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Địa Kiếp Tê",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Địa Kiếp Tê Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Địa Kiếp Tê",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Địa Kiếp Tê Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "kim_giap_te"
+  },
+  {
+   "id": "thuy_kiep_mang",
+   "name": "Thủy Kiếp Mãng",
+   "realm": "dk",
+   "hp": 90007,
+   "atk": 3183,
+   "tuViReward": 2498,
+   "maps": [
+    "thuy_kiep_trach"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Thủy Kiếp Mãng",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Thủy Kiếp Mãng",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Thủy Kiếp Mãng",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Thủy Kiếp Mãng",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thủy Kiếp Mãng Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thủy Kiếp Mãng",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thủy Kiếp Mãng Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "sam_lam_cu_mang"
+  },
+  {
+   "id": "kim_kiep_thu",
+   "name": "Kim Kiếp Thú",
+   "realm": "dk",
+   "hp": 54418,
+   "atk": 2882,
+   "tuViReward": 1493,
+   "maps": [
+    "kim_kiep_son"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Kim Kiếp Thú",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Kim Kiếp Thú",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Kim Kiếp Thú",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Kim Kiếp Thú",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Kim Kiếp Thú Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Kim Kiếp Thú",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Kim Kiếp Thú Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "dia_kim_thu"
+  },
+  {
+   "id": "huyet_kiep_buc",
+   "name": "Huyết Kiếp Bức",
+   "realm": "dk",
+   "hp": 54233,
+   "atk": 2448,
+   "tuViReward": 1335,
+   "maps": [
+    "huyet_kiep_hai"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Huyết Kiếp Bức",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Huyết Kiếp Bức",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Huyết Kiếp Bức",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Huyết Kiếp Bức",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Huyết Kiếp Bức Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Huyết Kiếp Bức",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Huyết Kiếp Bức Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "doi_den"
+  },
+  {
+   "id": "bang_kiep_ho",
+   "name": "Băng Kiếp Hồ",
+   "realm": "dk",
+   "hp": 80371,
+   "atk": 3079,
+   "tuViReward": 2585,
+   "maps": [
+    "bang_kiep_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Băng Kiếp Hồ",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Băng Kiếp Hồ",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Băng Kiếp Hồ",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Băng Kiếp Hồ",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Băng Kiếp Hồ Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Băng Kiếp Hồ",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Băng Kiếp Hồ Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "tuyet_ho"
+  },
+  {
+   "id": "hon_kiep_xa",
+   "name": "Hồn Kiếp Xà",
+   "realm": "dk",
+   "hp": 57661,
+   "atk": 2491,
+   "tuViReward": 1459,
+   "maps": [
+    "hon_kiep_lam"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Hồn Kiếp Xà",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Hồn Kiếp Xà",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Hồn Kiếp Xà",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Hồn Kiếp Xà",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Hồn Kiếp Xà Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Hồn Kiếp Xà",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Hồn Kiếp Xà Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "doc_xa"
+  },
+  {
+   "id": "kiep_van_khoi",
+   "name": "Kiếp Vân Khôi",
+   "realm": "dk",
+   "hp": 111090,
+   "atk": 3534,
+   "tuViReward": 4998,
+   "maps": [
+    "loi_kiep_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Kiếp Vân Khôi",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Kiếp Vân Khôi",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Kiếp Vân Khôi",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Kiếp Vân Khôi",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Kiếp Vân Khôi Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Kiếp Vân Khôi",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Kiếp Vân Khôi Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thach_khoi_loi"
+  },
+  {
+   "id": "thien_kiem_kiep_anh",
+   "name": "Thiên Kiếm Kiếp Ảnh",
+   "realm": "dk",
+   "hp": 122077,
+   "atk": 3403,
+   "tuViReward": 4202,
+   "maps": [
+    "thien_hoa_vuc"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Thiên Kiếm Kiếp Ảnh",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Thiên Kiếm Kiếp Ảnh",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Thiên Kiếm Kiếp Ảnh",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Thiên Kiếm Kiếp Ảnh",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thiên Kiếm Kiếp Ảnh Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thiên Kiếm Kiếp Ảnh",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thiên Kiếm Kiếp Ảnh Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "kiem_ma"
+  },
+  {
+   "id": "van_kiep_than_thu",
+   "name": "Vạn Kiếp Thần Thú",
+   "realm": "dk",
+   "hp": 205352,
+   "atk": 4367,
+   "tuViReward": 26284,
+   "maps": [
+    "tam_ma_canh",
+    "kim_kiep_son"
+   ],
+   "mechanics": [],
+   "rewardClass": "boss",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Vạn Kiếp Thần Thú",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Vạn Kiếp Thần Thú",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Vạn Kiếp Thần Thú",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Vạn Kiếp Thần Thú",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Vạn Kiếp Thần Thú Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Vạn Kiếp Thần Thú",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Vạn Kiếp Thần Thú Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thien_loi_thu"
+  },
+  {
+   "id": "kiep_hoa_phuong",
+   "name": "Kiếp Hỏa Phượng",
+   "realm": "dk",
+   "hp": 194019,
+   "atk": 4501,
+   "tuViReward": 24952,
+   "maps": [
+    "phong_kiep_coc",
+    "huyet_kiep_hai"
+   ],
+   "mechanics": [],
+   "rewardClass": "boss",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Kiếp Hỏa Phượng",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Kiếp Hỏa Phượng",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Kiếp Hỏa Phượng",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Kiếp Hỏa Phượng",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Kiếp Hỏa Phượng Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Kiếp Hỏa Phượng",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Kiếp Hỏa Phượng Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "diem_hoa_phuong"
+  },
+  {
+   "id": "kiep_hai_cu_ngu",
+   "name": "Kiếp Hải Cự Ngư",
+   "realm": "dk",
+   "hp": 108122,
+   "atk": 3716,
+   "tuViReward": 4583,
+   "maps": [
+    "dia_kiep_uyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Kiếp Hải Cự Ngư",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Kiếp Hải Cự Ngư",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Kiếp Hải Cự Ngư",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Kiếp Hải Cự Ngư",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Kiếp Hải Cự Ngư Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Kiếp Hải Cự Ngư",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Kiếp Hải Cự Ngư Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thuy_yeu_ngu"
+  },
+  {
+   "id": "kiep_anh_mieu",
+   "name": "Kiếp Ảnh Miêu",
+   "realm": "dk",
+   "hp": 13985,
+   "atk": 1302,
+   "tuViReward": 375,
+   "maps": [
+    "thuy_kiep_trach"
+   ],
+   "mechanics": [],
+   "rewardClass": "weak",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Kiếp Ảnh Miêu",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Kiếp Ảnh Miêu",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Kiếp Ảnh Miêu",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Kiếp Ảnh Miêu",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Kiếp Ảnh Miêu Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Kiếp Ảnh Miêu",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Kiếp Ảnh Miêu Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "huyen_anh_mieu"
+  },
+  {
+   "id": "thien_the_thu_ho",
+   "name": "Thiên Thê Thủ Hộ",
+   "realm": "dk",
+   "hp": 122286,
+   "atk": 3560,
+   "tuViReward": 4545,
+   "maps": [
+    "thien_the"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Thiên Thê Thủ Hộ",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Thiên Thê Thủ Hộ",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Thiên Thê Thủ Hộ",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Thiên Thê Thủ Hộ",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thiên Thê Thủ Hộ Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thiên Thê Thủ Hộ",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thiên Thê Thủ Hộ Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thach_khoi_loi"
+  },
+  {
+   "id": "tien_mon_kiem_si",
+   "name": "Tiên Môn Kiếm Sĩ",
+   "realm": "dk",
+   "hp": 119962,
+   "atk": 3448,
+   "tuViReward": 4307,
+   "maps": [
+    "tien_mon_tien_sanh"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Tiên Môn Kiếm Sĩ",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Môn Kiếm Sĩ",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tiên Môn Kiếm Sĩ",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Môn Kiếm Sĩ",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Môn Kiếm Sĩ Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Môn Kiếm Sĩ",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Môn Kiếm Sĩ Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "kiem_ma"
+  },
+  {
+   "id": "van_dao_tuong",
+   "name": "Vấn Đạo Tướng",
+   "realm": "dk",
+   "hp": 203635,
+   "atk": 4874,
+   "tuViReward": 22838,
+   "maps": [
+    "van_dao_dai"
+   ],
+   "mechanics": [],
+   "rewardClass": "boss",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Vấn Đạo Tướng",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Vấn Đạo Tướng",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Vấn Đạo Tướng",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Vấn Đạo Tướng",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Vấn Đạo Tướng Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Vấn Đạo Tướng",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Vấn Đạo Tướng Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "cot_vuong"
+  },
+  {
+   "id": "dang_tien_ho_phap",
+   "name": "Đăng Tiên Hộ Pháp",
+   "realm": "dk",
+   "hp": 114817,
+   "atk": 3494,
+   "tuViReward": 4593,
+   "maps": [
+    "dang_tien_dai"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Đăng Tiên Hộ Pháp",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Đăng Tiên Hộ Pháp",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Đăng Tiên Hộ Pháp",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Đăng Tiên Hộ Pháp",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Đăng Tiên Hộ Pháp Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Đăng Tiên Hộ Pháp",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Đăng Tiên Hộ Pháp Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "cot_binh"
+  },
+  {
+   "id": "thien_uy_giao",
+   "name": "Thiên Uy Giao",
+   "realm": "dk",
+   "hp": 219680,
+   "atk": 4351,
+   "tuViReward": 22962,
+   "maps": [
+    "thien_the"
+   ],
+   "mechanics": [],
+   "rewardClass": "boss",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Thiên Uy Giao",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Thiên Uy Giao",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Thiên Uy Giao",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Thiên Uy Giao",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thiên Uy Giao Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thiên Uy Giao",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thiên Uy Giao Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "loi_xa"
+  },
+  {
+   "id": "tien_mon_linh_thu",
+   "name": "Tiên Môn Linh Thú",
+   "realm": "dk",
+   "hp": 81895,
+   "atk": 3304,
+   "tuViReward": 2669,
+   "maps": [
+    "tien_mon_tien_sanh"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tiên Môn Linh Thú",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Môn Linh Thú",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tiên Môn Linh Thú",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Môn Linh Thú",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Môn Linh Thú Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Môn Linh Thú",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Môn Linh Thú Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "tuyet_ho"
+  },
+  {
+   "id": "tien_linh_lang",
+   "name": "Tiên Linh Lang",
+   "realm": "tn",
+   "hp": 214730,
+   "atk": 7806,
+   "tuViReward": 6412,
+   "maps": [
+    "tien_linh_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tiên Linh Lang",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Linh Lang",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tiên Linh Lang",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Linh Lang",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Linh Lang Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Linh Lang",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Linh Lang Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "soi_xam"
+  },
+  {
+   "id": "dao_tri_ngu",
+   "name": "Dao Trì Ngư",
+   "realm": "tn",
+   "hp": 35045,
+   "atk": 3156,
+   "tuViReward": 958,
+   "maps": [
+    "van_hai_tien"
+   ],
+   "mechanics": [],
+   "rewardClass": "weak",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Dao Trì Ngư",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Dao Trì Ngư",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Dao Trì Ngư",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Dao Trì Ngư",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Dao Trì Ngư Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Dao Trì Ngư",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Dao Trì Ngư Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thuy_yeu_ngu"
+  },
+  {
+   "id": "tien_phuong",
+   "name": "Tiên Phượng",
+   "realm": "tn",
+   "hp": 510155,
+   "atk": 12030,
+   "tuViReward": 69386,
+   "maps": [
+    "dao_tri_hai",
+    "dao_son"
+   ],
+   "mechanics": [],
+   "rewardClass": "boss",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tiên Phượng",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Tiên Phượng",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Phượng",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Phượng",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Phượng Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Phượng",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Phượng Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "diem_hoa_phuong"
+  },
+  {
+   "id": "ky_lan_tien_thu",
+   "name": "Kỳ Lân Tiên Thú",
+   "realm": "tn",
+   "hp": 535210,
+   "atk": 11854,
+   "tuViReward": 65322,
+   "maps": [
+    "phuong_lam",
+    "bich_lac_hai"
+   ],
+   "mechanics": [],
+   "rewardClass": "boss",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Kỳ Lân Tiên Thú",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Kỳ Lân Tiên Thú",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Kỳ Lân Tiên Thú",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Kỳ Lân Tiên Thú",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Kỳ Lân Tiên Thú Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Kỳ Lân Tiên Thú",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Kỳ Lân Tiên Thú Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "kim_giap_te"
+  },
+  {
+   "id": "van_hai_hac",
+   "name": "Vân Hải Hạc",
+   "realm": "tn",
+   "hp": 145208,
+   "atk": 7085,
+   "tuViReward": 3754,
+   "maps": [
+    "ky_lan_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Vân Hải Hạc",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Vân Hải Hạc",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Vân Hải Hạc",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Vân Hải Hạc",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Vân Hải Hạc Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Vân Hải Hạc",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Vân Hải Hạc Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "huyen_diep"
+  },
+  {
+   "id": "bong_lai_te",
+   "name": "Bồng Lai Tê",
+   "realm": "tn",
+   "hp": 227459,
+   "atk": 7400,
+   "tuViReward": 7415,
+   "maps": [
+    "tien_thu_coc"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Bồng Lai Tê",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Bồng Lai Tê",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Bồng Lai Tê",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Bồng Lai Tê",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Bồng Lai Tê Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Bồng Lai Tê",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Bồng Lai Tê Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "kim_giap_te"
+  },
+  {
+   "id": "tien_thu_ho",
+   "name": "Tiên Thú Hổ",
+   "realm": "tn",
+   "hp": 208608,
+   "atk": 7642,
+   "tuViReward": 7049,
+   "maps": [
+    "dao_son"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tiên Thú Hổ",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Tiên Thú Hổ",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Thú Hổ",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Thú Hổ",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Thú Hổ Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Thú Hổ",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Thú Hổ Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "tuyet_ho"
+  },
+  {
+   "id": "bich_lac_mang",
+   "name": "Bích Lạc Mãng",
+   "realm": "tn",
+   "hp": 222658,
+   "atk": 8166,
+   "tuViReward": 6773,
+   "maps": [
+    "bich_lac_hai"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Bích Lạc Mãng",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Bích Lạc Mãng",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Bích Lạc Mãng",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Bích Lạc Mãng",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Bích Lạc Mãng Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Bích Lạc Mãng",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Bích Lạc Mãng Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "sam_lam_cu_mang"
+  },
+  {
+   "id": "tinh_ha_hat",
+   "name": "Tinh Hà Hạt",
+   "realm": "tn",
+   "hp": 142615,
+   "atk": 7088,
+   "tuViReward": 3485,
+   "maps": [
+    "tinh_ha_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tinh Hà Hạt",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tinh Hà Hạt",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tinh Hà Hạt",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tinh Hà Hạt",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tinh Hà Hạt Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tinh Hà Hạt",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tinh Hà Hạt Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "sa_mac_hat"
+  },
+  {
+   "id": "tien_kiem_hon",
+   "name": "Tiên Kiếm Hồn",
+   "realm": "tn",
+   "hp": 307654,
+   "atk": 10105,
+   "tuViReward": 12565,
+   "maps": [
+    "dao_hoa_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Tiên Kiếm Hồn",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Kiếm Hồn",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tiên Kiếm Hồn",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Kiếm Hồn",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Kiếm Hồn Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Kiếm Hồn",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Kiếm Hồn Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "kiem_ma"
+  },
+  {
+   "id": "dao_tri_lien_tinh",
+   "name": "Dao Trì Liên Tinh",
+   "realm": "tn",
+   "hp": 133975,
+   "atk": 7310,
+   "tuViReward": 3812,
+   "maps": [
+    "con_luan_son"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Dao Trì Liên Tinh",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Dao Trì Liên Tinh",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Dao Trì Liên Tinh",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Dao Trì Liên Tinh",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Dao Trì Liên Tinh Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Dao Trì Liên Tinh",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Dao Trì Liên Tinh Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "huyen_diep"
+  },
+  {
+   "id": "thien_ha_khoi",
+   "name": "Thiên Hà Khôi",
+   "realm": "tn",
+   "hp": 282783,
+   "atk": 9463,
+   "tuViReward": 12760,
+   "maps": [
+    "thien_ha_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Thiên Hà Khôi",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Thiên Hà Khôi",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Thiên Hà Khôi",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Thiên Hà Khôi",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thiên Hà Khôi Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thiên Hà Khôi",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thiên Hà Khôi Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thach_khoi_loi"
+  },
+  {
+   "id": "tien_gioi_chien_hon",
+   "name": "Tiên Giới Chiến Hồn",
+   "realm": "tn",
+   "hp": 205187,
+   "atk": 8294,
+   "tuViReward": 7146,
+   "maps": [
+    "tien_linh_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Tiên Giới Chiến Hồn",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Giới Chiến Hồn",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tiên Giới Chiến Hồn",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Giới Chiến Hồn",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Giới Chiến Hồn Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Giới Chiến Hồn",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Giới Chiến Hồn Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "cot_vuong"
+  },
+  {
+   "id": "linh_van_buc",
+   "name": "Linh Vân Bức",
+   "realm": "tn",
+   "hp": 149282,
+   "atk": 6990,
+   "tuViReward": 3757,
+   "maps": [
+    "van_hai_tien"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Linh Vân Bức",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Linh Vân Bức",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Linh Vân Bức",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Linh Vân Bức",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Linh Vân Bức Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Linh Vân Bức",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Linh Vân Bức Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "doi_den"
+  },
+  {
+   "id": "tien_hoa_thu",
+   "name": "Tiên Hỏa Thú",
+   "realm": "tn",
+   "hp": 127734,
+   "atk": 6303,
+   "tuViReward": 3431,
+   "maps": [
+    "dao_tri_hai"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tiên Hỏa Thú",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Tiên Hỏa Thú",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Hỏa Thú",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Hỏa Thú",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Hỏa Thú Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Hỏa Thú",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Hỏa Thú Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "hoa_thu"
+  },
+  {
+   "id": "con_luan_su",
+   "name": "Côn Luân Sư",
+   "realm": "tn",
+   "hp": 215954,
+   "atk": 8227,
+   "tuViReward": 6808,
+   "maps": [
+    "phuong_lam"
+   ],
+   "mechanics": [],
+   "rewardClass": "strong",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Côn Luân Sư",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Côn Luân Sư",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Côn Luân Sư",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Côn Luân Sư",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Côn Luân Sư Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Côn Luân Sư",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Côn Luân Sư Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "tuyet_ho"
+  },
+  {
+   "id": "dao_tri_cu_ngu",
+   "name": "Dao Trì Cự Ngư",
+   "realm": "tn",
+   "hp": 293510,
+   "atk": 10030,
+   "tuViReward": 12944,
+   "maps": [
+    "ky_lan_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Dao Trì Cự Ngư",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Dao Trì Cự Ngư",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Dao Trì Cự Ngư",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Dao Trì Cự Ngư",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Dao Trì Cự Ngư Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Dao Trì Cự Ngư",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Dao Trì Cự Ngư Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thuy_yeu_ngu"
+  },
+  {
+   "id": "tien_vu_dieu",
+   "name": "Tiên Vũ Điểu",
+   "realm": "tn",
+   "hp": 147769,
+   "atk": 6897,
+   "tuViReward": 3655,
+   "maps": [
+    "tien_thu_coc"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Tiên Vũ Điểu",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Tiên Vũ Điểu",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Tiên Vũ Điểu",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Tiên Vũ Điểu",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Tiên Vũ Điểu Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Tiên Vũ Điểu",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Tiên Vũ Điểu Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "loi_dieu"
+  },
+  {
+   "id": "thien_tien_thu_than",
+   "name": "Thiên Tiên Thủ Thần",
+   "realm": "tn",
+   "hp": 543332,
+   "atk": 11056,
+   "tuViReward": 63080,
+   "maps": [
+    "dao_son",
+    "con_luan_son"
+   ],
+   "mechanics": [],
+   "rewardClass": "boss",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Thiên Tiên Thủ Thần",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Thiên Tiên Thủ Thần",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Thiên Tiên Thủ Thần",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Thiên Tiên Thủ Thần",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thiên Tiên Thủ Thần Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thiên Tiên Thủ Thần",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thiên Tiên Thủ Thần Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "thach_khoi_loi"
+  },
+  {
+   "id": "dao_hoa_tinh",
+   "name": "Đào Hoa Tinh",
+   "realm": "tn",
+   "hp": 38872,
+   "atk": 3060,
+   "tuViReward": 943,
+   "maps": [
+    "bich_lac_hai"
+   ],
+   "mechanics": [],
+   "rewardClass": "weak",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Đào Hoa Tinh",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Đào Hoa Tinh",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Đào Hoa Tinh",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Đào Hoa Tinh",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Đào Hoa Tinh Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Đào Hoa Tinh",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Đào Hoa Tinh Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "huyen_diep"
+  },
+  {
+   "id": "linh_mieu_tien",
+   "name": "Linh Miêu Tiên",
+   "realm": "tn",
+   "hp": 131197,
+   "atk": 6396,
+   "tuViReward": 3841,
+   "maps": [
+    "tinh_ha_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Linh Miêu Tiên",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Linh Miêu Tiên",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Linh Miêu Tiên",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Linh Miêu Tiên",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Linh Miêu Tiên Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Linh Miêu Tiên",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Linh Miêu Tiên Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "huyen_anh_mieu"
+  },
+  {
+   "id": "van_tien_quy",
+   "name": "Vân Tiên Quỷ",
+   "realm": "tn",
+   "hp": 145245,
+   "atk": 6822,
+   "tuViReward": 3992,
+   "maps": [
+    "dao_hoa_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Vân Tiên Quỷ",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Vân Tiên Quỷ",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Vân Tiên Quỷ",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Vân Tiên Quỷ",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Vân Tiên Quỷ Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Vân Tiên Quỷ",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Vân Tiên Quỷ Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "quy_hon"
+  },
+  {
+   "id": "thien_binh_hon",
+   "name": "Thiên Binh Hồn",
+   "realm": "tn",
+   "hp": 130945,
+   "atk": 7485,
+   "tuViReward": 3707,
+   "maps": [
+    "con_luan_son"
+   ],
+   "mechanics": [],
+   "rewardClass": "medium",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "moc",
+     "name": "Mộc Thiên Binh Hồn",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "thuy",
+     "name": "Thủy Thiên Binh Hồn",
+     "el": "thuy",
+     "hpMul": 1.0,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Thiên Binh Hồn",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Thiên Binh Hồn",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Thiên Binh Hồn Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Thiên Binh Hồn",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Thiên Binh Hồn Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "cot_binh"
+  },
+  {
+   "id": "bich_hai_giao",
+   "name": "Bích Hải Giao",
+   "realm": "tn",
+   "hp": 281400,
+   "atk": 8891,
+   "tuViReward": 11114,
+   "maps": [
+    "thien_ha_nguyen"
+   ],
+   "mechanics": [],
+   "rewardClass": "elite",
+   "rewardSource": "gd232-gen",
+   "hpAtkSource": "gd232-scale",
+   "branches": [
+    {
+     "id": "kim",
+     "name": "Kim Bích Hải Giao",
+     "el": "kim",
+     "hpMul": 1.0,
+     "atkMul": 1.05,
+     "w": 16
+    },
+    {
+     "id": "moc",
+     "name": "Mộc Bích Hải Giao",
+     "el": "moc",
+     "hpMul": 1.05,
+     "atkMul": 1.0,
+     "w": 16
+    },
+    {
+     "id": "hoa",
+     "name": "Hỏa Bích Hải Giao",
+     "el": "hoa",
+     "hpMul": 0.95,
+     "atkMul": 1.1,
+     "w": 16
+    },
+    {
+     "id": "tho",
+     "name": "Thổ Bích Hải Giao",
+     "el": "tho",
+     "hpMul": 1.15,
+     "atkMul": 0.95,
+     "w": 16
+    },
+    {
+     "id": "non",
+     "name": "Bích Hải Giao Non",
+     "el": null,
+     "hpMul": 0.7,
+     "atkMul": 0.7,
+     "w": 20
+    },
+    {
+     "id": "tinh",
+     "name": "Tinh Anh Bích Hải Giao",
+     "el": null,
+     "hpMul": 1.5,
+     "atkMul": 1.4,
+     "w": 8
+    },
+    {
+     "id": "vuong",
+     "name": "Bích Hải Giao Vương",
+     "el": null,
+     "hpMul": 2.2,
+     "atkMul": 1.8,
+     "w": 3
+    }
+   ],
+   "spriteBase": "loi_xa"
   }
  ]
 }

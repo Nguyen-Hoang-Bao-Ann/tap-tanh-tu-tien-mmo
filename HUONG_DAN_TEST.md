@@ -3485,3 +3485,44 @@ Thiết kế đầy đủ: `THIET_KE_LE_HOI.md` (Bảo chốt phương án A: l�
 - Kèm: vật rải nhỏ không chặn (hoa/cỏ/thảo/bụi) được xếp gần nhau 48px thay vì 120px nên mặt đất dày hẳn; vật chặn giữ nguyên luật clearance GĐ94/117 (cổng/đàn tế/khu dân/nhà không bị lấn). Kiểm vị trí chuyển qua lưới ô → boot không chậm lại (đo 4,9s cho 200 map sau tối ưu; bản chưa tối ưu từng chạm 20,8s).
 - Mặt đất: mỗi ô nền nướng thêm chi tiết theo theme (lá cỏ ở theme xanh, sỏi + đốm màu chủ đề ở các theme khác) — đất hết trơn.
 - Cách test: vào Hoa Vân Cốc/Băng Nguyên Đại đi sâu vào trong map (quanh cổng vẫn thoáng theo luật chừa lối) — thấy đá/núi/tinh thể dày hơn hẳn; thành phố đông nhà + decor hơn. Số mật độ đều TẠM, Bảo xem rồi dặn tăng/giảm tiếp.
+
+## GĐ230 — ĐỘ KIẾP ĐỢT 1 (01/11, theo THIET_KE_DO_KIEP.md Bảo chốt; server + client)
+- Mở cảnh **Độ Kiếp** (cảnh thứ 7) cho người Phản Hư tầng 9: đúng 3 giai đoạn **Bán Thần → Độ Kiếp → Chứng Thần** (không 9 tầng), bước toàn cục 64–66. Mỗi giai đoạn là 1 **cổng kiếp** ở sân Đạo Quán, đầy Tu vi, không cần đan, tỉ lệ theo khung Đại (60% gốc + chuỗi thua; thua 3 lần = lần kế chắc chắn qua).
+- **Luật cổng kiếp: phải HIỆN HÌNH Pháp Tướng** mới bắt đầu được, và giữ hiện hình suốt cổng — tắt tướng hoặc gục ngã giữa cổng là thiên kiếp tan, làm lại từ đầu (không phạt).
+- Cổng 1 **Lôi Kiếp Tụ Thần**: Thiên Lôi Kiếp Ảnh (máu elite ×16, chiêu ×3,0, phân thân) → Bán Thần, **+26 điểm / +300 năm thọ**. Cổng 2 **Tam Kiếp Liên Hoàn**: 3 đợt liên tiếp — Lôi Kiếp Ảnh ×16 → **Tâm Ma** (bản sao lực chiến gốc của chính mình ×1,7) → Thiên Hỏa Kiếp Ảnh ×17, hồi 30% máu/chân nguyên giữa các đợt → **+28 điểm / +350 thọ**. Cổng 3 **Chứng Thần**: Thần Kiếp Ảnh ×18, dùng chiêu + phân thân, dưới 30% máu thì CUỒNG NỘ (công ×1,3) → **+30 điểm / +400 thọ**. Chứng Thần = đỉnh hiện tại (Địa Tiên mở đợt sau).
+- **LÔI TÔI CHÂN THÂN** (bản sắc Độ Kiếp): mỗi giai đoạn qua được, Pháp Tướng cứng thêm vĩnh viễn — hệ số tướng **+0,3/giai đoạn** (Chân Ảnh ×5,5 → ×5,8 → ×6,1 → ×6,4), phí duy trì hiện hình **−10%/giai đoạn**, riêng Chứng Thần thêm hồi chiêu Thần Thuật ×0,8. Dòng Pháp Tướng trên thẻ hiện "⚡ Lôi Tôi tầng n".
+- Qua mỗi cổng có **thông báo toàn cõi** (mọi người chơi đều thấy tin ⚡). Thua roll đột phá ở cổng kiếp CHỈ mang **KIẾP THƯƠNG**: toàn bộ chỉ số −15% trong **20 phút thật** (không mất Tu vi/thọ/chỉ số vĩnh viễn như Đại cảnh thường).
+- Kèm: trần cấp nghề ở Độ Kiếp = 16; ô chiêu giữ 7. **Trùng tên đã xử**: bậc 2 thang Tiên phụ "Địa Tiên" → đổi hiển thị thành **"Tán Tiên"** (chỉ đổi chữ, logic không đổi).
+- Cách test: nhân vật Phản Hư 9 (Admin) → hiện hình Pháp Tướng → tới sân Đạo Quán bấm nút cổng kiếp → hạ trùm → bấm Đột phá. Thử tắt tướng giữa cổng (trùm tan), thử thua roll (mang kiếp thương 20 phút). Mọi con số đều TẠM.
+- Kiểm chứng: probe p219 26/26 PASS (khung cảnh, HP trùm 3 cổng, điểm/thọ, thông báo toàn cõi, hệ số ×5,5→×5,8→×6,4 đo qua trần máu, drain dk1 0,225%/s, form-off tan cổng, blocked_dk ở Chứng Thần) + p219b 3/3 PASS (ép thua roll: sát thương TB/đòn trước/sau thương tỉ lệ đúng 0,85).
+
+## GĐ231 — ĐỘ KIẾP ĐỢT 2: HAI CON ĐƯỜNG SAU CHỨNG THẦN (01/11, probe p220 24/24)
+Theo mục 8 THIET_KE_DO_KIEP.md (Bảo chốt tối 01/11: chọn đường VĨNH VIỄN; mỗi đỉnh cảnh game hỏi đúng 1 lần).
+- **Lễ Đăng Tiên**: ở Chứng Thần (dk tầng 3) đầy Tu vi, nút Đột phá đổi thành "✦ LỄ ĐĂNG TIÊN — CHỌN CON ĐƯỜNG ✦" → panel chọn đường (2 nút, ghi rõ chọn là vĩnh viễn).
+- **Đường THĂNG TIÊN GIỚI**: khóa đường → thử thách **Tiên Môn** ở Đạo Quán: trùm **Hộ Vệ Tiên Môn** (HP = elite bước hiện tại ×20, chiêu ×3,2, có phân thân; bắt buộc hiện hình Pháp Tướng như 3 cổng kiếp). Thắng + qua roll (khung tỉ lệ Đại, thua chỉ mang kiếp thương) → cảnh **Tiên Nhân** (+32 điểm, +500 thọ) và được đưa thẳng lên map mới **Tiên Môn Ngoại Viện** (map thứ 201). Tiên Nhân: 9 tầng (bước 67–75), tiểu +9, trung +11/+60 thọ, trần nghề 17, **8 ô chiêu**. Qua lại Nhân giới bằng Trận Dịch Chuyển qua Thanh Vân Thành; cổng Tiên Giới chỉ mở cho Tiên Nhân (Địa Tiên cùng hạng cũng bị chặn).
+- **Đường Ở LẠI NHÂN GIỚI**: vào thẳng cảnh **Địa Tiên** (+32 điểm, +500 thọ; 9 tầng như Tiên Nhân nhưng giữ 7 ô chiêu) — kèm cơ chế **THIÊN ĐẠO TRUY LÙNG**: mỗi ~2 ngày game có **điềm báo** (tin riêng "Thiên Nhãn đang quét"), tới giờ giáng phạt: đang **ngồi thiền** hoặc ở trong **bí cảnh** thì né được yên ổn; đang ở ngoài trời thì **Thiên Phạt Sứ** (HP elite ×6) hiện ra truy sát 3 phút — hạ nó được +200 Tu vi, trụ qua 3 phút cũng xong đợt, bị nó hạ gục thì **−5 năm thọ + kiếp thương**. Đang offline không bị phạt.
+- **Đồ đạc**: band mới Độ Kiếp ×3,0 / Địa Tiên ×3,5 / Tiên Nhân ×4,0 (đóng dấu theo cảnh người mở/rèn/mua như các band cũ; chỉ mặc được khi đủ cảnh). Thành tựu "Ngàn dặm khởi đầu" mở thêm bậc 7 (Độ Kiếp) và 8 (Tiên Nhân/Địa Tiên).
+- Cả hai đường giữ nguyên Pháp Tướng + Lôi Tôi tầng 3 + Thần Thuật CD ×0,8. Tầng 9 của cả hai cảnh = đỉnh hiện tại (đỉnh sau game hỏi lại — để đợt sau).
+- Toàn bộ số liệu ghi TẠM trong THIET_KE_DO_KIEP.md mục 8. Chưa push (bản local; zip kế = GĐ131–231).
+
+## GĐ232 — ĐỘ KIẾP ĐỢT 3: 54 MAP MỚI + 46 LOÀI (01/11, probe p221 19/19)
+- **20 map Độ Kiếp** (vào từ dk tầng 1; vài map sâu cần tầng 2–3): 10 bãi farm theo kiếp (Lôi Kiếp Nguyên, Thiên Hỏa Vực, Tâm Ma Cảnh, Phong Kiếp Cốc, Địa Kiếp Uyên, Thủy Kiếp Trạch, Kim Kiếp Sơn, Huyết Kiếp Hải, Băng Kiếp Nguyên, Hỗn Kiếp Lâm) + Kiếp Vân Thành (hub), Thiên Kiếp Cổ Thành, Độ Sinh Thành, 3 thành trì, 2 làng, 2 thành nghề.
+- **4 map Tiên Môn** (chỉ Chứng Thần — dk tầng 3 — vào được): Thiên Thê, Tiên Môn Tiền Sảnh, Vấn Đạo Đài, Đăng Tiên Đài — đất của thủ hộ Tiên Môn.
+- **30 map Tiên Giới** (CHỈ Tiên Nhân; Địa Tiên bị chặn ở cổng — đã sửa canEnterGate cho mọi map tn, không chỉ Ngoại Viện): 12 bãi farm tiên thú (Tiên Linh Nguyên, Dao Trì Hải, Côn Luân Sơn...) + Lăng Tiêu Thành (hub) + 5 thành + 4 trì + 4 làng + 4 thành nghề.
+- **46 loài mới** (16 Độ Kiếp + 6 thủ hộ Tiên Môn + 24 Tiên Giới), chỉ số theo thang ×2,6/cảnh từ bậc Phản Hư (Tiên Giới ×6,76), mỗi loài đủ 7 nhánh hệ/biến thể như lệ, hình dùng lại sprite loài gốc + nhuộm màu theo hệ (sprite riêng để sau khi có lượt vẽ). 28 map có dân được thêm NPC như các map GĐ207/208.
+- Tổng quái toàn cõi: 2492 → **2798**. Cách đi lại như cũ: từ thành Thanh Vân mở danh sách đích; từ bãi farm phải qua thành trung chuyển.
+- Chưa làm: nhiệm vụ/bảng treo thưởng bậc dk/tn/dt (đợt bổ sung sau). Chưa push (zip kế = GĐ131–232).
+
+## GĐ233 — MAP ĐỘ KIẾP/TIÊN GIỚI ĐỦ "NÀY NỌ": TRÙM, RƯƠNG ĐỒ, NGUYÊN LIỆU (01/11, probe p222 7/7)
+Theo ý Bảo ("map độ kiếp có quái, trang bị này nọ") — rà soát thấy quái + tiệm Đan/Nguyên Liệu/Thảo Dược ở thành mới vốn đã chạy; bổ sung 3 phần còn thiếu:
+- **Trùm theo map** cho cả Độ Kiếp + Tiên Giới (trước đây luật này chỉ áp Trúc Cơ/Kim Đan): map farm nào chưa có trùm thật thì loài mạnh nhất map làm trùm — có thanh máu trùm, chết **chắc chắn rơi rương** (tối thiểu phẩm B, Linh thạch **Cực phẩm**), hồi sinh 10 phút như trùm map cũ.
+- **Trang bị trong rương trùm mang band đúng cõi**: người Độ Kiếp mở ra đồ "· Độ Kiếp" (band ×3,0), Tiên Nhân mở ở Tiên Giới ra band Tiên Nhân ×4,0 (cơ chế mở rương theo cảnh người mở đã có từ GĐ231 — nay mọi map mới đều có trùm để săn).
+- **Nguyên liệu thu thập theo bậc**: node đào/hái ở map Độ Kiếp ra **Kiếp Vân Thạch / Kiếp Tâm Thảo**, ở Tiên Giới ra **Tinh Hà Thạch / Tiên Linh Chi** (trước đây rơi nhầm đồ Luyện Khí). Bán được: Tiệm Nguyên Liệu thu quặng 1000/2500 LT, Tiệm Thảo Dược mua bán thảo 2000/5000 LT (giá TẠM tiếp thang cũ).
+- Quái dk/tn được bổ giáp (22/38 và 26/46) + tốc đuổi (192/200) theo đúng thang các cõi trước — trước đây giáp 0, đuổi chậm như Luyện Khí.
+- Chưa push (zip kế = GĐ131–233).
+
+## GĐ234 — NHIỆM VỤ BẬC ĐỘ KIẾP + TIÊN NHÂN (01/11, probe p223 19/19)
+- **Nhiệm vụ bảng (Bảng treo thưởng làng / Sứ Giả)**: thêm 10 — Độ Kiếp 5 (diệt Lôi Kiếp Lang ×8, Tâm Ma Ảnh ×5, Vạn Kiếp Thần Thú ×1, thu thập 15 Kiếp Vân Thạch, 15 Kiếp Tâm Thảo; thưởng 3800–7000 LT + 350–600 Tu vi) và Tiên Giới 5 (diệt Tiên Phượng ×1, Kỳ Lân ×2, Thiên Tiên Thủ Thần ×1, thu thập 15 Tinh Hà Thạch, 15 Tiên Linh Chi; 5500–9500 LT + 500–800 Tu vi). Địa Tiên nhận/trả các nhiệm vụ Độ Kiếp bình thường (cùng ở Nhân giới); nhiệm vụ Tiên Giới ghi rõ chỉ Tiên Nhân vào được.
+- **Nhiệm vụ thành phố**: 28 thành/trì/làng/thành nghề mới của hai cõi có **Người Giao Nhiệm Vụ** riêng (NPC mới), mỗi nơi 2 nhiệm vụ (1 diệt quái của cõi đó ở map tầng 1 + 1 thu thập nguyên liệu mới/Đá Quý) — tổng nhiệm vụ thành phố 120 → **176**. Thưởng TẠM: diệt 3000 LT (Độ Kiếp) / 4200 LT (Tiên Giới), thu thập 2000–3200 LT.
+- Kiểm chứng end-to-end bằng probe: nhận → săn đủ 6 Băng Kiếp Hồ → trả tại giver Kiếp Vân Thành (+3000 LT); hai cõi đều trả được cả nhiệm vụ bảng lẫn thành phố.
+- Chưa push (zip kế = GĐ131–234). Chương trình Độ Kiếp còn nợ duy nhất: sprite riêng cho 46 loài mới (đang dùng lại + nhuộm màu).
