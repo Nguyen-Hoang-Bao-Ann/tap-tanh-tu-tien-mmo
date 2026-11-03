@@ -3485,7 +3485,8 @@
    "connectsTo": [
     "thanh_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "cong"
   },
   {
    "id": "loi_kiep_nguyen",
@@ -3503,7 +3504,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "dai"
   },
   {
    "id": "thien_hoa_vuc",
@@ -3521,7 +3523,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "dai"
   },
   {
    "id": "tam_ma_canh",
@@ -3539,7 +3542,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "bia"
   },
   {
    "id": "phong_kiep_coc",
@@ -3557,7 +3561,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "dia_kiep_uyen",
@@ -3575,7 +3580,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "bia"
   },
   {
    "id": "thuy_kiep_trach",
@@ -3593,7 +3599,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "sen"
   },
   {
    "id": "kim_kiep_son",
@@ -3611,7 +3618,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "dai"
   },
   {
    "id": "huyet_kiep_hai",
@@ -3629,7 +3637,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "bia"
   },
   {
    "id": "bang_kiep_nguyen",
@@ -3646,7 +3655,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "hon_kiep_lam",
@@ -3663,7 +3673,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "bia"
   },
   {
    "id": "kiep_van_tri",
@@ -3679,7 +3690,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "dai"
   },
   {
    "id": "do_kiep_quan",
@@ -3695,7 +3707,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "bia"
   },
   {
    "id": "tran_kiep_bao",
@@ -3711,7 +3724,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "dai"
   },
   {
    "id": "kiep_ha_thon",
@@ -3727,7 +3741,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "bia"
   },
   {
    "id": "vo_kiep_thon",
@@ -3743,7 +3758,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "dai"
   },
   {
    "id": "kiep_van_thanh",
@@ -3759,7 +3775,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "dai"
   },
   {
    "id": "thien_kiep_co_thanh",
@@ -3775,7 +3792,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "bia"
   },
   {
    "id": "do_sinh_thanh",
@@ -3791,7 +3809,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "dai"
   },
   {
    "id": "kiep_dan_cung",
@@ -3807,7 +3826,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "bia"
   },
   {
    "id": "thien_loi_khi_lau",
@@ -3823,7 +3843,8 @@
     "kiep_van_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "dai"
   },
   {
    "id": "thien_the",
@@ -3841,7 +3862,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "tien_mon_tien_sanh",
@@ -3859,7 +3881,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "cong"
   },
   {
    "id": "van_dao_dai",
@@ -3876,7 +3899,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "cong"
   },
   {
    "id": "dang_tien_dai",
@@ -3893,7 +3917,8 @@
    "connectsTo": [
     "kiep_van_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "cong"
   },
   {
    "id": "tien_linh_nguyen",
@@ -3911,7 +3936,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "sen"
   },
   {
    "id": "van_hai_tien",
@@ -3929,7 +3955,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "sen"
   },
   {
    "id": "dao_tri_hai",
@@ -3947,7 +3974,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "sen"
   },
   {
    "id": "phuong_lam",
@@ -3965,7 +3993,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "ky_lan_nguyen",
@@ -3983,7 +4012,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "tien_thu_coc",
@@ -4001,7 +4031,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "dao_son",
@@ -4020,7 +4051,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "bich_lac_hai",
@@ -4039,7 +4071,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "sen"
   },
   {
    "id": "tinh_ha_nguyen",
@@ -4057,7 +4090,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "cong"
   },
   {
    "id": "dao_hoa_nguyen",
@@ -4075,7 +4109,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "sen"
   },
   {
    "id": "con_luan_son",
@@ -4094,7 +4129,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "tuong"
   },
   {
    "id": "thien_ha_nguyen",
@@ -4112,7 +4148,8 @@
    "connectsTo": [
     "lang_tieu_thanh"
    ],
-   "impl": "live"
+   "impl": "live",
+   "landmark": "cong"
   },
   {
    "id": "lang_tieu_tri",
@@ -4128,7 +4165,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "dao_tri_bao",
@@ -4144,7 +4182,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "sen"
   },
   {
    "id": "bong_lai_quan",
@@ -4160,7 +4199,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "thien_cung_ve",
@@ -4176,7 +4216,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "tuong"
   },
   {
    "id": "tien_an_thon",
@@ -4192,7 +4233,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "dao_nguyen_thon",
@@ -4208,7 +4250,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "sen"
   },
   {
    "id": "van_lai_thon",
@@ -4224,7 +4267,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "sen"
   },
   {
    "id": "tinh_tu_thon",
@@ -4240,7 +4284,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "lang_tieu_thanh",
@@ -4256,7 +4301,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "dao_tri_thanh",
@@ -4272,7 +4318,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "sen"
   },
   {
    "id": "con_luan_thanh",
@@ -4288,7 +4335,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "tuong"
   },
   {
    "id": "bong_lai_thanh",
@@ -4304,7 +4352,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "thien_cung_thanh",
@@ -4320,7 +4369,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "doanh_chau_thanh",
@@ -4336,7 +4386,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "tuong"
   },
   {
    "id": "tien_dan_cung",
@@ -4352,7 +4403,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "sen"
   },
   {
    "id": "thien_khi_dien",
@@ -4368,7 +4420,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "tuong"
   },
   {
    "id": "tien_phu_cac",
@@ -4384,7 +4437,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "cong"
   },
   {
    "id": "tien_tran_dai",
@@ -4400,7 +4454,8 @@
     "lang_tieu_thanh"
    ],
    "impl": "live",
-   "npcProfile": "city"
+   "npcProfile": "city",
+   "landmark": "sen"
   }
  ]
 }

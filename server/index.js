@@ -160,7 +160,7 @@ function nearMountNpc(p) {
   return !!npc && mapOf(p) === MOUNT_MAP && Math.hypot(p.x - npc.x, p.y - npc.y) <= 130;
 }
 const REALM_NAMES = { pham: 'Phàm nhân', lk: 'Luyện Khí', tc: 'Trúc Cơ', kd: 'Kim Đan', na: 'Nguyên Anh', ht: 'Hóa Thần', ph: 'Phản Hư', dk: 'Độ Kiếp', tn: 'Tiên Nhân', dt: 'Địa Tiên' }; // GĐ231: + Tiên Nhân + Địa Tiên // GĐ230: + Độ Kiếp // GĐ183: bỏ Vô Danh
-const MAP_SIZE_BY_CAT = { city: [hs175(4800), hs175(3600)], profession: [hs175(2200), hs175(1650)], farm: [hs175(3800), hs175(2850)], elemental: [hs175(4000), hs175(3000)], current: [WORLD_W, WORLD_H], fortress: [hs175(4800), hs175(3600)], village: [hs175(2600), hs175(1950)] }; // GĐ207: + thành trì (cỡ thành) + làng (nhỏ hơn) // GĐ60: map SIÊU TO theo yêu cầu khám phá (số TẠM); GĐ110: city nhân 2 mỗi chiều (diện tích gấp 4) cho thưa bớt, đỡ lag — cổng/khu dân/dãy nhà/đàn/điểm đều tính theo cổng + kích thước nên tự giãn theo
+const MAP_SIZE_BY_CAT = { city: [hs175(4800), hs175(3600)], profession: [hs175(2200), hs175(1650)], farm: [hs175(3800), hs175(2850)], elemental: [hs175(4000), hs175(3000)], current: [WORLD_W, WORLD_H], fortress: [hs175(4800), hs175(3600)], village: [hs175(2600), hs175(1950)], cave: [hs175(1500), hs175(1150)] }; // GĐ236: nội thất hang (nhỏ, tối) // GĐ207: + thành trì (cỡ thành) + làng (nhỏ hơn) // GĐ60: map SIÊU TO theo yêu cầu khám phá (số TẠM); GĐ110: city nhân 2 mỗi chiều (diện tích gấp 4) cho thưa bớt, đỡ lag — cổng/khu dân/dãy nhà/đàn/điểm đều tính theo cổng + kích thước nên tự giãn theo
 function mapDims(mapId) {
   if (!mapId || mapId === HOME_MAP) return { w: WORLD_W, h: WORLD_H };
   const def = MAP_DEFS.get(mapId);
@@ -222,7 +222,8 @@ const THEME_DECOR = {
   desert: [['cactus', 0.20, 0], ['rock', 0.25, 16], ['bone', 0.15, 0], ['dead_tree', 0.15, 0], ['grass_tall', 0.15, 0], ['dune', 0.10, 0]], // GĐ166: + đụn cát
   blood_forest: [['blood_tree', 0.40, 0], ['rock', 0.20, 16], ['mushroom', 0.15, 0], ['blossom', 0.10, 0], ['grass', 0.15, 0]],
   graveyard: [['tomb', 0.30, 16], ['dead_tree', 0.30, 0], ['bone', 0.20, 0], ['willow', 0.10, 0], ['grass', 0.10, 0]],
-  mountain: [['pine', 0.30, 0], ['rock', 0.25, 16], ['tree', 0.15, 0], ['mountain', 0.15, 30], ['cave', 0.10, 18], ['grass', 0.05, 0]],
+  mountain: [['pine', 0.34, 0], ['rock', 0.27, 16], ['tree', 0.16, 0], ['mountain', 0.08, 30], ['cave', 0.10, 18], ['grass', 0.05, 0]], // GĐ237: giảm tỉ lệ núi rải (0.15→0.08) — một khu nhỏ không nên chen chúc núi
+  cave: [['rock', 0.34, 26], ['stone', 0.18, 14], ['mushroom', 0.14, 0], ['bone', 0.12, 0], ['crystal', 0.10, 0], ['crystal_gold', 0.03, 0], ['grass', 0.09, 0]], // GĐ236: trong hang — đá/nấm/xương/tinh thể, KHÔNG có kind cave (tránh hang lồng hang)
   storm: [['rock', 0.35, 16], ['pillar', 0.20, 16], ['dead_tree', 0.25, 0], ['mountain', 0.20, 30]],
   swamp: [['swamp_tree', 0.35, 0], ['mushroom', 0.20, 0], ['rock', 0.15, 16], ['reed', 0.15, 0], ['pond', 0.15, 0]],
   battlefield: [['sword_stone', 0.25, 14], ['bone', 0.20, 0], ['dead_tree', 0.20, 0], ['rock', 0.15, 16], ['hut', 0.10, 18], ['grass_tall', 0.10, 0]],
@@ -258,7 +259,7 @@ function buildMapRuntime(def) {
     ? Math.max(160, Math.min(1500, Math.round((w * h) / 5000))) // GĐ229: nâng trần (650→1500) — map giãn ×5 diện tích sau GĐ175 mà trần cũ giữ nguyên nên thưa hẳn
     : (theme === 'ice' || theme === 'ice_plain')
       ? Math.max(60, Math.min(700, Math.round((w * h) / 14000))) // GĐ229: băng vẫn thưa hơn các theme khác (đúng chất băng nguyên)
-      : Math.max(80, Math.min(1300, Math.round((w * h) / 8000))); // GĐ229: trần 420→1300
+      : Math.max(80, Math.min(1000, Math.round((w * h) / 10500))); // GĐ240: loãng bớt ~25% — decor to chen nhau trong 1 khung hình nhìn tùm lum, che lấp quái (người chơi phàn nàn)
   // GĐ94: vùng cấm vật cản — nhà/cổng/NPC luôn có lối đi (số TẠM).
   // Đàn tế ở bắc cổng 160px (bằng ALTAR_DIST ở dòng ~450 — KHÔNG dùng
   // trực tiếp vì buildMapRuntime chạy lúc boot trước khi const đó nạp).
@@ -300,7 +301,7 @@ function buildMapRuntime(def) {
       // (GĐ113 chỉ bắt 130px thì hết chồng nhưng núi vẫn nhỏ như đồi.)
       if (MOUNTAIN_LIKE.includes(kind) || MOUNTAIN_LIKE.includes(o.k)) {
         const bothMtn = MOUNTAIN_LIKE.includes(kind) && MOUNTAIN_LIKE.includes(o.k);
-        return Math.hypot(x - o.x, y - o.y) < (bothMtn ? 230 : 180);
+        return Math.hypot(x - o.x, y - o.y) < (bothMtn ? 320 : 180); // GĐ237: núi cách núi xa hơn
       }
       // Nhà (kể cả nhà vs nhà): chừa hành lang 40px quanh nhà.
       if (HOUSE_LIKE.includes(kind) || HOUSE_LIKE.includes(o.k)) return Math.hypot(x - o.x, y - o.y) < o.r + cr + 40;
@@ -317,14 +318,18 @@ function buildMapRuntime(def) {
   // RẢI NHỎ không chặn (hoa/cỏ/thảo/bụi...) chỉ cần cách nhau 48px cho
   // mặt đất dày hẳn; vật chặn giữ 150, còn lại 120 như GĐ117.
   const SMALL_DECOR = new Set(['flower', 'herb', 'grass', 'grass_tall', 'reed', 'bone', 'blossom', 'hay', 'mushroom']);
+  const BIG_VISUAL = new Set(['mountain', 'mountain_snow', 'cave', 'rock', 'pine', 'willow', 'palm', 'dead_tree', 'blood_tree', 'swamp_tree', 'bamboo', 'tree', 'tree_big', 'hut', 'pavilion']); // GĐ240: vật hình to
   const spacingOk = (x, y, kind) => { // lưới decorGrid/gridAdd đã khai báo ở khối GĐ229 trước posOk
     const cx = cellOf(x), cy = cellOf(y);
-    for (let gx = cx - 1; gx <= cx + 1; gx++) for (let gy = cy - 1; gy <= cy + 1; gy++) {
+    const bigSelf = BIG_VISUAL.has(kind);
+    const R = bigSelf ? 2 : 1; // GĐ240: vật to quét ±2 ô (300px) để giữ cách 210px
+    for (let gx = cx - R; gx <= cx + R; gx++) for (let gy = cy - R; gy <= cy + R; gy++) {
       const arr = decorGrid.get(gx + ',' + gy);
       if (!arr) continue;
       for (const d of arr) {
         if (FORESTY.includes(theme) && TREE_LIKE.includes(kind) && TREE_LIKE.includes(d.k)) continue;
-        const need = (blockingKinds.has(kind) || blockingKinds.has(d.k)) ? 150 : (SMALL_DECOR.has(kind) && SMALL_DECOR.has(d.k)) ? 48 : 120;
+        let need = (blockingKinds.has(kind) || blockingKinds.has(d.k)) ? 150 : (SMALL_DECOR.has(kind) && SMALL_DECOR.has(d.k)) ? 48 : 120;
+        if (bigSelf || BIG_VISUAL.has(d.k)) need = Math.max(need, 210); // GĐ240: vật to cách vật to/vật chặn ≥210px — hết chen chúc 1 khu nhỏ
         if (Math.hypot(x - d.x, y - d.y) < need) return false;
       }
     }
@@ -361,19 +366,19 @@ function buildMapRuntime(def) {
         const ay = Math.round(200 + rng() * (h - 400));
         const cands = [];
         for (let k = 0; k < 4; k++) {
-          const x = Math.round(ax + dx * 225 * k);
-          const y = Math.round(ay + dy * 225 * k);
+          const x = Math.round(ax + dx * 340 * k); // GĐ237: giãn bước dãy
+          const y = Math.round(ay + dy * 340 * k); // GĐ237
           if (x < 150 || x > w - 150 || y < 150 || y > h - 150) break;
           if (Math.hypot(x - portal.x, y - portal.y) <= 260) break;
           if (Math.hypot(x - altarPt.x, y - altarPt.y) < 160) break;
-          if (obstacles.some((o) => Math.hypot(x - o.x, y - o.y) < (MOUNTAIN_LIKE.includes(o.k) ? 230 : 180))) break;
+          if (obstacles.some((o) => Math.hypot(x - o.x, y - o.y) < (MOUNTAIN_LIKE.includes(o.k) ? 320 : 180))) break; // GĐ237
           cands.push({ x, y });
         }
         if (cands.length >= 3) placed = cands;
       }
       if (!placed) continue;
       for (const c of placed) {
-        const s = Math.round((2.0 + rng() * 0.4) * 100) / 100;
+        const s = Math.round((1.3 + rng() * 0.3) * 100) / 100; // GĐ237: hạ hệ số dãy núi (hộp sprite đã tăng ở client)
         const mtnDecor = { k: mtnKind, x: c.x, y: c.y, s };
         decor.push(mtnDecor); gridAdd(mtnDecor); // GĐ229
         const g229mo = { x: c.x, y: c.y, r: Math.round(45 * s), k: mtnKind }; obstacles.push(g229mo); obsAdd(g229mo); // GĐ229
@@ -395,6 +400,41 @@ function buildMapRuntime(def) {
     }
     ridgeList.push({ x: rx, y: ry });
     for (const dx of [-250, 0, 250]) { const g229ro = { x: rx + dx, y: ry - 115, r: 150, k: 'ridge' }; obstacles.push(g229ro); obsAdd(g229ro); } // GĐ229
+  }
+  // GĐ235: ĐIỂM NHẤN ĐỊA HÌNH — def.landmark (dai/cong/tuong/bia/sen/cay):
+  // 1 công trình riêng cho map, đặt TRƯỚC vòng rải decor (như dãy núi
+  // GĐ115) để giữ được đĩa trống; decor rải sau tự né vật cản của nó.
+  // Lõi là decor kind lm_* do client vẽ; quanh là vòng đá lát + 4 trụ
+  // (hoặc cụm cây/sậy tùy loại). Mọi push đều qua gridAdd/obsAdd (GĐ229).
+  let landmark = null;
+  if (def.landmark) {
+    const CORE_KIND = { dai: 'lm_dai', cong: 'lm_cong', tuong: 'lm_tuong', bia: 'lm_bia', sen: 'lm_sen', cay: 'tree_big' };
+    const discClear = (x, y) => x > 230 && x < w - 230 && y > 230 && y < h - 230
+      && Math.hypot(x - portal.x, y - portal.y) > 430 && Math.hypot(x - altarPt.x, y - altarPt.y) > 260
+      && !obstacles.some((o) => Math.hypot(x - o.x, y - o.y) < o.r + 190);
+    let anchor = null;
+    if (isCity) { const cx = portal.x, cy = portal.y - Math.round(hs175(620)); if (discClear(cx, cy)) anchor = { x: cx, y: cy }; }
+    for (let t = 0; t < 40 && !anchor; t++) {
+      const x = Math.round(240 + rng() * (w - 480)), y = Math.round(240 + rng() * (h - 480));
+      if (discClear(x, y)) anchor = { x, y };
+    }
+    if (anchor) {
+      const pushD = (k, x, y, s, cr) => { const d = { k, x: Math.round(x), y: Math.round(y), s }; decor.push(d); gridAdd(d); if (cr > 0) { const o = { x: d.x, y: d.y, r: cr, k }; obstacles.push(o); obsAdd(o); } };
+      for (let i = 0; i < 10; i++) {
+        const a = (i / 10) * Math.PI * 2;
+        if ((def.landmark === 'dai' || def.landmark === 'cong') && Math.abs(a - Math.PI / 2) < 0.35) continue;
+        pushD('stone', anchor.x + Math.cos(a) * 128, anchor.y + Math.sin(a) * 128, 1.15, 0);
+      }
+      if (def.landmark === 'cay') {
+        pushD('tree_big', anchor.x - 95, anchor.y - 40, 1.5, 0); pushD('tree_big', anchor.x + 100, anchor.y - 25, 1.35, 0);
+      } else if (def.landmark === 'sen') {
+        for (const a of [Math.PI / 4, 3 * Math.PI / 4, 5 * Math.PI / 4, 7 * Math.PI / 4]) pushD('reed', anchor.x + Math.cos(a) * 165, anchor.y + Math.sin(a) * 165, 1.25, 0);
+      } else {
+        for (const a of [Math.PI / 4, 3 * Math.PI / 4, 5 * Math.PI / 4, 7 * Math.PI / 4]) pushD('pillar', anchor.x + Math.cos(a) * 168, anchor.y + Math.sin(a) * 168, 1.3, 16);
+      }
+      pushD(CORE_KIND[def.landmark] || 'lm_bia', anchor.x, anchor.y, def.landmark === 'cay' ? 2.1 : 2.2, (def.landmark === 'sen' || def.landmark === 'cay') ? 0 : 30);
+      landmark = { x: anchor.x, y: anchor.y, type: def.landmark };
+    }
   }
   for (let i = 0; i < n; i++) {
     let kind = table[0][0]; let cr = table[0][2];
@@ -423,7 +463,7 @@ function buildMapRuntime(def) {
     // feature 310px); va chạm r = 45×s để chân núi khớp hình vẽ (núi
     // tuyết rộng 90px trong hộp 96). Cây/cỏ giữ hệ số cũ.
     const isMtn = MOUNTAIN_LIKE.includes(kind);
-    const s = isMtn ? Math.round((2.0 + rng() * 0.4) * 100) / 100 : Math.round((0.85 + rng() * 0.4) * 100) / 100;
+    const s = isMtn ? Math.round((1.3 + rng() * 0.3) * 100) / 100 : Math.round((0.85 + rng() * 0.4) * 100) / 100; // GĐ237: hạ hệ số núi rải
     const newDecor = { k: kind, x, y, s };
     decor.push(newDecor); gridAdd(newDecor); // GĐ229
     if (cr > 0) { const g229so = { x, y, r: isMtn ? Math.round(45 * s) : cr, k: kind }; obstacles.push(g229so); obsAdd(g229so); } // GĐ229
@@ -474,11 +514,32 @@ function buildMapRuntime(def) {
     }
     if (okS) spots.push({ x: sx, y: sy });
   }
-  return { w, h, theme, portal, decor, obstacles, hazards, features, spots };
+  return { w, h, theme, portal, decor, obstacles, hazards, features, spots, landmark };
 }
 for (const def of MAP_DEFS.values()) {
   if (def.id !== HOME_MAP && def.id !== 'thach_lam' && def.id !== 'bai_farm') MAP_RUNTIME.set(def.id, buildMapRuntime(def));
 }
+// GĐ236: HANG CHUI VÀO ĐƯỢC — map nào có decor miệng hang (kind 'cave')
+// thì sinh 1 nội thất hang riêng (id hang_<mapId>): map nhỏ tối, quái lấy
+// theo bộ quái của map cha (gán ở khối MAP_SPAWNS dưới), cửa vào/ra bằng
+// điểm E ở miệng hang (client đọc rt.caves qua map_enter). Hang KHÔNG
+// nằm trong danh sách dịch chuyển — chỉ vào bằng miệng hang.
+const CAVE_OF = new Map(); // interiorId -> parentId
+const PARENT_CAVE = new Map(); // parentId -> interiorId
+for (const [mid, rt] of [...MAP_RUNTIME]) {
+  const pdef = MAP_DEFS.get(mid);
+  if (!pdef || pdef.cave) continue;
+  const mouths = (rt.decor || []).filter((d) => d.k === 'cave');
+  if (!mouths.length) continue;
+  const id = 'hang_' + mid;
+  const def = { id, name: 'Hang ' + (pdef.name || mid), category: 'cave', theme: 'cave', cave: true, parentId: mid, minRealm: pdef.minRealm, minTier: pdef.minTier, safe: false, desc: 'Hang tối trong lòng ' + (pdef.name || mid) + ' — quái trong hang là giống loài ngoài trời, cuối hang có trùm hang canh giữ.' };
+  MAP_DEFS.set(id, def);
+  MAP_RUNTIME.set(id, buildMapRuntime(def));
+  rt.caves = mouths.map((d) => ({ x: d.x, y: d.y }));
+  CAVE_OF.set(id, mid);
+  PARENT_CAVE.set(mid, id);
+}
+console.log(`[hang] Đã sinh ${CAVE_OF.size} nội thất hang từ các miệng hang trên map cha`);
 // ---- GĐ89: DÂN CƯ THÀNH PHỐ — nối NPCData (10 thành cũ) + NPCData_new
 // (20 thành mới, sinh bởi shottools/gen_city_npcs.py) thành NPC thật trên
 // từng map thành phố. Vị trí xếp lúc boot: chức năng thành lưới quảng
@@ -590,7 +651,7 @@ function mapEnterPayload(mapId) {
   const def = MAP_DEFS.get(mapId);
   const rt = MAP_RUNTIME.get(mapId);
   if (!def || !rt) return mapEnterPayload(HOME_MAP);
-  return { mapId, isHome: false, name: def.name, category: def.category, safe: !!def.safe, w: rt.w, h: rt.h, theme: rt.theme, portal: rt.portal, decor: rt.decor, hazards: rt.hazards || [], features: rt.features || null, spots: rt.spots || [], desc: def.desc || '', altar: altarEntryFor(mapId) ? altarPosOf(mapId) : null, study: mapId === NHO_STUDY_MAP && rt ? { x: rt.portal.x, y: rt.portal.y } : null, npcs: (CITY_NPCS[mapId] || []).map((n) => ({ id: n.id, name: n.name, role: n.role, kind: n.kind, x: n.x, y: n.y, style: n.style })), nodes: MAP_NODES[mapId] || [] }; // GĐ60: + hazards/features; GĐ76: + spots; GĐ85: + đàn tế; GĐ89: + dân thành phố; GĐ105: + điểm đọc sách Văn Uyển; GĐ132: + điểm tài nguyên
+  return { mapId, isHome: false, name: def.name, category: def.category, safe: !!def.safe, w: rt.w, h: rt.h, theme: rt.theme, portal: rt.portal, decor: rt.decor, hazards: rt.hazards || [], features: rt.features || null, spots: rt.spots || [], desc: def.desc || '', altar: altarEntryFor(mapId) ? altarPosOf(mapId) : null, study: mapId === NHO_STUDY_MAP && rt ? { x: rt.portal.x, y: rt.portal.y } : null, npcs: (CITY_NPCS[mapId] || []).map((n) => ({ id: n.id, name: n.name, role: n.role, kind: n.kind, x: n.x, y: n.y, style: n.style })), nodes: MAP_NODES[mapId] || [], landmark: rt.landmark || null, caves: rt.caves || [], caveExit: def.cave ? { x: rt.portal.x, y: rt.portal.y, parentName: (MAP_DEFS.get(def.parentId) || {}).name || '' } : null }; // GĐ60: + hazards/features; GĐ76: + spots; GĐ85: + đàn tế; GĐ89: + dân thành phố; GĐ105: + điểm đọc sách Văn Uyển; GĐ132: + điểm tài nguyên; GĐ235: + điểm nhấn địa hình; GĐ236: + miệng hang / cửa ra hang
 }
 // ---- Quái GDD: nạp thêm loài chưa có từ MonsterData (số file: HP/ATK/Tu vi;
 //      def/tốc độ/hồi sinh TẠM như ghi chú đầu mục) ----
@@ -681,6 +742,16 @@ for (const g of GDD_MONSTERS) {
     let count = g.rewardClass === 'boss' ? 1 : Math.round(base * (MAP_COUNT_FACTOR[mr] ?? 1));
     if (g.rewardClass === 'boss' && SPECIAL_BOSS_MAPS.includes(mid)) count = 3; // GĐ70: map đặc biệt nhiều trùm
     MAP_SPAWNS.push({ mapId: mid, kind: rk, count });
+  }
+}
+// GĐ236: quái trong hang — nhân bản bộ quái map cha (bỏ loài hạng boss,
+// trùm hang do vòng MAP_BOSSES tự phong loài mạnh nhất còn lại), số lượng
+// một nửa (trần tối thiểu 2) vì hang nhỏ hơn map cha nhiều.
+for (const [iid, parentId] of CAVE_OF) {
+  for (const s of MAP_SPAWNS.filter((x) => x.mapId === parentId)) {
+    const tc = MONSTER_TYPES[s.kind];
+    if (!tc || tc.rewardClass === 'boss') continue;
+    MAP_SPAWNS.push({ mapId: iid, kind: s.kind, count: Math.max(2, Math.ceil(s.count / 2)) });
   }
 }
 // GĐ166: 3 trong 4 map từng gán tay ở đây (bang_phong_coc, hoa_diem_son,
@@ -3996,6 +4067,8 @@ function persistPlayer(p) {
   c.quests = p.quests;
   // GĐ10: ngoại hình tùy chỉnh
   c.robe = p.robe ?? null;
+  c.skin = p.skin ?? null; // GĐ248
+  c.ownedSkins = Array.isArray(p.ownedSkins) ? p.ownedSkins : []; // GĐ248
   c.gender = p.gender || 'nam';
   // GĐ11: vũ khí đang dùng
   c.weaponId = p.weaponId || null;
@@ -4073,6 +4146,7 @@ function charSummary(charId, c) {
     linhCanMain: c.linhCan ? c.linhCan.main : null,
     bienDi: (Array.isArray(c.linhCan?.mutations) && c.linhCan.mutations.length) ? c.linhCan.mutations.join(', ') : (c.classRes?.bienDi ?? null), // GĐ100/GĐ154: hệ Biến Dị Pháp Tu (chuỗi nối các hệ)
     robe: migrateRobe(c.robe ?? null),
+    skin: c.skin ?? null, ownedSkins: ownedSkinsOf(c.skin, c.ownedSkins), // GĐ248
     gender: c.gender || 'nam',
     weaponId: weaponOf(c.classId, c.weaponId)?.id || null,
     weaponName: weaponOf(c.classId, c.weaponId)?.name || null,
@@ -4096,6 +4170,10 @@ const ROBE_MIGRATE = {
 };
 const migrateRobe = (r) => (r ? ROBE_MIGRATE[r] || r : null);
 const validGender = (g) => (g === 'nu' ? 'nu' : 'nam');
+const SKIN_IDS = ['nam-lam', 'nam-hac', 'nam-bach', 'nu-hong', 'nu-ngoc']; // GĐ248: skin nhân vật cơ bản cho người chơi chọn
+const validSkin = (s) => (SKIN_IDS.includes(s) ? s : null);
+const SKIN_PRICE = 1000; // TẠM (GĐ248): giá mua thêm 1 skin = Linh thạch Hạ; bộ chọn lúc tạo nhân vật được tặng
+const ownedSkinsOf = (sk, owned) => (Array.isArray(owned) ? owned : (sk ? [sk] : [])); // nhân vật cũ chưa có ownedSkins: bộ đang mặc coi như đã có
 
 // ---- Làng Tân Thủ (Giai đoạn 5) ----
 // Làng là VÙNG AN TOÀN: quái không vào, người chơi spawn ở quảng trường.
@@ -4169,7 +4247,7 @@ const REALM_WALLS = [
 ];
 // GĐ91: cây đi xuyên được nên OBSTACLES không còn gốc cây — chỉ nhà,
 // ao, vách bí cảnh (vách rừng x=2252 vẫn giữ cổng Thạch Lâm).
-const OBSTACLES = [...HOUSE_OBSTACLES, POND, ...REALM_WALLS];
+const OBSTACLES = [...HOUSE_OBSTACLES, POND, { x: hs175(563), y: hs175(486), w: 144, h: 88 }, ...REALM_WALLS]; // GĐ246: + vòng đài phun cạnh tây quảng trường (tâm hs175(595,505))
 
 function insideVillage(x, y, pad = 0) {
   return (
@@ -4347,6 +4425,7 @@ function spawnFromCharacter(socket, charKey, char) {
     charKey,
     // GĐ10: ngoại hình tùy chỉnh (robe = null → màu mặc định theo lớp)
     robe: migrateRobe(char.robe ?? null),
+    skin: char.skin ?? null, ownedSkins: ownedSkinsOf(char.skin, char.ownedSkins), // GĐ248
     gender: char.gender || 'nam',
     // GĐ11: vũ khí khởi đầu (nhân vật cũ chưa có → vũ khí đầu của lớp)
     weaponId: weaponOf(char.classId, char.weaponId)?.id || null,
@@ -4523,6 +4602,7 @@ function characterPayload(p) {
     className: CLASSES[p.classId]?.name || p.classId,
     // GĐ10: ngoại hình + tài khoản
     robe: p.robe ?? null,
+    skin: p.skin ?? null, ownedSkins: ownedSkinsOf(p.skin, p.ownedSkins), // GĐ248
     gender: p.gender || 'nam',
     account: p.account || null,
     // GĐ11: vũ khí đang dùng
@@ -4840,7 +4920,7 @@ function spawnOfflineActor(charKey, char) {
     name: char.name, classId: char.classId, stats: migrateStats(char.stats),
     hp: maxHpEff(char), mp: maxMpEff(char),
     charKey,
-    robe: migrateRobe(char.robe ?? null), gender: char.gender || 'nam',
+    robe: migrateRobe(char.robe ?? null), skin: char.skin ?? null, ownedSkins: ownedSkinsOf(char.skin, char.ownedSkins), gender: char.gender || 'nam', // GĐ248
     weaponId: weaponOf(char.classId, char.weaponId)?.id || null,
     account: char.account || null, lastAttackAt: 0,
     freePoints: char.freePoints ?? FREE_POINTS_START, statPoints: char.statPoints ?? 0,
@@ -7487,7 +7567,7 @@ function destinationsFor(p) {
   if (cur === HOME_MAP) return [entry(city), entry(realm, true)].filter(Boolean);
   if (cur === 'thanh_van_thanh') {
     const list = [entry(home)];
-    const rest = [...MAP_DEFS.values()].filter((d) => d.id !== HOME_MAP && d.id !== 'thanh_van_thanh' && d.id !== 'thach_lam' && d.id !== 'bai_farm');
+    const rest = [...MAP_DEFS.values()].filter((d) => d.id !== HOME_MAP && d.id !== 'thanh_van_thanh' && d.id !== 'thach_lam' && d.id !== 'bai_farm' && !d.cave); // GĐ236: hang không đi bằng dịch chuyển
     rest.sort((a, b) => (REALM_ORDER[a.minRealm] - REALM_ORDER[b.minRealm]) || ((a.minTier || 0) - (b.minTier || 0)) || a.name.localeCompare(b.name, 'vi'));
     for (const d of rest) list.push(entry(d));
     list.push(entry(realm, true));
@@ -7650,6 +7730,8 @@ io.on('connection', (socket) => {
       // GĐ10: tùy chỉnh ngoại hình lúc tạo
       robe: validRobe(data.robe),
       gender: validGender(data.gender),
+      skin: validSkin(data.skin), // GĐ248
+      ownedSkins: validSkin(data.skin) ? [validSkin(data.skin)] : [], // GĐ248: bộ chọn lúc tạo được tặng, các bộ khác mua trong game
       // GĐ11: vũ khí khởi đầu — phải thuộc lớp đã chọn, sai thì lấy vũ khí đầu
       weaponId: weaponOf(data.classId, data.weaponId)?.id || null,
     };
@@ -7690,6 +7772,33 @@ io.on('connection', (socket) => {
   // ---- GĐ10: tài khoản + chọn nhân vật ----
   const validUsername = (u) => typeof u === 'string' && /^[A-Za-z0-9_]{3,20}$/.test(u);
   const validPassword = (pw) => typeof pw === 'string' && pw.length >= 6 && pw.length <= 64;
+
+  // GĐ248: đổi skin giữa game — chỉ mặc được bộ ĐÃ CÓ (null = về hình mặc định theo lớp)
+  socket.on('set_skin', (data) => {
+    if (!player) return;
+    const sk = data && typeof data.skin === 'string' ? data.skin : null;
+    if (sk !== null && !SKIN_IDS.includes(sk)) return;
+    if (sk !== null && !ownedSkinsOf(player.skin, player.ownedSkins).includes(sk)) { socket.emit('interact_error', { message: 'Bạn chưa có bộ trang phục này — mua trước đã nhé.' }); return; }
+    player.skin = sk;
+    persistPlayer(player);
+    syncChar(socket, player);
+  });
+
+  // GĐ248: mua thêm skin bằng Linh thạch Hạ (mua xong mặc luôn)
+  socket.on('buy_skin', (data) => {
+    if (!player || !data) return;
+    const sk = typeof data.skin === 'string' ? data.skin : null;
+    if (!sk || !SKIN_IDS.includes(sk)) return;
+    player.ownedSkins = ownedSkinsOf(player.skin, player.ownedSkins);
+    if (player.ownedSkins.includes(sk)) { player.skin = sk; persistPlayer(player); syncChar(socket, player); return; }
+    if ((player.stones || 0) < SKIN_PRICE) { socket.emit('interact_error', { message: `Mua trang phục cần ${SKIN_PRICE} Linh thạch (đang có ${player.stones || 0}).` }); return; }
+    player.stones -= SKIN_PRICE;
+    player.ownedSkins.push(sk);
+    player.skin = sk;
+    persistPlayer(player);
+    syncChar(socket, player);
+    socket.emit('notice', { text: `🎨 Đã mua trang phục mới! (−${SKIN_PRICE} Linh thạch)` });
+  });
 
   socket.on('auth_register', (data) => {
     if (player || !data || !validUsername(data.username) || !validPassword(data.password)) {
@@ -9993,6 +10102,7 @@ io.on('connection', (socket) => {
   // ---- Kinh tế + Nhiệm vụ (GĐ8) ----
   const nearPoint = (pt) => !!player && Math.hypot(player.x - pt.x, player.y - pt.y) <= INTERACT_RANGE;
   const notice = (text) => socket.emit('notice', { text });
+  const rewardPopup = (rows, title) => socket.emit('reward_popup', { title: title || 'Nhận được vật phẩm', rows }); // GĐ245: popup nhận quà giữa màn hình
 
   socket.on('shop_buy', (data) => {
     if (!player || !data) return;
@@ -10310,6 +10420,13 @@ io.on('connection', (socket) => {
     persistPlayer(player);
     syncChar(socket, player);
     notice(`Trả nhiệm vụ “${def.name}” — nhận ${def.rewardStones} Linh thạch${rivalBonus > 0 ? ` + ${rivalBonus} thưởng cừu hận` : ''}${extra}!`);
+    { // GĐ245: popup phần thưởng nhiệm vụ
+      const qRows = [`💠 Linh thạch +${def.rewardStones + rivalBonus}`];
+      if (def.tuViReward) qRows.push(`✦ Tu vi +${Math.round(def.tuViReward * tuviMulOf(player))}`);
+      if (def.rewardItem && ITEMS[def.rewardItem]) qRows.push(`${ITEMS[def.rewardItem].name} ×1`);
+      if (extra.includes('⚔️') || extra.includes('✦')) qRows.push('⚔️ Trang bị mới — xem trong Túi đồ');
+      rewardPopup(qRows, '🎁 Phần thưởng nhiệm vụ');
+    }
     if (player.counters) player.counters.questsDone = (player.counters.questsDone || 0) + 1; // GĐ27
     if (def.hidden && player.counters) player.counters.ach_hiddenQuests = (player.counters.ach_hiddenQuests || 0) + 1; // GĐ138: nhiệm vụ ẩn hoàn thành = 1 sự kiện cơ duyên
     if (def.secretChain && player.counters) player.counters.ach_secretChains = (player.counters.ach_secretChains || 0) + 1; // GĐ197: hoàn thành 1 chuỗi nhiệm vụ ẩn (thành tựu ẩn 'bí mật ẩn')
@@ -10344,8 +10461,44 @@ io.on('connection', (socket) => {
     if (!player) return;
     socket.emit('travel_info', { from: mapOf(player), list: destinationsFor(player) });
   });
+  // GĐ236: VÀO / RA HANG — đứng sát miệng hang (điểm server gửi trong
+  // map_enter.caves) bấm E; ra hang trở về ĐÚNG miệng hang đã vào (lưu
+  // tạm caveReturn trong phiên, mất kết nối thì ra miệng hang đầu tiên).
+  socket.on('cave_enter', () => {
+    if (!player || player.hp <= 0) return;
+    const cur = mapOf(player);
+    const iid = PARENT_CAVE.get(cur);
+    const rt = MAP_RUNTIME.get(cur);
+    if (!iid || !rt || !rt.caves) return;
+    const m = rt.caves.find((c) => Math.hypot(player.x - c.x, player.y - c.y) <= 130);
+    if (!m) { socket.emit('interact_error', { message: 'Hãy đứng sát miệng hang rồi mới vào.' }); return; }
+    if (player.meditating) stopMeditation(player, 'cave');
+    if (player.preaching) stopPreaching(player, 'cave');
+    if (player.studying) stopStudying(player, 'cave');
+    player.caveReturn = { mapId: cur, x: m.x, y: m.y + 70 };
+    const irt = MAP_RUNTIME.get(iid);
+    switchPlayerMap(socket, player, iid, { x: irt.portal.x, y: irt.portal.y - 56 });
+    socket.emit('notice', { text: '🕳️ Bạn chui vào hang tối...' });
+  });
+  socket.on('cave_exit', () => {
+    if (!player) return;
+    const cur = mapOf(player);
+    const parentId = CAVE_OF.get(cur);
+    if (!parentId) return;
+    const rt = MAP_RUNTIME.get(cur);
+    if (!rt || Math.hypot(player.x - rt.portal.x, player.y - rt.portal.y) > 160) { socket.emit('interact_error', { message: 'Hãy tới cửa hang (phía nam hang) để ra ngoài.' }); return; }
+    const ret = player.caveReturn && player.caveReturn.mapId === parentId ? player.caveReturn : null;
+    const mouths = (MAP_RUNTIME.get(parentId) || {}).caves || [];
+    const pos = ret ? { x: ret.x, y: ret.y } : (mouths[0] ? { x: mouths[0].x, y: mouths[0].y + 70 } : null);
+    if (!pos) return;
+    player.caveReturn = null;
+    switchPlayerMap(socket, player, parentId, pos);
+    socket.emit('notice', { text: '🌤️ Bạn chui ra khỏi hang.' });
+  });
+
   socket.on('travel_to', (data) => {
     if (!player || !data || typeof data.mapId !== 'string') return;
+    if ((MAP_DEFS.get(mapOf(player)) || {}).cave) { socket.emit('interact_error', { message: 'Đang ở trong hang — hãy tới cửa hang (nơi bạn vào, phía nam hang) và bấm E để ra ngoài.' }); return; } // GĐ236
     if (player.hp <= 0) { socket.emit('interact_error', { message: 'Bạn đang gục ngã, không thể dịch chuyển — chờ đồng đội hồi sinh.' }); return; } // GĐ104
     if (player.meditating) stopMeditation(player, 'travel'); // GĐ76: dịch chuyển là dứt thiền
     if (player.preaching) stopPreaching(player, 'travel'); // GĐ103: dịch chuyển là dứt Thuyết Pháp
@@ -11350,6 +11503,11 @@ io.on('connection', (socket) => {
     persistPlayer(player);
     syncChar(socket, player);
     socket.emit('ach_claim_result', { ok: true, achId: def.id, tier: nextTier, title: ACH.titleText(def.base, level), level, chest: ACH.CHEST_NAME[chestGrade], daoTich: st.daoTich, groupComplete });
+    { // GĐ245: popup nhận thưởng thành tựu
+      const aRows = [`🏆 Danh hiệu “${ACH.titleText(def.base, level)}”`, `${ACH.CHEST_NAME[chestGrade]} ×1`, `✦ Đạo Tích +${dao}`];
+      if (groupComplete) aRows.push(`${ACH.CHEST_NAME.thien || 'Rương Thành Tựu Thiên'} ×1`);
+      rewardPopup(aRows, '🎁 Thưởng thành tựu');
+    }
     if (groupComplete) notice(`🏆 Hoàn thành nhóm “${ACH.GROUP_NAMES[groupComplete]}” — nhận 1 Rương Thành Tựu Thiên + mở quyền chọn nhân đôi 1 thưởng của nhóm trong panel Thành tựu!`);
     notice(`🏆 Thành tựu “${def.name}” bậc ${nextTier}: danh hiệu “${ACH.titleText(def.base, level)}” + ${ACH.CHEST_NAME[chestGrade]} + ${dao} Đạo Tích!`);
     console.log(`[thành tựu] ${player.name} nhận ${def.id} bậc ${nextTier} (+${dao} Đạo Tích, ${chestGrade})`);
@@ -11455,6 +11613,11 @@ io.on('connection', (socket) => {
     f.mini.claimed += 1;
     festGiveCoins(player, socket, FESTIVAL_TIER_COINS[i]);
     if (i === FESTIVAL_TIERS.length - 1) { player.inventory.tui_qua_le = (player.inventory.tui_qua_le || 0) + 1; socket.emit('notice', { text: '🎁 Hoàn thành lễ nhỏ — tặng thêm 1 Túi Quà Lễ!' }); }
+    { // GĐ245: popup thưởng mốc lễ nhỏ
+      const fRows = [`🪙 Đồng Lễ Hội +${FESTIVAL_TIER_COINS[i]}`];
+      if (i === FESTIVAL_TIERS.length - 1) fRows.push('🎁 Túi Quà Lễ ×1');
+      rewardPopup(fRows, '🎁 Thưởng lễ nhỏ');
+    }
     persistPlayer(player); syncChar(socket, player);
     emitFestivalDialog(socket, player);
   });
@@ -11893,6 +12056,7 @@ io.on('connection', (socket) => {
       if (Math.random() < 0.4) { player.inventory.banh_le = (player.inventory.banh_le || 0) + 1; extra = ' + 1 Bánh Lễ'; }
       persistPlayer(player); syncChar(socket, player);
       notice(`🎁 Mở Túi Quà Lễ: +${lt} Linh thạch${extra}.`);
+      { const gRows = [`💠 Linh thạch +${lt}`]; if (extra) gRows.push('🍰 Bánh Lễ ×1'); rewardPopup(gRows, '🎁 Mở Túi Quà Lễ'); } // GĐ245
       return;
     }
     if (id === 'banh_le') { // GĐ217: ăn bánh lễ hồi 25% HP/MP
@@ -11926,6 +12090,7 @@ io.on('connection', (socket) => {
       if (Math.random() < 0.4) { const b = SEASON_BAG[id]; player.inventory[b] = (player.inventory[b] || 0) + 1; extra = ` và thêm 1 ${ITEMS[b]?.name || b}`; }
       persistPlayer(player); syncChar(socket, player);
       notice(`🎁 Mở ${ITEMS[id]?.name}: +${amt} Linh thạch${extra}.`);
+      { const sRows = [`💠 Linh thạch +${amt}`]; if (extra) sRows.push(`${ITEMS[SEASON_BAG[id]]?.name || SEASON_BAG[id]} ×1`); rewardPopup(sRows, `🎁 Mở ${ITEMS[id]?.name || 'Túi Quà'}`); } // GĐ245
       return;
     }
     if (id === 'ruou_que_hoa') { // GĐ223: thiền +30% Tu vi trong 1 giờ game (TẠM)
@@ -12844,7 +13009,7 @@ let lastSentWorldKey = -1; // GĐ20: khóa ngày×24+giờ của đồng hồ đ
 function playerSyncState(p) {
   return {
     id: p.id, x: Math.round(p.x), y: Math.round(p.y), direction: p.direction,
-    name: p.name, classId: p.classId, realm: p.realm || 'pham', tier: p.tier || 0,
+    name: p.name, classId: p.classId, skin: p.skin ?? null, realm: p.realm || 'pham', tier: p.tier || 0,
     robe: p.robe ?? null, gender: p.gender || 'nam', weaponId: p.weaponId || null,
     hp: Math.round(p.hp), maxHp: maxHpEff(p),
     mp: Math.round(p.mp), maxMp: maxMpEff(p),

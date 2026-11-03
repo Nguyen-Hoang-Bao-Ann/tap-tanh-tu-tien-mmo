@@ -1231,35 +1231,97 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   if (scene.textures.exists('world-bg')) return;
   const G = WORLD_GEO;
   const rnd = seededRand(12345);
+  // GĐ246b: THẢM CỎ MỀM cho nền LÀNG (Bảo: làm lại mặt đất cho hợp với
+  // nhân vật) — bỏ hẳn kiểu ô vuông pixel cũ: khóm cỏ cong + bụi lá +
+  // cụm hoa cùng màu + bồ công anh, chung ngôn ngữ painter map ngoài.
+  const paintCarpet = (c: CanvasRenderingContext2D, r2: () => number, x0: number, y0: number, w2: number, h2: number, skip?: (x: number, y: number) => boolean) => {
+    const leafA = '#357a2c', leafB = '#5da24c'; // GĐ252: lá sáng hơn
+    const cols = ['#ffffff', '#ffe066', '#f2a7c3'];
+    const cc = [cols[Math.floor(r2() * 3)], cols[Math.floor(r2() * 3)]];
+    for (let i = 0; i < 5200; i++) {
+      const px = x0 + r2() * w2, py = y0 + r2() * h2;
+      if (skip && skip(px, py)) continue;
+      c.fillStyle = r2() > 0.5 ? 'rgba(24,74,24,0.10)' : 'rgba(196,240,150,0.12)';
+      c.beginPath(); c.ellipse(px, py, 1.6 + r2() * 2.6, 1.2 + r2() * 1.8, r2() * 3, 0, Math.PI * 2); c.fill();
+    }
+    const n = Math.round((w2 * h2) / 1700);
+    for (let i = 0; i < n; i++) {
+      const bx = x0 + r2() * w2, by = y0 + r2() * h2;
+      if (skip && skip(bx, by)) continue;
+      const t = r2();
+      if (t < 0.62) {
+        const blades = 5 + Math.floor(r2() * 3);
+        for (let g = 0; g < blades; g++) {
+          const lean = (g / (blades - 1) - 0.5) * 16, len = 10 + r2() * 10;
+          c.strokeStyle = g % 2 ? leafA : leafB; c.globalAlpha = 0.55 + r2() * 0.35; c.lineWidth = 1.9;
+          c.beginPath(); c.moveTo(bx, by); c.quadraticCurveTo(bx + lean * 0.4, by - len * 0.7, bx + lean, by - len); c.stroke();
+        }
+        c.globalAlpha = 1;
+        if (r2() < 0.10) {
+          const sx = bx + (r2() * 10 - 5), sh2 = 12 + r2() * 5;
+          c.strokeStyle = leafA; c.globalAlpha = 0.7; c.lineWidth = 1.2;
+          c.beginPath(); c.moveTo(sx, by); c.quadraticCurveTo(sx + 1.5, by - sh2 * 0.6, sx + 2.5, by - sh2); c.stroke();
+          c.fillStyle = 'rgba(255,255,255,0.92)'; c.globalAlpha = 0.92;
+          c.beginPath(); c.arc(sx + 2.5, by - sh2 - 1.5, 2.7, 0, Math.PI * 2); c.fill();
+          c.globalAlpha = 1;
+        }
+      } else if (t < 0.76) {
+        for (let g = 0; g < 3; g++) {
+          const a = r2() * Math.PI * 2;
+          c.fillStyle = leafB; c.globalAlpha = 0.6 + r2() * 0.3;
+          c.beginPath(); c.ellipse(bx + Math.cos(a) * 3.4, by + Math.sin(a) * 2.4 - 1.5, 3.6, 2.1, a, 0, Math.PI * 2); c.fill();
+        }
+        c.globalAlpha = 1;
+      } else if (t < 0.90) {
+        const bn = 5 + Math.floor(r2() * 4);
+        for (let g = 0; g < bn; g++) {
+          const a = r2() * Math.PI * 2, d = r2() * 7;
+          c.fillStyle = g % 2 ? leafA : leafB; c.globalAlpha = 0.5 + r2() * 0.3;
+          c.beginPath(); c.ellipse(bx + Math.cos(a) * d, by - 3 + Math.sin(a) * d * 0.6, 5 + r2() * 6, 3.4 + r2() * 3.6, a, 0, Math.PI * 2); c.fill();
+        }
+        c.globalAlpha = 1;
+      } else if (t < 0.96) {
+        const col = cc[Math.floor(r2() * cc.length)];
+        const fn = 4 + Math.floor(r2() * 4);
+        for (let g = 0; g < fn; g++) {
+          const a = r2() * Math.PI * 2, d = r2() * 11;
+          const fx2 = bx + Math.cos(a) * d, fy2 = by + Math.sin(a) * d * 0.7;
+          for (let p = 0; p < 5; p++) {
+            const pa = (p / 5) * Math.PI * 2;
+            c.fillStyle = col; c.globalAlpha = 0.85;
+            c.beginPath(); c.arc(fx2 + Math.cos(pa) * 1.9, fy2 - 2 + Math.sin(pa) * 1.9, 1.6, 0, Math.PI * 2); c.fill();
+          }
+          c.fillStyle = '#ffdf6b'; c.globalAlpha = 1;
+          c.beginPath(); c.arc(fx2, fy2 - 2, 1.15, 0, Math.PI * 2); c.fill();
+        }
+        c.globalAlpha = 1;
+      } else {
+        for (let g = 0; g < 4; g++) {
+          const a = (g / 4) * Math.PI * 2 + r2();
+          c.fillStyle = '#ffd94d'; c.globalAlpha = 0.75;
+          c.beginPath(); c.arc(bx + Math.cos(a) * 2.1, by - 2 + Math.sin(a) * 2.1, 1.5, 0, Math.PI * 2); c.fill();
+        }
+        c.fillStyle = 'rgba(255,244,200,0.9)'; c.globalAlpha = 1;
+        c.beginPath(); c.arc(bx, by - 2, 1.1, 0, Math.PI * 2); c.fill();
+        c.globalAlpha = 1;
+      }
+    }
+  };
 
   // ---------- NỀN ĐẤT TOÀN BẢN ĐỒ ----------
   // GĐ28: nướng nền ở độ phân giải 2× (supersample) — pixelSnap ×2 cho texel 1px thế giới, nét như sprite nhân vật
   const [bgC, b] = makeCanvas(G.SPLIT, G.H); // GĐ175: nướng 1× (map to, 2× vượt 4096px)
-  b.fillStyle = '#58a447';
+  b.fillStyle = '#64b34d'; // GĐ252: nền cỏ sáng hơn
   b.fillRect(0, 0, G.SPLIT, G.H);
   for (let wb = 0; wb < 30; wb++) {
     const wx = rnd() * G.SPLIT, wy = rnd() * G.H, wr = 260 + rnd() * 620;
     b.fillStyle = wb % 2 ? 'rgba(52,72,40,0.05)' : 'rgba(246,240,214,0.05)';
     b.beginPath(); b.ellipse(wx, wy, wr, wr * 0.62, rnd() * 3, 0, Math.PI * 2); b.fill();
   }
-  const pxTones = ['rgba(30,84,28,0.16)', 'rgba(190,235,140,0.13)', 'rgba(140,105,50,0.12)'];
-  for (let pi = 0; pi < 11000; pi++) {
-    const px = Math.floor(rnd() * (G.SPLIT / 16)) * 16, py = Math.floor(rnd() * (G.H / 16)) * 16;
-    b.fillStyle = pxTones[pi % 3];
-    b.fillRect(px, py, 16, 16);
-  }
-  const pxDet = ['rgba(24,74,24,0.20)', 'rgba(168,230,120,0.16)', 'rgba(240,220,90,0.10)'];
-  for (let pd = 0; pd < 5200; pd++) {
-    const px = Math.floor(rnd() * (G.SPLIT / 8)) * 8, py = Math.floor(rnd() * (G.H / 8)) * 8;
-    b.fillStyle = pxDet[pd % 3];
-    b.fillRect(px, py, 8, 8);
-  }
-  for (let i = 0; i < 4200; i++) {
-    b.fillStyle = rnd() > 0.5 ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,220,0.05)';
-    b.fillRect(rnd() * G.SPLIT, rnd() * G.H, 3, 5);
-  }
+  const pxDet = ['rgba(24,74,24,0.20)', 'rgba(168,230,120,0.16)', 'rgba(240,220,90,0.10)']; // còn dùng cho bí cảnh phía đông
+  paintCarpet(b, rnd, 0, 0, G.SPLIT, G.H); // GĐ246b: thảm cỏ mềm thay ô vuông pixel
   // Nền làng sáng hơn nền farm
-  b.fillStyle = 'rgba(216,234,174,0.15)';
+  b.fillStyle = 'rgba(220,240,180,0.20)';
   b.fillRect(G.village.x, G.village.y, G.village.w, G.village.h);
 
   // ---------- ĐƯỜNG ĐÁ CUỘI ----------
@@ -1335,31 +1397,55 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   paintRoad(G.plaza.x - 15, 0, 30, G.H); // GĐ175
 
   // ---------- QUẢNG TRƯỜNG ĐÁ ----------
+  // GĐ246 (mẫu + LUẬT MẶT CẮT): KHÔNG còn đĩa tròn viền cứng — nền lót
+  // viền răng cưa bằng nhiều vạt chồng nhau, đá lát là VIÊN NGUYÊN (không
+  // viên nào bị clip cắt đôi ở mép), vòng ngoài thưa dần + đá rời và cỏ
+  // lấn ra ngoài cho quảng trường loang vào thảm cỏ.
   const P = G.plaza;
   b.fillStyle = '#b3ac9c';
-  b.beginPath(); b.arc(P.x, P.y, 150, 0, Math.PI * 2); b.fill();
+  b.beginPath(); b.arc(P.x, P.y, 140, 0, Math.PI * 2); b.fill();
+  for (let i = 0; i < 44; i++) { // vạt lót mép: tâm nằm trên vòng 132–150, bán kính 7–15
+    const a = rnd() * Math.PI * 2, rr = 132 + rnd() * 18;
+    b.beginPath(); b.arc(P.x + Math.cos(a) * rr, P.y + Math.sin(a) * rr, 7 + rnd() * 8, 0, Math.PI * 2); b.fill();
+  }
   b.fillStyle = '#bcb6a8';
   b.beginPath(); b.arc(P.x, P.y, 108, 0, Math.PI * 2); b.fill();
-  // GĐ18: lát đá cuội toàn quảng trường (viên bo tròn, mạch vữa tối, lệch hàng)
+  // GĐ18 + GĐ246: lát đá cuội — chỉ vẽ viên nào nằm TRỌN trong đĩa (tâm
+  // cách tâm ≤ 136 + jitter); vòng ngoài (118–136) thưa ngẫu nhiên.
   {
-    b.save();
-    b.beginPath(); b.arc(P.x, P.y, 148, 0, Math.PI * 2); b.clip();
     const tones = ['#bdb6a6', '#b0a996', '#c6c0b2', '#a89f8d', '#bab2a0'];
     const sw = 30, sh = 22;
     let row = 0;
     for (let yy = P.y - 152; yy < P.y + 150; yy += sh, row++) {
       const off = (row % 2) * (sw / 2);
       for (let xx = P.x - 152 - sw; xx < P.x + 150; xx += sw) {
+        const cx = xx + off + sw / 2, cy = yy + sh / 2;
+        const dc = Math.hypot(cx - P.x, cy - P.y);
+        if (dc > 136 + rnd() * 8) continue;
+        if (dc > 116 && rnd() < 0.30) continue; // vòng mép thưa
         b.fillStyle = tones[Math.floor(rnd() * tones.length)];
         b.beginPath(); b.roundRect(xx + off + 1.5, yy + 1.5, sw - 3, sh - 3, 5); b.fill();
         b.fillStyle = 'rgba(255,255,250,0.10)';
         b.beginPath(); b.roundRect(xx + off + 4, yy + 3.5, sw - 10, 5, 2); b.fill();
       }
     }
-    b.restore();
+    // đá rời ngoài mép + cỏ lấn vào mạch đá
+    for (let i = 0; i < 30; i++) {
+      const a = rnd() * Math.PI * 2, rr = 146 + rnd() * 44;
+      const sx = P.x + Math.cos(a) * rr, sy = P.y + Math.sin(a) * rr;
+      if (rnd() < 0.55) {
+        b.fillStyle = tones[Math.floor(rnd() * tones.length)];
+        b.beginPath(); b.roundRect(sx - 9, sy - 6, 15 + rnd() * 8, 10 + rnd() * 5, 5); b.fill();
+      } else {
+        b.strokeStyle = 'rgba(63,110,45,0.75)'; b.lineWidth = 1.8;
+        for (let g = 0; g < 4; g++) {
+          const lean = (g - 1.5) * 4.5, len = 8 + rnd() * 6;
+          b.beginPath(); b.moveTo(sx, sy); b.quadraticCurveTo(sx + lean * 0.4, sy - len * 0.7, sx + lean, sy - len); b.stroke();
+        }
+      }
+    }
   }
-  b.strokeStyle = 'rgba(90,84,70,0.5)'; b.lineWidth = 3;
-  b.beginPath(); b.arc(P.x, P.y, 150, 0, Math.PI * 2); b.stroke();
+  b.strokeStyle = 'rgba(90,84,70,0.20)'; b.lineWidth = 2.5;
   b.beginPath(); b.arc(P.x, P.y, 108, 0, Math.PI * 2); b.stroke();
   b.strokeStyle = 'rgba(90,84,70,0.18)'; b.lineWidth = 2;
   for (let si = 0; si < 12; si++) {
@@ -1450,7 +1536,7 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
     if (px > 742 && px < 858 && py > 600 && py < 686) return true;
     return false;
   };
-  const TUFT_COLS = ['#3e7d2c', '#57a047', '#2e6624'];
+  const TUFT_COLS = ['#4c9440', '#6cb457', '#357a2c']; // GĐ252
   const FLOWER_COLS = ['#e86a8a', '#f2d13c', '#ffffff', '#c95bf0', '#e5484d'];
   const place = (n: number, draw: (x: number, y: number, c: number) => void) => {
     let put = 0, tries = 0;
@@ -1548,10 +1634,8 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
     const rrnd = seededRand(4242);
     r.fillStyle = '#4a7d3e';
     r.fillRect(G.SPLIT, 0, G.W - G.SPLIT, G.H);
-    for (let i = 0; i < 5200; i++) {
-      r.fillStyle = pxDet[i % 3];
-      r.fillRect(G.SPLIT + Math.floor(rrnd() * ((G.W - G.SPLIT) / 8)) * 8, Math.floor(rrnd() * 150) * 8, 8, 8);
-    }
+    paintCarpet(r, rrnd, G.SPLIT, 0, G.W - G.SPLIT, G.H, (x, y) => // GĐ246b
+      (x > hs(2180) && x < hs(2380)) || (x > G.realm.x - 12 && x < G.realm.x + G.realm.w + 12 && y > G.realm.y - 12 && y < G.realm.y + G.realm.h + 12));
     // Dải rừng ngăn 2200–2360: nền tối rậm
     r.fillStyle = 'rgba(24,52,24,0.45)';
     r.fillRect(hs(2200), 0, hs(160), G.H); // GĐ175
@@ -1566,10 +1650,10 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
     r.fillRect(RM.x, RM.y, RM.w, RM.h);
     r.fillStyle = 'rgba(30,60,58,0.20)';
     r.fillRect(RM.x + 14, RM.y + 14, RM.w - 28, RM.h - 28);
-    for (let i = 0; i < 2400; i++) {
-      const px = RM.x + Math.floor(rrnd() * (RM.w / 8)) * 8, py = RM.y + Math.floor(rrnd() * (RM.h / 8)) * 8;
-      r.fillStyle = pxDet[i % 3];
-      r.fillRect(px, py, 8, 8);
+    for (let i = 0; i < 1500; i++) { // GĐ246b: vệt mềm lạnh thay ô vuông
+      const px = RM.x + rrnd() * RM.w, py = RM.y + rrnd() * RM.h;
+      r.fillStyle = rrnd() > 0.5 ? 'rgba(20,40,38,0.12)' : 'rgba(190,220,210,0.08)';
+      r.beginPath(); r.ellipse(px, py, 1.6 + rrnd() * 2.6, 1.2 + rrnd() * 1.8, rrnd() * 3, 0, Math.PI * 2); r.fill();
     }
     for (let i = 0; i < 300; i++) { // sỏi đá trong bí cảnh
       const px = RM.x + rrnd() * RM.w, py = RM.y + rrnd() * RM.h;
@@ -1737,6 +1821,13 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   bx.scale(2, 2);
   bx.fillStyle = 'rgba(20,26,14,0.22)';
   bx.beginPath(); bx.ellipse(60, 78, 34, 5, 0, 0, Math.PI * 2); bx.fill();
+  const boardImg = scene.textures.exists('board-spr')
+    ? scene.textures.get('board-spr').getSourceImage() as unknown as CanvasImageSource
+    : null;
+  if (boardImg) {
+    const bh = 78, bw = bh * 1.224;
+    bx.drawImage(boardImg, 60 - bw / 2, 1, bw, bh);
+  } else {
   bx.fillStyle = '#5d4037';
   bx.fillRect(29, 40, 7, 38); bx.fillRect(84, 40, 7, 38);
   bx.fillStyle = '#4a332a';
@@ -1751,7 +1842,28 @@ export function bakeWorldTextures(scene: Phaser.Scene): void {
   bx.strokeStyle = '#7a6a55'; bx.lineWidth = 1.4;
   bx.beginPath(); bx.moveTo(33, 34); bx.lineTo(79, 34); bx.stroke();
   bx.beginPath(); bx.moveTo(33, 40); bx.lineTo(71, 40); bx.stroke();
+  }
   scene.textures.addCanvas('board', bdC);
+
+  // ---------- ĐÀI PHUN NƯỚC (GĐ246, cạnh tây quảng trường) ----------
+  {
+    const [fC, fx] = makeCanvas(400, 300);
+    fx.scale(2, 2);
+    fx.fillStyle = 'rgba(20,26,14,0.20)';
+    fx.beginPath(); fx.ellipse(100, 138, 82, 10, 0, 0, Math.PI * 2); fx.fill();
+    const fImg = scene.textures.exists('fountain-spr')
+      ? scene.textures.get('fountain-spr').getSourceImage() as unknown as CanvasImageSource
+      : null;
+    if (fImg) {
+      const fh = 148, fw = fh * 1.367; // sprite đã cắt nền 1530x1119
+      fx.drawImage(fImg, 100 - fw / 2, 146 - fh, fw, fh);
+    } else { // dự phòng vẽ tay: vành đá + mặt nước
+      fx.fillStyle = '#9a958a'; fx.beginPath(); fx.ellipse(100, 118, 84, 30, 0, 0, Math.PI * 2); fx.fill();
+      fx.fillStyle = '#5ea8cf'; fx.beginPath(); fx.ellipse(100, 114, 72, 24, 0, 0, Math.PI * 2); fx.fill();
+      fx.fillStyle = '#8a8578'; fx.fillRect(94, 78, 12, 34);
+    }
+    scene.textures.addCanvas('fountain', fC);
+  }
 
   // GĐ29 (thay GĐ15/GĐ28): BỎ pixelSnap cho môi trường — người chơi cần NÉT.
   // Texture đã nướng 2× (GĐ28) nên giữ nguyên độ phân giải cao + lọc LINEAR:
@@ -2302,14 +2414,16 @@ export interface MapEnterData {
   study?: { x: number; y: number } | null; // GĐ105: điểm đọc sách Văn Uyển
   npcs?: Array<{ id: string; name: string; role: string; kind: string; x: number; y: number; style: string }>; // GĐ89: dân thành phố
   nodes?: Array<{ id: string; kind: string; itemId: string; x: number; y: number }>; // GĐ132: điểm tài nguyên (mạch quặng / bụi thuốc)
+  caves?: Array<{ x: number; y: number }>; // GĐ236: miệng hang trên map cha
+  caveExit?: { x: number; y: number; parentName: string } | null; // GĐ236: cửa ra khi đang ở trong hang
 }
 interface ThemeStyle { g1: string; g2: string; accent: string; leaf: string; leaf2: string; rock: string; plaza: string }
 const MAP_THEME_STYLE: Record<string, ThemeStyle> = {
-  city: { g1: '#8f9779', g2: '#7e8a6c', accent: '#ffd94d', leaf: '#4e7d3a', leaf2: '#639450', rock: '#9a958a', plaza: '#b3a58c' },
-  garden: { g1: '#5da24c', g2: '#4c8f3e', accent: '#8be9c9', leaf: '#3f7d33', leaf2: '#559548', rock: '#8a8578', plaza: '#a98f66' },
-  beast: { g1: '#63a34b', g2: '#548f3f', accent: '#f2d24b', leaf: '#4e7d3a', leaf2: '#639450', rock: '#8a8578', plaza: '#a98f66' },
+  city: { g1: '#96ac70', g2: '#84a05f', accent: '#ffd94d', leaf: '#55853f', leaf2: '#6da355', rock: '#9a958a', plaza: '#bfb091' },
+  garden: { g1: '#69b455', g2: '#57a047', accent: '#8be9c9', leaf: '#3f7d33', leaf2: '#559548', rock: '#8a8578', plaza: '#a98f66' },
+  beast: { g1: '#6fb354', g2: '#5da24c', accent: '#f2d24b', leaf: '#4e7d3a', leaf2: '#639450', rock: '#8a8578', plaza: '#a98f66' },
   array: { g1: '#7d8474', g2: '#6b7263', accent: '#7fe3d0', leaf: '#4e7d3a', leaf2: '#639450', rock: '#9a958a', plaza: '#a39a86' },
-  script: { g1: '#6f8a5f', g2: '#5f7a50', accent: '#ffe9a8', leaf: '#476e38', leaf2: '#5d8a49', rock: '#8a8578', plaza: '#a98f66' },
+  script: { g1: '#7a9869', g2: '#6b8a5c', accent: '#ffe9a8', leaf: '#476e38', leaf2: '#5d8a49', rock: '#8a8578', plaza: '#a98f66' },
   forge: { g1: '#6e5a4a', g2: '#5d4a3c', accent: '#f08a3c', leaf: '#5d6e42', leaf2: '#71855a', rock: '#4a4038', plaza: '#7a6a58' },
   ice: { g1: '#cfe6f2', g2: '#bcd8ea', accent: '#7fd1e8', leaf: '#dceef7', leaf2: '#c4e0f0', rock: '#aebfd0', plaza: '#e6f2fa' },
   lava: { g1: '#4a3230', g2: '#3c2826', accent: '#f0643c', leaf: '#5d4a3a', leaf2: '#6e5a48', rock: '#2e2126', plaza: '#5d4038' },
@@ -2320,6 +2434,7 @@ const MAP_THEME_STYLE: Record<string, ThemeStyle> = {
   storm: { g1: '#4f5a68', g2: '#424c5a', accent: '#b678f0', leaf: '#3f5642', leaf2: '#4f6b52', rock: '#6e7684', plaza: '#5d6672' },
   swamp: { g1: '#4a5d3a', g2: '#3d4f30', accent: '#a8c47f', leaf: '#5d7a45', leaf2: '#6f9157', rock: '#5d6050', plaza: '#55663f' },
   battlefield: { g1: '#7a6a52', g2: '#685a44', accent: '#d8c9a8', leaf: '#5d6e42', leaf2: '#71855a', rock: '#6e6252', plaza: '#86755c' },
+  cave: { g1: '#4a423a', g2: '#3b342c', accent: '#a8e6e0', leaf: '#5d7a45', leaf2: '#6f9157', rock: '#6e6258', plaza: '#575046' }, // GĐ236: nền hang tối, điểm tinh thể xanh ngọc
   void: { g1: '#241f3d', g2: '#1b1730', accent: '#9a86ff', leaf: '#3a3260', leaf2: '#4a4280', rock: '#453d6e', plaza: '#2e2752' },
   metal: { g1: '#8a8578', g2: '#767165', accent: '#f0c84b', leaf: '#5d7a45', leaf2: '#6f9157', rock: '#9a958a', plaza: '#9d968a' },
   swords: { g1: '#5f6b5a', g2: '#505c4c', accent: '#cfd8dc', leaf: '#476e38', leaf2: '#5d8a49', rock: '#7d8474', plaza: '#6e7a66' },
@@ -2545,6 +2660,53 @@ function drawDecorItem(b: CanvasRenderingContext2D, st: ThemeStyle, k: string, x
       b.strokeStyle = '#e3c96a'; b.lineWidth = 1.6;
       b.beginPath(); b.moveTo(-3, 12); b.lineTo(-4, -16); b.stroke();
       break;
+    case 'lm_dai': // GĐ235: Đài Kiếp — bệ đá 2 bậc + trụ khắc phù lôi (điểm nhấn cõi Độ Kiếp)
+      b.fillStyle = 'rgba(0,0,0,0.20)'; b.beginPath(); b.ellipse(0, 12, 26, 6, 0, 0, Math.PI * 2); b.fill();
+      b.fillStyle = st.rock; poly([[-25, 12], [-20, 5], [20, 5], [25, 12]]);
+      b.fillStyle = st.plaza; poly([[-20, 5], [-16, 0], [16, 0], [20, 5]]);
+      b.fillStyle = st.rock; poly([[-5, 0], [-3.4, -34], [3.4, -34], [5, 0]]);
+      b.fillStyle = 'rgba(0,0,0,0.22)'; poly([[1, 0], [3.4, -34], [5, 0]]);
+      b.fillStyle = st.rock; b.fillRect(-6.5, -38, 13, 5);
+      b.strokeStyle = st.accent; b.lineWidth = 2; b.beginPath(); b.moveTo(1.2, -30); b.lineTo(-1.6, -21); b.lineTo(0.8, -19); b.lineTo(-1.6, -9); b.stroke();
+      break;
+    case 'lm_cong': // GĐ235: Cổng Trời — 2 cột đá + 2 xà ngang + biển hiệu (điểm nhấn Tiên Môn/Tiên Giới)
+      b.fillStyle = 'rgba(0,0,0,0.20)'; b.beginPath(); b.ellipse(0, 12, 27, 6, 0, 0, Math.PI * 2); b.fill();
+      b.fillStyle = st.plaza; poly([[-22, 12], [-18, 7], [18, 7], [22, 12]]);
+      b.fillStyle = st.rock; b.fillRect(-19, -26, 7, 34); b.fillRect(12, -26, 7, 34);
+      b.fillStyle = 'rgba(0,0,0,0.20)'; b.fillRect(-14.5, -26, 2.5, 34); b.fillRect(14.5, -26, 2.5, 34);
+      b.fillStyle = st.rock; b.fillRect(-24, -33, 48, 6); b.fillRect(-21, -24, 42, 4.5);
+      b.fillStyle = st.accent; b.fillRect(-6, -32, 12, 7);
+      b.fillStyle = 'rgba(255,255,255,0.75)'; b.fillRect(-3.5, -29.3, 7, 1.8);
+      break;
+    case 'lm_tuong': // GĐ235: Tượng Đá — thần thú đá ngồi trên bệ (điểm nhấn núi/thú)
+      b.fillStyle = 'rgba(0,0,0,0.20)'; b.beginPath(); b.ellipse(0, 12, 25, 6, 0, 0, Math.PI * 2); b.fill();
+      b.fillStyle = st.rock; poly([[-21, 12], [-16, 4], [16, 4], [21, 12]]);
+      b.fillStyle = st.plaza; poly([[-16, 4], [-13, 0], [13, 0], [16, 4]]);
+      b.fillStyle = st.rock; b.beginPath(); b.ellipse(0, -10, 10.5, 11, 0, 0, Math.PI * 2); b.fill();
+      b.beginPath(); b.arc(0, -24, 7, 0, Math.PI * 2); b.fill();
+      poly([[-8.5, -28], [-4.5, -27], [-7.5, -21]]); poly([[8.5, -28], [4.5, -27], [7.5, -21]]);
+      b.fillRect(-13, -12, 5, 13); b.fillRect(8, -12, 5, 13);
+      b.fillStyle = 'rgba(0,0,0,0.18)'; b.beginPath(); b.ellipse(4, -10, 6, 10, 0, 0, Math.PI * 2); b.fill();
+      b.fillStyle = st.accent; b.beginPath(); b.arc(-2.6, -24.5, 1.1, 0, Math.PI * 2); b.fill(); b.beginPath(); b.arc(2.6, -24.5, 1.1, 0, Math.PI * 2); b.fill();
+      break;
+    case 'lm_bia': // GĐ235: Bia Cổ — bia đá khắc chữ trên lưng rùa đá (điểm nhấn mộ địa/cổ thành)
+      b.fillStyle = 'rgba(0,0,0,0.20)'; b.beginPath(); b.ellipse(0, 12, 24, 6, 0, 0, Math.PI * 2); b.fill();
+      b.fillStyle = st.rock; b.beginPath(); b.ellipse(0, 9, 17, 6.5, 0, Math.PI, Math.PI * 2); b.closePath(); b.fill();
+      b.beginPath(); b.moveTo(-10, 6); b.lineTo(-10, -22); b.arc(0, -22, 10, Math.PI, 0); b.lineTo(10, 6); b.closePath(); b.fill();
+      b.strokeStyle = 'rgba(0,0,0,0.35)'; b.lineWidth = 1.6;
+      b.beginPath(); b.moveTo(-5.5, -14); b.lineTo(5.5, -14); b.moveTo(-5.5, -9); b.lineTo(5.5, -9); b.moveTo(-5.5, -4); b.lineTo(3, -4); b.stroke();
+      b.fillStyle = st.accent; b.beginPath(); b.moveTo(0, -27.5); b.lineTo(3, -24); b.lineTo(0, -20.5); b.lineTo(-3, -24); b.closePath(); b.fill();
+      b.fillStyle = st.leaf; b.beginPath(); b.arc(-13, 9, 3, 0, Math.PI * 2); b.fill(); b.beginPath(); b.arc(14, 10, 2.4, 0, Math.PI * 2); b.fill();
+      break;
+    case 'lm_sen': // GĐ235: Đài Sen — hồ sen nhỏ (điểm nhấn vườn/biển tiên)
+      b.fillStyle = st.accent; b.globalAlpha = 0.5; b.beginPath(); b.ellipse(0, 8, 27, 9.5, 0, 0, Math.PI * 2); b.fill(); b.globalAlpha = 1;
+      b.fillStyle = st.leaf; b.beginPath(); b.arc(-13, 7, 5, 0.4, Math.PI * 2 - 0.7); b.lineTo(-13, 7); b.closePath(); b.fill();
+      b.beginPath(); b.arc(14, 10, 4.2, 0.4, Math.PI * 2 - 0.7); b.lineTo(14, 10); b.closePath(); b.fill();
+      b.fillStyle = st.leaf2;
+      for (const dx of [-7, 7]) { b.beginPath(); b.ellipse(dx, 1, 3.4, 6.4, dx < 0 ? -0.5 : 0.5, 0, Math.PI * 2); b.fill(); }
+      b.fillStyle = st.accent; b.beginPath(); b.ellipse(0, -1, 3.8, 7.6, 0, 0, Math.PI * 2); b.fill();
+      b.fillStyle = 'rgba(255,255,255,0.5)'; b.beginPath(); b.ellipse(-1.2, -3, 1.3, 3.6, 0, 0, Math.PI * 2); b.fill();
+      break;
     default: b.fillStyle = st.rock; poly([[-9, 6], [-5, -5], [4, -7], [9, 2], [8, 6]]); break;
   }
   b.restore();
@@ -2557,6 +2719,9 @@ function themeStyleOf(def: MapEnterData): ThemeStyle {
 // trong hộp 96, neo đáy y≈79. Đồ nhỏ KHÔNG phóng to (scale ≤ 1).
 const DECOR_SPRITE_BOX: Record<string, [number, number]> = {};
 for (const k of ['pine','willow','palm','dead_tree','blood_tree','swamp_tree','mountain','mountain_snow','pavilion','hut','cave','cactus']) DECOR_SPRITE_BOX[k] = [90, 76];
+DECOR_SPRITE_BOX['mountain'] = [130, 106]; DECOR_SPRITE_BOX['mountain_snow'] = [130, 106]; // GĐ237: núi phải to đúng tầm vóc so với nhân vật/cây (người chơi yêu cầu tỉ lệ như thực tế)
+DECOR_SPRITE_BOX['cave'] = [132, 112]; // GĐ237: miệng hang cũng phải to — cửa vào một thế giới bên trong, không phải lỗ nhỏ
+for (const k of ['lm_dai','lm_cong','lm_tuong','lm_bia','lm_sen']) DECOR_SPRITE_BOX[k] = [90, 76]; // GĐ235: sprite lõi landmark (Muse gen + khắc Cổ Ngữ) thay hình vẽ code
 for (const k of ['rock','lava_rock','ice_shard','tomb','pillar','sword_stone','lamp','banner','furnace','forge','anvil','desk','fence','pond','wave','coral','hay','blossom','lava_pool','ice_crystal','dune']) DECOR_SPRITE_BOX[k] = [70, 56]; // GĐ166: + 3 decor chủ đề mới
 DECOR_SPRITE_BOX['stone'] = [35, 28]; // GĐ228 (31/10): Bảo chê cục lát đá 'stone' to và chướng — thu còn một nửa (sprite nó là ô lát đá vuông nên càng to càng lộ)
 for (const k of ['flower','herb','grass','grass_tall','reed','bone','crystal','crystal_gold']) DECOR_SPRITE_BOX[k] = [46, 40];
@@ -2570,7 +2735,25 @@ function decorTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle, kind: 
   const key = `decor-${theme}-${kind}`;
   if (scene.textures.exists(key)) return key;
   const BOX = 96;
-  const [cv, b] = makeCanvas(BOX * 2, BOX * 2);
+  // GĐ239: canvas THÍCH ỨNG theo sprite — hộp 96 cố định CẮT XÉN sprite to
+  // (núi 116px, hang 130px bị lẹm hai bên + mất đỉnh; người chơi chỉ ra
+  // "bị sát hình ảnh cắt"). Đo sprite trước, canvas đủ chứa + chừa lề cho
+  // viền loang chân. Neo: đáy sprite ở baseY = 0.68*H + 13.7 (H=96 cho
+  // đúng số cũ 79), tâm x = W/2, điểm neo thế giới (0.5, 0.68) không đổi.
+  let sprImg: CanvasImageSource | null = null, sprW = 0, sprH = 0;
+  // GĐ240: thông trên map băng/tuyết dùng biến thể phủ tuyết (Bảo duyệt)
+  const sprKind = (kind === 'pine' && (theme === 'ice' || theme === 'ice_plain') && scene.textures.exists('decor-spr-pine_snow')) ? 'pine_snow' : kind;
+  if (DECOR_SPRITE_BOX[kind] && scene.textures.exists(`decor-spr-${sprKind}`)) {
+    sprImg = scene.textures.get(`decor-spr-${sprKind}`).getSourceImage() as unknown as CanvasImageSource;
+    const iw0 = (sprImg as HTMLImageElement).width, ih0 = (sprImg as HTMLImageElement).height;
+    const [mW, mH] = DECOR_SPRITE_BOX[kind];
+    const sc0 = Math.min(1, mW / iw0, mH / ih0);
+    sprW = iw0 * sc0; sprH = ih0 * sc0;
+  }
+  const W = Math.ceil(Math.max(BOX, sprW + 28));
+  const H = Math.ceil(Math.max(BOX, sprH > 0 ? (sprH - 7.7) / 0.68 : 0));
+  const baseY = 0.68 * H + 13.7;
+  const [cv, b] = makeCanvas(W * 2, H * 2);
   b.scale(2, 2);
   // GĐ108: cây/nhà dùng sprite PixelLab của làng (đã load sẵn ở boot) thay
   // cho hình vẽ code — cùng asset với map nhà, áp cho mọi map khác. Chỉ
@@ -2594,31 +2777,40 @@ function decorTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle, kind: 
   if (kind === 'tree' && SPRITE_TREE_THEMES.includes(theme) && scene.textures.exists('tree-village-01')) {
     const img = scene.textures.get('tree-village-01').getSourceImage() as unknown as CanvasImageSource;
     const h = 62, w = (h * 102) / 114;
-    b.drawImage(img, 13, 8, 102, 114, BOX / 2 - w / 2, 79 - h, w, h);
+    b.drawImage(img, 13, 8, 102, 114, W / 2 - w / 2, baseY - h, w, h);
     spriteDrawn = true;
   } else if (kind === 'tree_big' && SPRITE_TREE_THEMES.includes(theme) && scene.textures.exists('tree-village-01')) {
     const img = scene.textures.get('tree-village-01').getSourceImage() as unknown as CanvasImageSource;
     const h = 76, w = (h * 102) / 114;
-    b.drawImage(img, 13, 8, 102, 114, BOX / 2 - w / 2, 79 - h, w, h);
+    b.drawImage(img, 13, 8, 102, 114, W / 2 - w / 2, baseY - h, w, h);
     spriteDrawn = true;
   } else if (kind === 'house' && scene.textures.exists('house-village-01')) {
     const img = scene.textures.get('house-village-01').getSourceImage() as unknown as CanvasImageSource;
     const w = 76, h = (w * 109) / 168;
-    b.drawImage(img, 12, 9, 168, 109, BOX / 2 - w / 2, 79 - h, w, h);
+    b.drawImage(img, 12, 9, 168, 109, W / 2 - w / 2, baseY - h, w, h);
     spriteDrawn = true;
-  } else if (DECOR_SPRITE_BOX[kind] && scene.textures.exists(`decor-spr-${kind}`)) {
-    // GĐ111: sprite ngoại cảnh sheet A–E — khung vừa theo nhóm (to/vừa/nhỏ),
-    // KHÔNG phóng to (đồ nhỏ như cỏ/hoa giữ nhỏ như bản vẽ code), neo đáy
-    // ở y≈79 như cây/nhà. Load lỗi thì rơi về vẽ code ở dưới.
-    const img = scene.textures.get(`decor-spr-${kind}`).getSourceImage() as unknown as CanvasImageSource;
-    const iw = (img as HTMLImageElement).width, ih = (img as HTMLImageElement).height;
-    const [maxW, maxH] = DECOR_SPRITE_BOX[kind];
-    const sc = Math.min(1, maxW / iw, maxH / ih);
-    const w = iw * sc, h = ih * sc;
-    b.drawImage(img, 0, 0, iw, ih, BOX / 2 - w / 2, 79 - h, w, h);
+  } else if (sprImg) {
+    // GĐ111: sprite ngoại cảnh — khung vừa theo nhóm, neo đáy ở baseY.
+    const iw = (sprImg as HTMLImageElement).width, ih = (sprImg as HTMLImageElement).height;
+    b.drawImage(sprImg, 0, 0, iw, ih, W / 2 - sprW / 2, baseY - sprH, sprW, sprH);
     spriteDrawn = true;
+    // GĐ239: VÁY LOANG CHÂN — mảng đất tối lởm chởm ôm chân + vệt đất/cỏ/đá
+    // rắc tràn ra ngoài biên sprite, để vật "mọc" khỏi mặt đất chứ không
+    // phải hình cắt dán (luật mặt cắt của người chơi).
+    const rndS = seededRand(hashStrTs(`skirt:${theme}:${kind}`));
+    b.fillStyle = 'rgba(30,26,18,0.20)';
+    for (let i = 0; i < 7; i++) {
+      b.beginPath(); b.ellipse(W / 2 + (rndS() - 0.5) * sprW * 0.5, baseY - 1 + (rndS() - 0.5) * 5, sprW * (0.20 + rndS() * 0.16), 4.5 + rndS() * 3.5, 0, 0, Math.PI * 2); b.fill();
+    }
+    for (let i = 0; i < 26; i++) {
+      const fx = W / 2 + (rndS() - 0.5) * sprW * 1.12, fy = baseY - 3 + rndS() * 13;
+      b.fillStyle = i % 3 === 0 ? st.leaf : (i % 3 === 1 ? st.rock : 'rgba(60,50,36,0.55)');
+      b.globalAlpha = 0.35 + rndS() * 0.4;
+      b.beginPath(); b.ellipse(fx, fy, 1.6 + rndS() * 3.4, 1.2 + rndS() * 2.2, rndS() * 3, 0, Math.PI * 2); b.fill();
+    }
+    b.globalAlpha = 1;
   }
-  if (!spriteDrawn) drawDecorItem(b, st, kind, BOX / 2, BOX * 0.68, 1);
+  if (!spriteDrawn) drawDecorItem(b, st, kind, W / 2, H * 0.68, 1);
   scene.textures.addCanvas(key, cv);
   // GĐ68: decor vẽ vector mượt ở 2× — dùng LINEAR như map nhà (GĐ29), NEAREST
   // làm viền răng cưa/rung khi camera di chuyển (đó là chỗ "mờ" còn lại).
@@ -2732,15 +2924,15 @@ function groundTileTexture(scene: Phaser.Scene, def: MapEnterData, st: ThemeStyl
   const w = Math.min(GROUND_TILE, def.w - ox), h = Math.min(GROUND_TILE, def.h - oy);
   const [cv, b] = makeCanvas(w, h);
   const rnd = seededRand(hashStrTs(`${def.mapId}:${tx}:${ty}`));
+  // GĐ240: MẶT ĐẤT KIỂU THẢM CỎ (người chơi chốt: bỏ kiểu vệt lốm đốm
+  // trông bẩn/khó chịu) — nền là thảm cỏ XANH LIỀN, trôi tông mềm rất nhẹ,
+  // điểm xuyết mảng đất mòn nhỏ, và THỰC VẬT LỚN đọc được: khóm cỏ cao
+  // 7–15px xòe nhiều lá, nhánh lá nhỏ, hoa li ti thưa. Không còn hạt nhiễu.
   b.fillStyle = st.g1; b.fillRect(0, 0, w, h);
-  for (let i = 0; i < 6; i++) {
-    b.fillStyle = i % 2 ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,235,0.05)';
-    b.beginPath(); b.ellipse(rnd() * w, rnd() * h, 130 + rnd() * 300, 90 + rnd() * 200, rnd() * 3, 0, Math.PI * 2); b.fill();
-  }
-  for (let i = 0; i < 460; i++) {
-    b.fillStyle = i % 3 ? st.g2 : 'rgba(0,0,0,0.10)';
-    b.globalAlpha = 0.16;
-    b.fillRect(Math.floor(rnd() * (w / 16)) * 16, Math.floor(rnd() * (h / 16)) * 16, 16, 16);
+  for (let i = 0; i < 10; i++) { // trôi tông mềm của thảm (không hình khối)
+    b.fillStyle = i % 2 ? st.g2 : shadeHex(st.g1, 0.86);
+    b.globalAlpha = 0.07 + rnd() * 0.06;
+    b.beginPath(); b.ellipse(rnd() * w, rnd() * h, 150 + rnd() * 230, 110 + rnd() * 170, rnd() * 3, 0, Math.PI * 2); b.fill();
   }
   b.globalAlpha = 1;
   if (def.theme === 'void') {
@@ -2750,23 +2942,80 @@ function groundTileTexture(scene: Phaser.Scene, def: MapEnterData, st: ThemeStyl
   } else if (def.theme === 'ice' || def.theme === 'ice_plain' || def.theme === 'deep_sea') {
     for (let i = 0; i < 34; i++) { b.fillStyle = 'rgba(255,255,255,0.4)'; b.fillRect(rnd() * w, rnd() * h, 2.2, 2.2); }
   }
-  // GĐ229: chi tiết rải mặt đất theo theme (nướng theo seed của ô) — lá cỏ /
-  // sỏi / đốm sáng cho mặt đất hết trơn tru; theme xanh nhiều lá cỏ, theme
-  // khác thiên sỏi + đốm màu chủ đề.
+  // mảng đất mòn nhỏ: chấm cụm mềm (đất chỉ là điểm nhấn, không phải nền)
+  const dirt = shadeHex(st.rock, 0.60);
+  for (let i = 0; i < 6; i++) {
+    const cx = rnd() * w, cy = rnd() * h;
+    for (let j = 0; j < 55; j++) {
+      const a = rnd() * Math.PI * 2, d = Math.abs(rnd() + rnd() - 1) * 46;
+      b.fillStyle = dirt; b.globalAlpha = 0.16 + rnd() * 0.22;
+      b.beginPath(); b.ellipse(cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.7, 1.6 + rnd() * 3, 1.2 + rnd() * 2, a, 0, Math.PI * 2); b.fill();
+    }
+  }
+  b.globalAlpha = 1;
+  // THỰC VẬT LỚN: khóm cỏ xòe + nhánh lá + hoa li ti
   {
-    const th = def.theme || 'mountain';
-    const leafy = ['garden', 'city', 'beast', 'mountain', 'swamp', 'blood_forest', 'graveyard', 'script', 'deep_forest', 'ghost_forest', 'stream'].includes(th);
-    const detailN = Math.round((w * h) / 9000);
-    for (let i = 0; i < detailN; i++) {
-      const dx = rnd() * w, dy = rnd() * h, r = rnd();
-      if (leafy && r < 0.55) {
-        b.strokeStyle = st.leaf; b.globalAlpha = 0.35; b.lineWidth = 1.6;
-        b.beginPath(); b.moveTo(dx, dy); b.lineTo(dx + (rnd() * 4 - 2), dy - 4 - rnd() * 4); b.stroke();
-      } else if (r < 0.82) {
-        b.fillStyle = st.rock; b.globalAlpha = 0.3;
-        b.beginPath(); b.ellipse(dx, dy, 1.6 + rnd() * 2.2, 1.2 + rnd() * 1.4, rnd() * 3, 0, Math.PI * 2); b.fill();
-      } else {
-        b.fillStyle = st.accent; b.globalAlpha = 0.28; b.fillRect(dx, dy, 2.2, 2.2);
+    const tuftN = Math.round((w * h) / 1700); // GĐ240b: dày hơn
+    // GĐ246 (mẫu Thánh Nguyên): mỗi ô chọn 2 màu hoa chủ đạo để hoa mọc
+    // thành TỪNG CỤM cùng màu đọc được từ xa, không rải lẻ đủ màu.
+    const flowerPalette = ['#ffffff', '#ffe066', '#f2a7c3', st.accent];
+    const clusterCols = [flowerPalette[Math.floor(rnd() * flowerPalette.length)], flowerPalette[Math.floor(rnd() * flowerPalette.length)]];
+    for (let i = 0; i < tuftN; i++) {
+      const bx = rnd() * w, by = rnd() * h, t = rnd();
+      if (t < 0.62) { // khóm cỏ: 6 lá cong xòe từ 1 gốc
+        const blades = 5 + Math.floor(rnd() * 3);
+        for (let g = 0; g < blades; g++) {
+          const lean = (g / (blades - 1) - 0.5) * 16, len = 10 + rnd() * 10; // GĐ240b: lá cao 10–20px
+          b.strokeStyle = g % 2 ? st.leaf : st.leaf2; b.globalAlpha = 0.55 + rnd() * 0.35; b.lineWidth = 1.9;
+          b.beginPath(); b.moveTo(bx, by);
+          b.quadraticCurveTo(bx + lean * 0.4, by - len * 0.7, bx + lean, by - len); b.stroke();
+        }
+        if (rnd() < 0.10) { // GĐ246: bông bồ công anh — cuống mảnh + bông trắng xốp
+          const sx = bx + (rnd() * 10 - 5), sy = by, sh2 = 12 + rnd() * 5;
+          b.strokeStyle = st.leaf; b.globalAlpha = 0.7; b.lineWidth = 1.2;
+          b.beginPath(); b.moveTo(sx, sy); b.quadraticCurveTo(sx + 1.5, sy - sh2 * 0.6, sx + 2.5, sy - sh2); b.stroke();
+          b.fillStyle = 'rgba(255,255,255,0.92)'; b.globalAlpha = 0.92;
+          b.beginPath(); b.arc(sx + 2.5, sy - sh2 - 1.5, 2.7, 0, Math.PI * 2); b.fill();
+          b.fillStyle = 'rgba(230,238,255,0.65)';
+          b.beginPath(); b.arc(sx + 1.2, sy - sh2 - 3, 1.5, 0, Math.PI * 2); b.fill();
+          b.globalAlpha = 1;
+        }
+      } else if (t < 0.76) { // nhánh lá nhỏ: 3 lá bầu quanh 1 điểm
+        for (let g = 0; g < 3; g++) {
+          const a = rnd() * Math.PI * 2;
+          b.fillStyle = st.leaf2; b.globalAlpha = 0.6 + rnd() * 0.3;
+          b.beginPath(); b.ellipse(bx + Math.cos(a) * 3.4, by + Math.sin(a) * 2.4 - 1.5, 3.6, 2.1, a, 0, Math.PI * 2); b.fill();
+        }
+      } else if (t < 0.90) { // GĐ240b: BỤI LÁ LỚN — cụm lá bầu chồng nhau 14–26px
+        const bn = 5 + Math.floor(rnd() * 4);
+        for (let g = 0; g < bn; g++) {
+          const a = rnd() * Math.PI * 2, d = rnd() * 7;
+          b.fillStyle = g % 2 ? st.leaf : st.leaf2; b.globalAlpha = 0.5 + rnd() * 0.3;
+          b.beginPath(); b.ellipse(bx + Math.cos(a) * d, by - 3 + Math.sin(a) * d * 0.6, 5 + rnd() * 6, 3.4 + rnd() * 3.6, a, 0, Math.PI * 2); b.fill();
+        }
+      } else if (t < 0.96) { // GĐ246: CỤM HOA — 4–7 bông cùng màu mọc sát nhau (mẫu: thảm hoa theo mảng)
+        const col = clusterCols[Math.floor(rnd() * clusterCols.length)];
+        const fn = 4 + Math.floor(rnd() * 4);
+        for (let g = 0; g < fn; g++) {
+          const a = rnd() * Math.PI * 2, d = rnd() * 11;
+          const fx = bx + Math.cos(a) * d, fy = by + Math.sin(a) * d * 0.7;
+          for (let p = 0; p < 5; p++) {
+            const pa = (p / 5) * Math.PI * 2;
+            b.fillStyle = col; b.globalAlpha = 0.85;
+            b.beginPath(); b.arc(fx + Math.cos(pa) * 1.9, fy - 2 + Math.sin(pa) * 1.9, 1.6, 0, Math.PI * 2); b.fill();
+          }
+          b.fillStyle = '#ffdf6b'; b.globalAlpha = 1;
+          b.beginPath(); b.arc(fx, fy - 2, 1.15, 0, Math.PI * 2); b.fill();
+        }
+        b.globalAlpha = 1;
+      } else { // hoa li ti: 4 cánh + nhụy
+        for (let g = 0; g < 4; g++) {
+          const a = (g / 4) * Math.PI * 2 + rnd();
+          b.fillStyle = st.accent; b.globalAlpha = 0.75;
+          b.beginPath(); b.arc(bx + Math.cos(a) * 2.1, by - 2 + Math.sin(a) * 2.1, 1.5, 0, Math.PI * 2); b.fill();
+        }
+        b.fillStyle = 'rgba(255,244,200,0.9)'; b.globalAlpha = 1;
+        b.beginPath(); b.arc(bx, by - 2, 1.1, 0, Math.PI * 2); b.fill();
       }
     }
     b.globalAlpha = 1;

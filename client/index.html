@@ -41,11 +41,102 @@
       .xBtn { background: transparent; border: 1px solid rgba(255,255,255,0.35); color: #fff; border-radius: 5px; cursor: pointer; padding: 1px 7px; font-family: monospace; }
       .panelSub { font-size: 11.5px; color: #a5f3fc; margin-bottom: 8px; }
       .prow { display: flex; align-items: center; gap: 6px; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.09); font-size: 12px; }
-      .prow .pname { flex: 1; }
+      .prow .iico { width: 30px; height: 30px; vertical-align: -9px; margin-right: 7px; image-rendering: pixelated; } /* GĐ264 */
+      .pname { flex: 1; }
       .prow .pdesc { display: block; font-size: 10.5px; color: #9db8a4; }
       .pbtn { background: linear-gradient(180deg, #3f6212, #2c4a0d); color: #e9ffd0; border: 1px solid #84cc16; border-radius: 5px; padding: 3px 9px; cursor: pointer; font-family: monospace; font-size: 11.5px; white-space: nowrap; }
       .pbtn:disabled { opacity: 0.4; cursor: default; }
       .pbtn.gold { background: linear-gradient(180deg, #ffd94d, #d9a514); color: #231a02; border-color: #ffd94d; font-weight: 700; }
+      /* GĐ244: panel chế tạo thống nhất 3 cột (mẫu Bảo gửi 03/11) */
+      #jobPanel { left: 50%; right: auto; top: 50%; transform: translate(-50%, -50%); width: min(1240px, 97vw); padding: 16px 18px; max-height: calc(100vh - 36px); z-index: 60; background: rgba(23, 40, 29, 0.985); }
+      .craftWrap { display: grid; grid-template-columns: 282px 1fr 262px; gap: 14px; }
+      .craftWrap > div { min-width: 0; }
+      .craftChips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+      .cchip { background: rgba(255,255,255,0.06); color: #c9d8cc; border: 1px solid rgba(255,255,255,0.18); border-radius: 20px; padding: 2px 9px; font-size: 10.5px; font-family: monospace; cursor: pointer; }
+      .cchip.on { background: linear-gradient(180deg, #ffd94d, #d9a514); color: #231a02; border-color: #ffd94d; font-weight: 700; }
+      .craftList { max-height: 560px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; padding-right: 2px; }
+      .citem { text-align: left; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 9px 10px; cursor: pointer; color: #eaf3ec; font-family: monospace; }
+      .citem.on { border-color: #ffd94d; background: rgba(255,217,77,0.12); }
+      .citem .cn { font-size: 13px; font-weight: 700; display: block; }
+      .citem .cs { font-size: 11.5px; color: #9db8a4; display: block; margin-top: 2px; }
+      .ctag { font-size: 9.5px; padding: 0 5px; border-radius: 8px; margin-left: 4px; vertical-align: 1px; }
+      .ctag.ok { background: #14532d; color: #bbf7d0; }
+      .ctag.miss { background: #7f1d1d; color: #fecaca; }
+      .ctag.lock { background: #3f3f46; color: #d4d4d8; }
+      .craftArt { display: flex; align-items: center; justify-content: center; min-height: 270px; background: radial-gradient(ellipse at 50% 40%, rgba(255,217,77,0.10), rgba(0,0,0,0.25) 70%); border: 1px solid rgba(255,255,255,0.10); border-radius: 10px; overflow: hidden; }
+      .craftArt img { max-height: 300px; max-width: 100%; object-fit: contain; }
+      .craftArt img.scene { width: 100%; height: 300px; object-fit: cover; }
+      .craftHead { text-align: center; font-size: 14px; color: #ffe9a8; padding: 10px 0 2px; }
+      .craftMats { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 9px 0; }
+      .cmat { min-width: 88px; text-align: center; border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; padding: 8px 10px; background: rgba(255,255,255,0.04); }
+      .cmat .cmatN { font-size: 11px; color: #c9d8cc; max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .cmat .cmatC { font-size: 15px; font-weight: 700; }
+      .cmat.miss { border-color: #ef4444; }
+      .cmat.miss .cmatC { color: #f87171; }
+      .craftActRow { text-align: center; padding-top: 4px; }
+      .craftAct { font-size: 15px !important; padding: 11px 36px !important; }
+      .craftRight { font-size: 12.5px; }
+      .craftRight .drow { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.09); }
+      .craftRight .drow b { color: #ffe9a8; text-align: right; }
+      .craftRight .ddesc { color: #9db8a4; font-size: 11px; line-height: 1.5; padding-top: 6px; }
+      .craftRight select { background: #12241a; color: #eaf3ec; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; font-family: monospace; font-size: 11.5px; max-width: 132px; }
+      @media (max-width: 840px) { .craftWrap { grid-template-columns: 1fr; } .craftList { max-height: 170px; } }
+
+      /* GĐ245: popup NHẬN ĐƯỢC VẬT PHẨM + BẢNG THÔNG BÁO */
+      #skinPanel { position: fixed; inset: 0; z-index: 75; align-items: center; justify-content: center; background: rgba(4, 10, 6, 0.55); }
+      #skinPanel .noticeCard { width: min(430px, 94vw); margin: 0 auto; }
+      .skins { display: flex; gap: 8px; flex-wrap: wrap; }
+      .skins .skinTile { width: 66px; padding: 4px 2px 3px; text-align: center; cursor: pointer; border: 2px solid rgba(255,255,255,0.16); border-radius: 8px; background: rgba(255,255,255,0.04); }
+      .skins .skinTile.sel { border-color: #ffd94d; background: rgba(255,217,77,0.13); }
+      .skins .skinTile img { width: 44px; height: 54px; object-fit: contain; image-rendering: pixelated; }
+      .skins .skinTile .skinName { font-size: 9px; line-height: 1.15; color: #d7e8dd; }
+      .skins .skinTile .skinPh { font-size: 24px; line-height: 54px; }
+      .skins .skinTile.locked img { filter: grayscale(0.65) brightness(0.72); }
+      .skins .skinTile .skinPrice { font-size: 10px; color: #9fd8ff; margin-top: 1px; }
+      #rewardPopup, #noticeBoard {
+        position: fixed; inset: 0; z-index: 90; display: none;
+        align-items: center; justify-content: center;
+        background: rgba(4, 8, 5, 0.5); backdrop-filter: blur(2px);
+      }
+      .rewardCard {
+        width: min(420px, 92vw); background: rgba(26, 42, 31, 0.98);
+        border: 1px solid rgba(255, 217, 77, 0.55); border-radius: 14px;
+        padding: 18px 20px 16px; text-align: center; color: #f3ecd8;
+        box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55);
+      }
+      .rewardCard h3 { margin: 0 0 12px; font-size: 18px; color: #ffd94d; letter-spacing: 0.4px; }
+      #rewardRows { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+      .rewardRow {
+        background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 9px; padding: 8px 10px; font-size: 14.5px; font-weight: 600;
+      }
+      #rewardOk {
+        background: linear-gradient(180deg, #ffd94d, #d9a52b); color: #241a02; border: none;
+        font-weight: 800; font-size: 15px; padding: 10px 42px; border-radius: 9px; cursor: pointer;
+      }
+      .noticeCard {
+        width: min(880px, 95vw); height: min(600px, 88vh); display: flex; flex-direction: column;
+        background: rgba(26, 42, 31, 0.98); border: 1px solid rgba(255, 217, 77, 0.45);
+        border-radius: 14px; color: #f3ecd8; box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55); overflow: hidden;
+      }
+      .noticeHead { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+      .noticeHead .nTitle { font-weight: 800; color: #ffd94d; margin-right: auto; font-size: 16px; }
+      .nTab {
+        background: rgba(255, 255, 255, 0.07); color: #e8e2cc; border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px; padding: 5px 16px; font-size: 13.5px; font-weight: 700; cursor: pointer;
+      }
+      .nTab.sel { background: rgba(255, 217, 77, 0.2); border-color: #ffd94d; color: #ffd94d; }
+      .noticeBody { flex: 1; display: grid; grid-template-columns: 264px 1fr; min-height: 0; }
+      #noticeList { overflow-y: auto; border-right: 1px solid rgba(255, 255, 255, 0.1); padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+      .nItem { text-align: left; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 9px; padding: 8px 10px; cursor: pointer; color: #f3ecd8; }
+      .nItem.sel { border-color: #ffd94d; background: rgba(255, 217, 77, 0.1); }
+      .nItem .nT { font-size: 13.5px; font-weight: 700; line-height: 1.3; }
+      .nItem .nD { font-size: 11.5px; color: #a9b39a; margin-top: 2px; }
+      #noticeContent { overflow-y: auto; padding: 14px 18px; }
+      #noticeContent h4 { margin: 0 0 4px; font-size: 17px; color: #ffdf6b; }
+      #noticeContent .nDate { font-size: 12px; color: #a9b39a; margin-bottom: 10px; }
+      #noticeContent .nBody { font-size: 14px; line-height: 1.65; white-space: pre-wrap; }
+      @media (max-width: 640px) { .noticeBody { grid-template-columns: 168px 1fr; } }
       #invBtn {
         position: fixed; left: 10px; bottom: 10px; z-index: 25; cursor: pointer;
         background: rgba(10, 18, 12, 0.85); color: #ffd94d; border: 1px solid rgba(230, 184, 62, 0.55);
@@ -183,7 +274,7 @@
       .charCard {
         display: flex; align-items: center; gap: 10px; text-align: left; margin: 8px auto 0;
         width: 330px; max-width: 92%; padding: 8px 10px; box-sizing: border-box;
-        background: rgba(10, 18, 13, 0.88); border: 1px solid #33503d; border-radius: 9px;
+        background: rgba(24, 40, 30, 0.90); border: 1px solid #4a7a5c; border-radius: 9px;
       }
       .charCard canvas { width: 45px; height: 48px; flex: none; }
       .charCard .cinfo { flex: 1; min-width: 0; }
@@ -351,18 +442,18 @@
       }
       #zoneBanner.danger { color: #ffb3ab; border-color: rgba(255,150,130,.5); }
       #hudClock { background: rgba(10,20,16,.5); border-color: rgba(150,205,175,.3); color: #cfeadb; }
-      #minimapWrap { border: 1px solid rgba(150,205,175,.45); border-radius: 14px; background: rgba(7,13,11,.85); box-shadow: 0 6px 18px rgba(0,0,0,.45); }
+      #minimapWrap { border: 1px solid rgba(190,235,180,.65); border-radius: 14px; background: rgba(18,30,22,.80); box-shadow: 0 6px 18px rgba(0,0,0,.45); }
       #minimapLabel { color: #a9e8c9; font-family: Palatino, Georgia, serif; letter-spacing: 1.2px; }
       #sideBtns button { background: rgba(10,20,16,.6); border: 1px solid rgba(139,233,201,.5); color: #dff5e6; }
       .panel {
-        background: rgba(9,17,13,.95); border: 1px solid rgba(150,205,175,.45); border-radius: 12px;
+        background: rgba(23,40,29,.96); border: 1px solid rgba(175,228,190,.60); border-radius: 12px;
         font-family: inherit; box-shadow: 0 10px 30px rgba(0,0,0,.55);
       }
       .panelHead { font-family: Palatino, Georgia, serif; color: #8be9c9; letter-spacing: .5px; }
-      .panelSub { color: #a9cbb6; }
+      .panelSub { color: #bcd8c6; }
       .xBtn { border-color: rgba(150,205,175,.5); color: #dff5e6; border-radius: 99px; font-family: inherit; }
       .pbtn {
-        background: rgba(87,201,139,.12); color: #c9f5e6; border: 1px solid rgba(139,233,201,.5);
+        background: rgba(110,215,155,.20); color: #d8fbe9; border: 1px solid rgba(165,240,205,.65);
         border-radius: 99px; font-family: inherit;
       }
       .pbtn.gold { border-radius: 99px; }
@@ -687,7 +778,7 @@
       #chatBox { position: absolute; left: 10px; bottom: 10px; width: 330px; z-index: 6; display: none; } /* GĐ176: sát đáy */
       body.ingame #chatBox { display: block; }
       #chatMsgs { display: flex; flex-direction: column; gap: 3px; max-height: 132px; overflow: hidden; margin-bottom: 5px; pointer-events: none; }
-      #chatMsgs .cLine { padding: 3px 8px; border-radius: 8px; font-size: 11.5px; line-height: 1.35; color: #e8f2e9; background: rgba(7, 13, 10, 0.55); width: max-content; max-width: 100%; word-break: break-word; }
+      #chatMsgs .cLine { padding: 3px 8px; border-radius: 8px; font-size: 11.5px; line-height: 1.35; color: #e8f2e9; background: rgba(26,44,30,0.62); border: 1px solid rgba(190,235,180,0.16); width: max-content; max-width: 100%; word-break: break-word; }
       #chatMsgs .cLine .cName { color: #8be9c9; font-weight: 700; }
       #chatMsgs .cLine.world .cName { color: #ffd94d; }
       #chatRow { display: flex; gap: 5px; }
@@ -1410,12 +1501,50 @@
         <div class="swatches" id="menuRobeSwatches"></div>
         <button class="menuAction" id="menuMountBtn" type="button">🐴 Thú cưỡi</button>
         <button class="menuAction" id="menuSectBtn" type="button">🏯 Tông môn (người chơi lập)</button>
+        <button class="menuAction" id="menuNewsBtn" type="button">📢 Thông báo & cập nhật</button>
+        <button class="menuAction" id="menuSkinBtn" type="button">🎨 Đổi ngoại hình (skin)</button>
         <button class="menuAction" id="menuMusicBtn" type="button">🎵 Nhạc nền: Đang bật</button>
         <button class="menuAction" id="menuSfxBtn" type="button">🔔 Hiệu ứng: Đang bật</button>
         <button class="menuAction" id="menuExitBtn" type="button">🚪 Thoát về màn hình chính</button>
         <button class="menuAction danger" id="menuLogoutBtn" type="button">Đăng xuất</button>
         <div class="note">Đổi màu áo áp dụng ngay và được lưu lại. Thoát về màn hình chính giữ nguyên phiên đăng nhập.</div>
         <div class="note">Icon chiêu: <a href="https://game-icons.net" target="_blank" rel="noopener">game-icons.net</a> (CC BY 3.0) · Khung/nút: Kenney.nl (CC0).</div>
+      </div>
+
+      <!-- GĐ245: popup nhận quà -->
+      <div id="rewardPopup">
+        <div class="rewardCard">
+          <h3 id="rewardTitle">Nhận được vật phẩm</h3>
+          <div id="rewardRows"></div>
+          <button id="rewardOk" type="button">Nhận lấy</button>
+        </div>
+      </div>
+
+      <!-- GĐ245: bảng thông báo / cập nhật -->
+      <div id="skinPanel" style="display:none">
+        <div class="noticeCard">
+          <div class="noticeHead">
+            <span class="nTitle">🎨 Đổi ngoại hình</span>
+            <button class="xBtn" id="skinClose" type="button">✕</button>
+          </div>
+          <div class="note" style="padding:8px 10px 0">Bộ chọn lúc tạo nhân vật là của bạn. Các bộ khác mua bằng Linh thạch — bấm vào ô có giá để mua, mua xong mặc luôn. “Theo lớp” là hình mặc định theo lớp.</div>
+          <div class="skins" id="skinGrid" style="padding:10px"></div>
+        </div>
+      </div>
+
+      <div id="noticeBoard">
+        <div class="noticeCard">
+          <div class="noticeHead">
+            <span class="nTitle">📢 Bảng thông báo</span>
+            <button class="nTab sel" id="ntabCapnhat" type="button">Cập nhật</button>
+            <button class="nTab" id="ntabThongbao" type="button">Thông báo</button>
+            <button class="xBtn" id="noticeClose" type="button">✕</button>
+          </div>
+          <div class="noticeBody">
+            <div id="noticeList"></div>
+            <div id="noticeContent"></div>
+          </div>
+        </div>
       </div>
 
       <!-- Màn hình chờ / đăng nhập (GĐ10) — ảnh bìa lấy từ bản game cũ -->
@@ -1435,6 +1564,7 @@
             <button class="menubtn primary" id="btnShowLogin" type="button">Đăng nhập</button>
             <button class="menubtn" id="btnShowRegister" type="button">Đăng ký tài khoản</button>
             <button class="menubtn" id="btnGuest" type="button">Chơi nhanh (không cần tài khoản)</button>
+            <button class="menubtn" id="btnNews" type="button">📢 Thông báo & cập nhật</button>
             <button class="menubtn" id="btnExit" type="button">Thoát</button>
             <p class="splash-note"><b>Có tài khoản:</b> nhân vật lưu trên server, đăng nhập máy nào cũng chơi tiếp được, tối đa 3 nhân vật. <b>Chơi nhanh:</b> nhân vật chỉ gắn với trình duyệt này.</p>
           </div>
@@ -1454,6 +1584,7 @@
             <div id="splashUser"></div>
             <div id="charList"></div>
             <button class="menubtn primary" id="btnCreateChar" type="button" style="display:none">＋ Tạo nhân vật mới</button>
+            <button class="menubtn" id="btnNews2" type="button">📢 Thông báo & cập nhật</button>
             <button class="menubtn" id="btnLogout" type="button">Đăng xuất</button>
             <div id="charErr"></div>
           </div>
@@ -1486,6 +1617,8 @@
             </div>
             <label>Màu áo</label>
             <div class="swatches" id="robeSwatches"></div>
+            <label>Ngoại hình (bộ chọn ở đây được tặng — bộ khác mua trong game)</label>
+            <div class="skins" id="skinRow"></div>
           </div>
         </div>
         <div class="row" style="margin-top: 8px">

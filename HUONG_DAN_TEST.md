@@ -59,6 +59,31 @@ cài app nhưng rất ổn định, hợp cho các buổi sau.
 `http://<IPv4-máy-chủ>:3001`, xem `ipconfig` để lấy IPv4, và bấm Allow
 khi Windows Firewall hỏi lúc chạy server.)
 
+## 2b. CÓ GÌ MỚI Ở BẢN GĐ235–264 (so với bản live GĐ131–234)
+
+- **Hình ảnh làng/thành phố**: mặt đất thảm cỏ mềm kiểu truyện tranh, đài phun nước ở
+  quảng trường (phía tây), sprite landmark thật ở các cõi Độ Kiếp/Tiên Giới
+  (Đài Kiếp, Cổng Trời, Bia Cổ, Đài Sen, Tượng Kỳ Lân), hang động chui vào được
+  từ miệng hang trên các map núi.
+- **NPC**: toàn bộ NPC làng + thành phố là sprite pixel riêng; nay ĐI ĐƯỢC đủ
+  4 hướng có bước chân thật (trước đây trượt đi bằng 1 hình đứng yên).
+- **Skin nhân vật**: 5 bộ ngoại hình (chọn lúc tạo nhân vật = được tặng; bộ khác
+  mua 1.000 Linh thạch Hạ ở Menu → Đổi ngoại hình), đổi được bất cứ lúc nào.
+- **Animation**: quái Sói/Dơi/Thạch Quái/Huyết Lang/Kiếm Ma + pet Cốt Vương/Quỷ Hồn
+  có đủ khung đứng/đi/đánh/bị thương/chết; người chơi có tư thế bị thương (chớp đỏ),
+  né (vệt bóng ma), vòng Hộ Thể vàng khi sắp gục; Pháp Tướng có THÂN RIÊNG theo hệ
+  + nam/nữ, cầm vũ khí thật của người chơi (nhuộm màu hệ) và VUNG TAY theo đòn đánh;
+  hiệu ứng chiêu theo hệ: đạn xoáy khí + nổ 4 giai đoạn (Kim/Mộc/Thủy/Hỏa/Thổ).
+- **Giao diện**: panel chế tạo thống nhất 3 cột (gom mọi nguồn chế + chip lọc),
+  popup nhận quà giữa màn hình, bảng thông báo (nút ở màn hình vào game, tab
+  Cập nhật/Thông báo), theme sáng sinh động hơn; icon riêng cho đủ 124 vật phẩm
+  trong túi đồ/giao dịch/tiệm.
+- **46 loài quái cõi Độ Kiếp/Tiên Giới** có sprite riêng (không còn mượn hình nhuộm),
+  13 loài thú cưỡi có sprite cưỡi riêng.
+
+Việc nhờ bạn bè để mắt khi test bản này: FPS ở bãi farm đông quái, cảnh sói–rương,
+hành vi quái trong trận, Thiền Phòng/Tụ Linh Trận, bắn trúng ở tầm 5–6 ô.
+
 ## 2. Chế độ "test nhanh" cho tối nay (tùy chọn, nên dùng)
 
 Chạy bình thường thì 1 ngày game = 24 phút thật, đột phá cần 200 Tu vi —
