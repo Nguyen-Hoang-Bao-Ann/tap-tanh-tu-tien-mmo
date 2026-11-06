@@ -2411,6 +2411,7 @@ export interface MapEnterData {
   hazards?: MapHazard[]; features?: MapFeatures | null; // GĐ60
   spots?: { x: number; y: number }[]; // GĐ76: điểm linh mạch
   altar?: { x: number; y: number } | null; // GĐ85: đàn tế (chỉ map có trùm)
+  territory?: { pointId: string; name: string; x: number; y: number; owner: string | null; ownerId: string | null; war: { state: string; startsInSec: number; endsInSec: number } | null } | null; // GĐ302: cờ lãnh địa trên map
   study?: { x: number; y: number } | null; // GĐ105: điểm đọc sách Văn Uyển
   npcs?: Array<{ id: string; name: string; role: string; kind: string; x: number; y: number; style: string }>; // GĐ89: dân thành phố
   nodes?: Array<{ id: string; kind: string; itemId: string; x: number; y: number }>; // GĐ132: điểm tài nguyên (mạch quặng / bụi thuốc)

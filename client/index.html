@@ -128,6 +128,7 @@
       .nTab.sel { background: rgba(255, 217, 77, 0.2); border-color: #ffd94d; color: #ffd94d; }
       .noticeBody { flex: 1; display: grid; grid-template-columns: 264px 1fr; min-height: 0; }
       #noticeList { overflow-y: auto; border-right: 1px solid rgba(255, 255, 255, 0.1); padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+      #mailCompose input, #mailCompose textarea { background: #1d2418; color: #e8ecd9; border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 6px; padding: 6px 8px; font-size: 13px; font-family: inherit; }
       .nItem { text-align: left; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 9px; padding: 8px 10px; cursor: pointer; color: #f3ecd8; }
       .nItem.sel { border-color: #ffd94d; background: rgba(255, 217, 77, 0.1); }
       .nItem .nT { font-size: 13.5px; font-weight: 700; line-height: 1.3; }
@@ -1223,6 +1224,7 @@
         <div id="hudPet" style="display:none">
           <div class="bar"><div id="hudPetFill"></div><span id="hudPetText">🦴 Cốt Vương</span></div>
           <button id="hudPetRelease" type="button" style="display:none">Thả về rừng</button>
+          <button id="hudPetEvolve" type="button" style="display:none">⬆ Tiến hóa</button>
         </div>
         <div id="hudBuff" style="display:none">
           <div class="bar"><span id="hudBuffText"></span></div>
@@ -1341,6 +1343,39 @@
       <div id="interactHint"></div>
       <div id="skillBar"></div>
       <button id="invBtn" type="button">🎒 Túi đồ (I)</button>
+      <div id="rebirthPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>🔄 Luân hồi — hồn qua các kiếp</span><button class="xBtn" id="rebirthClose" type="button">✕</button></div>
+        <div id="rebirthBody"></div>
+        <p class="splash-note">Một kiếp sống trọn vẹn (chưa từng gục ngã) cho kiếp sau +2% tốc độ thiền, tối đa +20%. Đồ gửi vào hành trang chuyển kiếp sẽ theo hồn sang kiếp sau; tọa hóa hết thọ giữ 30% Linh thạch Hạ phẩm (Lễ Đăng Tiên chọn Luân hồi làm lại giữ 50%). Tìm đủ 10 vật phẩm ẩn của 10 vị thần đầu tiên sẽ mở công pháp Hoán Vu Kiếp Hồn — đổi chủng tộc qua Thiên Đạo Môn.</p>
+      </div>
+      <div id="bondPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>💞 Duyên Nợ — các mối quan hệ đặc biệt</span><button class="xBtn" id="bondClose" type="button">✕</button></div>
+        <div id="bondBody"></div>
+        <p class="splash-note">Thang thiện cảm −1000…+1000, 0 là người dưng. Leo rất chậm: ở gần nhau săn quái/thiền chung, trả nhiệm vụ, tặng quà, cứu mạng. Đạt <b>Bạn thân (300)</b> được chọn 1 trong 2 hướng — <b>Thân tình</b> (Tri kỉ → Huynh đệ/Tỷ muội) hoặc <b>Tình cảm</b> (Động lòng → Phu thê → Tri âm) — chọn rồi khóa vĩnh viễn; với người chơi phải cả hai cùng chọn một hướng. Buff/debuff chỉ tính khi hai bên ở gần nhau (cùng map) và lấy mối mạnh nhất. Nợ tới mức Không đội trời chung: NPC từ chối phục vụ.</p>
+      </div>
+      <div id="boardPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>📋 Bảng Ủy Thác — việc cho tông môn</span><button class="xBtn" id="boardClose" type="button">✕</button></div>
+        <div id="boardBody"></div>
+        <p class="splash-note">Bảng đặt ở sân Đạo Quán, Ban Lão giữ. <b>Nhận việc/treo ủy thác phải đứng tại bảng</b>; xem bảng và nộp vật phẩm cho việc thu mua thì ở đâu cũng được. Việc của làng/thương nhân thay mỗi ngày; ủy thác của người chơi ký quỹ thật — tông làm xong quỹ nhận tiền, vật phẩm gửi về người đăng qua thư; hết hạn 3 ngày game thì hoàn ký quỹ (việc săn được trả theo phần đã làm).</p>
+      </div>
+      <div id="disciplePanel" class="panel" style="display:none">
+        <div class="panelHead"><span>🎓 Đệ tử — sư đồ</span><button class="xBtn" id="discipleClose" type="button">✕</button></div>
+        <div id="discipleBody"></div>
+        <p class="splash-note">Nhận đệ tử cần có tông môn người chơi và giữ chức Trưởng lão trở lên (hoặc tự lập tông). Quan hệ sư đồ là VĨNH VIỄN — đệ tử không tự rời được, chỉ sư phụ mới có quyền trục xuất. Đệ tử NPC chết trong trận là mất hẳn; đệ tử người chơi đạt Kim Đan sẽ thành tài.</p>
+      </div>
+      <div id="storyPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>📖 Thiên Mệnh Ký</span><button class="xBtn" id="storyClose" type="button">✕</button></div>
+        <div class="row" style="gap:6px;margin:4px 0">
+          <button class="mini" id="storyTabLore" type="button">📜 Truyền Thuyết Sơ Khai</button>
+          <button class="mini" id="storyTabLog" type="button">🔄 Kiếp Ký</button>
+        </div>
+        <div id="storyBody"></div>
+      </div>
+      <div id="gardenPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>🌱 Gieo thảo — vườn làng</span><button class="xBtn" id="gardenClose" type="button">✕</button></div>
+        <div class="panelSub">Lấy chính thảo trong túi làm giống (tốn 1 cây). Cây lớn theo thời gian, tưới nước cho nhanh; chín thì thu hoạch được 3 cây.</div>
+        <div id="gardenBody"></div>
+      </div>
       <div id="shopPanel" class="panel">
         <div class="panelHead"><span id="shopTitle">Cửa hàng</span><button class="xBtn" id="shopClose" type="button">✕</button></div>
         <div class="panelSub" id="shopStones"></div>
@@ -1476,9 +1511,11 @@
           <p style="margin:0 0 8px">Đứng ở đỉnh Nhân giới, trời cho bạn chọn <b>một</b> con đường — và chọn là <b>vĩnh viễn</b>:</p>
           <p style="margin:0 0 6px">🌤️ <b>Thăng Tiên Giới</b> — vượt qua Tiên Môn, lên cõi Tiên, đạt cảnh <b>Tiên Nhân</b>. Rời khỏi Nhân giới; trời đất mới, luật mới.</p>
           <p style="margin:0 0 10px">🏔 <b>Ở lại Nhân giới</b> — bước vào cảnh <b>Địa Tiên</b>, ẩn tu hay xưng bá tùy ý. Nhưng kẻ đáng đi mà ở lại sẽ bị <b>Thiên Đạo truy lùng</b>: Thiên Phạt giáng theo chu kỳ, phải đọc điềm báo mà né.</p>
+          <p style="margin:0 0 10px">🔄 <b>Luân hồi làm lại</b> — khước từ cả hai cõi, <b>tọa hóa ngay tại Lễ</b> và đầu thai làm lại. Kiếp sau: <b>50% Linh thạch Hạ phẩm</b> mang theo, <b>+10 chỉ số tự do</b>, <b>chỉ số ẩn mở sẵn ở 30% cấp độ cũ</b>, giữ thành tựu + danh hiệu, và đồ trong <b>Hành trang chuyển kiếp</b> (vào Menu → 🔄 Luân hồi gửi đồ TRƯỚC khi chọn đường này).</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button id="pathThangBtn" type="button">🌤️ Thăng Tiên Giới</button>
             <button id="pathDiaBtn" type="button">🏔 Ở lại — Địa Tiên</button>
+            <button id="pathLuanHoiBtn" type="button">🔄 Luân hồi làm lại</button>
           </div>
         </div>
       </div>
@@ -1486,6 +1523,11 @@
       <div id="sectPanel" class="panel">
         <div class="panelHead"><span>🏯 Tông môn</span><button class="xBtn" id="sectClose" type="button">✕</button></div>
         <div id="sectBody"></div>
+      </div>
+
+      <div id="guildPanel" class="panel">
+        <div class="panelHead"><span>🏛 Hội nghề</span><button class="xBtn" id="guildClose" type="button">✕</button></div>
+        <div id="guildBody"></div>
       </div>
 
       <div id="stonesPanel" class="panel">
@@ -1500,7 +1542,12 @@
         <label>Màu áo nhân vật</label>
         <div class="swatches" id="menuRobeSwatches"></div>
         <button class="menuAction" id="menuMountBtn" type="button">🐴 Thú cưỡi</button>
+        <button class="menuAction" id="menuRebirthBtn" type="button">🔄 Luân hồi (kiếp sau)</button>
+        <button class="menuAction" id="menuStoryBtn" type="button">📖 Thiên Mệnh Ký (cốt truyện)</button>
+        <button class="menuAction" id="menuDiscipleBtn" type="button">🎓 Đệ tử (sư đồ)</button>
+        <button class="menuAction" id="menuBondBtn" type="button">💞 Duyên Nợ</button>
         <button class="menuAction" id="menuSectBtn" type="button">🏯 Tông môn (người chơi lập)</button>
+        <button class="menuAction" id="menuGuildBtn" type="button">🏛 Hội nghề (hội lớn của nghề phụ)</button>
         <button class="menuAction" id="menuNewsBtn" type="button">📢 Thông báo & cập nhật</button>
         <button class="menuAction" id="menuSkinBtn" type="button">🎨 Đổi ngoại hình (skin)</button>
         <button class="menuAction" id="menuMusicBtn" type="button">🎵 Nhạc nền: Đang bật</button>
@@ -1538,7 +1585,20 @@
             <span class="nTitle">📢 Bảng thông báo</span>
             <button class="nTab sel" id="ntabCapnhat" type="button">Cập nhật</button>
             <button class="nTab" id="ntabThongbao" type="button">Thông báo</button>
+            <button class="nTab" id="ntabThu" type="button">✉ Thư</button>
             <button class="xBtn" id="noticeClose" type="button">✕</button>
+          </div>
+          <div id="mailCompose" style="display: none; padding: 10px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); flex-direction: column; gap: 6px;">
+            <div style="font-weight: bold; color: #ffdf6b;">📮 Gửi thư hệ thống (GM)</div>
+            <input id="gmTitle" type="text" maxlength="80" placeholder="Tiêu đề thư" />
+            <textarea id="gmBody" rows="3" maxlength="1000" placeholder="Nội dung thư"></textarea>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+              <input id="gmStones" type="number" min="0" placeholder="Linh thạch tặng" style="width: 130px;" />
+              <input id="gmItem" type="text" placeholder="Mã vật phẩm (vd: linh_thao)" style="width: 180px;" />
+              <input id="gmQty" type="number" min="1" placeholder="SL" style="width: 64px;" />
+              <input id="gmTarget" type="text" placeholder="Đích: all = toàn server, hoặc gõ tên nhân vật" style="flex: 1; min-width: 200px;" />
+              <button class="pbtn gold" id="gmSend" type="button">Gửi thư</button>
+            </div>
           </div>
           <div class="noticeBody">
             <div id="noticeList"></div>
@@ -1554,7 +1614,7 @@
           <h1 class="splash-title">Tập Tành Tu Tiên</h1>
           <div class="splash-rule"></div>
           <div class="splash-sub">Từ một phàm nhân nơi Làng Tân Thủ, đo linh căn tại Đạo Quán,<br />chọn con đường tu luyện của riêng mình.</div>
-          <div id="loadwrap">
+          <div id="loadwrap" style="display:none"><!-- GĐ311: ẩn hẳn thanh tải/render theo yêu cầu của Bảo -->
             <div id="loadlabel">Đang tải thế giới… 0%</div>
             <div id="loadbar"><div id="loadfill"></div></div>
           </div>
@@ -1619,6 +1679,11 @@
             <div class="swatches" id="robeSwatches"></div>
             <label>Ngoại hình (bộ chọn ở đây được tặng — bộ khác mua trong game)</label>
             <div class="skins" id="skinRow"></div>
+            <div id="racePickWrap" style="display:none">
+              <label>🌌 THIÊN ĐẠO MÔN — Chọn chủng tộc cho kiếp này (chỉ có khi dùng Hoán Vu Kiếp Hồn)</label>
+              <div id="raceRow"></div>
+              <p class="splash-note" id="raceNote"></p>
+            </div>
           </div>
         </div>
         <div class="row" style="margin-top: 8px">

@@ -59,8 +59,129 @@ cài app nhưng rất ổn định, hợp cho các buổi sau.
 `http://<IPv4-máy-chủ>:3001`, xem `ipconfig` để lấy IPv4, và bấm Allow
 khi Windows Firewall hỏi lúc chạy server.)
 
-## 2b. CÓ GÌ MỚI Ở BẢN GĐ235–264 (so với bản live GĐ131–234)
+## 2b. CÓ GÌ MỚI Ở BẢN GĐ235–330 (so với bản live GĐ131–234)
 
+- **SÁNG TẠO CÔNG PHÁP TÔNG MÔN — đợt 1 (GĐ328)**: công pháp của tông
+  người chơi không còn là đồ có sẵn — **Tông chủ, Phó tông chủ và Trưởng
+  Lão Danh Dự (Tông chủ phong cho Trưởng lão, tối đa 2 người) tự sáng tạo
+  pháp riêng cho tông mình** trong panel Tông Môn: tự đặt tên, ghép hiệu
+  ứng (Công/Phòng/Tốc/Máu/Thiền/Chế) trong ngân sách của cấp pháp
+  (Phàm → Thiên), **bắt buộc chọn 1 khuyết điểm**. Cái giá rất nặng: quỹ
+  tông + Linh thạch Trung/Thượng và nguyên liệu của chính người tạo, cấp
+  Địa/Thiên còn **đốt thọ nguyên**; pháp tạo xong phải **ngộ** (cả tông
+  làm việc Bảng + nộp vật phẩm góp tiến độ) mới học được ở Tàng Kinh
+  Các. Nội Môn trở lên học bằng Tông Cống, vận hành tối đa 2 pháp cùng
+  lúc, rời tông là mất hiệu lực.
+- **RÀ SOÁT + VÁ LỖI TÔNG CHIẾN (GĐ327)**: rà soát bằng probe đo thật toàn bộ
+  các móc từng chỉ kiểm code — cứu phu thê đầy máu, buff Đau xót, Tông Uy
+  thắng/thua chiến, chuyển lãnh địa, ủy thác hết hạn — tất cả chạy đúng.
+  Vá 1 lỗi thật: **pet/đệ tử đi theo vào vùng tông chiến nay bị địch đánh
+  được** (trước đây đánh không trúng pet bao giờ); hạ pet/đệ tử của đối thủ
+  trong chiến trường trừ 150 điểm Duyên Nợ với chủ của nó như thiết kế.
+
+- **SPRITE TRỤ SỞ + ICON MỚI (GĐ325)**: Thạch Bia tông môn ngoài thế giới nay
+  là **sprite thật**: cột đá cao khắc **song long** chầu huy hiệu sao đồng,
+  đỉnh bia là **song kiếm chéo dưới nhật luân**, chân bia bậc đá rêu cỏ loang
+  tự nhiên (thay emoji 🗿 cũ) — một thiết kế riêng, khác hẳn Lệnh Bài. **Lệnh
+  Bài Tông Môn** cũng có hình mới: bài ngọc khắc **rồng vàng phát sáng**, viền
+  vàng chạm trổ, dây tết + tua đỏ. Icon **Trận Pháp Khai Sơn** vẽ lại bản đẹp
+  hơn: đĩa đồng bát giác nhiều lớp vòng, sao 8 cánh phát sáng, tinh thể ngọc
+  quanh vành.
+- **DỌN NỢ NHỎ (GĐ324)**: Minimap nay hiện **dấu trụ sở tông môn** trên map bạn
+  đang đứng (chấm vàng đậm = tông mình, nâu = tông khác). **Lệnh Bài Tông Môn**
+  và **Trận Pháp Khai Sơn** đã có icon riêng (bài ngọc khắc vân mây tua đỏ ·
+  đĩa đá trận pháp phát sáng). **Miệng hang đã thưa hẳn**: mỗi map chỉ còn tối
+  đa **3 miệng hang THẬT** chui vào được (cách nhau xa, chọn cố định) — các
+  hình hang còn lại trên núi chỉ là trang trí, hang thật phải chịu khó tìm
+  mới đáng giá (gợi ý: miệng hang thật có phản ứng khi đứng sát bấm E).
+- **TÔNG MÔN ĐỢT 3 (GĐ326)**: **Tông quy** do Tông chủ đặt trong panel tông:
+  mở cửa tự vào / xét duyệt đơn · cảnh tối thiểu · **thuế việc tông 0–30%**
+  (phần thuế của tiền thưởng mỗi việc ở Bảng Ủy Thác được chia đều cho thành
+  viên đang online, còn lại vào quỹ). **Nhật ký tông**: panel hiện 15 dòng sự
+  kiện mới nhất (ai vào/ra, phong chức, xong việc, thăng cấp...). **Kế vị tự
+  động**: Tông chủ vắng **14 ngày game** → Phó kỳ cựu nhất giữ **Quyền Tông
+  chủ** (điều hành được nhưng không giải tán/truyền ngôi); vắng **30 ngày**
+  → **kế vị hẳn**, Tông chủ cũ xuống Phó. **Ban Chấp Pháp** (Đường Chủ): duyệt
+  đơn, trục xuất Đệ tử, **cấm chat kênh tông 1 ngày game**. **Tông pháp ở
+  Tàng Kinh Các**: tới trụ sở học bằng Tông Cống — Hộ Thể +3% phòng · Chiến Ý
+  +3% công · Tụ Linh thiền +5% · Cấp Hành +3% tốc độ (bị động, rời tông là
+  mất hiệu lực).
+- **BẢNG ỦY THÁC TÔNG MÔN (GĐ323)**: Nhiệm vụ tông KHÔNG tự sinh mỗi ngày nữa!
+  Tới **Bảng Ủy Thác ở sân Đạo Quán** (gặp **Ban Lão**): mỗi ngày bảng treo 6
+  việc của làng/thương nhân/tu sĩ vô tông (trừ khử quái · thu mua vật phẩm ·
+  quyên góp tu sửa · truy lùng trùm). **Tông chủ/Phó tới bảng nhận việc** (tối
+  đa 2 việc cùng lúc) rồi cả tông cùng làm — tiến độ hiện ở panel Tông môn,
+  việc thu mua có nút **Nộp đồ** ngay trong panel. **Người chơi nào cũng treo
+  ủy thác được**: cần thu mua nguyên liệu hay thuê săn quái thì đăng lên bảng
+  + ký quỹ Linh thạch — tông làm xong thì quỹ nhận tiền, đồ thu thập gửi về
+  qua thư; hết hạn 3 ngày game thì hoàn ký quỹ. Admin (Bảo) ghim được **việc
+  Thiên Cơ** thưởng lớn lên bảng cho các tông tranh làm.
+- **CẤP TÔNG + TÔNG UY + PHÍ DUY TRÌ + NÂNG CẤP CÔNG TRÌNH (GĐ322)**: Tông môn
+  nay có **cấp 1–5** theo **Tông Uy** (kiếm từ: hoàn thành nhiệm vụ tông +10 ·
+  giữ lãnh địa +5/ngày · thắng tông chiến +50). Cấp càng cao trần càng rộng:
+  thành viên 10→80, kho chung 60→200 ô, **lãnh địa giữ được nhiều điểm cùng
+  lúc** (cấp 3 trở lên giữ 2–3 điểm Linh Mạch). Mỗi ngày game quỹ tông bị trừ
+  **phí duy trì** (100 LT × cấp + 200 LT × số lãnh địa) — **thiếu phí 3 ngày
+  liền sẽ TỤT 1 CẤP**, lo nạp quỹ đều. Công trình ở trụ sở **nâng cấp được tới
+  cấp 3** bằng tiền quỹ (Đan/Khí Phòng: tỉ lệ chế 5%→8%→12% · Dược Viên:
+  6→8→10 ô · Luyện Công Trường: vùng linh khí rộng dần). Xem hết ở panel
+  Tông môn (dòng Cấp tông/Tông Uy/Phí duy trì ngay đầu mục Lãnh địa).
+- **DUYÊN NỢ XUYÊN KIẾP + QUÁI ĐẶC BIỆT (GĐ321)**: Khi tọa hóa/luân hồi, các
+  mối quan hệ sâu đậm (|thiện cảm| từ 300 trở lên) được hồn ghi vào **Sổ kiếp
+  trước** (xem trong panel 💞 Duyên Nợ). Kiếp sau tới gần đúng người/NPC/quái
+  đó sẽ thấy cảm ứng *"Ánh mắt này… quen thuộc lạ thường"* — **kết lại** được
+  thì quan hệ khôi phục **thấp hơn kiếp trước 1 bậc** (với người chơi cần cả
+  hai đồng ý). Với **quái đặc biệt** (trùm, quái hiếm ✦): khi nó còn dưới 10%
+  máu sẽ hiện nút **🕊️ Tha mạng** (+300 thiện cảm với loài đó, nó rút lui
+  không rơi đồ); nút **🍖 Cho ăn** cho nó ăn món nó thích (+điểm, tự khám phá
+  món qua gợi ý khi cho ăn hụt); giết nó thì **−400 kết nợ**; bị nó hạ gục
+  nhiều lần nợ sâu thêm −50/lần. Nợ chạm đáy **−1000 (1 mất 1 còn)** thì cá
+  thể đặc biệt của loài đó sẽ **chủ động truy lùng bạn khắp map**. Đứng gần
+  quái có duyên/nợ sâu cũng chịu buff/debuff của mối đó như với người chơi.
+- **KHAI TÔNG QUA QUẦY QUẢN LÝ + TRỤ SỞ & PHÒNG BAN (GĐ319)**: Từ nay KHÔNG lập
+  tông trực tiếp trong panel nữa — tới **Quầy Quản Lý ở sân Đạo Quán** (NPC Quản
+  Sự Đạo Quán, cạnh hàng sư phụ) làm **3 bài kiểm tra**: ① TU VI — cần **Nguyên
+  Anh trở lên** và thắng **Khảo Quan Ảnh** do quầy triệu hồi (THUA thì phải chờ
+  6 ngày game mới thi lại, mỗi lần thi lại tốn 4.000 Linh thạch Trung phẩm — lần
+  đầu miễn phí; chống thi/lập tông bừa); ② SỐ NGƯỜI — gửi **Thiếp Đồng Sáng Lập** cho người chơi khác
+  (kể cả offline, họ đồng ý ở panel Tông môn), **đủ 5 người → phí còn 30.000
+  Linh thạch TRUNG PHẨM** và họ thành thành viên **Sáng Lập**; lập một mình thì
+  phí **70.000 TP**; ③ TÀI NGUYÊN — nộp phí Trung phẩm tại quầy. Qua kiểm tra
+  được cấp **Lệnh Bài Tông Môn** + **Trận Pháp Khai Sơn**: mang Lệnh Bài ra map
+  hoang dã/bãi farm bấm Dùng → hóa thành **Tông Môn Thạch Bia** (trụ sở; không
+  đặt được trong làng/thành/bí cảnh/hang, cách cổng map ≥400px, cách trụ sở
+  tông khác ≥800px); dùng Trận Pháp cạnh bia → dựng **7 công trình**: Sơn Môn,
+  Đại Điện, **Đan Phòng** (luyện đan tại đó +5% thành công), **Khí Phòng** (rèn
+  +5%), **Dược Viên** (6 ô trồng chung của tông — mọi thành viên gieo/tưới,
+  Nội Môn trở lên mới hái), Tàng Kinh Các, **Luyện Công Trường** (thiền tại đó
+  tính là nơi linh khí). Sơ đồ chức vụ đầy đủ: Tông Chủ → Phó (tối đa 2) →
+  Trưởng Lão (tối đa 5) → **Đường Chủ** (Tông chủ bổ nhiệm, mỗi ban 1 người, 7
+  ban) → Đệ Tử **Nội Môn** (Tông Cống ≥100 — được lấy đồ kho chung) / **Ngoại
+  Môn**. Tông lập từ trước giữ nguyên, không phải thi lại. (Thạch Bia/công
+  trình hiện vẽ biểu tượng + tên trong thế giới; cấp tông 1–5, phí duy trì,
+  nâng cấp công trình = đợt sau.)
+
+- **DUYÊN NỢ (GĐ320)**: Menu → 💞 Duyên Nợ. Thanh thiện cảm −1000…+1000 với từng
+  người chơi/NPC (điểm thiện cảm NPC cũ được nhân 3 chuyển sang thang mới). Tăng:
+  trò chuyện mỗi ngày, mua bán, nhận/trả nhiệm vụ, tặng quà cho NPC (đúng món thích
+  +15 — sở thích hé dần khi quen mặt), săn quái/thiền chung gần nhau, Y Tu cứu người
+  gục +50. Đạt Bạn thân (300) chọn 1 hướng: Thân tình (Tri kỉ → Huynh đệ/Tỷ muội)
+  hoặc Tình cảm (Động lòng → Hẹn hò → Phu thê → Tri âm) — khóa vĩnh viễn, với người
+  chơi phải cả hai cùng chọn một hướng. Ở gần nhau (cùng map) nhận buff/debuff theo
+  mối mạnh nhất (chỉ số/thiền/tốc độ). Nợ tới mức Không đội trời chung (−600): NPC
+  từ chối bán hàng và giao nhiệm vụ. Kèm: GIẢM 30% linh thạch + nguyên liệu rơi từ
+  QUÁI FARM THƯỜNG chống lạm phát (trùm/quái hiếm/rương ẩn giữ nguyên) và SỬA LỖI
+  điểm tiệm làng bị lệch tọa độ từ đợt phóng to map (mua bán ở tiệm làng từng bị
+  báo "hãy tới tiệm" dù đang đứng đúng tiệm).
+
+- **SƯ ĐỒ (GĐ318)**: Menu → 🎓 Đệ tử. Nhận đệ tử phải có tông môn người chơi và giữ
+  chức Trưởng lão trở lên (hoặc tự lập tông). Đệ tử NPC: gặp các thiếu niên cầu sư
+  quanh làng (quảng trường/Đạo Quán/cây cổ thụ), nói chuyện rồi nhận; đệ tử theo
+  đánh cùng, tích Tâm đắc lên 5 cấp, được truyền công pháp, được chỉ điểm mỗi ngày;
+  đệ tử NPC TỬ NẠN LÀ MẤT HẲN. Đệ tử người chơi: mời theo tên trong panel — quan hệ
+  VĨNH VIỄN, đệ tử không tự rời được, chỉ sư phụ trục xuất; truyền công pháp trực
+  tiếp (đủ điều kiện mới học được); đệ tử đạt Kim Đan = thành tài, sư phụ nhận thư
+  quà. Thành tựu "Đệ tử/Danh Sư" đã bật.
 - **Hình ảnh làng/thành phố**: mặt đất thảm cỏ mềm kiểu truyện tranh, đài phun nước ở
   quảng trường (phía tây), sprite landmark thật ở các cõi Độ Kiếp/Tiên Giới
   (Đài Kiếp, Cổng Trời, Bia Cổ, Đài Sen, Tượng Kỳ Lân), hang động chui vào được
@@ -81,8 +202,250 @@ khi Windows Firewall hỏi lúc chạy server.)
 - **46 loài quái cõi Độ Kiếp/Tiên Giới** có sprite riêng (không còn mượn hình nhuộm),
   13 loài thú cưỡi có sprite cưỡi riêng.
 
+- **Nhiệm vụ cõi cao (GĐ265)**: 28 map văn minh Độ Kiếp/Tiên Giới có thêm 112
+  nhiệm vụ tại Người Giao Nhiệm Vụ của map (diệt quái bản địa + giao nguyên liệu).
+- **Tông môn người chơi v2 (GĐ266)**: Quỹ tông (góp Linh thạch → điểm Cống hiến,
+  Phó tông chủ trở lên mới rút), Kho chung 60 ô (Trưởng lão trở lên mới lấy ra),
+  3 nhiệm vụ tông mỗi ngày game, Tiệm tông mua bằng điểm Cống hiến.
+- **Hội nghề (GĐ267)**: 7 hội cho 7 nghề phụ — Menu → 🏛 Hội nghề. Vào hội phải
+  có nghề tương ứng; mỗi ngày 2 nhiệm vụ hội (chế đồ / giao đồ), lên hạng theo
+  Uy danh, Tiệm hội mua bằng Điểm Hội.
+- **Quái cõi cao to hơn (GĐ268)**: từ Phản Hư trở lên hình quái to dần theo cõi
+  (Phản Hư ×1,35 · Độ Kiếp ×1,5 · Tiên Giới ×1,65) — chỉ to hình, chỉ số giữ nguyên.
+- **24 loài Phản Hư có hình riêng UY LỰC (GĐ292–295)**: tư thế trưng
+  bày chính diện choán khung, hào quang sau đầu, lõi năng lượng phát
+  sáng ở ngực như boss — mà mức hiệu ứng ĐÃ GIẢM BỚT theo ý chủ game:
+  hạt/tia sáng thưa, ánh sáng dịu không chóa mắt trong game. Mỗi loài
+  một màu chủ đạo + chất bề mặt riêng (sói xám khói, tê giác đồng hổ
+  phách, phượng lửa đỏ cam, cá băng trắng cyan, hồ ly bạc trắng, bọ
+  giáp dung nham đen cam, mãng xanh ngọc...). Các loài: Hư Không Lang,
+  Thời Gian Thú, Không Gian Xà, Thiên Thú Tinh, Thiên Đạo Thủ Thần,
+  Vạn Cổ Thần Thú, Hỗn Độn Phượng...
+- **Boss có hình UY LỰC riêng (GĐ291)**: 11 boss hết mượn hình loài khác —
+  Kim Sí Đại Bằng, Vực Ngoại Thiên Ma, Hỏa Thần Phượng, Thiên Đạo Thủ
+  Hộ, Hỗn Độn Cự Thú, Thanh Long Tàn Ảnh, Thôn Thiên Mãng, Cửu U Ma
+  Quân, Thiên Lang Vương, Cổ Thụ Thần, Giao Long Chúa: tư thế trưng
+  bày chính diện, hào quang sau đầu, lõi năng lượng phát sáng ở ngực,
+  khí thế áp đảo choán khung hình.
+- **Quái cử động như nhân vật (GĐ269–300)**: 200 loài có đủ bộ khung cử động
+  (đợt 1: Độc Xà, Lâm Trư, Cốt Binh, Huyền Ảnh Miêu, Lôi Điểu, Kim Giáp Tê;
+  đợt 2: Địa Hành Yêu, Hấp Huyết Quỷ, Điểm Hỏa Phượng, Sa Mạc Hạt, Tuyết Hồ,
+  Lôi Xà, Sâm Lâm Cự Mãng, Băng Tinh Cự Nhân; đợt 3: Khôi Lỗi, Thủy Triều Tinh,
+  Huyền Diệp, Đan Ma, Thiên Lôi Thú, Thiên Lang, Hỏa Thú, Địa Kim Thử;
+  đợt 4: Hỗn Độn Thú, Thủy Yêu Ngư, Dung Nham Cua, Thiên Niên Xà Yêu,
+  Cửu Vĩ Hồ, Ngọc Kỳ Lân, Thiết Giáp Tê, Kim Cương Tượng; đợt 5: Nguyệt Sát
+  Lang, Bích Lam Mãng, Kim Sí Điểu, Phong Bạo Ưng, Sơn Thần Khôi, Tử Kim Hạt,
+  Thiên Túc Ngô Công, Hư Cốt Chiến Sĩ; đợt 6: Huyền Băng Lang, Hoa Văn Mãng,
+  Thanh Loan, Cổ Thạch Cự Nhân, Man Hoang Cự Tượng, Ngọc Giáp Trùng, Huyền
+  Thủy Giao, U Minh Quỷ Tốt; đợt 7: Viêm Vĩ Lang, Huyền Thủy Xà, Sơn Tiêu,
+  Thâm Hải Cự Giải, Bạch Cốt Phu Nhân, Thực Nhân Hoa Yêu, Cổ Thụ Tinh, Hỏa Linh;
+  đợt 8: Cổ Sơn Lang, Huyết Dực Bức, Vân Lộc, Sơn Quân Hổ, Bích Ba Ngư Yêu,
+  Huyết Đằng Yêu, Dạ Xoa, Băng Linh; đợt 9: Lôi Vũ Bức, Linh Miêu Ảnh,
+  Huyết Ma Tốt, Lôi Linh, Thổ Linh, Ba Xà, Cung Kỳ, Toan Nghê; đợt 10:
+  Dạ Minh Bức, La Sát Ảnh, Khai Thiên Tê, Hư Không Thú, Đao Ngột, Hỗn Độn
+  Ma Viên, Côn Bằng Ảnh, Thiên Cẩu; đợt 11: Thiên Ma, Nguyệt Thố Thần,
+  Chu Tước Diễm, Bạch Hổ Sát Khí, Kỳ Lân Thần Ảnh, Lôi Kiếp Lang, Thiên
+  Hỏa Điểu, Tâm Ma Ảnh; đợt 12: Phong Kiếp Hạc, Tiên Phượng, Kỳ Lân Tiên
+  Thú, Băng Kiếp Hổ, Băng Thần Xà, Thủy Thần Ngư, Hỏa Vũ Phượng Ảnh,
+  Tu La Chiến Ma; đợt 13: Bích Hải Giao, Côn Luân Sư, Kim Kiếp Thú, Lôi
+  Thần Điểu, Thiên Hỏa Sư, Tiên Vũ Điểu, Huyền Vũ Tàn Giáp, Độc Thần Hạt;
+  đợt 14: Băng Xà, Hàn Băng Hổ, Kiếp Hỏa Phượng, Vân Hải Hạc, Thủy Kiếp
+  Mãng, Tiên Linh Lang, Phong Thần Ưng, Địa Kiếp Tê; đợt 15: Bích Lạc
+  Mãng, Huyết Kiếp Bức, Kiếp Ảnh Miêu, Linh Miêu Tiên, Thiên Uy Giao,
+  Vạn Kiếp Thần Thú, Tinh Hà Hạt, Mộc Thần Đằng; đợt 16: Hồn Kiếp Xà,
+  Linh Vân Bức, Kim Thần Giáp Trùng, Thiên Hà Khôi, Tiên Môn Kiếm Sĩ,
+  Vạn Cổ Độc Trùng, Chúc Long Ảnh, Đào Hoa Tinh; đợt 17: Huyết Thần Ma
+  Lang, Dạ Thần Bức, Kiếp Hải Cự Ngư, Thạch Thần Tượng, Tiên Hoa Thú,
+  Vân Tiên Quỷ, Thâm Uyên Cự Giải, Thiên Kiếm Kiếp Ảnh; đợt 18: Ám Thần
+  Quỷ Tốt, Cõi Âm Sát Thủ, Thiên Binh Hồn, Tiên Kiếm Hồn, Thổ Thần Khôi,
+  Thần Lôi Cự Nhân, Tiên Môn Linh Thú, Tinh Thần Tiểu Yêu; đợt 19: Bồng
+  Lai Tê, Cổ Ma Tàn Hồn, Đăng Tiên Hộ Pháp, Diễm Thần Chiến Tướng, Huyết
+  Hà Ma Bức, Kiếp Vân Khôi, Minh Hà Quỷ Tướng, Tiên Thủ Hộ; đợt 20:
+  Cổ Thần Thú Tinh, Dương Thần Chiến Sĩ, La Hầu Ma Ảnh, Thiên Binh Tàn
+  Ảnh, Thiên Thể Thủ Hộ, Thiên Tiên Thủ Thần, Tiên Giới Chiến Hồn, Vạn
+  Đạo Tướng — cộng
+  7 loài cũ Sói/Dơi/Thạch Quái/Huyết Lang/Kiếm Ma/Cốt Vương/Quỷ Hồn).
+  Đợt 20 là ĐỢT CUỐI của quái thường: toàn bộ quái thường trong game đều
+  đã cử động. Đợt 21 (GĐ296): 8 loài Phản Hư đầu có hoạt ảnh — Hư Không
+  Lang, Thời Gian Thú, Không Gian Xà, Phản Hư Ma Ảnh, Đạo Thiên Tê, Vạn
+  Cổ Thần Thú, Hỗn Độn Phượng, Thiên Cực Cự Ngư — giữ nguyên mặt chính
+  diện trưng bày như hình đã duyệt (không lật ngang khi đi). Đợt 22
+  (GĐ297): thêm 8 loài Phản Hư — Huyền Thiên Hồ, Đạo Kiếm Ma Thần, Vô
+  Hình Quỷ, Lục Đạo Chiến Hồn, Thiên Ngoại Cự Bức, Hỗn Độn Giáp Trùng,
+  Đạo Ngược Mãng, Vạn Lý Độc Hạt. Đợt 23 (GĐ298): 8 loài Phản Hư cuối —
+  Thiên Thú Tinh, Nghịch Thiên Sư, Hỗn Độn Khôi, Phản Hư Thần Binh, Thời
+  Lưu Ngư, Hư Ảnh Miêu, Vạn Cổ Hoa Thú, Thiên Đạo Thủ Thần — ĐỦ 24/24
+  loài Phản Hư có hoạt ảnh; đồng thời vẽ lại khung chết của Đạo Kiếm Ma
+  Thần và Lục Đạo Chiến Hồn cho đúng khổ người lớn nằm dài (khung chết
+  Đạo Kiếm Ma Thần vẽ tiếp bản v3: quỳ gục tựa đại kiếm). Đợt 24
+  (GĐ299): 8 boss có hoạt ảnh — Kim Sí Đại Bằng, Vực Ngoại Thiên Ma, Hỗn
+  Độn Cự Thú, Hỏa Thần Phượng, Thiên Đạo Thủ Hổ, Thanh Long Tàn Ảnh,
+  Thôn Thiên Mãng, Cửu U Ma Quân. Đợt 25 (GĐ300): 3 boss cuối — Thiên
+  Lang Vương, Cổ Thụ Thần, Giao Long Chúa — **đủ 200/200 loài có hoạt
+  ảnh, mọi quái + boss trong game đều cử động**. GĐ301: vẽ lại khung
+  chết của 34 loài cõi cao/boss theo luật "chết không phải nằm bẹp" —
+  mỗi loài một tư thế gục riêng (quỳ gục tựa kiếm/khiên, ngồi sụp gục
+  đầu, cuộn tròn, cuộn khoanh, tan thành khói, cây trụi xuống còn gốc,
+  cánh rũ quấn thân...), giữ nguyên khổ lớn như lúc đứng. GĐ302:
+  **tông môn v3** — tên tông người chơi hiện trên đầu nhân vật + trong
+  chat + panel xem thông tin; **lãnh địa**: 12 điểm Linh Mạch ở các map
+  farm (cờ cắm tại cổng map), tông cắm cờ bằng 20.000 LT từ quỹ (thiền
+  trên map lãnh địa +10% tốc độ Tu vi, đứng tại cờ = nơi linh khí, quỹ
+  +500 LT/ngày triều cống); **tông chiến có PvP THẬT**: tuyên chiến
+  đặt cược 5.000 LT, sau 30 phút thật mở cửa sổ chiến 10 phút tại điểm
+  cờ — trong vùng cờ, thành viên 2 tông đánh nhau thật bằng đòn thường
+  + chiêu + Thần Thuật (ngoài vùng vẫn không PvP), điểm tính theo giữ
+  vùng + sát thương/hạ Thủ Lĩnh Chiến Kỳ + hạ người đối phương, thắng
+  lấy lãnh địa + tiền cược (mọi số TẠM; probe p302 đạt 11/11). Quái dùng
+  sprite có nhún theo bước, thở lúc đứng yên, ép người khi trúng đòn, chúi tới
+  khi vồ; đi bộ 4 khung/loài (bước có chân chéo trung gian) nên di chuyển mượt
+  hẳn, kể cả pet. GĐ303: **kiểm chứng pet Cốt Vương / Quỷ Hồn trong
+  game thật + sửa 1 lỗi**: hai pet đã chạy đủ bộ khung (đi/bay/đánh/
+  thương) trong trình duyệt; phát hiện **khung chết của pet trước giờ
+  không hiện** (server gỡ pet ngay khi chết, client không kịp thấy máu
+  về 0) — đã sửa: server báo thẳng sự kiện pet gục, client dựng khung
+  xác tại chỗ (probe p303 đạt, có ảnh chụp xác Cốt Vương cạnh Huyết
+  Lang trong bí cảnh Thạch Lâm). GĐ304: **Hộp Thư** — tab ✉ Thư trong
+  bảng thông báo (Menu → 📢): hệ thống gửi thư kèm quà (chỉ Linh thạch
+  + vật phẩm — Tu vi không tặng qua thư, phải tự thiền), người chơi bấm Nhận quà ngay trong thư (mỗi thư
+  nhận 1 lần, có huy hiệu số thư chưa đọc ở nút Thông báo). Mọi nhân
+  vật đều có sẵn 1 thư chào mừng kèm 200 Linh thạch + 5 Linh Thảo.
+  Người chơi được cấp quyền GM (tên nhân vật khai trong biến môi
+  trường TTT_GM_NAMES trên host) thấy thêm khung soạn thư ngay trong
+  tab Thư: gửi cho toàn server hoặc 1 nhân vật (kể cả đang offline).
+  GĐ305: **nối đủ quầy hàng** — panel tiệm phía người chơi từng thiếu
+  hàng bậc cao dù server vẫn bán: nay Tiệm Đan (làng + thành phố +
+  tông môn) có đủ Đan Hóa Anh và các đan bậc cao, Tiệm Thảo Dược bán
+  đủ 8 loại thảo tới Tiên Linh Chi, Tiệm Nguyên Liệu thu mua cả quặng
+  bậc cao (Quặng Kim, Thần Thiết, Hỗn Độn Thạch...). Cách vào tiệm ở
+  thành phố: nói chuyện với chủ tiệm → nút Vào tiệm (probe p305 đạt:
+  mua/bán thật ở cả 3 tiệm của Thanh Vân Thành). GĐ306: **bật 4 thành
+  tựu từng bị ẩn** vì hồi đó chưa có hệ đo — Cấp nghề (đếm số nghề phụ
+  đạt cấp cao nhất, nay đã có đa nghề), Bái sư (đếm số sư phụ đã bái),
+  Mọi ngóc ngách (tìm điểm manh mối ẩn trên bản đồ) và Chết oan (gục
+  vì hố lửa ở map dung nham — thành tựu hài). 22 loại còn lại vẫn ẩn
+  vì game chưa có hệ tương ứng (luân hồi, đệ tử NPC...) — bật khi các
+  hệ đó ra đời (probe p306 đạt). GĐ307: **tiến hóa linh thú** — thú
+  thuần hóa theo chủ săn quái tích Linh tê (quái càng mạnh càng nhiều);
+  đủ 100 Linh tê + 500 Linh thạch thì bấm nút "⬆ Tiến hóa" ở dòng thú
+  để lên Linh Thú (chỉ số ×1,35, hình to hơn), đủ 300 + 2000 thì lên
+  Chân Linh (×1,8, to nhất). Thú chết hoặc thả về rừng là mất cả bậc
+  tiến hóa. Thành tựu Thú tiến hóa cũng bật từ đây (probe p307 đạt).
+  GĐ308: **vườn thảo dược** — 12 ô đất ở bãi cỏ phía nam làng (quanh
+  cây cổ thụ): đứng gần ô trống bấm E, chọn 1 trong 10 loại thảo/lúa/
+  hạt sen trong túi làm giống để gieo. Cây lớn 5 giai đoạn theo thời
+  gian (khoảng 3,5 giờ nếu không tưới), bấm E tưới nước cho nhanh
+  lớn; chín thì thu hoạch được 3 cây. Cây của ai người nấy tưới/hái.
+  Mở 2 thành tựu: Linh thảo quý (số loại đã trồng) và Linh thảo cấp 5
+  (số cây chín đã thu hoạch) (probe p308 đạt).
+  GĐ309: **quái hiếm + rương ẩn** — quái thường có tỉ lệ nhỏ (2%)
+  biến dị thành quái hiếm: tên có dấu ✦, hình nhuộm vàng và to hơn,
+  máu gấp đôi, đánh đau hơn 1,5 lần; hạ được thì rương rơi ra nâng
+  1 phẩm. Còn trong mỗi hang tối có giấu 1 rương ở góc xa cửa hang
+  nhất (thêm 2 rương trong bí cảnh Thạch Lâm) — phải đi tới thật gần
+  mới thấy rương hiện ra, mở được đồ phẩm B; mở xong khoảng 4 giờ
+  sau rương mới xuất hiện lại. Mở 2 thành tựu: Quái hiếm và Tìm kho
+  báu (probe p309 đạt).
+  GĐ311: **bỏ thanh tải ở màn hình đầu** — mở link là thấy ngay
+  menu (Đăng nhập / Đăng ký / Chơi nhanh / Thông báo), không còn
+  thanh tiến trình "Đang tải thế giới… %" phải ngồi chờ nữa; cách
+  vào game giữ nguyên như cũ (bấm Chơi nhanh hoặc đăng nhập rồi
+  chọn nhân vật). (Bản GĐ310 "vào thẳng game" đã gỡ bỏ theo ý Bảo
+  — chưa từng lên live.)
+  GĐ312–313: **đường Viên Mãn cho cả 9 lớp** — nhân vật đi đường
+  ẩn Viên Mãn (tu thêm đủ 300 ngày ở Luyện Khí tầng 9) nay nhận đủ
+  bộ "đồ nghề cuối đường": **vũ khí đã chọn lúc tạo nhân vật tự
+  TIẾN HÓA** thành bản Viên Mãn của chính nó (không đổi vũ khí —
+  vũ khí theo người từ đầu, tu tới cuối đường thì hóa thần binh).
+  Cả 30 vũ khí ban đầu đều có bản tiến hóa riêng với tên riêng và
+  bộ chiêu riêng mạnh hơn hẳn: thí dụ Kiếm → Tâm Kiếm Vô Ngân,
+  Thiết côn → Kim Cang Trấn Thiên Côn, Dao găm → Ảnh Nhận Đoạt
+  Hồn, Pháp trượng → Ngũ Lôi Pháp Trượng, Kim châm → Sinh Tử Thần
+  Châm, Bút phép → Văn Thánh Thần Bút… Kèm 1 **tuyệt kỹ Viên Mãn** tự lĩnh ngộ (Thiên Quân Trấn
+  Ngục, Đại Nhật Như Lai Ấn, Cốt Vương Giáng Lâm, Thiên Lôi Phù
+  Trận, Vạn Quỷ Dạ Hành, Dạ Hành Đột Kích, Kiếm Tâm Thiên Ngoại,
+  Hồi Thiên Thần Châm, Hạo Nhiên Thiên Chương) và 1 **nội tại**
+  riêng từng lớp: Kiếm tu càng nhiều công càng mạnh, Nho tu chiêu
+  +25%, Sát thủ đòn phủ đầu vào quái đầy máu +50%, Pháp tu tầm
+  đánh/chiêu +35%, Phật tu hồi chiêu −25% + choáng lâu hơn + nhận
+  ít sát thương hơn, Thể tu 25% đòn thường đánh thêm 1 đòn, Cốt tu
+  Cốt Vương +50% (Giáng Lâm +80% nữa), Quỷ tu tích hồn nhanh hơn
+  50%, Y tu hồi máu +60% và giải hiệu ứng xấu. Chưa viên mãn thì
+  như cũ. Mọi con số đều TẠM chờ cân bằng sau test (probe p313
+  đạt đủ 11 chân kiểm chứng, gồm chân vũ khí tự tiến hóa).
+
+  GĐ314: **LUÂN HỒI — tọa hóa không còn là mất trắng**. Hồn của
+  nhân vật bền qua các kiếp: khi nhân vật hết thọ + qua ân hạn mà
+  tọa hóa (hoặc đang trong ân hạn thì mở Menu ⚙ → **🔄 Luân hồi**
+  để chủ động tọa hóa đầu thai), nhân vật mới tạo sau đó sẽ là
+  KIẾP SAU của chính hồn ấy: giữ nguyên thành tựu + danh hiệu;
+  mỗi kiếp sống trọn (chưa từng gục ngã lần nào) cho kiếp sau
+  **+2% tốc độ thiền** (tối đa +20%); **Linh thạch giữ lại 10%**
+  mỗi phẩm; trước lúc đi, gửi tối đa **3 món đồ** vào **Hành trang
+  chuyển kiếp** trong panel Luân hồi — đồ sẽ theo sang kiếp sau.
+  Kiếp mới được chọn lại lớp/hướng thoải mái: hướng nào từng tu
+  tới Trúc Cơ trở lên đều được hồn ghi nhớ. Từ kiếp thứ 2, đang
+  thiền ở nơi linh khí thỉnh thoảng sẽ **mơ thấy kiếp trước**.
+  Kiếp nào không theo phe Ma được tính là kiếp chính đạo. Bật 5
+  thành tựu mới: Sống sót (Thọ Chung Chính Tẩm), Chuyển kiếp giàu,
+  Trải qua mọi hướng, và 2 thành tựu ẩn về giấc mơ kiếp trước /
+  ma khí. Mọi con số đều TẠM (probe p314 đạt đủ 4 chân kiểm
+  chứng).
+
+  GĐ317: **LUÂN HỒI CÁCH 1 — HOÁN VU KIẾP HỒN + CHỦNG TỘC + CỐT
+  TRUYỆN (đợt A)**. (1) **10 vật phẩm ẩn** của 10 vị thần đầu tiên
+  giấu theo manh mối truyền thuyết (Văn Uyển · Đài Kiếp · cây cổ
+  thụ làng · bãi trùm Thạch Lâm · nghĩa địa cổ · Tiên Môn ngoại
+  viện · thượng nguồn · cổng cõi Trúc Cơ · đỉnh băng · rừng thú):
+  tới gần trong 1500px hồn cảm ứng khí tức 3 mức, đứng sát ≤95px
+  bảo vật hiện hình — hồn nhớ vĩnh viễn qua các kiếp. (2) Đủ 10/10
+  mở **Hoán Vu Kiếp Hồn** (panel 🔄 Luân hồi): tự tọa hóa → tạo
+  nhân vật mới có mục **🌌 THIÊN ĐẠO MÔN chọn chủng tộc**; hồi
+  chiêu **500 năm game**. (3) **10 chủng tộc** — buff/debuff + 1
+  đặc trưng cơ chế riêng + thọ riêng + điểm gốc 112–148 (thiên
+  lệch ×2): Nhân học nhanh + ngưỡng ẩn −30% · Thần chiêu/PT +20%,
+  cấm phe Ma, miễn Thiên Đạo truy lùng · Hoa hồi ×2, chết hụt hồi
+  30%/ngày, sợ lửa · Ma dmg +20% + hút máu 6% + càng ít máu càng
+  mạnh · Quỷ hồn khí +60%, tàng hình với quái, máu −25% · Tiên
+  thiền +20%, khiên 12% máu/60s · Long máu +35%, đòn thứ 5 phun
+  Long Tức, đột phá tốn ×1,3 · Hồ chí mạng +10%, 15% ảo ảnh né đòn
+  · Bách Điểu bay từ Trúc Cơ, chạy/né cao · Vạn Thú pet +30%, thú
+  hoang không chủ động đánh. (4) **📖 Thiên Mệnh Ký** ở Menu:
+  Truyền Thuyết Sơ Khai 10 chương (mở theo kiếp tộc / vật phẩm /
+  tới Văn Uyển — mỗi chương chôn manh mối vật phẩm ẩn) + **Kiếp
+  Ký** biên niên từng kiếp của hồn.
+
+  GĐ316: **LUÂN HỒI CÁCH 2 — đường thứ 3 ở Lễ Đăng Tiên**. Tu tới
+  Độ Kiếp · Chứng Thần, panel chọn đường nay có thêm nút **🔄 Luân
+  hồi làm lại**: khước từ cả Tiên Môn lẫn Địa Tiên, tọa hóa ngay
+  tại Lễ. Kiếp sau nhận gói riêng: **50% Linh thạch Hạ phẩm**,
+  **+10 chỉ số tự do**, **chỉ số ẩn mở sẵn ở 30% cấp độ cũ** (cấp
+  mở khóa giữ nguyên — quà điểm của cấp không tặng lại; giờ tu
+  Đạo Quán và điểm từng chỉ số ẩn đều lấy 30%), giữ thành tựu +
+  danh hiệu, đồ trong Hành trang chuyển kiếp vẫn theo (nhớ gửi
+  đồ trước khi chọn). Mọi con số đều TẠM (probe p316 đạt đủ 11
+  chân kiểm chứng, gồm chân hồi quy đường Địa Tiên cũ).
+
+  GĐ315: **LUÂN HỒI CÁCH 3 ĐẦY ĐỦ** (theo thiết kế của Bảo). Linh
+  thạch mang sang đổi thành **30% Linh thạch Hạ phẩm** (chỉ Hạ —
+  phẩm Trung/Thượng/Cực không theo hồn). Kiếp trước **chưa từng
+  gục ngã lần nào** → kiếp mới mở Menu ⚙ → **🔄 Luân hồi** sẽ
+  được **chọn Tiên hoặc Ma**: Tiên (Phúc Lành Tiên Nhân) = mỗi lần
+  tăng tiến **+3 chỉ số tự do**, học/luyện công pháp **nhanh hơn
+  5%**; Ma (Ma Khí Quanh Thân) = **+5 chỉ số tự do** mỗi tăng
+  tiến, **sát thương lên quái +10%** — cả hai **tan khi tới Kim
+  Đan**. Kiếp chết **trên 70 lần** → kiếp sau mang **Khiếm Khuyết
+  Hồn Thể**: mất 10 điểm tự do khởi đầu, **tu luyện chậm 30%**,
+  và phải đi tìm **7 mảnh hồn** rải từ làng tới cảnh giới cũ
+  (vào đúng map sẽ có dòng cảm ứng cho biết xa/gần) — mỗi mảnh
+  tìm được **+10 chỉ số tự do**, **+5% khả năng tu luyện**, và
+  **chọn lại 1 loại đồ từ túi đồ kiếp trước** ngay trong panel
+  Luân hồi. Mọi con số đều TẠM (probe p315 đạt đủ 14 chân kiểm
+  chứng).
+
 Việc nhờ bạn bè để mắt khi test bản này: FPS ở bãi farm đông quái, cảnh sói–rương,
-hành vi quái trong trận, Thiền Phòng/Tụ Linh Trận, bắn trúng ở tầm 5–6 ô.
+hành vi quái trong trận, Thiền Phòng/Tụ Linh Trận, bắn trúng ở tầm 5–6 ô,
+độ mượt hoạt ảnh quái khi đi/đánh, panel Tông môn (Quỹ/Kho) và Hội nghề.
 
 ## 2. Chế độ "test nhanh" cho tối nay (tùy chọn, nên dùng)
 

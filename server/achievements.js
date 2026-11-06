@@ -83,7 +83,7 @@ const ACH138 = [
   { id: 'ach_cp_weapons', group: 'cong_phap', name: 'Đủ bộ vũ khí', desc: 'Số loại vũ khí đã dùng đến cấp luyện thuần thục', base: 'Bách Binh', tiers: [1, 3, 5, 8, 12, 16], key: 'weaponsMastered', enabled: false }, // GĐ139: nới 4→6 bậc (+4 Đạo Tích) để tổng nhóm Công pháp khớp tài liệu (59) sau khi godskills về 1 bậc
   { id: 'ach_cp_paths', group: 'cong_phap', name: 'Đạo riêng', desc: 'Số mốc cơ chế riêng của hướng tu đã mở', base: 'Đạo Thống', tiers: [4, 8, 12, 16], key: 'pathMilestones', enabled: false },
   { id: 'ach_cp_xuatkhieu', group: 'cong_phap', name: 'Xuất khiếu', desc: 'Số lần xuất khiếu (Nguyên Anh) thành công', base: 'Nguyên Thần Du Hành', tiers: [1, 5, 20, 60], key: 'xuatKhieu' },
-  { id: 'ach_cp_directions', group: 'cong_phap', name: 'Trải qua mọi hướng', desc: 'Số hướng tu đã từng chơi đến Trúc Cơ trở lên', base: 'Vạn Đạo Quy Nhất', tiers: [1, 3, 5, 7, 9], key: 'directions', enabled: false }, // GĐ139: TẠM ẨN — cần hệ đa nhân vật/đa hướng (1 tài khoản hiện chỉ 1 char),
+  { id: 'ach_cp_directions', group: 'cong_phap', name: 'Trải qua mọi hướng', desc: 'Số hướng tu đã từng chơi đến Trúc Cơ trở lên', base: 'Vạn Đạo Quy Nhất', tiers: [1, 3, 5, 7, 9], key: 'directions', enabled: true }, // GĐ139: TẠM ẨN — cần hệ đa nhân vật/đa hướng (1 tài khoản hiện chỉ 1 char),
   // Nhóm Nghề phụ (10)
   { id: 'ach_np_dan', group: 'nghe_phu', name: 'Luyện đan sư', desc: 'Số viên đan đã luyện thành công', base: 'Đan Sư', tiers: [10, 100, 500, 2000, 10000, 30000, 100000, 300000], key: 'danCrafts' },
   { id: 'ach_np_danpham', group: 'nghe_phu', name: 'Đan phẩm', desc: 'Số viên đan phẩm cao (từ Thượng phẩm) đã luyện', base: 'Đan Thánh', tiers: [1, 10, 50, 200], key: 'highPills', enabled: false },
@@ -92,7 +92,7 @@ const ACH138 = [
   { id: 'ach_np_cook', group: 'nghe_phu', name: 'Linh thực', desc: 'Số món linh thực đã nấu', base: 'Thực Thần', tiers: [10, 80, 400, 1500, 6000, 20000, 50000], key: 'cooks' },
   { id: 'ach_np_herb', group: 'nghe_phu', name: 'Làm vườn linh điền', desc: 'Số lần thu hoạch linh thảo', base: 'Điền Chủ', tiers: [10, 100, 500, 2000, 8000, 30000, 100000], key: 'herbGathers' },
   { id: 'ach_np_ore', group: 'nghe_phu', name: 'Khai khoáng', desc: 'Số mỏ hoặc mạch quặng đã đào', base: 'Quặng Vương', tiers: [10, 100, 500, 2000], key: 'oreGathers' },
-  { id: 'ach_np_toprank', group: 'nghe_phu', name: 'Cấp nghề', desc: 'Số nghề phụ đã đạt cấp cao nhất', base: 'Bách Nghệ', tiers: [1, 2, 3, 5, 7], key: 'topRanks', enabled: false }, // GĐ139: TẠM ẨN — cần hệ đa nghề (1 char hiện chỉ 1 nghề),
+  { id: 'ach_np_toprank', group: 'nghe_phu', name: 'Cấp nghề', desc: 'Số nghề phụ đã đạt cấp cao nhất', base: 'Bách Nghệ', tiers: [1, 2, 3, 5, 7], key: 'topRanks' }, // GĐ306: BẬT — đa nghề đã có từ GĐ142/160; progressFor đếm số nghề đạt cấp 14 (trần theo JOB_RANK_CRAFTS)
   { id: 'ach_np_profstones', group: 'nghe_phu', name: 'Kiếm sống bằng nghề', desc: 'Linh thạch kiếm được từ bán sản phẩm nghề phụ (đơn vị: hạ phẩm)', base: 'Phú Thương', tiers: [1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000], key: 'profStones' },
   { id: 'ach_np_failthen', group: 'nghe_phu', name: 'Thất bại là mẹ', desc: 'Số lần chế tạo thất bại rồi chế lại thành công ngay', base: 'Bất Khuất Tượng Nhân', tiers: [3, 20, 100, 400], key: 'failThenSuccess' },
   // Nhóm Khám phá (10)
@@ -100,8 +100,8 @@ const ACH138 = [
   { id: 'ach_kp_phmaps', group: 'kham_pha', name: 'Chân đạp hư không', desc: 'Số bản đồ cõi Phản Hư đã đặt chân tới', base: 'Hư Không Hành Giả', tiers: [1, 5, 15, 30], key: 'phMaps' }, // GĐ216
   { id: 'ach_kp_dist', group: 'kham_pha', name: 'Quãng đường', desc: 'Tổng quãng đường đã đi (đơn vị: km trong game)', base: 'Vạn Lý Hành', tiers: [10, 100, 500, 2000, 10000, 30000, 80000, 200000], key: 'distKm' },
   { id: 'ach_kp_dungeon', group: 'kham_pha', name: 'Bí cảnh', desc: 'Số bí cảnh đã vào và hoàn thành', base: 'Bí Cảnh Chinh Phục', tiers: [1, 3, 6, 12, 25], key: 'dungeons' },
-  { id: 'ach_kp_hiddenchest', group: 'kham_pha', name: 'Tìm kho báu', desc: 'Số rương ẩn tìm thấy', base: 'Thợ Săn Kho Báu', tiers: [1, 5, 15, 40, 100], key: 'hiddenChests', enabled: false },
-  { id: 'ach_kp_secrets', group: 'kham_pha', name: 'Mọi ngóc ngách', desc: 'Số điểm bí mật trên bản đồ đã tìm ra', base: 'Người Biết Hết', tiers: [1, 5, 15, 40], key: 'secretPoints', enabled: false },
+  { id: 'ach_kp_hiddenchest', group: 'kham_pha', name: 'Tìm kho báu', desc: 'Số rương ẩn tìm thấy', base: 'Thợ Săn Kho Báu', tiers: [1, 5, 15, 40, 100], key: 'hiddenChests' }, // GĐ309: BẬT — hệ tương ứng đã có
+  { id: 'ach_kp_secrets', group: 'kham_pha', name: 'Mọi ngóc ngách', desc: 'Số điểm bí mật trên bản đồ đã tìm ra', base: 'Người Biết Hết', tiers: [1, 5, 15, 40], key: 'secretPoints' }, // GĐ306: BẬT — điểm bí mật = điểm manh mối ẩn GĐ127/198 (27 điểm), progressFor đếm cờ đã tìm trong flags
   { id: 'ach_kp_chests', group: 'kham_pha', name: 'Mở rương', desc: 'Số rương đã mở (cấp C, B, A cộng dồn)', base: 'Rương Tinh', tiers: [10, 100, 500, 2000, 8000, 20000, 50000, 100000], key: 'chests' },
   { id: 'ach_kp_chestA', group: 'kham_pha', name: 'Rương cấp cao', desc: 'Số rương cấp A đã mở', base: 'Phúc Tinh', tiers: [1, 10, 40, 150, 500, 1500], key: 'chestsA' },
   { id: 'ach_kp_wall', group: 'kham_pha', name: 'Vượt tường đá', desc: 'Số lần vượt Tường Đá thành công', base: 'Thạch Môn Phá', tiers: [1, 10, 50, 200], key: 'wallCross', enabled: false },
@@ -112,7 +112,7 @@ const ACH138 = [
   { id: 'ach_qt_species', group: 'quai_trum', name: 'Từng loại quái', desc: 'Số loại quái khác nhau đã hạ ít nhất một lần', base: 'Bách Quái Đồ', tiers: [5, 10, 15, 18, 22], key: 'speciesKilled' }, // GĐ139: game có đúng 22 loài quái khác nhau (3 bãi farm + 19 GDD),
   { id: 'ach_qt_elite', group: 'quai_trum', name: 'Tinh anh', desc: 'Số quái tinh anh đã hạ', base: 'Tinh Anh Chiến Sĩ', tiers: [5, 30, 150, 600, 2500, 8000, 20000, 50000], key: 'eliteKills' },
   { id: 'ach_qt_bounty', group: 'quai_trum', name: 'Mục Tiêu truy nã', desc: 'Số quái Mục Tiêu (truy nã) đã hạ', base: 'Thợ Săn Tiền Thưởng', tiers: [1, 5, 20, 60, 150], key: 'bountyKills' },
-  { id: 'ach_qt_rare', group: 'quai_trum', name: 'Quái hiếm', desc: 'Số quái hiếm hoặc biến dị đã hạ', base: 'Kỳ Thú Săn Giả', tiers: [1, 5, 20, 60], key: 'rareKills', enabled: false },
+  { id: 'ach_qt_rare', group: 'quai_trum', name: 'Quái hiếm', desc: 'Số quái hiếm hoặc biến dị đã hạ', base: 'Kỳ Thú Săn Giả', tiers: [1, 5, 20, 60], key: 'rareKills' }, // GĐ309: BẬT — hệ tương ứng đã có
   { id: 'ach_qt_oneshot', group: 'quai_trum', name: 'Một chiêu hạ gục', desc: 'Số trùm hạ chỉ bằng một chiêu hoặc chuỗi thần thông ngắn (≤3 đòn)', base: 'Nhất Kích Tất Sát', tiers: [1, 3, 10, 25], key: 'oneShotBoss' },
   { id: 'ach_qt_speed', group: 'quai_trum', name: 'Trùm nhanh', desc: 'Hạ trùm trong ít hơn số giây cho trước (mốc giảm dần: 120, 90, 60, 40, 25)', base: 'Tốc Chiến', tiers: [1, 2, 3, 4, 5], key: 'speedKills' },
   { id: 'ach_qt_save', group: 'quai_trum', name: 'Bảo vệ đồng đội', desc: 'Số lần chắn đòn hoặc hồi máu cứu đồng đội', base: 'Hộ Pháp', tiers: [10, 100, 500, 2000], key: 'teammateSaves' },
@@ -120,11 +120,11 @@ const ACH138 = [
   { id: 'ach_qt_na', group: 'quai_trum', name: 'Đối thủ cảnh giới Nguyên Anh', desc: 'Số quái Nguyên Anh đã hạ', base: 'Nguyên Anh Sát', tiers: [5, 50, 300, 1000, 3000, 8000], key: 'naKills' },
   // Nhóm Sinh tồn và thời gian (8)
   { id: 'ach_st_hunger', group: 'sinh_ton', name: 'Đói khát', desc: 'Số lần vượt qua trạng thái sắp Kiệt sức rồi hồi phục', base: 'Sinh Tồn Giả', tiers: [3, 20, 100, 400], key: 'hungerRecovers' },
-  { id: 'ach_st_lives', group: 'sinh_ton', name: 'Sống sót', desc: 'Số kiếp đã sống đến hết tuổi thọ (không chết bất đắc kỳ tử)', base: 'Thọ Chung Chính Tẩm', tiers: [1, 3, 5, 10, 20], key: 'fullLives', enabled: false },
+  { id: 'ach_st_lives', group: 'sinh_ton', name: 'Sống sót', desc: 'Số kiếp đã sống đến hết tuổi thọ (không chết bất đắc kỳ tử)', base: 'Thọ Chung Chính Tẩm', tiers: [1, 3, 5, 10, 20], key: 'fullLives', enabled: true },
   { id: 'ach_st_revive', group: 'sinh_ton', name: 'Hồi sinh', desc: 'Số lần hồi sinh sau khi bị hạ', base: 'Cửu Tử Nhất Sinh', tiers: [5, 30, 150, 600], key: 'revives' },
   { id: 'ach_st_nodeath', group: 'sinh_ton', name: 'Không chết', desc: 'Số ngày game liên tục không bị hạ gục (kỷ lục cao nhất)', base: 'Bất Tử Thân', tiers: [30, 100, 365, 1000, 3000, 10000, 30000], key: 'noDeathMax' },
   { id: 'ach_st_meals', group: 'sinh_ton', name: 'Ăn uống đúng bữa', desc: 'Số bữa ăn đúng giờ (thanh Thức ăn và Nước uống luôn trên 30%)', base: 'Tịch Cốc Hạnh Phúc', tiers: [30, 300, 2000, 10000], key: 'meals' },
-  { id: 'ach_st_trap', group: 'sinh_ton', name: 'Chết oan', desc: 'Số lần chết do rơi vào bẫy hoặc môi trường (hài hước)', base: 'Đại Hiệp Chết Oan', tiers: [1, 5, 15], key: 'trapDeaths', enabled: false },
+  { id: 'ach_st_trap', group: 'sinh_ton', name: 'Chết oan', desc: 'Số lần chết do rơi vào bẫy hoặc môi trường (hài hước)', base: 'Đại Hiệp Chết Oan', tiers: [1, 5, 15], key: 'trapDeaths' }, // GĐ306: BẬT — hitPlayer đếm lần gục bởi 'hố lửa' (nguồn sát thương môi trường duy nhất)
   { id: 'ach_st_lifespan', group: 'sinh_ton', name: 'Tuổi thọ mở rộng', desc: 'Tổng tuổi thọ nhận thêm nhờ đột phá và đan dược', base: 'Thọ Tỉ Nam Sơn', tiers: [20, 100, 300, 800, 2000, 5000, 12000], key: 'lifespanBonus' },
   { id: 'ach_st_playtime', group: 'sinh_ton', name: 'Thời gian thật', desc: 'Tổng thời gian thật đã chơi (giờ)', base: 'Tu Sĩ Chân Chính', tiers: [1, 10, 50, 200, 500, 1000, 2000, 3500, 5000, 8000], key: 'playHours' },
   // Nhóm Của cải (8)
@@ -134,7 +134,7 @@ const ACH138 = [
   { id: 'ach_cc_trades', group: 'cua_cai', name: 'Mua bán', desc: 'Số giao dịch với NPC thương nhân', base: 'Thương Nhân', tiers: [10, 100, 500, 2500, 10000, 30000, 100000], key: 'trades' },
   { id: 'ach_cc_items', group: 'cua_cai', name: 'Túi đồ đầy', desc: 'Số loại vật phẩm khác nhau đã từng sở hữu', base: 'Sưu Tầm Gia', tiers: [5, 10, 15, 20, 25, 30, 32], key: 'itemsOwned' }, // GĐ139: 55 id vật phẩm nhưng char không nghề chỉ sở hữu được 32 loại (rơi/shop/rương/quest — còn lại là đồ nghề/lớp khác chế),
   { id: 'ach_cc_gear', group: 'cua_cai', name: 'Trang bị', desc: 'Số món trang bị phẩm cao đã sở hữu (từ Tiên phẩm trở lên)', base: 'Bảo Khí Chủ', tiers: [1, 5, 15, 40], key: 'gearHigh' },
-  { id: 'ach_cc_carry', group: 'cua_cai', name: 'Chuyển kiếp giàu', desc: 'Số lần mang vật phẩm sang kiếp sau', base: 'Truyền Thừa Giả', tiers: [1, 3, 7, 12, 20], key: 'carryItems', enabled: false },
+  { id: 'ach_cc_carry', group: 'cua_cai', name: 'Chuyển kiếp giàu', desc: 'Số lần mang vật phẩm sang kiếp sau', base: 'Truyền Thừa Giả', tiers: [1, 3, 7, 12, 20], key: 'carryItems', enabled: true },
   { id: 'ach_cc_budget', group: 'cua_cai', name: 'Tiết kiệm', desc: 'Số lần hoàn thành mục tiêu mà không tiêu quá số Linh thạch đặt trước', base: 'Cần Kiệm', tiers: [1, 5, 20, 60], key: 'budgetGoals', enabled: false },
   // Nhóm Nhân duyên (10)
   { id: 'ach_nd_met', group: 'nhan_duyen', name: 'Quen biết', desc: 'Số NPC có tên đã làm quen', base: 'Giao Du Rộng', tiers: [3, 10, 25, 50, 100, 200, 400], key: 'npcsMet' },
@@ -143,16 +143,16 @@ const ACH138 = [
   { id: 'ach_nd_fate', group: 'nhan_duyen', name: 'Cơ duyên', desc: 'Số sự kiện cơ duyên đã gặp', base: 'Phúc Duyên Thâm Hậu', tiers: [1, 5, 15, 40], key: 'hiddenQuests' },
   { id: 'ach_nd_rival', group: 'nhan_duyen', name: 'Hóa giải ân oán', desc: 'Số mối thù đã hóa giải hoặc trả', base: 'Ân Oán Phân Minh', tiers: [1, 5, 15, 40], key: 'rivalWins' },
   { id: 'ach_nd_merit', group: 'nhan_duyen', name: 'Tông môn', desc: 'Số điểm cống hiến tông môn (nghìn)', base: 'Trụ Cột Tông Môn', tiers: [1, 10, 50, 200, 1000], key: 'meritK' },
-  { id: 'ach_nd_disciple', group: 'nhan_duyen', name: 'Đệ tử', desc: 'Số đệ tử đã nhận hoặc dạy thành tài', base: 'Danh Sư', tiers: [1, 3, 10, 30], key: 'disciples', enabled: false },
-  { id: 'ach_nd_master', group: 'nhan_duyen', name: 'Bái sư', desc: 'Số vị sư phụ hoặc tiền bối đã nhận chỉ điểm', base: 'Sư Đồ Thâm Tình', tiers: [1, 3, 6, 12], key: 'masters', enabled: false }, // GĐ139: TẠM ẨN — 1 char chỉ có tối đa 1 sư phụ (1 nghề),
+  { id: 'ach_nd_disciple', group: 'nhan_duyen', name: 'Đệ tử', desc: 'Số đệ tử đã nhận hoặc dạy thành tài', base: 'Danh Sư', tiers: [1, 3, 10, 30], key: 'disciples', enabled: true },
+  { id: 'ach_nd_master', group: 'nhan_duyen', name: 'Bái sư', desc: 'Số vị sư phụ hoặc tiền bối đã nhận chỉ điểm', base: 'Sư Đồ Thâm Tình', tiers: [1, 3, 6, 12], key: 'masters' }, // GĐ306: BẬT — mỗi nghề một sư phụ (tối đa 3 vị từ GĐ142/160); progressFor đếm số nghề đã bái sư
   { id: 'ach_nd_sworn', group: 'nhan_duyen', name: 'Kết bạn', desc: 'Số bạn hữu NPC đã kết nghĩa', base: 'Hào Kiệt', tiers: [1, 3, 8, 20], key: 'swornFriends', enabled: false },
   { id: 'ach_nd_help', group: 'nhan_duyen', name: 'Mời lên cảnh', desc: 'Số lần NPC giúp bạn đột phá cảnh giới khó (cảnh cao thất bại nhiều lần)', base: 'Quý Nhân Phù Trợ', tiers: [1, 3, 6, 12], key: 'npcBreakHelp', enabled: false },
   // Nhóm Linh thú, thảo, đan (8)
   { id: 'ach_lt_tame', group: 'linh_thu', name: 'Thuần thú', desc: 'Số linh thú đã thuần phục', base: 'Thú Sư', tiers: [1, 3, 8, 20, 50], key: 'tames' },
   { id: 'ach_lt_mount', group: 'linh_thu', name: 'Thú cưỡi', desc: 'Số loại thú cưỡi đã sở hữu', base: 'Kỵ Sĩ Vạn Thú', tiers: [1, 3, 6, 10], key: 'mounts', enabled: true }, // GĐ161: đã nối — 7 loài hiện có nên mốc 10 chờ thêm loài sau
-  { id: 'ach_lt_evolve', group: 'linh_thu', name: 'Thú tiến hóa', desc: 'Số lần linh thú tiến hóa', base: 'Thú Hóa Tông Sư', tiers: [1, 5, 15, 40], key: 'petEvolves', enabled: false },
-  { id: 'ach_lt_herbtypes', group: 'linh_thu', name: 'Linh thảo quý', desc: 'Số loại linh thảo đã trồng thành công', base: 'Bách Thảo', tiers: [3, 10, 20, 40], key: 'herbTypesGrown', enabled: false },
-  { id: 'ach_lt_herb5', group: 'linh_thu', name: 'Linh thảo cấp 5', desc: 'Số cây linh thảo cấp 5 đã thu hoạch', base: 'Tiên Thảo Chủ', tiers: [1, 5, 20, 60], key: 'herbLv5', enabled: false },
+  { id: 'ach_lt_evolve', group: 'linh_thu', name: 'Thú tiến hóa', desc: 'Số lần linh thú tiến hóa', base: 'Thú Hóa Tông Sư', tiers: [1, 5, 15, 40], key: 'petEvolves' }, // GĐ307: BẬT — hệ tiến hóa linh thú đã có (GĐ307)
+  { id: 'ach_lt_herbtypes', group: 'linh_thu', name: 'Linh thảo quý', desc: 'Số loại linh thảo đã trồng thành công', base: 'Bách Thảo', tiers: [3, 10, 20, 40], key: 'herbTypesGrown' }, // GĐ308: BẬT — vườn thảo dược đã có
+  { id: 'ach_lt_herb5', group: 'linh_thu', name: 'Linh thảo cấp 5', desc: 'Số cây linh thảo cấp 5 đã thu hoạch', base: 'Tiên Thảo Chủ', tiers: [1, 5, 20, 60], key: 'herbLv5' }, // GĐ308: BẬT — vườn thảo dược đã có
   { id: 'ach_lt_overdose', group: 'linh_thu', name: 'Đan độc', desc: 'Số lần dùng đan dược quá liều rồi khỏi', base: 'Bách Độc Bất Xâm', tiers: [1, 5, 20], key: 'overdoses', enabled: false },
   { id: 'ach_lt_pills', group: 'linh_thu', name: 'Bộ sưu tập đan', desc: 'Số loại đan dược khác nhau đã dùng', base: 'Bách Đan Phổ', tiers: [5, 15, 30, 50], key: 'pillsUsed' },
   { id: 'ach_lt_loyal', group: 'linh_thu', name: 'Linh thú trung thành', desc: 'Số linh thú đã đạt độ thân thiết tối đa', base: 'Thú Tình Thâm', tiers: [1, 3, 8, 20], key: 'loyalPets', enabled: false },
@@ -165,9 +165,9 @@ const ACH138 = [
   { id: 'ach_an_festverse', group: 'an', name: '???: sưu tầm câu chúc', desc: 'Mở Bao Lì Xì trúng Mảnh Câu Chúc viết tay (ẩn cho đến khi đạt)', base: 'Người Giữ Chữ', tiers: [1, 6, 15], key: 'festVerse', hidden: true }, // GĐ222
   { id: 'ach_an_tandang', group: 'an', name: '???: đến cuối vẫn còn chăm chỉ', desc: 'Nguyên Anh tầng 9 không thăng cảnh, tu đến cuối thọ nguyên trên đường Tàn Đăng và thoát thai hoán cốt (ẩn cho đến khi đạt)', base: 'Tàn Đăng Bất Diệt', tiers: [1], key: 'tandang', hidden: true }, // GĐ180: tên thành tựu do Bảo đặt
   { id: 'ach_an_secret', group: 'an', name: '???: bí mật ẩn', desc: 'Hoàn thành chuỗi nhiệm vụ ẩn mở ra Đỏ sắc, Đen sắc hoặc Hư sắc (mở khóa thiên phú)', base: 'Cơ Duyên Thâm Hậu', tiers: [1, 2, 3], key: 'secretChains', hidden: true },
-  { id: 'ach_an_dream', group: 'an', name: '???: giấc mơ kiếp trước', desc: 'Gặp ký ức kiếp trước (cần chơi nhiều kiếp)', base: 'Luân Hồi Giả', tiers: [1, 3, 5, 10], key: 'pastDreams', hidden: true, enabled: false },
-  { id: 'ach_an_demon', group: 'an', name: '???: ma khí và chính đạo', desc: 'Giữ mức ma khí thấp suốt một kiếp (ẩn)', base: 'Chính Đạo', tiers: [1, 3, 5], key: 'lowDemonLives', hidden: true, enabled: false },
-  { id: 'ach_an_books', group: 'an', name: '???: đọc hết sách', desc: 'Đọc hết sách trong Thư viện, tìm ra bí tịch ẩn', base: 'Bác Học Giả', tiers: [1, 3, 6, 10], key: 'booksRead', hidden: true, enabled: false },
+  { id: 'ach_an_dream', group: 'an', name: '???: giấc mơ kiếp trước', desc: 'Gặp ký ức kiếp trước (cần chơi nhiều kiếp)', base: 'Luân Hồi Giả', tiers: [1, 3, 5, 10], key: 'pastDreams', hidden: true, enabled: true },
+  { id: 'ach_an_demon', group: 'an', name: '???: ma khí và chính đạo', desc: 'Giữ mức ma khí thấp suốt một kiếp (ẩn)', base: 'Chính Đạo', tiers: [1, 3, 5], key: 'lowDemonLives', hidden: true, enabled: true },
+  { id: 'ach_an_souldef', group: 'an', name: '???: khiếm khuyết hồn thể', desc: 'Chết quá nhiều lần trong một kiếp — hồn khiếm khuyết, phải đi tìm lại 7 mảnh hồn (ẩn)', base: 'Khiếm Khuyết', tiers: [1], key: 'soulDeficient', hidden: true, enabled: true }, // GĐ315  { id: 'ach_an_books', group: 'an', name: '???: đọc hết sách', desc: 'Đọc hết sách trong Thư viện, tìm ra bí tịch ẩn', base: 'Bác Học Giả', tiers: [1, 3, 6, 10], key: 'booksRead', hidden: true, enabled: false },
   { id: 'ach_an_cleanboss', group: 'an', name: '???: chiến thần', desc: 'Hạ trùm cuối bản đồ đầu tiên mà chưa dùng đan hay thần thông', base: 'Chiến Thần Tập Sự', tiers: [1, 3, 10], key: 'cleanBoss', hidden: true },
 ];
 // GĐ139 — THƯỞNG MỐC NHÓM (tài liệu bản -2, bảng "Thưởng theo nhóm"):
