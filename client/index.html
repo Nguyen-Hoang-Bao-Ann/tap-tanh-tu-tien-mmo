@@ -27,6 +27,23 @@
       #hudStats { font-size: 9.5px; color: #cfe3d4; line-height: 1.4; margin-top: 3px; }
       #hudRealm { font-size: 10.5px; color: #d9b8ff; margin: 1px 0; }
       #hudLinhCan { font-size: 9.5px; color: #9fd8c9; margin-bottom: 2px; }
+      #hudTalent { font-size: 9.5px; color: #f5d98a; margin-bottom: 2px; }
+      /* GĐ337: hộp thiên phú (màn tạo + panel bốc bù dùng chung) */
+      .talTierRow { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
+      .talTierBtn { border: 1px solid #4a4a6a; background: #23233a; color: #ddd; border-radius: 8px; padding: 5px 10px; font-size: 12px; cursor: pointer; }
+      .talTierBtn.sel { border-color: #ffd94d; box-shadow: 0 0 0 1px #ffd94d inset; color: #fff; }
+      .talTierBtn small { display: block; font-size: 10px; opacity: .75; }
+      .talPick { display: block; width: 100%; text-align: left; border: 1px solid #3d4a3d; background: #1c2a1c; color: #e8f2e8; border-radius: 8px; padding: 6px 9px; margin: 0 0 6px; font-size: 12.5px; cursor: pointer; }
+      .talPick:hover { border-color: #9fd8a9; }
+      .talPick small { display: block; font-size: 11px; color: #b9d9c0; line-height: 1.35; }
+      .talPick .talFit { color: #8fd18f; font-size: 10.5px; }
+      .talPick .talOff { color: #e89a8a; font-size: 10.5px; }
+      .talCard { border: 1px solid #6a5a2a; background: #2a2416; border-radius: 8px; padding: 8px 10px; font-size: 13px; color: #ffe9a8; margin: 6px 0; }
+      .talCard small { display: block; color: #d8cbb0; font-size: 11.5px; line-height: 1.4; margin-top: 2px; }
+      .talBtns { display: flex; gap: 8px; margin-top: 6px; }
+      .talBtns button { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid #4a4a6a; background: #2c3a5e; color: #fff; font-size: 13px; cursor: pointer; }
+      .talBtns button:disabled { opacity: .45; cursor: not-allowed; }
+      .talNote { font-size: 11.5px; color: #a9cbb6; line-height: 1.45; }
       #hudTuViFill { background: linear-gradient(90deg, #6d28c9, #a855f7); }
       #hudStones { font-size: 11px; color: #a5f3fc; margin-top: 4px; font-weight: 700; }
       #questTracker { font-size: 10px; color: #ffe9a8; margin-top: 4px; line-height: 1.45; border-top: 1px solid rgba(255,255,255,0.14); padding-top: 4px; }
@@ -263,6 +280,10 @@
       .menubtn:disabled { opacity: 0.45; cursor: default; }
       .menubtn:hover:not(:disabled) { filter: brightness(1.15); }
       .splash-note { font-size: 11.5px; color: rgba(226,238,228,0.88); line-height: 1.55; margin: 12px auto 0; max-width: 330px; text-shadow: 0 1px 3px rgba(0,0,0,0.95); }
+      /* GĐ339: khối trạng thái kết nối ở màn chờ */
+      #connStatus { text-align: center; }
+      #connStatusText { color: #ffe9b0; }
+      #btnRetryConn { width: 220px; font-size: 13.5px; padding: 8px; }
       .splash-note b { color: #ffe9b0; }
       .authInput {
         display: block; width: 290px; max-width: 84%; margin: 8px auto 0; padding: 10px 12px;
@@ -1205,6 +1226,7 @@
         <div id="hudAge"></div>
         <div id="hudSect" style="font-size: 10px; color: #ffd98a; margin: 1px 0 2px;"></div>
         <div id="hudLinhCan"></div>
+        <div id="hudTalent"></div>
         <div class="bar"><div id="hudHpFill"></div><span id="hudHpText">HP</span></div>
         <div class="bar"><div id="hudMpFill"></div><span id="hudMpText">Chân nguyên</span></div>
         <div class="bar"><div id="hudTuViFill"></div><span id="hudTuViText">Tu vi</span></div>
@@ -1242,6 +1264,8 @@
         <button id="btnBranchMa" type="button" style="display:none">☯ Chọn phe Ma</button>
         <button id="btnBranchBreak" type="button" style="display:none">✦ Đột phá thang</button>
         <button id="btnBranchCleanse" type="button" style="display:none">☯ Tẩy luyện đổi phe</button>
+        <div id="hudSubSeal" style="display:none;font-size:11px;color:#93c5fd;margin:1px 0 2px;"></div>
+        <div id="subSealBtns" style="display:none"></div>
         <div id="hudTanDang" style="display:none;font-size:11px;color:#fcd34d;margin:1px 0 2px;"></div>
         <button id="btnTanDang" type="button" style="display:none">🕯 Đi đường Tàn Đăng (không thăng cảnh)</button>
         <div id="hudPhapTuong" style="display:none;font-size:11px;color:#f0abfc;margin:1px 0 2px;"></div>
@@ -1254,7 +1278,7 @@
         <button id="btnThanThuat" type="button" style="display:none">🌟 Thần Thuật</button>
         <button id="btnXuatKhieu" type="button" style="display:none">👻 Xuất khiếu</button>
         <button id="hudDetailBtn" type="button">▸ Chỉ số</button>
-        <div id="hudDetails"><div id="hudStats">—</div></div>
+        <div id="hudDetails"><div id="hudStats">—</div><div id="hudTalentDetail" style="font-size:11px;color:#f5d98a;margin:3px 0 2px;line-height:1.45;"></div><button id="btnTalentMakeup" type="button" style="display:none">✦ Bốc bù thiên phú</button><button id="btnTalentLc" type="button" style="display:none">🧭 Đo lại linh căn (Thiên Linh Căn)</button></div>
         <button id="hudBreak" type="button">✦ Đột phá cảnh giới ✦</button>
         <button id="btnKiemUlt" type="button" style="display:none">✦ Nhân Kiếm Hợp Nhất</button>
         <button id="btnQuySummon" type="button" style="display:none">✦ Triệu Hồi Quỷ Hồn</button>
@@ -1343,6 +1367,21 @@
       <div id="interactHint"></div>
       <div id="skillBar"></div>
       <button id="invBtn" type="button">🎒 Túi đồ (I)</button>
+      <div id="talentPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>✦ Thiên phú — bốc bù cho nhân vật cũ</span><button class="xBtn" id="talentClose" type="button">✕</button></div>
+        <div id="talentPanelBody"></div>
+        <p class="splash-note">Nhân vật tạo trước khi có hệ thiên phú được bốc bù đúng 1 lần, y hệt bước tạo mới. Bấm ✕ là "Để sau" — lần đăng nhập sau sẽ mời lại. Thọ của thiên phú thọ cộng vào tuổi thọ hiện tại.</p>
+      </div>
+      <div id="lcRerollPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>🧭 Đo lại linh căn — chọn 1 kết quả</span><button class="xBtn" id="lcRerollClose" type="button">✕</button></div>
+        <div id="lcRerollBody"></div>
+        <p class="splash-note">Thiên phú Thiên Linh Căn Tương Hợp chỉ cho đo lại đúng 1 lần — chọn xong là chốt, không đổi lại được.</p>
+      </div>
+      <div id="rerollChoicePanel" class="panel" style="display:none">
+        <div class="panelHead"><span>✦ Thông linh — chọn giữ 1 bộ nội tại</span><button class="xBtn" id="rerollChoiceClose" type="button">✕</button></div>
+        <div id="rerollChoiceBody"></div>
+        <p class="splash-note">Bộ không chọn sẽ mất hẳn. Đóng panel này thì lần rèn lại sau sẽ bị chặn cho tới khi bạn chọn xong (mở lại bằng cách rèn lại món đó).</p>
+      </div>
       <div id="rebirthPanel" class="panel" style="display:none">
         <div class="panelHead"><span>🔄 Luân hồi — hồn qua các kiếp</span><button class="xBtn" id="rebirthClose" type="button">✕</button></div>
         <div id="rebirthBody"></div>
@@ -1367,6 +1406,7 @@
         <div class="panelHead"><span>📖 Thiên Mệnh Ký</span><button class="xBtn" id="storyClose" type="button">✕</button></div>
         <div class="row" style="gap:6px;margin:4px 0">
           <button class="mini" id="storyTabLore" type="button">📜 Truyền Thuyết Sơ Khai</button>
+          <button class="mini" id="storyTabMain" type="button">🌌 Thiên Mệnh</button>
           <button class="mini" id="storyTabLog" type="button">🔄 Kiếp Ký</button>
         </div>
         <div id="storyBody"></div>
@@ -1619,6 +1659,14 @@
             <div id="loadbar"><div id="loadfill"></div></div>
           </div>
 
+          <!-- GĐ339: trạng thái kết nối ở màn chờ — máy chủ free ngủ thì lần đầu
+               vào phải chờ đánh thức; nói rõ trạng thái bằng chữ thường (không
+               thanh tải) + nút thử lại khi chờ lâu. Client điều khiển hiển thị. -->
+          <div id="connStatus" style="display:none">
+            <p class="splash-note" id="connStatusText"></p>
+            <button class="menubtn" id="btnRetryConn" type="button" style="display:none">↻ Thử kết nối lại</button>
+          </div>
+
           <!-- Chưa đăng nhập -->
           <div id="splashMain" style="display:none">
             <button class="menubtn primary" id="btnShowLogin" type="button">Đăng nhập</button>
@@ -1701,6 +1749,9 @@
         </div>
         <label>Chọn vũ khí khởi đầu (theo hướng tu đã chọn)</label>
         <div id="weaponGrid"></div>
+        <label>Thiên phú — chọn bậc muốn thử (bậc cao mạnh hơn nhưng ít lượt bốc)</label>
+        <div id="talentBox"></div>
+        <p class="talNote" style="margin:2px 0 8px;">Vô sắc / Bạch sắc: chọn thẳng 1 thiên phú trong danh sách. Lục sắc được bốc 3 lượt, Lam 2, Tím 1, Cam 1 — mỗi lượt có thể giữ kết quả hoặc bốc tiếp, hết lượt là chốt. Thiên phú <b>không hợp lớp</b> vẫn nhận được nhưng <b>không có tác dụng</b>.</p>
         <label>Chọn con đường khởi đầu</label>
         <div class="gtoggle" id="pathGrid">
           <div class="cls sel" id="pathSolo">🚶 Tu luyện một mình<small>Phần thưởng 100% · Khi thoát game, nghỉ tại Đạo Quán</small></div>

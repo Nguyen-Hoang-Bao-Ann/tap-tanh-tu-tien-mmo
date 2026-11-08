@@ -59,8 +59,308 @@ cài app nhưng rất ổn định, hợp cho các buổi sau.
 `http://<IPv4-máy-chủ>:3001`, xem `ipconfig` để lấy IPv4, và bấm Allow
 khi Windows Firewall hỏi lúc chạy server.)
 
-## 2b. CÓ GÌ MỚI Ở BẢN GĐ235–330 (so với bản live GĐ131–234)
+## 2b. CÓ GÌ MỚI Ở BẢN GĐ235–355 (so với bản live GĐ131–234)
 
+- **CỐT TRUYỆN ĐỢT C — 10 CHƯƠNG THEO CHỦNG TỘC (GĐ355)**: mỗi
+  chủng tộc có một **chương truyện riêng 3 phần** (Nhập Tộc /
+  Thử Thách / Truyền Thừa) do đúng người kể của tộc đó kể:
+  Nhân (Thầy Đồ/Cụ Ký — phải từng đứng học ở Văn Uyển), Thần
+  (Kiếp Đài Thủ), Hoa (Cụ Ký — phần cuối cần đã hồi sinh một
+  lần), Ma (Âm Bà/Thương Nhân — cần chọn phe Ma), Quỷ (Âm Bà —
+  đi đường Luyện Hồn hoặc đủ cảnh), Tiên (Hộ Vệ Tiên Môn), Long
+  (Lão Ngư/Thú Lão — cần lên thượng nguồn), Hồ (Thương Nhân —
+  cần thiện cảm cao dần 100/200/300), Bách Điểu (Tuyết Ông/Thú
+  Lão — cần lên đỉnh băng), Vạn Thú (Thú Lão — cần vào rừng thú
+  và thuần hóa thú). **Chỉ mở tiếp trong đúng kiếp thuộc tộc
+  đó**; tiến độ ghi theo hồn — kiếp sau mở 📖 Thiên Mệnh Ký →
+  Truyền Thuyết vẫn **đọc lại được** phần đã nghe. Mười chương
+  đều chôn thêm một mảnh của vụ án Kẻ Không Tên. Đã kiểm bằng
+  máy đo tự động 39/39.
+
+- **CỐT TRUYỆN ĐỢT B3 — HỒI 7 + BA ĐOẠN KẾT (GĐ354)**: người
+  **Chứng Thần** được Quản Sự kể **trọn vụ án** Thiên Đạo Môn.
+  Ba con đường sau Chứng Thần có **ba đoạn kết riêng, không mở
+  chéo**: Thăng Tiên Giới nghe **Hộ Vệ Tiên Môn** kể ở ngoại
+  viện; Địa Tiên nghe **Âm Bà** nói về điềm báo mùi giấy cháy
+  (sau nhiều lần thoát Truy Lùng); người luân hồi sang kiếp mới
+  được **Cụ Ký nhận ra giọng bước chân** nếu kiếp trước đã nghe
+  trọn. Thêm thoại tình huống: Âm Bà với Địa Tiên bị truy lùng,
+  Cụ Ký với người mang đủ **10 vật phẩm ẩn**, **Lão Ngư** mùa lễ
+  kể chuyện sông nước và chiếc đèn không ghi tên, và một khoảnh
+  khắc riêng: sau khi nghe Hồi 4, **đệ tử NPC đi theo sẽ hỏi sư
+  phụ một câu** — trả lời thế nào là ở bạn. Kiếp nào đã nghe
+  trọn vụ án thì Kiếp Ký ghi thêm dòng ✦ đặc biệt. Đã kiểm bằng
+  máy đo tự động 28/28.
+
+- **CỐT TRUYỆN ĐỢT B2 — HỒI 4–6 + KIẾP ĐÀI THỦ (GĐ353)**: tuyến
+  Thiên Mệnh mở tiếp **Hồi 4–6**. Người kể mới: **Kiếp Đài Thủ**
+  đứng ngay tại **Đài Kiếp** (map Kim Kiếp Sơn) — kể chuyện nửa
+  tấm kính, câu gia truyền chép sổ và "buổi điểm danh" của trời.
+  **Quản Sự Đạo Quán** kể bản chính thống của Đạo Quán ở Hồi 3;
+  **Sứ Giả Tông Môn** kể bản sâu cho **phe Ma**, Thương Nhân kể
+  bản riêng cho **phe Tiên** — hai phe không nghe được đoạn của
+  nhau. Điều kiện đoạn theo trải nghiệm thật: mang **Thái Nhất
+  Thiên Mệnh Kính** (vật phẩm ẩn Thần tộc) tới Đài Kiếp mở đoạn
+  riêng; Hồi 4 cần Nguyên Anh + đã nghe Hồi 3; Hồi 5 gắn với
+  đường Luyện Hồn và khoảnh khắc Thần Thuật sinh ra. Tự mình
+  đặt chân tới Đài Kiếp một lần thì đoạn Cụ Ký kể về tấm kính
+  chuyển thành bản rõ. Đã kiểm bằng máy đo tự động 31/31.
+
+- **THIÊN MỆNH KÝ TẦNG 3 — "THIÊN MỆNH" + NPC KỂ CHUYỆN (GĐ352,
+  đợt B1 của cốt truyện đợt B)**: Thiên Mệnh Ký có thêm tab
+  **🌌 Thiên Mệnh**: 7 hồi chuyện về "Kẻ Không Tên Trong Sổ" —
+  kẻ xé trang của chính mình khỏi Sinh Tử Bộ rồi cắp nửa
+  Thiên Mệnh Kính, để La Hầu gác cửa chịu tội thay. Đợt này mở
+  **Hồi 1–3** qua cơ chế **"📖 Nghe kể chuyện"** trong hộp thoại
+  của 4 người kể: **Trưởng Làng** (quảng trường), **Cụ Ký MỚI**
+  — ông lão mù chép chuyện ngồi dưới cây cổ thụ phía nam làng,
+  **Âm Bà MỚI** — bà giữ nghĩa địa cổ phía bắc làng cạnh cổng
+  U Hồn Cảnh, và **Thương Nhân Lưu Động**. Mỗi đoạn kể khóa
+  bằng điều kiện phía máy chủ: cảnh giới, đã nghe đoạn trước,
+  duyên nợ, tộc/lớp — và có đoạn kể **mơ hồ trước, rõ sau** khi
+  người chơi tự trải qua việc liên quan (đã tới Đài Kiếp; đã
+  biếu thương nhân một món ăn/uống). Đoạn đã nghe đọc lại được
+  trong sổ; nghe trọn một hồi được danh hiệu kỷ niệm **"Người
+  Nghe Chuyện Xưa"**. Nghe kể KHÔNG thưởng Tu Vi/linh
+  thạch/vật phẩm và không chặn tiến độ nào. Đã kiểm bằng máy
+  đo tự động 41/41, gồm: khóa theo cảnh, ghi đoạn đúng 1 lần,
+  bản mơ hồ → bản rõ theo trải nghiệm, đoạn sâu theo Quỷ
+  tu/duyên nợ không rò sang người thường, 2 NPC mới đứng ô
+  thoáng nói chuyện được, trạng thái truyện bền qua khởi động
+  lại máy chủ.
+
+- **MỐC ĐẠO TÍCH 500 ĐÃ NỐI THẬT (GĐ351)**: người chơi đạt
+  500 Đạo Tích (thành tựu vĩnh viễn, theo hồn qua các kiếp) nay
+  gửi được **4 loại** vật phẩm vào Hành trang chuyển kiếp thay
+  vì 3 — panel Luân hồi hiện "tối đa 4 món" và mốc 500 trong
+  panel Thành tựu chuyển sang "đang áp dụng". Giới hạn chốt tại
+  lúc gửi đồ theo Đạo Tích lúc đó: ai đạt 500 sau khi đã gửi 3
+  loại thì gửi lại một lần là chọn được 4 (đồ cũ tự trả về túi
+  trước như cũ, không mất gì). Đã kiểm bằng máy đo tự động
+  24/24, gồm: biên 499 → 3 loại / 500 → 4 loại, vòng đời thật
+  (gửi 4 loại → tọa hóa → kiếp mới nhận đủ 4 loại đúng số
+  lượng), khởi động lại máy chủ + diễn viên offline tự lưu vẫn
+  giữ đủ 4 loại, và hồn cũ từ trước bản này vẫn nạp bình
+  thường ở mức 3 loại.
+
+- **SỬA NHÃN TỐC ĐỘ CHO KHỚP CƠ CHẾ (GĐ350)**: đợt này CHỈ đổi
+  chữ hiển thị, KHÔNG đổi bất kỳ con số/công thức nào. Lý do: tốc
+  chạy được tính từ *chỉ số Tốc Độ* qua một đường cong — bonus
+  cộng vào chỉ số (ghi "+X%") cho tốc chạy thật ít hơn nhiều so
+  với con số ghi, trong khi bonus nhân thẳng vào tốc chạy cuối
+  thì đúng như ghi. Các nhãn cộng-vào-chỉ-số nay ghi rõ
+  "+X% tốc độ (chỉ số Tốc Độ)" theo mẫu Tông Pháp Cấp Hành có
+  sẵn: **Thần Tốc Đan** (+20%), **Phong Thần Đan** (+35%),
+  thành phần **Tốc** trong panel Sáng tạo công pháp của tông
+  (+1%/bậc, cả dòng pháp đã tạo và khuyết Trì Trệ), và mô tả
+  **trận Linh Động** trong tài liệu thiết kế (+8%). Các nhãn
+  nhân thẳng vốn đúng nên giữ nguyên: thiên phú Bước Chân Nhẹ
+  (+5%), Dạ Hành (+12% ban đêm), phụ ấn Ảnh (+3%), Bách Điểu
+  tộc (+18%), dòng độc nhất trang bị "Tốc độ di chuyển +8%/+10%",
+  thần thông "Tăng tốc 40%". Đã kiểm bằng máy đo tự động: uống
+  Thần Tốc Đan, tốc chạy thật tăng đúng ~0,9% (417 → 421 px/giây)
+  — khớp công thức chỉ số, chứng minh nhãn mới là nhãn đúng.
+
+- **RÀ ĐO SỐ ĐỢT 2 (GĐ349)**: đợt này KHÔNG thêm nội dung và KHÔNG
+  đổi cân bằng — chỉ đo lại bằng máy đo tự động các hiệu ứng trước
+  đây mới kiểm ở mức đọc code, để chắc chắn chúng chạy thật trong
+  game: kháng khống chế của thiên phú ẩn **Ma Tâm Trấn** (kháng
+  ~20% số đòn làm chậm/choáng, đúng thiết kế), thời lượng choáng
+  của tuyệt kỹ Hồn Phật **Phổ Độ** (1,5 giây, thành 2,5 giây khi
+  đã đi sâu đường Phật), buff **+30% tốc chạy 3 giây** sau đòn kế
+  của tuyệt kỹ Hồn Ảnh, **phụ ấn Ảnh +3% tốc** và **phụ ấn Nho
+  +10% thông thạo** (đều đo ra đúng số), và thiên phú **Đại khí
+  vận** — đo mẫu lớn 300 kill xác nhận tỉ lệ thêm món hiếm đúng
+  **30%** như mô tả (số 20% từng thấy trước đây là do mẫu nhỏ +
+  đồ rơi bị nhặt quá nhanh nên đếm thiếu). Hiệu ứng **trận pháp
+  tông chiến** (kháng chậm trong vùng, hồi máu trong vùng, hồi
+  chiêu nhanh trong vùng) cũng được đo lại và khớp số cũ. Kết
+  luận: không phát hiện lỗi thật nào trong 7 hạng mục — người
+  chơi không cần test gì thêm cho đợt này.
+
+- **ĐƯỜNG ĐẶC BIỆT ĐÀO SÂU + BÍ CẢNH ẨN (GĐ343–346)**: con đường
+  tu luyện đặc biệt theo lớp (Võ Vương, Thánh tăng, Kiếm Thánh...)
+  nay có thêm chiều sâu theo cảnh giới ẩn. Người tu tới **Luyện
+  Hồn** sẽ lĩnh ngộ qua bí cảnh một **tuyệt kỹ Hồn** riêng của lớp
+  mình; người tu tới **Nhập Đạo** thì **nội tại của đường chín
+  hẳn** (số mạnh hơn nấc đầu) và được **mở ô công pháp thứ 7 ngay
+  tại Kim Đan** (người thường phải chờ Nguyên Anh), lại chọn thêm
+  được **một lớp phụ (phụ ấn)** mang theo một hiệu ứng nhỏ của lớp
+  đó. Hai **bí cảnh riêng** chỉ người tu ẩn mới thấy cổng: một
+  cảnh thử thách với chính đồng môn và cái bóng của mình, một
+  cảnh toàn hồn phách lẩn khuất — quà tính theo **% hoàn thành**,
+  mỗi ngày game vào lại được một lần mỗi cảnh. Manh mối tìm cổng
+  nằm rải rác trong thế giới và khi ngồi thiền ở Đạo Quán — xin
+  đừng spoil vị trí cổng trong nhóm, để mọi người tự tìm.
+
+- **SỬA CHỮ PANEL THÀNH TỰU + THƯỞNG VƯỜN THẢO & MỐC THỌ (GĐ348)**:
+  rà soát lại panel Thành tựu — mấy dòng lý do "chưa áp dụng" ghi từ
+  thời game chưa có Luân hồi nay đã sai sự thật, được sửa sạch. Mốc
+  Đạo Tích **220 và 650 nay áp dụng thật**: ở mỗi kiếp mới, tuổi thọ
+  ban đầu được cộng thêm theo tổng Đạo Tích thừa hưởng theo hồn
+  (+2 năm từ mốc 220, thêm +4 năm từ mốc 650 — đủ cả hai là +6 năm).
+  Thưởng mốc 2 của nhóm **Linh Thú** ("Linh thảo sinh trưởng nhanh
+  hơn 5%") nay cũng áp dụng thật: cây trong **vườn thảo** của người
+  đạt mốc **lớn nhanh hơn 5%** (ai chọn nhân đôi thưởng này của nhóm
+  thì nhanh hơn 10%). Mốc 350 được ghi rõ là Hành trang chuyển kiếp
+  vốn đã có sẵn cho mọi hồn (tối đa 3 loại vật phẩm); mốc 500 và
+  thưởng "nhờ chỉ điểm" được ghi lại đúng lý do chưa áp dụng.
+
+- **THƯỞNG MỐC NHÓM ẨN — CƠ DUYÊN (GĐ347)**: thưởng mốc đầu tiên
+  của nhóm thành tựu **Ẩn** nay đã áp dụng thật (trước đây panel
+  ghi "chưa có cơ chế"): khi tổng Đạo Tích của nhóm Ẩn đủ mốc
+  đầu, nhân vật được **+3% cơ duyên** — theo cách game tính cơ
+  duyên hiện nay là thêm cơ hội nhận món hiếm khi hạ quái và khi
+  mở rương (cùng kênh với thiên phú Khí vận, cộng dồn được).
+  Thưởng này **không nhân đôi được** bằng quyền chọn nhân đôi
+  thưởng của nhóm (panel ghi rõ "không nhân đôi được").
+
+- **THIÊN PHÚ ẨN (GĐ342)**: ngoài 6 bậc thiên phú thường, trong game
+  còn có **thiên phú ẩn** mở bằng các **chuỗi nhiệm vụ ẩn** — hồn
+  nhân vật mang theo thành tựu ấy qua các kiếp, làm được càng sâu
+  thì càng mở thêm bậc ẩn. Khi đã mở, bước Thiên phú lúc tạo nhân
+  vật (và lúc bốc bù / bốc lại) sẽ **tự hiện thêm bậc ẩn** để bốc
+  như bậc thường (chưa mở thì không thấy gì khác trước — cứ chơi và
+  khám phá như thường). Có một nhóm thiên phú ẩn thuộc loại **"mạnh
+  kèm cái giá"**: thẻ thiên phú của chúng hiện kèm **dòng GIÁ bằng
+  chữ màu khác ngay dưới dòng hiệu ứng** — nhờ mọi người để ý đọc
+  kỹ giá trước khi giữ, và cho ý kiến: hiệu ứng có đáng giá không,
+  dòng giá có dễ thấy dễ hiểu không. Thiên phú ẩn nào, hiệu ứng ra
+  sao thì xin giữ bí mật để người chơi tự khám phá — đừng spoil
+  trong nhóm nhé.
+
+- **BỐC LẠI THIÊN PHÚ MỖI KIẾP (GĐ341)**: từ nay, khi một nhân vật
+  tọa hóa và tạo nhân vật kiếp mới, bước Thiên phú có thêm **lượt bốc
+  lại** — bốc xong bước gốc, nếu còn lượt thì bấm "🔁 Bốc lại thiên
+  phú" để làm lại toàn bộ bước (chọn lại bậc, bốc lại từ đầu); bốc
+  xong hiện **song song 2 thẻ (đang giữ / vừa bốc)** để chọn giữ 1,
+  cái còn lại hủy — bốc ra tệ hơn thì giữ cái cũ, không lo mất thiên
+  phú tốt. **Ai có lượt**: hồn kiếp trước có Đạo Tích ≥120 (+1 lượt),
+  ≥780 (+1 lượt nữa), hoặc đã đạt thưởng mốc 2 của nhóm thành tựu Ẩn
+  (+1 lượt) — tối đa **3 lượt mỗi kiếp**, không cộng dồn sang kiếp
+  sau. Ở bước Thiên phú sẽ thấy dòng "🔁 Lượt bốc lại từ Đạo Tích: N"
+  khi có lượt. Lượt bị **trừ ngay khi bấm bốc lại** (đóng giữa chừng
+  không được hoàn — chống thoát ra vào lại bốc miễn phí). Nhân vật
+  tạo lần đầu (chưa có kiếp trước) không có lượt bốc lại. Panel Thành
+  tựu: mốc Đạo Tích 120, mốc 780 và thưởng nhóm Ẩn mốc 2 nay hiện
+  "Đang áp dụng" thay vì "chưa có cơ chế".
+
+- **VÀO GAME NHANH HƠN NHIỀU (GĐ340)**: trước đây mở game phải tải
+  một lượt ~37 MB hình (gần 2.900 file) mới vào được. Nay game chỉ
+  tải trước phần cần ngay (~8 MB: nhân vật, làng, bãi farm nhà) rồi
+  vào luôn; phần còn lại (quái các cõi xa, ngoại cảnh các map khác)
+  tự nạp tiếp ở nền trong lúc chơi — gặp loài nào chưa nạp xong thì
+  nó hiện hình tĩnh trước rồi tự chuyển sang hoạt ảnh khi nạp về,
+  không mất hình, không phải chờ. Đo bằng mạng chậm giả lập (Fast
+  3G): vào game lần đầu ~273 giây → ~86 giây; dung lượng tải chặn
+  41 MB → 11 MB. Hình lớn cũng được nén lại (đài phun nước, bảng
+  thông báo, tranh các nghề) — nhìn trong game không khác gì trước.
+  **Cache trình duyệt**: hình tĩnh nay được lưu 7 ngày — vào lại
+  game những lần sau gần như không phải tải lại hình (đo: ~110 giây
+  → ~26 giây ở mạng chậm). Lưu ý nhỏ: vì cache 7 ngày, nếu sau này
+  có bản cập nhật thay hình sprite thì người chơi cũ có thể thấy
+  hình cũ tối đa 7 ngày (phần code game thì luôn nhận bản mới ngay).
+- **MÀN CHỜ NÓI RÕ TRẠNG THÁI KẾT NỐI (GĐ339)**: máy chủ bản web
+  miễn phí sẽ NGỦ khi không ai chơi — lần đầu vào sau lúc ngủ, máy
+  chủ cần 1–2 phút để khởi động. Nay màn hình chờ hiện dòng trạng
+  thái ngay dưới phần giới thiệu: "Đang kết nối tới máy chủ…" →
+  quá ~10 giây chưa nối được thì "Máy chủ đang khởi động — lần đầu
+  vào có thể chờ 1–2 phút, đừng tắt trang…" → nối được thì "Đã kết
+  nối — đang tải dữ liệu…". **Cứ để trang mở và chờ** — máy chủ lên
+  là game tự vào, không cần tải lại trang. Nếu chờ quá ~15 giây sẽ
+  có thêm nút **↻ Thử kết nối lại** ngay dưới dòng trạng thái (bấm
+  để nối lại ngay, cũng không tải lại trang). Mất kết nối giữa
+  chừng sẽ hiện "Mất kết nối — đang thử lại…" và tự vào lại khi có
+  mạng/máy chủ trở lại như trước.
+- **RÀ SOÁT ĐO SỐ TOÀN DIỆN + SỬA 1 LỖI THIỀN (GĐ338)**: đo thật
+  toàn bộ 21 hiệu ứng trước đây mới kiểm ở mức công thức (trận pháp
+  tông chiến Linh Động/Tu Hành/Xảo Nghệ, Ngọc Giản Trống từ việc Ủy
+  Thác đặc biệt + rương ẩn, 11 kênh thiên phú, Tụ Linh/Cấp Hành của
+  tông pháp, tỉ lệ Đan/Khí Phòng theo cấp, trần kho tông, 3 kênh của
+  tâm pháp tự tạo) — 20/21 khoản ĐẠT đúng số. **1 LỖI THẬT ĐÃ SỬA**:
+  khi BẾ QUAN, Tu vi mỗi nhịp luôn là 1 điểm nên phép làm tròn nuốt
+  sạch mọi hệ số cộng thêm (thiên phú Thuận linh khí +15%, Tụ Linh
+  tông pháp, kênh thiền của pháp tự tạo… đều không có tác dụng khi bế
+  quan) — nay phần lẻ được mang sang nhịp sau nên hệ số cộng đúng như
+  mô tả. Ghi chú: các hiệu ứng "+% tốc độ" (Cấp Hành, trận Linh Động…)
+  cộng vào CHỈ SỐ tốc rồi qua đường cong tốc độ chung của game nên
+  tốc chạy thật tăng ít hơn con số % — quy ước chung toàn game, không
+  phải lỗi.
+
+- **THIÊN PHÚ KHI TẠO NHÂN VẬT (GĐ337)**: nhân vật mới có thêm bước
+  Thiên phú ngay dưới phần chọn vũ khí: TỰ CHỌN bậc muốn thử trong 6
+  bậc Vô → Bạch → Lục → Lam → Tím → Cam sắc (33 thiên phú). Vô/Bạch
+  chọn thẳng 1 thiên phú trong danh sách; Lục bốc 3 lượt, Lam 2, Tím 1,
+  Cam 1 — mỗi lượt giữ kết quả hoặc bốc tiếp, hết lượt là chốt. Thiên
+  phú không hợp lớp vẫn nhận được nhưng KHÔNG có tác dụng (thẻ nhân
+  vật ghi rõ). Hiệu ứng đủ loại: cộng chỉ số, +thọ, giảm tốn chân
+  nguyên/hồi chiêu, +tỉ lệ đột phá, cơ duyên thêm đồ hiếm, Thông linh
+  (rèn lại nội tại trang bị tung 2 bộ dòng chọn giữ 1), Thiên Linh Căn
+  (đo lại linh căn 1 lần ở Đạo Quán rồi chọn kết quả tốt hơn)... NHÂN
+  VẬT CŨ chưa có thiên phú được BỐC BÙ 1 lần: đăng nhập sẽ có thông
+  báo mời, mở thẻ nhân vật (dòng Thiên phú) để bốc — bấm để sau thì
+  lần đăng nhập sau mời lại. Thiết kế đầy đủ: THIET_KE_THIEN_PHU.md.
+
+- **KHUNG SỨC MẠNH RIÊNG CHO CHIẾN KỸ (GĐ336)**: chuẩn hóa công pháp
+  tông (GĐ334) nay dùng khung PI riêng cho Chiến kỹ (Phàm 143 · Linh
+  250 · Huyền 350 · Địa 400 · Thiên 410) thay vì dùng chung khung với
+  Tâm pháp — chiến kỹ ghép điển hình không còn bị ép kẹp hệ số ở hai
+  đầu (nâng chạm trần 1,40 hoặc nén chạm sàn 0,65) như trước. Chiến kỹ
+  đã ngộ từ trước tự tính lại hệ số theo khung mới khi vào game; Tâm
+  pháp giữ nguyên hệ số. Nhìn ở panel Tông Môn: dòng "💪 Sức mạnh"
+  của chiến kỹ hiện đúng khung cấp mới.
+- **GUARD PHÒNG THỦ LINH CĂN (GĐ335)**: thẻ nhân vật kiểm tra dạng dữ
+  liệu linh căn trước khi hiển thị — dữ liệu dị dạng (nếu có) được coi
+  như chưa đo linh căn thay vì làm sập giao diện. Không đổi lối chơi.
+- **SÁNG TẠO CÔNG PHÁP TÔNG — ĐỢT 3 (GĐ334)**: trọn gói đợt cuối của
+  hệ pháp tự tạo tông môn:
+  + **Ngọc Giản Trống** (vật phẩm mới): mỗi lần sáng tạo pháp tốn thêm
+    phôi ngọc theo cấp (Phàm 1 · Linh 1 · Huyền 2 · Địa 3 · Thiên 5,
+    trừ túi người tạo, thiếu là chặn). Kiếm ở: giết trùm map/quái
+    đặc biệt ✦ (25%), mở rương ẩn (20%), làm việc "Truy Lùng Trùm"
+    trên Bảng Ủy Thác (thưởng vào kho tông), hoặc tự chế ở Luyện Khí
+    Phòng (3 Đá Quý + 5 Tiên Linh Chi → 1 giản).
+  + **Chuẩn hóa tự động**: pháp ngộ xong được chấm "Sức mạnh" (PI)
+    theo khung cấp (Phàm 100 · Linh 160 · Huyền 240 · Địa 340 ·
+    Thiên 460); lệch khung thì hiệu ứng được co/giãn theo hệ số
+    ×0,65–1,40 hiện ngay trên panel (pháp trong biên ghi "đúng khung").
+  + **Tông Phong**: tông có đủ pháp đã ngộ (tổng điểm trục ≥ 30) sẽ
+    tự định hình phong cách riêng (vd "Hỏa Công Phá Phong", có cả
+    Song Phong khi hai trục ngang nhau). Pháp thuộc trục phong: học
+    rẻ Tông Cống hơn (−20%, Song Phong −12%), thành phần tâm pháp
+    +1 bậc hiệu lực, chiến kỹ hồi chiêu nhanh hơn (−10%/−6%).
+    Xem khối 🏳️ Tông Phong trong panel tông môn.
+  + **Trận pháp tông chiến**: tông đã có Tông Phong thì trong pha
+    chuẩn bị chiến, Tông chủ/Phó đứng tại điểm cờ bày trận theo trục
+    phong (10.000 LT quỹ + 5 Đá Quý từ kho tông): Công Phá +8% công ·
+    Thủ Ngự −8% sát thương nhận + Thủ lĩnh +2.000 máu · Linh Động
+    +8% tốc, kháng chậm 50% · Tu Hành hồi máu trong vùng · Xảo Nghệ
+    chiến kỹ hồi nhanh. Mỗi bên có 1 **Trận Nhãn** (3.000 máu) ở rìa
+    vùng cờ — đối thủ đánh thường phá được nhãn để tắt trận sớm.
+  Test nhanh: tạo 1 tông, sáng tạo vài pháp lệch hẳn 1 trục (toàn
+  Công/Sát) cho ngộ xong → xem Tông Phong định hình; tuyên chiến
+  tông khác có lãnh địa → bày trận ở pha chuẩn bị → vào vùng cờ
+  kiểm hiệu ứng + phá Trận Nhãn nhau.
+
+
+- **BỎ CHỚP ĐỎ KHI MẤT MÁU (GĐ333)**: thân nhân vật (mình và người
+  chơi khác) không còn nhuộm đỏ mỗi khi mất máu — trước đây mở Pháp
+  Tướng là đỏ thường trực vì drain trừ máu liên tục kích lại chớp đỏ.
+  Mất máu vì quái cắn/PvP/độc/drain đều không đỏ nữa; số liệu không đổi.
+
+- **PHÁP TƯỚNG — BỘ HÌNH MỚI ĐỦ 5 HỆ × NAM/NỮ (GĐ332)**: thân tướng
+  thay toàn bộ bằng hình thần tướng riêng từng hệ theo mẫu Bảo duyệt
+  06–07/11 (Hỏa thần lửa vương miện lửa, Thủy thần nước, Kim thần kiếm
+  vàng, Mộc thần cây, Thổ thần núi đá — chính diện choán khung, mặt rõ
+  nét pixel, nửa dưới tan thành xoáy khí của hệ). Điểm cầm vũ khí khổng
+  lồ đo lại theo hình mới (Hỏa vẫn tay giơ cao; 8 thân còn lại vũ khí
+  nằm ở bàn tay mở ngang thân). Thay thân tướng cũ GĐ260, luật chơi và
+  chỉ số không đổi.
+- **CHIẾN KỸ TỰ SÁNG TẠO — đợt 2 (GĐ329)**: pháp tự sáng tạo thêm thể
+  loại **Chiến kỹ** — chiêu đánh thật do lãnh đạo tông tự ghép (hệ số sát
+  thương, tầm, đánh vùng, làm chậm; khuyết điểm riêng: hồi chiêu lâu /
+  hao chân nguyên / thế yếu). Học xong mở Sổ Công Pháp **lắp vào ô chiêu
+  như chiêu thường** rồi tung bằng phím số; rời tông là bị gỡ khỏi bảng.
 - **SÁNG TẠO CÔNG PHÁP TÔNG MÔN — đợt 1 (GĐ328)**: công pháp của tông
   người chơi không còn là đồ có sẵn — **Tông chủ, Phó tông chủ và Trưởng
   Lão Danh Dự (Tông chủ phong cho Trưởng lão, tối đa 2 người) tự sáng tạo

@@ -2411,12 +2411,14 @@ export interface MapEnterData {
   hazards?: MapHazard[]; features?: MapFeatures | null; // GĐ60
   spots?: { x: number; y: number }[]; // GĐ76: điểm linh mạch
   altar?: { x: number; y: number } | null; // GĐ85: đàn tế (chỉ map có trùm)
-  territory?: { pointId: string; name: string; x: number; y: number; owner: string | null; ownerId: string | null; war: { state: string; startsInSec: number; endsInSec: number } | null } | null; // GĐ302: cờ lãnh địa trên map
+  territory?: { pointId: string; name: string; x: number; y: number; owner: string | null; ownerId: string | null; war: { state: string; startsInSec: number; endsInSec: number } | null; forms?: { side: string; axis: string; element: string | null; sectName: string; eye: { x: number; y: number; hp: number; maxHp: number } | null }[] } | null; // GĐ302: cờ lãnh địa trên map · GĐ334: + trận pháp/trận nhãn
   study?: { x: number; y: number } | null; // GĐ105: điểm đọc sách Văn Uyển
   npcs?: Array<{ id: string; name: string; role: string; kind: string; x: number; y: number; style: string }>; // GĐ89: dân thành phố
   nodes?: Array<{ id: string; kind: string; itemId: string; x: number; y: number }>; // GĐ132: điểm tài nguyên (mạch quặng / bụi thuốc)
   caves?: Array<{ x: number; y: number }>; // GĐ236: miệng hang trên map cha
   caveExit?: { x: number; y: number; parentName: string } | null; // GĐ236: cửa ra khi đang ở trong hang
+  anCanh?: string | null; // GĐ344/345: map hiện tại là bí cảnh ẩn (doi_anh_canh/u_hon_canh)
+  anGates?: Array<{ canh: string; x: number; y: number; name: string }>; // GĐ344/345: cổng bí cảnh ẩn trên map này
 }
 interface ThemeStyle { g1: string; g2: string; accent: string; leaf: string; leaf2: string; rock: string; plaza: string }
 const MAP_THEME_STYLE: Record<string, ThemeStyle> = {

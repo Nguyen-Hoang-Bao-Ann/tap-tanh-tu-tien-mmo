@@ -3,8 +3,10 @@
 // 100 loại / 11 nhóm, mỗi loại 3–10 bậc. Mỗi bậc thưởng: 1 danh hiệu (Tên gốc · Cấp)
 // + 1 Rương Thành Tựu + Đạo Tích (bậc 1–3: 1, 4–6: 2, 7–9: 3, bậc 10: 4).
 // Tổng toàn bộ 100 loại = 816 Đạo Tích (kiểm chứng bằng script tổng dưới cuối file).
-// Defs có enabled: false = hệ đo chưa có trong MMO (vườn, thú cưỡi, đầu thai,
-// thư viện, bẫy, truy nã...) — giữ đủ dữ liệu, ẩn khỏi panel, mở dần khi hệ đó ra.
+// Defs có enabled: false = hệ đo tương ứng chưa có trong MMO (thư viện sách,
+// Tường Đá/Trận Bão, độ thân thiết pet...) — giữ đủ dữ liệu, ẩn khỏi panel, mở
+// dần khi hệ đó ra. (Vườn thảo GĐ308, thú cưỡi, luân hồi GĐ314–317 đã có —
+// def/perk tương ứng đã bật/nối dần; perk vườn thảo nối thật ở GĐ348.)
 // progress đo bằng key: hàm progressFor() trong server/index.js ánh xạ key → số liệu thật.
 const TITLE_LEVELS = [
   { name: 'Tập Sự', color: '#e8e8e8', chest: 'dong' },
@@ -224,31 +226,37 @@ const GROUP_PERKS = {
   nhan_duyen: [
     { text: 'NPC mới quen bắt đầu với +5 thiện cảm', parked: false },
     { text: 'Tăng tỷ lệ NPC chịu giúp đột phá khi thất bại nhiều', parked: true, why: 'MMO chưa có hệ NPC giúp đột phá' },
-    { text: '+1 lần nhờ sư phụ/tiền bối chỉ điểm mỗi kiếp', parked: true, why: 'MMO chưa có hệ nhờ chỉ điểm' },
+    { text: '+1 lần nhờ sư phụ/tiền bối chỉ điểm mỗi kiếp', parked: true, why: 'MMO đã có chỉ điểm (sư phụ chủ động chỉ điểm cho đệ tử, mỗi ngày 1 lần) — chưa có cơ chế đệ tử nhờ chỉ điểm tính theo kiếp' }, // GĐ348: sửa why cho đúng hiện trạng sư đồ GĐ318
   ],
   linh_thu: [
     { text: 'Linh thú tăng độ thân thiết nhanh hơn 10%', parked: true, why: 'MMO chưa có độ thân thiết pet' },
-    { text: 'Linh thảo sinh trưởng nhanh hơn 5%', parked: true, why: 'MMO chưa có vườn linh thảo' },
+    { text: 'Linh thảo sinh trưởng nhanh hơn 5%', parked: false }, // GĐ348: đã nối thật — cây trong vườn của người đạt mốc sinh trưởng nhanh hơn 5% (achGardenMulOf ở server/index.js); nhân đôi được qua boost như các perk % anh em nên không gắn noBoost
     { text: 'Đan dược luyện ra có thêm 3% tỷ lệ phẩm cao', parked: true, why: 'MMO đan không có phẩm cao/thấp' },
   ],
   an: [
-    { text: '+3% tỷ lệ gặp sự kiện cơ duyên', parked: true, why: 'Sự kiện ngẫu nhiên đã gỡ ở GĐ35 theo lệnh người chơi' },
-    { text: '+1 lần bốc lại thiên phú mỗi kiếp', parked: true, why: 'MMO chưa có hệ thiên phú' },
+    { text: '+3% cơ duyên (cơ hội thêm món hiếm khi hạ quái và mở rương)', parked: false, noBoost: true }, // GĐ347: đã nối thật qua kênh cơ duyên F3 (kênh L hạ quái + kênh R mở rương, cùng định nghĩa với thiên phú Khí vận — xem achCoDuyenOf ở server/index.js); noBoost = không nhân đôi được (như mốc 2, tránh hứa hẹn +6%)
+    { text: '+1 lần bốc lại thiên phú mỗi kiếp', parked: false, noBoost: true }, // GĐ341: đã nối thật (lượt bốc lại thiên phú ở kiếp mới); noBoost = không nhân đôi được (trần lượt đã cố định theo 3 điểm chờ)
     { text: 'Mỗi kiếp mở sẵn 1 manh mối bí cảnh ẩn', parked: true, why: 'MMO chưa có hệ manh mối' },
   ],
 };
 // GĐ139 — MỐC ĐẠO TÍCH VĨNH VIỄN (tài liệu bản -2, bảng cuối mục).
-// Phần lớn mốc gắn với "mỗi kiếp" — MMO không có đầu thai nên chỉ danh hiệu 780
-// là nối được thật (danh hiệu đeo được); các mốc còn lại hiện rõ là chưa áp dụng.
+// GĐ348 (rà lại sau khi luân hồi GĐ314–317 ra đời): mốc 120 đã nối thật (GĐ341,
+// bốc lại thiên phú); mốc 220/650 đã nối thật (thọ ban đầu mỗi kiếp +2/+4, áp
+// tại create_character — daoLifeBonusFor ở server/index.js); mốc 780 nối một
+// phần (danh hiệu + bốc lại). Chưa áp dụng: 20 (túi không giới hạn ô — perk vô
+// nghĩa), 60 (chưa có vật phẩm Lệnh Tiết Thời), 350 (Hành trang chuyển kiếp cơ
+// bản đã cho mọi hồn mang 3 loại — mốc không còn phần riêng). GĐ351: mốc 500 đã
+// nối thật — giới hạn 4 loại đóng dấu vào bản ghi hồn (soul.carryMax) tại lúc gửi
+// đồ, soulNorm đọc giới hạn đã lưu ở mọi điểm chuẩn hóa (không truyền Đạo Tích).
 const DAO_MILESTONES = [
   { at: 20, text: '+1 ô túi đồ (vĩnh viễn)', active: false, why: 'MMO túi đồ không giới hạn ô' },
   { at: 60, text: '+1 Lệnh Tiết Thời mỗi kiếp (giảm 50% thời gian một hành động dài)', active: false, why: 'MMO chưa có Lệnh Tiết Thời' },
-  { at: 120, text: 'Bốc lại thiên phú 1 lần ở mỗi kiếp mới', active: false, why: 'MMO chưa có hệ thiên phú' },
-  { at: 220, text: '+2 năm tuổi thọ tối đa ban đầu mỗi kiếp', active: false, why: 'MMO không có kiếp sau (1 nhân vật/tài khoản)' },
-  { at: 350, text: 'Mang 1 vật phẩm sang kiếp sau', active: false, why: 'MMO không có kiếp sau' },
-  { at: 500, text: '+1 chỗ mang vật phẩm sang kiếp sau', active: false, why: 'MMO không có kiếp sau' },
-  { at: 650, text: '+4 năm tuổi thọ tối đa ban đầu mỗi kiếp (cộng dồn mốc trước)', active: false, why: 'MMO không có kiếp sau' },
-  { at: 780, text: 'Danh hiệu “Vô Thượng Đạo Tích” (+1 bốc lại thiên phú mỗi kiếp và +2 ô túi đồ — 2 phần sau chưa áp dụng)', active: 'title' },
+  { at: 120, text: 'Bốc lại thiên phú 1 lần ở mỗi kiếp mới', active: true }, // GĐ341: đã nối thật — kiếp mới được +1 lượt bốc lại thiên phú
+  { at: 220, text: '+2 năm tuổi thọ tối đa ban đầu mỗi kiếp', active: true }, // GĐ348: đã nối thật — cộng vào thọ nền khi tạo nhân vật của kiếp mới, đọc Đạo Tích thừa hưởng theo hồn
+  { at: 350, text: 'Mang 1 vật phẩm sang kiếp sau', active: false, why: 'Đã có sẵn cho mọi hồn: Hành trang chuyển kiếp mang được tối đa 3 loại vật phẩm (GĐ314) — mốc này không còn phần riêng để áp dụng' },
+  { at: 500, text: '+1 chỗ mang vật phẩm sang kiếp sau', active: true }, // GĐ351: đã nối thật — giới hạn loại đồ chuyển kiếp đóng dấu vào bản ghi hồn (soul.carryMax) tại lúc gửi đồ ở soul_set_carry, soulNorm đọc giới hạn đã lưu thay vì hằng 3
+  { at: 650, text: '+4 năm tuổi thọ tối đa ban đầu mỗi kiếp (cộng dồn mốc trước)', active: true }, // GĐ348: đã nối thật cùng điểm với mốc 220 — đủ cả hai mốc là +6 năm thọ ban đầu mỗi kiếp
+  { at: 780, text: 'Danh hiệu “Vô Thượng Đạo Tích” (+1 bốc lại thiên phú mỗi kiếp — đang áp dụng; +2 ô túi đồ — phần này chưa áp dụng)', active: 'title' }, // GĐ341: phần bốc lại đã nối thật
 ];
 module.exports = {
   TITLE_LEVELS, titleLevelFor, daoTichForTier, chestGradeForLevel, titleText,
