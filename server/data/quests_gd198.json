@@ -77,7 +77,8 @@
   "npcId": "npc_ren",
   "minAffinity": 0,
   "hidden": true,
-  "requiresFlag": "ren_found"
+  "requiresFlag": "ren_found",
+  "secretChain": true
  },
  "q199_xe1": {
   "name": "Đoàn Xe Năm Xưa (1/2)",
@@ -111,6 +112,7 @@
   "npcId": "npc_thuongnhan",
   "minAffinity": 0,
   "hidden": true,
-  "requiresFlag": "xe_old"
+  "requiresFlag": "xe_old",
+  "secretChain": true
  }
 }

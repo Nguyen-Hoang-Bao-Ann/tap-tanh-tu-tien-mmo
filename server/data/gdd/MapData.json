@@ -99,11 +99,6 @@
    "minTier": 0,
    "desc": "Làng khởi đầu của bản Alpha hiện tại",
    "existing": true,
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tan_thu"
-   ],
-   "impl": "live",
    "liveNpcs": [
     {
      "id": "npc_truonglang",
@@ -130,16 +125,7 @@
    "minRealm": "pham",
    "minTier": 0,
    "desc": "Vòng farm quanh làng (5 vòng theo thiết kế gốc)",
-   "existing": true,
-   "monsterSet": [
-    "soi_xam",
-    "doi_den",
-    "thach_quai"
-   ],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "live"
+   "existing": true
   },
   {
    "id": "thanh_van_thanh",
@@ -149,12 +135,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Trung tâm, đấu giá",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tan_thu"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "vong_nguyet_lau",
@@ -164,12 +145,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Bán công pháp hiếm",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "hac_phong_trai",
@@ -179,12 +155,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Chợ đen",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "tang_kinh_cac",
@@ -194,12 +165,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thư viện, tăng ngộ tính",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "phong_van_tong",
@@ -209,12 +175,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Tông môn",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "thien_co_thanh",
@@ -224,12 +185,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Chợ giao dịch",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "long_mach_co_thanh",
@@ -239,12 +195,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Nhiệm vụ truyền thừa",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "thien_ngoai_phuong",
@@ -254,12 +205,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "desc": "Chợ Kim Đan",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "ma_vuc_thanh",
@@ -269,12 +215,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "desc": "Thành Ma tu",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "tien_gioi_cac",
@@ -284,12 +225,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "desc": "Trạm Tiên nhân",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "duoc_coc",
@@ -301,12 +237,7 @@
    "profession": "dansu",
    "professionName": "Đan Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Đan Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Đan Sư"
   },
   {
    "id": "luyen_dan_phong",
@@ -318,12 +249,7 @@
    "profession": "dansu",
    "professionName": "Đan Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Đan Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Đan Sư"
   },
   {
    "id": "dan_thap",
@@ -335,12 +261,7 @@
    "profession": "dansu",
    "professionName": "Đan Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Đan Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Đan Sư"
   },
   {
    "id": "van_thu_son",
@@ -352,12 +273,7 @@
    "profession": "thusu",
    "professionName": "Thú Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Thú Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Thú Sư"
   },
   {
    "id": "linh_thu_vien",
@@ -369,12 +285,7 @@
    "profession": "thusu",
    "professionName": "Thú Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Thú Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Thú Sư"
   },
   {
    "id": "ngu_thu_son_trang",
@@ -386,12 +297,7 @@
    "profession": "thusu",
    "professionName": "Thú Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Thú Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Thú Sư"
   },
   {
    "id": "ky_mon_dong",
@@ -403,12 +309,7 @@
    "profession": "tranphap",
    "professionName": "Trận Pháp Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Trận Pháp Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Trận Pháp Sư"
   },
   {
    "id": "tran_phap_cac",
@@ -420,12 +321,7 @@
    "profession": "tranphap",
    "professionName": "Trận Pháp Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Trận Pháp Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Trận Pháp Sư"
   },
   {
    "id": "bat_quai_tran_do",
@@ -437,12 +333,7 @@
    "profession": "tranphap",
    "professionName": "Trận Pháp Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Trận Pháp Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Trận Pháp Sư"
   },
   {
    "id": "linh_phu_dien",
@@ -454,12 +345,7 @@
    "profession": "phusu",
    "professionName": "Phù Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Phù Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Phù Sư"
   },
   {
    "id": "chu_van_duong",
@@ -471,12 +357,7 @@
    "profession": "phusu",
    "professionName": "Phù Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Phù Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Phù Sư"
   },
   {
    "id": "but_mac_hien",
@@ -488,12 +369,7 @@
    "profession": "phusu",
    "professionName": "Phù Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Phù Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Phù Sư"
   },
   {
    "id": "hoa_lo_coc",
@@ -505,12 +381,7 @@
    "profession": "luyenkhisu",
    "professionName": "Luyện Khí Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Luyện Khí Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Luyện Khí Sư"
   },
   {
    "id": "thiet_coc",
@@ -522,12 +393,7 @@
    "profession": "luyenkhisu",
    "professionName": "Luyện Khí Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Luyện Khí Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Luyện Khí Sư"
   },
   {
    "id": "kiem_lo_son_trang",
@@ -539,12 +405,7 @@
    "profession": "luyenkhisu",
    "professionName": "Luyện Khí Sư",
    "npcProfile": "city",
-   "desc": "Map nghề Luyện Khí Sư",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map nghề Luyện Khí Sư"
   },
   {
    "id": "bang_phong_coc",
@@ -558,12 +419,7 @@
     "tierFrom": 7,
     "tierTo": 9
    },
-   "desc": "Map farm lk 7-9",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm lk 7-9"
   },
   {
    "id": "hoa_diem_son",
@@ -577,12 +433,7 @@
     "tierFrom": 7,
     "tierTo": 9
    },
-   "desc": "Map farm lk 7-9",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm lk 7-9"
   },
   {
    "id": "hac_phong_sa_mac",
@@ -596,12 +447,7 @@
     "tierFrom": 7,
     "tierTo": 9
    },
-   "desc": "Map farm lk 7-9",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm lk 7-9"
   },
   {
    "id": "huyet_sac_rung",
@@ -615,12 +461,7 @@
     "tierFrom": 1,
     "tierTo": 6
    },
-   "desc": "Map farm tc 1-6",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm tc 1-6"
   },
   {
    "id": "tu_vong_mo_dia",
@@ -634,12 +475,7 @@
     "tierFrom": 1,
     "tierTo": 6
    },
-   "desc": "Map farm tc 1-6",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm tc 1-6"
   },
   {
    "id": "van_thu_son_mach",
@@ -653,12 +489,7 @@
     "tierFrom": 1,
     "tierTo": 6
    },
-   "desc": "Map farm tc 1-6",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm tc 1-6"
   },
   {
    "id": "loi_dinh_son_coc",
@@ -672,12 +503,7 @@
     "tierFrom": 7,
     "tierTo": 9
    },
-   "desc": "Map farm tc 7-9",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm tc 7-9"
   },
   {
    "id": "hac_am_dam_lay",
@@ -691,12 +517,7 @@
     "tierFrom": 7,
     "tierTo": 9
    },
-   "desc": "Map farm tc 7-9",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm tc 7-9"
   },
   {
    "id": "co_chien_truong",
@@ -710,12 +531,7 @@
     "tierFrom": 7,
     "tierTo": 9
    },
-   "desc": "Map farm tc 7-9",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm tc 7-9"
   },
   {
    "id": "vo_tan_hu_khong",
@@ -729,12 +545,7 @@
     "tierFrom": 9,
     "tierTo": 9
    },
-   "desc": "Map farm đột phá",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map farm đột phá"
   },
   {
    "id": "kim_quang_dong",
@@ -744,12 +555,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Kim",
-   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được"
   },
   {
    "id": "kiem_trung",
@@ -759,12 +565,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Kim",
-   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được"
   },
   {
    "id": "thien_cuong_kim_son",
@@ -774,12 +575,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Kim",
-   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Kim — chỉ Kim Đan mới vào được"
   },
   {
    "id": "thanh_moc_lam",
@@ -789,12 +585,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Mộc",
-   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được"
   },
   {
    "id": "u_minh_quy_lam",
@@ -804,12 +595,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Mộc",
-   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được"
   },
   {
    "id": "co_thu_yeu_gioi",
@@ -819,12 +605,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Mộc",
-   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Mộc — chỉ Kim Đan mới vào được"
   },
   {
    "id": "thanh_tuyen_khe",
@@ -834,12 +615,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Thủy",
-   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được"
   },
   {
    "id": "han_bang_nguyen",
@@ -849,12 +625,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Thủy",
-   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được"
   },
   {
    "id": "tham_hai_bi_canh",
@@ -864,12 +635,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Thủy",
-   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Thủy — chỉ Kim Đan mới vào được"
   },
   {
    "id": "hoa_diem_dong",
@@ -879,12 +645,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Hỏa",
-   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được"
   },
   {
    "id": "hoa_son_khau",
@@ -894,12 +655,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Hỏa",
-   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được"
   },
   {
    "id": "dia_nguc_hoa_hai",
@@ -909,12 +665,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Hỏa",
-   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Hỏa — chỉ Kim Đan mới vào được"
   },
   {
    "id": "hoang_tho_coc",
@@ -924,12 +675,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Thổ",
-   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được"
   },
   {
    "id": "thach_lam",
@@ -939,12 +685,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Thổ",
-   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được"
   },
   {
    "id": "thai_co_sa_mac",
@@ -954,12 +695,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "element": "Thổ",
-   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "desc": "Map Ngũ Hành hệ Thổ — chỉ Kim Đan mới vào được"
   },
   {
    "id": "thanh_ha_thanh",
@@ -969,12 +705,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành ven sông, chợ đông, thuyền bè tấp nập",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "bach_lo_thanh",
@@ -984,12 +715,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành sương sớm, nhiều dược liệu và đan sư",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "tu_truc_thanh",
@@ -999,12 +725,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành trong rừng trúc tím, yên tĩnh",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "hoang_sa_thanh",
@@ -1014,12 +735,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành biên thùy cát vàng, thương đội qua lại",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "bich_ba_thanh",
@@ -1029,12 +745,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành ven hồ xanh, nghề cá và thủy tu",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "van_an_thanh",
@@ -1044,12 +755,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành trong mây, ẩn sĩ lui tới",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "xich_thuy_thanh",
@@ -1059,12 +765,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành nước đỏ, luyện khí sĩ đông",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "co_moc_thanh",
@@ -1074,12 +775,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành gỗ cổ thụ, mộc tu tụ họp",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "suong_nguyet_thanh",
@@ -1089,12 +785,7 @@
    "minRealm": "lk",
    "minTier": 1,
    "desc": "Thành nguyệt quang, chợ đêm nổi tiếng",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "long_ngam_thanh",
@@ -1104,12 +795,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành rồng ngâm, truyền thừa lâu đời",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "phuong_minh_thanh",
@@ -1119,12 +805,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành phượng hót, hỏa tu tụ họp",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "huyen_vu_thanh",
@@ -1134,12 +815,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành rùa thần, phòng ngự kiên cố",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "bach_ho_thanh",
@@ -1149,12 +825,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành bạch hổ, võ tu và kiếm tu đông",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "chu_tuoc_thanh",
@@ -1164,12 +835,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành chu tước, lửa thiêng quanh năm",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "thanh_long_thanh",
@@ -1179,12 +845,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành thanh long, lôi tu tụ họp",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "ky_lan_thanh",
@@ -1194,12 +855,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành kỳ lân, điềm lành và bảo vật",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "tinh_ha_thanh",
@@ -1209,12 +865,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành sông sao, trận pháp sư đông",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "nguyet_hoa_thanh",
@@ -1224,12 +875,7 @@
    "minRealm": "tc",
    "minTier": 1,
    "desc": "Thành hoa nguyệt, thi họa và nhạc tu",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "cuu_tieu_thanh",
@@ -1239,12 +885,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "desc": "Thành chín tầng trời, chỉ Kim Đan mới vào",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "vo_cuc_thanh",
@@ -1254,12 +895,7 @@
    "minRealm": "kd",
    "minTier": 1,
    "desc": "Thành vô cực, đạo vận thâm sâu",
-   "npcProfile": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "planned"
+   "npcProfile": "city"
   },
   {
    "id": "van_uyen",
@@ -1268,12 +904,7 @@
    "safe": true,
    "minRealm": "lk",
    "minTier": 1,
-   "desc": "Thư viện Nho gia — Nho Tu đọc sách mở Chương, tạo Ý Cảnh",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "live"
+   "desc": "Tàng Kinh Các — nơi Nho Tu tĩnh tu đọc sách, mở Chương, tạo Ý Cảnh; bia cổ ngàn năm còn đây, nghe đâu người xưa từng cất giấu vật quý chốn này"
   },
   {
    "id": "cuu_u_bi_canh",
@@ -1282,12 +913,7 @@
    "safe": false,
    "minRealm": "kd",
    "minTier": 1,
-   "desc": "Bí cảnh lớn — Ma Quân Cửu U trấn giữ, chỉ Kim Đan mới vào được",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "live"
+   "desc": "Bí cảnh lớn — Ma Quân Cửu U trấn giữ, chỉ Kim Đan mới vào được"
   },
   {
    "id": "thien_moc_lam",
@@ -1297,18 +923,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Rừng cổ thụ ngàn năm che kín trời, yêu thú Nguyên Anh trú ngụ.",
-   "theme": "deep_forest",
-   "monsterSet": [
-    "da_minh_buc",
-    "kim_cuong_tuong",
-    "bach_cot_phu_nhan",
-    "huyet_ma_tot",
-    "co_thu_than"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "deep_forest"
   },
   {
    "id": "van_dang_son",
@@ -1318,17 +933,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Dãy núi chìm trong mây, dã thú leo vách đá săn mồi.",
-   "theme": "mountain",
-   "monsterSet": [
-    "huyen_bang_lang",
-    "hoa_vu_phuong_anh",
-    "tham_hai_cu_giai",
-    "linh_mieu_anh"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "mountain"
   },
   {
    "id": "hac_thuy_dam",
@@ -1338,17 +943,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Đầm lầy nước đen bốc hơi độc, thủy quái ẩn mình dưới bùn.",
-   "theme": "swamp",
-   "monsterSet": [
-    "loi_vu_buc",
-    "thiet_giap_te",
-    "thuc_nhan_hoa_yeu",
-    "hoa_linh"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "swamp"
   },
   {
    "id": "hoa_van_coc",
@@ -1358,17 +953,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Thung lũng dung nham chảy quanh năm, hỏa thú sinh sôi.",
-   "theme": "lava",
-   "monsterSet": [
-    "thien_nien_xa_yeu",
-    "man_hoang_cu_tuong",
-    "co_thu_tinh",
-    "bang_linh"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "lava"
   },
   {
    "id": "bang_nguyen_dai",
@@ -1378,17 +963,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Bình nguyên băng giá vô tận, gió cắt da thịt.",
-   "theme": "ice_plain",
-   "monsterSet": [
-    "viem_vi_lang",
-    "phong_bao_ung",
-    "bich_ba_ngu_yeu",
-    "son_quan_ho"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "ice_plain"
   },
   {
    "id": "hoang_sa_hai",
@@ -1398,18 +973,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Biển cát nuốt cả đoàn thương nhân, sa thú rình dưới cát.",
-   "theme": "desert",
-   "monsterSet": [
-    "huyet_duc_buc",
-    "co_thach_cu_nhan",
-    "u_minh_quy_tot",
-    "la_sat_anh",
-    "giao_long_chua"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "desert"
   },
   {
    "id": "loi_van_dong",
@@ -1419,18 +983,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Hang động sấm sét không ngớt, lôi thú hấp thụ thiên lôi.",
-   "theme": "storm",
-   "monsterSet": [
-    "thien_lang",
-    "kim_si_dieu",
-    "thien_tuc_ngo_cong",
-    "thien_ma",
-    "giao_long_chua"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "storm"
   },
   {
    "id": "kim_thach_nguyen",
@@ -1440,18 +993,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Nguyên dã đầy quặng kim, thạch thú cứng như thép.",
-   "theme": "metal",
-   "monsterSet": [
-    "co_son_lang",
-    "son_than_khoi",
-    "hu_cot_chien_si",
-    "da_xoa",
-    "thien_lang_vuong_that"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "metal"
   },
   {
    "id": "quy_khoc_lam",
@@ -1461,17 +1003,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Rừng âm u vang tiếng khóc, quỷ vật lảng vảng.",
-   "theme": "ghost_forest",
-   "monsterSet": [
-    "huyen_thuy_xa",
-    "ngoc_giap_trung",
-    "ngoc_ky_lan",
-    "thien_lang_vuong_that"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "ghost_forest"
   },
   {
    "id": "thien_kiem_tri",
@@ -1482,11 +1014,6 @@
    "minTier": 1,
    "desc": "Thành trì của kiếm tu, vạn kiếm cắm quanh thành.",
    "theme": "swords",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1498,11 +1025,6 @@
    "minTier": 1,
    "desc": "Pháo đài luyện từ huyền thiết, tường thành không thể phá.",
    "theme": "metal",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1514,11 +1036,6 @@
    "minTier": 1,
    "desc": "Thành trì lớn bậc nhất vùng Nguyên Anh, thương hội tụ họp.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1530,11 +1047,6 @@
    "minTier": 1,
    "desc": "Thành trì trấn giữ miệng núi lửa, quân trấn thủ tinh nhuệ.",
    "theme": "lava",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1546,11 +1058,6 @@
    "minTier": 1,
    "desc": "Ải quan bên bờ sông lớn, đường thủy huyết mạch.",
    "theme": "stream",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1562,11 +1069,6 @@
    "minTier": 1,
    "desc": "Ngôi làng yên bình dưới chân mây, dân tu luyện nông.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1578,11 +1080,6 @@
    "minTier": 1,
    "desc": "Làng chài bên sông, sống bằng linh ngư và linh thảo.",
    "theme": "stream",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1594,11 +1091,6 @@
    "minTier": 1,
    "desc": "Làng đá cổ bên suối núi, thợ mỏ và thợ săn sinh sống.",
    "theme": "mountain",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1610,11 +1102,6 @@
    "minTier": 1,
    "desc": "Làng nổi tiếng với sương đêm tụ linh khí.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1626,11 +1113,6 @@
    "minTier": 1,
    "desc": "Thành lớn của vùng Nguyên Anh, tin tức bốn phương tụ về.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1642,11 +1124,6 @@
    "minTier": 1,
    "desc": "Thành thương mại, đấu giá và kho báu không thiếu thứ gì.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1658,11 +1135,6 @@
    "minTier": 1,
    "desc": "Thành của đan sư, mùi thuốc thơm khắp phố.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1674,11 +1146,6 @@
    "minTier": 1,
    "desc": "Thành xây trên lưng mây, cầu vồng làm đường.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1690,11 +1157,6 @@
    "minTier": 1,
    "desc": "Thành của nhạc tu và nho tu, tiếng đàn không dứt.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1706,11 +1168,6 @@
    "minTier": 1,
    "desc": "Thành ngọc trắng thanh khiết, quy củ nghiêm ngặt.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1722,11 +1179,6 @@
    "minTier": 1,
    "desc": "Thành của chiến tu, đấu trường mở quanh năm.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1738,11 +1190,6 @@
    "minTier": 1,
    "desc": "Thành xây quanh hố sao băng cổ, linh khí lạ thường.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1754,11 +1201,6 @@
    "minTier": 1,
    "desc": "Thung lũng của các đan vương Nguyên Anh, lò đan cháy ngày đêm.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1770,11 +1212,6 @@
    "minTier": 1,
    "desc": "Sơn trang rèn đúc, thợ rèn bậc thầy tụ họp.",
    "theme": "forge",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1786,11 +1223,6 @@
    "minTier": 1,
    "desc": "Lầu các của phù sư, giấy phù bay như bướm.",
    "theme": "script",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1802,11 +1234,6 @@
    "minTier": 1,
    "desc": "Động phủ trận sư, trận đồ khắc khắp vách đá.",
    "theme": "array",
-   "monsterSet": [],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -1817,17 +1244,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Cung điện lơ lửng nơi ngũ hành giao hội, linh thú trấn giữ.",
-   "theme": "void",
-   "monsterSet": [
-    "bich_lam_mang",
-    "son_tieu",
-    "huyet_dang_yeu",
-    "loi_linh"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "void"
   },
   {
    "id": "diem_thien_son",
@@ -1837,17 +1254,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Núi lửa chạm trời, phượng hỏa và viêm thú cư ngụ.",
-   "theme": "lava",
-   "monsterSet": [
-    "hoa_van_mang",
-    "tu_kim_hat",
-    "van_loc",
-    "tho_linh"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "lava"
   },
   {
    "id": "han_thien_ho",
@@ -1857,18 +1264,7 @@
    "minRealm": "na",
    "minTier": 1,
    "desc": "Hồ băng trên trời, hàn thú và băng linh sinh sống.",
-   "theme": "ice",
-   "monsterSet": [
-    "nguyet_sat_lang",
-    "thanh_loan",
-    "huyen_thuy_giao",
-    "cuu_vi_ho",
-    "co_thu_than"
-   ],
-   "connectsTo": [
-    "thien_khu_thanh"
-   ],
-   "impl": "live"
+   "theme": "ice"
   },
   {
    "id": "hon_don_nguyen",
@@ -1878,18 +1274,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Nguyên dã hỗn độn chưa phân âm dương, thần thú cổ đại đi lại.",
-   "theme": "void",
-   "monsterSet": [
-    "thon_thien_mang",
-    "kim_si_dai_bang",
-    "bach_ho_sat_khi",
-    "huyet_than_ma_lang",
-    "duong_than_chien_si"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "void"
   },
   {
    "id": "thien_ngoai_chien_truong",
@@ -1899,17 +1284,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Chiến trường ngoài trời sao, tàn hồn thần ma vẫn đánh nhau.",
-   "theme": "battlefield",
-   "monsterSet": [
-    "dao_ngot",
-    "thien_binh_tan_anh",
-    "hoa_than_phuong",
-    "han_bang_ho"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "battlefield"
   },
   {
    "id": "vu_diem_son",
@@ -1919,18 +1294,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Núi lửa vũ trụ, dung nham như mưa sao băng.",
-   "theme": "lava",
-   "monsterSet": [
-    "hon_don_cu_thu",
-    "ba_xa",
-    "thien_cau",
-    "tham_uyen_cu_giai",
-    "thach_than_tuong"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "lava"
   },
   {
    "id": "cuc_bang_hai",
@@ -1940,17 +1304,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Biển băng cực sâu, cự thú ngủ dưới lớp băng vạn năm.",
-   "theme": "deep_sea",
-   "monsterSet": [
-    "kim_si_dai_bang",
-    "minh_ha_quy_tuong",
-    "doc_than_hat",
-    "huyet_ha_ma_buc"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "deep_sea"
   },
   {
    "id": "thien_loi_uyen",
@@ -1960,18 +1314,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Vực sấm thiên phạt, nơi thần lôi giáng xuống không ngừng.",
-   "theme": "storm",
-   "monsterSet": [
-    "hu_khong_thu",
-    "chu_tuoc_diem",
-    "vuc_ngoai_thien_ma",
-    "kim_than_giap_trung",
-    "am_than_quy_tot"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "storm"
   },
   {
    "id": "co_than_lam",
@@ -1981,18 +1324,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Rừng của các vị thần cổ, cây nào cũng có thần thức.",
-   "theme": "deep_forest",
-   "monsterSet": [
-    "thon_thien_mang",
-    "cung_ky",
-    "co_ma_tan_hon",
-    "tho_than_khoi",
-    "tu_la_chien_ma"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "deep_forest"
   },
   {
    "id": "minh_ha_co",
@@ -2002,17 +1334,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Dòng sông âm phủ chảy qua cõi trần, quỷ thần qua lại.",
-   "theme": "graveyard",
-   "monsterSet": [
-    "con_bang_anh",
-    "than_loi_cu_nhan",
-    "moc_than_dang",
-    "coi_am_sat_thu"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "graveyard"
   },
   {
    "id": "kim_than_nguyen",
@@ -2022,17 +1344,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Nguyên dã kim loại lỏng, thần thú giáp vàng cư trú.",
-   "theme": "metal",
-   "monsterSet": [
-    "chuc_long_anh",
-    "ky_lan_than_anh",
-    "co_than_thu_tinh",
-    "tinh_than_tieu_yeu"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "metal"
   },
   {
    "id": "huyet_than_dam",
@@ -2042,19 +1354,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Đầm huyết sắc, ma thú uống máu thần mà sống.",
-   "theme": "blood_forest",
-   "monsterSet": [
-    "toan_nghe",
-    "thanh_long_tan_anh",
-    "nguyet_tho_than",
-    "loi_than_dieu",
-    "thien_hoa_su",
-    "thien_dao_thu_ho"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "blood_forest"
   },
   {
    "id": "than_vuong_tri",
@@ -2065,11 +1365,6 @@
    "minTier": 1,
    "desc": "Thành trì của thần vương, uy áp phủ khắp vùng.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2081,11 +1376,6 @@
    "minTier": 1,
    "desc": "Pháo đài trấn cửa hỗn độn, ngăn thú dữ tràn vào nhân gian.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2097,11 +1387,6 @@
    "minTier": 1,
    "desc": "Ải quan lửa thần, quân đoàn diệm giáp trấn thủ.",
    "theme": "lava",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2113,11 +1398,6 @@
    "minTier": 1,
    "desc": "Đài thiên phạt trên đỉnh mây, sấm sét là tường thành.",
    "theme": "storm",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2129,11 +1409,6 @@
    "minTier": 1,
    "desc": "Pháo đài dưới biển sâu, quy xà thần thú canh giữ.",
    "theme": "deep_sea",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2145,11 +1420,6 @@
    "minTier": 1,
    "desc": "Làng nhỏ trên con đường thần tích, khách hành hương qua lại.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2161,11 +1431,6 @@
    "minTier": 1,
    "desc": "Làng của hậu duệ tiên nhân, vườn thuốc đầy linh dược.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2177,11 +1442,6 @@
    "minTier": 1,
    "desc": "Ngôi làng tồn tại vạn năm không đổi, ẩn sĩ nhiều vô kể.",
    "theme": "mountain",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2193,11 +1453,6 @@
    "minTier": 1,
    "desc": "Làng bên bờ sông sao, đêm nào cũng thấy dải ngân hà chạm đất.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2209,11 +1464,6 @@
    "minTier": 1,
    "desc": "Đô thành bậc nhất cõi Hóa Thần, thần vương tọa trấn.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2225,11 +1475,6 @@
    "minTier": 1,
    "desc": "Thành cổ từ thuở hỗn nguyên, bảo vật tầng tầng lớp lớp.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2241,11 +1486,6 @@
    "minTier": 1,
    "desc": "Thành mô phỏng thiên đình, cung điện vàng son.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2257,11 +1497,6 @@
    "minTier": 1,
    "desc": "Đại thành phồn hoa, tu sĩ Hóa Thần qua lại như mây.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2273,11 +1508,6 @@
    "minTier": 1,
    "desc": "Thành của kiếm thần, kiếm khí phủ kín bầu trời.",
    "theme": "swords",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2289,11 +1519,6 @@
    "minTier": 1,
    "desc": "Thành ở rìa hư không, nhìn thấy cả dòng thời gian.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2305,11 +1530,6 @@
    "minTier": 1,
    "desc": "Thành chín tầng mây, càng lên cao càng tôn quý.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2321,11 +1541,6 @@
    "minTier": 1,
    "desc": "Thành âm u của minh tu, đèn lồng xanh cháy quanh năm.",
    "theme": "graveyard",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2337,11 +1552,6 @@
    "minTier": 1,
    "desc": "Điện đan thần, nơi luyện những viên đan trong truyền thuyết.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2353,11 +1563,6 @@
    "minTier": 1,
    "desc": "Lầu rèn thiên khí, thần binh ra lò ở đây.",
    "theme": "forge",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2369,11 +1574,6 @@
    "minTier": 1,
    "desc": "Cung điện phù chú, phù văn cổ nhất thiên hạ.",
    "theme": "script",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2385,11 +1585,6 @@
    "minTier": 1,
    "desc": "Đài trận pháp cấp thiên, đổi cả cục diện một vùng trời.",
    "theme": "array",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2400,19 +1595,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Vực sâu thiên đạo, nơi gần nhất với quy tắc trời đất.",
-   "theme": "void",
-   "monsterSet": [
-    "hon_don_cu_thu",
-    "huyen_vu_tan_giap",
-    "diem_than_chien_tuong",
-    "hoa_than_phuong",
-    "thuy_than_ngu",
-    "van_co_doc_trung"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "void"
   },
   {
    "id": "khai_thien_son",
@@ -2422,18 +1605,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Ngọn núi từ thuở khai thiên lập địa, cổ thú trấn sơn.",
-   "theme": "mountain",
-   "monsterSet": [
-    "khai_thien_te",
-    "thanh_long_tan_anh",
-    "bang_than_xa",
-    "phong_than_ung",
-    "thien_dao_thu_ho"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "mountain"
   },
   {
    "id": "hon_don_hai",
@@ -2443,17 +1615,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Biển hỗn độn vô biên, cự thú nuốt cả hòn đảo.",
-   "theme": "deep_sea",
-   "monsterSet": [
-    "hon_don_ma_vien",
-    "vuc_ngoai_thien_ma",
-    "da_than_buc",
-    "la_hau_ma_anh"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "deep_sea"
   },
   {
    "id": "phan_hu_nguyen",
@@ -2463,17 +1625,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Nguyên dã ở rìa hư không, nơi thực và hư lẫn lộn.",
-   "theme": "void",
-   "monsterSet": [
-    "hu_khong_lang",
-    "hon_don_phuong",
-    "vo_hinh_quy",
-    "thoi_luu_ngu"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "void"
   },
   {
    "id": "thoi_gian_hanh_lang",
@@ -2483,16 +1635,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Hành lang dòng thời gian, quái vật từ quá khứ và tương lai lẫn vào nhau.",
-   "theme": "void",
-   "monsterSet": [
-    "thoi_gian_thu",
-    "luc_dao_chien_hon",
-    "hu_anh_mieu"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "void"
   },
   {
    "id": "khong_gian_loi",
@@ -2502,16 +1645,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Vết nứt không gian khổng lồ, sinh vật dị giới tràn qua.",
-   "theme": "void",
-   "monsterSet": [
-    "khong_gian_xa",
-    "thien_ngoai_cu_buc",
-    "van_co_hoa_thu"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "void"
   },
   {
    "id": "dao_nguoc_son",
@@ -2521,16 +1655,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Ngọn núi nơi quy tắc đảo ngược: nước chảy lên, lửa đóng băng.",
-   "theme": "mountain",
-   "monsterSet": [
-    "phan_hu_ma_anh",
-    "hon_don_giap_trung",
-    "thien_dao_thu_than"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "mountain"
   },
   {
    "id": "van_co_chien_truong",
@@ -2540,15 +1665,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Chiến trường từ vạn cổ, thần ma ngã xuống vẫn chưa tan.",
-   "theme": "battlefield",
-   "monsterSet": [
-    "dao_thien_te",
-    "dao_nguoc_mang"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "battlefield"
   },
   {
    "id": "hon_don_thien_ho",
@@ -2558,15 +1675,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Hồ hỗn độn trên chín tầng mây, cự thú ngủ dưới đáy.",
-   "theme": "deep_sea",
-   "monsterSet": [
-    "van_co_than_thu",
-    "van_ly_doc_hat"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "deep_sea"
   },
   {
    "id": "thien_dao_hoa_hai",
@@ -2576,15 +1685,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Biển lửa thiên đạo, nơi phán xét kẻ nghịch thiên.",
-   "theme": "lava",
-   "monsterSet": [
-    "hon_don_phuong",
-    "thien_thu_tinh"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "lava"
   },
   {
    "id": "cuc_han_bang_vuc",
@@ -2594,16 +1695,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Vực băng cực hạn, thời gian như đóng băng theo.",
-   "theme": "ice",
-   "monsterSet": [
-    "thien_cuc_cu_ngu",
-    "nghich_thien_su",
-    "thien_dao_thu_than"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "ice"
   },
   {
    "id": "nghich_luu_sa_mac",
@@ -2613,15 +1705,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Sa mạc chảy ngược dòng thời gian, cát nuốt cả ký ức.",
-   "theme": "desert",
-   "monsterSet": [
-    "huyen_thien_ho",
-    "hon_don_khoi"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "desert"
   },
   {
    "id": "thien_lai_lam",
@@ -2631,16 +1715,7 @@
    "minRealm": "ph",
    "minTier": 1,
    "desc": "Rừng từ trời rơi xuống, cây cối mọc ngược lên không.",
-   "theme": "deep_forest",
-   "monsterSet": [
-    "van_co_than_thu",
-    "dao_kiem_ma_than",
-    "phan_hu_than_binh"
-   ],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live"
+   "theme": "deep_forest"
   },
   {
    "id": "phan_hu_tri",
@@ -2651,11 +1726,6 @@
    "minTier": 1,
    "desc": "Thành trì trấn giữ cửa Phản Hư, bức tường giữa hai cõi.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2667,11 +1737,6 @@
    "minTier": 1,
    "desc": "Pháo đài quan sát đại đạo, kính thiên văn nhìn thấu hư không.",
    "theme": "metal",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2683,11 +1748,6 @@
    "minTier": 1,
    "desc": "Pháo đài vô cực, không gian bên trong lớn gấp trăm lần bên ngoài.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2699,11 +1759,6 @@
    "minTier": 1,
    "desc": "Ải quan của kẻ nghịch thiên, sấm sét là lính gác.",
    "theme": "storm",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2715,11 +1770,6 @@
    "minTier": 1,
    "desc": "Pháo đài trước cổng trời, muốn qua phải thắng thủ hộ.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2731,11 +1781,6 @@
    "minTier": 1,
    "desc": "Ngôi làng của những người ngộ đạo, ai cũng là ẩn sĩ.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2747,11 +1792,6 @@
    "minTier": 1,
    "desc": "Làng lơ lửng giữa hư không, nhà nào cũng neo bằng trận pháp.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2763,11 +1803,6 @@
    "minTier": 1,
    "desc": "Làng cổ theo đạo xưa, vườn thuốc đầy dược liệu hư không.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2779,11 +1814,6 @@
    "minTier": 1,
    "desc": "Làng bên suối sao, nước suối chảy từ dải ngân hà.",
    "theme": "stream",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2795,11 +1825,6 @@
    "minTier": 1,
    "desc": "Đô thành bậc nhất cõi Phản Hư, trung tâm của vùng hư không.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2811,11 +1836,6 @@
    "minTier": 1,
    "desc": "Thành cổ từ thuở thiên đạo mới thành hình.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2827,11 +1847,6 @@
    "minTier": 1,
    "desc": "Thành vô hạn — đi mãi không hết phố, mỗi ngõ là một tiểu thế giới.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2843,11 +1858,6 @@
    "minTier": 1,
    "desc": "Thành của vạn pháp, thư viện chứa công pháp khắp chư thiên.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2859,11 +1869,6 @@
    "minTier": 1,
    "desc": "Thành của kiếm tu nghịch đạo, kiếm khí xé cả hư không.",
    "theme": "swords",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2875,11 +1880,6 @@
    "minTier": 1,
    "desc": "Thành cổ chìm trong hỗn độn, nửa thực nửa mơ.",
    "theme": "graveyard",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2891,11 +1891,6 @@
    "minTier": 1,
    "desc": "Thành thái hư thanh tịnh, tu sĩ tới đây đều lặng lẽ.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2907,11 +1902,6 @@
    "minTier": 1,
    "desc": "Cung điện đan đạo, nơi luyện đan bằng lửa hư không.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2923,11 +1913,6 @@
    "minTier": 1,
    "desc": "Lầu rèn khí đạo, thần binh rèn từ mảnh hư không.",
    "theme": "forge",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2939,11 +1924,6 @@
    "minTier": 1,
    "desc": "Điện vạn phù, phù văn viết lên cả không gian.",
    "theme": "script",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2955,11 +1935,6 @@
    "minTier": 1,
    "desc": "Ngọn núi trận đạo, cả quả núi là một đại trận.",
    "theme": "array",
-   "monsterSet": [],
-   "connectsTo": [
-    "phan_hu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -2970,16 +1945,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Nguyên dã thần đạo, dấu chân thần nhân còn in trên đất.",
-   "theme": "void",
-   "monsterSet": [
-    "co_than_thu_tinh",
-    "am_than_quy_tot",
-    "doc_than_hat"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "void"
   },
   {
    "id": "chu_thien_chien_truong",
@@ -2989,16 +1955,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Chiến trường chư thiên, vô số thế giới từng đánh nhau ở đây.",
-   "theme": "battlefield",
-   "monsterSet": [
-    "toan_nghe",
-    "tu_la_chien_ma",
-    "phong_than_ung"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "battlefield"
   },
   {
    "id": "thien_diem_hai",
@@ -3008,16 +1965,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Biển lửa trên trời, sóng lửa cao trăm trượng.",
-   "theme": "lava",
-   "monsterSet": [
-    "huyen_vu_tan_giap",
-    "thien_hoa_su",
-    "da_than_buc"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "lava"
   },
   {
    "id": "vo_bien_bang_nguyen",
@@ -3027,16 +1975,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Băng nguyên vô biên, thần thú ngủ đông vạn năm.",
-   "theme": "ice_plain",
-   "monsterSet": [
-    "kim_than_giap_trung",
-    "con_bang_anh",
-    "chu_tuoc_diem"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "ice_plain"
   },
   {
    "id": "than_loi_dai_vuc",
@@ -3046,16 +1985,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Đại vực thần lôi, trung tâm của mọi cơn bão.",
-   "theme": "storm",
-   "monsterSet": [
-    "tinh_than_tieu_yeu",
-    "ba_xa",
-    "vuc_ngoai_thien_ma"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "storm"
   },
   {
    "id": "co_tien_lam",
@@ -3065,16 +1995,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Rừng cổ tiên, cây nào cũng từng có tiên nhân ngồi thiền.",
-   "theme": "deep_forest",
-   "monsterSet": [
-    "ky_lan_than_anh",
-    "tho_than_khoi",
-    "hon_don_cu_thu"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "deep_forest"
   },
   {
    "id": "minh_gioi_co",
@@ -3084,16 +2005,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Cố đô minh giới, quỷ thần qua lại như chợ.",
-   "theme": "graveyard",
-   "monsterSet": [
-    "thanh_long_tan_anh",
-    "la_hau_ma_anh",
-    "van_co_doc_trung"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "graveyard"
   },
   {
    "id": "kim_uyen_nguyen",
@@ -3103,16 +2015,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Nguyên dã kim uyên, quặng thần thiết lộ thiên khắp nơi.",
-   "theme": "metal",
-   "monsterSet": [
-    "diem_than_chien_tuong",
-    "kim_si_dai_bang",
-    "thach_than_tuong"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "metal"
   },
   {
    "id": "thuy_than_dam",
@@ -3122,16 +2025,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Đầm của thủy thần, nước nặng như chì.",
-   "theme": "swamp",
-   "monsterSet": [
-    "coi_am_sat_thu",
-    "thuy_than_ngu",
-    "than_loi_cu_nhan"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "swamp"
   },
   {
    "id": "huyet_hai",
@@ -3141,16 +2035,7 @@
    "minRealm": "ht",
    "minTier": 1,
    "desc": "Biển huyết vô tận, ma thú sinh ra từ máu thần.",
-   "theme": "blood_forest",
-   "monsterSet": [
-    "hu_khong_thu",
-    "nguyet_tho_than",
-    "tham_uyen_cu_giai"
-   ],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live"
+   "theme": "blood_forest"
   },
   {
    "id": "chu_thien_tri",
@@ -3161,11 +2046,6 @@
    "minTier": 1,
    "desc": "Thành trì chư thiên, sứ giả các thế giới qua lại.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3177,11 +2057,6 @@
    "minTier": 1,
    "desc": "Pháo đài thần đạo trấn cửa chư thiên.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3193,11 +2068,6 @@
    "minTier": 1,
    "desc": "Ải quan đại diệm, tường thành bằng dung nham đông đặc.",
    "theme": "lava",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3209,11 +2079,6 @@
    "minTier": 1,
    "desc": "Đài lôi thần, cột thu lôi cao chạm mây.",
    "theme": "storm",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3225,11 +2090,6 @@
    "minTier": 1,
    "desc": "Pháo đài hải thần giữa biển cả, sóng thần không chạm được.",
    "theme": "deep_sea",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3241,11 +2101,6 @@
    "minTier": 1,
    "desc": "Làng trên đường đạo, khách tu hành nghỉ chân.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3257,11 +2112,6 @@
    "minTier": 1,
    "desc": "Làng quanh thần tích cổ, linh khí dày đặc.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3273,11 +2123,6 @@
    "minTier": 1,
    "desc": "Làng nhỏ mà nhà nào cũng có truyền thừa một pháp.",
    "theme": "mountain",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3289,11 +2134,6 @@
    "minTier": 1,
    "desc": "Làng ven đường âm, đèn lồng dẫn hồn cháy quanh năm.",
    "theme": "graveyard",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3305,11 +2145,6 @@
    "minTier": 1,
    "desc": "Thành chư thiên, đô hội lớn bậc nhất cõi Hóa Thần.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3321,11 +2156,6 @@
    "minTier": 1,
    "desc": "Thành đại đạo, tượng đạo tổ cao ngàn trượng.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3337,11 +2167,6 @@
    "minTier": 1,
    "desc": "Thành vô địch, đấu trường kiếm thần mở quanh năm.",
    "theme": "swords",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3353,11 +2178,6 @@
    "minTier": 1,
    "desc": "Thần thành thiên cổ, cung điện từ thời thần thoại.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3369,11 +2189,6 @@
    "minTier": 1,
    "desc": "Vương thành giữa hỗn độn, ranh giới thực hư.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3385,11 +2200,6 @@
    "minTier": 1,
    "desc": "Thành thái cổ, kiến trúc từ thuở khai thiên.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3401,11 +2211,6 @@
    "minTier": 1,
    "desc": "Thành minh thần, âm khí trang nghiêm.",
    "theme": "graveyard",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3417,11 +2222,6 @@
    "minTier": 1,
    "desc": "Thung lũng luyện Cửu Chuyển Đan, lò đan xếp như núi.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3433,11 +2233,6 @@
    "minTier": 1,
    "desc": "Điện thần khí, nơi thần binh được khai quang.",
    "theme": "forge",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3449,11 +2244,6 @@
    "minTier": 1,
    "desc": "Các thiên phù, phù văn cấp thiên lưu trữ ở đây.",
    "theme": "script",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3465,11 +2255,6 @@
    "minTier": 1,
    "desc": "Cung đại trận, trận đồ đổi cả cục diện chư thiên.",
    "theme": "array",
-   "monsterSet": [],
-   "connectsTo": [
-    "than_vuong_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city"
   },
   {
@@ -3481,11 +2266,6 @@
    "minTier": 0,
    "theme": "void",
    "desc": "Sân đáp đầu tiên của Tiên Giới — nơi Tiên Nhân mới thăng thiên đặt chân tới. (GĐ231)",
-   "monsterSet": [],
-   "connectsTo": [
-    "thanh_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "cong"
   },
   {
@@ -3497,14 +2277,6 @@
    "minTier": 1,
    "desc": "Nguyên dã lôi kiếp, sấm sét thiên đạo không ngày nào dứt.",
    "theme": "storm",
-   "monsterSet": [
-    "loi_kiep_lang",
-    "kiep_van_khoi"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "dai"
   },
   {
@@ -3516,14 +2288,6 @@
    "minTier": 1,
    "desc": "Vực thiên hỏa, lửa trời đốt cả linh khí.",
    "theme": "lava",
-   "monsterSet": [
-    "thien_hoa_dieu",
-    "thien_kiem_kiep_anh"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "dai"
   },
   {
@@ -3535,14 +2299,6 @@
    "minTier": 1,
    "desc": "Cõi tâm ma, nơi bóng của chính mình quay lại cắn chủ.",
    "theme": "graveyard",
-   "monsterSet": [
-    "tam_ma_anh",
-    "van_kiep_than_thu"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "bia"
   },
   {
@@ -3554,14 +2310,6 @@
    "minTier": 1,
    "desc": "Thung lũng phong kiếp, gió xé nát cả đá núi.",
    "theme": "mountain",
-   "monsterSet": [
-    "phong_kiep_hac",
-    "kiep_hoa_phuong"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -3573,14 +2321,6 @@
    "minTier": 2,
    "desc": "Uyên sâu địa kiếp, đất nứt nuốt người.",
    "theme": "badland",
-   "monsterSet": [
-    "dia_kiep_te",
-    "kiep_hai_cu_ngu"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "bia"
   },
   {
@@ -3592,14 +2332,6 @@
    "minTier": 1,
    "desc": "Đầm thủy kiếp, nước nặng như lưỡi dao.",
    "theme": "swamp",
-   "monsterSet": [
-    "thuy_kiep_mang",
-    "kiep_anh_mieu"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "sen"
   },
   {
@@ -3611,14 +2343,6 @@
    "minTier": 2,
    "desc": "Núi kim kiếp, vạn kiếm trời treo lơ lửng.",
    "theme": "metal",
-   "monsterSet": [
-    "kim_kiep_thu",
-    "van_kiep_than_thu"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "dai"
   },
   {
@@ -3630,14 +2354,6 @@
    "minTier": 2,
    "desc": "Biển huyết kiếp, sóng máu mang theo oán khí độ kiếp giả đã ngã.",
    "theme": "blood_forest",
-   "monsterSet": [
-    "huyet_kiep_buc",
-    "kiep_hoa_phuong"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "bia"
   },
   {
@@ -3649,13 +2365,6 @@
    "minTier": 1,
    "desc": "Nguyên băng kiếp, hàn khí đóng băng cả thời gian.",
    "theme": "ice",
-   "monsterSet": [
-    "bang_kiep_ho"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -3667,13 +2376,6 @@
    "minTier": 3,
    "desc": "Rừng hỗn kiếp sâu nhất cõi Độ Kiếp, quy tắc vặn xoắn.",
    "theme": "deep_forest",
-   "monsterSet": [
-    "hon_kiep_xa"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "bia"
   },
   {
@@ -3685,11 +2387,6 @@
    "minTier": 1,
    "desc": "Thành trì trong mây kiếp, trạm dừng của người đang độ.",
    "theme": "storm",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "dai"
   },
@@ -3702,11 +2399,6 @@
    "minTier": 1,
    "desc": "Ải quan độ kiếp, qua được ải này mới gần Tiên Môn.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "bia"
   },
@@ -3719,11 +2411,6 @@
    "minTier": 2,
    "desc": "Pháo đài trấn kiếp, tường đồng vách sắt chống thiên lôi.",
    "theme": "metal",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "dai"
   },
@@ -3736,11 +2423,6 @@
    "minTier": 1,
    "desc": "Làng dưới chân mây kiếp, dân ở đây quen nghe sấm trời.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "bia"
   },
@@ -3753,11 +2435,6 @@
    "minTier": 1,
    "desc": "Ngôi làng kỳ lạ không bao giờ bị kiếp giáng xuống.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "dai"
   },
@@ -3770,11 +2447,6 @@
    "minTier": 1,
    "desc": "Đô thành cõi Độ Kiếp, mây kiếp là mái nhà chung.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "dai"
   },
@@ -3787,11 +2459,6 @@
    "minTier": 2,
    "desc": "Thành cổ bị thiên kiếp đánh suốt vạn năm vẫn chưa sụp.",
    "theme": "storm",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "bia"
   },
@@ -3804,11 +2471,6 @@
    "minTier": 1,
    "desc": "Thành độ sinh, nơi người vượt kiếp mở tiệc tiễn kẻ ở lại.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "dai"
   },
@@ -3821,11 +2483,6 @@
    "minTier": 1,
    "desc": "Cung luyện đan độ kiếp, đan dược tôi trong thiên lôi.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "bia"
   },
@@ -3838,11 +2495,6 @@
    "minTier": 1,
    "desc": "Lầu rèn khí dùng sấm trời làm búa.",
    "theme": "forge",
-   "monsterSet": [],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "dai"
   },
@@ -3855,14 +2507,6 @@
    "minTier": 3,
    "desc": "Bậc thang trời dẫn lên Tiên Môn, mỗi bậc một lần lột xác.",
    "theme": "mountain",
-   "monsterSet": [
-    "thien_the_thu_ho",
-    "thien_uy_giao"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -3874,14 +2518,6 @@
    "minTier": 3,
    "desc": "Tiền sảnh của Tiên Môn, thủ hộ ở đây không nể mặt ai.",
    "theme": "city",
-   "monsterSet": [
-    "tien_mon_kiem_si",
-    "tien_mon_linh_thu"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "cong"
   },
   {
@@ -3893,13 +2529,6 @@
    "minTier": 3,
    "desc": "Đài vấn đạo trước cổng trời — trả lời được mới qua, không thì đánh.",
    "theme": "array",
-   "monsterSet": [
-    "van_dao_tuong"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "cong"
   },
   {
@@ -3911,13 +2540,6 @@
    "minTier": 3,
    "desc": "Đài đăng tiên, đứng ở đây đã thấy mây của Tiên Giới.",
    "theme": "void",
-   "monsterSet": [
-    "dang_tien_ho_phap"
-   ],
-   "connectsTo": [
-    "kiep_van_thanh"
-   ],
-   "impl": "live",
    "landmark": "cong"
   },
   {
@@ -3929,14 +2551,6 @@
    "minTier": 1,
    "desc": "Nguyên dã tiên linh, cỏ cây đều có linh tính.",
    "theme": "garden",
-   "monsterSet": [
-    "tien_linh_lang",
-    "tien_gioi_chien_hon"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "sen"
   },
   {
@@ -3948,14 +2562,6 @@
    "minTier": 1,
    "desc": "Biển mây Tiên Giới, suối chảy giữa trời.",
    "theme": "stream",
-   "monsterSet": [
-    "dao_tri_ngu",
-    "linh_van_buc"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "sen"
   },
   {
@@ -3967,14 +2573,6 @@
    "minTier": 1,
    "desc": "Hải vực quanh Dao Trì, cự thú tiên giới canh giữ.",
    "theme": "deep_sea",
-   "monsterSet": [
-    "tien_phuong",
-    "tien_hoa_thu"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "sen"
   },
   {
@@ -3986,14 +2584,6 @@
    "minTier": 1,
    "desc": "Rừng phượng hoàng làm tổ, lá rơi cũng hóa lửa lành.",
    "theme": "deep_forest",
-   "monsterSet": [
-    "ky_lan_tien_thu",
-    "con_luan_su"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -4005,14 +2595,6 @@
    "minTier": 2,
    "desc": "Nguyên dã kỳ lân, thấy được nó là có phúc.",
    "theme": "mountain",
-   "monsterSet": [
-    "van_hai_hac",
-    "dao_tri_cu_ngu"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -4024,14 +2606,6 @@
    "minTier": 1,
    "desc": "Thung lũng tiên thú, đàn thú của trời.",
    "theme": "beast",
-   "monsterSet": [
-    "bong_lai_te",
-    "tien_vu_dieu"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -4043,15 +2617,6 @@
    "minTier": 2,
    "desc": "Núi Dao, ngọc đá trên núi đều là tiên liệu.",
    "theme": "mountain",
-   "monsterSet": [
-    "tien_phuong",
-    "tien_thu_ho",
-    "thien_tien_thu_than"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -4063,15 +2628,6 @@
    "minTier": 3,
    "desc": "Biển Bích Lạc sâu thẳm, đáy biển là một tầng trời khác.",
    "theme": "deep_sea",
-   "monsterSet": [
-    "ky_lan_tien_thu",
-    "bich_lac_mang",
-    "dao_hoa_tinh"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "sen"
   },
   {
@@ -4083,14 +2639,6 @@
    "minTier": 3,
    "desc": "Nguyên dã ven dải ngân hà, sao rơi thành thú.",
    "theme": "void",
-   "monsterSet": [
-    "tinh_ha_hat",
-    "linh_mieu_tien"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "cong"
   },
   {
@@ -4102,14 +2650,6 @@
    "minTier": 1,
    "desc": "Nguyên hoa đào tiên, mười dặm hoa không một bóng người.",
    "theme": "garden",
-   "monsterSet": [
-    "tien_kiem_hon",
-    "van_tien_quy"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "sen"
   },
   {
@@ -4121,15 +2661,6 @@
    "minTier": 5,
    "desc": "Núi Côn Luân, tổ sơn của Tiên Giới, càng lên cao càng gần trời.",
    "theme": "mountain",
-   "monsterSet": [
-    "dao_tri_lien_tinh",
-    "thien_tien_thu_than",
-    "thien_binh_hon"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "tuong"
   },
   {
@@ -4141,14 +2672,6 @@
    "minTier": 2,
    "desc": "Nguyên ven Thiên Hà, sấm tiên gầm quanh năm.",
    "theme": "storm",
-   "monsterSet": [
-    "thien_ha_khoi",
-    "bich_hai_giao"
-   ],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "landmark": "cong"
   },
   {
@@ -4160,11 +2683,6 @@
    "minTier": 1,
    "desc": "Thành trì dưới Lăng Tiêu Điện, gác cửa trời.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4177,11 +2695,6 @@
    "minTier": 1,
    "desc": "Pháo đài canh Dao Trì, khách không mời đừng tới.",
    "theme": "deep_sea",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "sen"
   },
@@ -4194,11 +2707,6 @@
    "minTier": 2,
    "desc": "Ải quan Bồng Lai, một người giữ ải vạn người khó qua.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4211,11 +2719,6 @@
    "minTier": 3,
    "desc": "Đồn vệ Thiên Cung, giáp trụ toàn bằng tiên thiết.",
    "theme": "metal",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "tuong"
   },
@@ -4228,11 +2731,6 @@
    "minTier": 1,
    "desc": "Làng của tiên nhân về ẩn, ngày ngày câu mây.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4245,11 +2743,6 @@
    "minTier": 1,
    "desc": "Thôn đào nguyên, người trong thôn không hỏi chuyện ngoài.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "sen"
   },
@@ -4262,11 +2755,6 @@
    "minTier": 1,
    "desc": "Làng mây tới, nhà xây trên lưng mây.",
    "theme": "stream",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "sen"
   },
@@ -4279,11 +2767,6 @@
    "minTier": 2,
    "desc": "Làng dưới chòm sao, đêm nào cũng như hội.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4296,11 +2779,6 @@
    "minTier": 1,
    "desc": "Đô thành bậc nhất Tiên Giới, dưới chân Lăng Tiêu Bảo Điện.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4313,11 +2791,6 @@
    "minTier": 1,
    "desc": "Thành bên Dao Trì, tiên nữ qua lại như mây.",
    "theme": "deep_sea",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "sen"
   },
@@ -4330,11 +2803,6 @@
    "minTier": 3,
    "desc": "Thành dưới chân Côn Luân, cổ nhất Tiên Giới.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "tuong"
   },
@@ -4347,11 +2815,6 @@
    "minTier": 1,
    "desc": "Thành Bồng Lai, tiên sơn trong biển mây.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4364,11 +2827,6 @@
    "minTier": 5,
    "desc": "Thành Thiên Cung, gần trời nhất, luật trời nghiêm nhất.",
    "theme": "void",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4381,11 +2839,6 @@
    "minTier": 2,
    "desc": "Thành Doanh Châu, chợ tiên họp quanh năm.",
    "theme": "city",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "tuong"
   },
@@ -4398,11 +2851,6 @@
    "minTier": 1,
    "desc": "Cung luyện tiên đan, một viên đáng giá một cõi.",
    "theme": "garden",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "sen"
   },
@@ -4415,11 +2863,6 @@
    "minTier": 1,
    "desc": "Điện rèn tiên khí, thần binh xếp như củi.",
    "theme": "forge",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "tuong"
   },
@@ -4432,11 +2875,6 @@
    "minTier": 1,
    "desc": "Các chứa tiên phù, một lá phù đổi một mạng.",
    "theme": "script",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "cong"
   },
@@ -4449,11 +2887,6 @@
    "minTier": 2,
    "desc": "Đài tiên trận, trận pháp vận hành cả một vùng trời.",
    "theme": "array",
-   "monsterSet": [],
-   "connectsTo": [
-    "lang_tieu_thanh"
-   ],
-   "impl": "live",
    "npcProfile": "city",
    "landmark": "sen"
   }

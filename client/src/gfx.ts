@@ -15,7 +15,7 @@
 
 // GĐ71: id chiêu nào có icon thật (game-icons.net, CC BY 3.0) trong
 // client/public/icons/ — sinh bởi shottools/gen_skill_icons.py.
-import { SKILL_ICON_IDS } from './skill_icons';
+import { SKILL_ICON_IDS, SKILL_ICON_PNG_IDS } from './skill_icons';
 
 export const GFX_CONFIG = {
   palette: { paper: '#efe8d8', ink: '#2e2a26', moss: '#5f7f52', mossDeep: '#42563a', earth: '#a98f66', vermilion: '#c0392b', gold: '#d6b26a' },
@@ -2419,6 +2419,7 @@ export interface MapEnterData {
   caveExit?: { x: number; y: number; parentName: string } | null; // GĐ236: cửa ra khi đang ở trong hang
   anCanh?: string | null; // GĐ344/345: map hiện tại là bí cảnh ẩn (doi_anh_canh/u_hon_canh)
   anGates?: Array<{ canh: string; x: number; y: number; name: string }>; // GĐ344/345: cổng bí cảnh ẩn trên map này
+  steles?: Array<{ id: string; x: number; y: number; name: string }>; // GĐ357: bia khắc Cổ Ngữ (đọc bia = nhận manh mối)
 }
 interface ThemeStyle { g1: string; g2: string; accent: string; leaf: string; leaf2: string; rock: string; plaza: string }
 const MAP_THEME_STYLE: Record<string, ThemeStyle> = {
@@ -2619,6 +2620,11 @@ function drawDecorItem(b: CanvasRenderingContext2D, st: ThemeStyle, k: string, x
       b.fillStyle = '#ffffff'; poly([[20, -26], [24, -18], [18, -14], [14, -20]]);
       b.fillStyle = 'rgba(0,0,0,0.18)'; poly([[6, -12], [20, -26], [32, 14], [14, 14]]);
       break;
+    case 'mountain_dry': // GĐ370: núi chân đất khô — cùng dáng núi thường, đá tông ấm (hình dự phòng khi sprite lỗi)
+      b.fillStyle = '#8a6f4c'; poly([[-32, 14], [-8, -30], [6, -12], [20, -26], [32, 14]]);
+      b.fillStyle = 'rgba(255,255,255,0.14)'; poly([[-8, -30], [0, -18], [-4, -8], [-14, -14]]);
+      b.fillStyle = 'rgba(0,0,0,0.18)'; poly([[6, -12], [20, -26], [32, 14], [14, 14]]);
+      break;
     case 'cave': // hang đá: vòm đá + miệng tối (bản thường, khác hang băng)
       b.fillStyle = st.rock; poly([[-26, 14], [-20, -14], [-8, -24], [10, -24], [22, -12], [26, 14]]);
       b.fillStyle = 'rgba(255,255,255,0.14)'; poly([[-20, -14], [-8, -24], [-2, -14], [-12, -10]]);
@@ -2722,7 +2728,9 @@ function themeStyleOf(def: MapEnterData): ThemeStyle {
 // trong hộp 96, neo đáy y≈79. Đồ nhỏ KHÔNG phóng to (scale ≤ 1).
 const DECOR_SPRITE_BOX: Record<string, [number, number]> = {};
 for (const k of ['pine','willow','palm','dead_tree','blood_tree','swamp_tree','mountain','mountain_snow','pavilion','hut','cave','cactus']) DECOR_SPRITE_BOX[k] = [90, 76];
+DECOR_SPRITE_BOX['tree'] = [90, 62]; // GĐ366 (F3-3): cây thường có sprite riêng (Bảo duyệt mẫu 09/11) — hộp cao 62px đúng chiều cao cây làng cũ nó thay thế
 DECOR_SPRITE_BOX['mountain'] = [130, 106]; DECOR_SPRITE_BOX['mountain_snow'] = [130, 106]; // GĐ237: núi phải to đúng tầm vóc so với nhân vật/cây (người chơi yêu cầu tỉ lệ như thực tế)
+DECOR_SPRITE_BOX['mountain_dry'] = [130, 106]; // GĐ370 (F1-5): biến thể núi chân đất khô cho theme lava/badland — cùng hộp với núi thường
 DECOR_SPRITE_BOX['cave'] = [132, 112]; // GĐ237: miệng hang cũng phải to — cửa vào một thế giới bên trong, không phải lỗ nhỏ
 for (const k of ['lm_dai','lm_cong','lm_tuong','lm_bia','lm_sen']) DECOR_SPRITE_BOX[k] = [90, 76]; // GĐ235: sprite lõi landmark (Muse gen + khắc Cổ Ngữ) thay hình vẽ code
 for (const k of ['rock','lava_rock','ice_shard','tomb','pillar','sword_stone','lamp','banner','furnace','forge','anvil','desk','fence','pond','wave','coral','hay','blossom','lava_pool','ice_crystal','dune']) DECOR_SPRITE_BOX[k] = [70, 56]; // GĐ166: + 3 decor chủ đề mới
@@ -2734,6 +2742,13 @@ for (const k of ['flower','herb','grass','grass_tall','reed','bone','crystal','c
 DECOR_SPRITE_BOX['mushroom'] = [36, 30];
 DECOR_SPRITE_BOX['bamboo'] = [40, 76];
 
+// GĐ376: sổ các texture decor đã nướng bằng hình VẼ DỰ PHÒNG vì sprite của
+// kind chưa kịp nạp (lớp B nạp nền — GĐ340). Cơ chế đo đuôi GĐ371 chỉ chạy
+// ở nhánh sprite, nên bản nướng dự phòng không bao giờ được tiếp đất đúng
+// sprite và còn bị cache cả phiên. Sprite về → main.ts gọi
+// upgradeDecorForSprite376 để nướng lại + nâng cấp vật đang hiện trên map
+// (cùng họ cơ chế GĐ369 cho quái/pet). Key = khóa texture canvas.
+const decorFallbackBaked376 = new Map<string, { theme: string, kind: string }>();
 function decorTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle, kind: string): string {
   const key = `decor-${theme}-${kind}`;
   if (scene.textures.exists(key)) return key;
@@ -2776,13 +2791,12 @@ function decorTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle, kind: 
   const SPRITE_TREE_THEMES = ['city', 'garden', 'beast', 'array', 'script', 'stream', 'deep_forest'];
   let spriteDrawn = false;
   // GĐ112: liễu dùng sprite riêng (nhánh chung cũ vẽ liễu bằng cây làng
-  // vì hồi đó chưa có sprite liễu) — cây chung giờ chỉ cho kind 'tree'.
-  if (kind === 'tree' && SPRITE_TREE_THEMES.includes(theme) && scene.textures.exists('tree-village-01')) {
-    const img = scene.textures.get('tree-village-01').getSourceImage() as unknown as CanvasImageSource;
-    const h = 62, w = (h * 102) / 114;
-    b.drawImage(img, 13, 8, 102, 114, W / 2 - w / 2, baseY - h, w, h);
-    spriteDrawn = true;
-  } else if (kind === 'tree_big' && SPRITE_TREE_THEMES.includes(theme) && scene.textures.exists('tree-village-01')) {
+  // vì hồi đó chưa có sprite liễu).
+  // GĐ366 (F3-3): kind 'tree' KHÔNG còn qua nhánh cây làng nữa — nó đã có
+  // sprite riêng (decor/tree.png, Bảo duyệt mẫu 09/11) + DECOR_SPRITE_BOX
+  // nên rơi xuống nhánh sprImg chung ở dưới, áp cho MỌI theme (kèm váy
+  // loang chân GĐ239). tree_big giữ nguyên nhánh cây làng ngay dưới đây.
+  if (kind === 'tree_big' && SPRITE_TREE_THEMES.includes(theme) && scene.textures.exists('tree-village-01')) {
     const img = scene.textures.get('tree-village-01').getSourceImage() as unknown as CanvasImageSource;
     const h = 76, w = (h * 102) / 114;
     b.drawImage(img, 13, 8, 102, 114, W / 2 - w / 2, baseY - h, w, h);
@@ -2795,30 +2809,106 @@ function decorTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle, kind: 
   } else if (sprImg) {
     // GĐ111: sprite ngoại cảnh — khung vừa theo nhóm, neo đáy ở baseY.
     const iw = (sprImg as HTMLImageElement).width, ih = (sprImg as HTMLImageElement).height;
-    b.drawImage(sprImg, 0, 0, iw, ih, W / 2 - sprW / 2, baseY - sprH, sprW, sprH);
+    // GĐ371: đo ĐÁY NỘI DUNG THẬT của sprite — hàng cuối còn "đặc" (≥20%
+    // bề ngang có hình). Sprite núi thường/khô (GĐ370) có đuôi chân TAN
+    // DẦN dài 41px file ≈ 7,9px hiển thị: thân đá đặc kết thúc sớm, chỉ
+    // còn vụn thưa gần như trong suốt, trong khi váy GĐ239 neo theo ĐÁY
+    // FILE → bóng nằm dưới thân đá gần 8px, rộng tới ~132px so với chân
+    // thật ~68px → đọc thành bóng đổ của vật LƠ LỬNG (Bảo phản hồi sau
+    // GĐ370: "núi như đang bay"). Sprite nào đuôi ≥2,5px thì hạ sprite
+    // xuống đúng bằng đuôi (đỉnh hạ theo, chiều cao giữ nguyên) cho hàng
+    // đặc chạm baseY, và thay váy bằng BÓNG TIẾP XÚC mềm ôm bề ngang
+    // chân. Cây/đá đuôi ≤1,6px → giữ nguyên nhánh GĐ239 như cũ.
+    let tail371 = 0, footW371 = 0;
+    try {
+      const mc = document.createElement('canvas'); mc.width = iw; mc.height = ih;
+      const mx = mc.getContext('2d', { willReadFrequently: true });
+      if (mx) {
+        mx.drawImage(sprImg as CanvasImageSource, 0, 0);
+        const px371 = mx.getImageData(0, 0, iw, ih).data;
+        for (let y = ih - 1; y >= 0; y--) {
+          let cnt = 0, minX = iw, maxX = -1;
+          const off371 = y * iw * 4 + 3;
+          for (let x = 0; x < iw; x++) { if (px371[off371 + x * 4] > 40) { cnt++; if (x < minX) minX = x; if (x > maxX) maxX = x; } }
+          if (cnt >= iw * 0.20) {
+            const t371 = (ih - 1 - y) * (sprH / ih);
+            if (t371 >= 2.5) { tail371 = t371; footW371 = (maxX - minX + 1) * (sprW / iw); }
+            break;
+          }
+        }
+      }
+    } catch { /* đo lỗi (canvas bị chặn) thì giữ căn đáy file như cũ */ }
+    b.drawImage(sprImg, 0, 0, iw, ih, W / 2 - sprW / 2, baseY - sprH + tail371, sprW, sprH);
     spriteDrawn = true;
     // GĐ239: VÁY LOANG CHÂN — mảng đất tối lởm chởm ôm chân + vệt đất/cỏ/đá
     // rắc tràn ra ngoài biên sprite, để vật "mọc" khỏi mặt đất chứ không
     // phải hình cắt dán (luật mặt cắt của người chơi).
     const rndS = seededRand(hashStrTs(`skirt:${theme}:${kind}`));
-    b.fillStyle = 'rgba(30,26,18,0.20)';
-    for (let i = 0; i < 7; i++) {
-      b.beginPath(); b.ellipse(W / 2 + (rndS() - 0.5) * sprW * 0.5, baseY - 1 + (rndS() - 0.5) * 5, sprW * (0.20 + rndS() * 0.16), 4.5 + rndS() * 3.5, 0, 0, Math.PI * 2); b.fill();
+    if (tail371 > 0) {
+      // GĐ371: BÓNG TIẾP XÚC — 3 lớp ellipse đồng tâm ngay tại baseY (nơi
+      // thân đặc vừa chạm đất), đậm nhất ở giữa sát chân, nhạt dần ra
+      // ngoài; bề ngang theo chân thật đo được, không còn vệt bóng rời.
+      const sh371: Array<[number, number, number]> = [[0.92, 6.2, 0.10], [0.72, 4.4, 0.15], [0.54, 3.0, 0.21]];
+      for (const [kf371, ry371, al371] of sh371) {
+        b.fillStyle = `rgba(30,26,18,${al371})`;
+        b.beginPath(); b.ellipse(W / 2, baseY + 0.5, Math.max(10, footW371 * kf371), ry371, 0, 0, Math.PI * 2); b.fill();
+      }
+      // vụn đá/cỏ rắc SÁT chân (ôm trong bề ngang chân + đuôi vừa hạ),
+      // không rải xuống dưới thành vệt rời như trước.
+      for (let i = 0; i < 26; i++) {
+        const fx = W / 2 + (rndS() - 0.5) * Math.max(footW371 * 1.15, sprW * 0.5), fy = baseY - 4 + rndS() * (tail371 + 7);
+        b.fillStyle = i % 3 === 0 ? st.leaf : (i % 3 === 1 ? st.rock : 'rgba(60,50,36,0.55)');
+        b.globalAlpha = 0.35 + rndS() * 0.4;
+        b.beginPath(); b.ellipse(fx, fy, 1.6 + rndS() * 3.4, 1.2 + rndS() * 2.2, rndS() * 3, 0, Math.PI * 2); b.fill();
+      }
+      b.globalAlpha = 1;
+    } else {
+      b.fillStyle = 'rgba(30,26,18,0.20)';
+      for (let i = 0; i < 7; i++) {
+        b.beginPath(); b.ellipse(W / 2 + (rndS() - 0.5) * sprW * 0.5, baseY - 1 + (rndS() - 0.5) * 5, sprW * (0.20 + rndS() * 0.16), 4.5 + rndS() * 3.5, 0, 0, Math.PI * 2); b.fill();
+      }
+      for (let i = 0; i < 26; i++) {
+        const fx = W / 2 + (rndS() - 0.5) * sprW * 1.12, fy = baseY - 3 + rndS() * 13;
+        b.fillStyle = i % 3 === 0 ? st.leaf : (i % 3 === 1 ? st.rock : 'rgba(60,50,36,0.55)');
+        b.globalAlpha = 0.35 + rndS() * 0.4;
+        b.beginPath(); b.ellipse(fx, fy, 1.6 + rndS() * 3.4, 1.2 + rndS() * 2.2, rndS() * 3, 0, Math.PI * 2); b.fill();
+      }
+      b.globalAlpha = 1;
     }
-    for (let i = 0; i < 26; i++) {
-      const fx = W / 2 + (rndS() - 0.5) * sprW * 1.12, fy = baseY - 3 + rndS() * 13;
-      b.fillStyle = i % 3 === 0 ? st.leaf : (i % 3 === 1 ? st.rock : 'rgba(60,50,36,0.55)');
-      b.globalAlpha = 0.35 + rndS() * 0.4;
-      b.beginPath(); b.ellipse(fx, fy, 1.6 + rndS() * 3.4, 1.2 + rndS() * 2.2, rndS() * 3, 0, Math.PI * 2); b.fill();
-    }
-    b.globalAlpha = 1;
   }
   if (!spriteDrawn) drawDecorItem(b, st, kind, W / 2, H * 0.68, 1);
+  // GĐ376: kind CÓ sprite (nằm trong DECOR_SPRITE_BOX) mà lúc nướng sprite
+  // chưa về (sprImg trống) → ghi sổ bản dự phòng để nâng cấp khi sprite tới.
+  // Nướng bằng sprite thật thì xóa sổ (phòng khi đây là lần nướng lại).
+  if (DECOR_SPRITE_BOX[kind] && !sprImg) decorFallbackBaked376.set(key, { theme, kind });
+  else decorFallbackBaked376.delete(key);
   scene.textures.addCanvas(key, cv);
   // GĐ68: decor vẽ vector mượt ở 2× — dùng LINEAR như map nhà (GĐ29), NEAREST
   // làm viền răng cưa/rung khi camera di chuyển (đó là chỗ "mờ" còn lại).
   scene.textures.get(key).setFilter(0); // GĐ68
   return key;
+}
+// GĐ376: sprite decor vừa nạp xong (khóa 'decor-spr-<kind>') — nướng lại mọi
+// texture canvas của kind đó từng bị kẹt bản vẽ dự phòng, và trỏ lại các vật
+// đang hiện trên map sang texture mới (setTexture tra lại theo khóa nên vật
+// nhận đúng bản sprite + tiếp đất GĐ371). Texture không có vật nào dùng vẫn
+// được nướng lại trong cache để map sau mở ra là bản đúng. Trả về các khóa
+// đã nâng cấp (để ghi log/kiểm chứng).
+export function upgradeDecorForSprite376(scene: Phaser.Scene, sprKey: string, objects: Phaser.GameObjects.GameObject[]): string[] {
+  if (!sprKey.startsWith('decor-spr-')) return [];
+  const sprKind = sprKey.slice('decor-spr-'.length);
+  const kinds = sprKind === 'pine_snow' ? ['pine'] : [sprKind]; // thông băng dùng chung kind 'pine'
+  const upgraded: string[] = [];
+  for (const [key, info] of Array.from(decorFallbackBaked376.entries())) {
+    if (!kinds.includes(info.kind)) continue;
+    const st = themeStyleOf({ theme: info.theme } as MapEnterData); // style chỉ phụ thuộc theme
+    const imgs = objects.filter((o) => { const im = o as Phaser.GameObjects.Image; return im && im.texture && im.texture.key === key; }) as Phaser.GameObjects.Image[];
+    if (scene.textures.exists(key)) scene.textures.remove(key);
+    decorTexture(scene, info.theme, st, info.kind);
+    for (const im of imgs) { try { im.setTexture(key); } catch { /* vật đã hủy giữa chừng thì bỏ qua */ } }
+    upgraded.push(key);
+  }
+  return upgraded;
 }
 function plazaTexture(scene: Phaser.Scene, theme: string, st: ThemeStyle): string {
   const key = `plaza-${theme}`;
@@ -3095,6 +3185,7 @@ export const SKILL_ELEMENT_COLOR: Record<string, string> = {
 };
 const SKILL_TIER_FRAME: Record<string, string> = {
   coban: '#b08a4a', luyenkhi: '#3fae8e', trucco: '#e8b93a', kimdan: '#ffd75e', nguyenanh: '#86c5ff', // GĐ164
+  phaptuong: '#e2703a', luyenhon: '#9a6bff', // đợt làm lại icon 10/11: luyenhon tím hồn (Bảo duyệt trong mẫu); phaptuong TẠM cam than lửa
 };
 export function skillGlyphFamily(weaponId: string): string {
   switch (weaponId) {
@@ -3115,6 +3206,7 @@ const _skillIconCache = new Map<string, string>();
 export function skillIconURL(skill: { id?: string; element?: string; tier?: string; weaponId?: string; utility?: boolean }): string {
   // GĐ71: chiêu có icon thật (game-icons) -> file SVG tĩnh; chưa map -> vẽ
   // procedural như cũ (màu hệ + khung bậc + glyph vũ khí).
+  if (skill.id && SKILL_ICON_PNG_IDS[skill.id]) return `/icons/${skill.id}.png`; // icon vẽ lại từng chiêu (đợt 10/11)
   if (skill.id && SKILL_ICON_IDS[skill.id]) return `/icons/${skill.id}.svg`;
   const el = skill.element || '';
   const tier = skill.tier || '';

@@ -18,9 +18,68 @@
 // ============================================================
 
 import Phaser from 'phaser';
+import './pwa'; // GĐ375: đăng ký Service Worker + gợi ý cài PWA (chỉ lớp vỏ, không đụng logic game)
 import { QUEST_INFO_CITY } from './city_quests_info'; // GĐ90: mirror nhiệm vụ thành phố (sinh bởi gen_city_quests.py)
 import { NOTICES } from './notices'; // GĐ245: bảng thông báo / cập nhật
 import { RACE_INFO, RACE_BY_ID, CHAPTERS, HOIS, HOI_BY_N, STORY_SEG_TEXT, STORY_SEG_META } from './story'; // GĐ317: Thiên Mệnh Ký + chủng tộc; GĐ352: + tầng 3 Thiên Mệnh (7 hồi + đoạn kể)
+
+// GĐ382: CỐT TRUYỆN MỞ ĐẦU — 6 màn chữ hiện sau khi tạo nhân vật xong (sau bước
+// thiên phú), trước khi vào thế giới; kiếp mới tạo lại cũng hiện lại. Nội dung
+// NGUYÊN VĂN bản thảo Bảo duyệt 10/11/2026 (THIET_KE_MO_DAU.md) — không sửa chữ.
+// Đọc lại trong Thiên Mệnh Ký → 🌅 Khởi đầu. Chỉ client, không dữ liệu server.
+const INTRO_PAGES: Array<{ title: string; paras: string[]; bullets?: boolean }> = [
+  {
+    title: 'Tỉnh dậy',
+    paras: [
+      'Ngươi mở mắt. Trần nhà gỗ xa lạ, mùi khói bếp, tiếng gà gáy ngoài sân.',
+      'Đây không phải kiếp đầu tiên của ngươi — chỉ là ngươi chưa nhớ được gì nhiều. Hồn ngươi đã đi qua nhiều đời, và mỗi đời là một cơ hội làm lại.',
+      'Đời này, ngươi là một người phàm vừa bước chân lên con đường tu tiên.',
+    ],
+  },
+  {
+    title: 'Thế giới',
+    paras: [
+      'Thế gian này gọi là Nhân Giới — nơi linh khí mỏng, nhưng vẫn đủ nuôi những người tu hành.',
+      'Tu sĩ lần lượt đi qua các cảnh giới: Luyện Khí, Trúc Cơ, Kim Đan, Nguyên Anh… và cao hơn nữa là những cõi mà người làng chỉ dám nhắc trong truyện kể.',
+      'Không ai biết đỉnh cao nhất nằm ở đâu. Chỉ biết đường đi rất dài — và không có đường tắt.',
+    ],
+  },
+  {
+    title: 'Ngôi làng',
+    paras: [
+      'Ngươi đang ở một ngôi làng nhỏ ven rừng — nơi nhiều thế hệ tu sĩ đã bắt đầu từ đây.',
+      'Trưởng Làng và dân làng sẽ chỉ cho ngươi những việc đầu tiên. Ngoài cổng làng là bãi săn và Thạch Lâm; càng đi xa, quái càng mạnh.',
+      'Hãy để ý những điều người làng nói. Trong thế giới này, manh mối quý hơn linh thạch.',
+    ],
+  },
+  {
+    title: 'Đường tu',
+    paras: [
+      'Tu Vi chỉ có được bằng thiền định — không ai cho không, cũng không mua được. Ngồi thiền, tích lũy, rồi đột phá khi đã đủ.',
+      'Linh thạch là tiền của giới tu hành: mua đan dược, trang bị, học nghề, và trả phí dịch chuyển giữa các vùng đất.',
+      'Ngươi còn có thể học một nghề để tự nuôi thân, và sau này gia nhập — hoặc tự lập — một tông môn.',
+    ],
+  },
+  {
+    title: 'Kiếp & hồn',
+    paras: [
+      'Thân xác này có thọ nguyên hữu hạn. Năm tháng trong thế giới trôi đi, ngươi sẽ già, và một kiếp nào đó sẽ khép lại.',
+      'Nhưng hồn thì còn. Có những thứ hồn ngươi sẽ mang theo sang các kiếp sau — nếu ngươi sống đủ sâu để tìm thấy chúng.',
+      'Bị hạ gục trong chiến đấu không phải dấu chấm hết: ngươi sẽ tỉnh lại ở nơi an toàn. Chỉ có thời gian là không bao giờ quay lại.',
+    ],
+  },
+  {
+    title: 'Lưu ý đầu game',
+    bullets: true,
+    paras: [
+      'Di chuyển: WASD · Đánh thường: J · Né: Space · Tương tác: E · Túi đồ: I (trên điện thoại dùng cụm nút cảm ứng).',
+      'Nhận nhiệm vụ và gợi ý bằng cách nói chuyện với dân làng — đặc biệt là Trưởng Làng.',
+      'Đừng vội đi xa: quái mạnh dần theo vùng đất, và nhiều vùng chỉ mở khi ngươi đủ cảnh giới.',
+      'Thiền là cách duy nhất để tích Tu Vi; ngồi xuống thiền cũng giúp hồi phục.',
+      'Dịch chuyển xa tốn rất nhiều linh thạch — đầu game, hãy đi bộ và ngắm thế giới.',
+    ],
+  },
+];
 
 // GĐ245: trạng thái popup nhận quà + bảng thông báo (module-level cho gọn)
 const rewardQueue: Array<{ title: string; rows: string[] }> = [];
@@ -48,9 +107,11 @@ import { QUEST_INFO_GD131 } from './quests_gd131_info'; // GĐ131: mirror nhiệ
 import { QUEST_INFO_GD132 } from './quests_gd132_info'; // GĐ132: mirror nhiệm vụ nghề thu thập (6 quest)
 import { QUEST_INFO_GD143 } from './quests_gd143_info'; // GĐ143: mirror nhiệm vụ Tiên/Ma (4 quest)
 import { QUEST_INFO_GD145 } from './quests_gd145_info'; // GĐ145: mirror nhiệm vụ khảo hạch (6 quest)
+import { QUEST_INFO_GD198 } from './quests_gd198_info'; // GĐ364 (B3-2): mirror nhiệm vụ ẩn chuỗi manh mối (7 quest) — trước đây thiếu mirror nên không hiện tracker
+import { QUEST_INFO_GD265 } from './quests_gd265_info'; // GĐ364 (B3-2): mirror nhiệm vụ Độ Kiếp/Tiên Giới (112 quest) — cùng lý do như trên
 import { io, Socket } from 'socket.io-client';
 import { sound } from './sound'; // GĐ167: nhạc nền generative + hiệu ứng WebAudio
-import { bakePersonTextures, personTexKey, personStyleKeyForPlayer, npcStyleKey, PERSON_TEX, bakeWorldTextures, WORLD_GEO, HOUSE_TEX, DAOQUAN_TEX, TREE_TEX, bakeMonsterTextures, bakeDropTextures, bakeChestTextures, wolfTexKey, WOLF_TEX, bakeBirdTextures, birdTexKey, BIRD_TEX, bakeFxTextures, fxOrbKey, ensurePersonVariant, drawPersonPreview, buildMapObjects, destroyBuiltMap, skillIconURL } from './gfx';
+import { bakePersonTextures, personTexKey, personStyleKeyForPlayer, npcStyleKey, PERSON_TEX, bakeWorldTextures, WORLD_GEO, HOUSE_TEX, DAOQUAN_TEX, TREE_TEX, bakeMonsterTextures, bakeDropTextures, bakeChestTextures, wolfTexKey, WOLF_TEX, bakeBirdTextures, birdTexKey, BIRD_TEX, bakeFxTextures, fxOrbKey, ensurePersonVariant, drawPersonPreview, buildMapObjects, destroyBuiltMap, skillIconURL, upgradeDecorForSprite376 } from './gfx';
 import type { MapEnterData, BuiltMap } from './gfx';
 import { npcTalkLines, hashStr } from './npc_lines'; // GĐ150: lời thoại liên tục của NPC
 
@@ -355,6 +416,16 @@ const ITEM_INFO: Record<string, { name: string; desc?: string }> = {
   tran_phap_khai_son: { name: 'Trận Pháp Khai Sơn', desc: 'Dùng 1 lần cạnh Thạch Bia của tông: dựng 7 công trình cơ bản quanh bia.' }, // GĐ319
   dan_thien_luc: { name: 'Thiên Lực Đan', desc: 'Dùng: Vật công + Pháp công +80% trong 30 phút' }, // GĐ305
   dan_thien_giap: { name: 'Thiên Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +80% trong 30 phút' }, // GĐ305
+  // GĐ362: bổ sung 9 vật phẩm bậc cao từng thiếu tên/mô tả phía client (panel hiện id thô) — desc copy nguyên văn từ ITEMS server
+  dan_than_huyet: { name: 'Thần Huyết Đan', desc: 'Dùng: HP tối đa +800 trong 60 phút' }, // GĐ362
+  dan_than_nguyen: { name: 'Thần Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +800 trong 60 phút' }, // GĐ362
+  dan_phong_than: { name: 'Phong Thần Đan', desc: 'Dùng: +35% tốc độ (chỉ số Tốc Độ) trong 30 phút' }, // GĐ362
+  phu_thien_loi: { name: 'Phù Thiên Lôi', desc: 'Dùng: thiên lôi đánh quái gần nhất (400px), 1500 sát thương phép' }, // GĐ362
+  phu_an_than: { name: 'Phù Ẩn Thân', desc: 'Dùng: tàng hình 15 giây — quái không nhìn thấy, không chọn làm mục tiêu' }, // GĐ362
+  phu_van_ly: { name: 'Phù Vạn Lý', desc: 'Dùng: dịch chuyển tức thời về Thanh Vân Thành' }, // GĐ362
+  phu_thien_cang: { name: 'Phù Thiên Cang', desc: 'Dùng: sát thương nhận ×0,3 trong 90 giây' }, // GĐ362
+  ngoc_gian_trong: { name: 'Ngọc Giản Trống', desc: 'Cuộn ngọc giản trắng chưa khắc chữ — sáng tạo công pháp tông môn phải khắc lên giản trống mới thành pháp. Rơi từ trùm và quái đặc biệt, rương ẩn, việc truy lùng trùm trên Bảng Ủy Thác; cũng chế được từ Đá Quý + Tiên Linh Chi.' }, // GĐ362
+  trung_linh_thu: { name: 'Trứng Linh Thú', desc: 'Trứng mua ở Trại Ngự Thú (Ngự Thú Sơn Trang). Bấm Dùng để ấp — 1 ngày game sau nở; hên xui: có con không thuần hóa được, không cưỡi được.' }, // GĐ362
   quang_kim: { name: 'Quặng Kim', desc: 'Quặng kim đào ở vùng Nguyên Anh — dùng rèn, luyện khí cao cấp' }, // GĐ305
   quang_than_thiet: { name: 'Thần Thiết', desc: 'Thần thiết đào ở vùng Hóa Thần — kim loại luyện thần binh' }, // GĐ305
   hon_don_thach: { name: 'Hỗn Độn Thạch', desc: 'Hỗn độn thạch đào ở vùng Phản Hư — khoáng sản chứa khí hỗn độn' }, // GĐ305
@@ -383,7 +454,7 @@ const ITEM_INFO: Record<string, { name: string; desc?: string }> = {
   phu_tu_linh: { name: 'Phù Tụ Linh', desc: 'Dùng: +20 Tu vi (Phù Sư chế)' },
   // GĐ136: 5 bùa Phù Sư
   phu_don_tho: { name: 'Phù Độn Thổ', desc: 'Dùng: dịch chuyển về cổng map đang đứng (Phù Sư chế)' },
-  phu_cuong_bao: { name: 'Phù Cuồng Bạo', desc: 'Dùng: sát thương ×1,5 trong 60 giây (Phù Sư chế)' },
+  phu_cuong_bao: { name: 'Phù Cuồng Bạo', desc: 'Dùng: +50% chỉ số Vật công và Pháp công trong 60 giây (Phù Sư chế)' }, // GĐ362: sửa chữ khớp cơ chế +50% chỉ số công (không phải ×1,5 sát thương cuối)
   phu_kim_cang: { name: 'Phù Kim Cang', desc: 'Dùng: sát thương nhận ×0,5 trong 60 giây (Phù Sư chế)' },
   phu_dinh_than: { name: 'Phù Định Thân', desc: 'Dùng: quái gần nhất (300px) đứng yên 5 giây (Phù Sư chế)' },
   phu_loi_kich: { name: 'Phù Lôi Kích', desc: 'Dùng: sét đánh quái gần nhất (300px), 100 sát thương phép (Phù Sư chế)' },
@@ -516,8 +587,9 @@ const SHOP_INFO: Record<string, { name: string; sell: Record<string, number>; bu
   // GĐ89: tiệm ở thành phố — cùng bảng giá với tiệm làng (server kiểm tra vị trí NPC)
   city_dan: {
     name: 'Tiệm Đan Dược',
-    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000 },
-    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000 },
+    // GĐ379: đồng bộ đủ 14 đan như tiem_dan/server (bổ 7 đan NA/HT đợt GĐ207).
+    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500 },
+    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000 },
   },
   city_nguyenlieu: {
     name: 'Tiệm Nguyên Liệu',
@@ -545,7 +617,7 @@ const SHOP_INFO: Record<string, { name: string; sell: Record<string, number>; bu
     buy: { com_nam: 3, thit_nuong: 6, nuoc_loc: 2, tra_thao_moc: 5, ruou_gao: 4 },
   },
 };
-const QUEST_INFO: Record<string, { name: string; desc: string; target: number; reward: number; kind?: string; itemId?: string; npcId?: string; targetNpcId?: string; destMap?: string; duel?: string; laCase?: boolean; cityName?: string; gd127?: boolean; gd129?: boolean; gd130?: boolean; gd131?: boolean; gd132?: boolean; gd143?: boolean }> = {
+const QUEST_INFO: Record<string, { name: string; desc: string; target: number; reward: number; kind?: string; itemId?: string; npcId?: string; targetNpcId?: string; destMap?: string; duel?: string; laCase?: boolean; cityName?: string; gd127?: boolean; gd129?: boolean; gd130?: boolean; gd131?: boolean; gd132?: boolean; gd143?: boolean; gd145?: boolean; gd198?: boolean; gd265?: boolean }> = {
   q_dietsoi: { name: 'Trừ khử Sói Xám', desc: 'Hạ 5 con Sói Xám ngoài làng', target: 5, reward: 25, kind: 'kill' },
   q_nanhsoi: { name: 'Thu thập Nanh Sói', desc: 'Mang theo 3 Nanh Sói tới trả', target: 3, reward: 20, kind: 'item', itemId: 'nanh_soi' },
   q_dietdoi: { name: 'Diệt Dơi Đen', desc: 'Hạ 10 con Dơi Đen ngoài làng (+20 Tu vi)', target: 10, reward: 80, kind: 'kill' }, // GĐ38
@@ -595,6 +667,8 @@ const QUEST_INFO: Record<string, { name: string; desc: string; target: number; r
   ...QUEST_INFO_GD132, // GĐ132: 6 nhiệm vụ nghề thu thập — nhận/trả qua hộp thoại sư phụ, không qua bảng
   ...QUEST_INFO_GD143, // GĐ143: 4 nhiệm vụ Tiên/Ma — nhận/trả qua Sứ Giả, không qua bảng
   ...QUEST_INFO_GD145, // GĐ145: 6 nhiệm vụ khảo hạch — nhận/trả qua Sứ Giả, chỉ hiện khi đủ cấp Đạo Quán
+  ...QUEST_INFO_GD198, // GĐ364 (B3-2): 7 nhiệm vụ ẩn chuỗi manh mối — nhận/trả qua hộp thoại NPC, chỉ hiện ở tracker
+  ...QUEST_INFO_GD265, // GĐ364 (B3-2): 112 nhiệm vụ Độ Kiếp/Tiên Giới — nhận/trả tại Người Giao Nhiệm Vụ, chỉ hiện ở tracker
 };
 // GĐ24: ánh xạ phía client cho thiện cảm
 const NPC_NAME_CLIENT: Record<string, string> = {
@@ -891,11 +965,11 @@ function monBaseForKind(kind: string): 'wolf' | 'bat' | 'golem' | 'rival' {
 // GĐ161: thú cưỡi — loài → texture + bề rộng hiển thị (px). Loài trại bán
 // dùng sprite riêng trong sprites/mounts/; loài hoang dùng lại sprite quái.
 // GĐ255: loài có bộ khung animation 6 khung (f0 đứng, f1/f2 đi, f3 đánh, f4 bị thương, f5 chết)
-const ANIM_MONSTERS: Record<string, number> = { wolf: 8, bat: 6, golem: 8, huyetlang: 8, kiemma: 8, cot_vuong: 8, quy_hon: 8, doc_xa: 8, lam_tru: 8, cot_binh: 8, huyen_anh_mieu: 8, loi_dieu: 8, kim_giap_te: 8, dia_hanh_yeu: 8, hap_huyet_quy: 8, diem_hoa_phuong: 8, sa_mac_hat: 8, tuyet_ho: 8, loi_xa: 8, sam_lam_cu_mang: 8, bang_tinh_cu_nhan: 8, khoiloi: 8, thuy_trieu_tinh: 8, huyen_diep: 8, thien_loi_thu: 8, thien_lang: 8, hoa_thu: 8, dia_kim_thu: 8, dan_ma: 8, hon_don_thu: 8, thuy_yeu_ngu: 8, dung_nham_cua: 8, cuu_vi_ho: 8, ngoc_ky_lan: 8, thiet_giap_te: 8, thien_nien_xa_yeu: 8, kim_cuong_tuong: 8, nguyet_sat_lang: 8, bich_lam_mang: 8, kim_si_dieu: 8, phong_bao_ung: 8, son_than_khoi: 8, tu_kim_hat: 8, thien_tuc_ngo_cong: 8, hu_cot_chien_si: 8, huyen_bang_lang: 8, hoa_van_mang: 8, thanh_loan: 8, co_thach_cu_nhan: 8, man_hoang_cu_tuong: 8, ngoc_giap_trung: 8, huyen_thuy_giao: 8, u_minh_quy_tot: 8, viem_vi_lang: 8, huyen_thuy_xa: 8, son_tieu: 8, tham_hai_cu_giai: 8, bach_cot_phu_nhan: 8, thuc_nhan_hoa_yeu: 8, co_thu_tinh: 8, hoa_linh: 8, co_son_lang: 8, huyet_duc_buc: 8, van_loc: 8, son_quan_ho: 8, bich_ba_ngu_yeu: 8, huyet_dang_yeu: 8, da_xoa: 8, bang_linh: 8, loi_vu_buc: 8, linh_mieu_anh: 8, huyet_ma_tot: 8, loi_linh: 8, tho_linh: 8, ba_xa: 8, cung_ky: 8, toan_nghe: 8, da_minh_buc: 8, la_sat_anh: 8, khai_thien_te: 8, hu_khong_thu: 8, dao_ngot: 8, hon_don_ma_vien: 8, con_bang_anh: 8, thien_cau: 8, thien_ma: 8, nguyet_tho_than: 8, chu_tuoc_diem: 8, bach_ho_sat_khi: 8, ky_lan_than_anh: 8, loi_kiep_lang: 8, thien_hoa_dieu: 8, tam_ma_anh: 8, phong_kiep_hac: 8, tien_phuong: 8, ky_lan_tien_thu: 8, bang_kiep_ho: 8, bang_than_xa: 8, thuy_than_ngu: 8, hoa_vu_phuong_anh: 8, tu_la_chien_ma: 8, bich_hai_giao: 8, con_luan_su: 8, kim_kiep_thu: 8, loi_than_dieu: 8, thien_hoa_su: 8, tien_vu_dieu: 8, huyen_vu_tan_giap: 8, doc_than_hat: 8, bang_xa: 8, han_bang_ho: 8, kiep_hoa_phuong: 8, van_hai_hac: 8, thuy_kiep_mang: 8, tien_linh_lang: 8, phong_than_ung: 8, dia_kiep_te: 8, bich_lac_mang: 8, huyet_kiep_buc: 8, kiep_anh_mieu: 8, linh_mieu_tien: 8, thien_uy_giao: 8, van_kiep_than_thu: 8, tinh_ha_hat: 8, moc_than_dang: 8, hon_kiep_xa: 8, linh_van_buc: 8, kim_than_giap_trung: 8, thien_ha_khoi: 8, tien_mon_kiem_si: 8, van_co_doc_trung: 8, chuc_long_anh: 8, dao_hoa_tinh: 8, huyet_than_ma_lang: 8, da_than_buc: 8, kiep_hai_cu_ngu: 8, thach_than_tuong: 8, tien_hoa_thu: 8, van_tien_quy: 8, tham_uyen_cu_giai: 8, thien_kiem_kiep_anh: 8, am_than_quy_tot: 8, coi_am_sat_thu: 8, thien_binh_hon: 8, tien_kiem_hon: 8, tho_than_khoi: 8, than_loi_cu_nhan: 8, tien_mon_linh_thu: 8, tinh_than_tieu_yeu: 8, bong_lai_te: 8, co_ma_tan_hon: 8, dang_tien_ho_phap: 8, diem_than_chien_tuong: 8, huyet_ha_ma_buc: 8, kiep_van_khoi: 8, minh_ha_quy_tuong: 8, tien_thu_ho: 8, co_than_thu_tinh: 8, duong_than_chien_si: 8, la_hau_ma_anh: 8, thien_binh_tan_anh: 8, thien_the_thu_ho: 8, thien_tien_thu_than: 8, tien_gioi_chien_hon: 8, van_dao_tuong: 8, hu_khong_lang: 8, thoi_gian_thu: 8, khong_gian_xa: 8, phan_hu_ma_anh: 8, dao_thien_te: 8, van_co_than_thu: 8, hon_don_phuong: 8, thien_cuc_cu_ngu: 8, huyen_thien_ho: 8, dao_kiem_ma_than: 8, vo_hinh_quy: 8, luc_dao_chien_hon: 8, thien_ngoai_cu_buc: 8, hon_don_giap_trung: 8, dao_nguoc_mang: 8, van_ly_doc_hat: 8, thien_thu_tinh: 8, nghich_thien_su: 8, hon_don_khoi: 8, phan_hu_than_binh: 8, thoi_luu_ngu: 8, hu_anh_mieu: 8, van_co_hoa_thu: 8, thien_dao_thu_than: 8, kim_si_dai_bang: 8, vuc_ngoai_thien_ma: 8, hon_don_cu_thu: 8, hoa_than_phuong: 8, thien_dao_thu_ho: 8, thanh_long_tan_anh: 8, thon_thien_mang: 8, cuu_u_ma_quan: 8, thien_lang_vuong_that: 8, co_thu_than: 8, giao_long_chua: 8 }; // GĐ301: vẽ lại khung chết 33 loài cõi cao/boss theo luật tư thế gục riêng từng loài (không nằm bẹp). // GĐ300 đợt 25: +3 boss cuối — ĐỦ 200 loài có hoạt ảnh. // GĐ299 đợt 24: +8 boss + khung chết Đạo Kiếm Ma Thần v3 (quỳ gục tựa kiếm). // GĐ298 đợt 23: +8 loài Phản Hư cuối (đủ 24/24) + vẽ lại khung chết Đạo Kiếm Ma Thần/Lục Đạo Chiến Hồn. // GĐ297 đợt 22: +8 loài Phản Hư. // GĐ296 đợt 21: +8 loài Phản Hư (mặt chính diện). // GĐ290 đợt 20 đủ 8 loài (ĐỢT CUỐI quái thường). // GĐ269: +6 loài cử động; GĐ271: 8 = có f6/f7 bước trung gian (đi 4 khung); GĐ272: +8 loài đợt 2
+const ANIM_MONSTERS: Record<string, number> = { wolf: 8, bat: 6, golem: 8, huyetlang: 8, kiemma: 8, cot_vuong: 8, quy_hon: 8, doc_xa: 8, lam_tru: 8, cot_binh: 8, huyen_anh_mieu: 8, loi_dieu: 8, kim_giap_te: 8, dia_hanh_yeu: 8, hap_huyet_quy: 8, diem_hoa_phuong: 8, sa_mac_hat: 8, tuyet_ho: 8, loi_xa: 8, sam_lam_cu_mang: 8, bang_tinh_cu_nhan: 8, khoiloi: 8, thuy_trieu_tinh: 8, huyen_diep: 8, thien_loi_thu: 8, thien_lang: 8, hoa_thu: 8, dia_kim_thu: 8, dan_ma: 8, hon_don_thu: 8, thuy_yeu_ngu: 8, dao_tri_ngu: 8, dao_tri_lien_tinh: 8, dao_tri_cu_ngu: 8, dung_nham_cua: 8, cuu_vi_ho: 8, ngoc_ky_lan: 8, thiet_giap_te: 8, thien_nien_xa_yeu: 8, kim_cuong_tuong: 8, nguyet_sat_lang: 8, bich_lam_mang: 8, kim_si_dieu: 8, phong_bao_ung: 8, son_than_khoi: 8, tu_kim_hat: 8, thien_tuc_ngo_cong: 8, hu_cot_chien_si: 8, huyen_bang_lang: 8, hoa_van_mang: 8, thanh_loan: 8, co_thach_cu_nhan: 8, man_hoang_cu_tuong: 8, ngoc_giap_trung: 8, huyen_thuy_giao: 8, u_minh_quy_tot: 8, viem_vi_lang: 8, huyen_thuy_xa: 8, son_tieu: 8, tham_hai_cu_giai: 8, bach_cot_phu_nhan: 8, thuc_nhan_hoa_yeu: 8, co_thu_tinh: 8, hoa_linh: 8, co_son_lang: 8, huyet_duc_buc: 8, van_loc: 8, son_quan_ho: 8, bich_ba_ngu_yeu: 8, huyet_dang_yeu: 8, da_xoa: 8, bang_linh: 8, loi_vu_buc: 8, linh_mieu_anh: 8, huyet_ma_tot: 8, loi_linh: 8, tho_linh: 8, ba_xa: 8, cung_ky: 8, toan_nghe: 8, da_minh_buc: 8, la_sat_anh: 8, khai_thien_te: 8, hu_khong_thu: 8, dao_ngot: 8, hon_don_ma_vien: 8, con_bang_anh: 8, thien_cau: 8, thien_ma: 8, nguyet_tho_than: 8, chu_tuoc_diem: 8, bach_ho_sat_khi: 8, ky_lan_than_anh: 8, loi_kiep_lang: 8, thien_hoa_dieu: 8, tam_ma_anh: 8, phong_kiep_hac: 8, tien_phuong: 8, ky_lan_tien_thu: 8, bang_kiep_ho: 8, bang_than_xa: 8, thuy_than_ngu: 8, hoa_vu_phuong_anh: 8, tu_la_chien_ma: 8, bich_hai_giao: 8, con_luan_su: 8, kim_kiep_thu: 8, loi_than_dieu: 8, thien_hoa_su: 8, tien_vu_dieu: 8, huyen_vu_tan_giap: 8, doc_than_hat: 8, bang_xa: 8, han_bang_ho: 8, kiep_hoa_phuong: 8, van_hai_hac: 8, thuy_kiep_mang: 8, tien_linh_lang: 8, phong_than_ung: 8, dia_kiep_te: 8, bich_lac_mang: 8, huyet_kiep_buc: 8, kiep_anh_mieu: 8, linh_mieu_tien: 8, thien_uy_giao: 8, van_kiep_than_thu: 8, tinh_ha_hat: 8, moc_than_dang: 8, hon_kiep_xa: 8, linh_van_buc: 8, kim_than_giap_trung: 8, thien_ha_khoi: 8, tien_mon_kiem_si: 8, van_co_doc_trung: 8, chuc_long_anh: 8, dao_hoa_tinh: 8, huyet_than_ma_lang: 8, da_than_buc: 8, kiep_hai_cu_ngu: 8, thach_than_tuong: 8, tien_hoa_thu: 8, van_tien_quy: 8, tham_uyen_cu_giai: 8, thien_kiem_kiep_anh: 8, am_than_quy_tot: 8, coi_am_sat_thu: 8, thien_binh_hon: 8, tien_kiem_hon: 8, tho_than_khoi: 8, than_loi_cu_nhan: 8, tien_mon_linh_thu: 8, tinh_than_tieu_yeu: 8, bong_lai_te: 8, co_ma_tan_hon: 8, dang_tien_ho_phap: 8, diem_than_chien_tuong: 8, huyet_ha_ma_buc: 8, kiep_van_khoi: 8, minh_ha_quy_tuong: 8, tien_thu_ho: 8, co_than_thu_tinh: 8, duong_than_chien_si: 8, la_hau_ma_anh: 8, thien_binh_tan_anh: 8, thien_the_thu_ho: 8, thien_tien_thu_than: 8, tien_gioi_chien_hon: 8, van_dao_tuong: 8, hu_khong_lang: 8, thoi_gian_thu: 8, khong_gian_xa: 8, phan_hu_ma_anh: 8, dao_thien_te: 8, van_co_than_thu: 8, hon_don_phuong: 8, thien_cuc_cu_ngu: 8, huyen_thien_ho: 8, dao_kiem_ma_than: 8, vo_hinh_quy: 8, luc_dao_chien_hon: 8, thien_ngoai_cu_buc: 8, hon_don_giap_trung: 8, dao_nguoc_mang: 8, van_ly_doc_hat: 8, thien_thu_tinh: 8, nghich_thien_su: 8, hon_don_khoi: 8, phan_hu_than_binh: 8, thoi_luu_ngu: 8, hu_anh_mieu: 8, van_co_hoa_thu: 8, thien_dao_thu_than: 8, kim_si_dai_bang: 8, vuc_ngoai_thien_ma: 8, hon_don_cu_thu: 8, hoa_than_phuong: 8, thien_dao_thu_ho: 8, thanh_long_tan_anh: 8, thon_thien_mang: 8, cuu_u_ma_quan: 8, thien_lang_vuong_that: 8, co_thu_than: 8, giao_long_chua: 8 }; // GĐ301: vẽ lại khung chết 33 loài cõi cao/boss theo luật tư thế gục riêng từng loài (không nằm bẹp). // GĐ300 đợt 25: +3 boss cuối — ĐỦ 200 loài có hoạt ảnh. // GĐ299 đợt 24: +8 boss + khung chết Đạo Kiếm Ma Thần v3 (quỳ gục tựa kiếm). // GĐ298 đợt 23: +8 loài Phản Hư cuối (đủ 24/24) + vẽ lại khung chết Đạo Kiếm Ma Thần/Lục Đạo Chiến Hồn. // GĐ297 đợt 22: +8 loài Phản Hư. // GĐ296 đợt 21: +8 loài Phản Hư (mặt chính diện). // GĐ290 đợt 20 đủ 8 loài (ĐỢT CUỐI quái thường). // GĐ269: +6 loài cử động; GĐ271: 8 = có f6/f7 bước trung gian (đi 4 khung); GĐ272: +8 loài đợt 2
 const PET_EVO_SCALE = [1, 1.18, 1.38]; // GĐ307: cỡ hình thú theo giai đoạn tiến hóa (chỉ hiển thị)
 const PET_EVO_NAMES = ['Phàm Thú', 'Linh Thú', 'Chân Linh']; // GĐ307
 const PET_EVO_COST = [500, 2000]; // GĐ307: khớp server (TẠM)
-const ANIM_MODE: Record<string, string> = { bat: 'fly', golem: 'front', quy_hon: 'fly', thuy_trieu_tinh: 'fly', thuy_yeu_ngu: 'fly', kim_si_dieu: 'fly', phong_bao_ung: 'fly', thanh_loan: 'fly', huyen_thuy_giao: 'fly', u_minh_quy_tot: 'fly', huyen_thuy_xa: 'fly', hoa_linh: 'fly', huyet_duc_buc: 'fly', bich_ba_ngu_yeu: 'fly', bang_linh: 'fly', loi_vu_buc: 'fly', loi_linh: 'fly', da_minh_buc: 'fly', con_bang_anh: 'fly', chu_tuoc_diem: 'fly', thien_hoa_dieu: 'fly', phong_kiep_hac: 'fly', tien_phuong: 'fly', thuy_than_ngu: 'fly', hoa_vu_phuong_anh: 'fly', bich_hai_giao: 'fly', loi_than_dieu: 'fly', tien_vu_dieu: 'fly', kiep_hoa_phuong: 'fly', van_hai_hac: 'fly', phong_than_ung: 'fly', huyet_kiep_buc: 'fly', thien_uy_giao: 'fly', linh_van_buc: 'fly', chuc_long_anh: 'fly', da_than_buc: 'fly', kiep_hai_cu_ngu: 'fly', van_tien_quy: 'fly', thien_kiem_kiep_anh: 'fly', tien_kiem_hon: 'fly', huyet_ha_ma_buc: 'fly', co_ma_tan_hon: 'fly', minh_ha_quy_tuong: 'fly', la_hau_ma_anh: 'fly', thien_binh_tan_anh: 'fly', tien_gioi_chien_hon: 'fly', hu_khong_lang: 'front', thoi_gian_thu: 'front', khong_gian_xa: 'front', phan_hu_ma_anh: 'front', dao_thien_te: 'front', van_co_than_thu: 'front', hon_don_phuong: 'front', thien_cuc_cu_ngu: 'front', huyen_thien_ho: 'front', dao_kiem_ma_than: 'front', vo_hinh_quy: 'front', luc_dao_chien_hon: 'front', thien_ngoai_cu_buc: 'front', hon_don_giap_trung: 'front', dao_nguoc_mang: 'front', van_ly_doc_hat: 'front', thien_thu_tinh: 'front', nghich_thien_su: 'front', hon_don_khoi: 'front', phan_hu_than_binh: 'front', thoi_luu_ngu: 'front', hu_anh_mieu: 'front', van_co_hoa_thu: 'front', thien_dao_thu_than: 'front', kim_si_dai_bang: 'front', vuc_ngoai_thien_ma: 'front', hon_don_cu_thu: 'front', hoa_than_phuong: 'front', thien_dao_thu_ho: 'front', thanh_long_tan_anh: 'front', thon_thien_mang: 'front', cuu_u_ma_quan: 'front', thien_lang_vuong_that: 'front', co_thu_than: 'front', giao_long_chua: 'front' }; // GĐ278: dơi/cá/băng linh bay lượn // GĐ277: xà nước + hỏa linh lơ lửng // GĐ276: loan/giao/quỷ lướt // GĐ275: chim vỗ cánh // GĐ274: cá bơi lượn như bay // GĐ273: Thủy Triều Tinh trôi lơ lửng như bay // GĐ256: 'fly' vỗ cánh/lơ lửng liên tục; 'front' mặt trước — cả hai đều không lật ngang
+const ANIM_MODE: Record<string, string> = { bat: 'fly', golem: 'front', quy_hon: 'fly', thuy_trieu_tinh: 'fly', thuy_yeu_ngu: 'fly', dao_tri_ngu: 'fly', dao_tri_lien_tinh: 'fly', dao_tri_cu_ngu: 'fly', kim_si_dieu: 'fly', phong_bao_ung: 'fly', thanh_loan: 'fly', huyen_thuy_giao: 'fly', u_minh_quy_tot: 'fly', huyen_thuy_xa: 'fly', hoa_linh: 'fly', huyet_duc_buc: 'fly', bich_ba_ngu_yeu: 'fly', bang_linh: 'fly', loi_vu_buc: 'fly', loi_linh: 'fly', da_minh_buc: 'fly', con_bang_anh: 'fly', chu_tuoc_diem: 'fly', thien_hoa_dieu: 'fly', phong_kiep_hac: 'fly', tien_phuong: 'fly', thuy_than_ngu: 'fly', hoa_vu_phuong_anh: 'fly', bich_hai_giao: 'fly', loi_than_dieu: 'fly', tien_vu_dieu: 'fly', kiep_hoa_phuong: 'fly', van_hai_hac: 'fly', phong_than_ung: 'fly', huyet_kiep_buc: 'fly', thien_uy_giao: 'fly', linh_van_buc: 'fly', chuc_long_anh: 'fly', da_than_buc: 'fly', kiep_hai_cu_ngu: 'fly', van_tien_quy: 'fly', thien_kiem_kiep_anh: 'fly', tien_kiem_hon: 'fly', huyet_ha_ma_buc: 'fly', co_ma_tan_hon: 'fly', minh_ha_quy_tuong: 'fly', la_hau_ma_anh: 'fly', thien_binh_tan_anh: 'fly', tien_gioi_chien_hon: 'fly', hu_khong_lang: 'front', thoi_gian_thu: 'front', khong_gian_xa: 'front', phan_hu_ma_anh: 'front', dao_thien_te: 'front', van_co_than_thu: 'front', hon_don_phuong: 'front', thien_cuc_cu_ngu: 'front', huyen_thien_ho: 'front', dao_kiem_ma_than: 'front', vo_hinh_quy: 'front', luc_dao_chien_hon: 'front', thien_ngoai_cu_buc: 'front', hon_don_giap_trung: 'front', dao_nguoc_mang: 'front', van_ly_doc_hat: 'front', thien_thu_tinh: 'front', nghich_thien_su: 'front', hon_don_khoi: 'front', phan_hu_than_binh: 'front', thoi_luu_ngu: 'front', hu_anh_mieu: 'front', van_co_hoa_thu: 'front', thien_dao_thu_than: 'front', kim_si_dai_bang: 'front', vuc_ngoai_thien_ma: 'front', hon_don_cu_thu: 'front', hoa_than_phuong: 'front', thien_dao_thu_ho: 'front', thanh_long_tan_anh: 'front', thon_thien_mang: 'front', cuu_u_ma_quan: 'front', thien_lang_vuong_that: 'front', co_thu_than: 'front', giao_long_chua: 'front' }; // GĐ278: dơi/cá/băng linh bay lượn // GĐ277: xà nước + hỏa linh lơ lửng // GĐ276: loan/giao/quỷ lướt // GĐ275: chim vỗ cánh // GĐ274: cá bơi lượn như bay // GĐ273: Thủy Triều Tinh trôi lơ lửng như bay // GĐ256: 'fly' vỗ cánh/lơ lửng liên tục; 'front' mặt trước — cả hai đều không lật ngang
 const MOUNT_TEX: Record<string, string> = {
   linh_ma: 'mount-linh_ma', thanh_van_hac: 'mount-thanh_van_hac', huyen_quy: 'mount-huyen_quy',
   soi: 'mount-soi', huyet_lang: 'mount-huyet_lang', lam_tru: 'mount-lam_tru', thien_loi_thu: 'mount-thien_loi_thu',
@@ -1027,10 +1101,10 @@ const MON_SPRITE: Record<string, string> = {
   hoa_van_mang: 'sam_lam_cu_mang',
   huyen_thuy_xa: 'bang_xa',
   kim_si_dieu: 'loi_dieu',
-  thanh_loan: 'diem_hoa_phuong',
+  thanh_loan: 'thanh_loan', // F3-1 đợt 2: ảnh tĩnh riêng
   phong_bao_ung: 'loi_dieu',
-  hoa_vu_phuong_anh: 'diem_hoa_phuong',
-  son_than_khoi: 'thach_khoi_loi',
+  hoa_vu_phuong_anh: 'hoa_vu_phuong_anh', // F3-1 đợt 2: ảnh tĩnh riêng
+  son_than_khoi: 'son_than_khoi', // F3-1 đợt 1: ảnh tĩnh riêng
   co_thach_cu_nhan: 'thach_quai',
   kim_cuong_tuong: 'thach_quai',
   thiet_giap_te: 'kim_giap_te',
@@ -1039,7 +1113,7 @@ const MON_SPRITE: Record<string, string> = {
   tu_kim_hat: 'sa_mac_hat',
   ngoc_giap_trung: 'dia_kim_thu',
   thien_tuc_ngo_cong: 'sa_mac_hat',
-  huyen_thuy_giao: 'thuy_yeu_ngu',
+  huyen_thuy_giao: 'huyen_thuy_giao', // F3-1 đợt 2: ảnh tĩnh riêng
   bich_ba_ngu_yeu: 'thuy_yeu_ngu',
   tham_hai_cu_giai: 'dung_nham_cua',
   hu_cot_chien_si: 'cot_binh',
@@ -1049,10 +1123,10 @@ const MON_SPRITE: Record<string, string> = {
   co_thu_tinh: 'huyen_diep',
   huyet_dang_yeu: 'huyen_diep',
   van_loc: 'thien_loi_thu',
-  ngoc_ky_lan: 'thien_loi_thu',
+  ngoc_ky_lan: 'ngoc_ky_lan', // F3-1 đợt 2: ảnh tĩnh riêng
   thien_ma: 'thien_loi_thu',
   cuu_vi_ho: 'tuyet_ho',
-  son_quan_ho: 'tuyet_ho',
+  son_quan_ho: 'son_quan_ho', // F3-1 đợt 1: ảnh tĩnh riêng
   linh_mieu_anh: 'huyen_anh_mieu',
   da_xoa: 'kiem_ma',
   la_sat_anh: 'hap_huyet_quy',
@@ -1066,28 +1140,28 @@ const MON_SPRITE: Record<string, string> = {
   co_thu_than: 'co_thu_than',
   hon_don_cu_thu: 'hon_don_cu_thu',
   khai_thien_te: 'kim_giap_te',
-  hu_khong_thu: 'hon_don_thu',
+  hu_khong_thu: 'hu_khong_thu', // F3-1 đợt 1: ảnh tĩnh riêng
   thon_thien_mang: 'thon_thien_mang',
   chuc_long_anh: 'loi_xa',
   ba_xa: 'sam_lam_cu_mang',
-  toan_nghe: 'diem_hoa_phuong',
+  toan_nghe: 'toan_nghe', // F3-1 đợt 2: ảnh tĩnh riêng
   dao_ngot: 'kim_giap_te',
-  cung_ky: 'tuyet_ho',
+  cung_ky: 'cung_ky', // F3-1 đợt 1: ảnh tĩnh riêng
   hon_don_ma_vien: 'lam_tru',
   kim_si_dai_bang: 'kim_si_dai_bang',
-  con_bang_anh: 'thuy_yeu_ngu',
-  huyen_vu_tan_giap: 'hon_don_thu',
+  con_bang_anh: 'con_bang_anh', // F3-1 đợt 2: ảnh tĩnh riêng
+  huyen_vu_tan_giap: 'huyen_vu_tan_giap', // F3-1 đợt 1: ảnh tĩnh riêng
   thanh_long_tan_anh: 'thanh_long_tan_anh',
-  chu_tuoc_diem: 'diem_hoa_phuong',
-  bach_ho_sat_khi: 'tuyet_ho',
-  ky_lan_than_anh: 'thien_loi_thu',
+  chu_tuoc_diem: 'chu_tuoc_diem', // F3-1 đợt 2: ảnh tĩnh riêng
+  bach_ho_sat_khi: 'bach_ho_sat_khi', // F3-1 đợt 1: ảnh tĩnh riêng
+  ky_lan_than_anh: 'ky_lan_than_anh', // F3-1 đợt 2: ảnh tĩnh riêng
   thien_cau: 'soi_xam',
   nguyet_tho_than: 'thien_loi_thu',
   thien_binh_tan_anh: 'kiem_ma',
   co_ma_tan_hon: 'quy_hon',
   vuc_ngoai_thien_ma: 'vuc_ngoai_thien_ma',
   minh_ha_quy_tuong: 'cot_vuong',
-  than_loi_cu_nhan: 'thach_khoi_loi',
+  than_loi_cu_nhan: 'than_loi_cu_nhan', // F3-1 đợt 1: ảnh tĩnh riêng
   diem_than_chien_tuong: 'kim_giap_te',
   bang_than_xa: 'bang_xa',
   kim_than_giap_trung: 'dia_kim_thu',
@@ -1106,7 +1180,7 @@ const MON_SPRITE: Record<string, string> = {
   duong_than_chien_si: 'cot_binh',
   tinh_than_tieu_yeu: 'hoa_thu',
   thach_than_tuong: 'thach_quai',
-  thien_hoa_su: 'tuyet_ho',
+  thien_hoa_su: 'thien_hoa_su', // F3-1 đợt 1: ảnh tĩnh riêng
   han_bang_ho: 'tuyet_ho',
   tu_la_chien_ma: 'kiem_ma',
   la_hau_ma_anh: 'dan_ma',
@@ -1209,7 +1283,7 @@ interface OverviewData {
   };
   maps: Array<{
     id: string; name: string; category: string; safe: boolean; minRealm: string; minTier: number;
-    theme: string; boatOnly: boolean; canEnter: boolean; needText: string; cost: number; reachable: boolean;
+    theme: string; boatOnly: boolean; canEnter: boolean; needText: string; cost: number; costGrade: string; reachable: boolean;
     monsters: Array<{ name: string; count: number }>;
   }>;
 }
@@ -1222,6 +1296,7 @@ interface TravelDest {
   canEnter: boolean;
   needText: string;
   cost?: number; // GĐ60: Linh thạch cho Trận Dịch Chuyển
+  costGrade?: string; // GĐ367: phẩm của giá dịch chuyển ('ha' | 'thuong') — trừ đúng ví theo phẩm
   boatOnly?: boolean; // GĐ60: đảo biển — chỉ thuyền / ngự kiếm
   flySec?: number; // GĐ60: giây ngự kiếm (chỉ Kim Đan)
   boatSec?: number; // GĐ60: giây đi thuyền
@@ -1489,8 +1564,8 @@ interface MonsterState {
 }
 
 // GĐ171: màu hiệu ứng nổ theo hệ linh căn
-const FX_ELEM_COLORS: Record<string, string> = { Kim: '#f2c14e', Mộc: '#53d769', Thủy: '#4db2ff', Hỏa: '#ff7043', Thổ: '#c98d4b', neutral: '#ffd873' };
-const FX_SLUG: Record<string, string> = { Kim: 'kim', Mộc: 'moc', Thủy: 'thuy', Hỏa: 'hoa', Thổ: 'tho', neutral: 'neutral' }; // GĐ263
+const FX_ELEM_COLORS: Record<string, string> = { Kim: '#f2c14e', Mộc: '#53d769', Thủy: '#4db2ff', Hỏa: '#ff7043', Thổ: '#c98d4b', neutral: '#ffd873', Lôi: '#ffe14d', Phong: '#4dd8b2', Băng: '#bfe9ff', Nham: '#ff8a5c', Độc: '#a4e34d', Quang: '#fff6c9', Ám: '#7a4fd0', Huyết: '#ff4d4d', 'Thời Gian': '#e8e8f0', 'Không Gian': '#b07dff', Hồn: '#9a6bff' }; // + F2/F3: màu chớp cast cho 10 hệ đặc biệt + Hồn
+const FX_SLUG: Record<string, string> = { Kim: 'kim', Mộc: 'moc', Thủy: 'thuy', Hỏa: 'hoa', Thổ: 'tho', neutral: 'neutral', Lôi: 'loi', Phong: 'phong', Băng: 'bang', Nham: 'nham', Độc: 'doc', Quang: 'quang', Ám: 'am', Huyết: 'huyet', 'Thời Gian': 'thoigian', 'Không Gian': 'khonggian', Hồn: 'hon' }; // GĐ263 + đợt FX F2/F3 (11/11): 10 hệ đặc biệt + bộ Hồn có sprite riêng
 
 // GĐ170: một phía của bàn giao dịch (server gửi)
 interface TradeOffer {
@@ -1580,6 +1655,10 @@ interface Actor {
   petLastHp?: number; // GĐ258: hp pet lần trước (bắt khung bị thương + xác khi tan)
   petCorpseShown?: boolean; // GĐ303: đã dựng xác f5 qua sự kiện pet_died — nhánh gỡ actor không dựng lại
   petHurtUntil?: number; // GĐ258
+  petMonKey?: string; // GĐ369: khóa texture mon-<loài> của pet đang chờ nạp (nâng cấp hình khi texture về)
+  petTamedKind?: string; // GĐ369: loài pet thuần hóa (tính tỉ lệ lúc nâng cấp hình)
+  petEvo369?: number; // GĐ369: bậc tiến hóa của pet lúc dựng (hệ số cỡ hình pet)
+  petPending369?: boolean; // GĐ369: đang trong sổ chờ nâng cấp hình pet
   // GĐ333: bỏ chớp đỏ thân người khi mất máu (lệnh Bảo) — đã gỡ lastHpP/hurtUntilP/hurtTinted của GĐ259
   dodgeFxUntil?: number; // GĐ259: chính mình vừa bấm né (tín hiệu chắc chắn, khỏi đoán tốc độ)
   lastGhostAt?: number; // GĐ259: lần cuối nhả bóng mờ né
@@ -1637,6 +1716,8 @@ const SPRITE_SETS = [
   'npc-thulao', // GĐ243: Thú Lão (sư phụ Thú Sư) sprite riêng
   'npc-khoanglao', // GĐ246: Khoáng Lão (sư phụ Đào Khoáng) sprite riêng — pixel
   'npc-thaolao', // GĐ246: Thảo Lão (sư phụ Hái Thuốc) sprite riêng — pixel
+  'npc-banlao', // GĐ365: Ban Lão (giữ Bảng Ủy Thác) sprite riêng — pixel
+  'npc-quansu', // GĐ365: Quản Sự Đạo Quán sprite riêng — pixel
   'skin-nam-lam', 'skin-nam-hac', 'skin-nam-bach', 'skin-nu-hong', 'skin-nu-ngoc', // GĐ248: skin nhân vật cho người chơi chọn
   // GĐ16: bộ theo từng lớp (màu áo đặc trưng của lớp)
   'cls-thetu', 'cls-phattu', 'cls-cottu', 'cls-satthu', 'cls-kiemtu', 'cls-phaptu', 'cls-quytu', 'cls-ytu', 'cls-nhotu',
@@ -1753,6 +1834,8 @@ const NPC_SPRITE_SET: Record<string, string> = {
   npc_tuyetong: 'npc-tuyetong', // GĐ243: Tuyết Ông sprite riêng (trước không có bộ — vẽ code)
   npc_cuky: 'elder', // GĐ352: Cụ Ký — mượn bộ ông lão sẵn có (theo thiết kế đợt B: không chế sprite mới đợt đầu)
   npc_amba: 'villager-b', // GĐ352: Âm Bà — mượn bộ dân làng sẵn có
+  npc_banguythac: 'npc-banlao', // GĐ365: Ban Lão sprite riêng (trước không có bộ — vẽ code)
+  npc_quansu: 'npc-quansu', // GĐ365: Quản Sự Đạo Quán sprite riêng (trước không có bộ — vẽ code)
 };
 const BOT_SPRITE_SETS = ['villager-a', 'villager-b', 'villager-c'];
 function spriteTexKey(set: string, dir: string, frame: string): string {
@@ -1844,6 +1927,12 @@ interface MonsterActor {
   animBaseSX?: number; // GĐ270: tỉ lệ gốc của sprite (cho hiệu ứng ép/thở không trôi tỉ lệ)
   animBaseSY?: number;
   staticImgH?: number; // GĐ340: chiều cao ảnh tĩnh lúc dựng (để nâng cấp lên bộ khung anim khi nạp nền xong)
+  visKind?: string; // GĐ369: loài HÌNH ẢNH (khác kind khi quái trial U Hồn có kind='trial') — khóa texture luôn theo visKind
+  barBg?: Phaser.GameObjects.Rectangle; // GĐ369: nền thanh máu (dời theo chiều cao mới khi nâng cấp hình)
+  nameTxt?: Phaser.GameObjects.Text; // GĐ369: nhãn tên quái (dời cùng thanh máu khi nâng cấp hình)
+  artScale369?: number; // GĐ369: tỉ lệ của hình vẽ code lúc dựng (mẫu số khi nâng cấp lên sprite thật)
+  realTintN?: number | null; // GĐ369: nhuộm đúng của sprite thật (nhánh/hiếm) — khác nhuộm mượn của hình vẽ code
+  pendingSprite369?: boolean; // GĐ369: đang trong sổ chờ texture loài để nâng cấp hình
   hurtUntil: number; // GĐ255: hiển thị khung bị thương tới mốc này
 }
 
@@ -1987,6 +2076,7 @@ class GameScene extends Phaser.Scene {
   private spotObjects: Phaser.GameObjects.GameObject[] = []; // GĐ76: dấu điểm linh mạch
   private altarObjects: Phaser.GameObjects.GameObject[] = []; // GĐ85: dấu đàn tế
   private portalObjects: Phaser.GameObjects.GameObject[] = []; // GĐ128: dấu Trận Dịch Chuyển trên map GDD
+  private steleObjects: Phaser.GameObjects.GameObject[] = []; // GĐ357: dấu bia khắc Cổ Ngữ
   private studyObjects: Phaser.GameObjects.GameObject[] = []; // GĐ105: dấu điểm đọc sách Văn Uyển
   private nodeObjects: Phaser.GameObjects.GameObject[] = []; // GĐ132: quầng điểm tài nguyên
   private nodeLabels: Array<{ label: Phaser.GameObjects.Text; x: number; y: number }> = []; // GĐ132: nhãn điểm tài nguyên (chỉ hiện khi gần, như NPC thành phố)
@@ -2017,6 +2107,9 @@ class GameScene extends Phaser.Scene {
   private lastDialogueCheck = 0;
   private dropActors = new Map<string, Phaser.GameObjects.Container>();
   private openPanel: 'shop' | 'quest' | 'inv' | 'job' | 'ach' | 'learn' | 'bangvang' | 'stones' | 'altar' | 'forge' | 'hint' | 'mount' | 'sect' | 'guild' | null = null; // GĐ224: + sect
+  private exFrom: 'thuong' | 'trung' = 'thuong'; // GĐ367: trạng thái form đổi đá trong panel ví (giữ qua các lần render lại theo char_sync)
+  private exTo: 'ha' = 'ha'; // GĐ367: đích đổi chỉ còn Hạ phẩm — Bảo chốt 09/11 bỏ Thượng→Trung (giữ giá Trung)
+  private exQty = 1;
   private mountShopMode = false; // GĐ161: panel thú cưỡi mở từ trại (hiện mục mua bán) hay từ Menu (chỉ chuồng của mình)
   private currentShop = '';
   private invTab: 'items' | 'gear' = 'items'; // GĐ119: tab Túi đồ đang mở
@@ -2063,6 +2156,8 @@ class GameScene extends Phaser.Scene {
   private storyChapter: string | null = null; // GĐ317: chương đang đọc
   private storyHoi: number = 0; // GĐ352: hồi đang xem ở tab Thiên Mệnh (0 = mục lục)
   private storySeg: string | null = null; // GĐ352: đoạn kể đang đọc trong Thiên Mệnh Ký
+  private introIdx = 0; // GĐ382: màn mở đầu đang xem (0–5)
+  private pendingIntro = false; // GĐ382: vừa bấm tạo nhân vật mới — welcome tới sẽ mở chuỗi mở đầu (nhân vật cũ đăng nhập không qua đường này nên không hiện)
   private selWeapon = 'kiem'; // GĐ11: vũ khí khởi đầu đang chọn (mặc định = vũ khí đầu của Kiếm tu)
   private selPath = 'solo'; // GĐ22: con đường khởi đầu — 'solo' | 'sect'
   private heroImg: HTMLImageElement | null = null; // GĐ13: ảnh sprite thật cho xem trước
@@ -2076,6 +2171,16 @@ class GameScene extends Phaser.Scene {
   private bgTried340 = new Set<string>();
   private bgBumped340 = new Set<string>();
   private bgPumpOn340 = false;
+  private allAssets340: Array<{ key: string; url: string }> = []; // [LAG-OPT] catalog đầy đủ — bumpMonsterAssets340 lấy lại tài nguyên loài nạp-theo-yêu-cầu khi gặp
+  // [LAG-OPT] lớp tối ban đêm vẽ trong canvas thay div DOM #nightOverlay (xem create + updateClock)
+  private nightImg: Phaser.GameObjects.Image | null = null;
+  private nightTarget = 0;
+  // GĐ369: sổ chờ nâng cấp hình — actor (quái/pet) dựng trước khi texture loài
+  // lớp B về thì kẹt ở hình dự phòng; ghi sổ theo loài, texture về là nâng cấp.
+  private pendingMon369 = new Map<string, Set<MonsterActor>>();
+  private pendingPet369 = new Set<Actor>();
+  private pendingTimer369: Phaser.Time.TimerEvent | null = null;
+  private pendingListen369 = false;
 
   constructor() {
     super('game');
@@ -2107,12 +2212,12 @@ class GameScene extends Phaser.Scene {
     out.push({ key: 'fountain-spr', url: '/sprites/fountain.png' }); // GĐ246
     out.push({ key: 'sect-bia-spr', url: '/sprites/sect_bia.png' }); // GĐ325
     // GĐ263: sprite hiệu ứng chiêu theo hệ (đạn + nổ 4 giai đoạn)
-    for (const fxEl of ['kim', 'moc', 'thuy', 'hoa', 'tho', 'neutral']) {
+    for (const fxEl of ['kim', 'moc', 'thuy', 'hoa', 'tho', 'neutral', 'loi', 'phong', 'bang', 'nham', 'doc', 'quang', 'am', 'huyet', 'thoigian', 'khonggian', 'hon']) {
       out.push({ key: 'fxspr-' + fxEl + '-proj', url: '/sprites/fx/fxspr-' + fxEl + '-proj.png' });
       for (let fi = 0; fi < 4; fi++) out.push({ key: 'fxspr-' + fxEl + '-hit-' + fi, url: '/sprites/fx/fxspr-' + fxEl + '-hit-' + fi + '.png' });
     }
     // GĐ111: sprite ngoại cảnh — load lỗi thì decorTexture rơi về vẽ code như cũ.
-    for (const dk of ['anvil','bamboo','banner','blood_tree','blossom','bone','cactus','cave','coral','crystal','crystal_gold','dead_tree','desk','fence','flower','forge','furnace','grass','grass_tall','hay','herb','hut','ice_crystal','ice_shard','lamp','lava_pool','lava_rock','mountain','mountain_snow','mushroom','palm','pavilion','pillar','pine','pine_snow','pond','reed','rock','stone','swamp_tree','sword_stone','tomb','wave','willow','dune','tree','tree_big','lm_dai','lm_cong','lm_tuong','lm_bia','lm_sen']) {
+    for (const dk of ['anvil','bamboo','banner','blood_tree','blossom','bone','cactus','cave','coral','crystal','crystal_gold','dead_tree','desk','fence','flower','forge','furnace','grass','grass_tall','hay','herb','hut','ice_crystal','ice_shard','lamp','lava_pool','lava_rock','mountain','mountain_snow','mountain_dry','mushroom','palm','pavilion','pillar','pine','pine_snow','pond','reed','rock','stone','swamp_tree','sword_stone','tomb','wave','willow','dune','tree','tree_big','lm_dai','lm_cong','lm_tuong','lm_bia','lm_sen']) {
       out.push({ key: `decor-spr-${dk}`, url: `/sprites/decor/${dk}.png` });
     }
     // GĐ116: sprite dãy núi tuyết liền 1 mảng.
@@ -2149,10 +2254,14 @@ class GameScene extends Phaser.Scene {
       return true;
     };
     const seen = new Set<string>();
-    for (const a of this.collectAssets340()) {
+    const all340 = this.collectAssets340();
+    this.allAssets340 = all340;
+    for (const a of all340) {
       if (seen.has(a.key)) continue;
       seen.add(a.key);
       if (isA(a.key)) this.load.image(a.key, a.url);
+      // [LAG-OPT] khung anim của loài NGOÀI map nhà KHÔNG nạp nền chủ động nữa (~1.500 file): chỉ nạp theo yêu cầu khi người chơi sắp gặp loài đó (bumpMonsterAssets340 ở nhịp gặp quái/pet). Trước đây bơm nạp hết 2.872 file ≈ 2.100+ texture thường trú — nặng bộ nhớ + CPU điện thoại suốt phiên. Ảnh tĩnh mon- của mọi loài vẫn nạp nền như cũ (mặt dự phòng + thú thuần).
+      else if (a.key.startsWith('monanim-') && !homeSet.has(a.key.slice(8).replace(/-f\d+$/, ''))) { /* nạp theo yêu cầu */ }
       else this.bgAssets340.push(a);
     }
   }
@@ -2202,12 +2311,214 @@ class GameScene extends Phaser.Scene {
       else rest.push(a);
     }
     if (mine.length) this.bgAssets340 = mine.concat(rest);
+    // [LAG-OPT] hàng đợi có thể chỉ còn ảnh tĩnh mon-<kind> (khung anim của loài ngoài map nhà
+    // không nằm sẵn trong hàng đợi nền nữa) → hễ chưa thấy khung anim nào của loài trong hàng
+    // đợi thì lấy khung anim từ catalog đầy đủ, đẩy lên đầu và khởi động lại bơm (bơm có thể
+    // đã cạn hàng và dừng). Thiếu bước này là loài gặp lần đầu kẹt ảnh tĩnh vĩnh viễn.
+    if (!mine.some((a) => a.key.startsWith('monanim-' + kind + '-f'))) {
+      const fromCatalog = this.allAssets340.filter((a) => a.key.startsWith('monanim-' + kind + '-f'));
+      if (fromCatalog.length) {
+        this.bgAssets340 = fromCatalog.concat(this.bgAssets340);
+        if (this.scene.isActive()) this.bgBatch340();
+      }
+    }
+  }
+
+  // ============ GĐ369: nâng cấp hình cho actor sinh TRƯỚC khi texture về ============
+  // Gốc lỗi: actor dựng khi texture của loài (lớp B, nạp nền) chưa về thì chốt vào
+  // hình dự phòng (quái = hình vẽ code, pet = hình người) với monSprite=false;
+  // nút nâng cấp cũ trong vòng update đòi monSprite sẵn nên kẹt vĩnh viễn.
+  // Cơ chế: actor kẹt được ghi sổ theo loài; texture về là nâng cấp ngay tại chỗ —
+  // kích hoạt chính = sự kiện filecomplete của loader (chỉ khi khóa là hình quái),
+  // nhịp dự phòng = timer 500ms CHỈ chạy khi sổ còn người chờ, tự hủy khi sổ cạn.
+  private armPendingSprite369(): void {
+    if (this.pendingListen369) return;
+    this.pendingListen369 = true;
+    this.load.on('filecomplete', (key: string) => {
+      if (typeof key === 'string' && (key.startsWith('monanim-') || key.startsWith('mon-'))) this.scanPendingSprite369();
+      if (typeof key === 'string' && key.startsWith('decor-spr-')) this.upgradeDecor376(key); // GĐ376: sprite decor về muộn → nướng lại bản dự phòng
+    });
+  }
+
+  // GĐ376: nâng cấp texture decor đã nướng bằng hình vẽ dự phòng (sprite lớp B
+  // chưa kịp về lúc dựng map) ngay khi sprite của kind đó nạp xong — vật decor
+  // đang hiện trên map đổi sang bản sprite (kèm tiếp đất GĐ371) tại chỗ, không
+  // phải chờ mở lại map. Cùng họ cơ chế nâng cấp GĐ369 cho quái/pet.
+  private upgradeDecor376(sprKey: string): void {
+    try {
+      const objs = this.builtMap ? this.builtMap.objects : [];
+      const up = upgradeDecorForSprite376(this, sprKey, objs);
+      if (up.length) console.log('[GĐ376] nâng cấp decor dự phòng -> sprite:', up.join(', '));
+    } catch { /* nâng cấp lỗi thì giữ bản dự phòng như cũ, không chặn game */ }
+  }
+
+  private watchPendingMon369(actor: MonsterActor, visKind: string): void {
+    let set = this.pendingMon369.get(visKind);
+    if (!set) {
+      set = new Set<MonsterActor>();
+      this.pendingMon369.set(visKind, set);
+    }
+    set.add(actor);
+    actor.pendingSprite369 = true;
+    this.ensurePendingTimer369();
+  }
+
+  private ensurePendingTimer369(): void {
+    if (this.pendingTimer369) return;
+    this.pendingTimer369 = this.time.addEvent({ delay: 500, loop: true, callback: () => this.scanPendingSprite369() });
+  }
+
+  // File của loài coi như hỏng hẳn (bỏ chờ, giữ hình dự phòng như cũ) khi hàng
+  // đợi nạp nền đã cạn + loader rảnh + file đã từng được thử nạp.
+  private assetsGaveUp369(keys: string[]): boolean {
+    if (this.bgAssets340.length || this.load.isLoading()) return false;
+    return keys.some((k) => this.bgTried340.has(k));
+  }
+
+  private scanPendingSprite369(): void {
+    if (this.pendingMon369.size) {
+      const live = new Set(this.monsterActors.values());
+      for (const [visKind, set] of Array.from(this.pendingMon369)) {
+        const hasAnim = !!ANIM_MONSTERS[visKind] && this.textures.exists('monanim-' + visKind + '-f0');
+        const hasStatic = !!MON_SPRITE[visKind] && this.textures.exists('mon-' + visKind);
+        if (hasAnim || hasStatic) {
+          for (const a of Array.from(set)) if (live.has(a)) this.upgradeMonsterSprite369(a, visKind, hasAnim);
+          this.pendingMon369.delete(visKind);
+        } else if (this.assetsGaveUp369(['monanim-' + visKind + '-f0', 'mon-' + visKind])) {
+          this.pendingMon369.delete(visKind);
+        } else {
+          for (const a of Array.from(set)) if (!live.has(a)) set.delete(a);
+          if (!set.size) this.pendingMon369.delete(visKind);
+        }
+      }
+    }
+    if (this.pendingPet369.size) {
+      const live = new Set(this.actors.values());
+      for (const a of Array.from(this.pendingPet369)) {
+        if (!live.has(a)) {
+          this.pendingPet369.delete(a);
+          continue;
+        }
+        const key = a.petMonKey;
+        if (key && this.textures.exists(key)) {
+          this.upgradePetSprite369(a);
+          this.pendingPet369.delete(a);
+        } else if (key && this.assetsGaveUp369([key])) {
+          this.pendingPet369.delete(a);
+        }
+      }
+    }
+    if (!this.pendingMon369.size && !this.pendingPet369.size && this.pendingTimer369) {
+      this.time.removeEvent(this.pendingTimer369);
+      this.pendingTimer369 = null;
+    }
+  }
+
+  // Nâng cấp 1 quái đang kẹt hình vẽ code lên sprite thật: đích là bộ khung anim
+  // nếu f0 đã về, chưa thì ảnh tĩnh trước (nút bump cũ trong vòng update lo bước sau).
+  // Tỉ lệ hiển thị của sprite chỉ phụ thuộc chiều cao ảnh (monSpriteScale), còn của
+  // hình vẽ code phụ thuộc tỉ lệ lúc dựng — nên: scale_mới = scale_cũ / tỉ_lệ_vẽ_code
+  // × tỉ_lệ_sprite_thật × 1,35 (khổ chuẩn GĐ380), giữ nguyên mọi hệ số đã nhân
+  // sẵn trong scale_cũ.
+  private upgradeMonsterSprite369(actor: MonsterActor, visKind: string, toAnim: boolean): void {
+    const base = (actor.base as 'wolf' | 'bat' | 'golem' | 'rival') || 'wolf';
+    const spr = actor.sprite;
+    const texKey = toAnim ? 'monanim-' + visKind + '-f0' : 'mon-' + visKind;
+    const img = this.textures.get(texKey).getSourceImage() as unknown as HTMLImageElement;
+    if (!img || !img.height) return;
+    const div = actor.artScale369 || 1;
+    const target = monSpriteScale(base, visKind, img.height);
+    spr.setTexture(texKey);
+    // GĐ377: actor rival mượn bộ người 'rival' neo origin ở chân (0.5, HERO_ORIGIN_Y);
+    // sprite quái neo giữa (0.5, 0.5) như lúc dựng thẳng bằng sprite — trả về chuẩn
+    // quái kẻo hình lệch nửa thân so với điểm neo/va chạm thị giác của loài.
+    if (actor.rivalSet) { spr.setOrigin(0.5, 0.5); actor.rivalSet = false; }
+    // GĐ380: khổ chuẩn chính thức = công thức × 1,35 (Bảo phán 10/11/2026: GIỮ
+    // NGUYÊN khổ quái hiện tại — quái sinh sẵn có sprite bị vòng update khóa
+    // animBase ngay khung nảy hiện hình GĐ60 nên đứng ở ×1,35 vĩnh viễn; số đo
+    // probe GĐ60: tàn ảnh 0,6993 vs công thức 0,518, lâm trư 112 vs 83px...).
+    // Đường nâng cấp trước đây chốt thẳng khổ công thức → cá thể nạp hình trễ
+    // nhỏ hơn đồng loại sinh sẵn ~26%. Nhân thêm 1,35 ở kết quả cuối để mọi cá
+    // thể cùng loài bằng khổ nhau. Giết tween nảy còn sót (nâng cấp rơi đúng
+    // 240ms đầu đời) kẻo nó kéo scale về khổ vẽ code cũ trước khi vòng update
+    // kịp ghi animBase mới.
+    this.tweens.killTweensOf(spr);
+    spr.setScale((spr.scaleX / div) * target * 1.35, (spr.scaleY / div) * target * 1.35);
+    actor.monSprite = true;
+    actor.pendingSprite369 = false;
+    if (toAnim) {
+      actor.animSet = true;
+      actor.curTex = ''; // vòng update chọn lại khung ngay tick này
+    } else {
+      actor.staticImgH = img.height;
+      actor.curTex = texKey;
+    }
+    // Nhuộm mượn của hình vẽ code (màu loài GDD/khôi lỗi/huyết lang) KHÔNG theo sang
+    // sprite thật (sprite có màu riêng) — chỉ giữ nhuộm nhánh/hiếm như lúc dựng bằng
+    // sprite; vẫn tôn trọng hiệu ứng ăn mòn (stShown) đang chạy.
+    if (!actor.stShown) {
+      spr.clearTint();
+      if (actor.realTintN != null) spr.setTint(actor.realTintN);
+    }
+    actor.tintN = actor.realTintN ?? null;
+    // Thanh máu + nhãn + quầng hào quang bám lại chiều cao hiển thị mới.
+    const barY = -(spr.displayHeight / 2 + 10);
+    actor.barFg.y = barY;
+    if (actor.barBg) actor.barBg.y = barY;
+    if (actor.nameTxt) actor.nameTxt.y = barY - 6;
+    if (actor.glowImg) {
+      actor.glowImg.y = -spr.displayHeight * 0.42;
+      actor.glowImg.setDisplaySize(spr.displayHeight * 1.7, spr.displayHeight * 1.7);
+    }
+    actor.animBaseSX = undefined; // vòng update tự ghi lại tỉ lệ gốc mới
+    actor.animBaseSY = undefined;
+  }
+
+  // Nâng cấp pet thuần hóa đang lùi về hình người → sprite đúng loài (đúng công
+  // thức origin/tỉ lệ như nhánh dựng pet lúc texture đã sẵn sàng).
+  private upgradePetSprite369(actor: Actor): void {
+    const key = actor.petMonKey;
+    if (!key) return;
+    const img = this.textures.get(key).getSourceImage() as unknown as HTMLImageElement;
+    if (!img || !img.height) return;
+    const kind = actor.petTamedKind || '';
+    actor.sprite.setTexture(key);
+    actor.sprite.setOrigin(0.5, 0.94);
+    actor.sprite.setScale(monSpriteScale(monBaseForKind(kind), kind, img.height) * (PET_EVO_SCALE[actor.petEvo369 || 0] || 1));
+    actor.petSprite = true;
+    actor.petPending369 = false;
+    actor.petMonKey = undefined;
+    actor.curTex = key;
   }
 
   create(): void {
     // ---------- Thế giới GĐ9: nền/nhà/cây/vòng trận/bảng nướng từ đồ họa bản cũ ----------
     bakeWorldTextures(this);
     this.startBgPump340(); // GĐ340: bắt đầu nạp nền lớp B ngay khi scene sống
+    this.armPendingSprite369(); // GĐ369: nghe sự kiện texture về để nâng cấp actor đang chờ hình
+    // [LAG-OPT] Lớp tối ban đêm vẽ TRONG canvas thay cho div DOM #nightOverlay: div phủ
+    // toàn màn hình trên canvas WebGL bắt trình duyệt hợp lớp (composite) riêng mỗi khung
+    // hình — đo headless throttle 4× thấy FPS tụt gần một nửa (4,8 so 9,2). Hình giữ nguyên
+    // hệt: cùng dải gradient #2e4070 → #1a2650 → #0b1233, cùng đường cong độ tối theo phút
+    // (updateClock), HUD là DOM nằm trên canvas nên không bị nhuộm như cũ. Dựng texture
+    // lỗi thì nightImg = null và đường div DOM cũ vẫn chạy (xem updateClock).
+    try {
+      const cnv = this.textures.createCanvas('night-grad-lag', 512, 512);
+      if (cnv) {
+        const ctx = cnv.getContext();
+        const gr = ctx.createLinearGradient(512 * 0.71, 0, 512 * 0.29, 512); // ~155° như CSS: sáng nhất góc phải-trên (góc trăng)
+        gr.addColorStop(0, '#2e4070');
+        gr.addColorStop(0.42, '#1a2650');
+        gr.addColorStop(1, '#0b1233');
+        ctx.fillStyle = gr;
+        ctx.fillRect(0, 0, 512, 512);
+        cnv.refresh();
+        this.nightImg = this.add.image(0, 0, 'night-grad-lag').setOrigin(0, 0).setScrollFactor(0).setDepth(1000000).setAlpha(0).setVisible(false);
+        const fitNight = () => { if (this.nightImg) this.nightImg.setDisplaySize(this.scale.width, this.scale.height); };
+        fitNight();
+        this.scale.on('resize', fitNight);
+      }
+    } catch { this.nightImg = null; }
     (window as unknown as Record<string, unknown>).__tttScene = this; // GĐ255: móc kiểm tra cho probe tự động
     const WG = WORLD_GEO;
     // GĐ28: texture môi trường nướng 2× → hiển thị scale 0.5 (texel 1px, nét như sprite)
@@ -2586,6 +2897,7 @@ class GameScene extends Phaser.Scene {
     });
 
     this.socket.on('create_error', (e: { message: string }) => {
+      this.pendingIntro = false; // GĐ382: tạo thất bại → không mở chuỗi mở đầu
       const err = document.getElementById('createErr');
       if (err) err.textContent = e.message;
     });
@@ -2653,6 +2965,15 @@ class GameScene extends Phaser.Scene {
         }
       }
       console.log('[client] Chao mung', w.character.name, '-', w.character.className);
+      // GĐ382: nhân vật VỪA TẠO MỚI (pendingIntro chỉ đặt ở nút tạo nhân vật) →
+      // mở chuỗi cốt truyện mở đầu; ghi cờ "đã xem" theo nhân vật vào
+      // localStorage. Đăng nhập nhân vật cũ / vào lại sau rớt mạng không qua
+      // cờ này nên không hiện lại.
+      if (this.pendingIntro) {
+        this.pendingIntro = false;
+        try { window.localStorage.setItem(this.introSeenKey(), '1'); } catch { /* trình duyệt chặn localStorage thì bỏ qua */ }
+        this.showIntro();
+      }
     });
 
     // GĐ20: ngày mới (server phát lúc 00:00 giờ game)
@@ -2758,6 +3079,7 @@ class GameScene extends Phaser.Scene {
       if (this.sndPrevInvTotal !== null && invTotal > this.sndPrevInvTotal) sound.play('pickup');
       this.sndPrevInvTotal = invTotal;
       this.myChar = c;
+      const sm356 = (c as unknown as { secretMarks?: { found: Array<{ id: string; mapId: string; x: number; y: number; cat: string }>; hints: Array<{ mapId: string; x: number; y: number }> } }).secretMarks; if (sm356) this.secretMarks = sm356; // GĐ356: hạt giống dấu khám phá từ payload (welcome/char_sync)
       (window as unknown as { tttChar?: CharacterData }).tttChar = c;
       { const sp = document.getElementById('skinPanel'); if (sp && sp.style.display === 'flex') this.openSkinPanel(); } // GĐ248: cập nhật ô đã mua
       this.refreshFestivalFx(); // GĐ217
@@ -2822,6 +3144,7 @@ class GameScene extends Phaser.Scene {
     this.socket.on('party_invite_in', (d: { fromId: string; fromName: string }) => this.showSocialInvite('party', d.fromName));
     this.socket.on('sect_state', (d: typeof this.sectState) => { this.sectState = d; if (this.openPanel === 'sect') this.renderSectPanel(); }); // GĐ224
     this.socket.on('sect_hqs', (d: { list: Array<{ sectId: string; name: string; mapId: string; x: number; y: number; buildings: Array<{ kind: string; name: string; x: number; y: number }> }> }) => { this.sectHqs = d.list || []; this.renderSectHqs(); }); // GĐ319
+    this.socket.on('secret_marks', (d: { found: Array<{ id: string; mapId: string; x: number; y: number; cat: string }>; hints: Array<{ mapId: string; x: number; y: number }> }) => { this.secretMarks = d || { found: [], hints: [] }; }); // GĐ356: dấu điểm bí mật theo quyền thấy (server lọc)
     this.socket.on('board_state', (st: unknown) => { this.boardState = st as never; this.renderCommBoardPanel(); }); // GĐ323
     this.socket.on('guild_state', (d: typeof this.guildState) => { this.guildState = d; if (this.openPanel === 'guild') this.renderGuildPanel(); }); // GĐ267
     this.socket.on('party_update', (d: { party: PartyState | null }) => { this.myParty = d.party; this.renderParty(); });
@@ -2891,8 +3214,11 @@ class GameScene extends Phaser.Scene {
         const meA = this.actors.get(this.myId);
         if (meA) meA.castUntil = this.time.now + 260; // GĐ9: tư thế tung chiêu
         // GĐ9: viên đạn chiêu bay từ tay mình tới quái trúng đòn (màu = hệ linh căn chính)
-        if (r.targetId) { this.spawnProjectile(this.myId, r.targetId, this.myChar?.linhCan?.main || 'neutral'); if (meA) this.impactFx(meA.container.x, meA.container.y - 10, FX_ELEM_COLORS[this.myChar?.linhCan?.main || 'neutral'] || '#ffd873', 30); } // GĐ177: chớp sáng lúc tung chiêu
-        else if (meA) this.impactFx(meA.container.x, meA.container.y - 6, FX_ELEM_COLORS[this.myChar?.linhCan?.main || 'neutral'] || '#ffd873', 44); // GĐ171: chiêu buff/hồi không mục tiêu cũng có vòng sáng
+        // FX F3 (11/11): tuyệt kỹ Hồn (ô chiêu có tier luyenhon) dùng bộ FX Hồn riêng thay vì hệ linh căn
+        const castList = (r.area === 'util' ? this.myChar?.utilSkills || [] : this.myChar?.skills || []);
+        const fxElem = castList[r.slot]?.tier === 'luyenhon' ? 'Hồn' : (this.myChar?.linhCan?.main || 'neutral');
+        if (r.targetId) { this.spawnProjectile(this.myId, r.targetId, fxElem); if (meA) this.impactFx(meA.container.x, meA.container.y - 10, FX_ELEM_COLORS[fxElem] || '#ffd873', 30); } // GĐ177: chớp sáng lúc tung chiêu
+        else if (meA) this.impactFx(meA.container.x, meA.container.y - 6, FX_ELEM_COLORS[fxElem] || '#ffd873', 44); // GĐ171: chiêu buff/hồi không mục tiêu cũng có vòng sáng
       } else {
         const now = Date.now();
         if (now - this.lastFailToastAt > 1200) {
@@ -3161,6 +3487,21 @@ class GameScene extends Phaser.Scene {
       this.tweens.killTweensOf(c);
       this.tweens.add({ targets: c, x: mv.x, y: mv.y, duration: 120, ease: 'Linear' });
       c.setDepth(mv.y);
+      // GĐ364 (F1-6b): trước đây NPC chỉ tween vị trí, sprite giữ idle-south →
+      // trượt trên đất không bước/không quay hướng. Nay: hướng theo trục di
+      // chuyển trội + chu kỳ khung bước w0..w3 theo đồng hồ (file walk đã có đủ).
+      const wk = (c as any).npcWalk;
+      if (wk) {
+        const dx = mv.x - c.x, dy = mv.y - c.y;
+        if (Math.abs(dx) > 0.5 || Math.abs(dy) > 0.5) {
+          wk.dir = Math.abs(dx) >= Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up');
+        }
+        wk.lastMoveAt = this.time.now;
+        wk.walking = true;
+        const frame = 'w' + (Math.floor(this.time.now / 130) % 4);
+        const key = wk.set ? spriteTexKey(wk.set, wk.dir, frame) : personTexKey(wk.style, wk.dir, frame);
+        if (this.textures.exists(key) && wk.sprite.texture.key !== key) wk.sprite.setTexture(key);
+      }
     }
   }
 
@@ -3585,7 +3926,7 @@ class GameScene extends Phaser.Scene {
       this.myContainer = container;
       this.cameras.main.startFollow(container, true, 0.12, 0.12);
     }
-    return {
+    const actorObj: Actor = {
       container,
       sprite,
       barFg,
@@ -3602,6 +3943,9 @@ class GameScene extends Phaser.Scene {
       curTex: petAnim ? 'monanim-' + petAnim + '-f0' : petSprite ? (petMon as string) : spriteSet ? spriteTexKey(spriteSet, p.direction, 'idle') : personTexKey(styleKey, p.direction, 'idle'),
       petSprite,
       petAnim: petAnim ?? undefined, petLastHp: p.hp, petHurtUntil: 0,
+      petMonKey: !petSprite && petMon ? petMon : undefined, // GĐ369
+      petTamedKind: p.tamedKind, // GĐ369
+      petEvo369: p.pevo || 0, // GĐ369
       dodgeFxUntil: 0, lastGhostAt: 0,
       walkPhase: 0,
       castUntil: 0, comboIdx: 0, wasPosing: false, lastPoseAt: 0,
@@ -3622,6 +3966,15 @@ class GameScene extends Phaser.Scene {
       swordImg,
       lungeUntil: 0,
     };
+    // GĐ369: pet thuần hóa loài lớp B — texture mon-<loài> chưa về lúc dựng actor
+    // nên đang lùi về hình người; ghi sổ chờ nâng cấp chung cơ chế với quái.
+    if (petMon && !petSprite && p.tamedKind && !GD340_HOME_KINDS.includes(p.tamedKind)) {
+      actorObj.petPending369 = true;
+      this.pendingPet369.add(actorObj);
+      this.ensurePendingTimer369();
+      this.bumpMonsterAssets340(p.tamedKind);
+    }
+    return actorObj;
   }
 
   // GĐ16: gán/đổi vũ khí cho actor (ẩn nếu tay không/ngâm thơ/không có hình)
@@ -3668,7 +4021,17 @@ class GameScene extends Phaser.Scene {
     else if (m < 1140) dark = 0.34 * ((m - 1020) / 120);
     else dark = 0.34;
     const ov = document.getElementById('nightOverlay');
-    if (ov) ov.style.opacity = dark.toFixed(3);
+    if (this.nightImg) {
+      // [LAG-OPT] dùng ảnh phủ trong canvas, tắt hẳn div DOM (chỉ 1 lần) — độ tối + độ mượt 1,5s giữ như transition CSS cũ
+      if (ov && ov.style.display !== 'none') ov.style.display = 'none';
+      const ni = this.nightImg;
+      if (Math.abs(dark - this.nightTarget) > 0.004) {
+        this.nightTarget = dark;
+        this.tweens.killTweensOf(ni);
+        this.tweens.add({ targets: ni, alpha: dark, duration: 1500, ease: 'Linear' });
+      }
+      ni.setVisible(dark > 0.003 || ni.alpha > 0.003);
+    } else if (ov) ov.style.opacity = dark.toFixed(3);
     // GĐ52: vệt sáng trăng hiện theo độ tối × độ sáng của pha trăng;
     // mặt ao lấp lánh nhẹ theo thời gian
     const nf = dark / 0.34;
@@ -4105,6 +4468,7 @@ class GameScene extends Phaser.Scene {
           return;
         }
         if (err) err.textContent = '';
+        this.pendingIntro = true; // GĐ382: đánh dấu phiên tạo mới — welcome trả về sẽ mở cốt truyện mở đầu
         this.socket.emit('create_character', {
           token: this.guestToken,
           name,
@@ -4414,6 +4778,14 @@ class GameScene extends Phaser.Scene {
     if (stLog) stLog.onclick = () => { this.storyTab = 'log'; this.renderStoryPanel(); };
     const stMain = byId('storyTabMain'); // GĐ352: tab tầng 3 Thiên Mệnh
     if (stMain) stMain.onclick = () => { this.storyTab = 'main'; this.storyHoi = 0; this.storySeg = null; this.renderStoryPanel(); };
+    const stClues = byId('storyTabClues'); // GĐ356: mục 🧭 Manh mối (sổ khám phá) trong Thiên Mệnh Ký
+    if (stClues) stClues.onclick = () => { this.storyTab = 'clues'; this.storySeg = null; this.renderStoryPanel(); };
+    const stIntro = byId('storyTabIntro'); // GĐ382: mục 🌅 Khởi đầu (đọc lại cốt truyện mở đầu) trong Thiên Mệnh Ký
+    if (stIntro) stIntro.onclick = () => { this.storyTab = 'intro'; this.storySeg = null; this.renderStoryPanel(); };
+    const introNextBtn = byId('introNext'); // GĐ382: lật màn mở đầu / màn cuối vào thế giới
+    if (introNextBtn) introNextBtn.onclick = () => { if (this.introIdx >= INTRO_PAGES.length - 1) this.closeIntro(); else { this.introIdx++; this.renderIntroPage(); } };
+    const introSkipBtn = byId('introSkip'); // GĐ382: bỏ qua chuỗi mở đầu ở bất kỳ màn nào
+    if (introSkipBtn) introSkipBtn.onclick = () => this.closeIntro();
     const menuSect = byId('menuSectBtn'); // GĐ224: mở panel Tông môn người chơi từ Menu
     if (menuSect && gameMenu) menuSect.onclick = () => { gameMenu.style.display = 'none'; this.toggleSectPanel(); };
     const menuGuild = byId('menuGuildBtn'); // GĐ267: mở panel Hội nghề từ Menu
@@ -4699,6 +5071,7 @@ class GameScene extends Phaser.Scene {
     }
   }
   private sectHqs: Array<{ sectId: string; name: string; mapId: string; x: number; y: number; buildings: Array<{ kind: string; name: string; x: number; y: number }> }> = []; // GĐ319
+  private secretMarks: { found: Array<{ id: string; mapId: string; x: number; y: number; cat: string }>; hints: Array<{ mapId: string; x: number; y: number }> } = { found: [], hints: [] }; // GĐ356: dấu khám phá trên minimap (found = điểm đã tìm, hints = vùng mờ của điểm có manh mối — chỉ có khi có perk)
   private boardState: any = null; // GĐ323
   private boardWanted = false; // GĐ323
   private sectHqObjs: Phaser.GameObjects.GameObject[] = []; // GĐ319
@@ -5659,7 +6032,7 @@ class GameScene extends Phaser.Scene {
       if (ptEl) {
         if (pt) {
           ptEl.style.display = 'block';
-          ptEl.textContent = `🔮 Pháp Tướng · ${pt.stageName} · hệ ${pt.element} · Tu dưỡng ${pt.progress}${pt.nextNeed != null ? `/${pt.nextNeed}` : ''}${pt.soulNeed != null ? ` · Hồn lực ${pt.soulPower || 0}/${pt.soulNeed} (thiền hiện hình tại Đạo Quán)` : ''}${pt.shapeNeed != null ? ` · Nặn hình (Sơ Ảnh): tu dưỡng ${pt.progress}/${pt.shapeNeed}` : ''}${pt.divineArt ? ` · 🌟 ${pt.divineArt.name}` : ''}${(pt as any).kiep ? ` · ⚡ Lôi Tôi tầng ${(pt as any).kiep}` : ''}${pt.active ? ' · ĐANG HIỆN HÌNH' : ''}`;
+          ptEl.textContent = `🔮 Pháp Tướng · ${pt.stageName}${pt.element ? ` · hệ ${pt.element}` : ''}${typeof pt.progress === 'number' ? ` · Tu dưỡng ${pt.progress}${pt.nextNeed != null ? `/${pt.nextNeed}` : ''}` : ''}${pt.soulNeed != null ? ` · Hồn lực ${pt.soulPower || 0}/${pt.soulNeed} (thiền hiện hình tại Đạo Quán)` : ''}${pt.shapeNeed != null && typeof pt.progress === 'number' ? ` · Nặn hình (Sơ Ảnh): tu dưỡng ${pt.progress}/${pt.shapeNeed}` : ''}${pt.divineArt ? ` · 🌟 ${pt.divineArt.name}` : ''}${(pt as any).kiep ? ` · ⚡ Lôi Tôi tầng ${(pt as any).kiep}` : ''}${pt.active ? ' · ĐANG HIỆN HÌNH' : ''}`; // GĐ385-sửaUI: field trống thì bỏ đoạn, không in "undefined" (gốc rễ ở payload server đã sửa cùng đợt)
         } else ptEl.style.display = 'none';
       }
       if (ptBtn) {
@@ -6245,6 +6618,8 @@ class GameScene extends Phaser.Scene {
       this.socket.emit('travel_list'); // GĐ59: mở danh sách đích dịch chuyển
     } else if (near.type === 'altar') {
       this.socket.emit('altar_info'); // GĐ85: mở hộp thoại đàn tế
+    } else if (near.type === 'stele' && (near as any).steleId) {
+      this.socket.emit('clue_stele_read', { id: (near as any).steleId }); // GĐ357: đọc bia khắc -> nhận manh mối
     } else if (near.type === 'study') {
       this.socket.emit('nho_study'); // GĐ105: đọc sách ở Văn Uyển
     } else if (near.type === 'node' && near.nodeId) {
@@ -6495,6 +6870,8 @@ class GameScene extends Phaser.Scene {
         };
         dot2(ms.portal.x, ms.portal.y, '#57c98b', 5);
         for (const hq of this.sectHqs) { if (hq.mapId !== ms.mapId) continue; const own = !!this.sectState?.mySect && this.sectState.mySect.id === hq.sectId; dot2(hq.x, hq.y, own ? '#ffb52e' : '#c98d57', own ? 6.5 : 5); } // GĐ324: dấu trụ sở tông trên minimap (vàng đậm = tông mình, nâu = tông khác)
+        for (const mk of this.secretMarks.found) { if (mk.mapId !== ms.mapId) continue; dot2(mk.x, mk.y, '#7ee2ff', 5); } // GĐ356: điểm bí mật ĐÃ tìm ra (dấu xanh ngọc)
+        for (const ht of this.secretMarks.hints) { if (ht.mapId !== ms.mapId) continue; c2.beginPath(); c2.arc(ht.x * SX2, ht.y * SY2, 7, 0, Math.PI * 2); c2.strokeStyle = 'rgba(126,226,255,0.55)'; c2.lineWidth = 2; c2.stroke(); } // GĐ356: vòng mờ = vùng của điểm ĐÃ CÓ MANH MỐI (chỉ hiện khi có perk Khám phá mốc 2; server đã lệch tâm, không phải vị trí thật)
         if (this.myChar?.escort && this.myChar.escort.dest === ms.mapId) dot2(this.myChar.escort.delivery.x, this.myChar.escort.delivery.y, '#ffd94d', 6); // GĐ60: điểm giao hàng hộ tống
         for (const m of this.monsterTargets.values()) dot2(m.x, m.y, '#ff6b5e', 4.5);
         for (const [id, pl] of this.worldPlayers) if (id !== this.myId) dot2(pl.x, pl.y, '#e8f2ea', 3.6);
@@ -6568,6 +6945,9 @@ class GameScene extends Phaser.Scene {
     for (const cont of this.npcActors.values()) dot(cont.x, cont.y, '#ffd94d', 4.5);
     for (const m of this.monsterTargets.values()) dot(m.x, m.y, '#ff6b5e', 4.5);
     for (const [id, pl] of this.worldPlayers) if (id !== this.myId) dot(pl.x, pl.y, '#e8f2ea', 3.6);
+    const homeId356 = this.mapState?.mapId || 'lang_tan_thu'; // GĐ356: dấu khám phá trên minimap làng
+    for (const mk of this.secretMarks.found) { if (mk.mapId !== homeId356) continue; dot(mk.x, mk.y, '#7ee2ff', 5); }
+    for (const ht of this.secretMarks.hints) { if (ht.mapId !== homeId356) continue; c.beginPath(); c.arc(ht.x * SX, ht.y * SY, 7, 0, Math.PI * 2); c.strokeStyle = 'rgba(126,226,255,0.55)'; c.lineWidth = 2; c.stroke(); }
     dot(me.x, me.y, '#ffe14d', 6.5);
     c.strokeStyle = '#fff2b0';
     c.lineWidth = 2.5;
@@ -6593,6 +6973,7 @@ class GameScene extends Phaser.Scene {
     if (!isHome && this.mapState?.altar) cands.push({ type: 'altar', x: this.mapState.altar.x, y: this.mapState.altar.y });
     // GĐ105: điểm đọc sách Văn Uyển (server gửi theo map_enter)
     if (!isHome && this.mapState?.study) cands.push({ type: 'study', x: this.mapState.study.x, y: this.mapState.study.y });
+    if (this.mapState?.steles) for (const st of this.mapState.steles) cands.push({ type: 'stele', steleId: st.id, name: st.name, x: st.x, y: st.y } as any); // GĐ357: bia khắc Cổ Ngữ
     // GĐ89: dân thành phố — điểm E theo từng NPC (server gửi theo map_enter)
     if (!isHome && this.mapState?.npcs) {
       // GĐ156: NPC đang đi nghe Thuyết Pháp thì điểm tương tác theo vị trí sống
@@ -7613,6 +7994,15 @@ class GameScene extends Phaser.Scene {
       this.proxLabels.push({ t: tag, x: def.portal.x, y: def.portal.y }); // GĐ174
     }
     (window as unknown as { tttPortalMarker?: boolean }).tttPortalMarker = !isHome && !!def.portal;
+    // GĐ357: bia khắc Cổ Ngữ — quầng sáng xám đá + nhãn, hủy dấu cũ khi đổi map
+    for (const o of this.steleObjects) o.destroy();
+    this.steleObjects = [];
+    for (const st of def.steles || []) {
+      const glow = this.add.image(st.x, st.y, 'moonGlow').setTint(0xb9c4ce).setScale(0.5).setDepth(10000).setAlpha(0.8);
+      const tag = this.add.text(st.x, st.y - 26, '🗿 ' + st.name, { fontSize: '11px', color: '#cfd8e0' }).setOrigin(0.5, 0.5).setDepth(10000).setAlpha(0.9);
+      this.steleObjects.push(glow, tag);
+      this.proxLabels.push({ t: tag, x: st.x, y: st.y }); // GĐ174: nhãn chỉ hiện khi gần
+    }
     // GĐ105: điểm đọc sách Văn Uyển — quầng sáng + nhãn, hủy dấu cũ khi đổi map
     for (const o of this.studyObjects) o.destroy();
     this.studyObjects = [];
@@ -7647,8 +8037,9 @@ class GameScene extends Phaser.Scene {
       // shopnl, thương nhân→merchant, trưởng/lão→elder), còn lại xoay 3 bộ
       // villager theo số cuối id; thiếu texture thì lùi về vẽ code như cũ.
       const npcSet = this.cityNpcSpriteKey(n);
-      const sprite = npcSet && this.textures.exists(`${npcSet}-idle-south`)
-        ? this.add.sprite(0, 0, spriteTexKey(npcSet, 'down', 'idle')).setOrigin(0.5, HERO_ORIGIN_Y).setScale(HERO_SCALE)
+      const useSet = !!(npcSet && this.textures.exists(`${npcSet}-idle-south`));
+      const sprite = useSet
+        ? this.add.sprite(0, 0, spriteTexKey(npcSet as string, 'down', 'idle')).setOrigin(0.5, HERO_ORIGIN_Y).setScale(HERO_SCALE)
         : this.add.sprite(0, 0, personTexKey(n.style, 'down', 'idle'))
           .setOrigin(PERSON_TEX.originX, PERSON_TEX.originY).setScale(PERSON_TEX.scale);
       const parts: Phaser.GameObjects.GameObject[] = [sprite];
@@ -7662,6 +8053,7 @@ class GameScene extends Phaser.Scene {
       }
       const c = this.add.container(n.x, n.y, parts);
       (c as any).npcData = { id: n.id, name: n.name, role: n.role, kind: n.kind };
+      (c as any).npcWalk = { sprite, set: useSet ? npcSet : null, style: n.style, dir: 'down', lastMoveAt: 0, walking: false }; // GĐ364 (F1-6b): trạng thái bước/hướng cho applyNpcMoves + vòng trả idle
       c.setDepth(n.y);
       this.cityNpcObjects.push(c);
       this.cityNpcById.set(n.id, c); // GĐ156
@@ -7696,7 +8088,8 @@ class GameScene extends Phaser.Scene {
     if (title) title.textContent = '🌀 Trận Dịch Chuyển';
     const affEl = document.getElementById('npcDlgAff');
     const stones = this.myChar?.stones ?? 0;
-    if (affEl) affEl.textContent = `Đang ở: ${this.mapState?.name || 'Làng Tân Thủ'} · 💠 Linh thạch: ${stones}`;
+    const stonesThuong = this.myChar?.stonesThuong ?? 0; // GĐ367: đích cõi cao trả bằng Thượng phẩm
+    if (affEl) affEl.textContent = `Đang ở: ${this.mapState?.name || 'Làng Tân Thủ'} · 💠 Linh thạch: ${stones} · 🔶 Thượng phẩm: ${stonesThuong}`;
     const textEl = document.getElementById('npcDlgText');
     if (textEl) textEl.textContent = 'Dịch chuyển tức thì nhưng tốn Linh thạch (về làng/thành miễn phí). Kim Đan có thể ngự kiếm — miễn phí nhưng chậm. Đảo ngoài biển chỉ đi thuyền từ Thanh Vân Thành. Thiếu Linh thạch thì gặp Lái Buôn nhận việc hộ tống.';
     const btns = document.getElementById('npcDlgBtns');
@@ -7719,9 +8112,12 @@ class GameScene extends Phaser.Scene {
         btnsHtml.push(`<button class="pbtn gold" data-travel="${t.id}" data-method="boat">⛵ Thuyền ~${t.boatSec ?? '?'}s</button>`);
       } else {
         const cost = t.cost ?? 0;
-        const poor = stones < cost;
+        const grade = t.costGrade || 'ha'; // GĐ367: kiểm tra đúng ví theo phẩm của giá
+        const bal = grade === 'thuong' ? stonesThuong : grade === 'trung' ? (this.myChar?.stonesTrung ?? 0) : stones;
+        const gradeTxt = grade === 'thuong' ? ' LT Thượng' : grade === 'trung' ? ' LT Trung' : ' LT';
+        const poor = bal < cost;
         btnsHtml.push(cost > 0
-          ? `<button class="pbtn gold" data-travel="${t.id}" data-method="portal" ${poor ? 'disabled' : ''}>🌀 ${cost} LT${poor ? ' (thiếu)' : ''}</button>`
+          ? `<button class="pbtn gold" data-travel="${t.id}" data-method="portal" ${poor ? 'disabled' : ''}>🌀 ${cost}${gradeTxt}${poor ? ' (thiếu)' : ''}</button>`
           : `<button class="pbtn gold" data-travel="${t.id}" data-method="portal">🌀 Miễn phí</button>`);
         if (this.mapState?.mapId === 'tham_hai_bi_canh' && t.id === 'thanh_van_thanh') { // đang ở đảo → thêm lựa chọn về bằng thuyền
           btnsHtml.push(`<button class="pbtn" data-travel="${t.id}" data-method="boat">⛵ Thuyền ~${t.boatSec ?? '?'}s</button>`);
@@ -7851,7 +8247,7 @@ class GameScene extends Phaser.Scene {
         : m.reachable
           ? `<button class="pbtn gold" data-wm-travel="${m.id}">Đi</button>`
           : '<span style="color:#9fb8a8">Qua Thanh Vân Thành</span>';
-      html += `<div class="prow"><span class="pname">${m.name}${m.boatOnly ? ' 🏝' : ''}<span class="pdesc">${m.safe ? 'An toàn' : 'Nguy hiểm'}${m.boatOnly ? ' · Đảo biển (thuyền/ngự kiếm)' : ` · Dịch chuyển ${m.cost > 0 ? m.cost + ' LT' : 'miễn phí'}`}<br/>Quái: ${m.monsters.map((x) => `${x.name} ×${x.count}`).join(', ') || '—'}</span></span>${right}</div>`;
+      html += `<div class="prow"><span class="pname">${m.name}${m.boatOnly ? ' 🏝' : ''}<span class="pdesc">${m.safe ? 'An toàn' : 'Nguy hiểm'}${m.boatOnly ? ' · Đảo biển (thuyền/ngự kiếm)' : ` · Dịch chuyển ${m.cost > 0 ? m.cost + ' LT' + (m.costGrade === 'thuong' ? ' Thượng phẩm' : m.costGrade === 'trung' ? ' Trung phẩm' : ' Hạ phẩm') : 'miễn phí'}`}<br/>Quái: ${m.monsters.map((x) => `${x.name} ×${x.count}`).join(', ') || '—'}</span></span>${right}</div>`;
     }
     body.innerHTML = html;
     body.querySelectorAll<HTMLButtonElement>('[data-wm-travel]').forEach((b) => {
@@ -8398,7 +8794,7 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
     let html = '';
     for (const [qid, info] of Object.entries(QUEST_INFO)) {
       if (info.cityName) continue; // GĐ90: nhiệm vụ thành phố nhận/trả qua hộp thoại Người Giao Nhiệm Vụ, không qua bảng
-      if (info.gd127 || info.gd129 || info.gd130 || info.gd131 || info.gd132) continue; // GĐ127/GĐ129/GĐ130/GĐ131/GĐ132: nhiệm vụ mở rộng nhận/trả qua hộp thoại người giao, không qua bảng
+      if (info.gd127 || info.gd129 || info.gd130 || info.gd131 || info.gd132 || info.gd198 || info.gd265) continue; // GĐ127/GĐ129/GĐ130/GĐ131/GĐ132 (+GĐ364: gd198/gd265): nhiệm vụ mở rộng nhận/trả qua hộp thoại người giao, không qua bảng — gd198/gd265 phải có mặt ở đây để giữ nguyên hành vi bảng (trước GĐ364 chúng vắng hẳn khỏi QUEST_INFO nên cũng không hiện ở bảng)
       const q = this.myChar.quests[qid];
       const ready = !!q && q.state === 'active' && info.kind === 'item' && q.progress >= info.target;
       const npcName = info.npcId ? NPC_NAME_CLIENT[info.npcId] : 'Trưởng Làng';
@@ -8462,6 +8858,42 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
   // GĐ224: panel TÔNG MÔN NGƯỜI CHƠI — tạo tông / danh sách / thành viên / đơn / mời
   // GĐ312: panel đổi vũ khí khởi đầu — đặc quyền đường Viên Mãn
   private rebirthPicks: string[] = [];
+  // GĐ382: khóa cờ "đã xem mở đầu" theo nhân vật — tên + số kiếp của hồn,
+  // để kiếp mới (luân hồi, hồn đã qua thêm kiếp) là một khóa khác.
+  private introSeenKey(): string {
+    const c: any = this.myChar || {};
+    const lives = (c.soul && c.soul.lives) || 0;
+    return `ttt_intro_v1:${c.name || ''}:${lives}`;
+  }
+
+  private showIntro(): void { // GĐ382: mở chuỗi cốt truyện mở đầu từ màn 1
+    this.introIdx = 0;
+    this.renderIntroPage();
+    const o = document.getElementById('introOverlay');
+    if (o) o.style.display = 'flex';
+  }
+
+  private renderIntroPage(): void { // GĐ382: vẽ 1 màn mở đầu (chữ nguyên văn INTRO_PAGES)
+    const pg = INTRO_PAGES[this.introIdx];
+    if (!pg) return;
+    const title = document.getElementById('introTitle');
+    if (title) title.textContent = pg.title;
+    const body = document.getElementById('introBody');
+    if (body) {
+      if (pg.bullets) body.innerHTML = '<ul>' + pg.paras.map((p) => `<li>${escHtml245(p)}</li>`).join('') + '</ul>';
+      else body.innerHTML = pg.paras.map((p) => `<p>${escHtml245(p)}</p>`).join('');
+    }
+    const page = document.getElementById('introPage');
+    if (page) page.textContent = `Màn ${this.introIdx + 1} / ${INTRO_PAGES.length}`;
+    const next = document.getElementById('introNext');
+    if (next) next.textContent = this.introIdx >= INTRO_PAGES.length - 1 ? 'Vào thế giới →' : 'Tiếp tục →';
+  }
+
+  private closeIntro(): void { // GĐ382: đóng overlay mở đầu (hết 6 màn hoặc Bỏ qua)
+    const o = document.getElementById('introOverlay');
+    if (o) o.style.display = 'none';
+  }
+
   private openStoryPanel(): void { // GĐ317: THIÊN MỆNH KÝ — cốt truyện (đợt A)
     const panel = document.getElementById('storyPanel');
     if (!panel) return;
@@ -8491,12 +8923,50 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
       if (c.raceName) rows.push(`<div class="prow"><span>Kiếp này mang huyết mạch: <b>${escS(c.raceName)}</b></span></div>`);
       const log: any[] = Array.isArray(soul.lifeLog) ? soul.lifeLog : [];
       if (!log.length) rows.push('<div class="prow"><span>(Chưa có kiếp nào khép lại — khi một kiếp tọa hóa, biên niên sẽ ghi vào đây.)</span></div>');
-      [...log].reverse().forEach((e: any, i: number) => {
+      let lifeNo357 = log.filter((e: any) => !e.note).length; // GĐ357: dòng ghi chú (manh mối đầu kiếp) không tiêu thụ số kiếp
+      [...log].reverse().forEach((e: any) => {
+        if (e.note) { rows.push(`<div class="prow"><span>${escS(e.note)}</span></div>`); return; }
         const rn = e.race ? (RACE_BY_ID[e.race]?.name || e.race) : 'Phàm nhân';
         const pathTxt = e.path === 'dokiem' ? 'Luân hồi làm lại tại Lễ Đăng Tiên' : e.path === 'hoanvu' ? 'Hoán Vu Kiếp Hồn — đổi chủng tộc' : 'Tọa hóa hết thọ nguyên';
-        rows.push(`<div class="prow"><span>Kiếp ${log.length - i}: <b>${escS(e.name)}</b> — ${escS(rn)} · cảnh ${escS(e.realm || '')} tầng ${e.tier || 0} · gục ngã ${e.falls || 0} lần · ${pathTxt}</span></div>`);
+        rows.push(`<div class="prow"><span>Kiếp ${lifeNo357}: <b>${escS(e.name)}</b> — ${escS(rn)} · cảnh ${escS(e.realm || '')} tầng ${e.tier || 0} · gục ngã ${e.falls || 0} lần · ${pathTxt}</span></div>`);
+        lifeNo357--;
         if (e.story) rows.push('<div class="prow"><span>✦ Kiếp này, ngươi đã biết chuyện của Kẻ Không Tên.</span></div>'); // GĐ354: dòng Kiếp Ký đặc biệt khi kiếp đó đã nghe bản trọn vụ án
       });
+      body.innerHTML = rows.join('');
+      return;
+    }
+    if (this.storyTab === 'clues') { // GĐ356: 🧭 MANH MỐI — sổ khám phá của hồn (manh mối đang lần theo + điểm bí mật đã tìm ra)
+      const sv: any = soul.secretsView || { found: [], counts: {}, total: 0, clues: [] };
+      const rows: string[] = [];
+      rows.push('<div class="prow"><span class="pname">🧭 Manh mối — sổ khám phá của hồn</span></div>');
+      rows.push('<div class="prow"><span>Thế gian giấu nhiều nơi kín. Manh mối chỉ gợi hình ảnh và địa danh — đường đi vẫn là của đôi chân bạn. Mọi ghi chép ở đây đi theo hồn qua các kiếp.</span></div>');
+      const openC = (sv.clues || []).filter((cl: any) => cl.st === 1);
+      const closedC = (sv.clues || []).filter((cl: any) => cl.st === 2);
+      rows.push('<div class="prow"><span class="pname">🔍 Đang lần theo</span></div>');
+      if (!openC.length) rows.push('<div class="prow"><span>(Chưa có manh mối nào đang lần theo — hãy nghe người xưa kể chuyện, ngồi thiền tĩnh tâm ở Đạo Quán, hoặc tìm đọc bia khắc chữ cổ ở những nơi xưa cũ.)</span></div>');
+      for (const cl of openC) rows.push(`<div class="prow"><span>🧭 ${escS(cl.text)}<span class="pdesc">Nhận ở kiếp ${cl.life || 1}</span></span></div>`);
+      if (closedC.length) {
+        rows.push('<div class="prow"><span class="pname">✔ Manh mối đã lần tới</span></div>');
+        for (const cl of closedC) rows.push(`<div class="prow"><span>✔ ${escS(cl.text)}<span class="pdesc">→ ${escS(cl.pointName || '')}${cl.pointMap ? ' · ' + escS(cl.pointMap) : ''}</span></span></div>`);
+      }
+      rows.push('<div class="prow"><span class="pname">✦ Điểm bí mật đã tìm ra</span></div>');
+      const catNames: Record<string, string> = { manh_moi: 'Điểm manh mối nhiệm vụ ẩn', di_vat: 'Điểm giấu vật phẩm ẩn', ruong_an: 'Điểm giấu rương ẩn', cong_bi_canh: 'Cổng bí cảnh ẩn', hang: 'Miệng hang', thuan: 'Điểm bí mật thuần' };
+      const counts: any = sv.counts || {};
+      for (const cat of Object.keys(catNames)) { const cc = counts[cat]; if (cc) rows.push(`<div class="prow"><span>${catNames[cat]}: <b>${cc.found}/${cc.total}</b></span></div>`); }
+      const found: any[] = sv.found || [];
+      if (!found.length) rows.push('<div class="prow"><span>(Chưa tìm ra điểm bí mật nào — thế gian rộng lớn, cứ đi và quan sát.)</span></div>');
+      for (const f of found) rows.push(`<div class="prow"><span>✦ ${escS(f.name)}<span class="pdesc">${escS(f.mapName || '')} · tìm ra ở kiếp ${f.life || 1}</span>${f.lore ? `<br><span class="pdesc">“${escS(f.lore)}”</span>` : ''}</span></div>`); // GĐ358: điểm thuần có dòng ghi sổ riêng
+      body.innerHTML = rows.join('');
+      return;
+    }
+    if (this.storyTab === 'intro') { // GĐ382: 🌅 KHỞI ĐẦU — đọc lại đủ 6 màn cốt truyện mở đầu
+      const rows: string[] = [];
+      rows.push('<div class="prow"><span class="pname">🌅 Khởi đầu — những lời đầu tiên khi ngươi mở mắt ở kiếp này</span></div>');
+      for (const pg of INTRO_PAGES) {
+        rows.push(`<div class="prow"><span class="pname">${escS(pg.title)}</span></div>`);
+        if (pg.bullets) { for (const p of pg.paras) rows.push(`<p class="splash-note" style="text-align:left">• ${escS(p)}</p>`); }
+        else { for (const p of pg.paras) rows.push(`<p class="splash-note" style="text-align:left">${escS(p)}</p>`); }
+      }
       body.innerHTML = rows.join('');
       return;
     }
@@ -9160,11 +9630,33 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
     // là số thật từ rương (TC+ / KD hậu+); GĐ69: Cực phẩm từ rương boss.
     const row = (name: string, n: number) =>
       `<div class="prow"><span class="pname">${name}</span><b>${n}</b></div>`;
+    // GĐ367: đổi đá 1 CHIỀU XUỐNG (1 phẩm cao = 100 phẩm liền dưới) — form
+    // chỉ có chiều xuống; Cực phẩm không có nút đổi (chưa mở).
+    const EX_RATE: Record<string, number> = { 'trung>ha': 100, 'thuong>ha': 10000 }; // GĐ367: khớp EXCHANGE_RATES server — chỉ xem trước; Bảo chốt bỏ Thượng→Trung
+    const EX_NAME: Record<string, string> = { ha: 'Hạ phẩm', trung: 'Trung phẩm', thuong: 'Thượng phẩm' };
+    if (this.exFrom === 'trung') this.exTo = 'ha';
+    const rate = EX_RATE[`${this.exFrom}>${this.exTo}`] || 0;
+    const gained = Math.max(0, Math.floor(this.exQty || 0)) * rate;
+    const toOpts = `<option value="ha" selected>💠 Hạ phẩm</option>`; // GĐ367: mọi chiều đổi đều về Hạ (Thượng→Trung đã bỏ theo chốt của Bảo)
     body.innerHTML =
       row('💠 Hạ phẩm', this.myChar.stones ?? 0) +
       row('🔷 Trung phẩm', this.myChar.stonesTrung ?? 0) +
       row('🔶 Thượng phẩm', this.myChar.stonesThuong ?? 0) +
-      row('🟣 Cực phẩm', this.myChar.stonesCuc ?? 0);
+      row('🟣 Cực phẩm', this.myChar.stonesCuc ?? 0) +
+      `<div class="prow"><span class="pname">💱 Đổi xuống<span class="pdesc">1 phẩm cao = 100 phẩm liền dưới · chỉ đổi xuống, không đổi lên · Cực phẩm chưa mở đổi</span></span></div>` +
+      `<div class="prow"><span class="pname"><select id="exFrom"><option value="thuong" ${this.exFrom === 'thuong' ? 'selected' : ''}>🔶 Thượng phẩm</option><option value="trung" ${this.exFrom === 'trung' ? 'selected' : ''}>🔷 Trung phẩm</option></select>` +
+      ` → <select id="exTo">${toOpts}</select>` +
+      ` · Số lượng <input id="exQty" type="number" min="1" max="100000" value="${this.exQty}" style="width:76px">` +
+      `<span class="pdesc" id="exPreview">Nhận: ${gained.toLocaleString('vi-VN')} Linh thạch ${EX_NAME[this.exTo]}</span></span>` +
+      `<button class="pbtn gold" id="exBtn" type="button">Đổi</button></div>`;
+    const fromEl = document.getElementById('exFrom') as HTMLSelectElement | null;
+    const toEl = document.getElementById('exTo') as HTMLSelectElement | null;
+    const qtyEl = document.getElementById('exQty') as HTMLInputElement | null;
+    const btnEl = document.getElementById('exBtn') as HTMLButtonElement | null;
+    if (fromEl) fromEl.onchange = () => { this.exFrom = fromEl.value === 'trung' ? 'trung' : 'thuong'; if (this.exFrom === 'trung') this.exTo = 'ha'; this.renderStonesPanel(); };
+    if (toEl) toEl.onchange = () => { this.exTo = 'ha'; this.renderStonesPanel(); };
+    if (qtyEl) qtyEl.oninput = () => { const v = Math.floor(Number(qtyEl.value) || 0); this.exQty = v; const pv = document.getElementById('exPreview'); if (pv) pv.textContent = `Nhận: ${(Math.max(0, v) * rate).toLocaleString('vi-VN')} Linh thạch ${EX_NAME[this.exTo]}`; };
+    if (btnEl) btnEl.onclick = () => { this.socket?.emit('exchange_stones', { from: this.exFrom, to: this.exTo, qty: Math.floor(Number(qtyEl?.value) || 0) }); };
   }
 
   private renderInv(): void {
@@ -9816,7 +10308,7 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
         // GĐ255: quái có bộ animation vừa chết (đã từng mất máu) -> để lại xác gục mờ dần
         const deadA = this.monsterActors.get(id);
         if (deadA?.animSet && deadA.lastHp < (deadA.maxHp || 0)) {
-          const corpse = this.add.image(deadA.container.x, deadA.container.y, 'monanim-' + deadA.kind + '-f5')
+          const corpse = this.add.image(deadA.container.x, deadA.container.y, 'monanim-' + (deadA.visKind || deadA.kind) + '-f5')
             .setScale(deadA.sprite.scaleX).setFlipX(deadA.sprite.flipX).setDepth(deadA.container.y - 1).setAlpha(0.95);
           this.tweens.add({ targets: corpse, alpha: 0, delay: 600, duration: 1200, onComplete: () => corpse.destroy() });
         }
@@ -9894,6 +10386,7 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
     // GĐ344/345: ảo ảnh bí cảnh ẩn mượn hình sẵn có — Đối Ảnh là hình NGƯỜI (rival), U Hồn là hồn ma (Hồn Vương = Cửu U Ma Quân)
     const visKind = m.trial === 'uhon' ? (m.name === 'Hồn Vương' ? 'cuu_u_ma_quan' : 'quy_hon') : m.kind;
     if (!m.trial) this.bumpMonsterAssets340(m.kind); // GĐ340: loài sắp hiện hình → ưu tiên nạp nền
+    else if (m.trial === 'uhon') this.bumpMonsterAssets340(visKind); // GĐ369: ảo ảnh U Hồn cũng ưu tiên nạp hình của visKind
     const face = (m.direction === 'left' ? -1 : 1) as 1 | -1;
     // GĐ19: trùm thử thách dùng hình Thạch Quái lớn + nhãn tên; Tâm Ma nhuộm tím
     const isTrial = !!m.trial && m.trial !== 'doianh' && m.trial !== 'uhon'; // GĐ344/345: ảo ảnh 2 bí cảnh ẩn vẽ theo visKind, không theo hình thạch quái trùm thử thách
@@ -9968,22 +10461,34 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
     const barBg = this.add.rectangle(0, barY, 38, 7, 0x101418).setAlpha(0.6);
     const barFg = this.add.rectangle(-18, barY, 36, 5, 0x53d769).setOrigin(0, 0.5);
     const parts: Phaser.GameObjects.GameObject[] = glowImg ? [glowImg, sprite, barBg, barFg] : [sprite, barBg, barFg]; // GĐ227: quầng nằm dưới sprite
+    let nameTxt: Phaser.GameObjects.Text | undefined; // GĐ369: giữ tham chiếu nhãn (nâng cấp hình thì dời theo chiều cao mới)
     if (m.name) {
-      parts.push(
-        this.add
-          .text(0, barY - 6, m.name, { fontSize: isTrial ? '12px' : '11px', color: isTrial ? '#ffd9d9' : '#e8f0e9', fontStyle: 'bold' })
-          .setOrigin(0.5, 1)
-          .setShadow(1, 1, '#000', 2),
-      );
+      nameTxt = this.add
+        .text(0, barY - 6, m.name, { fontSize: isTrial ? '12px' : '11px', color: isTrial ? '#ffd9d9' : '#e8f0e9', fontStyle: 'bold' })
+        .setOrigin(0.5, 1)
+        .setShadow(1, 1, '#000', 2);
+      parts.push(nameTxt);
     }
     const container = this.add.container(m.x, m.y, parts);
     container.setDepth(m.y);
-    return {
-      container, sprite, barFg, dir: m.direction, face, curTex: key, trial: m.trial || null, kind: m.kind, rivalSet, base, tintN, monSprite: !!monKey || animSet, glowImg, // GĐ59, GĐ118, GĐ227
-      // (gán tiếp các trường còn lại ở dòng dưới của return gốc)
+    const actorObj: MonsterActor = {
+      container, sprite, barFg, dir: m.direction, face, curTex: key, trial: m.trial || null, kind: m.kind, visKind: visKind || undefined, barBg, nameTxt, rivalSet, base, tintN, monSprite: !!monKey || animSet, glowImg, // GĐ59, GĐ118, GĐ227 · GĐ369: visKind/barBg/nameTxt cho nâng cấp hình
       walkPhase: 0, lastX: m.x, lastY: m.y, lastHp: m.hp,
-      flashUntil: 0, lungeUntil: 0, nextLunge: 0, hurtUntil: 0, animSet, animMode: ANIM_MODE[m.kind || ''] || 'walk', staticImgH: staticImgH340 || undefined,
+      flashUntil: 0, lungeUntil: 0, nextLunge: 0, hurtUntil: 0, animSet, animMode: ANIM_MODE[visKind || ''] || 'walk', staticImgH: staticImgH340 || undefined,
+      artScale369: !monKey && !animSet ? (base === 'rival' && rivalSet ? HERO_SCALE * (vis?.scale ?? 1) : baseScale * (vis?.scale ?? 1)) : undefined, // GĐ369 · GĐ377: rival mượn bộ người 'rival' thì tỉ lệ lúc dựng là HERO_SCALE × tỉ lệ loài, không phải baseScale
+      realTintN: (m as unknown as { rare?: number }).rare ? 0xffd24d : brId && BRANCH_TINT[brId] ? BRANCH_TINT[brId] : null, // GĐ369
     };
+    // GĐ369: dựng xong mà texture loài (lớp B) chưa về → đang là hình vẽ code,
+    // ghi sổ chờ nâng cấp khi texture về (không chờ thì kẹt hình sói vĩnh viễn).
+    // GĐ377: bỏ loại trừ base 'rival' — 36 loài GDD họ người bị loại khỏi sổ chờ
+    // nên sinh trước khi texture về là kẹt hình tu sĩ (bộ 'rival' mượn) vĩnh viễn,
+    // và chết không hiện khung xác (xác đòi animSet — xem vòng dọn quái chết).
+    // Quái trial giữ nguyên ngoài sổ: kind 'trial' không có trong MON_SPRITE/
+    // ANIM_MONSTERS nên tự rơi khỏi điều kiện; Đối Ảnh/U Hồn đi theo visKind.
+    if (!isTrial && visKind && !animSet && !monKey && (MON_SPRITE[visKind] || ANIM_MONSTERS[visKind]) && !GD340_HOME_KINDS.includes(visKind)) {
+      this.watchPendingMon369(actorObj, visKind);
+    }
+    return actorObj;
   }
 
   update(_time: number, delta: number): void {
@@ -10003,6 +10508,16 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
         for (const l of this.cityNpcLabels) {
           const lx = l.c ? l.c.x : l.x, ly = l.c ? l.c.y : l.y; // GĐ156: nhãn theo vị trí sống của NPC
           l.label.setVisible(Math.hypot(this.myContainer.x - lx, this.myContainer.y - ly) <= 240);
+        }
+      }
+      // GĐ364 (F1-6b): NPC thành phố ngừng di chuyển >350ms → trả sprite về
+      // khung đứng yên theo hướng mặt cuối cùng (đi kèm applyNpcMoves).
+      for (const c of this.cityNpcObjects) {
+        const wk = (c as any).npcWalk;
+        if (wk && wk.walking && _time - wk.lastMoveAt > 350) {
+          wk.walking = false;
+          const key = wk.set ? spriteTexKey(wk.set, wk.dir, 'idle') : personTexKey(wk.style, wk.dir, 'idle');
+          if (this.textures.exists(key) && wk.sprite.texture.key !== key) wk.sprite.setTexture(key);
         }
       }
       if (this.nodeLabels.length) {
@@ -10091,6 +10606,8 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
             text = this.myChar.classId === 'nhotu'
               ? '📖 Bấm E — Đọc sách ở Văn Uyển (tích Hạo Nhiên, mở Chương)'
               : '📖 Tàng Kinh Các — chỉ Nho Tu đọc sách được';
+          } else if (near.type === 'stele') {
+            text = '🗿 Bấm E — Đọc bia khắc Cổ Ngữ (chữ trên bia có thể là một manh mối)';
           } else if (near.type === 'node') {
             text = near.kind === 'ore' ? `⛏️ Bấm E — Đào ${near.name} (mỗi mạch ngày 1 lần)` : `🌿 Bấm E — Hái ${near.name} (mỗi bụi ngày 1 lần)`;
           } else if (near.type === 'citynpc') {
@@ -10421,9 +10938,9 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
       // ngay trong tick này: sprite đang là ảnh tĩnh → bật animSet. Tỉ lệ chỉnh
       // theo tỉ số chiều cao ảnh tĩnh/khung f0 (monSpriteScale tỉ lệ nghịch
       // chiều cao nên chiều cao hiển thị giữ nguyên sau khi đổi texture).
-      if (!actor.animSet && actor.monSprite && actor.kind && ANIM_MONSTERS[actor.kind] && this.textures.exists('monanim-' + actor.kind + '-f0')) {
+      if (!actor.animSet && actor.monSprite && (actor.visKind || actor.kind) && ANIM_MONSTERS[actor.visKind || (actor.kind as string)] && this.textures.exists('monanim-' + (actor.visKind || actor.kind) + '-f0')) {
         actor.animSet = true;
-        const f0img340 = this.textures.get('monanim-' + actor.kind + '-f0').getSourceImage() as unknown as HTMLImageElement;
+        const f0img340 = this.textures.get('monanim-' + (actor.visKind || actor.kind) + '-f0').getSourceImage() as unknown as HTMLImageElement;
         if (actor.staticImgH && f0img340 && f0img340.height) {
           const r340 = actor.staticImgH / f0img340.height;
           if (Math.abs(r340 - 1) > 0.001) {
@@ -10436,12 +10953,12 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
       // GĐ255: loài có bộ khung animation -> chọn khung theo trạng thái
       if (actor.animSet) {
         // GĐ256: loài bay vỗ cánh liên tục theo nhịp thời gian (f0 lên -> f1 ngang -> f2 xuống -> f1)
-        const walk4 = (ANIM_MONSTERS[actor.kind as string] || 6) >= 8; // GĐ271
+        const walk4 = (ANIM_MONSTERS[(actor.visKind || actor.kind) as string] || 6) >= 8; // GĐ271 · GĐ369: khóa theo visKind
         const af = _time < actor.hurtUntil ? 4 : _time < actor.lungeUntil ? 3
           : actor.animMode === 'fly' ? (walk4 ? [0, 6, 1, 7, 2, 7, 1, 6][Math.floor(_time / 65) % 8] : [0, 1, 2, 1][Math.floor(_time / 130) % 4])
           : moving ? (walk4 ? [1, 6, 2, 7][Math.floor((actor.walkPhase + Math.PI / 2) / (Math.PI / 2)) % 4] : (Math.floor((actor.walkPhase + Math.PI / 2) / Math.PI) % 2 === 0 ? 1 : 2)) : 0;
-        const akey = 'monanim-' + actor.kind + '-f' + af;
-        if (akey !== actor.curTex) { actor.curTex = akey; actor.sprite.setTexture(akey); }
+        const akey = 'monanim-' + (actor.visKind || actor.kind) + '-f' + af; // GĐ369: khóa theo visKind
+        if (akey !== actor.curTex && this.textures.exists(akey)) { actor.curTex = akey; actor.sprite.setTexture(akey); } // GĐ369: khung đích chưa nạp về (f0 về trước, f6/f7 về sau) thì giữ khung hiện tại — tránh chớp __MISSING
         if (actor.animMode === 'walk') actor.sprite.setFlipX(actor.face > 0); // GĐ257: chỉ loài nhìn ngang mới lật
       }
       // GĐ270: chuyển động phụ cho quái DÙNG SPRITE (bộ khung + ảnh tĩnh): nhún theo bước

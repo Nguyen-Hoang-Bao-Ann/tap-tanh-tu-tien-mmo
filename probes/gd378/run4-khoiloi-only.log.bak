@@ -1,0 +1,13 @@
+
+##### LOÀI: khoiloi @ lang_tan_thu (char yếu)
+PASS | khoiloi: HTTP f5 khớp file đã cài
+INFO | boot xong sau 22s: true
+PASS | khoiloi: đăng nhập (yếu) + vào game
+PASS | khoiloi: texture f0/f5 đã nạp trước khi vào map
+PASS | khoiloi: tới được map lang_tan_thu
+INFO | số khoiloi trên map: 1
+PASS | khoiloi: có cá thể bật animSet trên map
+===== khoiloi cá thể #1: id=khoiloi-21 maxHp=700 khổ đứng=143px
+INFO | đòn: targetId=huyetlang-17 dmg=undefined trúng đích=false hp còn=700
+FAIL | khoiloi #1: bắt được xác f5 | firstHitSafe=null myKill=false
+===== khoiloi cá thể #2: id=khoiloi-21 maxHp=700 khổ đứng=143px

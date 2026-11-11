@@ -2,7 +2,7 @@
  "meta": {
   "version": 1,
   "note": "tuViReward theo công thức thiết kế gốc (nền Yếu 3/Trung 4/Mạnh 8/Tinh anh 12/Trùm 75 × 1.12^(bước đầu bậc −1)). hpAtkSource=doc: HP/ATK từ thiết kế gốc; placeholder: tài liệu mở rộng chỉ cho tên/cơ chế — HP/ATK nội suy, chờ chốt.",
-  "total": 31
+  "total": 201
  },
  "monsters": [
   {
@@ -617,15 +617,15 @@
      "name": "Mộc Thiên Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Lang",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -690,7 +690,7 @@
      "id": "kim",
      "name": "Kim Nguyệt Sát Lang",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -699,7 +699,7 @@
      "name": "Mộc Nguyệt Sát Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -764,7 +764,7 @@
      "id": "kim",
      "name": "Kim Viêm Vĩ Lang",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -773,15 +773,15 @@
      "name": "Mộc Viêm Vĩ Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Viêm Vĩ Lang",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -838,7 +838,7 @@
      "id": "kim",
      "name": "Kim Huyền Băng Lang",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -847,7 +847,7 @@
      "name": "Mộc Huyền Băng Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -912,7 +912,7 @@
      "id": "kim",
      "name": "Kim Cổ Sơn Lang",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -921,15 +921,15 @@
      "name": "Mộc Cổ Sơn Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Cổ Sơn Lang",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -986,7 +986,7 @@
      "id": "kim",
      "name": "Kim Huyết Dực Bức",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -995,15 +995,15 @@
      "name": "Mộc Huyết Dực Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Huyết Dực Bức",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1060,7 +1060,7 @@
      "id": "kim",
      "name": "Kim Dạ Minh Bức",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1069,7 +1069,7 @@
      "name": "Mộc Dạ Minh Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1135,15 +1135,15 @@
      "name": "Mộc Lôi Vũ Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Lôi Vũ Bức",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1208,7 +1208,7 @@
      "id": "kim",
      "name": "Kim Thiên Niên Xà Yêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1216,8 +1216,8 @@
      "id": "thuy",
      "name": "Thủy Thiên Niên Xà Yêu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1282,7 +1282,7 @@
      "id": "kim",
      "name": "Kim Bích Lân Mãng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1290,8 +1290,8 @@
      "id": "thuy",
      "name": "Thủy Bích Lân Mãng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1356,7 +1356,7 @@
      "id": "kim",
      "name": "Kim Hỏa Văn Mãng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1365,15 +1365,15 @@
      "name": "Mộc Hỏa Văn Mãng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỏa Văn Mãng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1430,7 +1430,7 @@
      "id": "kim",
      "name": "Kim Huyền Thủy Xà",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1439,7 +1439,7 @@
      "name": "Mộc Huyền Thủy Xà",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1505,15 +1505,15 @@
      "name": "Mộc Kim Sí Điêu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kim Sí Điêu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1578,7 +1578,7 @@
      "id": "kim",
      "name": "Kim Thanh Loan",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1586,8 +1586,8 @@
      "id": "thuy",
      "name": "Thủy Thanh Loan",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1653,15 +1653,15 @@
      "name": "Mộc Phong Bạo Ưng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Phong Bạo Ưng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1726,7 +1726,7 @@
      "id": "kim",
      "name": "Kim Hỏa Vũ Phượng Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1735,15 +1735,15 @@
      "name": "Mộc Hỏa Vũ Phượng Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỏa Vũ Phượng Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1800,7 +1800,7 @@
      "id": "kim",
      "name": "Kim Sơn Thần Khôi",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1809,15 +1809,15 @@
      "name": "Mộc Sơn Thần Khôi",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Sơn Thần Khôi",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1874,7 +1874,7 @@
      "id": "kim",
      "name": "Kim Cổ Thạch Cự Nhân",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -1883,15 +1883,15 @@
      "name": "Mộc Cổ Thạch Cự Nhân",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Cổ Thạch Cự Nhân",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -1949,15 +1949,15 @@
      "name": "Mộc Kim Cương Thạch Tượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kim Cương Thạch Tượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2023,15 +2023,15 @@
      "name": "Mộc Thiết Giáp Tê",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiết Giáp Tê",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2096,7 +2096,7 @@
      "id": "kim",
      "name": "Kim Man Hoang Cự Tượng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2105,15 +2105,15 @@
      "name": "Mộc Man Hoang Cự Tượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Man Hoang Cự Tượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2170,7 +2170,7 @@
      "id": "kim",
      "name": "Kim Sơn Tiêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2178,8 +2178,8 @@
      "id": "thuy",
      "name": "Thủy Sơn Tiêu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2245,15 +2245,15 @@
      "name": "Mộc Tử Kim Hạt",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tử Kim Hạt",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2318,7 +2318,7 @@
      "id": "kim",
      "name": "Kim Ngọc Giáp Trùng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2326,8 +2326,8 @@
      "id": "thuy",
      "name": "Thủy Ngọc Giáp Trùng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2392,7 +2392,7 @@
      "id": "kim",
      "name": "Kim Thiên Túc Ngô Công",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2400,8 +2400,8 @@
      "id": "thuy",
      "name": "Thủy Thiên Túc Ngô Công",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2466,7 +2466,7 @@
      "id": "kim",
      "name": "Kim Huyền Thủy Giao",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2475,7 +2475,7 @@
      "name": "Mộc Huyền Thủy Giao",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2540,7 +2540,7 @@
      "id": "kim",
      "name": "Kim Bích Ba Ngư Yêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2549,7 +2549,7 @@
      "name": "Mộc Bích Ba Ngư Yêu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2614,7 +2614,7 @@
      "id": "kim",
      "name": "Kim Thâm Hải Cự Giải",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2623,7 +2623,7 @@
      "name": "Mộc Thâm Hải Cự Giải",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2688,7 +2688,7 @@
      "id": "kim",
      "name": "Kim Hủ Cốt Chiến Sĩ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2697,15 +2697,15 @@
      "name": "Mộc Hủ Cốt Chiến Sĩ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hủ Cốt Chiến Sĩ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2762,7 +2762,7 @@
      "id": "kim",
      "name": "Kim U Minh Quỷ Tốt",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2771,7 +2771,7 @@
      "name": "Mộc U Minh Quỷ Tốt",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2837,15 +2837,15 @@
      "name": "Mộc Bạch Cốt Phu Nhân",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Bạch Cốt Phu Nhân",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2910,7 +2910,7 @@
      "id": "kim",
      "name": "Kim Thực Nhân Hoa Yêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2918,8 +2918,8 @@
      "id": "thuy",
      "name": "Thủy Thực Nhân Hoa Yêu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -2984,7 +2984,7 @@
      "id": "kim",
      "name": "Kim Cổ Thụ Tinh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -2992,8 +2992,8 @@
      "id": "thuy",
      "name": "Thủy Cổ Thụ Tinh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3058,7 +3058,7 @@
      "id": "kim",
      "name": "Kim Huyết Đằng Yêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3067,15 +3067,15 @@
      "name": "Mộc Huyết Đằng Yêu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Huyết Đằng Yêu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3132,7 +3132,7 @@
      "id": "kim",
      "name": "Kim Vân Lộc",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3140,8 +3140,8 @@
      "id": "thuy",
      "name": "Thủy Vân Lộc",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3207,15 +3207,15 @@
      "name": "Mộc Ngọc Kỳ Lân",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Ngọc Kỳ Lân",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3280,7 +3280,7 @@
      "id": "kim",
      "name": "Kim Thiên Mã",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3289,7 +3289,7 @@
      "name": "Mộc Thiên Mã",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3354,7 +3354,7 @@
      "id": "kim",
      "name": "Kim Cửu Vĩ Hồ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3363,15 +3363,15 @@
      "name": "Mộc Cửu Vĩ Hồ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Cửu Vĩ Hồ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3429,15 +3429,15 @@
      "name": "Mộc Sơn Quân Hổ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Sơn Quân Hổ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3502,7 +3502,7 @@
      "id": "kim",
      "name": "Kim Linh Miêu Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3511,7 +3511,7 @@
      "name": "Mộc Linh Miêu Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3577,15 +3577,15 @@
      "name": "Mộc Dạ Xoa",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Dạ Xoa",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3650,7 +3650,7 @@
      "id": "kim",
      "name": "Kim La Sát Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3659,15 +3659,15 @@
      "name": "Mộc La Sát Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy La Sát Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3724,7 +3724,7 @@
      "id": "kim",
      "name": "Kim Huyết Ma Tốt",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3733,15 +3733,15 @@
      "name": "Mộc Huyết Ma Tốt",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Huyết Ma Tốt",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3798,7 +3798,7 @@
      "id": "kim",
      "name": "Kim Hỏa Linh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3807,15 +3807,15 @@
      "name": "Mộc Hỏa Linh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỏa Linh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3872,7 +3872,7 @@
      "id": "kim",
      "name": "Kim Băng Linh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -3881,7 +3881,7 @@
      "name": "Mộc Băng Linh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -3947,15 +3947,15 @@
      "name": "Mộc Lôi Linh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Lôi Linh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4020,7 +4020,7 @@
      "id": "kim",
      "name": "Kim Thổ Linh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4029,15 +4029,15 @@
      "name": "Mộc Thổ Linh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thổ Linh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4096,15 +4096,15 @@
      "name": "Mộc Thiên Lang Chúa",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Lang Chúa",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4170,7 +4170,7 @@
      "id": "kim",
      "name": "Kim Giao Long Chúa",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4179,7 +4179,7 @@
      "name": "Mộc Giao Long Chúa",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4245,7 +4245,7 @@
      "id": "kim",
      "name": "Kim Cổ Thụ Thần",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4253,8 +4253,8 @@
      "id": "thuy",
      "name": "Thủy Cổ Thụ Thần",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4321,7 +4321,7 @@
      "id": "kim",
      "name": "Kim Hỗn Độn Cự Thú",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4330,15 +4330,15 @@
      "name": "Mộc Hỗn Độn Cự Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỗn Độn Cự Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4396,15 +4396,15 @@
      "name": "Mộc Khai Thiên Tê",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Khai Thiên Tê",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4470,7 +4470,7 @@
      "id": "kim",
      "name": "Kim Hư Không Thú",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4479,7 +4479,7 @@
      "name": "Mộc Hư Không Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4545,7 +4545,7 @@
      "id": "kim",
      "name": "Kim Thôn Thiên Mãng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4554,15 +4554,15 @@
      "name": "Mộc Thôn Thiên Mãng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thôn Thiên Mãng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4619,7 +4619,7 @@
      "id": "kim",
      "name": "Kim Chúc Long Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4628,15 +4628,15 @@
      "name": "Mộc Chúc Long Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Chúc Long Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4694,7 +4694,7 @@
      "id": "kim",
      "name": "Kim Ba Xà",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4703,7 +4703,7 @@
      "name": "Mộc Ba Xà",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4769,7 +4769,7 @@
      "id": "kim",
      "name": "Kim Toan Nghê",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4778,15 +4778,15 @@
      "name": "Mộc Toan Nghê",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Toan Nghê",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4843,7 +4843,7 @@
      "id": "kim",
      "name": "Kim Đào Ngột",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -4852,15 +4852,15 @@
      "name": "Mộc Đào Ngột",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Đào Ngột",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4918,15 +4918,15 @@
      "name": "Mộc Cùng Kỳ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Cùng Kỳ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -4991,7 +4991,7 @@
      "id": "kim",
      "name": "Kim Hỗn Độn Ma Viên",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5000,15 +5000,15 @@
      "name": "Mộc Hỗn Độn Ma Viên",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỗn Độn Ma Viên",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5068,15 +5068,15 @@
      "name": "Mộc Kim Sí Đại Bằng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kim Sí Đại Bằng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5142,7 +5142,7 @@
      "id": "kim",
      "name": "Kim Côn Bằng Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5151,7 +5151,7 @@
      "name": "Mộc Côn Bằng Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5217,7 +5217,7 @@
      "id": "kim",
      "name": "Kim Huyền Vũ Tàn Giáp",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5226,7 +5226,7 @@
      "name": "Mộc Huyền Vũ Tàn Giáp",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5293,7 +5293,7 @@
      "id": "kim",
      "name": "Kim Thanh Long Tàn Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5301,8 +5301,8 @@
      "id": "thuy",
      "name": "Thủy Thanh Long Tàn Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5368,7 +5368,7 @@
      "id": "kim",
      "name": "Kim Chu Tước Diễm",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5377,15 +5377,15 @@
      "name": "Mộc Chu Tước Diễm",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Chu Tước Diễm",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5443,15 +5443,15 @@
      "name": "Mộc Bạch Hổ Sát Khí",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Bạch Hổ Sát Khí",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5518,15 +5518,15 @@
      "name": "Mộc Kỳ Lân Thần Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kỳ Lân Thần Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5591,7 +5591,7 @@
      "id": "kim",
      "name": "Kim Thiên Cẩu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5600,15 +5600,15 @@
      "name": "Mộc Thiên Cẩu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Cẩu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5666,7 +5666,7 @@
      "id": "kim",
      "name": "Kim Nguyệt Thố Thần",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5675,7 +5675,7 @@
      "name": "Mộc Nguyệt Thố Thần",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5741,15 +5741,15 @@
      "name": "Mộc Thiên Binh Tàn Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Binh Tàn Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5814,7 +5814,7 @@
      "id": "kim",
      "name": "Kim Cổ Ma Tàn Hồn",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5823,15 +5823,15 @@
      "name": "Mộc Cổ Ma Tàn Hồn",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Cổ Ma Tàn Hồn",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5890,7 +5890,7 @@
      "id": "kim",
      "name": "Kim Vực Ngoại Thiên Ma",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5899,15 +5899,15 @@
      "name": "Mộc Vực Ngoại Thiên Ma",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Vực Ngoại Thiên Ma",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -5964,7 +5964,7 @@
      "id": "kim",
      "name": "Kim Minh Hà Quỷ Tướng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -5973,7 +5973,7 @@
      "name": "Mộc Minh Hà Quỷ Tướng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6040,15 +6040,15 @@
      "name": "Mộc Thần Lôi Cự Nhân",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thần Lôi Cự Nhân",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6114,7 +6114,7 @@
      "id": "kim",
      "name": "Kim Diệm Thần Chiến Tượng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6123,15 +6123,15 @@
      "name": "Mộc Diệm Thần Chiến Tượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Diệm Thần Chiến Tượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6188,7 +6188,7 @@
      "id": "kim",
      "name": "Kim Băng Thần Xà",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6197,7 +6197,7 @@
      "name": "Mộc Băng Thần Xà",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6264,15 +6264,15 @@
      "name": "Mộc Kim Thần Giáp Trùng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kim Thần Giáp Trùng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6337,7 +6337,7 @@
      "id": "kim",
      "name": "Kim Huyết Thần Ma Lang",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6346,15 +6346,15 @@
      "name": "Mộc Huyết Thần Ma Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Huyết Thần Ma Lang",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6412,7 +6412,7 @@
      "id": "kim",
      "name": "Kim Cổ Thần Thụ Tinh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6420,8 +6420,8 @@
      "id": "thuy",
      "name": "Thủy Cổ Thần Thụ Tinh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6487,7 +6487,7 @@
      "id": "kim",
      "name": "Kim Thâm Uyên Cự Giải",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6496,7 +6496,7 @@
      "name": "Mộc Thâm Uyên Cự Giải",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6562,15 +6562,15 @@
      "name": "Mộc Lôi Thần Điêu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Lôi Thần Điêu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6636,7 +6636,7 @@
      "id": "kim",
      "name": "Kim Hỏa Thần Phượng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6645,15 +6645,15 @@
      "name": "Mộc Hỏa Thần Phượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỏa Thần Phượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6711,7 +6711,7 @@
      "id": "kim",
      "name": "Kim Thổ Thần Khôi",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6720,15 +6720,15 @@
      "name": "Mộc Thổ Thần Khôi",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thổ Thần Khôi",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6786,7 +6786,7 @@
      "id": "kim",
      "name": "Kim Dạ Thần Bức",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6795,7 +6795,7 @@
      "name": "Mộc Dạ Thần Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6861,7 +6861,7 @@
      "id": "kim",
      "name": "Kim Độc Thần Hạt",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6869,8 +6869,8 @@
      "id": "thuy",
      "name": "Thủy Độc Thần Hạt",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -6935,7 +6935,7 @@
      "id": "kim",
      "name": "Kim Mộc Thần Đằng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -6943,8 +6943,8 @@
      "id": "thuy",
      "name": "Thủy Mộc Thần Đằng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7010,7 +7010,7 @@
      "id": "kim",
      "name": "Kim Thủy Thần Ngư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7019,7 +7019,7 @@
      "name": "Mộc Thủy Thần Ngư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7085,7 +7085,7 @@
      "id": "kim",
      "name": "Kim Phong Thần Ưng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7093,8 +7093,8 @@
      "id": "thuy",
      "name": "Thủy Phong Thần Ưng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7160,7 +7160,7 @@
      "id": "kim",
      "name": "Kim Âm Thần Quỷ Tốt",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7169,7 +7169,7 @@
      "name": "Mộc Âm Thần Quỷ Tốt",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7235,15 +7235,15 @@
      "name": "Mộc Dương Thần Chiến Sĩ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Dương Thần Chiến Sĩ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7309,7 +7309,7 @@
      "id": "kim",
      "name": "Kim Tinh Thần Tiểu Yêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7318,15 +7318,15 @@
      "name": "Mộc Tinh Thần Tiểu Yêu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tinh Thần Tiểu Yêu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7384,7 +7384,7 @@
      "id": "kim",
      "name": "Kim Thạch Thần Tượng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7393,15 +7393,15 @@
      "name": "Mộc Thạch Thần Tượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thạch Thần Tượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7459,7 +7459,7 @@
      "id": "kim",
      "name": "Kim Thiên Hỏa Sư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7468,15 +7468,15 @@
      "name": "Mộc Thiên Hỏa Sư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Hỏa Sư",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7533,7 +7533,7 @@
      "id": "kim",
      "name": "Kim Hàn Băng Hồ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7542,7 +7542,7 @@
      "name": "Mộc Hàn Băng Hồ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7609,15 +7609,15 @@
      "name": "Mộc Tu La Chiến Ma",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tu La Chiến Ma",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7683,7 +7683,7 @@
      "id": "kim",
      "name": "Kim La Hầu Ma Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7692,15 +7692,15 @@
      "name": "Mộc La Hầu Ma Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy La Hầu Ma Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7757,7 +7757,7 @@
      "id": "kim",
      "name": "Kim Huyết Hà Ma Bức",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7766,15 +7766,15 @@
      "name": "Mộc Huyết Hà Ma Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Huyết Hà Ma Bức",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7832,7 +7832,7 @@
      "id": "kim",
      "name": "Kim Cõi Âm Sát Thủ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7841,7 +7841,7 @@
      "name": "Mộc Cõi Âm Sát Thủ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7907,7 +7907,7 @@
      "id": "kim",
      "name": "Kim Vạn Cổ Độc Trùng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -7915,8 +7915,8 @@
      "id": "thuy",
      "name": "Thủy Vạn Cổ Độc Trùng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -7983,15 +7983,15 @@
      "name": "Mộc Thiên Đạo Thủ Hộ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Đạo Thủ Hộ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8056,7 +8056,7 @@
      "id": "kim",
      "name": "Kim Hư Không Lang",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8065,7 +8065,7 @@
      "name": "Mộc Hư Không Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8131,15 +8131,15 @@
      "name": "Mộc Thời Gian Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thời Gian Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8204,7 +8204,7 @@
      "id": "kim",
      "name": "Kim Không Gian Xà",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8213,7 +8213,7 @@
      "name": "Mộc Không Gian Xà",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8278,7 +8278,7 @@
      "id": "kim",
      "name": "Kim Phản Hư Ma Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8287,15 +8287,15 @@
      "name": "Mộc Phản Hư Ma Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Phản Hư Ma Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8352,7 +8352,7 @@
      "id": "kim",
      "name": "Kim Đạo Thiên Tê",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8361,15 +8361,15 @@
      "name": "Mộc Đạo Thiên Tê",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Đạo Thiên Tê",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8428,15 +8428,15 @@
      "name": "Mộc Vạn Cổ Thần Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Vạn Cổ Thần Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8502,7 +8502,7 @@
      "id": "kim",
      "name": "Kim Hỗn Độn Phượng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8511,15 +8511,15 @@
      "name": "Mộc Hỗn Độn Phượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỗn Độn Phượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8576,7 +8576,7 @@
      "id": "kim",
      "name": "Kim Thiên Cực Cự Ngư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8585,7 +8585,7 @@
      "name": "Mộc Thiên Cực Cự Ngư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8650,7 +8650,7 @@
      "id": "kim",
      "name": "Kim Huyền Thiên Hồ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8659,7 +8659,7 @@
      "name": "Mộc Huyền Thiên Hồ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8725,15 +8725,15 @@
      "name": "Mộc Đạo Kiếm Ma Thần",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Đạo Kiếm Ma Thần",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8798,7 +8798,7 @@
      "id": "kim",
      "name": "Kim Vô Hình Quỷ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8807,7 +8807,7 @@
      "name": "Mộc Vô Hình Quỷ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8872,7 +8872,7 @@
      "id": "kim",
      "name": "Kim Lục Đạo Chiến Hồn",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8881,15 +8881,15 @@
      "name": "Mộc Lục Đạo Chiến Hồn",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Lục Đạo Chiến Hồn",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -8946,7 +8946,7 @@
      "id": "kim",
      "name": "Kim Thiên Ngoại Cự Bức",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -8955,15 +8955,15 @@
      "name": "Mộc Thiên Ngoại Cự Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Ngoại Cự Bức",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9021,15 +9021,15 @@
      "name": "Mộc Hỗn Độn Giáp Trùng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỗn Độn Giáp Trùng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9094,7 +9094,7 @@
      "id": "kim",
      "name": "Kim Đạo Ngược Mãng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9102,8 +9102,8 @@
      "id": "thuy",
      "name": "Thủy Đạo Ngược Mãng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9168,7 +9168,7 @@
      "id": "kim",
      "name": "Kim Vạn Lý Độc Hạt",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9176,8 +9176,8 @@
      "id": "thuy",
      "name": "Thủy Vạn Lý Độc Hạt",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9242,7 +9242,7 @@
      "id": "kim",
      "name": "Kim Thiên Thụ Tinh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9250,8 +9250,8 @@
      "id": "thuy",
      "name": "Thủy Thiên Thụ Tinh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9316,7 +9316,7 @@
      "id": "kim",
      "name": "Kim Nghịch Thiên Sư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9325,15 +9325,15 @@
      "name": "Mộc Nghịch Thiên Sư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Nghịch Thiên Sư",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9390,7 +9390,7 @@
      "id": "kim",
      "name": "Kim Hỗn Độn Khôi",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9399,15 +9399,15 @@
      "name": "Mộc Hỗn Độn Khôi",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Hỗn Độn Khôi",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9465,15 +9465,15 @@
      "name": "Mộc Phản Hư Thần Binh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Phản Hư Thần Binh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9538,7 +9538,7 @@
      "id": "kim",
      "name": "Kim Thời Lưu Ngư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9547,7 +9547,7 @@
      "name": "Mộc Thời Lưu Ngư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9612,7 +9612,7 @@
      "id": "kim",
      "name": "Kim Hư Ảnh Miêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9621,7 +9621,7 @@
      "name": "Mộc Hư Ảnh Miêu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9686,7 +9686,7 @@
      "id": "kim",
      "name": "Kim Vạn Cổ Hỏa Thú",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9695,15 +9695,15 @@
      "name": "Mộc Vạn Cổ Hỏa Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Vạn Cổ Hỏa Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9762,15 +9762,15 @@
      "name": "Mộc Thiên Đạo Thủ Thần",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Đạo Thủ Thần",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9836,15 +9836,15 @@
      "name": "Mộc Lôi Kiếp Lang",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Lôi Kiếp Lang",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9909,7 +9909,7 @@
      "id": "kim",
      "name": "Kim Thiên Hỏa Điểu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9918,15 +9918,15 @@
      "name": "Mộc Thiên Hỏa Điểu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Hỏa Điểu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -9983,7 +9983,7 @@
      "id": "kim",
      "name": "Kim Tâm Ma Ảnh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -9992,7 +9992,7 @@
      "name": "Mộc Tâm Ma Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10058,15 +10058,15 @@
      "name": "Mộc Phong Kiếp Hạc",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Phong Kiếp Hạc",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10131,7 +10131,7 @@
      "id": "kim",
      "name": "Kim Địa Kiếp Tê",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10140,15 +10140,15 @@
      "name": "Mộc Địa Kiếp Tê",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Địa Kiếp Tê",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10205,7 +10205,7 @@
      "id": "kim",
      "name": "Kim Thủy Kiếp Mãng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10214,7 +10214,7 @@
      "name": "Mộc Thủy Kiếp Mãng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10280,15 +10280,15 @@
      "name": "Mộc Kim Kiếp Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kim Kiếp Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10353,7 +10353,7 @@
      "id": "kim",
      "name": "Kim Huyết Kiếp Bức",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10362,15 +10362,15 @@
      "name": "Mộc Huyết Kiếp Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Huyết Kiếp Bức",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10427,7 +10427,7 @@
      "id": "kim",
      "name": "Kim Băng Kiếp Hồ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10436,7 +10436,7 @@
      "name": "Mộc Băng Kiếp Hồ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10501,7 +10501,7 @@
      "id": "kim",
      "name": "Kim Hồn Kiếp Xà",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10509,8 +10509,8 @@
      "id": "thuy",
      "name": "Thủy Hồn Kiếp Xà",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10575,7 +10575,7 @@
      "id": "kim",
      "name": "Kim Kiếp Vân Khôi",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10584,15 +10584,15 @@
      "name": "Mộc Kiếp Vân Khôi",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kiếp Vân Khôi",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10650,15 +10650,15 @@
      "name": "Mộc Thiên Kiếm Kiếp Ảnh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Kiếm Kiếp Ảnh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10725,15 +10725,15 @@
      "name": "Mộc Vạn Kiếp Thần Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Vạn Kiếp Thần Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10799,7 +10799,7 @@
      "id": "kim",
      "name": "Kim Kiếp Hỏa Phượng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10808,15 +10808,15 @@
      "name": "Mộc Kiếp Hỏa Phượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kiếp Hỏa Phượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10873,7 +10873,7 @@
      "id": "kim",
      "name": "Kim Kiếp Hải Cự Ngư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10882,7 +10882,7 @@
      "name": "Mộc Kiếp Hải Cự Ngư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -10947,7 +10947,7 @@
      "id": "kim",
      "name": "Kim Kiếp Ảnh Miêu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -10956,7 +10956,7 @@
      "name": "Mộc Kiếp Ảnh Miêu",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11022,15 +11022,15 @@
      "name": "Mộc Thiên Thê Thủ Hộ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Thê Thủ Hộ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11096,15 +11096,15 @@
      "name": "Mộc Tiên Môn Kiếm Sĩ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tiên Môn Kiếm Sĩ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11169,7 +11169,7 @@
      "id": "kim",
      "name": "Kim Vấn Đạo Tướng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11178,15 +11178,15 @@
      "name": "Mộc Vấn Đạo Tướng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Vấn Đạo Tướng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11244,15 +11244,15 @@
      "name": "Mộc Đăng Tiên Hộ Pháp",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Đăng Tiên Hộ Pháp",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11317,7 +11317,7 @@
      "id": "kim",
      "name": "Kim Thiên Uy Giao",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11326,7 +11326,7 @@
      "name": "Mộc Thiên Uy Giao",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11391,7 +11391,7 @@
      "id": "kim",
      "name": "Kim Tiên Môn Linh Thú",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11399,8 +11399,8 @@
      "id": "thuy",
      "name": "Thủy Tiên Môn Linh Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11465,7 +11465,7 @@
      "id": "kim",
      "name": "Kim Tiên Linh Lang",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11473,8 +11473,8 @@
      "id": "thuy",
      "name": "Thủy Tiên Linh Lang",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11539,7 +11539,7 @@
      "id": "kim",
      "name": "Kim Dao Trì Ngư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11548,7 +11548,7 @@
      "name": "Mộc Dao Trì Ngư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11614,7 +11614,7 @@
      "id": "kim",
      "name": "Kim Tiên Phượng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11623,15 +11623,15 @@
      "name": "Mộc Tiên Phượng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tiên Phượng",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11690,15 +11690,15 @@
      "name": "Mộc Kỳ Lân Tiên Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Kỳ Lân Tiên Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11763,7 +11763,7 @@
      "id": "kim",
      "name": "Kim Vân Hải Hạc",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11772,7 +11772,7 @@
      "name": "Mộc Vân Hải Hạc",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11837,7 +11837,7 @@
      "id": "kim",
      "name": "Kim Bồng Lai Tê",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11846,15 +11846,15 @@
      "name": "Mộc Bồng Lai Tê",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Bồng Lai Tê",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11911,7 +11911,7 @@
      "id": "kim",
      "name": "Kim Tiên Thú Hổ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11920,15 +11920,15 @@
      "name": "Mộc Tiên Thú Hổ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tiên Thú Hổ",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -11985,7 +11985,7 @@
      "id": "kim",
      "name": "Kim Bích Lạc Mãng",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -11994,7 +11994,7 @@
      "name": "Mộc Bích Lạc Mãng",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12059,7 +12059,7 @@
      "id": "kim",
      "name": "Kim Tinh Hà Hạt",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12067,8 +12067,8 @@
      "id": "thuy",
      "name": "Thủy Tinh Hà Hạt",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12134,15 +12134,15 @@
      "name": "Mộc Tiên Kiếm Hồn",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tiên Kiếm Hồn",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12207,7 +12207,7 @@
      "id": "kim",
      "name": "Kim Dao Trì Liên Tinh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12215,8 +12215,8 @@
      "id": "thuy",
      "name": "Thủy Dao Trì Liên Tinh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12281,7 +12281,7 @@
      "id": "kim",
      "name": "Kim Thiên Hà Khôi",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12290,15 +12290,15 @@
      "name": "Mộc Thiên Hà Khôi",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Hà Khôi",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12356,15 +12356,15 @@
      "name": "Mộc Tiên Giới Chiến Hồn",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tiên Giới Chiến Hồn",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12429,7 +12429,7 @@
      "id": "kim",
      "name": "Kim Linh Vân Bức",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12438,7 +12438,7 @@
      "name": "Mộc Linh Vân Bức",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12503,7 +12503,7 @@
      "id": "kim",
      "name": "Kim Tiên Hỏa Thú",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12512,15 +12512,15 @@
      "name": "Mộc Tiên Hỏa Thú",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Tiên Hỏa Thú",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12578,15 +12578,15 @@
      "name": "Mộc Côn Luân Sư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Côn Luân Sư",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12651,7 +12651,7 @@
      "id": "kim",
      "name": "Kim Dao Trì Cự Ngư",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12660,7 +12660,7 @@
      "name": "Mộc Dao Trì Cự Ngư",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12725,7 +12725,7 @@
      "id": "kim",
      "name": "Kim Tiên Vũ Điểu",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12733,8 +12733,8 @@
      "id": "thuy",
      "name": "Thủy Tiên Vũ Điểu",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12801,15 +12801,15 @@
      "name": "Mộc Thiên Tiên Thủ Thần",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Tiên Thủ Thần",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12874,7 +12874,7 @@
      "id": "kim",
      "name": "Kim Đào Hoa Tinh",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12883,15 +12883,15 @@
      "name": "Mộc Đào Hoa Tinh",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Đào Hoa Tinh",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -12948,7 +12948,7 @@
      "id": "kim",
      "name": "Kim Linh Miêu Tiên",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -12957,7 +12957,7 @@
      "name": "Mộc Linh Miêu Tiên",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -13022,7 +13022,7 @@
      "id": "kim",
      "name": "Kim Vân Tiên Quỷ",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -13031,7 +13031,7 @@
      "name": "Mộc Vân Tiên Quỷ",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -13097,15 +13097,15 @@
      "name": "Mộc Thiên Binh Hồn",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {
      "id": "thuy",
      "name": "Thủy Thiên Binh Hồn",
      "el": "thuy",
-     "hpMul": 1.0,
-     "atkMul": 1.0,
+     "hpMul": 1,
+     "atkMul": 1,
      "w": 16
     },
     {
@@ -13170,7 +13170,7 @@
      "id": "kim",
      "name": "Kim Bích Hải Giao",
      "el": "kim",
-     "hpMul": 1.0,
+     "hpMul": 1,
      "atkMul": 1.05,
      "w": 16
     },
@@ -13179,7 +13179,7 @@
      "name": "Mộc Bích Hải Giao",
      "el": "moc",
      "hpMul": 1.05,
-     "atkMul": 1.0,
+     "atkMul": 1,
      "w": 16
     },
     {

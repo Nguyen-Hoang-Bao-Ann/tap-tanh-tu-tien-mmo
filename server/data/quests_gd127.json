@@ -9642,7 +9642,8 @@
       "r": 150
     },
     "clueHint": "Có dấu vết lạ quanh Bát Quái Trận Đồ...",
-    "monsterKind": "huyetlang"
+    "monsterKind": "huyetlang",
+    "bossOnly": true
   },
   "q127_hid_009": {
     "name": "Dấu vết Thư Cũ",
@@ -10302,7 +10303,8 @@
       "r": 150
     },
     "clueHint": "Có dấu vết lạ quanh Bạch Hổ Thành...",
-    "monsterKind": "huyetlang"
+    "monsterKind": "huyetlang",
+    "bossOnly": true
   },
   "q127_hid_045": {
     "name": "Dấu vết Rừng Sâu",
@@ -10412,7 +10414,8 @@
       "r": 150
     },
     "clueHint": "Có dấu vết lạ quanh Bạch Lộ Thành...",
-    "monsterKind": "loi_dieu"
+    "monsterKind": "loi_dieu",
+    "bossOnly": true
   },
   "q127_chain_01_1": {
     "name": "Mất Trộm (1/2)",
@@ -11028,7 +11031,8 @@
     "npcId": "ky_lan_thanh_npc_007",
     "minAffinity": 0,
     "requiresFlag": "chain_24",
-    "monsterKind": "huyetlang"
+    "monsterKind": "huyetlang",
+    "bossOnly": true
   },
   "q127_chain_25_1": {
     "name": "Lễ Hội (1/2)",
@@ -11611,7 +11615,7 @@
   },
   "q127_adv_tham_hiem_3": {
     "name": "Thăng cấp Thám Hiểm — Cấp 3/5",
-    "desc": "Thang cấp Thám Hiểm tầng 3: tới Bạch Hổ Thành — trả tại Người Giao Nhiệm Vụ ở Bạch Lộ Thành. — mở tầng 4 khi trả.",
+    "desc": "Thang cấp Thám Hiểm tầng 3: tới Bạch Hổ Thành — trả tại Người Giao Nhiệm Vụ ở Bạch Lộ Thành. Đích thuộc cõi Trúc Cơ — đạt cảnh Trúc Cơ mới vào được. — mở tầng 4 khi trả.",
     "target": 1,
     "rewardStones": 225,
     "tuViReward": 40,
@@ -11631,7 +11635,7 @@
   },
   "q127_adv_tham_hiem_4": {
     "name": "Thăng cấp Thám Hiểm — Cấp 4/5",
-    "desc": "Thang cấp Thám Hiểm tầng 4: tới Cửu Tiêu Thành — trả tại Người Giao Nhiệm Vụ ở Bạch Lộ Thành. — mở tầng 5 khi trả.",
+    "desc": "Thang cấp Thám Hiểm tầng 4: tới Cửu Tiêu Thành — trả tại Người Giao Nhiệm Vụ ở Bạch Lộ Thành. Đích thuộc cõi Kim Đan — đạt cảnh Kim Đan mới vào được. — mở tầng 5 khi trả.",
     "target": 1,
     "rewardStones": 265,
     "tuViReward": 48,
@@ -11651,7 +11655,7 @@
   },
   "q127_adv_tham_hiem_5": {
     "name": "Thăng cấp Thám Hiểm — Cấp 5/5",
-    "desc": "Thang cấp Thám Hiểm tầng 5: tới Cổ Thụ Yêu Giới — trả tại Người Giao Nhiệm Vụ ở Bạch Lộ Thành. — tầng cuối của thang.",
+    "desc": "Thang cấp Thám Hiểm tầng 5: tới Cổ Thụ Yêu Giới — trả tại Người Giao Nhiệm Vụ ở Bạch Lộ Thành. Đích thuộc cõi Kim Đan — đạt cảnh Kim Đan mới vào được. — tầng cuối của thang.",
     "target": 1,
     "rewardStones": 310,
     "tuViReward": 55,
@@ -11792,7 +11796,7 @@
   },
   "q127_adv_ho_tong_4": {
     "name": "Thăng cấp Hộ Tống — Cấp 4/5",
-    "desc": "Thang cấp Hộ Tống tầng 4: hộ tống thương nhân tới Cổ Thụ Yêu Giới — trả tại Người Giao Nhiệm Vụ ở Chu Tước Thành. — mở tầng 5 khi trả.",
+    "desc": "Thang cấp Hộ Tống tầng 4: hộ tống thương nhân tới Cổ Thụ Yêu Giới — trả tại Người Giao Nhiệm Vụ ở Chu Tước Thành. Đích thuộc cõi Kim Đan — đạt cảnh Kim Đan mới vào được. — mở tầng 5 khi trả.",
     "target": 1,
     "rewardStones": 610,
     "tuViReward": 114,
@@ -11807,7 +11811,7 @@
   },
   "q127_adv_ho_tong_5": {
     "name": "Thăng cấp Hộ Tống — Cấp 5/5",
-    "desc": "Thang cấp Hộ Tống tầng 5: hộ tống thương nhân tới Địa Ngục Hỏa Hải — trả tại Người Giao Nhiệm Vụ ở Chu Tước Thành. — tầng cuối của thang.",
+    "desc": "Thang cấp Hộ Tống tầng 5: hộ tống thương nhân tới Địa Ngục Hỏa Hải — trả tại Người Giao Nhiệm Vụ ở Chu Tước Thành. Đích thuộc cõi Kim Đan — đạt cảnh Kim Đan mới vào được. — tầng cuối của thang.",
     "target": 1,
     "rewardStones": 705,
     "tuViReward": 132,

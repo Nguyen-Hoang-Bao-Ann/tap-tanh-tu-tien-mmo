@@ -3,7 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
-    <title>Tập Tành Tu Tiên — Client (Phaser 3)</title>
+    <title>Tập Tành Tu Tiên</title>
+    <!-- GĐ375: PWA — cài game lên màn hình chính điện thoại, mở như ứng dụng -->
+    <meta name="description" content="Game tu tiên 2D — tu luyện, khám phá và viết nên cuộc đời tu tiên của riêng bạn." />
+    <meta name="theme-color" content="#0e1420" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Tu Tiên" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/pwa/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png" />
     <style>
       html, body { margin: 0; padding: 0; background: #0e1420; height: 100%; }
       body { display: flex; align-items: center; justify-content: center; font-family: 'Segoe UI', system-ui, sans-serif; }
@@ -473,6 +484,26 @@
       }
       .panelHead { font-family: Palatino, Georgia, serif; color: #8be9c9; letter-spacing: .5px; }
       .panelSub { color: #bcd8c6; }
+      /* GĐ382: overlay cốt truyện mở đầu — thẻ chữ giữa màn, hợp tông panel */
+      #introOverlay {
+        position: fixed; inset: 0; z-index: 90; display: none;
+        align-items: center; justify-content: center; padding: 14px; box-sizing: border-box;
+        background: rgba(3, 8, 5, 0.78);
+      }
+      .introCard {
+        width: 560px; max-width: 94vw; max-height: 88vh; overflow-y: auto; box-sizing: border-box;
+        background: rgba(23,40,29,.97); border: 1px solid rgba(230,184,62,.45); border-radius: 14px;
+        box-shadow: 0 14px 40px rgba(0,0,0,.6); padding: 20px 22px 16px; color: #eaf5ec;
+      }
+      .introKicker { font-size: 11px; letter-spacing: 3px; color: #cfe3d4; text-transform: uppercase; text-align: center; }
+      .introTitle { margin: 6px 0 4px; text-align: center; font-family: Palatino, Georgia, serif; font-size: 24px; color: #ffd94d; }
+      .introRule { height: 2px; margin: 8px auto 12px; width: 180px; background: linear-gradient(90deg, transparent, #e6b83e, transparent); }
+      .introBody p { font-size: 14.5px; line-height: 1.65; margin: 0 0 10px; text-align: left; }
+      .introBody ul { margin: 0 0 6px; padding-left: 18px; }
+      .introBody li { font-size: 14px; line-height: 1.6; margin-bottom: 8px; text-align: left; }
+      .introFoot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; }
+      .introPage { font-size: 12px; color: #bcd8c6; }
+      .introBtns { display: inline-flex; gap: 8px; }
       .xBtn { border-color: rgba(150,205,175,.5); color: #dff5e6; border-radius: 99px; font-family: inherit; }
       .pbtn {
         background: rgba(110,215,155,.20); color: #d8fbe9; border: 1px solid rgba(165,240,205,.65);
@@ -703,6 +734,13 @@
       }
       /* GĐ58: thẻ nhân vật trên mobile không tràn xuống cụm nút chiêu — cao tối đa rồi cuộn trong thẻ */
       body.touch #hudChar { max-height: calc(100vh - 128px); overflow-y: auto; overscroll-behavior: contain; }
+      /* GĐ375 đợt 2: màn ngang THẤP (≤430px — điện thoại cỡ 844×390): số 128 ở
+         luật GĐ58 chưa trừ ô chat (bottom 128 + cao 33 + top 6 của thẻ) nên đáy
+         thẻ vẫn đè ô chat ~49px (đo thật GĐ375). Siết trần riêng cho màn thấp —
+         thẻ vẫn cuộn trong như thiết kế, chỉ dừng trên ô chat. */
+      @media (max-height: 430px) {
+        body.touch #hudChar { max-height: calc(100vh - 184px); }
+      }
       /* GĐ60: thanh hành trình ngự kiếm / thuyền */
       #journeyBar {
         display: none; position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
@@ -899,9 +937,11 @@
       #touchBars .tbar { height: 15px; }
       body.touch #touchBars .tbar { height: 11px; margin-top: 3px; }
       body.touch #touchBars .tbar span { font-size: 8.5px; line-height: 11px; }
+      /* GĐ375 đợt 2: right 122 -> 134 — minimapWrap chiếm tới 132px từ mép
+         phải (lề 8 + rộng 124) nên cột nút bị nó phủ 10px (đo thật GĐ375). */
       body.touch #sideBtns {
         display: grid; grid-template-rows: repeat(3, 38px); grid-auto-flow: column;
-        grid-auto-columns: 34px; gap: 3px; top: 8px; right: 122px;
+        grid-auto-columns: 34px; gap: 3px; top: 8px; right: 134px;
       }
       body.touch #worldMapPanel { width: 97vw; max-height: 94vh; padding: 10px; }
       body.touch #wmCanvas { width: 100%; height: auto; }
@@ -1405,11 +1445,30 @@
       <div id="storyPanel" class="panel" style="display:none">
         <div class="panelHead"><span>📖 Thiên Mệnh Ký</span><button class="xBtn" id="storyClose" type="button">✕</button></div>
         <div class="row" style="gap:6px;margin:4px 0">
+          <button class="mini" id="storyTabIntro" type="button">🌅 Khởi đầu</button>
           <button class="mini" id="storyTabLore" type="button">📜 Truyền Thuyết Sơ Khai</button>
           <button class="mini" id="storyTabMain" type="button">🌌 Thiên Mệnh</button>
+          <button class="mini" id="storyTabClues" type="button">🧭 Manh mối</button>
           <button class="mini" id="storyTabLog" type="button">🔄 Kiếp Ký</button>
         </div>
         <div id="storyBody"></div>
+      </div>
+      <!-- GĐ382: Cốt truyện mở đầu — chuỗi 6 màn chữ lật trang sau khi tạo nhân vật -->
+      <div id="introOverlay" style="display:none">
+        <div class="introCard">
+          <div class="introKicker">✦ Khởi đầu một kiếp mới</div>
+          <h2 class="introTitle" id="introTitle"></h2>
+          <div class="introRule"></div>
+          <div class="introBody" id="introBody"></div>
+          <div class="introFoot">
+            <span class="introPage" id="introPage"></span>
+            <span class="introBtns">
+              <button class="mini" id="introSkip" type="button">Bỏ qua</button>
+              <button class="pbtn gold" id="introNext" type="button">Tiếp tục →</button>
+            </span>
+          </div>
+          <p class="splash-note" style="text-align:center;margin-top:10px">Đọc lại bất cứ lúc nào trong 📖 Thiên Mệnh Ký → 🌅 Khởi đầu.</p>
+        </div>
       </div>
       <div id="gardenPanel" class="panel" style="display:none">
         <div class="panelHead"><span>🌱 Gieo thảo — vườn làng</span><button class="xBtn" id="gardenClose" type="button">✕</button></div>
@@ -1665,6 +1724,12 @@
           <div id="connStatus" style="display:none">
             <p class="splash-note" id="connStatusText"></p>
             <button class="menubtn" id="btnRetryConn" type="button" style="display:none">↻ Thử kết nối lại</button>
+          </div>
+
+          <!-- GĐ375: gợi ý cài game như ứng dụng (pwa.ts điều khiển ẩn/hiện theo nền tảng) -->
+          <div id="installHint" style="display:none">
+            <button class="menubtn" id="btnInstallApp" type="button" style="display:none">📱 Cài game như ứng dụng</button>
+            <p class="splash-note" id="iosInstallHint" style="display:none">📱 Chơi trên iPhone/iPad: bấm nút <b>Chia sẻ</b> rồi chọn <b>“Thêm vào Màn hình chính”</b> để cài game như một ứng dụng.</p>
           </div>
 
           <!-- Chưa đăng nhập -->
