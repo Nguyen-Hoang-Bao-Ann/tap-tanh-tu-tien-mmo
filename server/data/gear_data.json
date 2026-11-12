@@ -245,6 +245,10 @@
    {
     "id": "SACH_PHEP",
     "name": "Sách Phép"
+   },
+   {
+    "id": "PHAP_AN",
+    "name": "Pháp Ấn"
    }
   ],
   "PHAT_TU": [
@@ -259,6 +263,10 @@
    {
     "id": "BINH_BAT",
     "name": "Bình Bát"
+   },
+   {
+    "id": "PHAT_LUAN",
+    "name": "Phật Luân"
    }
   ],
   "COT_TU": [
@@ -269,6 +277,14 @@
    {
     "id": "COT_CHUY",
     "name": "Cốt Chùy"
+   },
+   {
+    "id": "COT_CUNG",
+    "name": "Cốt Cung"
+   },
+   {
+    "id": "COT_NHAN",
+    "name": "Cốt Nhận"
    }
   ],
   "SAT_THU": [
@@ -301,6 +317,10 @@
    {
     "id": "TRONG_KIEM",
     "name": "Trọng Kiếm"
+   },
+   {
+    "id": "PHI_KIEM",
+    "name": "Phi Kiếm"
    }
   ],
   "QUY_TU": [
@@ -315,6 +335,10 @@
    {
     "id": "QUY_THUONG",
     "name": "Quỷ Thương"
+   },
+   {
+    "id": "QUY_LINH",
+    "name": "Chiêu Hồn Linh"
    }
   ],
   "Y_TU": [
@@ -329,6 +353,10 @@
    {
     "id": "CO_CAM",
     "name": "Cổ Cầm"
+   },
+   {
+    "id": "DOC_KINH",
+    "name": "Độc Kinh"
    }
   ],
   "NHO_TU": [
@@ -343,6 +371,10 @@
    {
     "id": "QUYEN_TRUC",
     "name": "Quyển Trúc"
+   },
+   {
+    "id": "VAN_KIEM",
+    "name": "Văn Kiếm"
    }
   ]
  },

@@ -1,0 +1,71 @@
+TỔNG NPC (file gộp + nối tay): 14490  [gộp 157 map; nối tay: thảo dược 118, trại ngự thú 1, thủ tàng 1, kể chuyện 2]
+
+--- CŨ (cityNpcSpriteKey, có style) — top bộ ---
+  city-e           2480  17.1%
+  city-a           2465  17.0%
+  city-d           2464  17.0%
+  city-b           2440  16.8%
+  city-c           2438  16.8%
+  merchant         1395  9.6%
+  envoy             245  1.7%
+  shopdan           155  1.1%
+  shopnl            155  1.1%
+  elder             135  0.9%
+  npc-thaoduoc      118  0.8%
+  city-a cũ: 2465 (17.0%)
+
+--- MỚI (cityNpcLook + variant) — top bộ ---
+  city-e           2391  16.5%
+  city-d           1682  11.6%
+  city-c           1452  10.0%
+  city-b           1437  9.9%
+  merchant         1395  9.6%
+  city-a            994  6.9%
+  f32-laodan        581  4.0%
+  villager-a        578  4.0%
+  villager-b        573  4.0%
+  f32-dannu         562  3.9%
+  villager-c        559  3.9%
+  blacksmith        361  2.5%
+  city-a mới: 994 (6.9%) — giảm 1471 NPC
+  tổng diện mạo khác nhau (set×variant): 232
+
+--- DIỆN MẠO / VAI (poolSize × 8; vai giữ cũ = 5 bộ city × 8 = 40) — top vai đông nhất ---
+   5750  Dân thường                 pool 10 → 80 diện mạo
+   1350  Tu sĩ lữ hành              pool 5 → 40 diện mạo
+   1350  Thương nhân rong           pool 1 → 8 diện mạo
+   1350  Lính gác                   pool 1 → 8 diện mạo
+   1350  Người ngắm cảnh            pool 3 → 24 diện mạo
+    155  Chủ Tiệm Đan               pool 1 → 8 diện mạo
+    155  Chủ Tiệm Vũ Khí            pool 1 → 8 diện mạo
+    155  Chủ Tiệm Nguyên Liệu       pool 1 → 8 diện mạo
+    118  Chủ Tiệm Thảo Dược         pool 1 → 8 diện mạo
+    110  Sứ Giả                     pool 1 → 8 diện mạo
+    110  Thợ Rèn                    pool 1 → 8 diện mạo
+    110  Chủ Quán Ăn                pool 1 → 8 diện mạo
+    110  Chủ Tiệm Tạp Hóa           pool 1 → 8 diện mạo
+    110  Dược Sư                    pool 1 → 8 diện mạo
+    105  Người Giao Nhiệm Vụ        pool 5 → 40 diện mạo
+     45  Đấu Giá Viên               pool 5 → 40 diện mạo
+
+--- VAI NÀO KHÔNG KHỚP POOL (giữ hành vi cũ) ---
+   1350  Tu sĩ lữ hành
+    105  Người Giao Nhiệm Vụ
+     45  Đấu Giá Viên
+     45  Thủ Quỹ Ngân Hàng
+     45  Người Đổi Tiền
+     45  Thủ Kho
+     45  Người Giữ Cổng Dịch Chuyển
+     45  Người Kể Chuyện
+     45  Tiểu Đồng Truyền Tin
+     45  Quan Khâm Sai
+     45  Y Sư Thành
+     45  Người Gác Đền
+     45  Người Bán Công Pháp Hiếm
+     45  Người Bán Mảnh Công Pháp Ẩn
+     45  Người Tặng Quà
+     45  Người Đổi Linh Thạch
+     45  Người Thu Mua Kỳ Vật
+      1  Chủ Trại Ngự Thú
+      1  Người giữ Đài Kiếp
+      1  Hộ Vệ Tiên Môn ngoại viện

@@ -39,6 +39,21 @@
       #hudRealm { font-size: 10.5px; color: #d9b8ff; margin: 1px 0; }
       #hudLinhCan { font-size: 9.5px; color: #9fd8c9; margin-bottom: 2px; }
       #hudTalent { font-size: 9.5px; color: #f5d98a; margin-bottom: 2px; }
+      /* GĐ385: pháp bảo — dòng nhỏ trên thẻ + panel chi tiết */
+      #hudPhapBao img { width: 18px; height: 18px; vertical-align: -4px; image-rendering: pixelated; }
+      /* GĐ385-sửaUI: chi tiết pháp bảo là PANEL NỔI riêng (không nở trong thẻ hẹp) */
+      #phapBaoPanel { width: 302px; max-width: calc(100vw - 24px); }
+      #phapBaoBody { font-size: 11px; color: #ddd6fe; line-height: 1.45; }
+      #phapBaoBody .pbItem { border-top: 1px solid rgba(255,255,255,0.09); padding: 7px 0 8px; }
+      #phapBaoBody .pbItem:first-child { border-top: none; padding-top: 2px; }
+      #phapBaoBody .pbHead2 { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #f5d98a; }
+      #phapBaoBody .pbHead2 img { width: 26px; height: 26px; flex: 0 0 26px; image-rendering: pixelated; }
+      #phapBaoBody .pbHead2 span { flex: 1 1 auto; min-width: 0; }
+      #phapBaoBody .pbFx { display: block; color: #a5f3fc; font-size: 11px; line-height: 1.5; margin-top: 3px; }
+      #phapBaoBody .pbCosts { color: #fcd34d; font-size: 11px; line-height: 1.55; margin-top: 4px; }
+      #phapBaoBody .pbBtns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+      #phapBaoBody .pbtn { white-space: normal; }
+      @media (max-width: 560px) { #phapBaoPanel { max-height: calc(100vh - 250px); } } /* màn hẹp: chừa vùng chat + dock ở đáy, panel cuộn nội bộ */
       /* GĐ337: hộp thiên phú (màn tạo + panel bốc bù dùng chung) */
       .talTierRow { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 8px; }
       .talTierBtn { border: 1px solid #4a4a6a; background: #23233a; color: #ddd; border-radius: 8px; padding: 5px 10px; font-size: 12px; cursor: pointer; }
@@ -161,6 +176,11 @@
       .nItem.sel { border-color: #ffd94d; background: rgba(255, 217, 77, 0.1); }
       .nItem .nT { font-size: 13.5px; font-weight: 700; line-height: 1.3; }
       .nItem .nD { font-size: 11.5px; color: #a9b39a; margin-top: 2px; }
+      .nItem.unread .nT { font-weight: 800; }
+      .nNew { color: #ff5a4d; margin-right: 4px; font-size: 11px; }
+      .nPin { font-size: 12px; color: #ffd94d; margin-bottom: 6px; }
+      .nMaint { font-size: 13px; line-height: 1.5; color: #ffb37a; background: rgba(255, 179, 122, 0.08); border: 1px solid rgba(255, 179, 122, 0.35); border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
+      .menubtn.hasNew::after, .menuAction.hasNew::after { content: ' ●'; color: #ff5a4d; }
       #noticeContent { overflow-y: auto; padding: 14px 18px; }
       #noticeContent h4 { margin: 0 0 4px; font-size: 17px; color: #ffdf6b; }
       #noticeContent .nDate { font-size: 12px; color: #a9b39a; margin-bottom: 10px; }
@@ -295,6 +315,33 @@
       #connStatus { text-align: center; }
       #connStatusText { color: #ffe9b0; }
       #btnRetryConn { width: 220px; font-size: 13.5px; padding: 8px; }
+      /* GĐ390-sửa select lần 2: chỉ hiện TÊN + TRẠNG THÁI server (Bảo 12/11) —
+         không số người, không độ trễ; trạng thái của server đang chọn hiện ở
+         dòng #serverDetail bên dưới (Đang hoạt động / Đang bảo trì / Không truy cập được) */
+      .serverSelectWrap {
+        position: relative; width: 330px; max-width: 92%; margin: 8px auto 0; box-sizing: border-box;
+      }
+      .serverSelectWrap::after {
+        content: '▾'; position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+        color: #ffd94d; font-size: 15px; pointer-events: none;
+      }
+      .serverSelect {
+        width: 100%; box-sizing: border-box; appearance: none; -webkit-appearance: none;
+        padding: 10px 34px 10px 12px; font-size: 14px; font-weight: 700; color: #eaf5ec;
+        background: rgba(24, 40, 30, 0.90); border: 1px solid #4a7a5c; border-radius: 9px; outline: none;
+      }
+      .serverSelect:focus { border-color: #e6b83e; }
+      .serverSelect option { background: #18281e; color: #eaf5ec; font-weight: 400; }
+      .serverDetail {
+        font-size: 11.5px; color: #a9cbb6; line-height: 1.5; margin: 8px auto 0;
+        width: 330px; max-width: 92%; min-height: 34px; box-sizing: border-box;
+      }
+      #btnEnterServer { width: 290px; }
+      /* GĐ390-sửa panel lần 2: panel GỌN như bản đầu (cao bằng nội dung), chỉ căn giữa màn hình theo chiều dọc (Bảo 12/11 — lần 1 hiểu sai "cao lên" thành kéo cao panel 62vh, đã bỏ) */
+      #serverPanel { display: flex; flex-direction: column; justify-content: center; }
+      #splashScreen.serverMode { align-items: center; }
+      #splashScreen.serverMode .splash-inner { margin-bottom: 0; }
+      #btnRefreshServers { width: 220px; font-size: 13.5px; padding: 8px; }
       .splash-note b { color: #ffe9b0; }
       .authInput {
         display: block; width: 290px; max-width: 84%; margin: 8px auto 0; padding: 10px 12px;
@@ -1317,6 +1364,8 @@
         <button id="btnPtHopNhat" type="button" style="display:none">☯ Hợp Nhất — hoàn thiện Chân Ảnh</button>
         <button id="btnThanThuat" type="button" style="display:none">🌟 Thần Thuật</button>
         <button id="btnXuatKhieu" type="button" style="display:none">👻 Xuất khiếu</button>
+        <div id="hudPhapBao" style="font-size:11px;color:#c4b5fd;margin:1px 0 2px;"></div>
+        <button id="btnPhapBao" type="button">▸ Pháp bảo</button>
         <button id="hudDetailBtn" type="button">▸ Chỉ số</button>
         <div id="hudDetails"><div id="hudStats">—</div><div id="hudTalentDetail" style="font-size:11px;color:#f5d98a;margin:3px 0 2px;line-height:1.45;"></div><button id="btnTalentMakeup" type="button" style="display:none">✦ Bốc bù thiên phú</button><button id="btnTalentLc" type="button" style="display:none">🧭 Đo lại linh căn (Thiên Linh Căn)</button></div>
         <button id="hudBreak" type="button">✦ Đột phá cảnh giới ✦</button>
@@ -1407,6 +1456,10 @@
       <div id="interactHint"></div>
       <div id="skillBar"></div>
       <button id="invBtn" type="button">🎒 Túi đồ (I)</button>
+      <div id="phapBaoPanel" class="panel" style="display:none">
+        <div class="panelHead"><span>✦ Pháp bảo — kỳ vật bản mệnh</span><button class="xBtn" id="phapBaoClose" type="button">✕</button></div>
+        <div id="phapBaoBody"></div>
+      </div>
       <div id="talentPanel" class="panel" style="display:none">
         <div class="panelHead"><span>✦ Thiên phú — bốc bù cho nhân vật cũ</span><button class="xBtn" id="talentClose" type="button">✕</button></div>
         <div id="talentPanelBody"></div>
@@ -1732,12 +1785,26 @@
             <p class="splash-note" id="iosInstallHint" style="display:none">📱 Chơi trên iPhone/iPad: bấm nút <b>Chia sẻ</b> rồi chọn <b>“Thêm vào Màn hình chính”</b> để cài game như một ứng dụng.</p>
           </div>
 
+          <!-- GĐ390: khung chọn server — hiện TRƯỚC đăng nhập -->
+          <!-- GĐ390-sửa select: kiểu ô chọn (select) thay danh sách dòng — bấm ô xổ ra các server, chọn xong bấm "Vào" -->
+          <div id="serverPanel" style="display:none">
+            <div style="font-weight:700; color:#ffd94d; margin-top:10px">Chọn máy chủ</div>
+            <div class="serverSelectWrap">
+              <select id="serverSelect" class="serverSelect" aria-label="Chọn máy chủ"></select>
+            </div>
+            <div id="serverDetail" class="serverDetail">Đang kiểm tra…</div>
+            <button class="menubtn primary" id="btnEnterServer" type="button" disabled>Vào</button>
+            <p class="splash-note">Mỗi máy chủ là một thế giới riêng — nhân vật, đồ đạc và tông môn không chuyển qua lại được.</p>
+            <button class="menubtn" id="btnRefreshServers" type="button">↻ Làm mới trạng thái</button>
+          </div>
+
           <!-- Chưa đăng nhập -->
           <div id="splashMain" style="display:none">
             <button class="menubtn primary" id="btnShowLogin" type="button">Đăng nhập</button>
             <button class="menubtn" id="btnShowRegister" type="button">Đăng ký tài khoản</button>
             <button class="menubtn" id="btnGuest" type="button">Chơi nhanh (không cần tài khoản)</button>
             <button class="menubtn" id="btnNews" type="button">📢 Thông báo & cập nhật</button>
+            <button class="menubtn" id="btnChangeServer" type="button">Đổi máy chủ</button>
             <button class="menubtn" id="btnExit" type="button">Thoát</button>
             <p class="splash-note"><b>Có tài khoản:</b> nhân vật lưu trên server, đăng nhập máy nào cũng chơi tiếp được, tối đa 3 nhân vật. <b>Chơi nhanh:</b> nhân vật chỉ gắn với trình duyệt này.</p>
           </div>
@@ -1758,6 +1825,7 @@
             <div id="charList"></div>
             <button class="menubtn primary" id="btnCreateChar" type="button" style="display:none">＋ Tạo nhân vật mới</button>
             <button class="menubtn" id="btnNews2" type="button">📢 Thông báo & cập nhật</button>
+            <button class="menubtn" id="btnChangeServer2" type="button">Đổi máy chủ</button>
             <button class="menubtn" id="btnLogout" type="button">Đăng xuất</button>
             <div id="charErr"></div>
           </div>

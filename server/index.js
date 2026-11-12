@@ -675,7 +675,7 @@ try {
     // GĐ129: trước đây chỉ nhận map 'city' nên NPC 15 map nghề (và giver
     // Cổ Thụ mới) không bao giờ spawn — giờ nhận mọi map có entry trong
     // NPCData (thành + nghề + Cổ Thụ); map không có entry vẫn bỏ qua.
-    const entry = npcAll[def.id];
+    const entry = npcAll[def.id] || (def.id === 'van_uyen' ? { npcs: [] } : null); // GĐ386: Văn Uyển không có entry NPCData — cho qua với danh sách trống để nối tay Thủ Tàng (PA2); 'van_uyen' = NHO_STUDY_MAP (hằng khai báo ở khối GĐ105 bên dưới)
     const rt = MAP_RUNTIME.get(def.id);
     if (!entry || !rt) continue;
     const rng = mulberry32(hash89(def.id));
@@ -711,7 +711,7 @@ try {
     // tiệm CÓ BẰNG Thải Dược Sư (herbCert); vị trí nối tiếp lưới chức năng
     // (quét từ ô ngay sau NPC chức năng cuối, hàng KHÔNG gói %5 như lưới cũ,
     // vẫn qua đủ kiểm tra vật cản/decor/khoảng cách như mọi NPC khác).
-    if (def.category === 'city' || def.category === 'fortress' || def.category === 'village') { // GĐ207: + thành trì/làng
+    if ((def.category === 'city' || def.category === 'fortress' || def.category === 'village') && def.id !== 'van_uyen') { // GĐ207: + thành trì/làng; GĐ386: trừ Văn Uyển — đó là thư viện, không đặt tiệm thảo dược
       const SUR151 = ['Trần', 'Lê', 'Phạm', 'Hoàng', 'Vũ', 'Đặng', 'Bùi', 'Đỗ', 'Hồ', 'Ngô', 'Dương', 'Lý'];
       const GIVEN151 = ['Dược Sinh', 'Thảo Nhi', 'Linh Chi', 'Cam Thảo', 'Bạch Truật', 'Đương Quy', 'Hoàng Kỳ', 'Phục Linh', 'Sâm Ông', 'Hà Thủ', 'Bạc Hà', 'Kinh Giới'];
       const kid = `${def.id}_npc_thaoduoc`;
@@ -736,6 +736,22 @@ try {
       }
       if (!kok) { kx = rt.portal.x; ky = rt.portal.y - 200; }
       const keeper = { id: kid, name: 'Mã Vân', kind: 'functional', group: 'he_thong', role: 'Chủ Trại Ngự Thú', dialogue: ['Trại Ngự Thú của ta đây — mua thú cưỡi, đặt thuần hóa hộ, hay mua trứng về tự ấp đều có đủ. Có điều thú cưỡi chỉ dành cho bậc Nguyên Anh trở lên, trẻ tuổi cưỡi vào thú nó hất xuống đấy.'], mountKeeper: true, x: kx, y: ky, style: 'villager' + (hash89(kid) % 5) };
+      list.push(keeper); placed.push(keeper);
+    }
+    // GĐ386 (PA2): THỦ TÀNG VĂN UYỂN — Văn Uyển không có entry NPCData nên
+    // nối tay như GĐ161: người trông Tàng Kinh Các đứng cạnh chính đường
+    // (điểm đọc sách quanh cổng), quét ô trống qua đủ kiểm vật cản/decor.
+    // Đứng thường trực như mọi NPC thành phố — cơ chế hiện hình 95px của
+    // GĐ317 chỉ áp cho điểm giấu di vật dv_nhan trong map, không áp cho NPC.
+    if (def.id === 'van_uyen') {
+      const kid = 'van_uyen_npc_thutang';
+      const OFF386 = [[130, -50], [-130, -50], [130, 70], [-130, 70], [0, -170], [190, 10], [-190, 10], [70, 150], [-70, 150]];
+      let kx = rt.portal.x + 130, ky = rt.portal.y - 50;
+      for (const [dx, dy] of OFF386) {
+        const cx = rt.portal.x + dx, cy = rt.portal.y + dy;
+        if (!blocked(cx, cy, 20) && !decorBlocked(cx, cy) && farEnough(cx, cy, 45)) { kx = cx; ky = cy; break; }
+      }
+      const keeper = { id: kid, name: 'Trầm Mặc', kind: 'functional', group: 'he_thong', role: 'Thủ Tàng', dialogue: ['Lão phu Trầm Mặc, trông coi Tàng Kinh Các này đã mấy chục năm. Sách ở đây không phân môn phái — ai tới đọc cũng được, chỉ xin giữ yên lặng, và đừng mang sách ra khỏi các.'], libKeeper: true, x: kx, y: ky, style: 'villager3' };
       list.push(keeper); placed.push(keeper);
     }
     for (const n of ambs) {
@@ -1158,6 +1174,26 @@ function rollChestLoot(grade, nerf = false) {
   }
   return out;
 }
+// Nhóm A (11/11/2026, tỉ lệ TẠM theo DE_XUAT_VAT_PHAM): A4 — nguyên liệu CỤM LOÀI
+// cõi cao. Mỗi nguyên liệu chỉ rơi từ đúng cụm loài mang đặc trưng của nó (hồn →
+// quái hệ hồn, cốt hư không → quái hệ hư không...). Nối ở handler hạ quái cạnh
+// các đường rơi nguyên liệu cũ, nhân dmMat như mọi nguyên liệu (đã gồm LOOT_NERF
+// cho quái farm thường, trùm/hiếm miễn giảm theo GĐ319; kênh cơ duyên GĐ337/347
+// là kênh riêng, không đụng).
+const KIND_MAT_DROPS = {
+  hon_tinh: { kinds: ['vo_hinh_quy', 'phan_hu_ma_anh', 'luc_dao_chien_hon', 'hu_anh_mieu'], rate: 0.15 }, // Hồn Tinh ← quái hệ hồn cõi Phản Hư
+  hu_khong_cot: { kinds: ['hu_khong_lang', 'khong_gian_xa', 'thoi_gian_thu'], rate: 0.15 }, // Hư Không Cốt ← quái hệ hư không/không gian/thời gian
+  kiep_loi_tinh: { kinds: ['loi_kiep_lang', 'thien_uy_giao'], rate: 0.15 }, // Kiếp Lôi Tinh ← quái hệ lôi cõi Độ Kiếp
+  tam_ma_ket_tinh: { kinds: ['tam_ma_anh', 'van_kiep_than_thu', 'kiep_hoa_phuong', 'van_dao_tuong', 'thien_uy_giao'], rate: 0.20 }, // Tâm Ma Kết Tinh ← quái hệ tâm ma/vạn kiếp
+  giao_chau: { kinds: ['huyen_thuy_giao', 'giao_long_chua', 'thien_uy_giao', 'bich_hai_giao'], rate: 0.15 }, // Giao Châu ← loài giao long
+  phuong_vu: { kinds: ['chu_tuoc_diem', 'hoa_vu_phuong_anh'], rate: 0.15 }, // Phượng Vũ ← loài phượng/chu tước
+  ky_lan_giac: { kinds: ['ngoc_ky_lan', 'ky_lan_than_anh'], rate: 0.15 }, // Kỳ Lân Giác ← loài kỳ lân
+  long_lan: { kinds: ['bich_hai_giao'], rate: 0.20 }, // Long Lân ← Bích Hải Giao (loài mang vảy rồng rõ nhất)
+  bang_vu: { kinds: ['con_bang_anh', 'kim_si_dai_bang'], rate: 0.15 }, // Bằng Vũ ← loài chim bằng/đại bàng
+  loan_vu: { kinds: ['thanh_loan', 'tien_phuong', 'hon_don_phuong', 'kiep_hoa_phuong', 'hoa_than_phuong'], rate: 0.15 }, // Loan Vũ ← loài loan/phượng
+  thu_vuong_tinh_huyet: { kinds: ['thien_lang_vuong_that', 'giao_long_chua', 'hon_don_cu_thu', 'thon_thien_mang', 'kim_si_dai_bang', 'thanh_long_tan_anh', 'hoa_than_phuong'], rate: 0.25 }, // Thú Vương Tinh Huyết ← thú vương/trùm thú
+  dia_mach_tinh: { kinds: ['tho_than_khoi', 'thach_than_tuong', 'than_loi_cu_nhan'], rate: 0.15 }, // Địa Mạch Tinh ← quái hệ thổ khổng lồ
+};
 // GĐ67: phẩm Linh thạch trong rương theo quái rơi ra (ý người chơi
 // 24/10: Trung phẩm ở rương Trúc Cơ trung trở lên, Thượng phẩm ở rương
 // Kim Đan hậu trở lên; rương LK vẫn chỉ Hạ phẩm). Phân biệt "phẩm
@@ -1234,23 +1270,31 @@ const WEAPONS = {
     { id: 'phatchau', name: 'Phật châu', cat: 'beads', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Phối hợp đánh và thủ, có thể đánh xa' },
     { id: 'quyentruong', name: 'Quyền trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: true, note: 'Đánh chậm, có thể đánh xa' },
     { id: 'binhbat', name: 'Bình bát', cat: 'bowl', speed: 'trung', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Úp bát đỡ đòn, ném ra đánh xa rồi thu về' },
+    { id: 'phatluan', name: 'Phật luân', cat: 'wheel', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: true, note: 'Pháp luân vàng xoay quanh tay, phóng ra cắt vòng' }, // GĐ393
     { id: 'phatchau_vm', name: 'Đại Nhật Phật Châu', cat: 'beads', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'phatchau', note: 'Phật châu tiến hóa theo đường Viên Mãn — châu quang như mặt trời' },
     { id: 'quyentruong_vm', name: 'Phổ Độ Quyền Trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'quyentruong', note: 'Quyền trượng tiến hóa theo đường Viên Mãn — trượng Phật môn, trấn ma phổ độ' },
     { id: 'binhbat_vm', name: 'Càn Khôn Bình Bát', cat: 'bowl', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'binhbat', note: 'Bình bát tiến hóa theo đường Viên Mãn — một bát thu càn khôn' },
+    { id: 'phatluan_vm', name: 'Phật Quang Pháp Luân', cat: 'wheel', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'phatluan', note: 'Pháp luân tiến hóa theo đường Viên Mãn — luân quang phổ độ, xoay chuyển càn khôn' }, // GĐ393
   ],
   cottu: [
     { id: 'cotthuan', name: 'Cốt thuẫn', cat: 'shield', speed: 'cham', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Khiên xương, đỡ đòn và đẩy lùi quái' },
     { id: 'cotchuy', name: 'Cốt chùy', cat: 'club', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: false, note: 'Chùy xương, vừa đỡ vừa đánh' },
+    { id: 'cotcung', name: 'Cốt cung', cat: 'bow', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: true, note: 'Cung xương, bắn xa từ sau Cốt Vương' }, // GĐ389
+    { id: 'cotnhan', name: 'Cốt nhận', cat: 'dual', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Song nhận xương, chém nhanh liên hoàn' }, // GĐ389
     { id: 'cotthuan_vm', name: 'Bất Diệt Cốt Thuẫn', cat: 'shield', speed: 'cham', dmg: 'Trung bình', mana: 'Ít', ranged: false, vienman: true, evolvesFrom: 'cotthuan', note: 'Cốt thuẫn tiến hóa theo đường Viên Mãn — khiên xương bất diệt' },
     { id: 'cotchuy_vm', name: 'Vương Giả Cốt Chùy', cat: 'club', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: false, vienman: true, evolvesFrom: 'cotchuy', note: 'Cốt chùy tiến hóa theo đường Viên Mãn — chùy xương vương giả, hiệu lệnh vạn cốt' },
+    { id: 'cotcung_vm', name: 'Vạn Cốt Xuyên Vân Cung', cat: 'bow', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'cotcung', note: 'Cốt cung tiến hóa theo đường Viên Mãn — cung xương vạn cốt, một tên xuyên mây' }, // GĐ389
+    { id: 'cotnhan_vm', name: 'Liệt Hồn Song Nhận', cat: 'dual', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: false, vienman: true, evolvesFrom: 'cotnhan', note: 'Cốt nhận tiến hóa theo đường Viên Mãn — song nhận nứt hồn, chém không thấy bóng' }, // GĐ389
   ],
   quytu: [
     { id: 'colenh', name: 'Cờ lệnh', cat: 'flag', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, note: 'Gọi và điều khiển quỷ hồn đánh thay' },
     { id: 'luoihai', name: 'Lưỡi hái', cat: 'sickle', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: false, note: 'Cận chiến, chém quét vòng cung' },
     { id: 'quythuong', name: 'Quỷ thương', cat: 'spear', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: false, note: 'Vũ khí dài, đâm xa cận chiến' },
+    { id: 'quylinh', name: 'Chiêu hồn linh', cat: 'bell', speed: 'nhanh', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Chuông đồng nhỏ khắc mặt quỷ, rung chuông gọi hồn' }, // GĐ393
     { id: 'colenh_vm', name: 'Sinh Tử Lệnh Kỳ', cat: 'flag', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'colenh', note: 'Cờ lệnh tiến hóa theo đường Viên Mãn — phất cờ điểm danh sinh tử' },
     { id: 'luoihai_vm', name: 'Đoạt Mệnh Quỷ Liêm', cat: 'sickle', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: false, vienman: true, evolvesFrom: 'luoihai', note: 'Lưỡi hái tiến hóa theo đường Viên Mãn — một cắt đoạt mệnh' },
     { id: 'quythuong_vm', name: 'U Minh Quỷ Thương', cat: 'spear', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: false, vienman: true, evolvesFrom: 'quythuong', note: 'Quỷ thương tiến hóa theo đường Viên Mãn — thương xuyên hồn đoạt phách' },
+    { id: 'quylinh_vm', name: 'Cửu U Chiêu Hồn Linh', cat: 'bell', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'quylinh', note: 'Chiêu hồn linh tiến hóa theo đường Viên Mãn — chuông vang cửu u, vạn hồn triều bái' }, // GĐ393
   ],
   satthu: [
     { id: 'daogam', name: 'Dao găm', cat: 'dagger', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Độ chính xác cao' },
@@ -1266,33 +1310,41 @@ const WEAPONS = {
     { id: 'kiem', name: 'Kiếm', cat: 'sword', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: false, note: 'Mạnh, nhanh, nhưng khó luyện' },
     { id: 'songkiem', name: 'Song kiếm', cat: 'dual', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Cận chiến linh hoạt' },
     { id: 'trongkiem', name: 'Trọng kiếm', cat: 'sword', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: false, note: 'Chém nặng, hắt lùi' },
+    { id: 'phikiem', name: 'Phi kiếm', cat: 'sword', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, note: 'Một thanh kiếm bay quanh người, ngự kiếm đâm từ xa' }, // GĐ393
     { id: 'kiem_vm', name: 'Tâm Kiếm Vô Ngân', cat: 'sword', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: false, vienman: true, evolvesFrom: 'kiem', note: 'Kiếm tiến hóa theo đường Viên Mãn — kiếm theo tâm, mạnh theo người' },
     { id: 'songkiem_vm', name: 'Lưu Vân Song Kiếm', cat: 'dual', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: false, vienman: true, evolvesFrom: 'songkiem', note: 'Song kiếm tiến hóa theo đường Viên Mãn — hai kiếm như mây trôi' },
     { id: 'trongkiem_vm', name: 'Trấn Nhạc Trọng Kiếm', cat: 'sword', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: false, vienman: true, evolvesFrom: 'trongkiem', note: 'Trọng kiếm tiến hóa theo đường Viên Mãn — một chém trấn nhạc' },
+    { id: 'phikiem_vm', name: 'Ngự Hư Phi Kiếm', cat: 'sword', speed: 'nhanh', dmg: 'Cao', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'phikiem', note: 'Phi kiếm tiến hóa theo đường Viên Mãn — ngự hư phi hành, kiếm đến người chưa tới' }, // GĐ393
   ],
   phaptu: [
     { id: 'phien', name: 'Phiến', cat: 'fan', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Niệm nhanh, đánh liên tục' },
     { id: 'phaptruong', name: 'Pháp trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: true, note: 'Niệm lâu nhưng đau' },
     { id: 'sachphep', name: 'Sách phép', cat: 'book', speed: 'nhanh', dmg: 'Cao', mana: 'Nhiều', ranged: true, note: 'Mạnh nhất nhưng cạn linh lực nhanh' },
+    { id: 'phapan', name: 'Pháp ấn', cat: 'seal', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, note: 'Ấn chú lơ lửng trước tay, đóng dấu phép xuống đất' }, // GĐ393
     { id: 'phien_vm', name: 'Càn Khôn Pháp Phiến', cat: 'fan', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'phien', note: 'Phiến tiến hóa theo đường Viên Mãn — quạt mở càn khôn, gọi lôi gọi gió' },
     { id: 'phaptruong_vm', name: 'Ngũ Lôi Pháp Trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'phaptruong', note: 'Pháp trượng tiến hóa theo đường Viên Mãn — trượng dẫn thiên lôi, phù trấn yêu ma' },
     { id: 'sachphep_vm', name: 'Thiên Thư Pháp Điển', cat: 'book', speed: 'nhanh', dmg: 'Cao', mana: 'Nhiều', ranged: true, vienman: true, evolvesFrom: 'sachphep', note: 'Sách phép tiến hóa theo đường Viên Mãn — mỗi trang một thiên kiếp' },
+    { id: 'phapan_vm', name: 'Thiên La Pháp Ấn', cat: 'seal', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'phapan', note: 'Pháp ấn tiến hóa theo đường Viên Mãn — thiên la địa võng, ấn trấn vạn pháp' }, // GĐ393
   ],
   ytu: [
     { id: 'phattran', name: 'Phất trần', cat: 'fan', speed: 'trung', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Buff, debuff, hồi máu, khống chế' },
     { id: 'kimcham', name: 'Kim châm', cat: 'needle', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Tầm xa, chính xác, gây debuff' },
     { id: 'cocam', name: 'Cổ cầm', cat: 'lute', speed: 'cham', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Gảy đàn tạo vùng hồi máu hoặc buff' },
+    { id: 'dockinh', name: 'Độc kinh', cat: 'book', speed: 'trung', dmg: 'Cao', mana: 'Nhiều', ranged: true, note: 'Cuốn kinh bìa tối ghi độc thuật, lật trang tỏa khí độc' }, // GĐ393
     { id: 'phattran_vm', name: 'Hồi Thiên Phất Trần', cat: 'fan', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'phattran', note: 'Phất trần tiến hóa theo đường Viên Mãn — phất nhẹ hồi thiên' },
     { id: 'kimcham_vm', name: 'Sinh Tử Thần Châm', cat: 'needle', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, evolvesFrom: 'kimcham', note: 'Kim châm tiến hóa theo đường Viên Mãn — châm cứu sinh tử, độ huyệt hồi thiên' },
     { id: 'cocam_vm', name: 'Phục Hi Cổ Cầm', cat: 'lute', speed: 'cham', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'cocam', note: 'Cổ cầm tiến hóa theo đường Viên Mãn — một khúc đàn định sinh tử' },
+    { id: 'dockinh_vm', name: 'Vạn Độc Thiên Kinh', cat: 'book', speed: 'trung', dmg: 'Cao', mana: 'Nhiều', ranged: true, vienman: true, evolvesFrom: 'dockinh', note: 'Độc kinh tiến hóa theo đường Viên Mãn — vạn độc quy tông, một trang một kiếp' }, // GĐ393
   ],
   nhotu: [
     { id: 'ngamtho', name: 'Ngâm thơ', cat: '', speed: 'nhanh', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Dùng miệng đọc thơ, chữ phép tạo vùng ảnh hưởng' },
     { id: 'butphep', name: 'Bút phép', cat: 'brush', speed: 'nhanh', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Viết chữ phép tầm xa' },
     { id: 'quyentruc', name: 'Quyển trục', cat: 'scroll', speed: 'cham', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Mở quyển tạo vùng ảnh hưởng lớn' },
+    { id: 'vankiem', name: 'Văn kiếm', cat: 'sword', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: false, note: 'Kiếm thanh mảnh của quân tử, chuôi buộc tua sách' }, // GĐ393
     { id: 'ngamtho_vm', name: 'Hạo Nhiên Thiên Âm', cat: '', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'ngamtho', note: 'Ngâm thơ tiến hóa theo đường Viên Mãn — tiếng ngâm thành thiên chương' },
     { id: 'butphep_vm', name: 'Văn Thánh Thần Bút', cat: 'brush', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'butphep', note: 'Bút phép tiến hóa theo đường Viên Mãn — bút thần viết chữ phép lớn như thiên chương' },
     { id: 'quyentruc_vm', name: 'Thiên Chương Quyển Trục', cat: 'scroll', speed: 'cham', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, evolvesFrom: 'quyentruc', note: 'Quyển trục tiến hóa theo đường Viên Mãn — mở trục là mở thiên chương' },
+    { id: 'vankiem_vm', name: 'Thánh Hiền Văn Kiếm', cat: 'sword', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: false, vienman: true, evolvesFrom: 'vankiem', note: 'Văn kiếm tiến hóa theo đường Viên Mãn — kiếm bút song toàn, hạo nhiên chính khí' }, // GĐ393
   ],
 };
 function weaponOf(classId, weaponId) {
@@ -1378,8 +1430,8 @@ function effStatsOf(p) {
   for (const k of Object.keys(eff)) if (typeof eff[k] === 'number' && Number.isFinite(eff[k])) eff[k] = Math.round(eff[k]);
   return eff;
 }
-function maxHpEff(p) { let m = maxHpOf((p && p.stats) || {}) + (talentStatsOf(p).khiHuyet || 0) * 10 + (((p && p.gearStats) || gearTotalsOf(p)).hp || 0); const b = activeBuffsOf(p); if (b.hp) m += b.hp.value; return Math.round(m * ptMulOf(p) * raceHpMulOf(p) * sectArtHpMulOf(p) * (subSealOf(p) === 'thetu' ? 1.05 : 1)); } // GĐ337: +Khí huyết thiên phú ×10 vào trần máu // GĐ317: x hệ số máu theo tộc (Quỷ/Điểu 0.75, Hồ 0.82, Long 1.35) // GĐ184: trần máu nhân theo Pháp Tướng // GĐ133: + buff Huyết Khí // GĐ346: phụ ấn Thể +5% máu tối đa
-function maxMpEff(p) { let m = maxMpOf((p && p.stats) || {}) + (talentStatsOf(p).minhMan || 0) * 10 + (((p && p.gearStats) || gearTotalsOf(p)).mp || 0); const b = activeBuffsOf(p); if (b.mp) m += b.mp.value; return Math.round(m * ptMulOf(p) * (talentActiveId(p) === 'linh_the' ? 1.15 : 1)); } // GĐ337: +Minh Mẫn thiên phú ×10; Linh thể dồi dào ×1,15 trần chân nguyên // GĐ184: trần chân nguyên nhân theo Pháp Tướng // GĐ133: + buff Nguyên Linh
+function maxHpEff(p) { let m = maxHpOf((p && p.stats) || {}) + (talentStatsOf(p).khiHuyet || 0) * 10 + (((p && p.gearStats) || gearTotalsOf(p)).hp || 0); const b = activeBuffsOf(p); for (const bd of Object.values(b)) if (bd.maxStat === 'hp' && bd.mode === 'flat') m += bd.value; return Math.round(m * ptMulOf(p) * raceHpMulOf(p) * sectArtHpMulOf(p) * (subSealOf(p) === 'thetu' ? 1.05 : 1)); } // GĐ337: +Khí huyết thiên phú ×10 vào trần máu // GĐ317: x hệ số máu theo tộc (Quỷ/Điểu 0.75, Hồ 0.82, Long 1.35) // GĐ184: trần máu nhân theo Pháp Tướng // GĐ133: + buff Huyết Khí // GĐ346: phụ ấn Thể +5% máu tối đa
+function maxMpEff(p) { let m = maxMpOf((p && p.stats) || {}) + (talentStatsOf(p).minhMan || 0) * 10 + (((p && p.gearStats) || gearTotalsOf(p)).mp || 0); const b = activeBuffsOf(p); for (const bd of Object.values(b)) if (bd.maxStat === 'mp' && bd.mode === 'flat') m += bd.value; return Math.round(m * ptMulOf(p) * (talentActiveId(p) === 'linh_the' ? 1.15 : 1)); } // GĐ337: +Minh Mẫn thiên phú ×10; Linh thể dồi dào ×1,15 trần chân nguyên // GĐ184: trần chân nguyên nhân theo Pháp Tướng // GĐ133: + buff Nguyên Linh
 // GĐ133: BUFF ĐAN DƯỢC CÓ THỜI HẠN — uống đan → chỉ số tăng trong X phút THẬT
 // (đồng hồ thật, không phụ thuộc ngày game; bền qua restart vì buffs lưu file).
 // Mỗi loại buff 1 key: uống đan khác loại thì cộng dồn, uống cùng loại thì
@@ -1404,12 +1456,34 @@ const PILL_BUFFS = {
   atk3: { name: 'Thiên Lực', icon: '☀️', desc: 'Vật công + Pháp công', stats: ['vatCong', 'phapCong'], mode: 'pct', value: 0.80, minutes: 30 },
   def3: { name: 'Thiên Giáp', icon: '🏯', desc: 'Vật phòng + Pháp phòng', stats: ['vatPhong', 'phapPhong'], mode: 'pct', value: 0.80, minutes: 30 },
   taldef2: { name: 'Thiên Cang', icon: '💠', desc: 'Sát thương nhận', mode: 'shield', value: 0.70, minutes: 1.5 },
+  // Nhóm A (11/11/2026, số TẠM theo DE_XUAT_VAT_PHAM đã duyệt): buff bậc 4 Phản Hư · bậc 5 Độ Kiếp · bậc 6 Tiên — cùng cơ chế GĐ133/207 (mỗi loại 1 key, dùng lại = gia hạn, khác loại cộng dồn qua effStatsOf/maxHpEff).
+  atk4: { name: 'Hỗn Độn Lực', icon: '🌀', desc: 'Vật công + Pháp công', stats: ['vatCong', 'phapCong'], mode: 'pct', value: 1.1, minutes: 30 },
+  def4: { name: 'Hỗn Độn Giáp', icon: '🛡️', desc: 'Vật phòng + Pháp phòng', stats: ['vatPhong', 'phapPhong'], mode: 'pct', value: 1.1, minutes: 30 },
+  hp4: { name: 'Hỗn Độn Huyết', icon: '❤️', desc: 'HP tối đa', maxStat: 'hp', mode: 'flat', value: 2500, minutes: 60 },
+  mp4: { name: 'Hỗn Độn Nguyên', icon: '💧', desc: 'Chân nguyên tối đa', maxStat: 'mp', mode: 'flat', value: 2500, minutes: 60 },
+  spd4: { name: 'Hư Ảnh', icon: '👻', desc: 'Tốc độ', stats: ['tocDo'], mode: 'pct', value: 0.5, minutes: 30 },
+  atk5: { name: 'Kiếp Lực', icon: '⚡', desc: 'Vật công + Pháp công', stats: ['vatCong', 'phapCong'], mode: 'pct', value: 1.5, minutes: 30 },
+  def5: { name: 'Kiếp Giáp', icon: '🛡️', desc: 'Vật phòng + Pháp phòng', stats: ['vatPhong', 'phapPhong'], mode: 'pct', value: 1.5, minutes: 30 },
+  hp5: { name: 'Kiếp Huyết', icon: '❤️', desc: 'HP tối đa', maxStat: 'hp', mode: 'flat', value: 6000, minutes: 60 },
+  mp5: { name: 'Kiếp Nguyên', icon: '💧', desc: 'Chân nguyên tối đa', maxStat: 'mp', mode: 'flat', value: 6000, minutes: 60 },
+  spd5: { name: 'Kiếp Ảnh', icon: '💨', desc: 'Tốc độ', stats: ['tocDo'], mode: 'pct', value: 0.6, minutes: 30 },
+  atk6: { name: 'Tiên Lực', icon: '✨', desc: 'Vật công + Pháp công', stats: ['vatCong', 'phapCong'], mode: 'pct', value: 2.0, minutes: 30 },
+  def6: { name: 'Tiên Giáp', icon: '🛡️', desc: 'Vật phòng + Pháp phòng', stats: ['vatPhong', 'phapPhong'], mode: 'pct', value: 2.0, minutes: 30 },
+  hp6: { name: 'Tiên Huyết', icon: '❤️', desc: 'HP tối đa', maxStat: 'hp', mode: 'flat', value: 12000, minutes: 60 },
+  mp6: { name: 'Tiên Nguyên', icon: '💧', desc: 'Chân nguyên tối đa', maxStat: 'mp', mode: 'flat', value: 12000, minutes: 60 },
+  spd6: { name: 'Tiên Ảnh', icon: '🌠', desc: 'Tốc độ', stats: ['tocDo'], mode: 'pct', value: 0.75, minutes: 30 },
+  taldef3: { name: 'Hư Không Thuẫn', icon: '💠', desc: 'Sát thương nhận', mode: 'shield', value: 0.8, minutes: 1.5 },
 };
 const PILL_BY_ITEM = { dan_bao_luc: 'atk', dan_thiet_bich: 'def', dan_huyet_khi: 'hp', dan_nguyen_linh: 'mp', dan_than_toc: 'spd',
   dan_nguyen_than: 'atk2', dan_huyen_giap: 'def2', dan_than_huyet: 'hp2', dan_than_nguyen: 'mp2', dan_phong_than: 'spd2', dan_thien_luc: 'atk3', dan_thien_giap: 'def3', phu_thien_cang: 'taldef2', // GĐ207
   // GĐ136: bùa buff đi chung nhánh đan (cùng cơ chế buff có thời hạn) — khác
   // đan ở thời gian ngắn (60s) và cường độ mạnh (burst trận đánh, không phải buff dài)
-  phu_cuong_bao: 'talatk', phu_kim_cang: 'taldef' };
+  phu_cuong_bao: 'talatk', phu_kim_cang: 'taldef',
+  // Nhóm A (11/11/2026): đan buff bậc 4-6 + Phù Hư Không Thuẫn đi chung nhánh buff có thời hạn như bậc 1-3
+  dan_hon_don_luc: 'atk4', dan_hon_don_giap: 'def4', dan_hon_don_huyet: 'hp4', dan_hon_don_nguyen: 'mp4', dan_hu_anh: 'spd4',
+  dan_kiep_luc: 'atk5', dan_kiep_giap: 'def5', dan_kiep_huyet: 'hp5', dan_kiep_nguyen: 'mp5', dan_kiep_anh: 'spd5',
+  dan_tien_luc: 'atk6', dan_tien_giap: 'def6', dan_tien_huyet: 'hp6', dan_tien_nguyen: 'mp6', dan_tien_anh: 'spd6',
+  phu_hu_khong_thuan: 'taldef3' };
 function activeBuffsOf(p) { // buff đang còn hạn (lười: quá hạn coi như không có, tick sẽ dọn sau)
   const out = {};
   const b = p?.buffs;
@@ -1810,6 +1884,29 @@ const ageOf = (p) => {
 // VIỄN: nhân vật chết thật (khác chết thường — không hồi sinh), đồ đạc +
 // Linh thạch mất theo nhân vật, tài khoản/khách được tạo nhân vật mới.
 const GRACE_DAYS = 30;
+// GĐ387: DIÊN THỌ ĐAN (Bảo chốt hết theo đề xuất 11/11, gốc B2 trong
+// DE_XUAT_VAT_PHAM + THIET_KE_DIEN_THO_DAN): +2 năm thọ/viên, trần 3
+// viên/KIẾP (= +6, ngang kênh Đạo Tích). Bộ đếm để ở field riêng
+// p.dienThoUsed — KHÔNG để trong counters vì lúc luân hồi thừa hưởng hồn
+// counters được chép NGUYÊN sang nhân vật mới (xem create_character),
+// đếm để đó sẽ không bao giờ reset theo kiếp. Nguồn: CHỈ rương trùm cõi
+// cao (Phản Hư+); không bán tiệm, không công thức chế.
+const DIEN_THO_YEARS = 2;
+const DIEN_THO_MAX_PER_LIFE = 3;
+const DIEN_THO_CHEST_RATE = 0.12; // TẠM trong khoảng bản thảo 10–15% (tiền lệ rương: Mảnh Xương 10% mọi rương, Ngọc Giản Trống 20% rương ẩn — lấy 12% ở giữa khoảng)
+// GĐ388: B3+B4 — ĐỒ CHO PET + ĐAN GIẢI TRẠNG THÁI (Bảo chốt hết theo đề
+// xuất 11/11, THIET_KE_DO_PET_GIAI_TRANG_THAI): Phần B đan giải đi trước
+// (Giải Độc/Thanh Tâm — hồi chiêu CHUNG 30s, trạng thái phiên như ICD pháp
+// bảo GĐ385), Phần A đồ pet sau (Linh Thú Đan hồi %/Thú Linh Hoàn buff phía
+// chủ/Hộ Mệnh vỡ thay chết). Mọi số TẠM theo bản thảo.
+const CLEANSE_CD_MS = 30000; // GĐ388: hồi chiêu CHUNG của 2 đan giải (ăn 1 viên → cả 2 cùng chờ)
+const TALISMAN_PCT_CD_MS = 30000; // GĐ392 (B5): hồi chiêu CHUNG của 3 phù % máu (mẫu đan giải GĐ388 — trạng thái phiên, không lưu bền)
+const PET_HEAL_PCT = 0.5; // GĐ388: Linh Thú Đan hồi 50% máu tối đa của pet
+const PET_HEAL_CD_MS = 10000; // GĐ388: hồi dùng riêng của Linh Thú Đan
+const PET_ATK_BUFF_PCT = 0.20; // GĐ388: Thú Linh Hoàn — pet +20% công
+const PET_ATK_BUFF_MS = 10 * 60000; // GĐ388: Thú Linh Hoàn — hiệu lực 10 phút
+const HO_MENH_HP_PCT = 0.30; // GĐ388: Hộ Mệnh vỡ → pet sống ở 30% máu
+const HO_MENH_RETREAT_MS = 5000; // GĐ388: Hộ Mệnh vỡ → pet rút về, không giao chiến 5s
 const lifespanLeftOf = (p) => (p.lifespan ?? 80) - ageOf(p);
 function graceDaysLeftOf(p) {
   if (p.graceStartDay == null) return null;
@@ -2497,7 +2594,7 @@ const NAME_PRE = {
   ytu: { lk: ['Thanh Tâm', 'Hồi Xuân', 'Linh Tê'], tc: ['Hồi Thiên', 'Tạo Hóa'] },
   nhotu: { lk: ['Hạo Nhiên', 'Mặc Vận', 'Chính Khí'], tc: ['Thiên Chương', 'Thánh Ngôn'] },
 };
-const CAT_NOUN = { sword: 'Kiếm', dual: 'Song Nhận', dagger: 'Nhận', claw: 'Trảo', fist: 'Quyền', axe: 'Phủ', spear: 'Thương', staff: 'Trượng', club: 'Chùy', shield: 'Thuẫn', flag: 'Kỳ', sickle: 'Liềm', beads: 'Châu', bowl: 'Bát', fan: 'Phiến', book: 'Thiên Thư', needle: 'Châm', lute: 'Cầm Âm', brush: 'Bút', scroll: 'Quyển', '': 'Ngâm' };
+const CAT_NOUN = { sword: 'Kiếm', dual: 'Song Nhận', dagger: 'Nhận', claw: 'Trảo', fist: 'Quyền', axe: 'Phủ', spear: 'Thương', staff: 'Trượng', club: 'Chùy', shield: 'Thuẫn', flag: 'Kỳ', sickle: 'Liềm', beads: 'Châu', bowl: 'Bát', fan: 'Phiến', book: 'Thiên Thư', needle: 'Châm', lute: 'Cầm Âm', brush: 'Bút', scroll: 'Quyển', seal: 'Ấn', wheel: 'Luân', bell: 'Linh', '': 'Ngâm' }; // GĐ393: + seal/wheel/bell
 const LK_SUFFIX = ['Quyết', 'Trảm', 'Vũ'];
 const TC_SUFFIX = ['Vô Song', 'Quy Tông'];
 const SEC_STATS = ['khiHuyet', 'minhMan', 'tocDo', 'vatPhong', 'phapPhong'];
@@ -3019,6 +3116,69 @@ const ITEMS = {
   tran_ky: { name: 'Trận Kỳ Dịch Chuyển', desc: 'Dùng: dịch chuyển tức thời về quảng trường làng' },
   banh_thit: { name: 'Bánh Thịt Thú', desc: 'Dùng: hồi 25% HP tối đa' },
   da_soi: { name: 'Da Sói Khô', desc: 'Nguyên liệu thuộc da — bán lại cho Tiệm Nguyên Liệu' },
+  // Nhóm A (11/11/2026, số TẠM theo DE_XUAT_VAT_PHAM đã duyệt): A1 đan Phản Hư
+  dan_hon_don_luc: { name: 'Hỗn Độn Lực Đan', desc: 'Dùng: Vật công + Pháp công +110% trong 30 phút' },
+  dan_hon_don_giap: { name: 'Hỗn Độn Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +110% trong 30 phút' },
+  dan_hon_don_huyet: { name: 'Hỗn Độn Huyết Đan', desc: 'Dùng: HP tối đa +2.500 trong 60 phút' },
+  dan_hon_don_nguyen: { name: 'Hỗn Độn Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +2.500 trong 60 phút' },
+  dan_hu_anh: { name: 'Hư Ảnh Đan', desc: 'Dùng: +50% tốc độ (chỉ số Tốc Độ) trong 30 phút' },
+  dan_hon_don_hoi_xuan: { name: 'Hỗn Độn Hồi Xuân Đan', desc: 'Dùng: hồi 70% HP tối đa' },
+  dan_hon_don_hoi_nguyen: { name: 'Hỗn Độn Hồi Nguyên Đan', desc: 'Dùng: hồi 70% Chân nguyên tối đa' },
+  // Nhóm A: A2 đan Độ Kiếp
+  dan_kiep_luc: { name: 'Kiếp Lực Đan', desc: 'Dùng: Vật công + Pháp công +150% trong 30 phút' },
+  dan_kiep_giap: { name: 'Kiếp Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +150% trong 30 phút' },
+  dan_kiep_huyet: { name: 'Kiếp Huyết Đan', desc: 'Dùng: HP tối đa +6.000 trong 60 phút' },
+  dan_kiep_nguyen: { name: 'Kiếp Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +6.000 trong 60 phút' },
+  dan_kiep_anh: { name: 'Kiếp Ảnh Đan', desc: 'Dùng: +60% tốc độ (chỉ số Tốc Độ) trong 30 phút' },
+  // Nhóm A: A2 đan Tiên
+  dan_tien_luc: { name: 'Tiên Lực Đan', desc: 'Dùng: Vật công + Pháp công +200% trong 30 phút' },
+  dan_tien_giap: { name: 'Tiên Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +200% trong 30 phút' },
+  dan_tien_huyet: { name: 'Tiên Huyết Đan', desc: 'Dùng: HP tối đa +12.000 trong 60 phút' },
+  dan_tien_nguyen: { name: 'Tiên Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +12.000 trong 60 phút' },
+  dan_tien_anh: { name: 'Tiên Ảnh Đan', desc: 'Dùng: +75% tốc độ (chỉ số Tốc Độ) trong 30 phút' },
+  // Nhóm A: A6 đan hộ kiếp
+  dan_ho_kiep: { name: 'Đan Hộ Kiếp', desc: 'Dùng khi qua Cổng Kiếp (Độ Kiếp 1/2/3): +15% tỉ lệ thành công (tự tiêu hao)' },
+  // GĐ387: đan cứu thọ — cộng vĩnh viễn vào lifespan như đột phá (không qua PILL_BUFFS), trần 3 viên/kiếp; chỉ rơi rương trùm Phản Hư+
+  dan_dien_tho: { name: 'Diên Thọ Đan', desc: 'Dùng: +2 năm thọ nguyên (vĩnh viễn trong kiếp này). Chỉ rơi từ rương trùm cõi cao.' },
+  // GĐ388 đợt 1 (Phần B — ĐAN GIẢI TRẠNG THÁI, Đan Sư chế): hồi chiêu CHUNG 30s cho cả 2 viên
+  dan_giai_doc: { name: 'Giải Độc Đan', desc: 'Dùng: xoá toàn bộ độc đang đốt trên người. Hồi chiêu chung 30 giây với Thanh Tâm Đan.' },
+  dan_thanh_tam: { name: 'Thanh Tâm Đan', desc: 'Dùng: xoá làm chậm + choáng trên người (không giải được phản phệ tự gây). Hồi chiêu chung 30 giây với Giải Độc Đan.' },
+  // GĐ388 đợt 2 (Phần A — ĐỒ CHO PET, Thú Sư chế): chỉ áp cho thú thuần hoá đang theo
+  dan_linh_thu: { name: 'Linh Thú Đan', desc: 'Dùng: hồi ngay 50% máu tối đa cho thú thuần hoá đang theo — quý giữa trận (ngoài trận thú tự hồi dần). Hồi dùng 10 giây.' },
+  thu_linh_hoan: { name: 'Thú Linh Hoàn', desc: 'Dùng: thú thuần hoá +20% công trong 10 phút (buff tính phía chủ — đổi thú vẫn còn hiệu lực).' },
+  linh_thu_ho_menh: { name: 'Linh Thú Hộ Mệnh', desc: 'Mang trong túi (không cần bấm dùng): thú thuần hoá nhận đòn kết liễu sẽ vỡ 1 Hộ Mệnh thay chết — sống sót ở 30% máu, rút về bên chủ 5 giây.' },
+  // Nhóm A: A3 phù bậc cao
+  phu_hon_don_loi: { name: 'Phù Hỗn Độn Lôi', desc: 'Dùng: lôi hỗn độn đánh quái gần nhất (500px), 25.000 sát thương phép' },
+  phu_hu_khong_thuan: { name: 'Phù Hư Không Thuẫn', desc: 'Dùng: sát thương nhận ×0,2 trong 90 giây' },
+  phu_dinh_hon: { name: 'Phù Định Hồn', desc: 'Dùng: quái gần nhất (400px) đứng yên 8 giây' },
+  phu_kiep_loi: { name: 'Phù Kiếp Lôi', desc: 'Dùng: kiếp lôi đánh quái gần nhất (550px), 60.000 sát thương phép' },
+  phu_thien_kiep: { name: 'Phù Thiên Kiếp', desc: 'Dùng: thiên kiếp giáng quái gần nhất (600px), 100.000 sát thương phép. Rơi từ trùm cõi Độ Kiếp, hiếm.' },
+  phu_tinh_ha: { name: 'Phù Tinh Hà', desc: 'Dùng: tinh hà trút xuống quái gần nhất (650px), 180.000 sát thương phép' },
+  phu_huyet_hon_don: { name: 'Thiên Hư Phù', desc: 'Dùng: đánh quái gần nhất (500px), sát thương = 40% máu tối đa của quái (tối đa 50.000). Hồi chiêu chung 30 giây với các phù % máu.' }, // GĐ392 (B5)
+  phu_kiep_huyet: { name: 'Kiếp Vân Phù', desc: 'Dùng: đánh quái gần nhất (550px), sát thương = 40% máu tối đa của quái (tối đa 200.000). Hồi chiêu chung 30 giây với các phù % máu.' }, // GĐ392 (B5)
+  phu_diet_than_huyet: { name: 'Vãng Tiên Phù', desc: 'Dùng: đánh quái gần nhất (650px), sát thương = 40% máu tối đa của quái (tối đa 360.000). Hồi chiêu chung 30 giây với các phù % máu.' }, // GĐ392 (B5)
+  // Nhóm A: A4 nguyên liệu cụm loài cõi cao
+  hon_tinh: { name: 'Hồn Tinh', desc: 'Tinh thể hồn phách kết tinh từ quái hệ hồn ở cõi Phản Hư — nguyên liệu luyện Phù Định Hồn, Súp Hồn Tinh' },
+  hu_khong_cot: { name: 'Hư Không Cốt', desc: 'Mảnh cốt thấm khí hư không của quái hệ hư không — nguyên liệu luyện Hỗn Độn Giáp Đan, Phù Hư Không Thuẫn' },
+  kiep_loi_tinh: { name: 'Kiếp Lôi Tinh', desc: 'Tinh thể sét kiếp kết tinh trên thân quái hệ lôi ở cõi Độ Kiếp — nguyên liệu luyện phù lôi bậc cao' },
+  tam_ma_ket_tinh: { name: 'Tâm Ma Kết Tinh', desc: 'Kết tinh của tâm ma — nguyên liệu luyện Kiếp Huyết Đan, Kiếp Nguyên Đan' },
+  giao_chau: { name: 'Giao Châu', desc: 'Ngọc châu trong thân giao long — nguyên liệu luyện Tiên Nguyên Đan, Canh Giao Châu' },
+  phuong_vu: { name: 'Phượng Vũ', desc: 'Lông phượng rực lửa — nguyên liệu luyện Tiên Lực Đan, Tiệc Phượng Vũ' },
+  ky_lan_giac: { name: 'Kỳ Lân Giác', desc: 'Sừng kỳ lân vàng — nguyên liệu luyện Tiên Giáp Đan' },
+  long_lan: { name: 'Long Lân', desc: 'Vảy rồng xanh biếc viền vàng — nguyên liệu luyện Tiên Huyết Đan' },
+  bang_vu: { name: 'Bằng Vũ', desc: 'Lông chim bằng phủ băng tuyết — nguyên liệu luyện Tiên Ảnh Đan' },
+  loan_vu: { name: 'Loan Vũ', desc: 'Lông loan điểu ngũ sắc — nguyên liệu luyện Phù Tinh Hà' },
+  thu_vuong_tinh_huyet: { name: 'Thú Vương Tinh Huyết', desc: 'Giọt tinh huyết của thú vương/trùm thú — nguyên liệu phụ luyện đan bậc Tiên' },
+  dia_mach_tinh: { name: 'Địa Mạch Tinh', desc: 'Tinh thể địa mạch trong thân quái hệ thổ khổng lồ — nguyên liệu phụ luyện đan bậc Tiên' },
+  // Nhóm A: A5 thức ăn cõi cao (nghề nấu — Thú Sư)
+  canh_hu_khong: { name: 'Canh Hư Không', desc: 'Ăn: hồi 40% HP tối đa (Thú Sư nấu)' },
+  thit_hon_don_nuong: { name: 'Thịt Hỗn Độn Nướng', desc: 'Ăn: hồi 45% HP tối đa (Thú Sư nấu)' },
+  sup_hon_tinh: { name: 'Súp Hồn Tinh', desc: 'Ăn: hồi 30% Chân nguyên tối đa (Thú Sư nấu)' },
+  canh_kiep_tam: { name: 'Canh Kiếp Tâm', desc: 'Ăn: hồi 55% HP tối đa (Thú Sư nấu)' },
+  banh_tinh_ha: { name: 'Bánh Tinh Hà', desc: 'Ăn: hồi 65% HP tối đa (Thú Sư nấu)' },
+  canh_giao_chau: { name: 'Canh Giao Châu', desc: 'Ăn: hồi 50% Chân nguyên tối đa (Thú Sư nấu)' },
+  tiec_phuong_vu: { name: 'Tiệc Phượng Vũ', desc: 'Ăn: hồi 80% HP tối đa (Thú Sư nấu)' },
+  tra_tien_linh: { name: 'Trà Tiên Linh', desc: 'Uống: hồi 35% HP và 35% Chân nguyên tối đa (Thú Sư nấu)' },
 };
 // GĐ26 — NGHỀ PHỤ (bản cơ bản): 5 nghề như bản cũ/file (Đan Sư, Luyện Khí
 // Sư, Trận Pháp Sư, Phù Sư, Thú Sư). Học 1 nghề sau khi có linh căn; chế
@@ -3572,7 +3732,183 @@ const RECIPES = {
   rc_kiem_liet_hoa: { jobId: 'thusu', duongkiem: true, sword: 'liet_hoa', name: 'Rèn Liệt Hỏa Kiếm', inputs: { quang: 3, tinh_huyet: 3 }, stones: 10, rate: 0.9, minRank: 1 },
   // GĐ101: Luyện Khôi Lõi Cốt Tu — cotloi: true = cơ chế lớp, không cần nghề (kiểu tambo/docduoc/duongkiem).
   rc_cot_khoi_loi: { jobId: 'thusu', cotloi: true, name: 'Luyện Khôi Lõi Xương', inputs: { manh_xuong: 5 }, stones: 10, output: 'khoi_loi', rate: 0.9, minRank: 1 },
+  // Nhóm A (11/11/2026, số TẠM): A1 — Đan Sư bậc Phản Hư (Hỗn Độn Thạch + Hư Không Thảo là khung chính; cấp nghề trần theo cảnh: PH 15)
+  rc_dan_hon_don_luc: { jobId: 'dansu', name: 'Luyện Hỗn Độn Lực Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4 }, stones: 5000, output: 'dan_hon_don_luc', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_giap: { jobId: 'dansu', name: 'Luyện Hỗn Độn Giáp Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4, hu_khong_cot: 2 }, stones: 5000, output: 'dan_hon_don_giap', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_huyet: { jobId: 'dansu', name: 'Luyện Hỗn Độn Huyết Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4 }, stones: 5000, output: 'dan_hon_don_huyet', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_nguyen: { jobId: 'dansu', name: 'Luyện Hỗn Độn Nguyên Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4, linh_thuy: 2 }, stones: 5000, output: 'dan_hon_don_nguyen', rate: 0.5, minRank: 12 },
+  rc_dan_hu_anh: { jobId: 'dansu', name: 'Luyện Hư Ảnh Đan', inputs: { hon_don_thach: 1, hu_khong_thao: 4, hu_khong_cot: 2 }, stones: 5000, output: 'dan_hu_anh', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_hoi_xuan: { jobId: 'dansu', name: 'Luyện Hỗn Độn Hồi Xuân Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 3, thanh_thao: 2 }, stones: 5000, output: 'dan_hon_don_hoi_xuan', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_hoi_nguyen: { jobId: 'dansu', name: 'Luyện Hỗn Độn Hồi Nguyên Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 3, tien_thao: 3 }, stones: 5000, output: 'dan_hon_don_hoi_nguyen', rate: 0.5, minRank: 12 },
+  // Nhóm A: A2 — Đan Sư bậc Độ Kiếp (Kiếp Vân Thạch + Kiếp Tâm Thảo)
+  rc_dan_kiep_luc: { jobId: 'dansu', name: 'Luyện Kiếp Lực Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4, kiep_loi_tinh: 2 }, stones: 10000, output: 'dan_kiep_luc', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_giap: { jobId: 'dansu', name: 'Luyện Kiếp Giáp Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4 }, stones: 10000, output: 'dan_kiep_giap', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_huyet: { jobId: 'dansu', name: 'Luyện Kiếp Huyết Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4, tam_ma_ket_tinh: 1 }, stones: 10000, output: 'dan_kiep_huyet', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_nguyen: { jobId: 'dansu', name: 'Luyện Kiếp Nguyên Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4, tam_ma_ket_tinh: 1 }, stones: 10000, output: 'dan_kiep_nguyen', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_anh: { jobId: 'dansu', name: 'Luyện Kiếp Ảnh Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 3, kiep_loi_tinh: 1 }, stones: 10000, output: 'dan_kiep_anh', rate: 0.45, minRank: 13 },
+  // Nhóm A: A2 — Đan Sư bậc Tiên (Tinh Hà Thạch + Tiên Linh Chi + nguyên liệu cụm loài A4)
+  rc_dan_tien_luc: { jobId: 'dansu', name: 'Luyện Tiên Lực Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, phuong_vu: 1 }, stones: 20000, output: 'dan_tien_luc', rate: 0.4, minRank: 14 },
+  rc_dan_tien_giap: { jobId: 'dansu', name: 'Luyện Tiên Giáp Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, ky_lan_giac: 1 }, stones: 20000, output: 'dan_tien_giap', rate: 0.4, minRank: 14 },
+  rc_dan_tien_huyet: { jobId: 'dansu', name: 'Luyện Tiên Huyết Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, long_lan: 1, thu_vuong_tinh_huyet: 1 }, stones: 20000, output: 'dan_tien_huyet', rate: 0.4, minRank: 14 },
+  rc_dan_tien_nguyen: { jobId: 'dansu', name: 'Luyện Tiên Nguyên Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, giao_chau: 1 }, stones: 20000, output: 'dan_tien_nguyen', rate: 0.4, minRank: 14 },
+  rc_dan_tien_anh: { jobId: 'dansu', name: 'Luyện Tiên Ảnh Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, bang_vu: 1, dia_mach_tinh: 1 }, stones: 20000, output: 'dan_tien_anh', rate: 0.4, minRank: 14 },
+  // Nhóm A: A6 — Đan Hộ Kiếp (công thức theo bản thảo: Kiếp Tâm Thảo ×6 + Hỗn Độn Thạch ×2)
+  rc_dan_ho_kiep: { jobId: 'dansu', name: 'Luyện Đan Hộ Kiếp', inputs: { kiep_tam_thao: 6, hon_don_thach: 2 }, stones: 12000, output: 'dan_ho_kiep', rate: 0.5, minRank: 13 },
+  // Nhóm A: A3 — Phù Sư bậc cao (Phù Thiên Kiếp chủ yếu rơi từ trùm Độ Kiếp, chế tỉ lệ thấp)
+  rc_phu_hon_don_loi: { jobId: 'phusu', name: 'Vẽ Phù Hỗn Độn Lôi', inputs: { hon_don_thach: 1, hu_khong_thao: 2, da_quy: 1 }, stones: 4000, output: 'phu_hon_don_loi', rate: 0.7, minRank: 12 },
+  rc_phu_hu_khong_thuan: { jobId: 'phusu', name: 'Vẽ Phù Hư Không Thuẫn', inputs: { hu_khong_cot: 2, hu_khong_thao: 2 }, stones: 4000, output: 'phu_hu_khong_thuan', rate: 0.7, minRank: 12 },
+  rc_phu_dinh_hon: { jobId: 'phusu', name: 'Vẽ Phù Định Hồn', inputs: { hon_tinh: 2, hu_khong_thao: 2 }, stones: 4000, output: 'phu_dinh_hon', rate: 0.7, minRank: 12 },
+  rc_phu_kiep_loi: { jobId: 'phusu', name: 'Vẽ Phù Kiếp Lôi', inputs: { kiep_loi_tinh: 2, kiep_van_thach: 1 }, stones: 8000, output: 'phu_kiep_loi', rate: 0.6, minRank: 13 },
+  rc_phu_thien_kiep: { jobId: 'phusu', name: 'Vẽ Phù Thiên Kiếp', inputs: { kiep_loi_tinh: 3, kiep_van_thach: 2, kiep_tam_thao: 2 }, stones: 15000, output: 'phu_thien_kiep', rate: 0.35, minRank: 14 },
+  rc_phu_tinh_ha: { jobId: 'phusu', name: 'Vẽ Phù Tinh Hà', inputs: { loan_vu: 1, tinh_ha_thach: 2 }, stones: 15000, output: 'phu_tinh_ha', rate: 0.5, minRank: 14 },
+  rc_phu_huyet_hon_don: { jobId: 'phusu', name: 'Vẽ Thiên Hư Phù', inputs: { hon_don_thach: 2, hon_tinh: 1, hu_khong_thao: 2 }, stones: 6000, output: 'phu_huyet_hon_don', rate: 0.6, minRank: 12 }, // GĐ392 (B5)
+  rc_phu_kiep_huyet: { jobId: 'phusu', name: 'Vẽ Kiếp Vân Phù', inputs: { kiep_loi_tinh: 3, tam_ma_ket_tinh: 1, kiep_van_thach: 1 }, stones: 12000, output: 'phu_kiep_huyet', rate: 0.5, minRank: 13 }, // GĐ392 (B5)
+  rc_phu_diet_than_huyet: { jobId: 'phusu', name: 'Vẽ Vãng Tiên Phù', inputs: { loan_vu: 1, tinh_ha_thach: 3, phuong_vu: 1 }, stones: 25000, output: 'phu_diet_than_huyet', rate: 0.4, minRank: 14 }, // GĐ392 (B5)
+  // Nhóm A: A5 — Thú Sư nấu món cõi cao (hồi % như Bánh Thịt)
+  rc_canh_hu_khong: { jobId: 'thusu', name: 'Nấu Canh Hư Không', inputs: { hu_khong_thao: 2, thit_thu: 1 }, stones: 2500, output: 'canh_hu_khong', rate: 0.85, minRank: 10 },
+  rc_thit_hon_don_nuong: { jobId: 'thusu', name: 'Nướng Thịt Hỗn Độn', inputs: { thit_thu: 2, hon_don_thach: 1 }, stones: 2500, output: 'thit_hon_don_nuong', rate: 0.85, minRank: 10 },
+  rc_sup_hon_tinh: { jobId: 'thusu', name: 'Nấu Súp Hồn Tinh', inputs: { hon_tinh: 1, linh_thuy: 1 }, stones: 3000, output: 'sup_hon_tinh', rate: 0.85, minRank: 11 },
+  rc_canh_kiep_tam: { jobId: 'thusu', name: 'Nấu Canh Kiếp Tâm', inputs: { kiep_tam_thao: 2, thit_thu: 1 }, stones: 5000, output: 'canh_kiep_tam', rate: 0.85, minRank: 12 },
+  rc_banh_tinh_ha: { jobId: 'thusu', name: 'Làm Bánh Tinh Hà', inputs: { tinh_ha_thach: 1, linh_thuy: 1 }, stones: 8000, output: 'banh_tinh_ha', rate: 0.85, minRank: 13 },
+  rc_canh_giao_chau: { jobId: 'thusu', name: 'Nấu Canh Giao Châu', inputs: { giao_chau: 1, linh_thuy: 1 }, stones: 5000, output: 'canh_giao_chau', rate: 0.85, minRank: 12 },
+  rc_tiec_phuong_vu: { jobId: 'thusu', name: 'Dọn Tiệc Phượng Vũ', inputs: { phuong_vu: 1, tien_linh_chi: 1, thit_thu: 2 }, stones: 8000, output: 'tiec_phuong_vu', rate: 0.8, minRank: 13 },
+  rc_tra_tien_linh: { jobId: 'thusu', name: 'Pha Trà Tiên Linh', inputs: { tien_linh_chi: 1, linh_thuy: 1 }, stones: 5000, output: 'tra_tien_linh', rate: 0.85, minRank: 12 },
+  // GĐ388 đợt 1 (Phần B): đan giải trạng thái — Đan Sư (số TẠM theo THIET_KE_DO_PET_GIAI_TRANG_THAI)
+  rc_dan_giai_doc: { jobId: 'dansu', name: 'Luyện Giải Độc Đan', inputs: { noc_ran: 1, thao_duoc: 2 }, stones: 10, output: 'dan_giai_doc', rate: 0.9, minRank: 2 },
+  rc_dan_thanh_tam: { jobId: 'dansu', name: 'Luyện Thanh Tâm Đan', inputs: { linh_thao: 2, canh_doi: 2 }, stones: 15, output: 'dan_thanh_tam', rate: 0.85, minRank: 3 },
+  // GĐ388 đợt 2 (Phần A): đồ cho pet — Thú Sư (Hộ Mệnh cố ý đắt/hiếm: 2 nguyên liệu mới có đúng 1 công thức dùng)
+  rc_dan_linh_thu: { jobId: 'thusu', name: 'Luyện Linh Thú Đan', inputs: { thit_thu: 2, thao_duoc: 2 }, stones: 10, output: 'dan_linh_thu', rate: 0.9, minRank: 1 },
+  rc_thu_linh_hoan: { jobId: 'thusu', name: 'Nấu Thú Linh Hoàn', inputs: { tinh_huyet: 2, xuong_thu: 2 }, stones: 30, output: 'thu_linh_hoan', rate: 0.8, minRank: 3 },
+  rc_linh_thu_ho_menh: { jobId: 'thusu', name: 'Kết Linh Thú Hộ Mệnh', inputs: { thu_vuong_tinh_huyet: 1, ky_lan_giac: 1 }, stones: 5000, output: 'linh_thu_ho_menh', rate: 0.5, minRank: 11 },
 };
+// ================= GĐ385: PHÁP BẢO ĐỢT 1 (Bảo chốt hết theo đề xuất 11/11/2026) =================
+// Bản mệnh kỳ vật: 1 ô duy nhất, mở khoá Hóa Thần, KHÔNG cho chỉ số nền/Tu Vi —
+// chỉ cho 1 hiệu ứng kích hoạt riêng/món. Dữ liệu nằm NGOÀI túi đồ (p.phapBao =
+// { owned: {id: cấp}, equipped: id|null }) nên mọi đường bán/trao theo túi
+// (shop_sell, trade, kho tông, nộp việc...) tự nhiên không chạm được; thêm
+// chặn tường minh ở shop_sell + sanitizeOffer. Nuôi cấp LUÔN thành công,
+// mỗi cấp hiệu ứng +8% tương đối, ICD không đổi. Mọi số TẠM theo THIET_KE_PHAP_BAO.
+const PHAP_BAO = {
+  pb_hon_don_chau: { name: 'Hỗn Độn Châu', icon: '🌀', kind: 'chaos', craft: { hon_don_thach: 6, hu_khong_cot: 2 }, upMat: 'hu_khong_cot' },
+  pb_kiep_loi_kiem: { name: 'Kiếp Lôi Kiếm', icon: '⚡', kind: 'thunder', craft: { kiep_van_thach: 4, kiep_loi_tinh: 2 }, upMat: 'kiep_loi_tinh' },
+  pb_tinh_ha_phien: { name: 'Tinh Hà Phiến', icon: '🛡️', kind: 'shield', craft: { tinh_ha_thach: 6, loan_vu: 2 }, upMat: 'loan_vu' },
+  pb_hu_khong_chung: { name: 'Hư Không Chung', icon: '🔔', kind: 'slow', craft: { hon_don_thach: 3, hu_khong_cot: 3 }, upMat: 'hu_khong_cot' },
+  pb_giao_long_an: { name: 'Giao Long Ấn', icon: '🐉', kind: 'mp', craft: { giao_chau: 2, kiep_tam_thao: 4 }, upMat: 'giao_chau' },
+  pb_phuong_hoang_linh: { name: 'Phượng Hoàng Linh', icon: '🔥', kind: 'phoenix', craft: { phuong_vu: 2, tam_ma_ket_tinh: 1 }, upMat: 'phuong_vu' },
+};
+const PB_CRAFT_THUONG = 200; // phí chế mỗi món (Thượng, TẠM)
+// Nuôi cấp: khóa theo CẤP ĐÍCH. Cấp 2–4 ăn đá cõi cao thường ×2 (xoay 3 loại đá);
+// 5–7 ăn nguyên liệu A4 theo món ×2; 8–10 ăn A4 ×3 + Cực ×1/cấp (sink đầu tiên của Cực).
+// Tổng Thượng 1→10 = 50+100+150+300+500+800+1500+2500+3100 = 9.000 (TẠM, đúng tổng bản thảo).
+const PB_UPGRADE = {
+  2: { thuong: 50, mats: { hon_don_thach: 2 } },
+  3: { thuong: 100, mats: { kiep_van_thach: 2 } },
+  4: { thuong: 150, mats: { tinh_ha_thach: 2 } },
+  5: { thuong: 300, a4: 2 },
+  6: { thuong: 500, a4: 2 },
+  7: { thuong: 800, a4: 2 },
+  8: { thuong: 1500, a4: 3, cuc: 1 },
+  9: { thuong: 2500, a4: 3, cuc: 1 },
+  10: { thuong: 3100, a4: 3, cuc: 1 },
+};
+function pbNorm(raw) {
+  const out = { owned: {}, equipped: null };
+  if (raw && typeof raw === 'object') {
+    for (const [id, lv] of Object.entries(raw.owned || {})) {
+      if (PHAP_BAO[id]) out.owned[id] = Math.max(1, Math.min(10, Math.floor(Number(lv) || 1)));
+    }
+    if (raw.equipped && out.owned[raw.equipped]) out.equipped = raw.equipped;
+  }
+  return out;
+}
+function pbStateOf(p) { p.phapBao = pbNorm(p.phapBao); return p.phapBao; }
+function pbUnlocked(p) { return (REALM_ORDER[p.realm] ?? 0) >= 5; } // Hóa Thần trở lên
+function pbEquipped(p) {
+  if (!p || !p.phapBao) return null;
+  const st = pbStateOf(p);
+  return st.equipped ? { id: st.equipped, def: PHAP_BAO[st.equipped], level: st.owned[st.equipped] || 1 } : null;
+}
+function pbFactor(level) { return 1 + (Math.max(1, Math.min(10, level || 1)) - 1) * 0.08; } // +8%/cấp tương đối
+function pbCdReady(p, key) { return Date.now() >= ((p.pbCd || {})[key] || 0); }
+function pbSetCd(p, key, ms) { if (!p.pbCd) p.pbCd = {}; p.pbCd[key] = Date.now() + ms; }
+function pbEmitProc(p, artId, at) {
+  io.to('map:' + mapOf(p)).emit('phapbao_proc', { id: p.id, art: artId, x: Math.round(at && typeof at.x === 'number' ? at.x : p.x), y: Math.round(at && typeof at.y === 'number' ? at.y : p.y), targetId: at && at.id ? at.id : null });
+}
+function pbUpgradeCost(def, targetLevel) {
+  const c = PB_UPGRADE[targetLevel];
+  if (!c) return null;
+  const mats = { ...(c.mats || {}) };
+  if (c.a4) mats[def.upMat] = (mats[def.upMat] || 0) + c.a4;
+  return { thuong: c.thuong, mats, cuc: c.cuc || 0 };
+}
+function pbEffectText(id, level) {
+  const f = pbFactor(level);
+  switch (PHAP_BAO[id].kind) {
+    case 'chaos': return `Khi đánh trúng: 15% tỉ lệ nổ thêm 1 đòn hỗn độn = ${Math.round(40 * f)}% sát thương đòn vừa đánh, lan 120px quanh mục tiêu. Hồi nội bộ 1,5s.`;
+    case 'thunder': return `Mỗi 6s tự chém mục tiêu đang đánh 1 nhát sét = ${Math.round(60 * f)}% công. Không cần thao tác.`;
+    case 'shield': return `Khi nhận 1 đòn ≥10% máu tối đa: tạo khiên = ${Math.round(120 * f) / 10}% máu tối đa trong 5s. Hồi nội bộ 20s.`;
+    case 'slow': return `Khi bị đánh trúng: 20% tỉ lệ làm chậm kẻ đánh 40% trong 2s. Hồi nội bộ 4s.`;
+    case 'mp': return `Khi đánh trúng: 12% tỉ lệ hồi ${Math.round(30 * f) / 10}% chân nguyên tối đa. Hồi nội bộ 2s.`;
+    case 'phoenix': return `Khi máu tụt dưới 20%: hồi ngay ${Math.round(250 * f) / 10}% máu tối đa. Hồi nội bộ 180s.`;
+    default: return '';
+  }
+}
+// Móc ĐÁNH TRÚNG quái (đòn thường + chiêu): Hỗn Độn Châu + Giao Long Ấn.
+// KHÔNG tự gọi onMonsterKilled cho mục tiêu chính (luồng gọi chính xử lý);
+// quái phụ chết vì lan thì xử lý tại đây như đòn lan sẵn có.
+function pbOnHitMonster(p, target, dmg, socket) {
+  if (!p || p.isCompanion || p.isBot || !target || !(dmg > 0)) return;
+  p.pbLastTargetId = target.id;
+  const eq = pbEquipped(p);
+  if (!eq) return;
+  if (eq.def.kind === 'chaos') {
+    if (!pbCdReady(p, 'pbchaos') || Math.random() >= 0.15) return;
+    pbSetCd(p, 'pbchaos', 1500);
+    const extra = Math.max(1, Math.round(dmg * 0.40 * pbFactor(eq.level)));
+    const victims = [target];
+    for (const m of monsters.values()) {
+      if (m !== target && m.hp > 0 && !m.hidden && !m.warEyeId && mapOf(m) === mapOf(target) && Math.hypot(m.x - target.x, m.y - target.y) <= 120) victims.push(m);
+    }
+    for (const v of victims) {
+      if (v.hp <= 0) continue;
+      const d = hurtMonster(v, extra, 0, 'magic', 1, false); // sát thương nổ tính trên đòn đã qua giáp — xuyên phòng như phản chấn GĐ191
+      if (d > 0) notePlayerDamage(p, v, d, false);
+      if (v !== target && v.hp <= 0) onMonsterKilled(socket || null, p, v);
+    }
+    pbEmitProc(p, eq.id, target);
+  } else if (eq.def.kind === 'mp') {
+    if (!pbCdReady(p, 'pbmp') || Math.random() >= 0.12) return;
+    pbSetCd(p, 'pbmp', 2000);
+    p.mp = Math.min(maxMpEff(p), (p.mp || 0) + Math.max(1, Math.round(maxMpEff(p) * 0.03 * pbFactor(eq.level))));
+    pbEmitProc(p, eq.id, p);
+  }
+}
+// Kiếp Lôi Kiếm: nhịp riêng 500ms — chỉ chém khi đang giao tranh (đòn cuối ≤8s)
+// và mục tiêu gần nhất còn sống trong 700px cùng map.
+function pbThunderTick(p) {
+  const eq = pbEquipped(p);
+  if (!eq || eq.def.kind !== 'thunder') return;
+  const now = Date.now();
+  if (now < (p.pbThunderAt || 0)) return;
+  if (now - (p.lastCombatAt || 0) > 8000) return;
+  const t = p.pbLastTargetId ? monsters.get(p.pbLastTargetId) : null;
+  if (!t || t.hp <= 0 || t.hidden || t.warEyeId || mapOf(t) !== mapOf(p) || Math.hypot(t.x - p.x, t.y - p.y) > 700) return;
+  p.pbThunderAt = now + 6000;
+  const atk = attackStatOf(p);
+  const d = hurtMonster(t, 0.60 * pbFactor(eq.level) * (atk.value + 10), t.def ?? WOLF.def, 'magic', 1, false);
+  if (d > 0) {
+    notePlayerDamage(p, t, d, false);
+    pbEmitProc(p, eq.id, t);
+    if (t.hp <= 0) onMonsterKilled(null, p, t);
+  }
+}
+setInterval(() => {
+  for (const p of players.values()) {
+    if (p.isBot || p.isOffline || p.isCompanion || (p.hp || 0) <= 0) continue;
+    try { pbThunderTick(p); } catch (e) { /* pháp bảo không được làm sập tick */ }
+  }
+}, 500);
+
 // GĐ131: ngưỡng lượt chế thành công cho 14 cấp (số TẠM).
 const JOB_RANK_CRAFTS = [0, 10, 30, 60, 100, 160, 240, 340, 460, 600, 800, 1000, 1400, 2000];
 function jobRankOf(p) { return jobRankOfJob(p.job, p.realm); }
@@ -3737,6 +4073,7 @@ function progressFor(def, p) {
     case 'firstFails': return c.ach_firstFails || 0;
     case 'tandang': return c.ach_tandang || 0; // GĐ180: thoát thai hoán cốt đường Tàn Đăng
     case 'cleanBoss': return c.ach_cleanBoss || 0;
+    case 'booksRead': return c.booksRead || 0; // GĐ386: số quyển đã đọc xong ở Văn Uyển (addLibRead đếm)
     default: return 0;
   }
 }
@@ -3881,13 +4218,13 @@ const HERB_ITEMS = new Set(['thao_duoc', 'linh_thao', 'tien_thao', 'than_thao', 
 const SHOPS = {
   tiem_dan: {
     name: 'Tiệm Đan Dược', point: { x: 1012, y: 541 },
-    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500 }, // người chơi MUA (đan đột phá: giá TẠM; GĐ76: Hồi Nguyên thay Tụ Khí; GĐ87: + Kết Đan; GĐ160: + Hóa Anh; GĐ207: + đan NA/HT)
-    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000 }, // người chơi BÁN (40% giá mua)
+    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500, dan_hon_don_luc: 300000, dan_hon_don_giap: 300000, dan_hon_don_huyet: 250000, dan_hon_don_nguyen: 250000, dan_hu_anh: 200000, dan_hon_don_hoi_xuan: 200000, dan_hon_don_hoi_nguyen: 200000, dan_kiep_luc: 500000, dan_kiep_giap: 500000, dan_kiep_huyet: 450000, dan_kiep_nguyen: 450000, dan_kiep_anh: 400000, dan_tien_luc: 1000000, dan_tien_giap: 1000000, dan_tien_huyet: 900000, dan_tien_nguyen: 900000, dan_tien_anh: 800000, dan_ho_kiep: 600000 }, // người chơi MUA (đan đột phá: giá TẠM; GĐ76: Hồi Nguyên thay Tụ Khí; GĐ87: + Kết Đan; GĐ160: + Hóa Anh; GĐ207: + đan NA/HT; Nhóm A 11/11/2026: + đan PH/ĐK/Tiên + Đan Hộ Kiếp — giá bản thảo tính bằng Thượng, tiệm kết toán Hạ nên quy đổi ×10.000 theo tỉ lệ GĐ367)
+    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000, dan_hon_don_luc: 120000, dan_hon_don_giap: 120000, dan_hon_don_huyet: 100000, dan_hon_don_nguyen: 100000, dan_hu_anh: 80000, dan_hon_don_hoi_xuan: 80000, dan_hon_don_hoi_nguyen: 80000, dan_kiep_luc: 200000, dan_kiep_giap: 200000, dan_kiep_huyet: 180000, dan_kiep_nguyen: 180000, dan_kiep_anh: 160000, dan_tien_luc: 400000, dan_tien_giap: 400000, dan_tien_huyet: 360000, dan_tien_nguyen: 360000, dan_tien_anh: 320000, dan_ho_kiep: 240000 }, // người chơi BÁN (40% giá mua)
   },
   tiem_nguyen_lieu: {
     name: 'Tiệm Nguyên Liệu', point: { x: 392, y: 373 },
     sell: { nanh_soi: 12 },
-    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400, than_hong_linh: 100, kiep_van_thach: 1000, tinh_ha_thach: 2500 }, // GĐ233: thu mua quặng dk/tn (TẠM tiếp thang ×2,5) // GĐ26 + GĐ38: thu mua thêm Cánh Dơi / Đá Quý (giá TẠM); GĐ207: + quặng NA/HT; GĐ208: + Hỗn Độn Thạch; GĐ223: + Than Hồng Linh
+    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400, than_hong_linh: 100, kiep_van_thach: 1000, tinh_ha_thach: 2500, hon_tinh: 600, hu_khong_cot: 500, kiep_loi_tinh: 1500, tam_ma_ket_tinh: 1200, giao_chau: 1800, phuong_vu: 2000, ky_lan_giac: 2000, long_lan: 1600, bang_vu: 1500, loan_vu: 1800, thu_vuong_tinh_huyet: 900, dia_mach_tinh: 800 }, // GĐ233: thu mua quặng dk/tn (TẠM tiếp thang ×2,5) // GĐ26 + GĐ38: thu mua thêm Cánh Dơi / Đá Quý (giá TẠM); GĐ207: + quặng NA/HT; GĐ208: + Hỗn Độn Thạch; GĐ223: + Than Hồng Linh; Nhóm A (11/11/2026): + thu mua 12 nguyên liệu cụm loài cõi cao (giá TẠM theo thang quặng)
   },
   // GĐ140: TIỆM THẢO DƯỢC — tiệm riêng cho thảo dược ở làng (bản thành phố
   // là city_thao_duoc ở dưới, GĐ151). Chỉ NPC có bằng Thải Dược Sư mới được
@@ -3923,13 +4260,13 @@ const SHOPS = {
   city_dan: {
     name: 'Tiệm Đan Dược', point: { x: 0, y: 0 },
     // GĐ379: bổ đủ 7 đan NA/HT của đợt GĐ207 (sót cập nhật — comment GĐ89 nói cùng bảng giá tiệm làng, city_thao_duoc đã đủ mà city_dan thiếu); giá y hệt tiem_dan.
-    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500 },
-    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000 },
+    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500, dan_hon_don_luc: 300000, dan_hon_don_giap: 300000, dan_hon_don_huyet: 250000, dan_hon_don_nguyen: 250000, dan_hu_anh: 200000, dan_hon_don_hoi_xuan: 200000, dan_hon_don_hoi_nguyen: 200000, dan_kiep_luc: 500000, dan_kiep_giap: 500000, dan_kiep_huyet: 450000, dan_kiep_nguyen: 450000, dan_kiep_anh: 400000, dan_tien_luc: 1000000, dan_tien_giap: 1000000, dan_tien_huyet: 900000, dan_tien_nguyen: 900000, dan_tien_anh: 800000, dan_ho_kiep: 600000 },
+    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000, dan_hon_don_luc: 120000, dan_hon_don_giap: 120000, dan_hon_don_huyet: 100000, dan_hon_don_nguyen: 100000, dan_hu_anh: 80000, dan_hon_don_hoi_xuan: 80000, dan_hon_don_hoi_nguyen: 80000, dan_kiep_luc: 200000, dan_kiep_giap: 200000, dan_kiep_huyet: 180000, dan_kiep_nguyen: 180000, dan_kiep_anh: 160000, dan_tien_luc: 400000, dan_tien_giap: 400000, dan_tien_huyet: 360000, dan_tien_nguyen: 360000, dan_tien_anh: 320000, dan_ho_kiep: 240000 },
   },
   city_nguyenlieu: {
     name: 'Tiệm Nguyên Liệu', point: { x: 0, y: 0 },
     sell: { nanh_soi: 12 },
-    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400 }, // GĐ207; GĐ208: + Hỗn Độn Thạch
+    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400, hon_tinh: 600, hu_khong_cot: 500, kiep_loi_tinh: 1500, tam_ma_ket_tinh: 1200, giao_chau: 1800, phuong_vu: 2000, ky_lan_giac: 2000, long_lan: 1600, bang_vu: 1500, loan_vu: 1800, thu_vuong_tinh_huyet: 900, dia_mach_tinh: 800 }, // GĐ207; GĐ208: + Hỗn Độn Thạch; Nhóm A (11/11/2026): + thu mua 12 nguyên liệu cụm loài cõi cao (đồng bộ tiem_nguyen_lieu)
   },
   // GĐ151: bản thành phố của Tiệm Thảo Dược — cùng bảng giá với tiệm làng;
   // điểm bán thật tra theo NPC Chủ Tiệm Thảo Dược (có bằng) trên map hiện tại.
@@ -5334,6 +5671,7 @@ function persistPlayer(p) {
   c.phapTuong = p.phapTuong || null; // GĐ184: Pháp Tướng (giai đoạn/tu dưỡng/hệ khóa)
   c.lifespanAtNa1 = p.lifespanAtNa1 ?? null; // GĐ180
   c.graceStartDay = p.graceStartDay ?? null; // GĐ25: mốc bắt đầu ân hạn thọ
+  c.dienThoUsed = p.dienThoUsed || 0; // GĐ387: số viên Diên Thọ Đan đã dùng trong kiếp (luật bền GĐ89/95: chép ở cả persist/spawn/offline/payload)
   // GĐ30: tông môn + Công trạng
   c.merit = p.merit || 0;
   c.boardQuests = p.boardQuests || 0;
@@ -5411,6 +5749,7 @@ function persistPlayer(p) {
   c.gearBag = p.gearBag || {}; // GĐ119: kho trang bị
   c.gear = p.gear || {}; // GĐ119: đồ đang mặc
   c.gearOrders = p.gearOrders || []; // GĐ119 bước 4: đơn đặt rèn chưa nhận
+  c.phapBao = pbStateOf(p); // GĐ385: pháp bảo {owned:{id:cấp}, equipped} — luật bền GĐ89/95: chép ở cả 4 điểm persist/spawn
   c.gearShopBought = p.gearShopBought || {}; // GĐ119 bước 4: món shop đã mua theo ngày
   c.quests = p.quests;
   // GĐ10: ngoại hình tùy chỉnh
@@ -5936,6 +6275,7 @@ process.on('unhandledRejection', (e) => { console.error('[CRASH-GUARD] unhandled
 
 // API trạng thái để kiểm tra nhanh (trang chủ / dành cho bản dựng game)
 app.get('/api/status', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*'); // GĐ390: khung chọn server gọi /api/status chéo origin để hiện số người online
   res.json({
     game: 'Tap Tanh Tu Tien — server',
     status: 'ok',
@@ -6113,6 +6453,7 @@ function spawnFromCharacter(socket, charKey, char) {
     ageStart: char.ageStart ?? 16,
     lifespan: char.lifespan ?? 80,
     graceStartDay: char.graceStartDay ?? null, // GĐ25
+    dienThoUsed: char.dienThoUsed || 0, // GĐ387: đếm viên Diên Thọ Đan theo kiếp
     birthDay: char.birthDay ?? worldClock().dayIndex,
     ageAtNa1: char.ageAtNa1 ?? null, lifespanAtNa1: char.lifespanAtNa1 ?? null, // GĐ180
     phapTuong: char.phapTuong || null, phapTuongActive: false, ptBurn: null, ptTrialBossId: null, dkGateBossId: null, thienPhatSuId: null, // GĐ184; GĐ230: + dkGateBossId (phiên, không lưu); GĐ231: + thienPhatSuId
@@ -6150,6 +6491,7 @@ function spawnFromCharacter(socket, charKey, char) {
     gear: char.gear && typeof char.gear === 'object' ? char.gear : {}, // GĐ119: ô nào đang mặc món nào {slot: uid}
     gearOrders: Array.isArray(char.gearOrders) ? char.gearOrders : [], // GĐ119 bước 4: đơn đặt rèn
     gearShopBought: char.gearShopBought && typeof char.gearShopBought === 'object' ? char.gearShopBought : {}, // GĐ119 bước 4
+    phapBao: pbNorm(char.phapBao), pbCd: {}, pbShield: null, pbThunderAt: 0, pbLastTargetId: null, // GĐ385: pháp bảo (ICD/khiên là trạng thái phiên như Hộ Thể GĐ88 — không lưu)
     quests: char.quests && typeof char.quests === 'object' ? char.quests : {},
     // GĐ24: thiện cảm NPC
     affinity: char.affinity && typeof char.affinity === 'object' ? char.affinity : {},
@@ -6370,6 +6712,7 @@ function characterPayload(p) {
     age: ageOf(p),
     lifespan: p.lifespan ?? 80,
     lifespanLeft: (p.lifespan ?? 80) - ageOf(p),
+    dienThoUsed: p.dienThoUsed || 0, // GĐ387: client hiện "đã dùng X/3 viên kiếp này" ở mô tả Diên Thọ Đan trong túi
     // GĐ25: số ngày ân hạn còn lại (null = thọ chưa tận)
     graceDaysLeft: graceDaysLeftOf(p),
     // GĐ30: Công trạng + tông môn hiện tại
@@ -6554,6 +6897,7 @@ function characterPayload(p) {
     gearBag: p.gearBag || {}, // GĐ119: kho trang bị (đọc ở welcome/char_sync)
     gear: p.gear || {}, // GĐ119: đồ đang mặc
     gearOrders: p.gearOrders || [], // GĐ119 bước 4: đơn đặt rèn (UI nhận đồ)
+    phapBao: (() => { const st385 = pbStateOf(p); return { unlocked: pbUnlocked(p), equipped: st385.equipped, owned: st385.owned, catalog: Object.entries(PHAP_BAO).map(([id, def]) => { const lv = st385.owned[id] || 0; const up = lv >= 1 && lv < 10 ? pbUpgradeCost(def, lv + 1) : null; return { id, name: def.name, icon: def.icon, level: lv, equipped: st385.equipped === id, effect: pbEffectText(id, Math.max(1, lv)), craft: { thuong: PB_CRAFT_THUONG, mats: def.craft }, next: up ? { level: lv + 1, thuong: up.thuong, mats: up.mats, cuc: up.cuc } : null }; }) }; })(), // GĐ385: pháp bảo cho thẻ nhân vật + panel chi tiết
     quests: Object.fromEntries(
       Object.entries(p.quests || {}).map(([qid, q]) => {
         const def = QUESTS[qid];
@@ -6663,6 +7007,7 @@ function spawnOfflineActor(charKey, char) {
     failStreak: char.failStreak ?? 0, trialReady: char.trialReady ?? null, statPenaltyStacks: char.statPenaltyStacks ?? 0,
     ageStart: char.ageStart ?? 16, lifespan: char.lifespan ?? 80,
     graceStartDay: char.graceStartDay ?? null, // GĐ25
+    dienThoUsed: char.dienThoUsed || 0, // GĐ387: bản offline cũng chép đếm Diên Thọ Đan (thiếu là autosave 15s xóa sạch — họ lỗi GĐ89/95)
     birthDay: char.birthDay ?? worldClock().dayIndex, lastDayIndex: char.lastDayIndex ?? worldClock().dayIndex,
     ageAtNa1: char.ageAtNa1 ?? null, lifespanAtNa1: char.lifespanAtNa1 ?? null, // GĐ180: bản offline cũng chép mốc Tàn Đăng
     phapTuong: char.phapTuong || null, phapTuongActive: false, ptBurn: null, ptTrialBossId: null, dkGateBossId: null, thienPhatSuId: null, // GĐ184; GĐ230: + dkGateBossId (phiên, không lưu); GĐ231: + thienPhatSuId: bản offline cũng chép Pháp Tướng
@@ -6677,6 +7022,7 @@ function spawnOfflineActor(charKey, char) {
     gear: char.gear && typeof char.gear === 'object' ? char.gear : {}, // GĐ119
     gearOrders: Array.isArray(char.gearOrders) ? char.gearOrders : [], // GĐ119 bước 4: đơn đặt rèn qua restart
     gearShopBought: char.gearShopBought && typeof char.gearShopBought === 'object' ? char.gearShopBought : {}, // GĐ119 bước 4
+    phapBao: pbNorm(char.phapBao), // GĐ385: giữ pháp bảo qua restart (thiếu chép ở đây là autosave 15s xóa sạch — họ lỗi GĐ89/95)
     quests: char.quests && typeof char.quests === 'object' ? char.quests : {},
     affinity: char.affinity && typeof char.affinity === 'object' ? char.affinity : {}, // GĐ24
     affTalk: char.affTalk && typeof char.affTalk === 'object' ? char.affTalk : {},
@@ -7025,6 +7371,7 @@ function breakQuyHon(pet) {
     qh.active = false; qh.hp = 0;
     classResOf(owner).honKhi = 0; // GĐ102: phản phệ — mất hết Hồn Khí
     applyPlayerStatus(owner, { stunSec: QUY_BACKLASH_STUN_SEC }); // GĐ102: phản phệ — choáng chủ
+    owner.quyBacklashUntil = Date.now() + QUY_BACKLASH_STUN_SEC * 1000; // GĐ388: mốc choáng PHẢN PHỆ (trạng thái phiên) — Thanh Tâm Đan không giải được choáng tự phản phệ này
     persistPlayer(owner);
     const sock = io.sockets.sockets.get(owner.id);
     if (sock) {
@@ -7148,6 +7495,29 @@ function spawnTamed(owner) {
 function breakTamed(pet) {
   if (!pet || !players.has(pet.id)) return;
   const owner = players.get(pet.ownerId);
+  // GĐ388: LINH THÚ HỘ MỆNH — mọi đường CHẾT của thú thuần hóa đều qua hàm
+  // này (hitPlayer + updateTamed), còn THẢ thú đi đường riêng không qua đây
+  // nên không tốn oan. Chủ còn Hộ Mệnh trong túi → vỡ 1 cái thay chết: thú
+  // sống ở 30% máu, dịch về sát chủ, không giao chiến 5s (updateTamed đọc
+  // hoMenhRetreatUntil). Không có Hộ Mệnh → chết mất hẳn như luật GĐ137.
+  if (owner && (owner.inventory?.linh_thu_ho_menh || 0) > 0) {
+    owner.inventory.linh_thu_ho_menh -= 1;
+    if (owner.inventory.linh_thu_ho_menh <= 0) delete owner.inventory.linh_thu_ho_menh;
+    const maxHpHM388 = maxHpOf(pet.stats);
+    pet.hp = Math.max(1, Math.round(maxHpHM388 * HO_MENH_HP_PCT));
+    pet.hoMenhRetreatUntil = Date.now() + HO_MENH_RETREAT_MS;
+    const hx388 = owner.x + (pet.followDx || 28), hy388 = owner.y + (pet.followDy || 12);
+    if (!hitsObstacle(hx388, hy388)) { pet.x = hx388; pet.y = hy388; }
+    tamedOf(owner).hp = Math.round(pet.hp);
+    persistPlayer(owner);
+    const sockHM388 = io.sockets.sockets.get(owner.id);
+    if (sockHM388) {
+      sockHM388.emit('notice', { text: `💠 Linh Thú Hộ Mệnh vỡ tan thay cho ${pet.name}! Thú sống sót ở 30% máu và rút về bên bạn (còn ${owner.inventory.linh_thu_ho_menh || 0} Hộ Mệnh trong túi).` });
+      syncChar(sockHM388, owner);
+    }
+    console.log(`[ho-menh] ${pet.name} (chủ ${owner.name}) thoát chết nhờ Linh Thú Hộ Mệnh`);
+    return;
+  }
   players.delete(pet.id);
   if (owner) {
     if (owner.petId === pet.id) owner.petId = null;
@@ -7186,7 +7556,7 @@ function updateTamed(c, dt) {
     const d = Math.hypot(m.x - owner.x, m.y - owner.y);
     if (d < td) { td = d; target = m; }
   }
-  const anchor = target && td <= PET_ENGAGE_RANGE ? target : null;
+  const anchor = target && td <= PET_ENGAGE_RANGE && Date.now() >= (c.hoMenhRetreatUntil || 0) ? target : null; // GĐ388: vừa được Hộ Mệnh cứu → rút về, không giao chiến 5s
   const dest = anchor ? { x: anchor.x, y: anchor.y } : { x: owner.x + c.followDx, y: owner.y + c.followDy };
   const distDest = Math.hypot(dest.x - c.x, dest.y - c.y);
   const stopD = anchor ? 40 : 4;
@@ -7208,7 +7578,8 @@ function updateTamed(c, dt) {
     if (now - (c.lastAttackAt || 0) >= cd) {
       c.lastAttackAt = now;
       const atk = attackStatOf(c);
-      const dmg = hurtMonster(anchor, BASIC_COEF * (atk.value + 10), anchor.def ?? WOLF.def);
+      const atkVal388 = atk.value * (Date.now() < (classResOf(owner).petAtkBuffUntil || 0) ? 1 + PET_ATK_BUFF_PCT : 1); // GĐ388: Thú Linh Hoàn — buff công pet lưu phía CHỦ trong classRes (đổi pet vẫn còn; classRes bền đủ 4 điểm persist/spawn/offline/payload từ GĐ95)
+      const dmg = hurtMonster(anchor, BASIC_COEF * (atkVal388 + 10), anchor.def ?? WOLF.def);
       io.emit('player_attacked', { id: c.id, targetId: anchor.id });
       if (anchor.hp <= 0) onMonsterKilled(null, owner, anchor);
     }
@@ -7710,6 +8081,7 @@ for (const [key, c] of Object.entries(characters)) spawnOfflineActor(key, c);
 const NHO_STUDY_MAP = 'van_uyen'; // GĐ105: map đọc sách
 const NHO_STUDY_PER_SEC = 5; // TẠM: Hạo Nhiên mỗi giây đọc
 const NHO_STUDY_RANGE = 300; // TẠM: px quanh cổng Văn Uyển tính là đang ở điểm đọc
+const LIB_READ_BOOK_SEC = 60; // GĐ386 TẠM: giây đọc đứng yên ở Văn Uyển để đọc xong 1 quyển — áp cho MỌI lớp (PA2, đếm ach_an_books)
 const NHO_CHUONG_UNLOCK = { 2: 300, 3: 900, 4: 1800 }; // TẠM: tổng giây đọc để mở Chương 2/3/4 (Chương 1 có sẵn)
 const NHO_ZONE_COST_MP = 20; // TẠM
 const NHO_ZONE_COST_HAO = 25; // TẠM: Hạo Nhiên mỗi lần mở Ý Cảnh
@@ -7747,6 +8119,20 @@ function addNhoStudy(p, dtSec) {
       list.push(n);
       emitNoticeTo(p, `📖 Bạn đã đọc đủ ${NHO_CHUONG_UNLOCK[n]} giây — mở khóa Chương ${n}: ${NHO_ZONE_NAMES[n]}!`);
     }
+  }
+}
+// GĐ386: đọc sách cho MỌI lớp (PA2) — đứng đọc ở Văn Uyển tích giây vào
+// counters.readSec (bền qua persist như mọi counters), đủ LIB_READ_BOOK_SEC
+// thì xong 1 quyển: counters.booksRead +1 (nguồn đếm của ach_an_books).
+// Nho Tu đọc song song cả track này lẫn Hạo Nhiên/Chương của addNhoStudy.
+function addLibRead(p, dtSec) {
+  if (!p.counters) p.counters = {};
+  p.counters.readSec = (p.counters.readSec || 0) + dtSec;
+  while (p.counters.readSec >= LIB_READ_BOOK_SEC) {
+    p.counters.readSec -= LIB_READ_BOOK_SEC;
+    p.counters.booksRead = (p.counters.booksRead || 0) + 1;
+    emitNoticeTo(p, `📚 Đọc xong một quyển sách ở Văn Uyển! Bạn đã đọc ${p.counters.booksRead} quyển — sổ Bác Học ghi thêm một dòng.`);
+    persistPlayer(p);
   }
 }
 function stopStudying(p, reason) {
@@ -8403,6 +8789,12 @@ function onMonsterKilled(socket, player, target) {
   if (Math.random() < 0.15 * dm) dropItem('manh_xuong', rand(-18, 18), rand(-14, 14)); // GĐ101: Mảnh Xương — nguyên liệu Cốt Tu (theo tài liệu 15%; trùm thử thách/ảo ảnh đã return sớm phía trên)
   if ((MONSTER_TYPES[target.kind]?.minChestGrade || target.mapBoss || target.rare) && Math.random() < 0.25) dropItem('ngoc_gian_trong', rand(-18, 18), rand(-14, 14)); // GĐ334: Ngọc Giản Trống — trùm (loài minChestGrade / trùm map) + quái đặc biệt ✦ rơi 25%, đi đường NGOÀI LOOT_NERF như trùm/hiếm (TẠM)
   { const cd347 = coDuyenEffOf(player); if (cd347.loot > 0 && Math.random() < cd347.loot) { const pool337 = ['da_quy', 'ngoc_gian_trong', 'tien_linh_chi']; dropItem(pool337[Math.floor(Math.random() * pool337.length)], rand(-18, 18), rand(-14, 14)); } } // GĐ337: cơ duyên (F3) kênh L — hạ quái roll thêm món hiếm, NGOÀI LOOT_NERF · GĐ347: tỉ lệ hiệu dụng qua coDuyenEffOf (thiên phú + perk mốc 1 nhóm Ẩn +3%)
+  // Nhóm A (11/11/2026): A4 — nguyên liệu cụm loài cõi cao rơi xuống đất như mọi nguyên liệu (đi qua là nhặt), tỉ lệ theo KIND_MAT_DROPS nhân dmMat (gồm LOOT_NERF với quái farm thường; trùm/hiếm miễn giảm sẵn trong dmMat — GĐ319).
+  for (const [matId, md] of Object.entries(KIND_MAT_DROPS)) {
+    if (md.kinds.includes(target.kind) && Math.random() < md.rate * dmMat) dropItem(matId, rand(-18, 18), rand(-14, 14));
+  }
+  // Nhóm A: Phù Thiên Kiếp rơi thẳng từ TRÙM cõi Độ Kiếp (10%, TẠM) — rương game dùng chung bảng C/B/A không theo cõi nên đi đường rơi trùm như Ngọc Giản Trống GĐ334 (ngoài LOOT_NERF).
+  if (MONSTER_TYPES[target.kind]?.realm === 'dk' && (MONSTER_TYPES[target.kind]?.minChestGrade || target.mapBoss || target.rare) && Math.random() < 0.10) dropItem('phu_thien_kiep', rand(-18, 18), rand(-14, 14));
   // GĐ39: tung RƯƠNG theo hạng quái (bảng B10) — rơi tại chỗ quái gục,
   // người chơi tới gần là mở; trùm thử thách không rơi rương (theo bản SP)
   {
@@ -8421,6 +8813,11 @@ function onMonsterKilled(socket, player, target) {
       if (grade) {
         const chc = spawnChest(target.x + rand(-14, 14), target.y + rand(-10, 10), grade, deadMapId, stoneG);
         if (chc) { chc.nerfLoot = farmNerf < 1; console.log(`[rương] ${target.name} rơi rương cấp ${grade} (linh thạch ${stoneG})`); }
+        // GĐ387: đóng dấu RƯƠNG TRÙM CÕI CAO cho Diên Thọ Đan — trùm = loài
+        // boss-class (minChestGrade) hoặc trùm map (mapBoss), cõi từ Phản Hư
+        // trở lên. Cá thể hiếm ✦ KHÔNG tính (luật phân biệt trùm/hiếm GĐ379);
+        // roll tỉ lệ ở lúc MỞ rương như các kênh phụ khác (Mảnh Xương GĐ101).
+        if (chc && (MONSTER_TYPES[target.kind]?.minChestGrade || target.mapBoss) && (REALM_ORDER[MONSTER_TYPES[target.kind]?.realm] ?? 0) >= (REALM_ORDER.ph ?? 6)) chc.dienThoBoss = 1;
       }
     }
   }
@@ -9818,6 +10215,7 @@ function sanitizeOffer(p, raw) {
   if (!raw) return out;
   const inv = p.inventory || {};
   for (const [itemId, qtyRaw] of Object.entries(raw.items || {})) {
+    if (PHAP_BAO[itemId]) continue; // GĐ385: pháp bảo khóa giao dịch đợt 1 — không lên bàn trade được
     if (!ITEMS[itemId]) continue;
     const qty = Math.floor(Number(qtyRaw) || 0);
     const owned = inv[itemId] || 0;
@@ -10339,6 +10737,7 @@ function hitPlayer(p, rawDamage, type, source, chainDepth = 0, chainHit = null) 
   if (p.classId === 'thetu') rawIn *= 1 - rageRedOf(p); // GĐ95: Cương Kình — giảm dmg theo Nộ Khí (tới 30%)
   if (activeBuffsOf(p).taldef) rawIn *= 1 - 0.5; // GĐ136: Phù Kim Cang — sát thương nhận ×0,5
   if (activeBuffsOf(p).taldef2) rawIn *= 1 - 0.7; // GĐ207: Phù Thiên Cang — sát thương nhận ×0,3
+  if (activeBuffsOf(p).taldef3) rawIn *= 1 - 0.8; // Nhóm A (11/11/2026): Phù Hư Không Thuẫn — sát thương nhận ×0,2
   if (Date.now() < (p.tranWardUntil || 0)) rawIn *= 0.6; // GĐ207: đang đứng trong Trận Hộ Thể — sát thương nhận ×0,6
   if (vmOf(p) && p.classId === 'phattu') rawIn *= pathTierOf(p) >= 3 ? 0.75 : 0.8; // GĐ312: Thánh tăng — Phật quang hộ thể, giảm 20% sát thương nhận · GĐ343 nấc 3: giảm 25%
   if (talentActiveId(p) === 'chien_the') rawIn *= 0.95; // GĐ337: Chiến thể — sát thương nhận −5%
@@ -10346,6 +10745,7 @@ function hitPlayer(p, rawDamage, type, source, chainDepth = 0, chainHit = null) 
   { const wf334 = p.token ? warFormFx(p) : null; if (wf334 && wf334.axis === 'thungu' && dmg > 0) dmg = Math.max(1, Math.round(dmg * 0.92)); } // GĐ334: trận THỦ NGỰ — người của tông có trận đứng trong vùng cờ nhận ít hơn 8% sát thương
   if (p.race === 'hoa' && source && source.kind) { raceKindSets(); if (FIRE_KINDS.has(source.kind)) dmg = Math.round(dmg * 1.4); } // GĐ317: Hoa tộc sợ lửa — nhận +40% từ quái hệ Hỏa
   if (p.raceShield > 0 && dmg > 0) { const ab317 = Math.min(p.raceShield, dmg); p.raceShield -= ab317; dmg -= ab317; } // GĐ317: Tiên Khí Hộ Thể hấp thụ trước máu
+  if (p.pbShield && dmg > 0) { if (Date.now() < p.pbShield.until && p.pbShield.amount > 0) { const ab385 = Math.min(p.pbShield.amount, dmg); p.pbShield.amount -= ab385; dmg -= ab385; } else p.pbShield = null; } // GĐ385: khiên Tinh Hà Phiến hấp thụ trước máu (cùng ngăn thuẫn với Tiên Khí/Thần Thuật)
   // GĐ88: KIM ĐAN HỘ THỂ — Kim Đan tầng 7+ (Hậu Kỳ): máu xuống ≤30% thì tự
   // động bật hộ thể: giảm 50% sát thương nhận trong 10s, hồi 60s (TẠM).
   const maxHp88 = maxHpEff(p);
@@ -10424,6 +10824,33 @@ function hitPlayer(p, rawDamage, type, source, chainDepth = 0, chainHit = null) 
   if (source && typeof source.hp === 'number' && Date.now() < (p.reflectUntil || 0) && p.reflectPct) {
     hurtMonster(source, (rawDamage * p.reflectPct) / 100, source.def ?? WOLF.def); // GĐ38
     if (source.hp <= 0) onMonsterKilled(null, p, source);
+  }
+  // GĐ385: PHÁP BẢO — móc BỊ ĐÁNH TRÚNG (khiên Tinh Hà Phiến / chậm Hư Không Chung / cứu Phượng Hoàng Linh).
+  // Chạy sau khi máu đã trừ, trước nhánh gục ngã: Phượng Hoàng Linh kịp cứu cả đòn kết liễu.
+  { const eq385 = (p.token && !p.isCompanion) ? pbEquipped(p) : null;
+    if (eq385 && dmg > 0) {
+      const maxHp385 = maxHpEff(p);
+      if (eq385.def.kind === 'shield' && dmg >= maxHp385 * 0.10 && pbCdReady(p, 'pbshield')) {
+        pbSetCd(p, 'pbshield', 20000);
+        p.pbShield = { amount: Math.round(maxHp385 * 0.12 * pbFactor(eq385.level)), until: Date.now() + 5000 };
+        pbEmitProc(p, eq385.id, p);
+      }
+      if (eq385.def.kind === 'slow' && source && pbCdReady(p, 'pbslow') && Math.random() < 0.20) {
+        pbSetCd(p, 'pbslow', 4000);
+        if (source.id && monsters.get(source.id) === source && typeof source.hp === 'number') {
+          initMonsterFx(source);
+          if (Date.now() >= (source.slowUntil || 0) || 40 >= (source.slowPct || 0)) source.slowPct = 40;
+          source.slowUntil = Math.max(source.slowUntil || 0, Date.now() + 2000);
+        } else if (source.token && !source.isCompanion) applyPlayerStatus(source, { slowPct: 40, slowSec: 2 });
+        pbEmitProc(p, eq385.id, source && typeof source.x === 'number' ? source : p);
+      }
+    }
+    if (eq385 && eq385.def.kind === 'phoenix' && p.hp < maxHpEff(p) * 0.20 && pbCdReady(p, 'pbphoenix')) {
+      pbSetCd(p, 'pbphoenix', 180000);
+      p.hp = Math.min(maxHpEff(p), p.hp + Math.round(maxHpEff(p) * 0.25 * pbFactor(eq385.level)));
+      emitNoticeTo(p, '🔥 Phượng Hoàng Linh bùng cháy — hồi lại một phần máu tối đa, giữ bạn đứng vững!');
+      pbEmitProc(p, eq385.id, p);
+    }
   }
   console.log(`[combat] ${source.id} cắn ${p.name}: -${dmg} HP (còn ${Math.max(0, Math.round(p.hp))}/${maxHpEff(p)})`);
   if (p.hp <= 0) {
@@ -12910,6 +13337,7 @@ io.on('connection', (socket) => {
     }
     warNoteDamage(player, target, dmg); // GĐ302: sát thương lên Thủ Lĩnh Chiến Kỳ tính điểm tông chiến
     notePlayerDamage(player, target, dmg, critMul > 1); // GĐ138
+    pbOnHitMonster(player, target, dmg, socket); // GĐ385: pháp bảo móc đòn thường trúng quái (Hỗn Độn Châu / Giao Long Ấn)
     if (player.classId === 'thetu') addRage(player, 6); // GĐ95: đánh trúng tích Nộ
     if (player.classId === 'satthu') addSatKhi(player, SATKHI_HIT); // GĐ97: đánh trúng tích Sát Khí
     if (player.classId === 'satthu') applyCoatingOnHit(player, target); // GĐ98: đòn trúng bôi độc / kích thích
@@ -13301,16 +13729,21 @@ io.on('connection', (socket) => {
   });
 
   // GĐ105: NHO TU — Đọc sách ở Văn Uyển (tích Hạo Nhiên + mở Chương) + mở Ý Cảnh.
+  // GĐ386 (PA2): đọc sách mở cho MỌI lớp — lớp khác không tích Hạo Nhiên/Chương
+  // mà tích giây đọc thư viện (addLibRead, đếm ach_an_books); Nho Tu chạy cả hai.
   socket.on('nho_study', () => {
     if (!player) return;
-    if (player.classId !== 'nhotu') { socket.emit('interact_error', { message: 'Đọc sách ở Văn Uyển là việc riêng của Nho Tu.' }); return; }
     if (player.hp <= 0) return; // GĐ105: đang gục ngã thì không đọc được
     if (player.studying) { stopStudying(player, 'toggle'); return; }
     if (mapOf(player) !== NHO_STUDY_MAP) { socket.emit('interact_error', { message: 'Muốn đọc sách, hãy tới Văn Uyển Tàng Kinh Các.' }); return; }
     const portal = vanUyenPortal();
     if (!portal || Math.hypot(player.x - portal.x, player.y - portal.y) > NHO_STUDY_RANGE) { socket.emit('interact_error', { message: 'Hãy đứng gần chính đường Văn Uyển (quanh cổng) để đọc sách.' }); return; }
     player.studying = true;
-    emitNoticeTo(player, `📖 Bạn bắt đầu đọc sách ở Văn Uyển — đứng yên nhận +${NHO_STUDY_PER_SEC} Hạo Nhiên/giây, đủ giây sẽ mở Chương mới (di chuyển hoặc bị đánh sẽ ngắt).`);
+    if (player.classId === 'nhotu') {
+      emitNoticeTo(player, `📖 Bạn bắt đầu đọc sách ở Văn Uyển — đứng yên nhận +${NHO_STUDY_PER_SEC} Hạo Nhiên/giây, đủ giây sẽ mở Chương mới (di chuyển hoặc bị đánh sẽ ngắt).`);
+    } else {
+      emitNoticeTo(player, `📖 Bạn bắt đầu đọc sách ở Văn Uyển — đứng yên đọc, mỗi ${LIB_READ_BOOK_SEC} giây đọc xong 1 quyển ghi vào sổ Bác Học (di chuyển hoặc bị đánh sẽ ngắt). Bạn đã đọc ${(player.counters && player.counters.booksRead) || 0} quyển.`);
+    }
   });
 
   socket.on('nho_zone', (data) => {
@@ -13874,6 +14307,7 @@ io.on('connection', (socket) => {
       }
     }
     applySelfFx(player, fx, totalDealt);
+    if (totalDealt > 0 && target) pbOnHitMonster(player, target, firstDmg > 0 ? firstDmg : totalDealt, socket); // GĐ385: pháp bảo móc chiêu trúng quái (1 lần/cast, theo đòn đầu)
     // GĐ312: hiệu ứng riêng của tuyệt kỹ đường Viên Mãn
     if (skill.id === 'vm_cot-tu') {
       player.vmPetBuffUntil = now + 20000;
@@ -14501,6 +14935,8 @@ io.on('connection', (socket) => {
     if (info.type === 'dokiep1' || info.type === 'dokiep2' || info.type === 'dokiep3' || info.type === 'tienmon') { // GĐ231: Tiên Môn đi chung khung cổng kiếp
       let chance = 0.6;
       if ((player.inventory.dan_ho_mach || 0) > 0) { player.inventory.dan_ho_mach -= 1; if (player.inventory.dan_ho_mach <= 0) delete player.inventory.dan_ho_mach; chance += 0.1; }
+      // Nhóm A (11/11/2026): Đan Hộ Kiếp +15% (TẠM) — CHỈ áp cho 3 cổng kiếp Độ Kiếp (dokiep1/2/3); KHÔNG áp Tiên Môn (đường thăng thiên riêng), không áp đột phá Đại cảnh thường. Tự tiêu hao khi qua cổng như Hộ Mạch.
+      if (info.type !== 'tienmon' && (player.inventory.dan_ho_kiep || 0) > 0) { player.inventory.dan_ho_kiep -= 1; if (player.inventory.dan_ho_kiep <= 0) delete player.inventory.dan_ho_kiep; chance += 0.15; socket.emit('notice', { text: '🛡️ Đan Hộ Kiếp hộ thể: +15% tỉ lệ qua cổng kiếp (đã tiêu hao 1 viên).' }); }
       if (attackStatOf(player).value >= 40) chance += 0.1;
       chance -= 0.05 * ((player.linhCan?.count || 1) - 1);
       chance += 0.1 * (player.failStreak || 0);
@@ -14822,6 +15258,8 @@ io.on('connection', (socket) => {
   socket.on('shop_sell', (data) => {
     if (!player || !data) return;
     if (player.hp <= 0) return; // GĐ128: linh thể chỉ đi lại, không tương tác được
+    if (PHAP_BAO[data.itemId]) { socket.emit('interact_error', { message: 'Pháp bảo là vật bản mệnh — không bán cho tiệm được.' }); return; } // GĐ385: khóa giao dịch đợt 1 (pháp bảo vốn nằm ngoài túi, đây là chặn tường minh)
+    if (data.itemId === 'dan_dien_tho') { socket.emit('interact_error', { message: 'Diên Thọ Đan là đan cứu mạng — tiệm không thu mua.' }); return; } // GĐ387: chặn bán lại tiệm tường minh (đan cũng không có trong bảng giá mua của tiệm nào)
     if (data.shopId === 'luu_dong' && !merchantPresent()) { // GĐ40+
       socket.emit('interact_error', { message: 'Thương Nhân Lưu Động hiện không có ở làng.' });
       return;
@@ -15430,6 +15868,7 @@ io.on('connection', (socket) => {
         accuse: null, personalQuest: null, personalQuests: cityQuests, claimable: cityClaimable,
         merchantInfo: null, sectInfo: null, realmInfo: null, escortInfo: null, envoySect,
         mountShop: cityNpc.mountKeeper ? true : null, // GĐ161: Chủ Trại Ngự Thú → nút mở panel Trại Thú Cưỡi
+        libInfo: cityNpc.libKeeper ? { booksRead: (player.counters && player.counters.booksRead) || 0, readSec: Math.floor((player.counters && player.counters.readSec) || 0) } : null, // GĐ386: Thủ Tàng Văn Uyển → khối đọc sách trong hội thoại
         storySegs: storySegsFor(player, cityNpc.id), // GĐ353: đoạn kể chuyện của NPC thành phố (Kiếp Đài Thủ / Hộ Vệ Tiên Môn)
       });
       return;
@@ -16205,6 +16644,94 @@ io.on('connection', (socket) => {
     syncChar(socket, player);
   });
 
+  // GĐ385: PHÁP BẢO — chế / đeo / tháo / nuôi cấp. Cùng khung với forge_gear
+  // (kiểm cổng → trừ đúng ví/nguyên liệu → persist → sync → báo kết quả),
+  // nhưng phí bằng THƯỢNG (không phải Hạ như craft_item) và LUÔN thành công.
+  const pbErr = (msg) => socket.emit('interact_error', { message: msg });
+  const pbMatsText = (mats) => Object.entries(mats).map(([id, n]) => `${ITEMS[id]?.name || id} ×${n}`).join(' + ');
+  const pbCheckMats = (mats) => {
+    for (const [id, n] of Object.entries(mats)) {
+      if ((player.inventory[id] || 0) < n) return `Thiếu ${ITEMS[id]?.name || id}: cần ${n}, đang có ${player.inventory[id] || 0}.`;
+    }
+    return null;
+  };
+  const pbTakeMats = (mats) => { for (const [id, n] of Object.entries(mats)) player.inventory[id] -= n; };
+  const pbInCombat = () => Date.now() - (player.lastCombatAt || 0) < 5000; // đổi món chỉ ngoài giao tranh (bản thảo mục 4)
+  socket.on('phapbao_craft', (data) => {
+    if (!player || !data) return;
+    if (player.hp <= 0) { pbErr('Đang là linh thể — không chế pháp bảo được.'); return; }
+    const def = PHAP_BAO[data.id];
+    if (!def) { pbErr('Không tìm thấy pháp bảo này.'); return; }
+    if (!pbUnlocked(player)) { pbErr('Pháp bảo chỉ mở khi đạt Hóa Thần — dưới Hóa Thần chưa chế, chưa đeo, chưa nuôi được.'); return; }
+    const st = pbStateOf(player);
+    if (st.owned[data.id]) { pbErr(`Bạn đã có ${def.name} rồi — pháp bảo là vật bản mệnh, mỗi món chỉ chế một lần.`); return; }
+    const mErr = pbCheckMats(def.craft);
+    if (mErr) { pbErr(mErr); return; }
+    if ((player.stonesThuong || 0) < PB_CRAFT_THUONG) { pbErr(`Không đủ Linh thạch Thượng để chế (cần ${PB_CRAFT_THUONG}, đang có ${player.stonesThuong || 0}).`); return; }
+    pbTakeMats(def.craft);
+    player.stonesThuong -= PB_CRAFT_THUONG;
+    st.owned[data.id] = 1;
+    if (!st.equipped) st.equipped = data.id; // ô đang trống thì đeo luôn món vừa chế
+    persistPlayer(player);
+    syncChar(socket, player);
+    socket.emit('phapbao_result', { ok: true, action: 'craft', id: data.id, level: 1 });
+    notice(`✦ Chế tạo THÀNH CÔNG: ${def.name} (cấp 1) — ${pbEffectText(data.id, 1)}`);
+    console.log(`[pháp bảo] ${player.name} chế ${def.name}: −${PB_CRAFT_THUONG} Thượng, −${pbMatsText(def.craft)}`);
+  });
+  socket.on('phapbao_equip', (data) => {
+    if (!player || !data) return;
+    if (player.hp <= 0) return;
+    const def = PHAP_BAO[data.id];
+    if (!def) { pbErr('Không tìm thấy pháp bảo này.'); return; }
+    if (!pbUnlocked(player)) { pbErr('Pháp bảo chỉ mở khi đạt Hóa Thần.'); return; }
+    const st = pbStateOf(player);
+    if (!st.owned[data.id]) { pbErr(`Bạn chưa có ${def.name}.`); return; }
+    if (pbInCombat()) { pbErr('Đang giao tranh — ra khỏi trận mới đổi pháp bảo được.'); return; }
+    st.equipped = data.id;
+    player.pbShield = null; // tháo/đổi món là khiên cũ tan theo món cũ
+    persistPlayer(player);
+    syncChar(socket, player);
+    socket.emit('phapbao_result', { ok: true, action: 'equip', id: data.id, level: st.owned[data.id] });
+    notice(`✦ Đã đeo ${def.name} (cấp ${st.owned[data.id]}).`);
+  });
+  socket.on('phapbao_unequip', () => {
+    if (!player) return;
+    if (player.hp <= 0) return;
+    if (pbInCombat()) { pbErr('Đang giao tranh — ra khỏi trận mới tháo pháp bảo được.'); return; }
+    const st = pbStateOf(player);
+    st.equipped = null;
+    player.pbShield = null;
+    persistPlayer(player);
+    syncChar(socket, player);
+    socket.emit('phapbao_result', { ok: true, action: 'unequip', id: null });
+  });
+  socket.on('phapbao_upgrade', (data) => {
+    if (!player || !data) return;
+    if (player.hp <= 0) { pbErr('Đang là linh thể — không nuôi pháp bảo được.'); return; }
+    const st = pbStateOf(player);
+    const id = data.id || st.equipped;
+    const def = id ? PHAP_BAO[id] : null;
+    if (!def) { pbErr('Không tìm thấy pháp bảo này.'); return; }
+    if (!pbUnlocked(player)) { pbErr('Pháp bảo chỉ mở khi đạt Hóa Thần.'); return; }
+    const lv = st.owned[id] || 0;
+    if (!lv) { pbErr(`Bạn chưa có ${def.name} — chế trước đã.`); return; }
+    if (lv >= 10) { pbErr(`${def.name} đã tới cấp 10 — cấp tối đa.`); return; }
+    const cost = pbUpgradeCost(def, lv + 1);
+    const mErr = pbCheckMats(cost.mats);
+    if (mErr) { pbErr(mErr); return; }
+    if ((player.stonesThuong || 0) < cost.thuong) { pbErr(`Không đủ Linh thạch Thượng để nuôi cấp ${lv + 1} (cần ${cost.thuong}, đang có ${player.stonesThuong || 0}).`); return; }
+    if (cost.cuc > 0 && (player.stonesCuc || 0) < cost.cuc) { pbErr(`Nuôi cấp ${lv + 1} cần ${cost.cuc} Linh thạch CỰC phẩm (đang có ${player.stonesCuc || 0}) — Cực phẩm chỉ rơi từ rương trùm.`); return; }
+    pbTakeMats(cost.mats);
+    player.stonesThuong -= cost.thuong;
+    if (cost.cuc > 0) player.stonesCuc -= cost.cuc;
+    st.owned[id] = lv + 1; // luôn thành công — không xịt, không tụt cấp (Bảo chốt điểm 3)
+    persistPlayer(player);
+    syncChar(socket, player);
+    socket.emit('phapbao_result', { ok: true, action: 'upgrade', id, level: lv + 1 });
+    notice(`✦ Nuôi cấp THÀNH CÔNG: ${def.name} lên cấp ${lv + 1} — ${pbEffectText(id, lv + 1)}`);
+    console.log(`[pháp bảo] ${player.name} nuôi ${def.name} → cấp ${lv + 1}: −${cost.thuong} Thượng${cost.cuc ? `, −${cost.cuc} Cực` : ''}, −${pbMatsText(cost.mats)}`);
+  });
+
   // GĐ138: NHẬN THƯỞNG THÀNH TỰU THEO BẬC — mỗi lần nhận 1 bậc kế tiếp đã đạt:
   // danh hiệu bậc đó + 1 Rương Thành Tựu + Đạo Tích. Đeo danh hiệu: tự do ngoài trận
   // (chỉ chặn khi gục ngã — danh hiệu chỉ là hiển thị, không ảnh hưởng chiến đấu).
@@ -16843,7 +17370,7 @@ io.on('connection', (socket) => {
     const id = data.itemId;
     if ((player.inventory[id] || 0) <= 0) { socket.emit('interact_error', { message: 'Trong túi không có vật phẩm này.' }); syncChar(socket, player); return; } // GĐ364 (E-2): báo rõ + đồng bộ lại túi thay vì im lặng
     // GĐ184: đang hiện hình Pháp Tướng → không dùng được vật phẩm hồi máu/chân nguyên
-    if (player.phapTuongActive && ['dan_hoi_nguyen', 'dan_hoi_xuan', 'phu_ho_than', 'banh_thit', 'thit_ham_tam_bo', 'canh_xuong_tam_bo', 'dan_dai_hoi_xuan', 'dan_dai_hoi_nguyen', 'dan_cuu_chuyen'].includes(id)) { socket.emit('interact_error', { message: 'Pháp Tướng đang hiện hình — không thể hồi phục máu/chân nguyên lúc này.' }); return; } // GĐ207: + đan hồi bậc cao vào danh sách chặn
+    if (player.phapTuongActive && ['dan_hoi_nguyen', 'dan_hoi_xuan', 'phu_ho_than', 'banh_thit', 'thit_ham_tam_bo', 'canh_xuong_tam_bo', 'dan_dai_hoi_xuan', 'dan_dai_hoi_nguyen', 'dan_cuu_chuyen', 'dan_hon_don_hoi_xuan', 'dan_hon_don_hoi_nguyen', 'canh_hu_khong', 'thit_hon_don_nuong', 'sup_hon_tinh', 'canh_kiep_tam', 'banh_tinh_ha', 'canh_giao_chau', 'tiec_phuong_vu', 'tra_tien_linh'].includes(id)) { socket.emit('interact_error', { message: 'Pháp Tướng đang hiện hình — không thể hồi phục máu/chân nguyên lúc này.' }); return; } // GĐ207: + đan hồi bậc cao vào danh sách chặn
     if (id === 'lenh_bai_tong_mon') { // GĐ319: Lệnh Bài hóa Tông Môn Thạch Bia — đặt trụ sở
       const g = sectOfToken(player.token);
       if (!g) { socket.emit('interact_error', { message: 'Bạn không còn ở tông môn nào — lệnh bài vô hiệu.' }); return; }
@@ -17086,6 +17613,16 @@ io.on('connection', (socket) => {
       player.hp = maxH;
       player.mp = Math.min(maxM, player.mp + Math.round(maxM * 0.5 * potionMulOf(player))); // GĐ346: phụ ấn Y
       notice('Dùng Cửu Chuyển Đan: hồi đầy HP và 50% Chân nguyên!');
+    } else if (id === 'dan_hon_don_hoi_xuan') { // Nhóm A (11/11/2026): đan hồi bậc Phản Hư — 70% HP (TẠM)
+      const max = maxHpEff(player);
+      if (player.hp >= max) { socket.emit('interact_error', { message: 'Máu đã đầy.' }); return; }
+      player.hp = Math.min(max, player.hp + Math.round(max * 0.7 * (1 + achHealBonus(player)) * potionMulOf(player)));
+      notice('Dùng Hỗn Độn Hồi Xuân Đan: hồi 70% HP');
+    } else if (id === 'dan_hon_don_hoi_nguyen') { // Nhóm A: 70% Chân nguyên (TẠM)
+      const max = maxMpEff(player);
+      if (player.mp >= max) { socket.emit('interact_error', { message: 'Chân nguyên đã đầy.' }); return; }
+      player.mp = Math.min(max, player.mp + Math.round(max * 0.7 * potionMulOf(player)));
+      notice('Dùng Hỗn Độn Hồi Nguyên Đan: hồi 70% Chân nguyên');
     } else if (id === 'phu_thien_loi') { // GĐ207: sét mạnh 1500, tầm 400
       const t = nearestMonsterForTalisman(player, 400);
       if (!t) { socket.emit('interact_error', { message: 'Không có quái nào trong tầm 400px.' }); return; }
@@ -17093,6 +17630,28 @@ io.on('connection', (socket) => {
       notePlayerDamage(player, t, dmg, false);
       console.log(`[talisman] ${player.name} dùng Phù Thiên Lôi lên ${t.id}: -${dmg}`);
       notice(`⚡ Phù Thiên Lôi: -${dmg} máu lên quái gần nhất!`);
+    } else if (id === 'phu_hon_don_loi' || id === 'phu_kiep_loi' || id === 'phu_thien_kiep' || id === 'phu_tinh_ha') {
+      // Nhóm A (11/11/2026): phù sát thương PHẲNG bậc cao — cùng cơ chế Phù Thiên Lôi (số phẳng, KHÔNG theo % máu quái — phù % máu là nhóm B5 chưa duyệt). Số TẠM theo bản thảo.
+      const SPEC = { phu_hon_don_loi: [25000, 500], phu_kiep_loi: [60000, 550], phu_thien_kiep: [100000, 600], phu_tinh_ha: [180000, 650] }[id];
+      const t = nearestMonsterForTalisman(player, SPEC[1]);
+      if (!t) { socket.emit('interact_error', { message: `Không có quái nào trong tầm ${SPEC[1]}px.` }); return; }
+      const dmg = hurtMonster(t, Math.round(SPEC[0] * (1 + achDmgBonus(player)) * branchDmgMulOf(player) * factionVsMulOf(player, t)), t.def ?? 0, 'magic');
+      notePlayerDamage(player, t, dmg, false);
+      console.log(`[talisman] ${player.name} dùng ${ITEMS[id].name} lên ${t.id}: -${dmg}`);
+      notice(`⚡ ${ITEMS[id].name}: -${dmg} máu lên quái gần nhất!`);
+    } else if (id === 'phu_huyet_hon_don' || id === 'phu_kiep_huyet' || id === 'phu_diet_than_huyet') {
+      // GĐ392 (B5): phù % máu — dmg = 40% máu TỐI ĐA quái gần nhất, trần theo bậc (2× phù phẳng cùng bậc); hồi chiêu CHUNG 30s cho cả 3 phù % (mẫu đan giải GĐ388). Số TẠM — neo crossover: % thắng phẳng khi HP quái > 62,5k (PH) / 150k (ĐK) / 450k (Tiên).
+      const SPEC = { phu_huyet_hon_don: [500, 50000], phu_kiep_huyet: [550, 200000], phu_diet_than_huyet: [650, 360000] }[id];
+      const now392 = Date.now();
+      if (now392 < (player.talismanPctCdUntil || 0)) { socket.emit('interact_error', { message: `Phù % máu đang hồi chiêu — chờ ${Math.ceil((player.talismanPctCdUntil - now392) / 1000)} giây nữa.` }); return; }
+      const t = nearestMonsterForTalisman(player, SPEC[0]);
+      if (!t) { socket.emit('interact_error', { message: `Không có quái nào trong tầm ${SPEC[0]}px.` }); return; }
+      const raw392 = Math.min(Math.round((t.maxHp || 0) * 0.40), SPEC[1]);
+      const dmg = hurtMonster(t, Math.round(raw392 * (1 + achDmgBonus(player)) * branchDmgMulOf(player) * factionVsMulOf(player, t)), t.def ?? 0, 'magic');
+      player.talismanPctCdUntil = now392 + TALISMAN_PCT_CD_MS;
+      notePlayerDamage(player, t, dmg, false);
+      console.log(`[talisman] ${player.name} dùng ${ITEMS[id].name} lên ${t.id}: -${dmg} (40% maxHp ${t.maxHp}, tran ${SPEC[1]})`);
+      notice(`🩸 ${ITEMS[id].name}: -${dmg} máu lên quái gần nhất!`);
     } else if (id === 'phu_an_than') { // GĐ207: tàng hình 15s
       player.invisUntil = Date.now() + 15000;
       notice('👤 Phù Ẩn Thân: tàng hình 15 giây — quái không nhìn thấy bạn.');
@@ -17135,6 +17694,18 @@ io.on('connection', (socket) => {
       if (!hpFull) player.hp = Math.min(max, player.hp + Math.round(max * 0.25));
       if (!needsKd(player)) player.food = Math.min(100, (player.food ?? 100) + 30);
       notice('Ăn Bánh Thịt Thú: hồi 25% HP + 30 thức ăn');
+    } else if (id === 'canh_hu_khong' || id === 'thit_hon_don_nuong' || id === 'sup_hon_tinh' || id === 'canh_kiep_tam' || id === 'banh_tinh_ha' || id === 'canh_giao_chau' || id === 'tiec_phuong_vu' || id === 'tra_tien_linh') {
+      // Nhóm A (11/11/2026): thức ăn cõi cao (Thú Sư nấu) — hồi % như Bánh Thịt, số TẠM theo bản thảo; [tỉ lệ HP, tỉ lệ Chân nguyên]
+      const SPEC = { canh_hu_khong: [0.4, 0], thit_hon_don_nuong: [0.45, 0], sup_hon_tinh: [0, 0.3], canh_kiep_tam: [0.55, 0], banh_tinh_ha: [0.65, 0], canh_giao_chau: [0, 0.5], tiec_phuong_vu: [0.8, 0], tra_tien_linh: [0.35, 0.35] }[id];
+      const maxH = maxHpEff(player); const maxM = maxMpEff(player);
+      const needH = SPEC[0] > 0 && player.hp < maxH; const needM = SPEC[1] > 0 && player.mp < maxM;
+      if (!needH && !needM) { socket.emit('interact_error', { message: 'Máu và chân nguyên đã đầy.' }); return; }
+      if (needH) player.hp = Math.min(maxH, player.hp + Math.round(maxH * SPEC[0]));
+      if (needM) player.mp = Math.min(maxM, player.mp + Math.round(maxM * SPEC[1]));
+      const parts = [];
+      if (SPEC[0] > 0) parts.push(`hồi ${Math.round(SPEC[0] * 100)}% HP`);
+      if (SPEC[1] > 0) parts.push(`hồi ${Math.round(SPEC[1] * 100)}% Chân nguyên`);
+      notice(`🍲 Ăn ${ITEMS[id].name}: ${parts.join(' và ')}`);
     } else if (id === 'com_nam' || id === 'thit_nuong' || id === 'luong_kho') {
       // GĐ78: đồ ăn — chỉ hồi thức ăn
       if (needsKd(player)) {
@@ -17204,6 +17775,15 @@ io.on('connection', (socket) => {
       }
       t.tranSealUntil = Date.now() + 5000;
       notice('🔒 Phù Định Thân: quái gần nhất đứng yên 5 giây!');
+    } else if (id === 'phu_dinh_hon') {
+      // Nhóm A (11/11/2026): bản mạnh của Định Thân — quái gần nhất (400px) đứng yên 8 giây (TẠM), cùng cờ tranSealUntil.
+      const t = nearestMonsterForTalisman(player, 400);
+      if (!t) {
+        socket.emit('interact_error', { message: 'Không có quái nào trong tầm 400px.' });
+        return;
+      }
+      t.tranSealUntil = Date.now() + 8000;
+      notice('🔒 Phù Định Hồn: quái gần nhất đứng yên 8 giây!');
     } else if (id === 'phu_loi_kich') {
       // GĐ136: Phù Lôi Kích — sét đánh quái gần nhất (300px), 100 sát thương
       // phép xuyên giáp đá (magic không bị physResist). Log riêng cho probe.
@@ -17264,6 +17844,101 @@ io.on('connection', (socket) => {
       cv.active = true; cv.hp = cotVuongMaxHpOf(player);
       spawnCotVuong(player);
       notice('🦴 Cốt Vương đã hiện hình — nó sẽ đỡ đòn cho bạn!');
+    } else if (id === 'dan_dien_tho') {
+      // GĐ387: DIÊN THỌ ĐAN — cộng thẳng +2 năm vào lifespan như đột phá (KHÔNG
+      // qua PILL_BUFFS), trần 3 viên/kiếp; đủ trần → chặn, KHÔNG trừ đan (return
+      // trước đoạn trừ túi ở cuối handler). Cộng cùng bộ đếm ach_lifeBonus với
+      // đột phá để ach_st_lifespan đếm cả nguồn đan như mô tả đã ghi sẵn.
+      if ((player.dienThoUsed || 0) >= DIEN_THO_MAX_PER_LIFE) {
+        socket.emit('interact_error', { message: 'Kiếp này đã dùng đủ 3 viên Diên Thọ Đan — dược lực không dung nạp thêm nữa.' });
+        return;
+      }
+      player.lifespan = (player.lifespan ?? 80) + DIEN_THO_YEARS;
+      player.dienThoUsed = (player.dienThoUsed || 0) + 1;
+      if (player.counters) player.counters.ach_lifeBonus = (player.counters.ach_lifeBonus || 0) + DIEN_THO_YEARS;
+      // GĐ25: đang ân hạn mà thọ dương trở lại = ĐƯỢC CỨU (đi đúng đường đột phá dùng)
+      let rescuedTxt387 = '';
+      if (player.graceStartDay != null && checkLifespan(player) === 'rescued') {
+        socket.emit('lifespan_grace', { graceDaysLeft: null, lifespanLeft: lifespanLeftOf(player) });
+        rescuedTxt387 = ' Thọ nguyên dương trở lại — THOÁT ân hạn tọa hóa!';
+      }
+      notice(`🕯 Diên Thọ Đan: +${DIEN_THO_YEARS} năm thọ — thọ nguyên còn ${lifespanLeftOf(player)} năm (đã dùng ${player.dienThoUsed}/${DIEN_THO_MAX_PER_LIFE} viên kiếp này).${rescuedTxt387}`);
+    } else if (id === 'dan_giai_doc' || id === 'dan_thanh_tam') {
+      // GĐ388 Phần B: ĐAN GIẢI TRẠNG THÁI — 1 hồi chiêu CHUNG 30s cho cả 2
+      // viên (trạng thái phiên như ICD pháp bảo GĐ385, không lưu bền). Không
+      // có trạng thái tương ứng → chặn, KHÔNG trừ đan (return trước đoạn trừ
+      // túi ở cuối handler — như lệ Diên Thọ Đan). Thanh Tâm KHÔNG giải
+      // choáng tự phản phệ của Quỷ Tu (mốc quyBacklashUntil do breakQuyHon
+      // đặt — giữ cái giá của cơ chế lớp); ranh giới với Thần y/Thể Tu xem
+      // THIET_KE_DO_PET_GIAI_TRANG_THAI mục 4.3.
+      const now388 = Date.now();
+      if (now388 < (player.cleanseCdUntil || 0)) {
+        socket.emit('interact_error', { message: `Đan giải đang hồi chiêu chung — chờ ${Math.ceil((player.cleanseCdUntil - now388) / 1000)} giây nữa.` });
+        return;
+      }
+      if (id === 'dan_giai_doc') {
+        if (!player.dots || !player.dots.length) {
+          socket.emit('interact_error', { message: 'Người không có độc nào đang đốt để giải.' });
+          return;
+        }
+        player.dots = [];
+        player.cleanseCdUntil = now388 + CLEANSE_CD_MS;
+        notice('🌿 Giải Độc Đan: độc trong người tan sạch.');
+      } else {
+        const slowOn388 = now388 < (player.slowUntil || 0);
+        const stunOn388 = now388 < (player.stunUntil || 0);
+        const stunBacklash388 = stunOn388 && now388 < (player.quyBacklashUntil || 0);
+        const clearStun388 = stunOn388 && !stunBacklash388;
+        if (!slowOn388 && !clearStun388) {
+          socket.emit('interact_error', { message: stunBacklash388 ? 'Choáng này là phản phệ của chính bạn — Thanh Tâm Đan không giải được.' : 'Người không bị làm chậm hay choáng để giải.' });
+          return;
+        }
+        const cleared388 = [];
+        if (slowOn388) { player.slowUntil = 0; player.slowPct = 0; cleared388.push('làm chậm'); }
+        if (clearStun388) { player.stunUntil = 0; cleared388.push('choáng'); }
+        player.cleanseCdUntil = now388 + CLEANSE_CD_MS;
+        notice(`🍃 Thanh Tâm Đan: tâm trí trong trẻo — đã xoá ${cleared388.join(' + ')}.`);
+      }
+    } else if (id === 'dan_linh_thu') {
+      // GĐ388 Phần A: LINH THÚ ĐAN — hồi 50% máu tối đa cho thú thuần hóa
+      // đang theo (chỉ thú thuần hóa; Cốt Vương/Quỷ Hồn/đệ tử có đường riêng).
+      // Không có pet / pet đầy máu / đang hồi dùng riêng 10s → chặn không trừ.
+      const pet388 = tamedPetOf(player);
+      if (!pet388) {
+        socket.emit('interact_error', { message: 'Không có thú thuần hoá nào đang theo để dùng Linh Thú Đan.' });
+        return;
+      }
+      const now388 = Date.now();
+      if (now388 < (player.petHealCdUntil || 0)) {
+        socket.emit('interact_error', { message: `Linh Thú Đan đang hồi — chờ ${Math.ceil((player.petHealCdUntil - now388) / 1000)} giây nữa.` });
+        return;
+      }
+      const maxHp388 = maxHpOf(pet388.stats);
+      if (pet388.hp >= maxHp388) {
+        socket.emit('interact_error', { message: `${pet388.name} đang đầy máu — để dành Linh Thú Đan cho giữa trận.` });
+        return;
+      }
+      const before388 = Math.max(0, Math.min(100, Math.round((pet388.hp / maxHp388) * 100)));
+      pet388.hp = Math.min(maxHp388, pet388.hp + Math.round(maxHp388 * PET_HEAL_PCT));
+      tamedOf(player).hp = Math.round(pet388.hp);
+      player.petHealCdUntil = now388 + PET_HEAL_CD_MS;
+      notice(`🐾 Linh Thú Đan: ${pet388.name} hồi 50% máu (${before388}% → ${Math.round((pet388.hp / maxHp388) * 100)}%).`);
+    } else if (id === 'thu_linh_hoan') {
+      // GĐ388 Phần A: THÚ LINH HOÀN — pet +20% công 10 phút; buff lưu phía
+      // CHỦ trong classRes (petAtkBuffUntil) nên đổi pet vẫn còn hiệu lực và
+      // bền đủ 4 điểm persist/spawn/offline/payload nhờ classRes chép nguyên
+      // (GĐ95). updateTamed nhân công pet theo mốc này. Dùng lại = làm mới hạn.
+      if (!tamedOf(player).active) {
+        socket.emit('interact_error', { message: 'Chưa có thú thuần hoá nào — Thú Linh Hoàn chưa có đích để buff.' });
+        return;
+      }
+      classResOf(player).petAtkBuffUntil = Date.now() + PET_ATK_BUFF_MS;
+      notice('🐾 Thú Linh Hoàn: thú thuần hoá +20% công trong 10 phút (buff theo chủ — đổi thú vẫn còn).');
+    } else if (id === 'linh_thu_ho_menh') {
+      // GĐ388 Phần A: HỘ MỆNH là vật MANG TRONG TÚI, tự vỡ khi pet nhận đòn
+      // kết liễu (xem breakTamed) — bấm dùng chỉ báo lại, không tiêu hao.
+      socket.emit('interact_error', { message: 'Linh Thú Hộ Mệnh không cần bấm dùng — cứ mang trong túi, nó sẽ tự vỡ cứu thú thuần hoá khỏi đòn kết liễu.' });
+      return;
     } else if (PILL_BY_ITEM[id]) {
       // GĐ133: đan tăng chỉ số có thời hạn — cùng loại làm mới thời hạn, khác loại cộng dồn.
       const key = PILL_BY_ITEM[id];
@@ -18250,7 +18925,8 @@ setInterval(() => {
       if (p.input && (p.input.vx !== 0 || p.input.vy !== 0)) {
         stopStudying(p, 'move');
       } else {
-        addNhoStudy(p, dt);
+        addNhoStudy(p, dt); // GĐ105: chỉ Nho Tu mới tích Hạo Nhiên/Chương (hàm tự lọc lớp)
+        addLibRead(p, dt); // GĐ386: mọi lớp tích giây đọc thư viện → booksRead
       }
     }
     // GĐ105: Ý CẢNH — vùng của chính người này tác dụng lên đồng đội/quái quanh vùng.
@@ -18824,7 +19500,7 @@ setInterval(() => {
         continue;
       }
       for (const p of players.values()) {
-        if (p.isBot) continue;
+        if (p.isBot || p.isOffline || p.isCompanion) continue; // GĐ388-phụ: chỉ NGƯỜI CHƠI THẬT mới nhặt (đồng hành không có inventory — đi qua đồ rơi làm tick văng TypeError + nhặt đá vào hư vô; mẫu cùng vòng rương bên dưới)
         if (mapOf(p) !== mapOf(d)) continue; // GĐ59
         if (Math.hypot(p.x - d.x, p.y - d.y) <= PICKUP_RANGE) {
           drops.delete(d.id);
@@ -18914,6 +19590,12 @@ setInterval(() => {
             p.inventory.manh_xuong = (p.inventory.manh_xuong || 0) + 1;
             noteItemGain(p, 'manh_xuong'); // GĐ138
             lines.push('Mảnh Xương ×1');
+          }
+          // GĐ387: rương TRÙM cõi cao (Phản Hư+, đóng dấu lúc quái gục) — 12% ra 1 Diên Thọ Đan (TẠM trong khoảng bản thảo 10–15%)
+          if (c.dienThoBoss && Math.random() < DIEN_THO_CHEST_RATE) {
+            p.inventory.dan_dien_tho = (p.inventory.dan_dien_tho || 0) + 1;
+            noteItemGain(p, 'dan_dien_tho');
+            lines.push('Diên Thọ Đan ×1');
           }
           // GĐ119 bước 4: rương có tỉ lệ rơi trang bị (rương boss cao hơn);
           // đồ rơi theo hướng tu + hệ của người mở nên mặc được ngay.

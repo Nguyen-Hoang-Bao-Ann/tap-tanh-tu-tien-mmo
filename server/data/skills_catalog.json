@@ -7431,6 +7431,602 @@
     "role": "phaptuong"
    }
   ],
+  "phatluan": [
+   {
+    "id": "phattu_phatluan_co1",
+    "name": "Luân Quang Hộ Thể",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Thủ: xoay pháp luân vàng trước thân hấp thụ sát thương trong vài giây. Kim: phản một phần sát thương đã hấp thụ; Mộc: đổi một phần sát thương hấp thụ thành máu; Thủy: làm chậm kẻ đánh; Hỏa: thiêu kẻ đánh; Thổ: hấp thụ lâu hơn",
+    "weaponId": "phatluan",
+    "fx": {
+     "defPct": 30,
+     "defSec": 3.0,
+     "reflect": 20,
+     "reflectSec": 4.0
+    },
+    "fxText": "Giảm 30% sát thương nhận/3.0s · Phản 20%"
+   },
+   {
+    "id": "phattu_phatluan_co2",
+    "name": "Phi Luân Trảm",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 1500,
+    "cost": 10,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: phóng pháp luân xoay cắt xa rồi thu về tay. Kim: luân xuyên giáp; Mộc: luân trói chân ngắn; Thủy: luân làm chậm; Hỏa: luân thiêu đốt; Thổ: luân nặng, đẩy lùi",
+    "weaponId": "phatluan",
+    "fx": {
+     "root": 1.0,
+     "dotDps": 3,
+     "dotSec": 3
+    },
+    "fxText": "Trói 1.0s · Đốt/độc 3/s×3s"
+   },
+   {
+    "id": "phattu_phatluan_lu1",
+    "name": "Kim Luân Phản Chiếu",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Vật phòng 20",
+    "desc": "Thủ: pháp luân xoay ngược hấp thụ đòn; Công: phóng ngược lượng đã hấp thụ",
+    "weaponId": "phatluan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phattu_phatluan_lu2",
+    "name": "Vô Lượng Luân",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 30
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 30 + Khí huyết 20",
+    "desc": "Công: hút quái nhỏ vào vòng luân; Thủ: hồi máu theo số quái bị hút",
+    "weaponId": "phatluan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phattu_phatluan_lu3",
+    "name": "Cam Lộ Luân",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "vatPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Vật phòng 15",
+    "desc": "Công: úp luân làm chậm kẻ đánh; Thủ: hấp thụ sát thương",
+    "weaponId": "phatluan",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "defPct": 30,
+     "defSec": 3.0
+    },
+    "fxText": "Chậm 20%/2.0s · Giảm 30% sát thương nhận/3.0s"
+   },
+   {
+    "id": "phattu_phatluan_lu4",
+    "name": "Liên Hoa Luân",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 15 + Khí huyết 20",
+    "desc": "Công: luân gieo hạt sen trói kẻ địch; Thủ: hồi máu nhỏ theo thời gian",
+    "weaponId": "phatluan",
+    "fx": {
+     "root": 1.0
+    },
+    "fxText": "Trói 1.0s"
+   },
+   {
+    "id": "phattu_phatluan_lu5",
+    "name": "Kim Luân Trấn Yêu",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     },
+     {
+      "stat": "minhMan",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 20 + Thần thức 15",
+    "desc": "Công: phản một phần sát thương đã hấp thụ; Thủ: hấp thụ đòn mạnh",
+    "weaponId": "phatluan",
+    "fx": {
+     "reflect": 20,
+     "reflectSec": 4.0
+    },
+    "fxText": "Phản 20%"
+   },
+   {
+    "id": "phattu_phatluan_lu6",
+    "name": "Hỏa Luân Phần Hương",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 15
+     },
+     {
+      "stat": "minhMan",
+      "value": 10
+     }
+    ],
+    "condText": "Pháp công 15 + Thần thức 10",
+    "desc": "Công: phóng luân thiêu đốt; Thủ: lửa quanh luân đẩy lùi",
+    "weaponId": "phatluan",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3,
+     "knock": 46
+    },
+    "fxText": "Đốt/độc 5/s×3s · Đẩy lùi"
+   },
+   {
+    "id": "phattu_phatluan_lu7",
+    "name": "Hỏa Luân Thiêu Thiên",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "vatPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Pháp công 25 + Vật phòng 15",
+    "desc": "Công: luân tỏa lửa thiêu vùng; Thủ: lá chắn lửa",
+    "weaponId": "phatluan",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "phattu_phatluan_lu8",
+    "name": "Thạch Luân Trấn Địa",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 15
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 15 + Khí huyết 15",
+    "desc": "Công: ném luân đá đẩy lùi; Thủ: hấp thụ thêm sát thương",
+    "weaponId": "phatluan",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "phattu_phatluan_lu9",
+    "name": "Địa Luân Trần Trạch",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 25
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 25
+     }
+    ],
+    "condText": "Vật phòng 25 + Khí huyết 25",
+    "desc": "Công: úp luân tạo sóng đất; Thủ: giảm mạnh sát thương",
+    "weaponId": "phatluan",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "phattu_phatluan_tr1",
+    "name": "Kim Luân Trấn Ma",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 105,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 35
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 35",
+    "desc": "Công: úp luân lên mục tiêu mạnh, giảm sát thương nó gây ra; Thủ: giảm tốc nó, mình nhận ít sát thương",
+    "weaponId": "phatluan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phattu_phatluan_tr2",
+    "name": "Thủy Luân Thôn Hải",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "vatPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Vật phòng 30",
+    "desc": "Công: luân xoáy nước hút kẻ địch; Thủ: màng nước giảm mạnh sát thương",
+    "weaponId": "phatluan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phattu_phatluan_tr3",
+    "name": "Mộc Luân Sinh Cơ",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "khiHuyet",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Khí huyết 40 + Thần thức 30",
+    "desc": "Công: sen mọc từ luân đánh vùng; Thủ: hồi máu cả vùng",
+    "weaponId": "phatluan",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "phattu_phatluan_tr4",
+    "name": "Bát Bảo Kim Luân",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Thần thức 30",
+    "desc": "Công: ánh kim từ luân xuyên giáp; Thủ: miễn sát thương lớn một lần ngắn",
+    "weaponId": "phatluan",
+    "fx": {
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15%"
+   },
+   {
+    "id": "phattu_phatluan_tr5",
+    "name": "Tam Muội Luân Hỏa",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Thần thức 30",
+    "desc": "Công: luân phun lửa diện rộng; Thủ: miễn hiệu ứng xấu trong lúc dùng",
+    "weaponId": "phatluan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phattu_phatluan_tr6",
+    "name": "Thái Sơn Pháp Luân",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 22000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 35
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Khí huyết 35",
+    "desc": "Công: luân nặng như núi đập mục tiêu; Thủ: lá chắn đất rất lớn",
+    "weaponId": "phatluan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phattu_phatluan_kd1",
+    "name": "Phục Ma Luân",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp Luân — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Pháp Luân.",
+    "weaponId": "phatluan",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_phatluan_kd2",
+    "name": "Minh Vương Pháp Luân",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp Luân — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "phatluan",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phattu_phatluan_kd3",
+    "name": "Phổ Độ Luân",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp Luân — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "phatluan",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phattu_phatluan_na1",
+    "name": "Liên Hoa Pháp Luân",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp Luân — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "phatluan",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phattu_phatluan_na2",
+    "name": "Từ Bi Pháp Luân",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp Luân — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "phatluan",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phattu_phatluan_na3",
+    "name": "Sư Tử Pháp Luân",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp Luân — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "phatluan",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_phattu_phatluan_1",
+    "name": "Hàng Ma Pháp Luân",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Pháp Luân) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phatluan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_phatluan_2",
+    "name": "Phật Vực Pháp Luân",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Pháp Luân) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phatluan",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_phatluan_3",
+    "name": "Đại Bi Pháp Luân",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Pháp Luân) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phatluan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
   "phatchau_vm": [
    {
     "id": "phattu_phatchau_vm_co1",
@@ -8452,6 +9048,350 @@
     "condText": "Pháp Tướng giai đoạn 3",
     "desc": "Chiêu của Pháp Tướng (Càn Khôn Bình Bát) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
     "weaponId": "binhbat_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "phatluan_vm": [
+   {
+    "id": "phattu_phatluan_vm_co1",
+    "name": "Luân Quang Thu Nạp",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: luân quang đẩy lùi kẻ áp sát; Thủ: vòng luân hộ thân chặn đòn.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "phattu_phatluan_vm_co2",
+    "name": "Càn Khôn Luân Ảnh",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: luân ảnh chém hai vòng nối tiếp; Thủ: luân quay quanh người chặn đạn.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "phattu_phatluan_vm_lu1",
+    "name": "Thu Ma Nhất Luân",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 18
+     },
+     {
+      "stat": "vatCong",
+      "value": 16
+     }
+    ],
+    "condText": "Pháp công 18 + Vật công 16",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: kim luân xuyên giáp; Thủ: luân quang hộ thể.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "phattu_phatluan_vm_lu2",
+    "name": "Phật Luân Trấn Tâm",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 22
+     },
+     {
+      "stat": "vatCong",
+      "value": 19
+     }
+    ],
+    "condText": "Pháp công 22 + Vật công 19",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: luân trấn tâm đánh hai vòng nối tiếp; Thủ: tâm an, giảm sát thương nhận.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "phattu_phatluan_vm_lu3",
+    "name": "Kim Luân Phổ Chiếu",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 26
+     },
+     {
+      "stat": "vatCong",
+      "value": 22
+     }
+    ],
+    "condText": "Pháp công 26 + Vật công 22",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: luân phổ chiếu hút sinh khí địch; Thủ: hồi máu theo đòn đánh.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "lifesteal": 25
+    },
+    "fxText": "Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "phattu_phatluan_vm_tr1",
+    "name": "Càn Khôn Chuyển Luân",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 34
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Pháp công 34 + Vật công 30",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: luân hỏi tâm, trấn áp kẻ địch; Thủ: tâm vững, miễn khống chế ngắn.",
+    "weaponId": "phatluan_vm",
+    "fx": null,
+    "fxText": ""
+   },
+   {
+    "id": "phattu_phatluan_vm_tr2",
+    "name": "Luân Nộ Trấn Ma",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 38
+     },
+     {
+      "stat": "vatCong",
+      "value": 33
+     }
+    ],
+    "condText": "Pháp công 38 + Vật công 33",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: luân nộ thiêu đốt kẻ địch; Thủ: lửa luân hộ thân.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "dotDps": 6,
+     "dotSec": 4
+    },
+    "fxText": "Đốt/độc 6/s×4s"
+   },
+   {
+    "id": "phattu_phatluan_vm_kd1",
+    "name": "Đại Nhật Luân Ấn",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: đại nhật luân ấn quét vùng; Thủ: luân quang hộ thể.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_phatluan_vm_kd2",
+    "name": "Phổ Độ Luân Vũ",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: luân phổ độ xuyên giáp; Thủ: luân quang hộ thể.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_phatluan_vm_kd3",
+    "name": "Kim Cang Pháp Luân",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: kim cang luân đánh hai vòng nối tiếp; Thủ: thân như kim cang, giảm sát thương nhận.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_phatluan_vm_na1",
+    "name": "Thánh Tăng Luân Pháp",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: thánh tăng luân pháp quét vùng; Thủ: luân quang hộ thể.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_phatluan_vm_na2",
+    "name": "Quang Luân Vô Lượng",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: quang luân vô lượng tăng tốc thân pháp; Thủ: luân quang hộ thể.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "phattu_phatluan_vm_na3",
+    "name": "Vô Ngã Pháp Luân",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Phật Quang Pháp Luân — Công: vô ngã luân quét vùng xuyên giáp; Thủ: luân quang hộ thể.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_phattu_phatluan_vm_1",
+    "name": "Pháp Tướng Phật Luân",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Phật Quang Pháp Luân) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_phatluan_vm_2",
+    "name": "Càn Khôn Trấn Luân",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Phật Quang Pháp Luân) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phatluan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phattu_phatluan_vm_3",
+    "name": "Thánh Tăng Thu Ma Luân",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Phật Quang Pháp Luân) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phatluan_vm",
     "fx": {
      "aoe": 1,
      "pierce": 20
@@ -9670,6 +10610,1217 @@
     "role": "phaptuong"
    }
   ],
+  "cotcung": [
+   {
+    "id": "cottu_cotcung_co1",
+    "name": "Cốt Giáp Mỏng Sinh",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: giương cung xương sườn bắn tên đốt xương mài nhọn, tên găm vào thịt rồi nổ tung mảnh xương; Thủ: giáp xương mỏng mọc phủ thân, vỡ thì mọc lại sau một lúc, kẻ áp sát bị gai xương làm chậm. Kim: tên xương cứng hơn, xuyên giáp sâu hơn; Mộc: giáp xương mọc lại nhanh hơn, mảnh găm tự nảy mầm gai; Thủy: tên xương lạnh làm chậm kẻ địch, giáp phản băng; Hỏa: mảnh xương găm vào thịt cháy rồi nổ mạnh hơn; Thổ: giáp xương dày hơn một lớp, đứng bắn vững như cắm cọc",
+    "weaponId": "cotcung",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "defPct": 30,
+     "defSec": 3.0
+    },
+    "fxText": "Chậm 20%/2.0s · Giảm 30% sát thương nhận/3.0s"
+   },
+   {
+    "id": "cottu_cotcung_co2",
+    "name": "Xương Tên Chấn Bạo",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 1500,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: bắn một tên xương nặng, trúng đích thì đầu tên vỡ nổ đẩy lùi kẻ địch; Thủ: lúc kéo dây lùi nửa bước về sau Cốt Vương, nhận ít sát thương hơn trong thoáng chốc. Kim: tên chấn xuyên giáp; Mộc: tên chấn hút nhẹ máu; Thủy: tên chấn làm chậm; Hỏa: tên chấn nổ lửa thiêu kẻ địch; Thổ: tên chấn đẩy lùi mạnh, mặt đất nứt gai xương",
+    "weaponId": "cotcung",
+    "fx": {
+     "dotDps": 3,
+     "dotSec": 3,
+     "pierce": 15
+    },
+    "fxText": "Đốt/độc 3/s×3s · Xuyên phòng 15%"
+   },
+   {
+    "id": "cottu_cotcung_lu1",
+    "name": "Kim Cốt Xuyên Tiễn",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 30,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Vật phòng 20",
+    "desc": "Công: tên xương kim xuyên qua kẻ đứng trước, găm thẳng vào kẻ đứng sau; Thủ: bị áp sát thì gai xương trên giáp mỏng bật ra phản đòn kẻ đánh",
+    "weaponId": "cotcung",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotcung_lu2",
+    "name": "Bạch Cốt Tiễn Thành",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 7000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 30
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 25
+     }
+    ],
+    "condText": "Vật phòng 30 + Khí huyết 25",
+    "desc": "Công: cắm một hàng tên xương xuống đất thành bẫy gai, kẻ dẫm phải bị mảnh xương găm vào chân; Thủ: hàng gai xương dựng như thành thấp chặn đường, che thân sau Cốt Vương",
+    "weaponId": "cotcung",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotcung_lu3",
+    "name": "Sinh Cốt Đằng Tiễn",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 20
+     },
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Vật công 20 + Vật phòng 20",
+    "desc": "Công: bắn tên xương mọc dây leo bằng xương giữa đường bay, quấn lấy kẻ địch; Thủ: dây xương thu về kéo mọc lớp giáp mỏng mới phủ lên chỗ giáp vừa vỡ",
+    "weaponId": "cotcung",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotcung_lu4",
+    "name": "Thiết Cốt Xuyên Giáp Tiễn",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     },
+     {
+      "stat": "vatCong",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 20 + Vật công 15",
+    "desc": "Công: tên đốt xương mài sắc xoay trên dây gân, xuyên thủng giáp dày; Thủ: giáp mỏng gắn thêm phiến xương cứng, phản lại chút sát thương khi bị chạm",
+    "weaponId": "cotcung",
+    "fx": {
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15%"
+   },
+   {
+    "id": "cottu_cotcung_lu5",
+    "name": "Hậu Thổ Trọng Tiễn",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     }
+    ],
+    "condText": "Vật phòng 20 + Khí huyết 20",
+    "desc": "Công: tên xương nặng như cọc bắn xuống, đẩy lùi kẻ trúng tên; Thủ: cắm chân sau lớp giáp xương dày thêm, đứng vững không bị xô lùi",
+    "weaponId": "cotcung",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotcung_lu6",
+    "name": "Cốt Đằng Phược Tiễn",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     },
+     {
+      "stat": "vatPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Khí huyết 20 + Vật phòng 15",
+    "desc": "Công: tên găm xuống đất rồi nảy dây xương trói chân kẻ áp sát, giữ chúng đứng yên tại chỗ; Thủ: lùi nhanh về sau Cốt Vương trong lúc dây xương còn giữ địch",
+    "weaponId": "cotcung",
+    "fx": {
+     "root": 1.0
+    },
+    "fxText": "Trói 1.0s"
+   },
+   {
+    "id": "cottu_cotcung_lu7",
+    "name": "Xích Cốt Hỏa Tiễn",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 15
+     },
+     {
+      "stat": "vatCong",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 15 + Vật công 15",
+    "desc": "Công: tên xương nung đỏ bắn ra, chạm đích thì nổ tung đẩy lùi kẻ địch; Thủ: giáp mỏng tỏa nhiệt, kẻ áp sát bị hơi nóng đẩy ra",
+    "weaponId": "cotcung",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotcung_lu8",
+    "name": "Liệt Diệm Bạo Cốt Tiễn",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 25
+     },
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Vật công 25 + Vật phòng 20",
+    "desc": "Công: bắn chùm tên xương lửa, mỗi tên găm vào thịt rồi nổ tung thành mưa mảnh xương; Thủ: giáp xương cháy sáng hấp thụ sát thương trong lúc mưa mảnh rơi",
+    "weaponId": "cotcung",
+    "fx": {
+     "defPct": 30,
+     "defSec": 3.0,
+     "aoe": 85
+    },
+    "fxText": "Giảm 30% sát thương nhận/3.0s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotcung_lu9",
+    "name": "Hàn Cốt Tiễn",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 15
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 15 + Tốc độ 15",
+    "desc": "Công: tên xương lạnh bắn xuyên, hơi lạnh thấm vào thịt làm kẻ địch chậm lại; Thủ: giáp mỏng phủ sương băng, kẻ chạm vào trượt chân chậm đi",
+    "weaponId": "cotcung",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "cottu_cotcung_lu10",
+    "name": "Băng Cốt Tiễn Trận",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 25 + Thần thức 15",
+    "desc": "Công: rải một trận tên xương băng quanh mục tiêu, cả vùng lạnh buốt làm chậm mọi kẻ trong trận; Thủ: đứng trong trận tiễn, giáp mỏng được hơi lạnh gia cố, giảm sát thương phải nhận",
+    "weaponId": "cotcung",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "aoe": 85
+    },
+    "fxText": "Chậm 20%/2.0s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotcung_tr1",
+    "name": "Kim Cốt Xuyên Vân Tiễn",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Vật công 30",
+    "desc": "Công: một tên xương kim duy nhất bay xuyên tầng mây, những đòn trúng sau đó đều nặng hơn khi tên còn găm; Thủ: giáp xương mỏng hóa cứng như kim, không vỡ trong thời gian ngắn",
+    "weaponId": "cotcung",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotcung_tr2",
+    "name": "Nhạc Cốt Chấn Địa Tiễn",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Khí huyết 30",
+    "desc": "Công: bắn tên xương lớn cắm xuống đất, gai xương trồi lên chấn động cả vùng quanh điểm cắm; Thủ: sau lưng mọc tường xương lớn chặn đường, nấp sau tường mà bắn",
+    "weaponId": "cotcung",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "cottu_cotcung_tr3",
+    "name": "Cốt Tiễn Hồi Xuân",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "khiHuyet",
+      "value": 40
+     },
+     {
+      "stat": "vatPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Khí huyết 40 + Vật phòng 30",
+    "desc": "Công: tên xương mọc gai quanh thân người bắn, kẻ tới gần tự đâm vào gai; Thủ: mỗi khi giáp mỏng mọc lại, sinh khí theo gai xương hồi lại cho bản thân",
+    "weaponId": "cotcung",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotcung_tr4",
+    "name": "Hỏa Ngục Bạo Cốt Tiễn",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Vật công 30",
+    "desc": "Công: tên xương lửa găm sâu rồi nổ trong thịt, mảnh cháy còn thiêu tiếp vết thương; Thủ: giáp mỏng bốc lửa địa ngục, bản thân miễn thiêu đốt trong lúc dùng",
+    "weaponId": "cotcung",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3
+    },
+    "fxText": "Đốt/độc 5/s×3s"
+   },
+   {
+    "id": "cottu_cotcung_tr5",
+    "name": "Huyền Băng Phong Cốt Tiễn",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Thần thức 30",
+    "desc": "Công: tên băng nổ giữa đám địch, đóng băng làm choáng kẻ địch gần điểm nổ; Thủ: lùi về sau Cốt Vương dưới lớp giáp băng hấp thụ lớn",
+    "weaponId": "cotcung",
+    "fx": {
+     "stun": 1.2,
+     "aoe": 85
+    },
+    "fxText": "Choáng 1.2s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotcung_kd1",
+    "name": "Cốt Nhận Tiễn",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt cung — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Cốt cung.",
+    "weaponId": "cotcung",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotcung_kd2",
+    "name": "Cốt Giáp Tiễn Đài",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt cung — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "cotcung",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "cottu_cotcung_kd3",
+    "name": "Triều Tủy Tiễn",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt cung — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "cotcung",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "cottu_cotcung_na1",
+    "name": "Cốt Ảnh Tiễn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt cung — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "cotcung",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "cottu_cotcung_na2",
+    "name": "Hoàn Cốt Tiễn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt cung — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "cotcung",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "cottu_cotcung_na3",
+    "name": "Cốt Ngục Tiễn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt cung — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "cotcung",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_cottu_cotcung_1",
+    "name": "Diệt Cốt Cung",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Cốt cung) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotcung",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotcung_2",
+    "name": "Cốt Vực Cung",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Cốt cung) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotcung",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotcung_3",
+    "name": "Bất Tử Cung",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Cốt cung) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotcung",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
+  "cotnhan": [
+   {
+    "id": "cottu_cotnhan_co1",
+    "name": "Song Nhận Khai Phong",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: hai lưỡi xương cong chém xen kẽ liên hồi, mỗi nhát găm một gai xương nhỏ vào vết chém và hút chút tủy; Thủ: giáp xương mỏng ôm hai cánh tay, đỡ đòn xong lách né ngay. Kim: lưỡi xương cứng hơn, gai găm xuyên giáp; Mộc: tủy hút được nhiều hơn theo mỗi nhát; Thủy: vết chém phủ sương lạnh, làm chậm kẻ địch; Hỏa: lưỡi xương nóng, vết chém bốc cháy; Thổ: giáp xương dày hơn một lớp, đứng vững hơn khi đổi đòn",
+    "weaponId": "cotnhan",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "defPct": 30,
+     "defSec": 3.0
+    },
+    "fxText": "Chậm 20%/2.0s · Giảm 30% sát thương nhận/3.0s"
+   },
+   {
+    "id": "cottu_cotnhan_co2",
+    "name": "Cốt Nhận Hấp Tủy",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 1500,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: lưỡi trái rạch mở vết thương, lưỡi phải đâm theo hút tủy và máu rất nhỏ trong từng nhát; Thủ: cúi thấp người sau lưng Cốt Vương, giáp xương mỏng che chỗ hiểm. Kim: đâm xuyên giáp hút tủy sâu hơn; Mộc: hút được nhiều tủy hơn; Thủy: vết đâm làm chậm kẻ địch; Hỏa: vết đâm thiêu đốt từ trong; Thổ: thế đứng bám đất, khó bị đẩy lùi",
+    "weaponId": "cotnhan",
+    "fx": {
+     "dotDps": 3,
+     "dotSec": 3,
+     "pierce": 15
+    },
+    "fxText": "Đốt/độc 3/s×3s · Xuyên phòng 15%"
+   },
+   {
+    "id": "cottu_cotnhan_lu1",
+    "name": "Kim Nhận Phân Cốt",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 30,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Vật phòng 20",
+    "desc": "Công: chém liên hoàn dọc thớ giáp của địch, nhát sau nối nhát trước không dứt; Thủ: hai lưỡi bắt chéo gạt đòn rồi trượt né sang bên",
+    "weaponId": "cotnhan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotnhan_lu2",
+    "name": "Địa Cốt Hoàn Nhận",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 7000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 30
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 25
+     }
+    ],
+    "condText": "Vật phòng 30 + Khí huyết 25",
+    "desc": "Công: xoay người quét hai lưỡi thành vòng quanh thân, kẻ nào áp sát cũng ăn chém; Thủ: vòng lưỡi hóa thành vành gai xương che thân trong lúc xoay",
+    "weaponId": "cotnhan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotnhan_lu3",
+    "name": "Sinh Nhận Liên Hoàn",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 20
+     },
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Vật công 20 + Vật phòng 20",
+    "desc": "Công: hai tay chém nối tiếp hai nhát liên hoàn, gai xương găm vào vết chém rồi mọc chồi níu thịt; Thủ: lùi nửa bước theo nhịp chém, giáp xương mỏng phủ vai tránh đòn",
+    "weaponId": "cotnhan",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "cottu_cotnhan_lu4",
+    "name": "Thiết Nhận Xuyên Giáp",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     },
+     {
+      "stat": "vatCong",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 20 + Vật công 15",
+    "desc": "Công: lưỡi xương mài nhọn đâm chém xuyên qua khe giáp; Thủ: gạt lưỡi theo bề mặt giáp địch, trượt đòn đi",
+    "weaponId": "cotnhan",
+    "fx": {
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15%"
+   },
+   {
+    "id": "cottu_cotnhan_lu5",
+    "name": "Thổ Nhận Hồi Chấn",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 20
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     }
+    ],
+    "condText": "Vật phòng 20 + Khí huyết 20",
+    "desc": "Công: chém chéo hai lưỡi hắt kẻ địch lùi ra; Thủ: chân bám đất như mọc rễ xương, thân không lùi theo đòn",
+    "weaponId": "cotnhan",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotnhan_lu6",
+    "name": "Cốt Đằng Nhận Phược",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     },
+     {
+      "stat": "vatPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Khí huyết 20 + Vật phòng 15",
+    "desc": "Công: chém rạch đất cho gai xương mọc như dây leo trói kẻ áp sát; Thủ: dây gai quấn quanh thân thành lớp giáp sống, vỡ thì mọc lại",
+    "weaponId": "cotnhan",
+    "fx": {
+     "root": 1.0
+    },
+    "fxText": "Trói 1.0s"
+   },
+   {
+    "id": "cottu_cotnhan_lu7",
+    "name": "Xích Nhận Bức Lui",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 15
+     },
+     {
+      "stat": "vatCong",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 15 + Vật công 15",
+    "desc": "Công: lưỡi xương nung đỏ chém liên tiếp bức kẻ địch lùi khỏi tầm áp sát; Thủ: hơi nóng từ lưỡi đẩy lùi kẻ chạm vào",
+    "weaponId": "cotnhan",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotnhan_lu8",
+    "name": "Liệt Nhận Hoàn Vũ",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 25
+     },
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Vật công 25 + Vật phòng 20",
+    "desc": "Công: múa hai lưỡi thành vòng lửa chém cả vùng quanh mình; Thủ: vòng lưỡi quay nhanh gạt bớt sát thương trong lúc múa",
+    "weaponId": "cotnhan",
+    "fx": {
+     "defPct": 30,
+     "defSec": 3.0,
+     "aoe": 85
+    },
+    "fxText": "Giảm 30% sát thương nhận/3.0s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotnhan_lu9",
+    "name": "Hàn Nhận Lưu Ngân",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 35,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 15
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 15 + Tốc độ 15",
+    "desc": "Công: chém để lại vết hàn băng trên thịt, gai xương găm trong vết làm địch chậm dần; Thủ: sương lạnh phủ lưỡi và tay, đòn địch chạm vào cũng chậm lại",
+    "weaponId": "cotnhan",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "cottu_cotnhan_lu10",
+    "name": "Băng Cốt Nhận Trận",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 15
+     }
+    ],
+    "condText": "Vật phòng 25 + Thần thức 15",
+    "desc": "Công: cắm hai lưỡi xuống đất dựng trận băng, vùng lạnh quanh mình làm chậm mọi kẻ bước vào; Thủ: đứng trong trận được lớp băng mỏng hấp thụ bớt sát thương",
+    "weaponId": "cotnhan",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "aoe": 85
+    },
+    "fxText": "Chậm 20%/2.0s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotnhan_tr1",
+    "name": "Kim Nhận Bất Tuyệt",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Vật công 30",
+    "desc": "Công: chém liên hoàn không ngừng nghỉ, mỗi nhát trúng làm nhát sau thêm nặng; Thủ: giáp xương mỏng tự liền lại giữa các nhịp chém",
+    "weaponId": "cotnhan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotnhan_tr2",
+    "name": "Nhạc Nhận Trấn Vây",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Khí huyết 30",
+    "desc": "Công: dậm chân bật gai xương quanh thân phản đòn cả bầy đang vây, hai lưỡi quét vòng dọn đường; Thủ: vành gai dựng thành hào xương cản kẻ áp sát",
+    "weaponId": "cotnhan",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "cottu_cotnhan_tr3",
+    "name": "Vạn Nhận Hồi Tủy",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "khiHuyet",
+      "value": 40
+     },
+     {
+      "stat": "vatPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Khí huyết 40 + Vật phòng 30",
+    "desc": "Công: ngàn nhát chém nhỏ hút tủy từng chút, tích tiểu thành đại hồi lại cho thân; Thủ: tủy hút được dồn nuôi giáp xương mọc lại nhanh hơn",
+    "weaponId": "cotnhan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "cottu_cotnhan_tr4",
+    "name": "Hỏa Ngục Song Nhận",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Vật công 30",
+    "desc": "Công: hai lưỡi bùng lửa chém diện rộng, vết chém cháy âm ỉ trong thịt; Thủ: thân phủ lớp xương chịu lửa, miễn thiêu đốt trong lúc dùng",
+    "weaponId": "cotnhan",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3
+    },
+    "fxText": "Đốt/độc 5/s×3s"
+   },
+   {
+    "id": "cottu_cotnhan_tr5",
+    "name": "Huyền Băng Nhận Ngục",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatPhong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật phòng 40 + Thần thức 30",
+    "desc": "Công: nổ băng từ hai lưỡi làm choáng kẻ địch gần, gai băng găm đầy vết chém; Thủ: giáp băng mỏng hấp thụ sát thương rồi vỡ tan",
+    "weaponId": "cotnhan",
+    "fx": {
+     "stun": 1.2,
+     "aoe": 85
+    },
+    "fxText": "Choáng 1.2s · Đánh vùng"
+   },
+   {
+    "id": "cottu_cotnhan_kd1",
+    "name": "Song Nhận Đoạt Mệnh",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt nhận — Tấn công: nấp sau lưng Cốt Vương rồi bất ngờ lao ra, dồn toàn lực vào một đòn thần thông nặng nhất của Cốt nhận.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotnhan_kd2",
+    "name": "Cốt Ảnh Nhận Giáp",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt nhận — Phòng thủ: vận thần thông hộ thể, giáp xương mỏng phủ kín thân, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "cottu_cotnhan_kd3",
+    "name": "Phệ Tủy Song Nhận",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Cốt nhận — Cân bằng: hai lưỡi chém liên hoàn vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "cottu_cotnhan_na1",
+    "name": "Tật Phong Cốt Nhận",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt nhận — Tốc độ: thân pháp thần thông, thân nhẹ như gió lướt, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "cottu_cotnhan_na2",
+    "name": "Hoàn Tủy Nhận",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt nhận — Hồi phục: thần thông trị thương, tủy xương tích góp hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "cottu_cotnhan_na3",
+    "name": "Cốt Nhận Tỏa Hồn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Cốt nhận — Khống chế: gai xương từ vết chém khóa chặt gân mạch, trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_cottu_cotnhan_1",
+    "name": "Diệt Cốt Nhận",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Cốt nhận) — Pháp Tướng hàng lâm: Pháp Tướng vung hai lưỡi xương khổng lồ chém một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotnhan_2",
+    "name": "Cốt Nhận Vực",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Cốt nhận) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, gai xương mọc khắp mặt đất, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotnhan_3",
+    "name": "Bất Tử Song Nhận",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Cốt nhận) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, hai lưỡi hợp chém xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "cotnhan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
   "cotthuan_vm": [
    {
     "id": "cottu_cotthuan_vm_co1",
@@ -10347,6 +12498,695 @@
     "condText": "Pháp Tướng giai đoạn 3",
     "desc": "Chiêu của Pháp Tướng (Vương Giả Cốt Chùy) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
     "weaponId": "cotchuy_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "cotcung_vm": [
+   {
+    "id": "cottu_cotcung_vm_co1",
+    "name": "Vạn Cốt Liên Châu",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "cottu_cotcung_vm_co2",
+    "name": "Xuyên Vân Đệ Nhất Tiễn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotcung_vm_lu1",
+    "name": "Vương Tiễn Xuyên Tâm",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 18
+     },
+     {
+      "stat": "phapCong",
+      "value": 16
+     }
+    ],
+    "condText": "Vật công 18 + Pháp công 16",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s"
+   },
+   {
+    "id": "cottu_cotcung_vm_lu2",
+    "name": "Bạch Cốt Tiễn Vũ",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 22
+     },
+     {
+      "stat": "phapCong",
+      "value": 19
+     }
+    ],
+    "condText": "Vật công 22 + Pháp công 19",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotcung_vm_lu3",
+    "name": "Vương Cung Hoành Tiễn",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 26
+     },
+     {
+      "stat": "phapCong",
+      "value": 22
+     }
+    ],
+    "condText": "Vật công 26 + Pháp công 22",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "cottu_cotcung_vm_tr1",
+    "name": "Cốt Hải Tiễn Trận",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 34
+     },
+     {
+      "stat": "phapCong",
+      "value": 30
+     }
+    ],
+    "condText": "Vật công 34 + Pháp công 30",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "cottu_cotcung_vm_tr2",
+    "name": "Khô Lâu Tiễn Tế",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 38
+     },
+     {
+      "stat": "phapCong",
+      "value": 33
+     }
+    ],
+    "condText": "Vật công 38 + Pháp công 33",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "lifesteal": 25
+    },
+    "fxText": "Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "cottu_cotcung_vm_kd1",
+    "name": "Vạn Cốt Tiễn Triều",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotcung_vm_kd2",
+    "name": "Cốt Vương Cung Lệnh",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotcung_vm_kd3",
+    "name": "Bạch Cốt Tiễn Diệt",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotcung_vm_na1",
+    "name": "Khô Lâu Vương Cung",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotcung_vm_na2",
+    "name": "Cốt Hải Vô Biên Cung",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotcung_vm_na3",
+    "name": "Vương Cốt Cung Uy",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Vạn Cốt Xuyên Vân Cung — Cốt cung tiến hóa theo đường Viên Mãn (Khô Lâu Vương).",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_cottu_cotcung_vm_1",
+    "name": "Pháp Tướng Cốt Cung",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Vạn Cốt Xuyên Vân Cung) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotcung_vm_2",
+    "name": "Cung Vương Trấn Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Vạn Cốt Xuyên Vân Cung) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotcung_vm_3",
+    "name": "Khô Lâu Diệt Thế Cung",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Vạn Cốt Xuyên Vân Cung) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "cotcung_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "cotnhan_vm": [
+   {
+    "id": "cottu_cotnhan_vm_co1",
+    "name": "Liệt Nhận Vô Thanh",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Hai lưỡi chém không tiếng động, vết chém phủ hàn khí làm địch chậm lại.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "cottu_cotnhan_vm_co2",
+    "name": "Song Nhận Phệ Hồn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Chém trả ngay sau cú gạt, lưỡi cong hất kẻ địch bật lùi.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotnhan_vm_lu1",
+    "name": "Hồn Nhận Xuyên Tâm",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 18
+     },
+     {
+      "stat": "phapCong",
+      "value": 16
+     }
+    ],
+    "condText": "Vật công 18 + Pháp công 16",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Lưỡi trái găm gai cố định, lưỡi phải đâm thẳng tim làm địch choáng váng.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s"
+   },
+   {
+    "id": "cottu_cotnhan_vm_lu2",
+    "name": "Bạch Cốt Nhận Vũ",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 22
+     },
+     {
+      "stat": "phapCong",
+      "value": 19
+     }
+    ],
+    "condText": "Vật công 22 + Pháp công 19",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Hai lưỡi múa thành mưa xương trắng, chém hắt kẻ áp sát ra xa.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "cottu_cotnhan_vm_lu3",
+    "name": "Liệt Hồn Phân Thi Nhận",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 26
+     },
+     {
+      "stat": "phapCong",
+      "value": 22
+     }
+    ],
+    "condText": "Vật công 26 + Pháp công 22",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Hai nhát nối tiếp xẻ đôi vết chém, nhát sau nặng hơn nhát trước.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "cottu_cotnhan_vm_tr1",
+    "name": "Cốt Hải Nhận Triều",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 34
+     },
+     {
+      "stat": "phapCong",
+      "value": 30
+     }
+    ],
+    "condText": "Vật công 34 + Pháp công 30",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Sóng lưỡi xương dâng như triều, hai đòn nối tiếp cuốn phăng kẻ trước mặt.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "cottu_cotnhan_vm_tr2",
+    "name": "Khô Lâu Nhận Tế",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 38
+     },
+     {
+      "stat": "phapCong",
+      "value": 33
+     }
+    ],
+    "condText": "Vật công 38 + Pháp công 33",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Mỗi nhát chém tế lên Khô Lâu Vương đều hút sinh khí địch hồi lại cho thân.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "lifesteal": 25
+    },
+    "fxText": "Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "cottu_cotnhan_vm_kd1",
+    "name": "Vạn Cốt Nhận Triều",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Vạn lưỡi xương cùng dâng chém ngập cả vùng quanh mình.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotnhan_vm_kd2",
+    "name": "Cốt Vương Nhận Lệnh",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Nhận lệnh Cốt Vương, một chém choáng váng mở đường lao sâu vào giữa địch.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotnhan_vm_kd3",
+    "name": "Bạch Cốt Nhận Diệt",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Song nhận hợp lực hất bay và xé toang lớp phòng ngự cuối cùng.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotnhan_vm_na1",
+    "name": "Khô Lâu Vương Nhận",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Vương nhận quét ngang một vùng, không kẻ nào đứng vững trong tầm lưỡi.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotnhan_vm_na2",
+    "name": "Cốt Hải Vô Biên Nhận",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Thân pháp theo nhận pháp nhanh đến vô biên, tốc độ tăng vọt trong chốc lát.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "cottu_cotnhan_vm_na3",
+    "name": "Vương Cốt Nhận Uy",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Liệt Hồn Song Nhận — Cốt nhận tiến hóa theo đường Viên Mãn (Khô Lâu Vương). Uy của Cốt Vương phủ xuống theo lưỡi chém, xuyên qua mọi lớp giáp che thân.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_cottu_cotnhan_vm_1",
+    "name": "Pháp Tướng Liệt Nhận",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Liệt Hồn Song Nhận) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotnhan_vm_2",
+    "name": "Nhận Vương Trấn Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Liệt Hồn Song Nhận) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "cotnhan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_cottu_cotnhan_vm_3",
+    "name": "Khô Lâu Diệt Thế Nhận",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Liệt Hồn Song Nhận) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "cotnhan_vm",
     "fx": {
      "aoe": 1,
      "pierce": 20
@@ -14501,6 +17341,614 @@
     "role": "phaptuong"
    }
   ],
+  "phapan": [
+   {
+    "id": "phaptu_phapan_co1",
+    "name": "Khai Ấn Phá Giáp",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 800,
+    "cost": 10,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: kết ấn phóng thẳng, ấn chạm đích thì nổ tung dấu ấn, niệm nhanh. Kim: ấn sắc xuyên giáp; Mộc: ấn gieo độc nhẹ; Thủy: ấn lạnh làm chậm; Hỏa: ấn cháy thiêu đốt; Thổ: ấn nặng đẩy lùi",
+    "weaponId": "phapan",
+    "fx": {
+     "dotDps": 3,
+     "dotSec": 3,
+     "pierce": 15
+    },
+    "fxText": "Đốt/độc 3/s×3s · Xuyên phòng 15%"
+   },
+   {
+    "id": "phaptu_phapan_co2",
+    "name": "Hộ Ấn Triền Thân",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Thủ: ấn hộ thân quấn quanh người giảm sát thương phép; Công: ấn vỡ thì dấu ấn còn lại đánh trả nhẹ. Kim: ấn vỡ phản đòn mạnh hơn; Mộc: ấn vỡ hồi máu; Thủy: ấn vỡ làm chậm kẻ đánh; Hỏa: ấn vỡ nổ lửa; Thổ: ấn dày hơn, giảm thêm sát thương",
+    "weaponId": "phapan",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "phaptu_phapan_lu1",
+    "name": "Kim Ấn Liệt Phong",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 20 + Tốc độ 20",
+    "desc": "Công: ấn kim bay liên tiếp như lưỡi dao; Thủ: ấn còn lại xoay quanh người chặn đạn",
+    "weaponId": "phapan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phaptu_phapan_lu2",
+    "name": "Thổ Ấn Trấn Địa",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 7000,
+    "cost": 55,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 30
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 30 + Pháp phòng 20",
+    "desc": "Thủ: đóng ấn xuống đất thành trận, kẻ địch bước vào bị chậm; Công: trận ấn gây sát thương theo thời gian",
+    "weaponId": "phapan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phaptu_phapan_lu3",
+    "name": "Kim Ấn Xuyên Tâm",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Pháp công 20 + Tốc độ 15",
+    "desc": "Công: ấn kim xuyên giáp, dấu ấn găm sâu vào thịt; Thủ: ấn lướt giúp né đòn",
+    "weaponId": "phapan",
+    "fx": {
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15%"
+   },
+   {
+    "id": "phaptu_phapan_lu4",
+    "name": "Thổ Ấn Định Thân",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapPhong",
+      "value": 20
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp phòng 20 + Thần thức 20",
+    "desc": "Công: ấn đất đóng xuống gây choáng ngắn; Thủ: dựng trận đất chặn đạn tầm xa",
+    "weaponId": "phapan",
+    "fx": {
+     "stun": 1.0
+    },
+    "fxText": "Choáng 1.0s"
+   },
+   {
+    "id": "phaptu_phapan_lu5",
+    "name": "Thủy Ấn Hàn Triều",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 20
+     },
+     {
+      "stat": "minhMan",
+      "value": 15
+     }
+    ],
+    "condText": "Pháp công 20 + Thần thức 15",
+    "desc": "Công: ấn nước làm chậm kẻ trúng; Thủ: ấn tạo màng nước quanh người",
+    "weaponId": "phapan",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "phaptu_phapan_lu6",
+    "name": "Băng Ấn Ngưng Hồn",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 30
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 30 + Pháp phòng 20",
+    "desc": "Công: ấn băng đóng băng ngắn kẻ địch; Thủ: ấn băng hấp thụ sát thương",
+    "weaponId": "phapan",
+    "fx": {
+     "stun": 1.2,
+     "defPct": 30,
+     "defSec": 3.0
+    },
+    "fxText": "Choáng 1.2s · Giảm 30% sát thương nhận/3.0s"
+   },
+   {
+    "id": "phaptu_phapan_lu7",
+    "name": "Hỏa Ấn Liệt Diệm",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 15
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Pháp công 15 + Tốc độ 15",
+    "desc": "Công: ấn lửa thiêu đốt vết ấn; Thủ: ấn nổ đẩy lùi kẻ áp sát",
+    "weaponId": "phapan",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3,
+     "knock": 46
+    },
+    "fxText": "Đốt/độc 5/s×3s · Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phapan_lu8",
+    "name": "Hỏa Ấn Phần Thiên",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Pháp công 25 + Thần thức 20",
+    "desc": "Công: chuỗi ấn lửa nổ liên tiếp thành vùng; Thủ: ấn lửa chặn đường kẻ đuổi theo",
+    "weaponId": "phapan",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "phaptu_phapan_lu9",
+    "name": "Mộc Ấn Sinh Đằng",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Khí huyết 15",
+    "desc": "Công: ấn gieo dây leo trói chân kẻ địch; Thủ: hồi nhẹ máu theo dấu ấn",
+    "weaponId": "phapan",
+    "fx": {
+     "root": 1.0,
+     "healPct": 5
+    },
+    "fxText": "Trói 1.0s · Hồi 5% máu"
+   },
+   {
+    "id": "phaptu_phapan_lu10",
+    "name": "Mộc Ấn Hồi Xuân",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 25 + Pháp phòng 15",
+    "desc": "Công: ấn mọc cây nhỏ hút máu kẻ địch; Thủ: hồi máu theo thời gian",
+    "weaponId": "phapan",
+    "fx": {
+     "lifesteal": 10,
+     "healPct": 8
+    },
+    "fxText": "Hút máu 10% · Hồi 8% máu"
+   },
+   {
+    "id": "phaptu_phapan_tr1",
+    "name": "Thủy Ấn Quy Triều",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 35
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Thần thức 35",
+    "desc": "Công: gom nhiều ấn thành một đòn lớn; Thủ: trong lúc gom ấn có lá chắn nước",
+    "weaponId": "phapan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phaptu_phapan_tr2",
+    "name": "Kim Ấn Vạn Nhận",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Tốc độ 30",
+    "desc": "Công: mưa ấn kim giảm phòng kẻ địch; Thủ: ấn chặn đạn quanh người",
+    "weaponId": "phapan",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "phaptu_phapan_tr3",
+    "name": "Thổ Ấn Địa Mạch",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "phapPhong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 35
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp phòng 40 + Thần thức 35",
+    "desc": "Công: ấn đất nổ diện rộng; Thủ: kết giới đất giảm mạnh sát thương",
+    "weaponId": "phapan",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "phaptu_phapan_tr4",
+    "name": "Hỏa Ấn Cửu Dương",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 40
+     },
+     {
+      "stat": "minhMan",
+      "value": 35
+     }
+    ],
+    "condText": "Trúc Cơ + Pháp công 40 + Thần thức 35",
+    "desc": "Công: ấn lửa trắng thiêu diện rộng; Thủ: miễn thiêu đốt trong lúc dùng",
+    "weaponId": "phapan",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3
+    },
+    "fxText": "Đốt/độc 5/s×3s"
+   },
+   {
+    "id": "phaptu_phapan_tr5",
+    "name": "Mộc Ấn Vạn Thụ",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Khí huyết 30",
+    "desc": "Công: trận ấn mọc rừng nhỏ trói địch; Thủ: hồi máu cả vùng",
+    "weaponId": "phapan",
+    "fx": {
+     "root": 1.0
+    },
+    "fxText": "Trói 1.0s"
+   },
+   {
+    "id": "phaptu_phapan_kd1",
+    "name": "Diệt Thiên Pháp Ấn",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp Ấn — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Pháp Ấn.",
+    "weaponId": "phapan",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phapan_kd2",
+    "name": "Hộ Pháp Thiên Ấn",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp Ấn — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "phapan",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "phaptu_phapan_kd3",
+    "name": "Ngũ Hành Pháp Ấn",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Pháp Ấn — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "phapan",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "phaptu_phapan_na1",
+    "name": "Phiêu Vân Pháp Ấn",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp Ấn — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "phapan",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "phaptu_phapan_na2",
+    "name": "Hồi Linh Pháp Ấn",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp Ấn — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "phapan",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "phaptu_phapan_na3",
+    "name": "Trấn Ma Pháp Ấn",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Pháp Ấn — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "phapan",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_phaptu_phapan_1",
+    "name": "Diệt Thế Pháp Ấn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Pháp Ấn) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phapan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phapan_2",
+    "name": "Pháp Vực Thiên Ấn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Pháp Ấn) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phapan",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phapan_3",
+    "name": "Hộ Thiên Pháp Ấn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Pháp Ấn) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phapan",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
   "phien_vm": [
    {
     "id": "phaptu_phien_vm_co1",
@@ -15522,6 +18970,350 @@
     "condText": "Pháp Tướng giai đoạn 3",
     "desc": "Chiêu của Pháp Tướng (Thiên Thư Pháp Điển) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
     "weaponId": "sachphep_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "phapan_vm": [
+   {
+    "id": "phaptu_phapan_vm_co1",
+    "name": "Thiên La Khai Ấn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "phaptu_phapan_vm_co2",
+    "name": "Thiên La Liên Ấn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "phaptu_phapan_vm_lu1",
+    "name": "Thiên La Xuyên Ấn",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 18
+     },
+     {
+      "stat": "vatCong",
+      "value": 16
+     }
+    ],
+    "condText": "Pháp công 18 + Vật công 16",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "phaptu_phapan_vm_lu2",
+    "name": "Thiên La Song Ấn",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 22
+     },
+     {
+      "stat": "vatCong",
+      "value": 19
+     }
+    ],
+    "condText": "Pháp công 22 + Vật công 19",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "phaptu_phapan_vm_lu3",
+    "name": "Thiên La Hấp Ấn",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 26
+     },
+     {
+      "stat": "vatCong",
+      "value": 22
+     }
+    ],
+    "condText": "Pháp công 26 + Vật công 22",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "lifesteal": 25
+    },
+    "fxText": "Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "phaptu_phapan_vm_tr1",
+    "name": "Thiên La Lục Ấn",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 34
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Pháp công 34 + Vật công 30",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": null,
+    "fxText": ""
+   },
+   {
+    "id": "phaptu_phapan_vm_tr2",
+    "name": "Thiên La Diệm Ấn",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 38
+     },
+     {
+      "stat": "vatCong",
+      "value": 33
+     }
+    ],
+    "condText": "Pháp công 38 + Vật công 33",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "dotDps": 6,
+     "dotSec": 4
+    },
+    "fxText": "Đốt/độc 6/s×4s"
+   },
+   {
+    "id": "phaptu_phapan_vm_kd1",
+    "name": "Thiên La Diệt Ấn",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phapan_vm_kd2",
+    "name": "Thiên La Phá Ấn",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phapan_vm_kd3",
+    "name": "Thiên La Kiếp Ấn",
+    "element": "Hỏa",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phapan_vm_na1",
+    "name": "Thiên La Thiên Ấn",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phapan_vm_na2",
+    "name": "Thiên La Vân Ấn",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "phaptu_phapan_vm_na3",
+    "name": "Thiên La Trấn Ấn",
+    "element": "Hỏa",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Thiên La Pháp Ấn — Pháp Ấn tiến hóa theo đường Viên Mãn (Thiên La Pháp Ấn).",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_phaptu_phapan_vm_1",
+    "name": "Pháp Tướng Thiên La",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Thiên La Pháp Ấn) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phapan_vm_2",
+    "name": "Thiên La Trấn Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Thiên La Pháp Ấn) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phapan_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_phaptu_phapan_vm_3",
+    "name": "Thiên La Diệt Thế",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Thiên La Pháp Ấn) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phapan_vm",
     "fx": {
      "aoe": 1,
      "pierce": 20
@@ -17325,6 +21117,596 @@
     "role": "phaptuong"
    }
   ],
+  "quylinh": [
+   {
+    "id": "quytu_quylinh_co1",
+    "name": "Linh Âm Triệu Hồn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: rung chuông gọi một u hồn nhỏ đánh thay, tiếng chuông xuyên tai làm chậm kẻ địch. Kim: u hồn mang chuông kim, tiếng vang xuyên giáp; Mộc: u hồn hút nhẹ máu qua tiếng chuông; Thủy: u hồn làm chậm kẻ địch; Hỏa: u hồn mang lửa ma, gây thiêu; Thổ: u hồn dày hơn, hút đòn tốt hơn",
+    "weaponId": "quylinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "pierce": 15
+    },
+    "fxText": "Chậm 20%/2.0s · Xuyên phòng 15%"
+   },
+   {
+    "id": "quytu_quylinh_co2",
+    "name": "Linh Âm Hộ Hồn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Thủ: tiếng chuông gọi u hồn quay quanh người chặn đòn; Công: u hồn chặn kẻ áp sát. Kim: u hồn phản chút sát thương; Mộc: u hồn hồi nhẹ máu cho chủ; Thủy: u hồn làm chậm kẻ áp sát; Hỏa: u hồn thiêu kẻ áp sát; Thổ: u hồn chặn đòn lâu hơn",
+    "weaponId": "quylinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "healPct": 5
+    },
+    "fxText": "Chậm 20%/2.0s · Hồi 5% máu"
+   },
+   {
+    "id": "quytu_quylinh_lu1",
+    "name": "Chuông Vang Dẫn Hồn",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     }
+    ],
+    "condText": "Thần thức 25",
+    "desc": "Công: tiếng chuông hóa thành nhiều u hồn nhỏ bay ra; Thủ: u hồn nhỏ hút sự chú ý của kẻ địch",
+    "weaponId": "quylinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "quytu_quylinh_lu2",
+    "name": "Âm Linh Hút Hồn",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Pháp công 25 + Pháp phòng 15",
+    "desc": "Công: tiếng chuông trầm tạo vùng âm khí hút máu địch; Thủ: máu hút được hồi cho u hồn và bản thân",
+    "weaponId": "quylinh",
+    "fx": {
+     "lifesteal": 10,
+     "aoe": 85
+    },
+    "fxText": "Hút máu 10% · Đánh vùng"
+   },
+   {
+    "id": "quytu_quylinh_lu3",
+    "name": "Linh Âm Mê Hồn",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Pháp phòng 15",
+    "desc": "Công: u hồn nước theo tiếng chuông làm chậm kẻ địch; Thủ: u hồn chặn đòn thay chủ",
+    "weaponId": "quylinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "quytu_quylinh_lu4",
+    "name": "Cửu U Trói Hồn",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Khí huyết 15",
+    "desc": "Công: chuông gieo rừng u hồn trói kẻ địch; Thủ: u hồn hồi máu cho chủ",
+    "weaponId": "quylinh",
+    "fx": {
+     "root": 1.0
+    },
+    "fxText": "Trói 1.0s"
+   },
+   {
+    "id": "quytu_quylinh_lu5",
+    "name": "Quỷ Hỏa Linh Âm",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "phapCong",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 15 + Pháp công 20",
+    "desc": "Công: u hồn mang lửa ma theo tiếng chuông; Thủ: u hồn hóa khói chặn kẻ áp sát",
+    "weaponId": "quylinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "quytu_quylinh_lu6",
+    "name": "Địa Ngục Linh Hỏa",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 55,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 30
+     },
+     {
+      "stat": "minhMan",
+      "value": 25
+     }
+    ],
+    "condText": "Pháp công 30 + Thần thức 25",
+    "desc": "Công: nhiều u hồn lửa nổ khi chạm địch; Thủ: u hồn lửa hút sự chú ý",
+    "weaponId": "quylinh",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "quytu_quylinh_lu7",
+    "name": "Kim Linh Xuyên Hồn",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "vatCong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Vật công 15",
+    "desc": "Công: u hồn cầm chuông kim, tiếng vang xuyên giáp; Thủ: u hồn gạt đạn bằng tiếng chuông",
+    "weaponId": "quylinh",
+    "fx": {
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15%"
+   },
+   {
+    "id": "quytu_quylinh_lu8",
+    "name": "Linh Giáp Hộ Hồn",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 25 + Vật phòng 20",
+    "desc": "Công: u hồn giáp kim đánh nặng theo nhịp chuông; Thủ: giáp kim hấp thụ sát thương thay chủ",
+    "weaponId": "quylinh",
+    "fx": {
+     "defPct": 30,
+     "defSec": 3.0
+    },
+    "fxText": "Giảm 30% sát thương nhận/3.0s"
+   },
+   {
+    "id": "quytu_quylinh_lu9",
+    "name": "Thổ Linh Trấn Hồn",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "vatPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Vật phòng 15",
+    "desc": "Công: u hồn đất đập mục tiêu theo tiếng chuông; Thủ: u hồn chặn đạn",
+    "weaponId": "quylinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "quytu_quylinh_lu10",
+    "name": "Hoàng Tuyền Linh Âm",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "vatPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 25 + Vật phòng 20",
+    "desc": "Công: u hồn trồi lên từ đất khi chuông vang; Thủ: tường u hồn chặn đường",
+    "weaponId": "quylinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "quytu_quylinh_tr1",
+    "name": "Vạn Hồn Linh Triều",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40",
+    "desc": "Công: chuông thu hồn quái chết vào tiếng vang, tăng sức u hồn; Thủ: u hồn mạnh hơn gánh sát thương thay",
+    "weaponId": "quylinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "quytu_quylinh_tr2",
+    "name": "Huyền Minh Linh Âm",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Pháp phòng 30",
+    "desc": "Công: tiếng chuông nước lạnh đóng băng kẻ địch; Thủ: màn sương hồn giảm sát thương",
+    "weaponId": "quylinh",
+    "fx": {
+     "stun": 1.2
+    },
+    "fxText": "Choáng 1.2s"
+   },
+   {
+    "id": "quytu_quylinh_tr3",
+    "name": "Vạn Linh Hút Hồn",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Khí huyết 30",
+    "desc": "Công: rừng u hồn hút máu diện rộng theo nhịp chuông; Thủ: hồi máu cả vùng",
+    "weaponId": "quylinh",
+    "fx": {
+     "lifesteal": 10
+    },
+    "fxText": "Hút máu 10%"
+   },
+   {
+    "id": "quytu_quylinh_tr4",
+    "name": "Vạn Kim Linh Âm",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Vật công 30",
+    "desc": "Công: đội u hồn kim tấn công diện rộng; Thủ: u hồn dựng vòng giáp quanh chủ",
+    "weaponId": "quylinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "quytu_quylinh_tr5",
+    "name": "Địa Phủ Linh Âm",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "vatPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Vật phòng 30",
+    "desc": "Công: tiếng chuông mở cổng địa phủ gọi u hồn; Thủ: kết giới đất giảm mạnh sát thương",
+    "weaponId": "quylinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "quytu_quylinh_kd1",
+    "name": "Linh Âm Phệ Hồn",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Chiêu Hồn Linh — Tấn công: rung chuông dồn toàn lực vào một đòn thần thông nặng nhất của Chiêu Hồn Linh, tiếng chuông xé hồn kẻ địch.",
+    "weaponId": "quylinh",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_quylinh_kd2",
+    "name": "Linh Âm Hộ Thể",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Chiêu Hồn Linh — Phòng thủ: tiếng chuông trầm gọi u hồn hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "quylinh",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "quytu_quylinh_kd3",
+    "name": "Minh Hà Linh Âm",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Chiêu Hồn Linh — Cân bằng: vừa rung chuông đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "quylinh",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "quytu_quylinh_na1",
+    "name": "Linh Ảnh Du Hồn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Chiêu Hồn Linh — Tốc độ: thân pháp thần thông theo tiếng chuông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "quylinh",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "quytu_quylinh_na2",
+    "name": "Linh Âm Hoàn Hồn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Chiêu Hồn Linh — Hồi phục: tiếng chuông gọi hồn về xác, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "quylinh",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "quytu_quylinh_na3",
+    "name": "Linh Vực Trấn Hồn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Chiêu Hồn Linh — Khống chế: tiếng chuông trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "quylinh",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_quytu_quylinh_1",
+    "name": "Linh Âm Diệt Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Chiêu Hồn Linh) — Pháp Tướng hàng lâm: tiếng chuông Cửu U vang khắp vùng, một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quylinh",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_quylinh_2",
+    "name": "Cửu U Linh Vực",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Chiêu Hồn Linh) — Pháp Tướng trấn áp: tiếng chuông trầm phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quylinh",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_quylinh_3",
+    "name": "Cửu U Diệt Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Chiêu Hồn Linh) — Pháp Tướng thiên uy: tiếng chuông cuối cùng, đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "quylinh",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
   "colenh_vm": [
    {
     "id": "quytu_colenh_vm_co1",
@@ -18346,6 +22728,350 @@
     "condText": "Pháp Tướng giai đoạn 3",
     "desc": "Chiêu của Pháp Tướng (U Minh Quỷ Thương) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
     "weaponId": "quythuong_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "quylinh_vm": [
+   {
+    "id": "quytu_quylinh_vm_co1",
+    "name": "Linh Âm Điểm Hồn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "quytu_quylinh_vm_co2",
+    "name": "Cửu U Dẫn Hồn",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "quytu_quylinh_vm_lu1",
+    "name": "Quỷ Linh Trấn Hồn",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 18
+     },
+     {
+      "stat": "vatCong",
+      "value": 16
+     }
+    ],
+    "condText": "Pháp công 18 + Vật công 16",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s"
+   },
+   {
+    "id": "quytu_quylinh_vm_lu2",
+    "name": "Sinh Tử Linh Âm",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 22
+     },
+     {
+      "stat": "vatCong",
+      "value": 19
+     }
+    ],
+    "condText": "Pháp công 22 + Vật công 19",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "quytu_quylinh_vm_lu3",
+    "name": "Cửu U Phệ Hồn",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 26
+     },
+     {
+      "stat": "vatCong",
+      "value": 22
+     }
+    ],
+    "condText": "Pháp công 26 + Vật công 22",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "quytu_quylinh_vm_tr1",
+    "name": "Vạn Quỷ Linh Âm",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 34
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Pháp công 34 + Vật công 30",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "quytu_quylinh_vm_tr2",
+    "name": "Quỷ Môn Linh Âm",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 38
+     },
+     {
+      "stat": "vatCong",
+      "value": 33
+     }
+    ],
+    "condText": "Pháp công 38 + Vật công 33",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "lifesteal": 25
+    },
+    "fxText": "Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "quytu_quylinh_vm_kd1",
+    "name": "Cửu U Phán Hồn",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_quylinh_vm_kd2",
+    "name": "Linh Âm Đoạt Mệnh",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_quylinh_vm_kd3",
+    "name": "Vạn Quỷ Linh Triều",
+    "element": "Thủy",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_quylinh_vm_na1",
+    "name": "Cửu U Minh Linh",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_quylinh_vm_na2",
+    "name": "Linh Âm Vô Ngạn",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "quytu_quylinh_vm_na3",
+    "name": "Quỷ Linh Diệt Thiên",
+    "element": "Thủy",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Cửu U Chiêu Hồn Linh — Chiêu Hồn Linh tiến hóa theo đường Viên Mãn (Cửu U Minh Chủ).",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_quytu_quylinh_vm_1",
+    "name": "Pháp Tướng Linh Âm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Cửu U Chiêu Hồn Linh) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_quylinh_vm_2",
+    "name": "Cửu U Trấn Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Cửu U Chiêu Hồn Linh) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "quylinh_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_quytu_quylinh_vm_3",
+    "name": "Vạn Linh Diệt Thế",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Cửu U Chiêu Hồn Linh) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "quylinh_vm",
     "fx": {
      "aoe": 1,
      "pierce": 20
@@ -23931,6 +28657,605 @@
     "role": "phaptuong"
    }
   ],
+  "phikiem": [
+   {
+    "id": "kiemtu_phikiem_co1",
+    "name": "Phi Kiếm Xuyên Vân",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: phi kiếm lao thẳng từ xa, mũi kiếm xé gió đâm xuyên giáp, vết đâm còn rỉ kiếm khí thiêu đốt; Thủ: kiếm bay vòng quanh thân chặn một đòn rồi mới lao đi. Kim: mũi kiếm sắc hơn, xuyên sâu hơn; Mộc: kiếm khí mang độc nhẹ; Thủy: kiếm khí lạnh làm chậm; Hỏa: kiếm khí nóng thiêu đốt; Thổ: kiếm khí nặng đẩy lùi",
+    "weaponId": "phikiem",
+    "fx": {
+     "dotDps": 3,
+     "dotSec": 3,
+     "pierce": 15
+    },
+    "fxText": "Đốt/độc 3/s×3s · Xuyên phòng 15%"
+   },
+   {
+    "id": "kiemtu_phikiem_co2",
+    "name": "Ngự Kiếm Hộ Thân",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 10,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Thủ: phi kiếm bắt chéo trước thân chặn đòn, đẩy bật kẻ đánh ra xa; Công: kiếm bật ngược đâm trả từ xa, kiếm khí lạnh làm chậm kẻ địch. Kim: kiếm phản chút sát thương; Mộc: kiếm khí hồi nhẹ máu; Thủy: kiếm khí làm chậm kẻ đuổi theo; Hỏa: kiếm khí nổ nhẹ thiêu kẻ đánh; Thổ: kiếm khí chặn thêm đạn nhỏ",
+    "weaponId": "phikiem",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "knock": 46
+    },
+    "fxText": "Chậm 20%/2.0s · Đẩy lùi"
+   },
+   {
+    "id": "kiemtu_phikiem_lu1",
+    "name": "Phi Kiếm Âm Dương",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Vật công 25 + Pháp phòng 15",
+    "desc": "Công: một phi kiếm bay vòng rồi đâm thẳng từ xa; Thủ: kiếm bay quanh thân đỡ đòn phép",
+    "weaponId": "phikiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "kiemtu_phikiem_lu2",
+    "name": "Phi Kiếm Loạn Vũ",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "tocDo",
+      "value": 30
+     },
+     {
+      "stat": "vatCong",
+      "value": 20
+     }
+    ],
+    "condText": "Tốc độ 30 + Vật công 20",
+    "desc": "Công: phi kiếm chém dày đặc từ xa, kiếm khí nối nhau không dứt; Thủ: kiếm khí quanh thân giảm sát thương khi đang chém",
+    "weaponId": "phikiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "kiemtu_phikiem_lu3",
+    "name": "Phi Kiếm Trấn Nhạc",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 20
+     },
+     {
+      "stat": "vatPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Vật công 20 + Vật phòng 15",
+    "desc": "Công: phi kiếm nặng đâm thẳng từ xa, đẩy lùi kẻ địch; Thủ: kiếm khí đất dựng giáp nhỏ quanh thân",
+    "weaponId": "phikiem",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "kiemtu_phikiem_lu4",
+    "name": "Phi Kiếm Đằng Vân",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 20
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 15
+     }
+    ],
+    "condText": "Vật công 20 + Khí huyết 15",
+    "desc": "Công: phi kiếm kèm kiếm khí mộc đâm từ xa; Thủ: kiếm khí mộc hồi nhẹ máu",
+    "weaponId": "phikiem",
+    "fx": {
+     "healPct": 5
+    },
+    "fxText": "Hồi 5% máu"
+   },
+   {
+    "id": "kiemtu_phikiem_lu5",
+    "name": "Phi Kiếm Hàn Quang",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 20
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Vật công 20 + Tốc độ 15",
+    "desc": "Công: phi kiếm lạnh đâm từ xa làm chậm kẻ địch; Thủ: sương kiếm nhẹ làm kẻ địch khó nhắm trúng",
+    "weaponId": "phikiem",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "kiemtu_phikiem_lu6",
+    "name": "Phi Kiếm Băng Vũ",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 30
+     },
+     {
+      "stat": "minhMan",
+      "value": 20
+     }
+    ],
+    "condText": "Vật công 30 + Thần thức 20",
+    "desc": "Công: phi kiếm bay liên tục, kiếm khí băng đóng băng kẻ địch trong chốc lát; Thủ: lớp băng mỏng quanh thân hấp thụ đòn",
+    "weaponId": "phikiem",
+    "fx": {
+     "stun": 1.2
+    },
+    "fxText": "Choáng 1.2s"
+   },
+   {
+    "id": "kiemtu_phikiem_lu7",
+    "name": "Phi Kiếm Phá Giáp",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 15
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Vật công 15 + Tốc độ 15",
+    "desc": "Công: phi kiếm xuyên giáp đâm từ xa; Thủ: kiếm bay gạt nhẹ đòn đánh tới",
+    "weaponId": "phikiem",
+    "fx": {
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15%"
+   },
+   {
+    "id": "kiemtu_phikiem_lu8",
+    "name": "Phi Kiếm Kim Quang",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 25
+     }
+    ],
+    "condText": "Vật công 25 + Tốc độ 25",
+    "desc": "Công: phi kiếm vàng chém nhanh từ xa, kiếm khí mài mòn phòng ngự; Thủ: lướt nhẹ giữa các đòn phi kiếm",
+    "weaponId": "phikiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "kiemtu_phikiem_lu9",
+    "name": "Phi Kiếm Liệt Diệm",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 15
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Vật công 15 + Tốc độ 15",
+    "desc": "Công: phi kiếm lửa đâm từ xa, thiêu đốt kẻ địch; Thủ: lửa kiếm đẩy lùi kẻ áp sát",
+    "weaponId": "phikiem",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3,
+     "knock": 46
+    },
+    "fxText": "Đốt/độc 5/s×3s · Đẩy lùi"
+   },
+   {
+    "id": "kiemtu_phikiem_lu10",
+    "name": "Phi Kiếm Hỏa Vũ",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Vật công 25 + Tốc độ 20",
+    "desc": "Công: phi kiếm để lại vệt lửa dài trên đường bay; Thủ: lướt né giữa các đòn phi kiếm",
+    "weaponId": "phikiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "kiemtu_phikiem_tr1",
+    "name": "Phi Kiếm Song Long",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật công 40 + Tốc độ 30",
+    "desc": "Công: hai luồng kiếm khí lao ra từ xa như song long; Thủ: người ngự kiếm lướt xuyên qua kẻ địch",
+    "weaponId": "phikiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "kiemtu_phikiem_tr2",
+    "name": "Phi Kiếm Địa Nhạc",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 40
+     },
+     {
+      "stat": "vatPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật công 40 + Vật phòng 30",
+    "desc": "Công: phi kiếm nện đất từ xa, sóng kiếm lan diện rộng; Thủ: lá chắn đất lớn dựng quanh thân",
+    "weaponId": "phikiem",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "kiemtu_phikiem_tr3",
+    "name": "Phi Kiếm Vạn Mộc",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật công 40 + Khí huyết 30",
+    "desc": "Công: hai luồng kiếm khí mộc diện rộng từ xa; Thủ: kiếm khí mộc hồi máu cả vùng",
+    "weaponId": "phikiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "kiemtu_phikiem_tr4",
+    "name": "Phi Kiếm Thiên Kim",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 16000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Vật công 40 + Tốc độ 30",
+    "desc": "Công: hai luồng kiếm khí kim xuyên giáp từ xa; Thủ: miễn khống chế khi đang ngự kiếm chém",
+    "weaponId": "phikiem",
+    "fx": {
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15%"
+   },
+   {
+    "id": "kiemtu_phikiem_tr5",
+    "name": "Phi Kiếm Phượng Vũ",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 115,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 25
+     }
+    ],
+    "condText": "Trúc Cơ + Vật công 40 + Khí huyết 25",
+    "desc": "Công: hai cánh lửa kiếm chém diện rộng từ xa; Thủ: hồi máu khi hạ kẻ bị kiếm lửa thiêu",
+    "weaponId": "phikiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "kiemtu_phikiem_kd1",
+    "name": "Phi Kiếm Diệt Thiên",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phi Kiếm — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Phi Kiếm.",
+    "weaponId": "phikiem",
+    "fx": {
+     "knock": 60,
+     "pierce": 15
+    },
+    "fxText": "Xuyên phòng 15% · Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_phikiem_kd2",
+    "name": "Ngự Kiếm Hộ Thể",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phi Kiếm — Phòng thủ: vận thần thông hộ thể, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "phikiem",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "kiemtu_phikiem_kd3",
+    "name": "Phi Kiếm Hấp Linh",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Phi Kiếm — Cân bằng: vừa đánh vừa hút sinh khí của địch hồi lại cho bản thân.",
+    "weaponId": "phikiem",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "kiemtu_phikiem_na1",
+    "name": "Phi Kiếm Lưu Quang",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phi Kiếm — Tốc độ: thân pháp thần thông, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "phikiem",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "kiemtu_phikiem_na2",
+    "name": "Phi Kiếm Hồi Sinh",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phi Kiếm — Hồi phục: thần thông trị thương, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "phikiem",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "kiemtu_phikiem_na3",
+    "name": "Phi Kiếm Trấn Ma",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Phi Kiếm — Khống chế: trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "phikiem",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_kiemtu_phikiem_1",
+    "name": "Phi Kiếm Tru Thần",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Phi Kiếm) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phikiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_phikiem_2",
+    "name": "Phi Kiếm Trấn Vực",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Phi Kiếm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phikiem",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_phikiem_3",
+    "name": "Phi Kiếm Diệt Hồn",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Phi Kiếm) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "phikiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
   "kiem_vm": [
    {
     "id": "kiemtu_kiem_vm_co1",
@@ -24952,6 +30277,350 @@
     "condText": "Pháp Tướng giai đoạn 3",
     "desc": "Chiêu của Pháp Tướng (Trấn Nhạc Trọng Kiếm) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
     "weaponId": "trongkiem_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "phikiem_vm": [
+   {
+    "id": "kiemtu_phikiem_vm_co1",
+    "name": "Ngự Hư Nhất Kiếm",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_co2",
+    "name": "Ngự Hư Kiếm Ý",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_lu1",
+    "name": "Ngự Hư Liên Hoàn Kiếm",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 18
+     },
+     {
+      "stat": "phapCong",
+      "value": 16
+     }
+    ],
+    "condText": "Vật công 18 + Pháp công 16",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_lu2",
+    "name": "Ngự Hư Thông Thiên Kiếm",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 22
+     },
+     {
+      "stat": "phapCong",
+      "value": 19
+     }
+    ],
+    "condText": "Vật công 22 + Pháp công 19",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_lu3",
+    "name": "Ngự Hư Tâm Kiếm",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 26
+     },
+     {
+      "stat": "phapCong",
+      "value": 22
+     }
+    ],
+    "condText": "Vật công 26 + Pháp công 22",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_tr1",
+    "name": "Ngự Hư Lăng Thiên Kiếm",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 34
+     },
+     {
+      "stat": "phapCong",
+      "value": 30
+     }
+    ],
+    "condText": "Vật công 34 + Pháp công 30",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_tr2",
+    "name": "Ngự Hư Vô Ngân Kiếm",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "vatCong",
+      "value": 38
+     },
+     {
+      "stat": "phapCong",
+      "value": 33
+     }
+    ],
+    "condText": "Vật công 38 + Pháp công 33",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "lifesteal": 25
+    },
+    "fxText": "Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_kd1",
+    "name": "Ngự Hư Vạn Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_kd2",
+    "name": "Ngự Hư Diệt Ma Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_kd3",
+    "name": "Ngự Hư Thiên Kiếm",
+    "element": "Kim",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_na1",
+    "name": "Ngự Hư Kiếm Thánh",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_na2",
+    "name": "Ngự Hư Vô Địch Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "kiemtu_phikiem_vm_na3",
+    "name": "Ngự Hư Thiên Ngoại Kiếm",
+    "element": "Kim",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Ngự Hư Phi Kiếm — Phi Kiếm tiến hóa theo đường Viên Mãn (Kiếm Thánh).",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_kiemtu_phikiem_vm_1",
+    "name": "Ngự Hư Pháp Tướng Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Ngự Hư Phi Kiếm) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_phikiem_vm_2",
+    "name": "Ngự Hư Phá Thiên Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Ngự Hư Phi Kiếm) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phikiem_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_kiemtu_phikiem_vm_3",
+    "name": "Ngự Hư Diệt Thế Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Ngự Hư Phi Kiếm) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "phikiem_vm",
     "fx": {
      "aoe": 1,
      "pierce": 20
@@ -26771,6 +32440,619 @@
     "role": "phaptuong"
    }
   ],
+  "dockinh": [
+   {
+    "id": "ytu_dockinh_co1",
+    "name": "Khí Độc Khai Kinh",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: lật trang kinh độc, khí độc tím đen cuộn ra làm chậm kẻ địch rồi hất chúng văng xa. Kim: khí độc sắc như kim châm, khoét sâu vết thương; Mộc: độc dây leo bám vào chân kẻ địch; Thủy: khí độc lạnh thấm vào gân cốt; Hỏa: độc hỏa thiêu rát da thịt; Thổ: khí độc nặng như cát lún, giữ chân kẻ địch",
+    "weaponId": "dockinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "knock": 46
+    },
+    "fxText": "Chậm 20%/2.0s · Đẩy lùi"
+   },
+   {
+    "id": "ytu_dockinh_co2",
+    "name": "Độc Huyết Phá Tâm",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 3000,
+    "cost": 10,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: một trang kinh độc rời khỏi sách, hóa thành châm độc bay thẳng, găm vào thịt rồi rỉ độc từng nhịp. Kim: châm độc xuyên giáp; Mộc: độc thấm vào máu, lan chậm mà dai; Thủy: độc lạnh làm tê tay chân; Hỏa: độc nóng thiêu từ trong vết châm; Thổ: độc nặng kéo kẻ trúng châm lún xuống",
+    "weaponId": "dockinh",
+    "fx": {
+     "dotDps": 3,
+     "dotSec": 3
+    },
+    "fxText": "Độc 3/s×3s"
+   },
+   {
+    "id": "ytu_dockinh_lu1",
+    "name": "Độc Vụ Mạn Thiên",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Pháp phòng 15",
+    "desc": "Lật kinh độc dựng một vùng khí độc quanh mình, kẻ bước vào hít phải khí độc thì độc ngấm từng nhịp; độc bám dai, càng ở lâu càng nặng.",
+    "weaponId": "dockinh",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3
+    },
+    "fxText": "Độc 5/s×3s"
+   },
+   {
+    "id": "ytu_dockinh_lu2",
+    "name": "Độc Khí Phản Phệ",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 30
+     }
+    ],
+    "condText": "Thần thức 30",
+    "desc": "Độc khí xoáy quanh thân như dòng nước độc, kẻ chạm vào bị độc thấm chậm; độc không giết ngay mà làm gân cốt rã rời, bước chân nặng dần.",
+    "weaponId": "dockinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "ytu_dockinh_lu3",
+    "name": "Độc Đằng Triền Thân",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Khí huyết 15",
+    "desc": "Dây độc leo từ trang kinh bò ra, quấn chặt chân kẻ áp sát rồi tiết độc vào vết siết, độc rỉ từng nhịp cho tới khi dây khô héo.",
+    "weaponId": "dockinh",
+    "fx": {
+     "root": 1.0,
+     "dotDps": 5,
+     "dotSec": 3
+    },
+    "fxText": "Trói 1.0s · Độc 5/s×3s"
+   },
+   {
+    "id": "ytu_dockinh_lu4",
+    "name": "Độc Lộ Thực Cốt",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Pháp phòng 15",
+    "desc": "Hắt một bát độc lộ lên không, sương độc rơi xuống làm chậm kẻ gần; độc thấm qua da, ăn mòn dần sức chống cự của chúng.",
+    "weaponId": "dockinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "ytu_dockinh_lu5",
+    "name": "Độc Hỏa Thiêu Tâm",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Tốc độ 15",
+    "desc": "Trang kinh độc bốc cháy, ngọn lửa độc liếm lên kẻ gần, vết cháy rỉ độc nóng từng nhịp; lửa độc tắt rồi mà độc vẫn còn âm ỉ trong thịt.",
+    "weaponId": "dockinh",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3
+    },
+    "fxText": "Độc 5/s×3s"
+   },
+   {
+    "id": "ytu_dockinh_lu6",
+    "name": "Hàn Độc Phá Thể",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 30
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 30 + Khí huyết 20",
+    "desc": "Độc hàn từ kinh độc đóng cứng gân mạch kẻ địch trong chốc lát rồi nổ tung hất chúng văng ra; độc lạnh thấm sâu, lúc tan ra vẫn để lại cơn tê buốt.",
+    "weaponId": "dockinh",
+    "fx": {
+     "stun": 1.2,
+     "knock": 46
+    },
+    "fxText": "Choáng 1.2s · Đẩy lùi"
+   },
+   {
+    "id": "ytu_dockinh_lu7",
+    "name": "Độc Kim Phá Giáp",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Pháp phòng 15",
+    "desc": "Châm độc kim đâm vào huyệt đạo kẻ áp sát, độc theo mạch chạy khắp thân, làm tay chân chúng run rẩy không cầm nổi vũ khí.",
+    "weaponId": "dockinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "ytu_dockinh_lu8",
+    "name": "Độc Chú Đoạn Mạch",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 25 + Pháp phòng 20",
+    "desc": "Đọc một đoạn độc chú, chữ độc bay ra cắt ngang chiêu thức của quái, độc thấm vào làm chúng khựng lại giữa chừng.",
+    "weaponId": "dockinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "ytu_dockinh_lu9",
+    "name": "Độc Sa Thực Cốt",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Khí huyết 15",
+    "desc": "Rắc độc sa quanh chân, kẻ áp sát dẫm phải độc sa thì bước chậm lại, độc bụi bám vào giáp ăn mòn từng lớp.",
+    "weaponId": "dockinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "defPct": 25,
+     "defSec": 3.0
+    },
+    "fxText": "Chậm 20%/2.0s · Giảm 25% sát thương nhận/3.0s"
+   },
+   {
+    "id": "ytu_dockinh_lu10",
+    "name": "Độc Trạch Mạn Dã",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 25 + Khí huyết 20",
+    "desc": "Nện kinh độc xuống đất, độc trạch loang ra cả vùng, kẻ trong vùng hít phải khí độc mà chậm chạp, chân như lún vào bùn độc.",
+    "weaponId": "dockinh",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "aoe": 85
+    },
+    "fxText": "Chậm 20%/2.0s · Đánh vùng"
+   },
+   {
+    "id": "ytu_dockinh_tr1",
+    "name": "Độc Chủng Ký Sinh",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 30000,
+    "cost": 150,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 25
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Khí huyết 25",
+    "desc": "Gieo một độc chủng vào chính thân mình, độc chủng ký sinh trong máu; lúc máu cạn tới đường cùng, độc chủng vỡ ra phun độc diện rộng, kéo kẻ địch chết cùng.",
+    "weaponId": "dockinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "ytu_dockinh_tr2",
+    "name": "Vạn Độc Mạn Dã",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Khí huyết 30",
+    "desc": "Vùng độc thảo mọc lên từ trang kinh, dây độc trói chặt quái trong vùng, độc theo dây thấm vào từng kẻ bị trói.",
+    "weaponId": "dockinh",
+    "fx": {
+     "root": 1.0,
+     "aoe": 85
+    },
+    "fxText": "Trói 1.0s · Đánh vùng"
+   },
+   {
+    "id": "ytu_dockinh_tr3",
+    "name": "Huyền Băng Độc Vụ",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Pháp phòng 30",
+    "desc": "Khí độc lạnh phủ cả vùng, kẻ áp sát bị độc hàn đóng cứng rồi choáng váng ngã xuống; độc lạnh thấm qua giáp, tê liệt gân cốt.",
+    "weaponId": "dockinh",
+    "fx": {
+     "stun": 1.2,
+     "aoe": 85
+    },
+    "fxText": "Choáng 1.2s · Đánh vùng"
+   },
+   {
+    "id": "ytu_dockinh_tr4",
+    "name": "Kim Độc Xuyên Tâm",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Pháp phòng 30",
+    "desc": "Lá chắn kim độc dựng quanh thân, kẻ áp sát chạm vào bị độc kim chích ngược, giáp độc càng đánh càng tiết thêm độc.",
+    "weaponId": "dockinh",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "ytu_dockinh_tr5",
+    "name": "Địa Mạch Độc Tuyền",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 22000,
+    "cost": 130,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 35
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Khí huyết 35",
+    "desc": "Địa mạch dưới chân nứt ra, độc tuyền trào lên, kẻ đứng trong vùng bị độc ngấm từng nhịp, càng giãy càng lún sâu vào độc.",
+    "weaponId": "dockinh",
+    "fx": {
+     "dotDps": 5,
+     "dotSec": 3
+    },
+    "fxText": "Độc 5/s×3s"
+   },
+   {
+    "id": "ytu_dockinh_kd1",
+    "name": "Độc Kinh Diệt Thiên",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Độc Kinh — Tấn công: dồn toàn lực vào một đòn thần thông nặng nhất của Độc Kinh.",
+    "weaponId": "dockinh",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_dockinh_kd2",
+    "name": "Độc Vụ Hộ Thể",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Độc Kinh — Phòng thủ: khí độc quấn quanh thân thành giáp độc, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "dockinh",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "ytu_dockinh_kd3",
+    "name": "Độc Chủng Thực Tâm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Độc Kinh — Cân bằng: vừa đánh vừa gieo độc chủng vào địch, độc ăn mòn theo thời gian.",
+    "weaponId": "dockinh",
+    "fx": {
+     "dotDps": 8,
+     "dotSec": 3
+    },
+    "fxText": "Độc 8/s×3s",
+    "role": "bal"
+   },
+   {
+    "id": "ytu_dockinh_na1",
+    "name": "Độc Ảnh Phi Thân",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Độc Kinh — Tốc độ: độc vụ nâng thân, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "dockinh",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "ytu_dockinh_na2",
+    "name": "Độc Hồn Phệ Thể",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Độc Kinh — Độc hồn: độc hồn thoát khỏi kinh sách, cắn xé sinh khí kẻ địch rồi rỉ độc từng nhịp.",
+    "weaponId": "dockinh",
+    "fx": {
+     "dotDps": 10,
+     "dotSec": 3
+    },
+    "fxText": "Độc 10/s×3s",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_dockinh_na3",
+    "name": "Độc Vực Trấn Hồn",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Độc Kinh — Khống chế: độc vực trấn áp kẻ địch trước mặt, gây choáng và làm chậm.",
+    "weaponId": "dockinh",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_ytu_dockinh_1",
+    "name": "Vạn Độc Hàng Lâm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Độc Kinh) — Pháp Tướng hàng lâm: một đòn vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "dockinh",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_dockinh_2",
+    "name": "Độc Vực Trấn Thiên",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Độc Kinh) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "dockinh",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_dockinh_3",
+    "name": "Vạn Độc Diệt Thế",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Độc Kinh) — Pháp Tướng thiên uy: đòn nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "dockinh",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
   "phattran_vm": [
    {
     "id": "ytu_phattran_vm_co1",
@@ -27792,6 +34074,351 @@
     "condText": "Pháp Tướng giai đoạn 3",
     "desc": "Chiêu của Pháp Tướng (Phục Hi Cổ Cầm) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
     "weaponId": "cocam_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "dockinh_vm": [
+   {
+    "id": "ytu_dockinh_vm_co1",
+    "name": "Độc Kinh Sơ Khai",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Trang kinh độc hé mở, khí độc lan ra làm chậm kẻ địch.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "slowPct": 25,
+     "slowSec": 2.5
+    },
+    "fxText": "Chậm 25%/2.5s"
+   },
+   {
+    "id": "ytu_dockinh_vm_co2",
+    "name": "Độc Trang Phi Vũ",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Trang kinh độc vỗ mạnh, độc vụ hất kẻ áp sát văng xa.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "ytu_dockinh_vm_lu1",
+    "name": "Độc Trận Sơ Thành",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 18
+     },
+     {
+      "stat": "vatCong",
+      "value": 16
+     }
+    ],
+    "condText": "Pháp công 18 + Vật công 16",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Châm độc từ kinh bay ra, găm vào huyệt khiến kẻ địch khựng lại.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s"
+   },
+   {
+    "id": "ytu_dockinh_vm_lu2",
+    "name": "Độc Châm Xuyên Tâm",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 22
+     },
+     {
+      "stat": "vatCong",
+      "value": 19
+     }
+    ],
+    "condText": "Pháp công 22 + Vật công 19",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Độc khí dồn thành luồng, đẩy lùi kẻ địch đang áp sát.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "ytu_dockinh_vm_lu3",
+    "name": "Độc Kinh Phá Giáp",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 26
+     },
+     {
+      "stat": "vatCong",
+      "value": 22
+     }
+    ],
+    "condText": "Pháp công 26 + Vật công 22",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Trang kinh độc xuyên thẳng, độc châm khoét qua giáp kẻ địch.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "ytu_dockinh_vm_tr1",
+    "name": "Vạn Độc Liên Châu",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 34
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Pháp công 34 + Vật công 30",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Hai trang kinh độc bay nối tiếp, trang sau độc nặng hơn trang trước.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "ytu_dockinh_vm_tr2",
+    "name": "Độc Huyết Thực Tâm",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 38
+     },
+     {
+      "stat": "vatCong",
+      "value": 33
+     }
+    ],
+    "condText": "Pháp công 38 + Vật công 33",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Độc huyết rỉ từ trang kinh, thấm vào vết thương kẻ địch từng nhịp.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "dotDps": 8,
+     "dotSec": 3
+    },
+    "fxText": "Độc 8/s×3s"
+   },
+   {
+    "id": "ytu_dockinh_vm_kd1",
+    "name": "Vạn Độc Diệt Ma",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Thần thông Kim Đan Viên Mãn: độc vụ nổ tung thành vùng, kẻ trong vùng hít phải khí độc.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_dockinh_vm_kd2",
+    "name": "Độc Lôi Phá Thể",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Thần thông Kim Đan Viên Mãn: độc lôi giáng xuống, kẻ trúng độc choáng váng.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_dockinh_vm_kd3",
+    "name": "Độc Kinh Trấn Hồn",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Thần thông Kim Đan Viên Mãn: độc khí trấn xuống, hất kẻ địch văng xa.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_dockinh_vm_na1",
+    "name": "Vạn Độc Giáng Thế",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Thần thông Nguyên Anh Viên Mãn: vạn độc cuộn thành triều, quét sạch kẻ địch trước mặt.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_dockinh_vm_na2",
+    "name": "Độc Vụ Vô Lượng",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Thần thông Nguyên Anh Viên Mãn: độc vụ nâng thân, lướt nhanh như bóng độc.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "ytu_dockinh_vm_na3",
+    "name": "Độc Kinh Phá Thiên",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Vạn Độc Thiên Kinh — Độc Kinh tiến hóa theo đường Viên Mãn (Vạn Độc Chi Chủ). Thần thông Nguyên Anh Viên Mãn: độc kinh phá giáp, xuyên qua mọi phòng ngự.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_ytu_dockinh_vm_1",
+    "name": "Pháp Tướng Độc Kinh",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Vạn Độc Thiên Kinh) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình. Pháp Tướng lật kinh độc, vạn độc tràn ra quét sạch kẻ địch quanh mình.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_dockinh_vm_2",
+    "name": "Độc Vực Thiên Kinh",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Vạn Độc Thiên Kinh) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình. Pháp Tướng trấn độc vực, độc khí phủ xuống làm kẻ địch chậm chạp rồi gục ngã.",
+    "weaponId": "dockinh_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_ytu_dockinh_vm_3",
+    "name": "Vạn Độc Diệt Thế Kinh",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Vạn Độc Thiên Kinh) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình. Pháp Tướng tung đòn độc nặng nhất, độc xuyên thủng mọi phòng ngự.",
+    "weaponId": "dockinh_vm",
     "fx": {
      "aoe": 1,
      "pierce": 20
@@ -29610,6 +36237,605 @@
     "role": "phaptuong"
    }
   ],
+  "vankiem": [
+   {
+    "id": "nhotu_vankiem_co1",
+    "name": "Quân Tử Xuất Kiếm",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công: rút kiếm quân tử chém thẳng, kiếm ý như nét bút điểm xuống; Thủ: kiếm ngang trước ngực, chữ nghĩa hộ thân. Kim: kiếm sắc xuyên giáp; Mộc: kiếm ý sinh sôi, vết chém mọc gai chữ; Thủy: kiếm lạnh làm chậm; Hỏa: kiếm nóng thiêu đốt; Thổ: kiếm nặng đẩy lùi",
+    "weaponId": "vankiem",
+    "fx": {
+     "root": 1.0,
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Trói 1.0s · Chậm 20%/2.0s"
+   },
+   {
+    "id": "nhotu_vankiem_co2",
+    "name": "Văn Tâm Hộ Kiếm",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.0,
+    "cdMs": 2000,
+    "cost": 10,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Thủ: dựng kiếm trước mặt thành vách chữ, giảm sát thương; Công: vách chữ vỡ thì chữ bay ra chém. Kim: chữ phản đòn; Mộc: chữ hồi nhẹ máu; Thủy: chữ làm chậm kẻ chạm vào; Hỏa: chữ nổ lửa khi vỡ; Thổ: vách chữ dày hơn",
+    "weaponId": "vankiem",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0,
+     "healPct": 5
+    },
+    "fxText": "Chậm 20%/2.0s · Hồi 5% máu"
+   },
+   {
+    "id": "nhotu_vankiem_lu1",
+    "name": "Mặc Kiếm Trói Ma",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 25 + Tốc độ 15",
+    "desc": "Công: kiếm vẽ mực thành dây trói giữ chân kẻ địch; Thủ: mực thấm vào áo, tăng tốc độ lùi lại giữ khoảng cách kiếm",
+    "weaponId": "vankiem",
+    "fx": {
+     "root": 1.0
+    },
+    "fxText": "Trói 1.0s"
+   },
+   {
+    "id": "nhotu_vankiem_lu2",
+    "name": "Vạn Chữ Kiếm Triều",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 55,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 30
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 30 + Tốc độ 20",
+    "desc": "Công: ngàn chữ bay thành triều kiếm dồn tới; Thủ: triều chữ chặn đạn tầm xa trước mặt",
+    "weaponId": "vankiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_lu3",
+    "name": "Thanh Trúc Văn Kiếm",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Tốc độ 15",
+    "desc": "Công: kiếm chém như trúc gãy, gọn mà sâu; Thủ: kiếm ý thanh trúc hồi nhẹ máu cho chủ",
+    "weaponId": "vankiem",
+    "fx": {
+     "root": 1.0,
+     "healPct": 5
+    },
+    "fxText": "Trói 1.0s · Hồi 5% máu"
+   },
+   {
+    "id": "nhotu_vankiem_lu4",
+    "name": "Mặc Thủy Kiếm Ý",
+    "element": "Thủy",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Tốc độ 15",
+    "desc": "Công: kiếm mực lạnh làm chậm vùng; Thủ: màng mực quanh thân giảm sát thương",
+    "weaponId": "vankiem",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "nhotu_vankiem_lu5",
+    "name": "Kim Thư Kiếm Quang",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 20
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 20 + Pháp phòng 15",
+    "desc": "Công: kiếm quang kim sắc xuyên giáp; Thủ: kiếm ý kim thư soi rõ đường lui",
+    "weaponId": "vankiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_lu6",
+    "name": "Thiết Họa Ngân Kiếm",
+    "element": "Kim",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 30
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 30 + Tốc độ 20",
+    "desc": "Công: kiếm vẽ nét bạc, chém liên tiếp không ngừng; Thủ: nét bạc quanh người chặn đạn",
+    "weaponId": "vankiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_lu7",
+    "name": "Chu Sa Kiếm Ấn",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 4000,
+    "cost": 40,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "tocDo",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Tốc độ 15",
+    "desc": "Công: kiếm điểm chu sa, ấn đỏ nổ trên vết chém; Thủ: ấn chu sa xua tà khí quanh thân",
+    "weaponId": "vankiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_lu8",
+    "name": "Liệt Hỏa Thi Kiếm",
+    "element": "Hỏa",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "tocDo",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 25 + Tốc độ 20",
+    "desc": "Công: kiếm ngâm thơ lửa, câu thơ cháy thành sóng lửa; Thủ: lửa thơ đẩy lùi kẻ áp sát",
+    "weaponId": "vankiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_lu9",
+    "name": "Hoàng Thổ Kiếm Chướng",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 5000,
+    "cost": 45,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 15
+     },
+     {
+      "stat": "phapPhong",
+      "value": 15
+     }
+    ],
+    "condText": "Thần thức 15 + Pháp phòng 15",
+    "desc": "Công: kiếm chém đất dậy bụi làm chậm; Thủ: chướng đất chặn đạn tầm xa",
+    "weaponId": "vankiem",
+    "fx": {
+     "slowPct": 20,
+     "slowSec": 2.0
+    },
+    "fxText": "Chậm 20%/2.0s"
+   },
+   {
+    "id": "nhotu_vankiem_lu10",
+    "name": "Sơn Thạch Kiếm Trận",
+    "element": "Thổ",
+    "tier": "luyenkhi",
+    "coef": 1.6,
+    "cdMs": 6000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 25
+     },
+     {
+      "stat": "phapPhong",
+      "value": 20
+     }
+    ],
+    "condText": "Thần thức 25 + Pháp phòng 20",
+    "desc": "Công: kiếm cắm đất thành trận đá, kẻ vào trận bị chém; Thủ: trận đá ngăn bước địch",
+    "weaponId": "vankiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_tr1",
+    "name": "Thư Kiếm Hóa Giáp",
+    "element": "Kim",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 18000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 25
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Pháp phòng 25",
+    "desc": "Công: chữ bay quanh kiếm thành giáp chữ, kiếm chém xuyên qua giáp địch; Thủ: giáp chữ vỡ thì đẩy lùi kẻ đánh",
+    "weaponId": "vankiem",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "nhotu_vankiem_tr2",
+    "name": "Vạn Mộc Văn Kiếm",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "khiHuyet",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Khí huyết 30",
+    "desc": "Công: rừng chữ mọc thành kiếm gỗ, chém diện rộng; Thủ: kiếm gỗ hồi sinh khí cho chủ",
+    "weaponId": "vankiem",
+    "fx": {},
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_tr3",
+    "name": "Huyền Băng Kiếm Vực",
+    "element": "Thủy",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Pháp phòng 30",
+    "desc": "Công: kiếm băng đóng băng kẻ địch trong vực; Thủ: lá chắn băng hấp thụ lớn",
+    "weaponId": "vankiem",
+    "fx": {
+     "stun": 1.2,
+     "aoe": 85
+    },
+    "fxText": "Choáng 1.2s · Đánh vùng"
+   },
+   {
+    "id": "nhotu_vankiem_tr4",
+    "name": "Phượng Vũ Kiếm Thiên",
+    "element": "Hỏa",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 20000,
+    "cost": 125,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "tocDo",
+      "value": 30
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Tốc độ 30",
+    "desc": "Công: kiếm múa như phượng, lửa thiêu diện rộng; Thủ: hồi máu theo số kẻ bị thiêu",
+    "weaponId": "vankiem",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "nhotu_vankiem_tr5",
+    "name": "Địa Mạch Kiếm Trận",
+    "element": "Thổ",
+    "tier": "trucco",
+    "coef": 2.2,
+    "cdMs": 22000,
+    "cost": 130,
+    "cond": [
+     {
+      "stat": "minhMan",
+      "value": 40
+     },
+     {
+      "stat": "phapPhong",
+      "value": 35
+     }
+    ],
+    "condText": "Trúc Cơ + Thần thức 40 + Pháp phòng 35",
+    "desc": "Công: kiếm dẫn địa mạch nổ diện rộng; Thủ: giảm sát thương nhận trong trận",
+    "weaponId": "vankiem",
+    "fx": {
+     "aoe": 85
+    },
+    "fxText": "Đánh vùng"
+   },
+   {
+    "id": "nhotu_vankiem_kd1",
+    "name": "Tru Ma Văn Kiếm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Văn Kiếm — Tấn công: dồn toàn lực vào một kiếm thần thông nặng nhất, kiếm ý như thơ chém xuống, tà ma tan theo nét chữ.",
+    "weaponId": "vankiem",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_vankiem_kd2",
+    "name": "Chính Khí Văn Kiếm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Văn Kiếm — Phòng thủ: vận thần thông hộ thể, chính khí thành vách chữ, giảm mạnh sát thương phải nhận trong chốc lát.",
+    "weaponId": "vankiem",
+    "fx": {
+     "defPct": 50,
+     "defSec": 10
+    },
+    "fxText": "Giảm 50% sát thương nhận/10s",
+    "role": "def"
+   },
+   {
+    "id": "nhotu_vankiem_kd3",
+    "name": "Hạo Nhiên Văn Kiếm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.0,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Thần thông Kim Đan của Văn Kiếm — Cân bằng: vừa chém vừa hút sinh khí của địch hồi lại cho bản thân, kiếm càng chính thì hút càng bền.",
+    "weaponId": "vankiem",
+    "fx": {
+     "lifesteal": 35
+    },
+    "fxText": "Hút 35% sát thương thành máu",
+    "role": "bal"
+   },
+   {
+    "id": "nhotu_vankiem_na1",
+    "name": "Tật Thư Văn Kiếm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.4,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Văn Kiếm — Tốc độ: thân pháp thần thông, kiếm theo chữ bay, tăng mạnh tốc độ di chuyển trong chốc lát.",
+    "weaponId": "vankiem",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "spd"
+   },
+   {
+    "id": "nhotu_vankiem_na2",
+    "name": "Dưỡng Tâm Văn Kiếm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 2.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Văn Kiếm — Hồi phục: thần thông trị thương, kiếm ý dưỡng tâm, hồi ngay một phần lớn máu khi tung chiêu.",
+    "weaponId": "vankiem",
+    "fx": {
+     "healPct": 45
+    },
+    "fxText": "Hồi 45% máu",
+    "role": "rec"
+   },
+   {
+    "id": "nhotu_vankiem_na3",
+    "name": "Trấn Tà Văn Kiếm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Thần thông Nguyên Anh của Văn Kiếm — Khống chế: trấn áp kẻ địch trước mặt, kiếm đè xuống như ấn, gây choáng và làm chậm.",
+    "weaponId": "vankiem",
+    "fx": {
+     "stun": 1.5,
+     "slowPct": 30,
+     "slowSec": 3.0
+    },
+    "fxText": "Chậm 30%/3.0s · Choáng 1.5s",
+    "role": "ctl"
+   },
+   {
+    "id": "pt_nhotu_vankiem_1",
+    "name": "Tru Thiên Văn Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.5,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1 (Sơ Hình)",
+    "desc": "Chiêu của Pháp Tướng (Văn Kiếm) — Pháp Tướng hàng lâm: một kiếm vùng cực nặng, quét mọi địch quanh mình, mang theo dấu ấn hệ của pháp tướng. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "vankiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình · Tốn thêm 4% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_vankiem_2",
+    "name": "Thánh Vực Văn Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 4.2,
+    "cdMs": 30000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2 (Chân Thân)",
+    "desc": "Chiêu của Pháp Tướng (Văn Kiếm) — Pháp Tướng trấn áp: thần uy phủ xuống cả vùng, địch trúng chiêu chậm chạp hẳn đi. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "vankiem",
+    "fx": {
+     "aoe": 1,
+     "slowPct": 40,
+     "slowSec": 3
+    },
+    "fxText": "Chậm 40%/3s · Đánh vùng quanh mình · Tốn thêm 6% máu tối đa",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_vankiem_3",
+    "name": "Chính Tâm Văn Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.0,
+    "cdMs": 45000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3 (Viên Mãn)",
+    "desc": "Chiêu của Pháp Tướng (Văn Kiếm) — Pháp Tướng thiên uy: kiếm nặng nhất của pháp tướng, xuyên thủng phòng ngự, chỉ mở khi pháp tướng đã viên mãn. Chỉ tung được khi Pháp Tướng đang hiện hình; hệ của chiêu là hệ đã khóa của pháp tướng.",
+    "weaponId": "vankiem",
+    "fx": {
+     "aoe": 1,
+     "pierce": 30
+    },
+    "fxText": "Xuyên phòng 30% · Đánh vùng quanh mình · Tốn thêm 10% máu tối đa",
+    "role": "phaptuong"
+   }
+  ],
   "ngamtho_vm": [
    {
     "id": "nhotu_ngamtho_vm_co1",
@@ -30631,6 +37857,347 @@
     "condText": "Pháp Tướng giai đoạn 3",
     "desc": "Chiêu của Pháp Tướng (Thiên Chương Quyển Trục) — tuyệt kỹ đường Viên Mãn, chỉ tung được khi Pháp Tướng đang hiện hình.",
     "weaponId": "quyentruc_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   }
+  ],
+  "vankiem_vm": [
+   {
+    "id": "nhotu_vankiem_vm_co1",
+    "name": "Thần Kiếm Điểm Mặc",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 800,
+    "cost": 8,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — kiếm điểm mực mà choáng, một nét mà định thắng bại.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "stun": 0.8
+    },
+    "fxText": "Choáng 0.8s"
+   },
+   {
+    "id": "nhotu_vankiem_vm_co2",
+    "name": "Hạo Nhiên Nhất Kiếm",
+    "element": "Theo linh căn",
+    "tier": "coban",
+    "coef": 1.2,
+    "cdMs": 1500,
+    "cost": 12,
+    "cond": [],
+    "condText": "Không",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — một kiếm mang chính khí, xuyên qua mọi phòng ngự giả dối.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "nhotu_vankiem_vm_lu1",
+    "name": "Văn Kiếm Liên Châu",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 5000,
+    "cost": 50,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 18
+     },
+     {
+      "stat": "vatCong",
+      "value": 16
+     }
+    ],
+    "condText": "Pháp công 18 + Vật công 16",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — kiếm chém liên châu, đẩy lùi kẻ địch như lật trang sách.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi"
+   },
+   {
+    "id": "nhotu_vankiem_vm_lu2",
+    "name": "Mặc Vận Thiên Kiếm",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 6500,
+    "cost": 60,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 22
+     },
+     {
+      "stat": "vatCong",
+      "value": 19
+     }
+    ],
+    "condText": "Pháp công 22 + Vật công 19",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — mực vận thành thiên kiếm, xuyên giáp mà không gãy nét.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%"
+   },
+   {
+    "id": "nhotu_vankiem_vm_lu3",
+    "name": "Hạo Nhiên Chính Khí Kiếm",
+    "element": "Mộc",
+    "tier": "luyenkhi",
+    "coef": 2.2,
+    "cdMs": 8000,
+    "cost": 70,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 26
+     },
+     {
+      "stat": "vatCong",
+      "value": 22
+     }
+    ],
+    "condText": "Pháp công 26 + Vật công 22",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — hai kiếm nối tiếp, kiếm sau mạnh hơn kiếm trước nhờ chính khí dồn lên.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "hits": 2,
+     "hitGrowth": 0.3
+    },
+    "fxText": "2 đòn nối tiếp"
+   },
+   {
+    "id": "nhotu_vankiem_vm_tr1",
+    "name": "Văn Tâm Điêu Kiếm",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 12000,
+    "cost": 90,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 34
+     },
+     {
+      "stat": "vatCong",
+      "value": 30
+     }
+    ],
+    "condText": "Pháp công 34 + Vật công 30",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — kiếm chạm khắc văn tâm, chém mà hút sinh khí về nuôi chủ.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "lifesteal": 25
+    },
+    "fxText": "Hút 25% sát thương thành máu"
+   },
+   {
+    "id": "nhotu_vankiem_vm_tr2",
+    "name": "Thiên Chương Cái Kiếm",
+    "element": "Mộc",
+    "tier": "trucco",
+    "coef": 2.9,
+    "cdMs": 16000,
+    "cost": 120,
+    "cond": [
+     {
+      "stat": "phapCong",
+      "value": 38
+     },
+     {
+      "stat": "vatCong",
+      "value": 33
+     }
+    ],
+    "condText": "Pháp công 38 + Vật công 33",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — thiên chương giáng xuống thành kiếm, uy nghi che cả bầu trời.",
+    "weaponId": "vankiem_vm",
+    "fx": null,
+    "fxText": ""
+   },
+   {
+    "id": "nhotu_vankiem_vm_kd1",
+    "name": "Đại Nho Thiên Kiếm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — đại nho xuất kiếm, một kiếm quét cả vùng.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_vankiem_vm_kd2",
+    "name": "Hạo Nhiên Diệt Tà Kiếm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — kiếm chính khí diệt tà, kẻ trúng chiêu choáng váng.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "knock": 46
+    },
+    "fxText": "Đẩy lùi",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_vankiem_vm_kd3",
+    "name": "Mặc Hải Vô Ngân Kiếm",
+    "element": "Mộc",
+    "tier": "kimdan",
+    "coef": 3.7,
+    "cdMs": 30000,
+    "cost": 100,
+    "cond": [],
+    "condText": "Đạt Kim Đan",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — mực thành biển không bờ, kiếm xuyên qua mà không để lại dấu.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20%",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_vankiem_vm_na1",
+    "name": "Văn Thánh Giáng Kiếm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — văn thánh giáng lâm, kiếm quét cả vùng như thánh dụ.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "aoe": 1
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_vankiem_vm_na2",
+    "name": "Thiên Chương Vô Thượng Kiếm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 3.6,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — thiên chương vô thượng, kiếm bay mà thân pháp nhanh như chữ lướt.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "spdPct": 40,
+     "spdSec": 8
+    },
+    "fxText": "Tăng tốc 40% trong 8s",
+    "role": "atk"
+   },
+   {
+    "id": "nhotu_vankiem_vm_na3",
+    "name": "Hạo Nhiên Phá Thiên Kiếm",
+    "element": "Mộc",
+    "tier": "nguyenanh",
+    "coef": 4.3,
+    "cdMs": 45000,
+    "cost": 150,
+    "cond": [],
+    "condText": "Đạt Nguyên Anh",
+    "desc": "Công pháp của Thánh Hiền Văn Kiếm — chính khí phá thiên, kiếm xuyên phòng mà quét vùng.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Đánh vùng",
+    "role": "atk"
+   },
+   {
+    "id": "pt_nhotu_vankiem_vm_1",
+    "name": "Pháp Tướng Thiên Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.6,
+    "cdMs": 20000,
+    "cost": 180,
+    "hpCostPct": 4,
+    "range": 220,
+    "ptStage": 1,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 1",
+    "desc": "Chiêu của Pháp Tướng (Thánh Hiền Văn Kiếm) — tuyệt kỹ đường Viên Mãn, kiếm pháp tướng quét vùng, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_vankiem_vm_2",
+    "name": "Văn Thánh Trấn Ma Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 5.2,
+    "cdMs": 20000,
+    "cost": 220,
+    "hpCostPct": 6,
+    "range": 220,
+    "ptStage": 2,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 2",
+    "desc": "Chiêu của Pháp Tướng (Thánh Hiền Văn Kiếm) — tuyệt kỹ đường Viên Mãn, văn thánh trấn ma, kiếm đè cả vùng, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "vankiem_vm",
+    "fx": {
+     "aoe": 1,
+     "pierce": 20
+    },
+    "fxText": "Xuyên phòng 20% · Đánh vùng quanh mình",
+    "role": "phaptuong"
+   },
+   {
+    "id": "pt_nhotu_vankiem_vm_3",
+    "name": "Đại Nho Diệt Thế Kiếm",
+    "element": "Pháp Tướng",
+    "tier": "phaptuong",
+    "coef": 6.0,
+    "cdMs": 20000,
+    "cost": 300,
+    "hpCostPct": 10,
+    "range": 220,
+    "ptStage": 3,
+    "cond": [],
+    "condText": "Pháp Tướng giai đoạn 3",
+    "desc": "Chiêu của Pháp Tướng (Thánh Hiền Văn Kiếm) — tuyệt kỹ đường Viên Mãn, đại nho diệt thế, kiếm nặng nhất của pháp tướng, chỉ tung được khi Pháp Tướng đang hiện hình.",
+    "weaponId": "vankiem_vm",
     "fx": {
      "aoe": 1,
      "pierce": 20

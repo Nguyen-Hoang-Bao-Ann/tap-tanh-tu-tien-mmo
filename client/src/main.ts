@@ -20,7 +20,7 @@
 import Phaser from 'phaser';
 import './pwa'; // GĐ375: đăng ký Service Worker + gợi ý cài PWA (chỉ lớp vỏ, không đụng logic game)
 import { QUEST_INFO_CITY } from './city_quests_info'; // GĐ90: mirror nhiệm vụ thành phố (sinh bởi gen_city_quests.py)
-import { NOTICES } from './notices'; // GĐ245: bảng thông báo / cập nhật
+import { getNotices, sortNotices, getReadNoticeIds, markNoticeRead, NOTICE_KIND_ICON } from './notices'; // GĐ245: bảng thông báo / cập nhật — GĐ391: loại tin + ghim + cờ mới
 import { RACE_INFO, RACE_BY_ID, CHAPTERS, HOIS, HOI_BY_N, STORY_SEG_TEXT, STORY_SEG_META } from './story'; // GĐ317: Thiên Mệnh Ký + chủng tộc; GĐ352: + tầng 3 Thiên Mệnh (7 hồi + đoạn kể)
 
 // GĐ382: CỐT TRUYỆN MỞ ĐẦU — 6 màn chữ hiện sau khi tạo nhân vật xong (sau bước
@@ -114,6 +114,7 @@ import { sound } from './sound'; // GĐ167: nhạc nền generative + hiệu ứ
 import { bakePersonTextures, personTexKey, personStyleKeyForPlayer, npcStyleKey, PERSON_TEX, bakeWorldTextures, WORLD_GEO, HOUSE_TEX, DAOQUAN_TEX, TREE_TEX, bakeMonsterTextures, bakeDropTextures, bakeChestTextures, wolfTexKey, WOLF_TEX, bakeBirdTextures, birdTexKey, BIRD_TEX, bakeFxTextures, fxOrbKey, ensurePersonVariant, drawPersonPreview, buildMapObjects, destroyBuiltMap, skillIconURL, upgradeDecorForSprite376 } from './gfx';
 import type { MapEnterData, BuiltMap } from './gfx';
 import { npcTalkLines, hashStr } from './npc_lines'; // GĐ150: lời thoại liên tục của NPC
+import { SERVERS, SERVER_CHOICE_KEY, type ServerEntry } from './servers'; // GĐ390: khung chọn server
 
 // Gộp 1 địa chỉ (GĐ5): bản dựng chạy từ chính server cổng 3001 →
 // kết nối cùng origin; khi dev bằng Vite (5173) thì trỏ sang 3001.
@@ -267,6 +268,8 @@ interface CharacterData {
   teleportArray?: { mapId: string; x: number; y: number } | null; // GĐ135: Trận Dịch Chuyển (cho nút Gọi về)
   // GĐ119: trang bị (server gửi trong welcome/char_sync)
   gearBag?: Record<string, GearItem>;
+  // GĐ385: pháp bảo (server gửi trong welcome/char_sync)
+  phapBao?: { unlocked: boolean; equipped: string | null; owned: Record<string, number>; catalog: Array<{ id: string; name: string; icon: string; level: number; equipped: boolean; effect: string; craft: { thuong: number; mats: Record<string, number> }; next: { level: number; thuong: number; mats: Record<string, number>; cuc: number } | null }> };
   gear?: Record<string, string>;
   gearStats?: { attack: number; defense: number; hp: number; mp: number; speed: number; crit: number };
   gearOrders?: GearOrder[];
@@ -416,6 +419,62 @@ const ITEM_INFO: Record<string, { name: string; desc?: string }> = {
   tran_phap_khai_son: { name: 'Trận Pháp Khai Sơn', desc: 'Dùng 1 lần cạnh Thạch Bia của tông: dựng 7 công trình cơ bản quanh bia.' }, // GĐ319
   dan_thien_luc: { name: 'Thiên Lực Đan', desc: 'Dùng: Vật công + Pháp công +80% trong 30 phút' }, // GĐ305
   dan_thien_giap: { name: 'Thiên Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +80% trong 30 phút' }, // GĐ305
+  // Nhóm A (11/11/2026): 44 vật phẩm mới — desc đồng bộ ITEMS server
+  dan_hon_don_luc: { name: 'Hỗn Độn Lực Đan', desc: 'Dùng: Vật công + Pháp công +110% trong 30 phút' },
+  dan_hon_don_giap: { name: 'Hỗn Độn Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +110% trong 30 phút' },
+  dan_hon_don_huyet: { name: 'Hỗn Độn Huyết Đan', desc: 'Dùng: HP tối đa +2.500 trong 60 phút' },
+  dan_hon_don_nguyen: { name: 'Hỗn Độn Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +2.500 trong 60 phút' },
+  dan_hu_anh: { name: 'Hư Ảnh Đan', desc: 'Dùng: +50% tốc độ (chỉ số Tốc Độ) trong 30 phút' },
+  dan_hon_don_hoi_xuan: { name: 'Hỗn Độn Hồi Xuân Đan', desc: 'Dùng: hồi 70% HP tối đa' },
+  dan_hon_don_hoi_nguyen: { name: 'Hỗn Độn Hồi Nguyên Đan', desc: 'Dùng: hồi 70% Chân nguyên tối đa' },
+  dan_kiep_luc: { name: 'Kiếp Lực Đan', desc: 'Dùng: Vật công + Pháp công +150% trong 30 phút' },
+  dan_kiep_giap: { name: 'Kiếp Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +150% trong 30 phút' },
+  dan_kiep_huyet: { name: 'Kiếp Huyết Đan', desc: 'Dùng: HP tối đa +6.000 trong 60 phút' },
+  dan_kiep_nguyen: { name: 'Kiếp Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +6.000 trong 60 phút' },
+  dan_kiep_anh: { name: 'Kiếp Ảnh Đan', desc: 'Dùng: +60% tốc độ (chỉ số Tốc Độ) trong 30 phút' },
+  dan_tien_luc: { name: 'Tiên Lực Đan', desc: 'Dùng: Vật công + Pháp công +200% trong 30 phút' },
+  dan_tien_giap: { name: 'Tiên Giáp Đan', desc: 'Dùng: Vật phòng + Pháp phòng +200% trong 30 phút' },
+  dan_tien_huyet: { name: 'Tiên Huyết Đan', desc: 'Dùng: HP tối đa +12.000 trong 60 phút' },
+  dan_tien_nguyen: { name: 'Tiên Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +12.000 trong 60 phút' },
+  dan_tien_anh: { name: 'Tiên Ảnh Đan', desc: 'Dùng: +75% tốc độ (chỉ số Tốc Độ) trong 30 phút' },
+  dan_ho_kiep: { name: 'Đan Hộ Kiếp', desc: 'Dùng khi qua Cổng Kiếp (Độ Kiếp 1/2/3): +15% tỉ lệ thành công (tự tiêu hao)' },
+  dan_dien_tho: { name: 'Diên Thọ Đan', desc: 'Dùng: +2 năm thọ nguyên (vĩnh viễn trong kiếp này). Chỉ rơi từ rương trùm cõi cao.' }, // GĐ387 (số viên đã dùng nối động ở renderInv)
+  // GĐ388 đợt 1 (Phần B — đan giải trạng thái, Đan Sư chế)
+  dan_giai_doc: { name: 'Giải Độc Đan', desc: 'Dùng: xoá toàn bộ độc đang đốt trên người. Hồi chiêu chung 30 giây với Thanh Tâm Đan.' },
+  dan_thanh_tam: { name: 'Thanh Tâm Đan', desc: 'Dùng: xoá làm chậm + choáng trên người (không giải được phản phệ tự gây). Hồi chiêu chung 30 giây với Giải Độc Đan.' },
+  // GĐ388 đợt 2 (Phần A — đồ cho pet, Thú Sư chế)
+  dan_linh_thu: { name: 'Linh Thú Đan', desc: 'Dùng: hồi ngay 50% máu tối đa cho thú thuần hoá đang theo — quý giữa trận (ngoài trận thú tự hồi dần). Hồi dùng 10 giây.' },
+  thu_linh_hoan: { name: 'Thú Linh Hoàn', desc: 'Dùng: thú thuần hoá +20% công trong 10 phút (buff tính phía chủ — đổi thú vẫn còn hiệu lực).' },
+  linh_thu_ho_menh: { name: 'Linh Thú Hộ Mệnh', desc: 'Mang trong túi (không cần bấm dùng): thú thuần hoá nhận đòn kết liễu sẽ vỡ 1 Hộ Mệnh thay chết — sống sót ở 30% máu, rút về bên chủ 5 giây.' },
+  phu_hon_don_loi: { name: 'Phù Hỗn Độn Lôi', desc: 'Dùng: lôi hỗn độn đánh quái gần nhất (500px), 25.000 sát thương phép' },
+  phu_hu_khong_thuan: { name: 'Phù Hư Không Thuẫn', desc: 'Dùng: sát thương nhận ×0,2 trong 90 giây' },
+  phu_dinh_hon: { name: 'Phù Định Hồn', desc: 'Dùng: quái gần nhất (400px) đứng yên 8 giây' },
+  phu_kiep_loi: { name: 'Phù Kiếp Lôi', desc: 'Dùng: kiếp lôi đánh quái gần nhất (550px), 60.000 sát thương phép' },
+  phu_thien_kiep: { name: 'Phù Thiên Kiếp', desc: 'Dùng: thiên kiếp giáng quái gần nhất (600px), 100.000 sát thương phép. Rơi từ trùm cõi Độ Kiếp, hiếm.' },
+  phu_tinh_ha: { name: 'Phù Tinh Hà', desc: 'Dùng: tinh hà trút xuống quái gần nhất (650px), 180.000 sát thương phép' },
+  phu_huyet_hon_don: { name: 'Thiên Hư Phù', desc: 'Dùng: đánh quái gần nhất (500px), sát thương = 40% máu tối đa của quái (tối đa 50.000). Hồi chiêu chung 30 giây với các phù % máu.' }, // GĐ392 (B5)
+  phu_kiep_huyet: { name: 'Kiếp Vân Phù', desc: 'Dùng: đánh quái gần nhất (550px), sát thương = 40% máu tối đa của quái (tối đa 200.000). Hồi chiêu chung 30 giây với các phù % máu.' }, // GĐ392 (B5)
+  phu_diet_than_huyet: { name: 'Vãng Tiên Phù', desc: 'Dùng: đánh quái gần nhất (650px), sát thương = 40% máu tối đa của quái (tối đa 360.000). Hồi chiêu chung 30 giây với các phù % máu.' }, // GĐ392 (B5)
+  hon_tinh: { name: 'Hồn Tinh', desc: 'Tinh thể hồn phách kết tinh từ quái hệ hồn ở cõi Phản Hư — nguyên liệu luyện Phù Định Hồn, Súp Hồn Tinh' },
+  hu_khong_cot: { name: 'Hư Không Cốt', desc: 'Mảnh cốt thấm khí hư không của quái hệ hư không — nguyên liệu luyện Hỗn Độn Giáp Đan, Phù Hư Không Thuẫn' },
+  kiep_loi_tinh: { name: 'Kiếp Lôi Tinh', desc: 'Tinh thể sét kiếp kết tinh trên thân quái hệ lôi ở cõi Độ Kiếp — nguyên liệu luyện phù lôi bậc cao' },
+  tam_ma_ket_tinh: { name: 'Tâm Ma Kết Tinh', desc: 'Kết tinh của tâm ma — nguyên liệu luyện Kiếp Huyết Đan, Kiếp Nguyên Đan' },
+  giao_chau: { name: 'Giao Châu', desc: 'Ngọc châu trong thân giao long — nguyên liệu luyện Tiên Nguyên Đan, Canh Giao Châu' },
+  phuong_vu: { name: 'Phượng Vũ', desc: 'Lông phượng rực lửa — nguyên liệu luyện Tiên Lực Đan, Tiệc Phượng Vũ' },
+  ky_lan_giac: { name: 'Kỳ Lân Giác', desc: 'Sừng kỳ lân vàng — nguyên liệu luyện Tiên Giáp Đan' },
+  long_lan: { name: 'Long Lân', desc: 'Vảy rồng xanh biếc viền vàng — nguyên liệu luyện Tiên Huyết Đan' },
+  bang_vu: { name: 'Bằng Vũ', desc: 'Lông chim bằng phủ băng tuyết — nguyên liệu luyện Tiên Ảnh Đan' },
+  loan_vu: { name: 'Loan Vũ', desc: 'Lông loan điểu ngũ sắc — nguyên liệu luyện Phù Tinh Hà' },
+  thu_vuong_tinh_huyet: { name: 'Thú Vương Tinh Huyết', desc: 'Giọt tinh huyết của thú vương/trùm thú — nguyên liệu phụ luyện đan bậc Tiên' },
+  dia_mach_tinh: { name: 'Địa Mạch Tinh', desc: 'Tinh thể địa mạch trong thân quái hệ thổ khổng lồ — nguyên liệu phụ luyện đan bậc Tiên' },
+  canh_hu_khong: { name: 'Canh Hư Không', desc: 'Ăn: hồi 40% HP tối đa (Thú Sư nấu)' },
+  thit_hon_don_nuong: { name: 'Thịt Hỗn Độn Nướng', desc: 'Ăn: hồi 45% HP tối đa (Thú Sư nấu)' },
+  sup_hon_tinh: { name: 'Súp Hồn Tinh', desc: 'Ăn: hồi 30% Chân nguyên tối đa (Thú Sư nấu)' },
+  canh_kiep_tam: { name: 'Canh Kiếp Tâm', desc: 'Ăn: hồi 55% HP tối đa (Thú Sư nấu)' },
+  banh_tinh_ha: { name: 'Bánh Tinh Hà', desc: 'Ăn: hồi 65% HP tối đa (Thú Sư nấu)' },
+  canh_giao_chau: { name: 'Canh Giao Châu', desc: 'Ăn: hồi 50% Chân nguyên tối đa (Thú Sư nấu)' },
+  tiec_phuong_vu: { name: 'Tiệc Phượng Vũ', desc: 'Ăn: hồi 80% HP tối đa (Thú Sư nấu)' },
+  tra_tien_linh: { name: 'Trà Tiên Linh', desc: 'Uống: hồi 35% HP và 35% Chân nguyên tối đa (Thú Sư nấu)' },
   // GĐ362: bổ sung 9 vật phẩm bậc cao từng thiếu tên/mô tả phía client (panel hiện id thô) — desc copy nguyên văn từ ITEMS server
   dan_than_huyet: { name: 'Thần Huyết Đan', desc: 'Dùng: HP tối đa +800 trong 60 phút' }, // GĐ362
   dan_than_nguyen: { name: 'Thần Nguyên Đan', desc: 'Dùng: Chân nguyên tối đa +800 trong 60 phút' }, // GĐ362
@@ -541,6 +600,64 @@ const RECIPE_INFO: Record<string, { jobId: string; name: string; inputs: Record<
   rc_kiem_liet_hoa: { jobId: 'thusu', duongkiem: true, sword: 'liet_hoa', name: 'Rèn Liệt Hỏa Kiếm', inputs: { quang: 3, tinh_huyet: 3 }, stones: 10, output: 'liet_hoa', rate: 0.9, minRank: 1 },
   // GĐ101: Luyện Khôi Lõi (mirror server).
   rc_cot_khoi_loi: { jobId: 'thusu', cotloi: true, name: 'Luyện Khôi Lõi Xương', inputs: { manh_xuong: 5 }, stones: 10, output: 'khoi_loi', rate: 0.9, minRank: 1 },
+  // GĐ388 đợt 1 (Phần B): đan giải trạng thái — Đan Sư (mirror server)
+  rc_dan_giai_doc: { jobId: 'dansu', name: 'Luyện Giải Độc Đan', inputs: { noc_ran: 1, thao_duoc: 2 }, stones: 10, output: 'dan_giai_doc', rate: 0.9, minRank: 2 },
+  rc_dan_thanh_tam: { jobId: 'dansu', name: 'Luyện Thanh Tâm Đan', inputs: { linh_thao: 2, canh_doi: 2 }, stones: 15, output: 'dan_thanh_tam', rate: 0.85, minRank: 3 },
+  // GĐ388 đợt 2 (Phần A): đồ cho pet — Thú Sư (mirror server)
+  rc_dan_linh_thu: { jobId: 'thusu', name: 'Luyện Linh Thú Đan', inputs: { thit_thu: 2, thao_duoc: 2 }, stones: 10, output: 'dan_linh_thu', rate: 0.9, minRank: 1 },
+  rc_thu_linh_hoan: { jobId: 'thusu', name: 'Nấu Thú Linh Hoàn', inputs: { tinh_huyet: 2, xuong_thu: 2 }, stones: 30, output: 'thu_linh_hoan', rate: 0.8, minRank: 3 },
+  rc_linh_thu_ho_menh: { jobId: 'thusu', name: 'Kết Linh Thú Hộ Mệnh', inputs: { thu_vuong_tinh_huyet: 1, ky_lan_giac: 1 }, stones: 5000, output: 'linh_thu_ho_menh', rate: 0.5, minRank: 11 },
+  // GĐ388-phụ: mirror bổ sung 14 công thức CŨ còn thiếu trong RECIPE_INFO (mirror nguyên văn server RECIPES)
+  rc_hoa_anh: { jobId: 'dansu', name: 'Luyện Đan Hóa Anh', inputs: { nanh_soi: 50, da_quy: 10 }, stones: 500, output: 'dan_hoa_anh', rate: 0.45, minRank: 5 },
+  rc_dai_hoi_xuan: { jobId: 'dansu', name: 'Luyện Đại Hồi Xuân Đan', inputs: { than_thao: 3, tien_thao: 5 }, stones: 800, output: 'dan_dai_hoi_xuan', rate: 0.6, minRank: 8 },
+  rc_dai_hoi_nguyen: { jobId: 'dansu', name: 'Luyện Đại Hồi Nguyên Đan', inputs: { than_thao: 3, tien_thao: 5 }, stones: 800, output: 'dan_dai_hoi_nguyen', rate: 0.6, minRank: 8 },
+  rc_nguyen_than: { jobId: 'dansu', name: 'Luyện Nguyên Thần Đan', inputs: { than_thao: 4, quang_kim: 2 }, stones: 1000, output: 'dan_nguyen_than', rate: 0.55, minRank: 8 },
+  rc_huyen_giap: { jobId: 'dansu', name: 'Luyện Huyền Giáp Đan', inputs: { quang_kim: 4, than_thao: 2 }, stones: 1000, output: 'dan_huyen_giap', rate: 0.55, minRank: 8 },
+  rc_than_huyet: { jobId: 'dansu', name: 'Luyện Thần Huyết Đan', inputs: { than_thao: 6 }, stones: 1200, output: 'dan_than_huyet', rate: 0.5, minRank: 9 },
+  rc_cuu_chuyen: { jobId: 'dansu', name: 'Luyện Cửu Chuyển Đan', inputs: { thanh_thao: 5, than_thao: 5 }, stones: 3000, output: 'dan_cuu_chuyen', rate: 0.45, minRank: 11 },
+  rc_thien_luc: { jobId: 'dansu', name: 'Luyện Thiên Lực Đan', inputs: { thanh_thao: 4, quang_than_thiet: 2 }, stones: 3000, output: 'dan_thien_luc', rate: 0.5, minRank: 11 },
+  rc_thien_giap: { jobId: 'dansu', name: 'Luyện Thiên Giáp Đan', inputs: { quang_than_thiet: 5, thanh_thao: 2 }, stones: 3000, output: 'dan_thien_giap', rate: 0.5, minRank: 11 },
+  rc_phu_thien_loi: { jobId: 'phusu', name: 'Vẽ Phù Thiên Lôi', inputs: { quang_kim: 2, linh_thao: 3 }, stones: 500, output: 'phu_thien_loi', rate: 0.8, minRank: 7 },
+  rc_phu_an_than: { jobId: 'phusu', name: 'Vẽ Phù Ẩn Thân', inputs: { than_thao: 2, tien_thao: 3 }, stones: 600, output: 'phu_an_than', rate: 0.75, minRank: 8 },
+  rc_phu_van_ly: { jobId: 'phusu', name: 'Vẽ Phù Vạn Lý', inputs: { quang_bac: 3, linh_thao: 2 }, stones: 800, output: 'phu_van_ly', rate: 0.7, minRank: 9 },
+  rc_phu_thien_cang: { jobId: 'phusu', name: 'Vẽ Phù Thiên Cang', inputs: { quang_than_thiet: 2, thanh_thao: 2 }, stones: 1500, output: 'phu_thien_cang', rate: 0.7, minRank: 11 },
+  rc_ngoc_gian_trong: { jobId: 'luyenkhi', name: 'Luyện Ngọc Giản Trống', inputs: { da_quy: 3, tien_linh_chi: 5 }, stones: 200, output: 'ngoc_gian_trong', rate: 0.9, minRank: 3 },
+  // GĐ384: đan/phù/thức ăn cõi cao — mirror bổ sung ở GĐ388-phụ (nguyên văn server RECIPES)
+  rc_dan_hon_don_luc: { jobId: 'dansu', name: 'Luyện Hỗn Độn Lực Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4 }, stones: 5000, output: 'dan_hon_don_luc', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_giap: { jobId: 'dansu', name: 'Luyện Hỗn Độn Giáp Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4, hu_khong_cot: 2 }, stones: 5000, output: 'dan_hon_don_giap', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_huyet: { jobId: 'dansu', name: 'Luyện Hỗn Độn Huyết Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4 }, stones: 5000, output: 'dan_hon_don_huyet', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_nguyen: { jobId: 'dansu', name: 'Luyện Hỗn Độn Nguyên Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 4, linh_thuy: 2 }, stones: 5000, output: 'dan_hon_don_nguyen', rate: 0.5, minRank: 12 },
+  rc_dan_hu_anh: { jobId: 'dansu', name: 'Luyện Hư Ảnh Đan', inputs: { hon_don_thach: 1, hu_khong_thao: 4, hu_khong_cot: 2 }, stones: 5000, output: 'dan_hu_anh', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_hoi_xuan: { jobId: 'dansu', name: 'Luyện Hỗn Độn Hồi Xuân Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 3, thanh_thao: 2 }, stones: 5000, output: 'dan_hon_don_hoi_xuan', rate: 0.5, minRank: 12 },
+  rc_dan_hon_don_hoi_nguyen: { jobId: 'dansu', name: 'Luyện Hỗn Độn Hồi Nguyên Đan', inputs: { hon_don_thach: 2, hu_khong_thao: 3, tien_thao: 3 }, stones: 5000, output: 'dan_hon_don_hoi_nguyen', rate: 0.5, minRank: 12 },
+  rc_dan_kiep_luc: { jobId: 'dansu', name: 'Luyện Kiếp Lực Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4, kiep_loi_tinh: 2 }, stones: 10000, output: 'dan_kiep_luc', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_giap: { jobId: 'dansu', name: 'Luyện Kiếp Giáp Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4 }, stones: 10000, output: 'dan_kiep_giap', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_huyet: { jobId: 'dansu', name: 'Luyện Kiếp Huyết Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4, tam_ma_ket_tinh: 1 }, stones: 10000, output: 'dan_kiep_huyet', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_nguyen: { jobId: 'dansu', name: 'Luyện Kiếp Nguyên Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 4, tam_ma_ket_tinh: 1 }, stones: 10000, output: 'dan_kiep_nguyen', rate: 0.45, minRank: 13 },
+  rc_dan_kiep_anh: { jobId: 'dansu', name: 'Luyện Kiếp Ảnh Đan', inputs: { kiep_van_thach: 2, kiep_tam_thao: 3, kiep_loi_tinh: 1 }, stones: 10000, output: 'dan_kiep_anh', rate: 0.45, minRank: 13 },
+  rc_dan_tien_luc: { jobId: 'dansu', name: 'Luyện Tiên Lực Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, phuong_vu: 1 }, stones: 20000, output: 'dan_tien_luc', rate: 0.4, minRank: 14 },
+  rc_dan_tien_giap: { jobId: 'dansu', name: 'Luyện Tiên Giáp Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, ky_lan_giac: 1 }, stones: 20000, output: 'dan_tien_giap', rate: 0.4, minRank: 14 },
+  rc_dan_tien_huyet: { jobId: 'dansu', name: 'Luyện Tiên Huyết Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, long_lan: 1, thu_vuong_tinh_huyet: 1 }, stones: 20000, output: 'dan_tien_huyet', rate: 0.4, minRank: 14 },
+  rc_dan_tien_nguyen: { jobId: 'dansu', name: 'Luyện Tiên Nguyên Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, giao_chau: 1 }, stones: 20000, output: 'dan_tien_nguyen', rate: 0.4, minRank: 14 },
+  rc_dan_tien_anh: { jobId: 'dansu', name: 'Luyện Tiên Ảnh Đan', inputs: { tinh_ha_thach: 2, tien_linh_chi: 3, bang_vu: 1, dia_mach_tinh: 1 }, stones: 20000, output: 'dan_tien_anh', rate: 0.4, minRank: 14 },
+  rc_dan_ho_kiep: { jobId: 'dansu', name: 'Luyện Đan Hộ Kiếp', inputs: { kiep_tam_thao: 6, hon_don_thach: 2 }, stones: 12000, output: 'dan_ho_kiep', rate: 0.5, minRank: 13 },
+  rc_phu_hon_don_loi: { jobId: 'phusu', name: 'Vẽ Phù Hỗn Độn Lôi', inputs: { hon_don_thach: 1, hu_khong_thao: 2, da_quy: 1 }, stones: 4000, output: 'phu_hon_don_loi', rate: 0.7, minRank: 12 },
+  rc_phu_hu_khong_thuan: { jobId: 'phusu', name: 'Vẽ Phù Hư Không Thuẫn', inputs: { hu_khong_cot: 2, hu_khong_thao: 2 }, stones: 4000, output: 'phu_hu_khong_thuan', rate: 0.7, minRank: 12 },
+  rc_phu_dinh_hon: { jobId: 'phusu', name: 'Vẽ Phù Định Hồn', inputs: { hon_tinh: 2, hu_khong_thao: 2 }, stones: 4000, output: 'phu_dinh_hon', rate: 0.7, minRank: 12 },
+  rc_phu_kiep_loi: { jobId: 'phusu', name: 'Vẽ Phù Kiếp Lôi', inputs: { kiep_loi_tinh: 2, kiep_van_thach: 1 }, stones: 8000, output: 'phu_kiep_loi', rate: 0.6, minRank: 13 },
+  rc_phu_thien_kiep: { jobId: 'phusu', name: 'Vẽ Phù Thiên Kiếp', inputs: { kiep_loi_tinh: 3, kiep_van_thach: 2, kiep_tam_thao: 2 }, stones: 15000, output: 'phu_thien_kiep', rate: 0.35, minRank: 14 },
+  rc_phu_tinh_ha: { jobId: 'phusu', name: 'Vẽ Phù Tinh Hà', inputs: { loan_vu: 1, tinh_ha_thach: 2 }, stones: 15000, output: 'phu_tinh_ha', rate: 0.5, minRank: 14 },
+  rc_phu_huyet_hon_don: { jobId: 'phusu', name: 'Vẽ Thiên Hư Phù', inputs: { hon_don_thach: 2, hon_tinh: 1, hu_khong_thao: 2 }, stones: 6000, output: 'phu_huyet_hon_don', rate: 0.6, minRank: 12 }, // GĐ392 (B5)
+  rc_phu_kiep_huyet: { jobId: 'phusu', name: 'Vẽ Kiếp Vân Phù', inputs: { kiep_loi_tinh: 3, tam_ma_ket_tinh: 1, kiep_van_thach: 1 }, stones: 12000, output: 'phu_kiep_huyet', rate: 0.5, minRank: 13 }, // GĐ392 (B5)
+  rc_phu_diet_than_huyet: { jobId: 'phusu', name: 'Vẽ Vãng Tiên Phù', inputs: { loan_vu: 1, tinh_ha_thach: 3, phuong_vu: 1 }, stones: 25000, output: 'phu_diet_than_huyet', rate: 0.4, minRank: 14 }, // GĐ392 (B5)
+  rc_canh_hu_khong: { jobId: 'thusu', name: 'Nấu Canh Hư Không', inputs: { hu_khong_thao: 2, thit_thu: 1 }, stones: 2500, output: 'canh_hu_khong', rate: 0.85, minRank: 10 },
+  rc_thit_hon_don_nuong: { jobId: 'thusu', name: 'Nướng Thịt Hỗn Độn', inputs: { thit_thu: 2, hon_don_thach: 1 }, stones: 2500, output: 'thit_hon_don_nuong', rate: 0.85, minRank: 10 },
+  rc_sup_hon_tinh: { jobId: 'thusu', name: 'Nấu Súp Hồn Tinh', inputs: { hon_tinh: 1, linh_thuy: 1 }, stones: 3000, output: 'sup_hon_tinh', rate: 0.85, minRank: 11 },
+  rc_canh_kiep_tam: { jobId: 'thusu', name: 'Nấu Canh Kiếp Tâm', inputs: { kiep_tam_thao: 2, thit_thu: 1 }, stones: 5000, output: 'canh_kiep_tam', rate: 0.85, minRank: 12 },
+  rc_banh_tinh_ha: { jobId: 'thusu', name: 'Làm Bánh Tinh Hà', inputs: { tinh_ha_thach: 1, linh_thuy: 1 }, stones: 8000, output: 'banh_tinh_ha', rate: 0.85, minRank: 13 },
+  rc_canh_giao_chau: { jobId: 'thusu', name: 'Nấu Canh Giao Châu', inputs: { giao_chau: 1, linh_thuy: 1 }, stones: 5000, output: 'canh_giao_chau', rate: 0.85, minRank: 12 },
+  rc_tiec_phuong_vu: { jobId: 'thusu', name: 'Dọn Tiệc Phượng Vũ', inputs: { phuong_vu: 1, tien_linh_chi: 1, thit_thu: 2 }, stones: 8000, output: 'tiec_phuong_vu', rate: 0.8, minRank: 13 },
+  rc_tra_tien_linh: { jobId: 'thusu', name: 'Pha Trà Tiên Linh', inputs: { tien_linh_chi: 1, linh_thuy: 1 }, stones: 5000, output: 'tra_tien_linh', rate: 0.85, minRank: 12 },
 };
 // GĐ119: bảng hiển thị trang bị (mirror server/data/gear_data.json — chỉ để hiển thị, server vẫn kiểm tra thật).
 const GEAR_RARITY_NAME: Record<string, string> = { TRANG: 'Phàm', XAM: 'Sơ', LUC: 'Linh', LAM: 'Bảo', TIM: 'Tiên', CAM: 'Thần', DO: 'Huyết', DEN: 'Ma', VO: 'Vô Cực' };
@@ -571,13 +688,14 @@ const SHOP_INFO: Record<string, { name: string; sell: Record<string, number>; bu
     name: 'Tiệm Đan Dược',
     // GĐ84: trước đây mirror thiếu 3 đan đột phá nên UI tiệm không hiện
     // hàng dù server vẫn bán — đồng bộ đúng giá server (số TẠM).
-    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500 },
-    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000 },
+    // Nhóm A (11/11/2026): + đan PH/ĐK/Tiên + Đan Hộ Kiếp, giá Hạ quy đổi từ Thượng ×10.000 (GĐ367) — đồng bộ server.
+    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500, dan_hon_don_luc: 300000, dan_hon_don_giap: 300000, dan_hon_don_huyet: 250000, dan_hon_don_nguyen: 250000, dan_hu_anh: 200000, dan_hon_don_hoi_xuan: 200000, dan_hon_don_hoi_nguyen: 200000, dan_kiep_luc: 500000, dan_kiep_giap: 500000, dan_kiep_huyet: 450000, dan_kiep_nguyen: 450000, dan_kiep_anh: 400000, dan_tien_luc: 1000000, dan_tien_giap: 1000000, dan_tien_huyet: 900000, dan_tien_nguyen: 900000, dan_tien_anh: 800000, dan_ho_kiep: 600000 },
+    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000, dan_hon_don_luc: 120000, dan_hon_don_giap: 120000, dan_hon_don_huyet: 100000, dan_hon_don_nguyen: 100000, dan_hu_anh: 80000, dan_hon_don_hoi_xuan: 80000, dan_hon_don_hoi_nguyen: 80000, dan_kiep_luc: 200000, dan_kiep_giap: 200000, dan_kiep_huyet: 180000, dan_kiep_nguyen: 180000, dan_kiep_anh: 160000, dan_tien_luc: 400000, dan_tien_giap: 400000, dan_tien_huyet: 360000, dan_tien_nguyen: 360000, dan_tien_anh: 320000, dan_ho_kiep: 240000 },
   },
   tiem_nguyen_lieu: {
     name: 'Tiệm Nguyên Liệu',
     sell: { nanh_soi: 12 },
-    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400, than_hong_linh: 100, kiep_van_thach: 1000, tinh_ha_thach: 2500 }, // GĐ305: đồng bộ thu mua quặng bậc cao với server
+    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400, than_hong_linh: 100, kiep_van_thach: 1000, tinh_ha_thach: 2500, hon_tinh: 600, hu_khong_cot: 500, kiep_loi_tinh: 1500, tam_ma_ket_tinh: 1200, giao_chau: 1800, phuong_vu: 2000, ky_lan_giac: 2000, long_lan: 1600, bang_vu: 1500, loan_vu: 1800, thu_vuong_tinh_huyet: 900, dia_mach_tinh: 800 }, // GĐ305: đồng bộ thu mua quặng bậc cao với server; Nhóm A: + 12 nguyên liệu cụm loài cõi cao
   },
   tiem_thao_duoc: { // GĐ140 + GĐ305: đồng bộ đủ hàng với server (giá TẠM trừ thảo dược thường 5 LT theo tài liệu)
     name: 'Tiệm Thảo Dược',
@@ -588,13 +706,14 @@ const SHOP_INFO: Record<string, { name: string; sell: Record<string, number>; bu
   city_dan: {
     name: 'Tiệm Đan Dược',
     // GĐ379: đồng bộ đủ 14 đan như tiem_dan/server (bổ 7 đan NA/HT đợt GĐ207).
-    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500 },
-    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000 },
+    // Nhóm A (11/11/2026): + đan PH/ĐK/Tiên + Đan Hộ Kiếp — đồng bộ tiem_dan/server.
+    sell: { dan_hoi_nguyen: 30, dan_hoi_xuan: 15, dan_trung_canh: 200, dan_truc_co: 800, dan_ho_mach: 300, dan_ket_dan: 2000, dan_hoa_anh: 5000, dan_dai_hoi_xuan: 400, dan_dai_hoi_nguyen: 400, dan_nguyen_than: 900, dan_huyen_giap: 900, dan_cuu_chuyen: 4000, dan_thien_luc: 2500, dan_thien_giap: 2500, dan_hon_don_luc: 300000, dan_hon_don_giap: 300000, dan_hon_don_huyet: 250000, dan_hon_don_nguyen: 250000, dan_hu_anh: 200000, dan_hon_don_hoi_xuan: 200000, dan_hon_don_hoi_nguyen: 200000, dan_kiep_luc: 500000, dan_kiep_giap: 500000, dan_kiep_huyet: 450000, dan_kiep_nguyen: 450000, dan_kiep_anh: 400000, dan_tien_luc: 1000000, dan_tien_giap: 1000000, dan_tien_huyet: 900000, dan_tien_nguyen: 900000, dan_tien_anh: 800000, dan_ho_kiep: 600000 },
+    buy: { dan_hoi_nguyen: 12, dan_hoi_xuan: 6, dan_trung_canh: 80, dan_truc_co: 320, dan_ho_mach: 120, dan_ket_dan: 800, dan_hoa_anh: 2000, dan_dai_hoi_xuan: 160, dan_dai_hoi_nguyen: 160, dan_nguyen_than: 360, dan_huyen_giap: 360, dan_cuu_chuyen: 1600, dan_thien_luc: 1000, dan_thien_giap: 1000, dan_hon_don_luc: 120000, dan_hon_don_giap: 120000, dan_hon_don_huyet: 100000, dan_hon_don_nguyen: 100000, dan_hu_anh: 80000, dan_hon_don_hoi_xuan: 80000, dan_hon_don_hoi_nguyen: 80000, dan_kiep_luc: 200000, dan_kiep_giap: 200000, dan_kiep_huyet: 180000, dan_kiep_nguyen: 180000, dan_kiep_anh: 160000, dan_tien_luc: 400000, dan_tien_giap: 400000, dan_tien_huyet: 360000, dan_tien_nguyen: 360000, dan_tien_anh: 320000, dan_ho_kiep: 240000 },
   },
   city_nguyenlieu: {
     name: 'Tiệm Nguyên Liệu',
     sell: { nanh_soi: 12 },
-    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400 },
+    buy: { nanh_soi: 5, nanh_tinh: 30, da_soi: 22, canh_doi: 8, da_quy: 45, quang_kim: 60, quang_than_thiet: 150, hon_don_thach: 400, hon_tinh: 600, hu_khong_cot: 500, kiep_loi_tinh: 1500, tam_ma_ket_tinh: 1200, giao_chau: 1800, phuong_vu: 2000, ky_lan_giac: 2000, long_lan: 1600, bang_vu: 1500, loan_vu: 1800, thu_vuong_tinh_huyet: 900, dia_mach_tinh: 800 },
   },
   city_thao_duoc: { // GĐ151 + GĐ305: đồng bộ đủ hàng với server — cùng bảng giá với tiệm làng
     name: 'Tiệm Thảo Dược',
@@ -1088,66 +1207,66 @@ const MON_SPRITE: Record<string, string> = {
   thien_loi_thu: 'thien_loi_thu', hon_don_thu: 'hon_don_thu',
   cuu_u_ma_quan: 'cuu_u_ma_quan', // GĐ130: Ma Quân dùng lại sprite kiếm khách quỷ (PixelLab hết lượt, không vẽ mới)
   // GĐ207: 100 loài mới dùng lại file sprite của loài gốc (tên file theo kind gốc)
-  thien_lang: 'soi_xam',
-  nguyet_sat_lang: 'soi_xam',
-  viem_vi_lang: 'soi_xam',
-  huyen_bang_lang: 'soi_xam',
-  co_son_lang: 'soi_xam',
-  huyet_duc_buc: 'doi_den',
-  da_minh_buc: 'doi_den',
-  loi_vu_buc: 'doi_den',
-  thien_nien_xa_yeu: 'doc_xa',
-  bich_lam_mang: 'sam_lam_cu_mang',
-  hoa_van_mang: 'sam_lam_cu_mang',
-  huyen_thuy_xa: 'bang_xa',
-  kim_si_dieu: 'loi_dieu',
+  thien_lang: 'thien_lang', // F3-1 đợt 6: ảnh tĩnh riêng
+  nguyet_sat_lang: 'nguyet_sat_lang', // F3-1 đợt 6: ảnh tĩnh riêng
+  viem_vi_lang: 'viem_vi_lang', // F3-1 đợt 6: ảnh tĩnh riêng
+  huyen_bang_lang: 'huyen_bang_lang', // F3-1 đợt 6: ảnh tĩnh riêng
+  co_son_lang: 'co_son_lang', // F3-1 đợt 6: ảnh tĩnh riêng
+  huyet_duc_buc: 'huyet_duc_buc', // F3-1 đợt 6: ảnh tĩnh riêng
+  da_minh_buc: 'da_minh_buc', // F3-1 đợt 6: ảnh tĩnh riêng
+  loi_vu_buc: 'loi_vu_buc', // F3-1 đợt 6: ảnh tĩnh riêng
+  thien_nien_xa_yeu: 'thien_nien_xa_yeu', // F3-1 đợt 3: ảnh tĩnh riêng
+  bich_lam_mang: 'bich_lam_mang', // F3-1 đợt 6: ảnh tĩnh riêng
+  hoa_van_mang: 'hoa_van_mang', // F3-1 đợt 6: ảnh tĩnh riêng
+  huyen_thuy_xa: 'huyen_thuy_xa', // F3-1 đợt 6: ảnh tĩnh riêng
+  kim_si_dieu: 'kim_si_dieu', // F3-1 đợt 6: ảnh tĩnh riêng
   thanh_loan: 'thanh_loan', // F3-1 đợt 2: ảnh tĩnh riêng
-  phong_bao_ung: 'loi_dieu',
+  phong_bao_ung: 'phong_bao_ung', // F3-1 đợt 6: ảnh tĩnh riêng
   hoa_vu_phuong_anh: 'hoa_vu_phuong_anh', // F3-1 đợt 2: ảnh tĩnh riêng
   son_than_khoi: 'son_than_khoi', // F3-1 đợt 1: ảnh tĩnh riêng
-  co_thach_cu_nhan: 'thach_quai',
-  kim_cuong_tuong: 'thach_quai',
-  thiet_giap_te: 'kim_giap_te',
-  man_hoang_cu_tuong: 'kim_giap_te',
-  son_tieu: 'lam_tru',
-  tu_kim_hat: 'sa_mac_hat',
-  ngoc_giap_trung: 'dia_kim_thu',
-  thien_tuc_ngo_cong: 'sa_mac_hat',
+  co_thach_cu_nhan: 'co_thach_cu_nhan', // F3-1 đợt 6: ảnh tĩnh riêng
+  kim_cuong_tuong: 'kim_cuong_tuong', // F3-1 đợt 6: ảnh tĩnh riêng
+  thiet_giap_te: 'thiet_giap_te', // F3-1 đợt 6: ảnh tĩnh riêng
+  man_hoang_cu_tuong: 'man_hoang_cu_tuong', // F3-1 đợt 6: ảnh tĩnh riêng
+  son_tieu: 'son_tieu', // F3-1 đợt 6: ảnh tĩnh riêng
+  tu_kim_hat: 'tu_kim_hat', // F3-1 đợt 6: ảnh tĩnh riêng
+  ngoc_giap_trung: 'ngoc_giap_trung', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  thien_tuc_ngo_cong: 'thien_tuc_ngo_cong', // F3-1 đợt 6: ảnh tĩnh riêng
   huyen_thuy_giao: 'huyen_thuy_giao', // F3-1 đợt 2: ảnh tĩnh riêng
-  bich_ba_ngu_yeu: 'thuy_yeu_ngu',
-  tham_hai_cu_giai: 'dung_nham_cua',
-  hu_cot_chien_si: 'cot_binh',
-  u_minh_quy_tot: 'quy_hon',
-  bach_cot_phu_nhan: 'cot_vuong',
-  thuc_nhan_hoa_yeu: 'huyen_diep',
-  co_thu_tinh: 'huyen_diep',
-  huyet_dang_yeu: 'huyen_diep',
-  van_loc: 'thien_loi_thu',
+  bich_ba_ngu_yeu: 'bich_ba_ngu_yeu', // F3-1 đợt 6: ảnh tĩnh riêng
+  tham_hai_cu_giai: 'tham_hai_cu_giai', // F3-1 đợt 6: ảnh tĩnh riêng
+  hu_cot_chien_si: 'hu_cot_chien_si', // F3-1 đợt 6: ảnh tĩnh riêng
+  u_minh_quy_tot: 'u_minh_quy_tot', // F3-1 đợt 6: ảnh tĩnh riêng
+  bach_cot_phu_nhan: 'bach_cot_phu_nhan', // F3-1 đợt 3: ảnh tĩnh riêng (cot_vuong.png giữ cho thú triệu hồi)
+  thuc_nhan_hoa_yeu: 'thuc_nhan_hoa_yeu', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  co_thu_tinh: 'co_thu_tinh', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  huyet_dang_yeu: 'huyet_dang_yeu', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  van_loc: 'van_loc', // F3-1 đợt 4–5: ảnh tĩnh riêng
   ngoc_ky_lan: 'ngoc_ky_lan', // F3-1 đợt 2: ảnh tĩnh riêng
-  thien_ma: 'thien_loi_thu',
-  cuu_vi_ho: 'tuyet_ho',
+  thien_ma: 'thien_ma', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  cuu_vi_ho: 'cuu_vi_ho', // F3-1 đợt 3: ảnh tĩnh riêng
   son_quan_ho: 'son_quan_ho', // F3-1 đợt 1: ảnh tĩnh riêng
-  linh_mieu_anh: 'huyen_anh_mieu',
-  da_xoa: 'kiem_ma',
-  la_sat_anh: 'hap_huyet_quy',
-  huyet_ma_tot: 'dan_ma',
-  hoa_linh: 'hoa_thu',
-  bang_linh: 'bang_xa',
-  loi_linh: 'loi_xa',
-  tho_linh: 'dia_kim_thu',
+  linh_mieu_anh: 'linh_mieu_anh', // F3-1 đợt 6: ảnh tĩnh riêng
+  da_xoa: 'da_xoa', // F3-1 đợt 6: ảnh tĩnh riêng
+  la_sat_anh: 'la_sat_anh', // F3-1 đợt 6: ảnh tĩnh riêng
+  huyet_ma_tot: 'huyet_ma_tot', // F3-1 đợt 6: ảnh tĩnh riêng
+  hoa_linh: 'hoa_linh', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  bang_linh: 'bang_linh', // F3-1 đợt 6: ảnh tĩnh riêng
+  loi_linh: 'loi_linh', // F3-1 đợt 6: ảnh tĩnh riêng
+  tho_linh: 'tho_linh', // F3-1 đợt 4–5: ảnh tĩnh riêng
   thien_lang_vuong_that: 'thien_lang_vuong_that',
   giao_long_chua: 'giao_long_chua',
   co_thu_than: 'co_thu_than',
   hon_don_cu_thu: 'hon_don_cu_thu',
-  khai_thien_te: 'kim_giap_te',
+  khai_thien_te: 'khai_thien_te', // F3-1 đợt 6: ảnh tĩnh riêng
   hu_khong_thu: 'hu_khong_thu', // F3-1 đợt 1: ảnh tĩnh riêng
   thon_thien_mang: 'thon_thien_mang',
-  chuc_long_anh: 'loi_xa',
-  ba_xa: 'sam_lam_cu_mang',
+  chuc_long_anh: 'chuc_long_anh', // F3-1 đợt 3: ảnh tĩnh riêng
+  ba_xa: 'ba_xa', // F3-1 đợt 6: ảnh tĩnh riêng
   toan_nghe: 'toan_nghe', // F3-1 đợt 2: ảnh tĩnh riêng
-  dao_ngot: 'kim_giap_te',
+  dao_ngot: 'dao_ngot', // F3-1 đợt 6: ảnh tĩnh riêng
   cung_ky: 'cung_ky', // F3-1 đợt 1: ảnh tĩnh riêng
-  hon_don_ma_vien: 'lam_tru',
+  hon_don_ma_vien: 'hon_don_ma_vien', // F3-1 đợt 4–5: ảnh tĩnh riêng
   kim_si_dai_bang: 'kim_si_dai_bang',
   con_bang_anh: 'con_bang_anh', // F3-1 đợt 2: ảnh tĩnh riêng
   huyen_vu_tan_giap: 'huyen_vu_tan_giap', // F3-1 đợt 1: ảnh tĩnh riêng
@@ -1155,38 +1274,38 @@ const MON_SPRITE: Record<string, string> = {
   chu_tuoc_diem: 'chu_tuoc_diem', // F3-1 đợt 2: ảnh tĩnh riêng
   bach_ho_sat_khi: 'bach_ho_sat_khi', // F3-1 đợt 1: ảnh tĩnh riêng
   ky_lan_than_anh: 'ky_lan_than_anh', // F3-1 đợt 2: ảnh tĩnh riêng
-  thien_cau: 'soi_xam',
-  nguyet_tho_than: 'thien_loi_thu',
-  thien_binh_tan_anh: 'kiem_ma',
-  co_ma_tan_hon: 'quy_hon',
+  thien_cau: 'thien_cau', // F3-1 đợt 6: ảnh tĩnh riêng
+  nguyet_tho_than: 'nguyet_tho_than', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  thien_binh_tan_anh: 'thien_binh_tan_anh', // F3-1 đợt 6: ảnh tĩnh riêng
+  co_ma_tan_hon: 'co_ma_tan_hon', // F3-1 đợt 6: ảnh tĩnh riêng
   vuc_ngoai_thien_ma: 'vuc_ngoai_thien_ma',
-  minh_ha_quy_tuong: 'cot_vuong',
+  minh_ha_quy_tuong: 'minh_ha_quy_tuong', // F3-1 đợt 3: ảnh tĩnh riêng (cot_vuong.png giữ cho thú triệu hồi)
   than_loi_cu_nhan: 'than_loi_cu_nhan', // F3-1 đợt 1: ảnh tĩnh riêng
-  diem_than_chien_tuong: 'kim_giap_te',
-  bang_than_xa: 'bang_xa',
-  kim_than_giap_trung: 'dia_kim_thu',
-  huyet_than_ma_lang: 'soi_xam',
-  co_than_thu_tinh: 'huyen_diep',
-  tham_uyen_cu_giai: 'dung_nham_cua',
-  loi_than_dieu: 'loi_dieu',
+  diem_than_chien_tuong: 'diem_than_chien_tuong', // F3-1 đợt 6: ảnh tĩnh riêng
+  bang_than_xa: 'bang_than_xa', // F3-1 đợt 6: ảnh tĩnh riêng
+  kim_than_giap_trung: 'kim_than_giap_trung', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  huyet_than_ma_lang: 'huyet_than_ma_lang', // F3-1 đợt 6: ảnh tĩnh riêng
+  co_than_thu_tinh: 'co_than_thu_tinh', // F3-1 đợt 3: ảnh tĩnh riêng
+  tham_uyen_cu_giai: 'tham_uyen_cu_giai', // F3-1 đợt 6: ảnh tĩnh riêng
+  loi_than_dieu: 'loi_than_dieu', // F3-1 đợt 6: ảnh tĩnh riêng
   hoa_than_phuong: 'hoa_than_phuong',
-  tho_than_khoi: 'thach_quai',
-  da_than_buc: 'doi_den',
-  doc_than_hat: 'sa_mac_hat',
-  moc_than_dang: 'huyen_diep',
-  thuy_than_ngu: 'thuy_yeu_ngu',
-  phong_than_ung: 'loi_dieu',
-  am_than_quy_tot: 'quy_hon',
-  duong_than_chien_si: 'cot_binh',
-  tinh_than_tieu_yeu: 'hoa_thu',
-  thach_than_tuong: 'thach_quai',
+  tho_than_khoi: 'tho_than_khoi', // F3-1 đợt 6: ảnh tĩnh riêng
+  da_than_buc: 'da_than_buc', // F3-1 đợt 6: ảnh tĩnh riêng
+  doc_than_hat: 'doc_than_hat', // F3-1 đợt 6: ảnh tĩnh riêng
+  moc_than_dang: 'moc_than_dang', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  thuy_than_ngu: 'thuy_than_ngu', // F3-1 đợt 6: ảnh tĩnh riêng
+  phong_than_ung: 'phong_than_ung', // F3-1 đợt 6: ảnh tĩnh riêng
+  am_than_quy_tot: 'am_than_quy_tot', // F3-1 đợt 6: ảnh tĩnh riêng
+  duong_than_chien_si: 'duong_than_chien_si', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  tinh_than_tieu_yeu: 'tinh_than_tieu_yeu', // F3-1 đợt 4–5: ảnh tĩnh riêng
+  thach_than_tuong: 'thach_than_tuong', // F3-1 đợt 6: ảnh tĩnh riêng
   thien_hoa_su: 'thien_hoa_su', // F3-1 đợt 1: ảnh tĩnh riêng
-  han_bang_ho: 'tuyet_ho',
-  tu_la_chien_ma: 'kiem_ma',
-  la_hau_ma_anh: 'dan_ma',
-  huyet_ha_ma_buc: 'doi_den',
-  coi_am_sat_thu: 'huyen_anh_mieu',
-  van_co_doc_trung: 'dia_kim_thu',
+  han_bang_ho: 'han_bang_ho', // F3-1 đợt 6: ảnh tĩnh riêng
+  tu_la_chien_ma: 'tu_la_chien_ma', // F3-1 đợt 3: ảnh tĩnh riêng
+  la_hau_ma_anh: 'la_hau_ma_anh', // F3-1 đợt 6: ảnh tĩnh riêng
+  huyet_ha_ma_buc: 'huyet_ha_ma_buc', // F3-1 đợt 6: ảnh tĩnh riêng
+  coi_am_sat_thu: 'coi_am_sat_thu', // F3-1 đợt 6: ảnh tĩnh riêng
+  van_co_doc_trung: 'van_co_doc_trung', // F3-1 đợt 4–5: ảnh tĩnh riêng
   thien_dao_thu_ho: 'thien_dao_thu_ho',
   // GĐ208: 24 loài Phản Hư dùng lại file sprite loài gốc
   hu_khong_lang: 'hu_khong_lang',
@@ -1458,23 +1577,31 @@ const WEAPONS_BY_CLASS: Record<string, WeaponDef[]> = {
     { id: 'phatchau', name: 'Phật châu', cat: 'beads', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Phối hợp đánh và thủ, có thể đánh xa' },
     { id: 'quyentruong', name: 'Quyền trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: true, note: 'Đánh chậm, có thể đánh xa' },
     { id: 'binhbat', name: 'Bình bát', cat: 'bowl', speed: 'trung', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Ném ra đánh xa rồi thu về' },
+    { id: 'phatluan', name: 'Phật luân', cat: 'wheel', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: true, note: 'Pháp luân vàng xoay quanh tay, phóng ra cắt vòng' }, // GĐ393
     { id: 'phatchau_vm', name: 'Đại Nhật Phật Châu', cat: 'beads', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, note: 'Phật châu tiến hóa theo đường Viên Mãn — châu quang như mặt trời' },
     { id: 'quyentruong_vm', name: 'Phổ Độ Quyền Trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: true, vienman: true, note: 'Quyền trượng tiến hóa theo đường Viên Mãn — trượng Phật môn, trấn ma phổ độ' },
     { id: 'binhbat_vm', name: 'Càn Khôn Bình Bát', cat: 'bowl', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, note: 'Bình bát tiến hóa theo đường Viên Mãn — một bát thu càn khôn' },
+    { id: 'phatluan_vm', name: 'Phật Quang Pháp Luân', cat: 'wheel', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: true, vienman: true, note: 'Pháp luân tiến hóa theo đường Viên Mãn — luân quang phổ độ, xoay chuyển càn khôn' }, // GĐ393
   ],
   cottu: [
     { id: 'cotthuan', name: 'Cốt thuẫn', cat: 'shield', speed: 'cham', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Khiên xương, đỡ đòn và đẩy lùi quái' },
     { id: 'cotchuy', name: 'Cốt chùy', cat: 'club', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: false, note: 'Chùy xương, vừa đỡ vừa đánh' },
+    { id: 'cotcung', name: 'Cốt cung', cat: 'bow', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: true, note: 'Cung xương, bắn xa từ sau Cốt Vương' }, // GĐ389
+    { id: 'cotnhan', name: 'Cốt nhận', cat: 'dual', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Song nhận xương, chém nhanh liên hoàn' }, // GĐ389
     { id: 'cotthuan_vm', name: 'Bất Diệt Cốt Thuẫn', cat: 'shield', speed: 'cham', dmg: 'Trung bình', mana: 'Ít', ranged: false, vienman: true, note: 'Cốt thuẫn tiến hóa theo đường Viên Mãn — khiên xương bất diệt' },
     { id: 'cotchuy_vm', name: 'Vương Giả Cốt Chùy', cat: 'club', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: false, vienman: true, note: 'Cốt chùy tiến hóa theo đường Viên Mãn — chùy xương vương giả, hiệu lệnh vạn cốt' },
+    { id: 'cotcung_vm', name: 'Vạn Cốt Xuyên Vân Cung', cat: 'bow', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: true, vienman: true, note: 'Cốt cung tiến hóa theo đường Viên Mãn — cung xương vạn cốt, một tên xuyên mây' }, // GĐ389
+    { id: 'cotnhan_vm', name: 'Liệt Hồn Song Nhận', cat: 'dual', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: false, vienman: true, note: 'Cốt nhận tiến hóa theo đường Viên Mãn — song nhận nứt hồn, chém không thấy bóng' }, // GĐ389
   ],
   quytu: [
     { id: 'colenh', name: 'Cờ lệnh', cat: 'flag', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, note: 'Gọi quỷ hồn đánh thay' },
     { id: 'luoihai', name: 'Lưỡi hái', cat: 'sickle', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: false, note: 'Chém quét vòng cung' },
     { id: 'quythuong', name: 'Quỷ thương', cat: 'spear', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: false, note: 'Vũ khí dài, đâm xa cận chiến' },
+    { id: 'quylinh', name: 'Chiêu hồn linh', cat: 'bell', speed: 'nhanh', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Chuông đồng nhỏ khắc mặt quỷ, rung chuông gọi hồn' }, // GĐ393
     { id: 'colenh_vm', name: 'Sinh Tử Lệnh Kỳ', cat: 'flag', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: true, vienman: true, note: 'Cờ lệnh tiến hóa theo đường Viên Mãn — phất cờ điểm danh sinh tử' },
     { id: 'luoihai_vm', name: 'Đoạt Mệnh Quỷ Liêm', cat: 'sickle', speed: 'cham', dmg: 'Cao', mana: 'Ít', ranged: false, vienman: true, note: 'Lưỡi hái tiến hóa theo đường Viên Mãn — một cắt đoạt mệnh' },
     { id: 'quythuong_vm', name: 'U Minh Quỷ Thương', cat: 'spear', speed: 'trung', dmg: 'Cao', mana: 'Ít', ranged: false, vienman: true, note: 'Quỷ thương tiến hóa theo đường Viên Mãn — thương xuyên hồn đoạt phách' },
+    { id: 'quylinh_vm', name: 'Cửu U Chiêu Hồn Linh', cat: 'bell', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, note: 'Chiêu hồn linh tiến hóa theo đường Viên Mãn — chuông vang cửu u, vạn hồn triều bái' }, // GĐ393
   ],
   satthu: [
     { id: 'daogam', name: 'Dao găm', cat: 'dagger', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Độ chính xác cao' },
@@ -1490,33 +1617,41 @@ const WEAPONS_BY_CLASS: Record<string, WeaponDef[]> = {
     { id: 'kiem', name: 'Kiếm', cat: 'sword', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: false, note: 'Mạnh, nhanh, nhưng khó luyện' },
     { id: 'songkiem', name: 'Song kiếm', cat: 'dual', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: false, note: 'Cận chiến linh hoạt' },
     { id: 'trongkiem', name: 'Trọng kiếm', cat: 'sword', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: false, note: 'Chém nặng, hắt lùi' },
+    { id: 'phikiem', name: 'Phi kiếm', cat: 'sword', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, note: 'Một thanh kiếm bay quanh người, ngự kiếm đâm từ xa' }, // GĐ393
     { id: 'kiem_vm', name: 'Tâm Kiếm Vô Ngân', cat: 'sword', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: false, vienman: true, note: 'Kiếm tiến hóa theo đường Viên Mãn — kiếm theo tâm, mạnh theo người' },
     { id: 'songkiem_vm', name: 'Lưu Vân Song Kiếm', cat: 'dual', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: false, vienman: true, note: 'Song kiếm tiến hóa theo đường Viên Mãn — hai kiếm như mây trôi' },
     { id: 'trongkiem_vm', name: 'Trấn Nhạc Trọng Kiếm', cat: 'sword', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: false, vienman: true, note: 'Trọng kiếm tiến hóa theo đường Viên Mãn — một chém trấn nhạc' },
+    { id: 'phikiem_vm', name: 'Ngự Hư Phi Kiếm', cat: 'sword', speed: 'nhanh', dmg: 'Cao', mana: 'Trung bình', ranged: true, vienman: true, note: 'Phi kiếm tiến hóa theo đường Viên Mãn — ngự hư phi hành, kiếm đến người chưa tới' }, // GĐ393
   ],
   phaptu: [
     { id: 'phien', name: 'Phiến', cat: 'fan', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Niệm nhanh, đánh liên tục' },
     { id: 'phaptruong', name: 'Pháp trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: true, note: 'Niệm lâu nhưng đau' },
     { id: 'sachphep', name: 'Sách phép', cat: 'book', speed: 'nhanh', dmg: 'Cao', mana: 'Nhiều', ranged: true, note: 'Mạnh nhất nhưng cạn linh lực nhanh' },
+    { id: 'phapan', name: 'Pháp ấn', cat: 'seal', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, note: 'Ấn chú lơ lửng trước tay, đóng dấu phép xuống đất' }, // GĐ393
     { id: 'phien_vm', name: 'Càn Khôn Pháp Phiến', cat: 'fan', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, note: 'Phiến tiến hóa theo đường Viên Mãn — quạt mở càn khôn, gọi lôi gọi gió' },
     { id: 'phaptruong_vm', name: 'Ngũ Lôi Pháp Trượng', cat: 'staff', speed: 'cham', dmg: 'Cao', mana: 'Trung bình', ranged: true, vienman: true, note: 'Pháp trượng tiến hóa theo đường Viên Mãn — trượng dẫn thiên lôi, phù trấn yêu ma' },
     { id: 'sachphep_vm', name: 'Thiên Thư Pháp Điển', cat: 'book', speed: 'nhanh', dmg: 'Cao', mana: 'Nhiều', ranged: true, vienman: true, note: 'Sách phép tiến hóa theo đường Viên Mãn — mỗi trang một thiên kiếp' },
+    { id: 'phapan_vm', name: 'Thiên La Pháp Ấn', cat: 'seal', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, note: 'Pháp ấn tiến hóa theo đường Viên Mãn — thiên la địa võng, ấn trấn vạn pháp' }, // GĐ393
   ],
   ytu: [
     { id: 'phattran', name: 'Phất trần', cat: 'fan', speed: 'trung', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Buff, debuff, hồi máu, khống chế' },
     { id: 'kimcham', name: 'Kim châm', cat: 'needle', speed: 'nhanh', dmg: 'Thấp', mana: 'Ít', ranged: true, note: 'Tầm xa, chính xác, gây debuff' },
     { id: 'cocam', name: 'Cổ cầm', cat: 'lute', speed: 'cham', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Gảy đàn tạo vùng hồi máu, buff' },
+    { id: 'dockinh', name: 'Độc kinh', cat: 'book', speed: 'trung', dmg: 'Cao', mana: 'Nhiều', ranged: true, note: 'Cuốn kinh bìa tối ghi độc thuật, lật trang tỏa khí độc' }, // GĐ393
     { id: 'phattran_vm', name: 'Hồi Thiên Phất Trần', cat: 'fan', speed: 'trung', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, note: 'Phất trần tiến hóa theo đường Viên Mãn — phất nhẹ hồi thiên' },
     { id: 'kimcham_vm', name: 'Sinh Tử Thần Châm', cat: 'needle', speed: 'nhanh', dmg: 'Trung bình', mana: 'Ít', ranged: true, vienman: true, note: 'Kim châm tiến hóa theo đường Viên Mãn — châm cứu sinh tử, độ huyệt hồi thiên' },
     { id: 'cocam_vm', name: 'Phục Hi Cổ Cầm', cat: 'lute', speed: 'cham', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, note: 'Cổ cầm tiến hóa theo đường Viên Mãn — một khúc đàn định sinh tử' },
+    { id: 'dockinh_vm', name: 'Vạn Độc Thiên Kinh', cat: 'book', speed: 'trung', dmg: 'Cao', mana: 'Nhiều', ranged: true, vienman: true, note: 'Độc kinh tiến hóa theo đường Viên Mãn — vạn độc quy tông, một trang một kiếp' }, // GĐ393
   ],
   nhotu: [
     { id: 'ngamtho', name: 'Ngâm thơ', cat: '', speed: 'nhanh', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Đọc thơ, chữ phép tạo vùng ảnh hưởng' },
     { id: 'butphep', name: 'Bút phép', cat: 'brush', speed: 'nhanh', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Viết chữ phép tầm xa' },
     { id: 'quyentruc', name: 'Quyển trục', cat: 'scroll', speed: 'cham', dmg: 'Thấp', mana: 'Trung bình', ranged: true, note: 'Mở quyển tạo vùng ảnh hưởng lớn' },
+    { id: 'vankiem', name: 'Văn kiếm', cat: 'sword', speed: 'trung', dmg: 'Trung bình', mana: 'Trung bình', ranged: false, note: 'Kiếm thanh mảnh của quân tử, chuôi buộc tua sách' }, // GĐ393
     { id: 'ngamtho_vm', name: 'Hạo Nhiên Thiên Âm', cat: '', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, note: 'Ngâm thơ tiến hóa theo đường Viên Mãn — tiếng ngâm thành thiên chương' },
     { id: 'butphep_vm', name: 'Văn Thánh Thần Bút', cat: 'brush', speed: 'nhanh', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, note: 'Bút phép tiến hóa theo đường Viên Mãn — bút thần viết chữ phép lớn như thiên chương' },
     { id: 'quyentruc_vm', name: 'Thiên Chương Quyển Trục', cat: 'scroll', speed: 'cham', dmg: 'Trung bình', mana: 'Trung bình', ranged: true, vienman: true, note: 'Quyển trục tiến hóa theo đường Viên Mãn — mở trục là mở thiên chương' },
+    { id: 'vankiem_vm', name: 'Thánh Hiền Văn Kiếm', cat: 'sword', speed: 'trung', dmg: 'Cao', mana: 'Trung bình', ranged: false, vienman: true, note: 'Văn kiếm tiến hóa theo đường Viên Mãn — kiếm bút song toàn, hạo nhiên chính khí' }, // GĐ393
   ],
 };
 const SPEED_LABEL: Record<string, string> = { nhanh: 'Nhanh', trung: 'Trung bình', cham: 'Chậm' };
@@ -1699,6 +1834,7 @@ const HERO_ORIGIN_Y = 94 / 96;
 const SPRITE_SETS = [
   'hero', 'elder', 'shopdan', 'shopnl', 'villager-a', 'villager-b', 'villager-c',
   'city-a', 'city-b', 'city-c', 'city-d', 'city-e', // GĐ253: dân thành phố pixel riêng (Tu Sĩ/Thương Nhân/Nữ Tu/Học Giả/Lính Gác) theo style villager0-4 của server
+  'f32-quanan', 'f32-taphoa', 'f32-aoden', 'f32-bamoi', 'f32-thayboi', 'f32-laongu', 'f32-thosan', 'f32-kiemkhach', 'f32-hoathuong', 'f32-nuhiep', 'f32-daosi', 'f32-tieuyeu', 'f32-dannu', 'f32-laodan', // GĐ396 (F3-2): 14 bộ NPC thành phố mới (mẫu v2 đã duyệt) — file cắt ở chân 1; file nào chưa có thì loader bỏ qua như mọi asset thiếu, NPC đó lùi về vẽ code qua useSet=false
   'envoy', 'merchant', 'rival', // GĐ42: Sứ Giả / Thương Nhân / Tu Sĩ Thù Địch — hết dùng hình vẽ code cũ
   'blacksmith', // GĐ158: Thợ Rèn có sprite riêng (1 ảnh mặt trước dùng cho mọi khung — NPC đứng yên tại lò rèn)
   'npc-truonglang', // GĐ243: Trưởng Làng sprite riêng (ảnh mặt trước mọi khung, như blacksmith)
@@ -1726,23 +1862,23 @@ const SPRITE_SETS = [
 // cầm trên tay nhân vật dưới dạng lớp phủ — vung/đâm/nâng theo nhóm cơ chế.
 const WEAPON_IDS = [
   'chienphu', 'cukiem', 'daothe', 'thuongthe', 'thietcon',
-  'phatchau', 'quyentruong', 'binhbat', 'cotthuan', 'cotchuy',
-  'colenh', 'luoihai', 'quythuong',
+  'phatchau', 'quyentruong', 'binhbat', 'phatluan', 'cotthuan', 'cotchuy', 'cotcung', 'cotnhan',
+  'colenh', 'luoihai', 'quythuong', 'quylinh',
   'daogam', 'songdao', 'liemngan', 'trao',
-  'kiem', 'songkiem', 'trongkiem',
-  'phien', 'phaptruong', 'sachphep',
-  'phattran', 'kimcham', 'cocam',
-  'butphep', 'quyentruc',
+  'kiem', 'songkiem', 'trongkiem', 'phikiem',
+  'phien', 'phaptruong', 'sachphep', 'phapan',
+  'phattran', 'kimcham', 'cocam', 'dockinh',
+  'butphep', 'quyentruc', 'vankiem',
   'chienphu_vm', 'cukiem_vm', 'daothe_vm', 'thuongthe_vm', 'thietcon_vm',
-  'phatchau_vm', 'quyentruong_vm', 'binhbat_vm', 'cotthuan_vm', 'cotchuy_vm',
-  'colenh_vm', 'luoihai_vm', 'quythuong_vm',
+  'phatchau_vm', 'quyentruong_vm', 'binhbat_vm', 'phatluan_vm', 'cotthuan_vm', 'cotchuy_vm', 'cotcung_vm', 'cotnhan_vm',
+  'colenh_vm', 'luoihai_vm', 'quythuong_vm', 'quylinh_vm',
   'daogam_vm', 'songdao_vm', 'liemngan_vm', 'trao_vm',
-  'kiem_vm', 'songkiem_vm', 'trongkiem_vm',
-  'phien_vm', 'phaptruong_vm', 'sachphep_vm',
-  'phattran_vm', 'kimcham_vm', 'cocam_vm',
-  'butphep_vm', 'quyentruc_vm',
+  'kiem_vm', 'songkiem_vm', 'trongkiem_vm', 'phikiem_vm',
+  'phien_vm', 'phaptruong_vm', 'sachphep_vm', 'phapan_vm',
+  'phattran_vm', 'kimcham_vm', 'cocam_vm', 'dockinh_vm',
+  'butphep_vm', 'quyentruc_vm', 'vankiem_vm',
 ];
-const DUAL_WEAPON_IDS = ['songkiem', 'songdao', 'songkiem_vm', 'songdao_vm'];
+const DUAL_WEAPON_IDS = ['songkiem', 'songdao', 'songkiem_vm', 'songdao_vm', 'cotnhan', 'cotnhan_vm']; // GĐ389: + Cốt Nhận
 // GĐ340: loài quái của thế giới nhà (làng + bãi farm + Thạch Lâm) + pet phổ biến —
 // thuộc LỚP A nạp chặn ở preload; mọi loài còn lại nạp nền (lớp B) sau khi vào game.
 const GD340_HOME_KINDS = ['wolf', 'bat', 'golem', 'kiemma', 'huyetlang', 'cot_vuong', 'quy_hon', 'khoiloi'];
@@ -1751,7 +1887,7 @@ const WPN_REST: Record<string, number> = { down: 2.5, up: -0.6, left: -2.5, righ
 const WPN_THRUST_ROT: Record<string, number> = { down: 3.0, up: 0.1, left: -1.45, right: 1.45 };
 const DIR_VEC: Record<string, [number, number]> = { down: [0, 1], up: [0, -1], left: [-1, 0], right: [1, 0] };
 function weaponMotion(cat: string): 'swing' | 'thrust' | 'raise' | 'guard' {
-  if (cat === 'spear' || cat === 'dagger' || cat === 'needle' || cat === 'fist') return 'thrust'; // GĐ189: tay không = đấm (nhóm đâm)
+  if (cat === 'spear' || cat === 'dagger' || cat === 'needle' || cat === 'fist' || cat === 'bow') return 'thrust'; // GĐ189: tay không = đấm (nhóm đâm); GĐ389: cung = vươn tay kéo dây về trước như đâm
   if (cat === 'shield') return 'guard';
   if (cat === 'sword' || cat === 'axe' || cat === 'club' || cat === 'sickle' || cat === 'fan' || cat === 'claw' || cat === 'dual') return 'swing'; // GĐ189: song kiếm/song đao = chém (trước rơi nhầm vào 'raise', tay phụ đứng yên)
   return 'raise'; // staff, beads, bowl, flag, book, scroll, brush, lute...
@@ -1775,13 +1911,17 @@ const WPN_COMBOS: Record<string, [WpnMove, WpnMove, WpnMove]> = {
   phatchau: [{ m: 'raise' }, { m: 'raise', tilt: 0.55 }, { m: 'raise', spin: 1 }], // phật châu: giơ, chếch, XOAY CHÂU
   quyentruong: [{ m: 'raise' }, { m: 'thrust', ext: 10 }, { m: 'raise', lift: 14 }], // quyền trượng: giơ, điểm trượng, giơ cao
   binhbat: [{ m: 'raise' }, { m: 'raise', ext: 9 }, { m: 'raise', lift: 12, tilt: -0.4 }], // bình bát: nâng, đẩy bát ra, nâng cao
+  phatluan: [{ m: 'raise' }, { m: 'raise', spin: 1 }, { m: 'raise', spin: 1, tilt: 0.5 }], // GĐ393 pháp luân: giơ, XOAY LUÂN, xoay chếch
   // Cốt Tu
   cotthuan: [{ m: 'guard', ext: 4 }, { m: 'guard', ext: 6, tilt: 0.3 }, { m: 'guard', ext: 11 }], // khiên: đỡ, đỡ chếch, HÚC khiên
   cotchuy: [{ m: 'swing', arc: 1.15 }, { m: 'swing', chop: true, arc: 1.2 }, { m: 'swing', flip: true, arc: 1.15 }], // chùy: quét, bổ nặng, quét ngược
+  cotcung: [{ m: 'thrust', ext: 9 }, { m: 'thrust', ext: 11, tilt: 0.35 }, { m: 'thrust', ext: 15 }], // GĐ389 cung: giương bắn, bắn chếch, kéo căng bắn nặng
+  cotnhan: [{ m: 'swing', arc: 0.9 }, { m: 'swing', flip: true, arc: 0.9 }, { m: 'swing', chop: true, arc: 0.85 }], // GĐ389 song nhận: chém lệch nhịp 2 tay như song đao
   colenh: [{ m: 'swing', arc: 1.1 }, { m: 'swing', flip: true, arc: 1.1 }, { m: 'raise', lift: 12 }], // cờ lệnh: phất 2 chiều rồi dựng cờ
   luoihai: [{ m: 'swing', dip: 4 }, { m: 'swing', flip: true, dip: 4 }, { m: 'swing', chop: true }], // lưỡi hái: gặt thấp 2 chiều, bổ
   // Quỷ Tu
   quythuong: [{ m: 'thrust', ext: 14 }, { m: 'thrust', sweep: true, arc: 1.25 }, { m: 'thrust', ext: 16, spin: 0.5 }], // quỷ thương: đâm xa, quét rộng, đâm XOAY
+  quylinh: [{ m: 'raise' }, { m: 'raise', tilt: 0.55 }, { m: 'raise', osc: 0.3 }], // GĐ393 chiêu hồn linh: giơ, lắc chuông, RUNG CHUÔNG
   // Ảnh Tu
   daogam: [{ m: 'thrust', ext: 8 }, { m: 'thrust', ext: 8, tilt: 0.7 }, { m: 'swing', arc: 0.6 }], // dao găm: đâm nhanh, đâm chéo, cứa
   songdao: [{ m: 'swing', arc: 0.95 }, { m: 'swing', flip: true, arc: 0.95 }, { m: 'swing', chop: true, arc: 0.9 }], // song đao: chém lệch nhịp 2 tay
@@ -1791,18 +1931,22 @@ const WPN_COMBOS: Record<string, [WpnMove, WpnMove, WpnMove]> = {
   kiem: [{ m: 'swing' }, { m: 'thrust', ext: 13 }, { m: 'swing', flip: true }], // kiếm: chém, ĐÂM, chém ngược (đúng kiếm pháp)
   songkiem: [{ m: 'swing', arc: 1.05 }, { m: 'swing', flip: true, arc: 1.05 }, { m: 'thrust', ext: 12 }], // song kiếm: chém đôi rồi đâm
   trongkiem: [{ m: 'swing', arc: 1.5 }, { m: 'swing', chop: true, arc: 1.35 }, { m: 'swing', flip: true, arc: 1.5 }], // trọng kiếm: mỗi đòn đều nặng và rộng
+  phikiem: [{ m: 'thrust', ext: 12 }, { m: 'thrust', ext: 12, tilt: -0.5 }, { m: 'thrust', ext: 16 }], // GĐ393 phi kiếm: ngự kiếm đâm 3 nhịp
   // Pháp Tu
   phien: [{ m: 'swing', arc: 0.9 }, { m: 'swing', flip: true, arc: 1.15 }, { m: 'swing', arc: 1.3 }], // phiến: quạt nhẹ, quạt quét (đạn cong), quạt mạnh (đạn to)
   phaptruong: [{ m: 'raise' }, { m: 'raise', tilt: 0.5 }, { m: 'raise', lift: 13, spin: 0.5 }], // pháp trượng: giơ, chếch, giơ cao xoay nhẹ
   sachphep: [{ m: 'raise' }, { m: 'raise', ext: 8 }, { m: 'raise', osc: 0.22 }], // sách phép: giơ, đẩy sách, LẬT TRANG (rung)
+  phapan: [{ m: 'raise' }, { m: 'raise', ext: 8 }, { m: 'raise', lift: 10, tilt: 0.3 }], // GĐ393 pháp ấn: giơ, đẩy ấn, ĐÓNG ẤN
   // Y Tu
   phattran: [{ m: 'swing', arc: 0.85 }, { m: 'swing', flip: true, arc: 0.85 }, { m: 'swing', arc: 1.1 }], // phất trần: phất mềm 2 chiều, phất rộng
   kimcham: [{ m: 'thrust', ext: 6 }, { m: 'thrust', ext: 6, tilt: 0.4 }, { m: 'thrust', ext: 11 }], // kim châm: châm nhanh chính xác, đòn cuối sâu
+  dockinh: [{ m: 'raise' }, { m: 'raise', ext: 8 }, { m: 'raise', osc: 0.22 }], // GĐ393 độc kinh: giơ, đẩy kinh, LẬT TRANG tỏa độc
   // Nho Tu
   cocam: [{ m: 'raise', osc: 0.3 }, { m: 'raise', tilt: 0.5, osc: 0.2 }, { m: 'raise', lift: 12 }], // cổ cầm: GẢY đàn (rung), gảy chếch, nâng đàn
   ngamtho: [{ m: 'raise' }, { m: 'raise', tilt: 0.55 }, { m: 'raise', lift: 13 }], // ngâm thơ: kết ấn 3 nhịp
   butphep: [{ m: 'swing', arc: 0.6 }, { m: 'swing', flip: true, arc: 0.6 }, { m: 'thrust', ext: 10 }], // bút phép: vẩy bút 2 chiều, CHẤM bút
   quyentruc: [{ m: 'raise' }, { m: 'swing', arc: 1.1 }, { m: 'raise', lift: 12, tilt: -0.4 }], // quyển trục: giơ, MỞ TRỤC quét, giơ cao
+  vankiem: [{ m: 'swing' }, { m: 'thrust', ext: 13 }, { m: 'swing', flip: true }], // GĐ393 văn kiếm: chém, ĐÂM, chém ngược như kiếm quân tử
 };
 function defaultMoveFor(motion: 'swing' | 'thrust' | 'raise' | 'guard', cv: number): WpnMove {
   if (motion === 'swing') return cv === 1 ? { m: 'swing', flip: true } : cv === 2 ? { m: 'swing', chop: true } : { m: 'swing' };
@@ -1843,6 +1987,79 @@ function spriteTexKey(set: string, dir: string, frame: string): string {
   if (frame === 'idle') return `${set}-idle-${hd}`;
   if (frame === 'cast') return `${set}-walk-${hd}-1`; // chưa có khung tung chiêu riêng → dùng khung bước
   return `${set}-walk-${hd}-${frame.slice(1)}`; // w0..w3
+}
+
+// ---- GĐ396 (F3-2): BIẾN THỂ MÀU ÁO TỪNG NPC — mỗi NPC có diện mạo riêng
+// xác định từ chính nó (hash id), không random theo thời gian:
+//   set     = pool[h % pool.length]            (pool = các bộ của vai, xem cityNpcPool)
+//   variant = floor(h / pool.length) % 8       (8 mức: hue {0,+20,-20,+40} × tone {thường, nhạt s×0.6})
+// v0 = ảnh gốc (không sinh thêm texture). v1..v7 sinh LƯỜI tại runtime bằng
+// canvas hue-shift (port từ asset-src/f32/build_f32_samples_v2.py: bỏ pixel
+// da theo bảng SKINS, chỉ đổi hue pixel áo có s>0.12, v>0.10 trong vùng thân
+// x24..72/y48..94, giữ s/v, band ±18° quanh hue áo gốc của bộ).
+function fnv1a32(s: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h >>> 0;
+}
+function npcHueDist(a: number, b: number): number {
+  const d = Math.abs(a - b) % 360;
+  return Math.min(d, 360 - d);
+}
+function npcRgbToHsv(r: number, g: number, b: number): [number, number, number] {
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
+  let h = 0;
+  if (d !== 0) {
+    if (mx === r) h = ((g - b) / d) % 6;
+    else if (mx === g) h = (b - r) / d + 2;
+    else h = (r - g) / d + 4;
+    h /= 6; if (h < 0) h += 1;
+  }
+  return [h, mx === 0 ? 0 : d / mx, mx];
+}
+function npcHsvToRgb(h: number, s: number, v: number): [number, number, number] {
+  const i = Math.floor(h * 6), f = h * 6 - i;
+  const p = v * (1 - s), q = v * (1 - f * s), t = v * (1 - (1 - f) * s);
+  switch (i % 6) {
+    case 0: return [v, t, p];
+    case 1: return [q, v, p];
+    case 2: return [p, v, t];
+    case 3: return [p, q, v];
+    case 4: return [t, p, v];
+    default: return [v, p, q];
+  }
+}
+// Hue áo gốc từng bộ = mode hue pixel thân trong idle-south (đo offline bằng
+// /tmp/f32_measure_hue.py; bộ f32 đo trên mẫu v2 — chân 1 cắt khung xong phải
+// đo lại trên file idle-south thật, xem probes/f32/f32_count_396.cjs).
+// Ngoại lệ: f32-tieuyeu mode đo được 111 là DA XANH của Tiểu Yêu, không phải
+// áo — lấy 270 (váy tím, 303px trong band) để biến thể đổi đúng váy, tay giữ nguyên.
+// f32-laodan (47) + f32-kiemkhach (29): áo đã desat gần xám từ mẫu v2 nên
+// biến thể hue gần như không đổi — 2 bộ này thực chất chỉ ~1 diện mạo (xem báo cáo GĐ396).
+const NPC_SET_ROBE_HUE: Record<string, number> = {
+  'city-a': 211, 'city-b': 347, 'city-c': 263, 'city-d': 185, 'city-e': 211,
+  'villager-a': 35, 'villager-b': 223, 'villager-c': 29,
+  merchant: 345, envoy: 217, elder: 227, blacksmith: 25, 'npc-thaoduoc': 101,
+  shopdan: 167, shopnl: 41,
+  'f32-quanan': 25, 'f32-taphoa': 151, 'f32-aoden': 211, 'f32-bamoi': 349,
+  'f32-thayboi': 225, 'f32-laongu': 191, 'f32-thosan': 25, 'f32-kiemkhach': 29,
+  'f32-hoathuong': 45, 'f32-nuhiep': 171, 'f32-daosi': 45, 'f32-tieuyeu': 270,
+  'f32-dannu': 331, 'f32-laodan': 26, // GĐ396-chân 1: đo lại trên file idle-south thật = 26 (172px, đỉnh rõ); giá trị 47 đo trên mẫu v2 bằng script khác là sai — band 47±18 chỉ bắt 12px, band 26±18 bắt 293px
+};
+const NPC_VARIANT_HUE_DELTAS = [0, 20, -20, 40]; // variant % 4; variant >= 4 thêm tone nhạt (s×0.6)
+const NPC_SKIN_RGB: Array<[number, number, number]> = [ // port bảng SKINS trong build_f32_samples_v2.py
+  [254, 220, 193], [255, 218, 192], [255, 212, 179], [252, 207, 174], [250, 208, 174],
+  [253, 219, 192], [253, 214, 184], [254, 178, 156], [255, 225, 201], [247, 183, 114],
+  [255, 202, 163], [253, 177, 154], [255, 210, 170],
+];
+// Khóa texture biến thể: v0 dùng khóa gốc; v>0 thêm -v<v>. NPC không có set
+// (rơi về personTexKey) không qua đây.
+function npcTexKey(set: string, variant: number, dir: string, frame: string): string {
+  if (!variant) return spriteTexKey(set, dir, frame);
+  const hd = HERO_DIRS[dir] || 'south';
+  if (frame === 'idle') return `${set}-v${variant}-idle-${hd}`;
+  if (frame === 'cast') return `${set}-v${variant}-walk-${hd}-1`;
+  return `${set}-v${variant}-walk-${hd}-${frame.slice(1)}`;
 }
 
 // ---- Tạo nhân vật (GĐ6): 9 lớp + nhãn 7 chỉ số, khớp server ----
@@ -1972,6 +2189,7 @@ interface NpcDialogData {
   storySegs?: Array<{ id: string; title: string; hoi: number; kind: string; state: string; version: string | null; canClear?: boolean }>; // GĐ352: đoạn kể chuyện của NPC
   storyRead?: { segId: string; version: string } | null; // GĐ352: đoạn vừa nghe — hiện nguyên văn trong hộp thoại
   storyAnswers?: string[] | null; // GĐ354: khoảnh khắc đệ tử hỏi sư phụ — 2 câu đáp sẵn
+  libInfo?: { booksRead: number; readSec: number } | null; // GĐ386: Thủ Tàng Văn Uyển — số sách đã đọc của người chơi
   text: string;
   personalQuest: {
     questId: string; name: string; desc: string; target: number; rewardStones: number;
@@ -2106,13 +2324,14 @@ class GameScene extends Phaser.Scene {
   private dialogueState = new Map<string, { idx: number; nextAt: number; until: number }>();
   private lastDialogueCheck = 0;
   private dropActors = new Map<string, Phaser.GameObjects.Container>();
-  private openPanel: 'shop' | 'quest' | 'inv' | 'job' | 'ach' | 'learn' | 'bangvang' | 'stones' | 'altar' | 'forge' | 'hint' | 'mount' | 'sect' | 'guild' | null = null; // GĐ224: + sect
+  private openPanel: 'shop' | 'quest' | 'inv' | 'job' | 'ach' | 'learn' | 'bangvang' | 'stones' | 'altar' | 'forge' | 'hint' | 'mount' | 'sect' | 'guild' | 'phapbao' | null = null; // GĐ224: + sect; GĐ385-sửaUI: + phapbao
   private exFrom: 'thuong' | 'trung' = 'thuong'; // GĐ367: trạng thái form đổi đá trong panel ví (giữ qua các lần render lại theo char_sync)
   private exTo: 'ha' = 'ha'; // GĐ367: đích đổi chỉ còn Hạ phẩm — Bảo chốt 09/11 bỏ Thượng→Trung (giữ giá Trung)
   private exQty = 1;
   private mountShopMode = false; // GĐ161: panel thú cưỡi mở từ trại (hiện mục mua bán) hay từ Menu (chỉ chuồng của mình)
   private currentShop = '';
   private invTab: 'items' | 'gear' = 'items'; // GĐ119: tab Túi đồ đang mở
+  private pbSig = ''; // GĐ385: chữ ký dữ liệu pháp bảo — chỉ dựng lại DOM chi tiết khi đổi (tránh phá cú bấm giữa các char_sync); GĐ385-sửaUI: trạng thái mở nằm ở openPanel === 'phapbao'
   private forgeStock: ForgeStock = null; // GĐ119 bước 5: entry kho dạng phẳng (không lồng .item)
   private forgeDay: number | null = null; // GĐ119 bước 5: ngày của kho đang hiển thị
   private forgeMeta: ForgeMeta = null; // GĐ119 bước 5
@@ -2130,6 +2349,18 @@ class GameScene extends Phaser.Scene {
   private guestToken = '';
   private session = '';
   private accountName = '';
+  // GĐ390: khung chọn server — server đã chọn (null = chưa chọn, đang ở màn chọn);
+  // socketOrigin là origin socket hiện tại được tạo ra (để biết khi nào chọn
+  // server khác origin thì phải tải lại trang cho socket nối đúng origin).
+  private selectedServer: ServerEntry | null = null;
+  private socketOrigin = '';
+  private serverListTimer: number | null = null; // GĐ390: làm mới trạng thái server mỗi 60s khi ở màn chọn
+  // GĐ390-sửa select: trạng thái live đã đo của từng server (null = không truy cập được; chưa có = chưa đo)
+  // GĐ390-sửa select lần 2 (Bảo 12/11): chỉ kiểm tra server SỐNG hay CHẾT qua
+  // /api/status — không đọc/không hiện số người hay độ trễ nữa. true = sống,
+  // false = không truy cập được, chưa có key = chưa kiểm tra.
+  private serverStatusCache = new Map<string, boolean>();
+  private serverOptionsBuilt = false; // GĐ390-sửa select: option chỉ dựng 1 lần, lần sau chỉ sửa chữ (không đóng picker đang xổ)
   private pendingMode: 'session' | 'guest' | null = null; // hello sẽ gửi khi socket nối xong
   // GĐ56: phiên hello gần nhất + nhân vật đang chơi — khi socket nối LẠI
   // (rớt mạng, chuyển WiFi/4G, server chập chờn) client tự hello lại và
@@ -2777,6 +3008,7 @@ class GameScene extends Phaser.Scene {
     wire('mountClose', () => this.closePanels()); // GĐ161: Trại Thú Cưỡi
     wire('stonesClose', () => this.closePanels());
     wire('sectClose', () => this.closePanels()); // GĐ224
+    wire('phapBaoClose', () => this.closePanels()); // GĐ385-sửaUI: ✕ panel Pháp bảo
     wire('guildClose', () => this.closePanels()); // GĐ267
     const pathCloseEl = document.getElementById('pathClose'); if (pathCloseEl) pathCloseEl.onclick = () => { const pp = document.getElementById('pathPanel'); if (pp) pp.style.display = 'none'; };
     const pathThangEl = document.getElementById('pathThangBtn'); if (pathThangEl) pathThangEl.onclick = () => { this.socket.emit('choose_path', { path: 'thang' }); const pp = document.getElementById('pathPanel'); if (pp) pp.style.display = 'none'; };
@@ -2785,7 +3017,14 @@ class GameScene extends Phaser.Scene {
     wire('invBtn', () => this.toggleInv());
 
     // ---- Kết nối Socket.io tới Backend ----
-    this.socket = SERVER_URL ? io(SERVER_URL) : io();
+    // GĐ390: khung chọn server — origin theo server đã chọn (nhớ ở localStorage).
+    // Chưa chọn server thì tạo socket chưa nối (autoConnect:false); nối sau khi
+    // người chơi chọn ở màn chọn. Server đang bảo trì thì không tự nối vào.
+    const storedServer390 = this.loadStoredServer();
+    this.selectedServer = storedServer390 && storedServer390.status !== 'maintenance' ? storedServer390 : null;
+    const chosenOrigin390 = (this.selectedServer ? this.selectedServer.origin : '') || SERVER_URL;
+    this.socketOrigin = chosenOrigin390;
+    this.socket = chosenOrigin390 ? io(chosenOrigin390, { autoConnect: false }) : io({ autoConnect: false });
     // Tay cầm gỡ lỗi/kiểm chứng tự động (server vẫn là chuẩn, không ảnh hưởng luật chơi)
     (window as unknown as { tttSocket?: Socket }).tttSocket = this.socket;
 
@@ -2804,12 +3043,19 @@ class GameScene extends Phaser.Scene {
     }
     this.setupSplashUI();
     // GĐ311: hiện panel đầu NGAY khi mở trang — không bắt người chơi nhìn thanh tải/render
-    if (this.session) {
-      this.showSplashPanel('chars');
-      const cl = document.getElementById('charList');
-      if (cl && !cl.innerHTML) cl.innerHTML = '<p class="splash-note">Đang tải danh sách nhân vật…</p>';
+    if (this.selectedServer) {
+      // GĐ390: đã nhớ server — vào thẳng luồng cũ + nối socket
+      this.socket.connect();
+      if (this.session) {
+        this.showSplashPanel('chars');
+        const cl = document.getElementById('charList');
+        if (cl && !cl.innerHTML) cl.innerHTML = '<p class="splash-note">Đang tải danh sách nhân vật…</p>';
+      } else {
+        this.showSplashPanel('main');
+      }
     } else {
-      this.showSplashPanel('main');
+      // GĐ390: chưa chọn server — hiện màn chọn trước đăng nhập, chưa nối socket
+      this.showServerPanel();
     }
     this.setLoadProgress(55, 'Đang kết nối tới server…');
     // Có sẵn phiên đăng nhập → khôi phục thẳng tới danh sách nhân vật
@@ -3239,6 +3485,21 @@ class GameScene extends Phaser.Scene {
         else this.impactFx(a.container.x, a.container.y - 6, '#ffd873', 40); // GĐ171
       }
     });
+    // GĐ385: pháp bảo kích hoạt — 1 hình nhỏ đúng chất món tại vị trí kích hoạt, không chữ bay dài
+    this.socket.on('phapbao_proc', (r: { id: string; art: string; x: number; y: number; targetId?: string | null }) => {
+      const PB_VIS: Record<string, { g: string; col: string }> = {
+        pb_hon_don_chau: { g: '🌀', col: '#b18cff' }, pb_kiep_loi_kiem: { g: '⚡', col: '#ffd873' },
+        pb_tinh_ha_phien: { g: '🛡️', col: '#7dd3fc' }, pb_hu_khong_chung: { g: '🔔', col: '#c4b5fd' },
+        pb_giao_long_an: { g: '🐉', col: '#6ee7b7' }, pb_phuong_hoang_linh: { g: '🔥', col: '#fb923c' },
+      };
+      const v = PB_VIS[r.art] || { g: '✦', col: '#ffffff' };
+      const tc = r.targetId ? this.monsterActors.get(r.targetId)?.container : null;
+      const x = tc ? tc.x : r.x;
+      const y = (tc ? tc.y : r.y) - 14;
+      this.impactFx(x, y, v.col, 36);
+      const t = this.add.text(x, y - 8, v.g, { fontSize: '18px' }).setOrigin(0.5, 0.5).setDepth(10001);
+      this.tweens.add({ targets: t, y: y - 30, alpha: 0, duration: 900, ease: 'Quad.Out', onComplete: () => t.destroy() });
+    });
     this.socket.on('player_attacked', (r: { id: string; targetId?: string }) => {
       if (r.id === this.myId) { sound.noteAction(); sound.play('swing'); } // GĐ167
       const a = this.actors.get(r.id);
@@ -3499,7 +3760,7 @@ class GameScene extends Phaser.Scene {
         wk.lastMoveAt = this.time.now;
         wk.walking = true;
         const frame = 'w' + (Math.floor(this.time.now / 130) % 4);
-        const key = wk.set ? spriteTexKey(wk.set, wk.dir, frame) : personTexKey(wk.style, wk.dir, frame);
+        const key = wk.set ? this.ensureNpcVariantTex(wk.set, wk.variant || 0, wk.dir, frame) : personTexKey(wk.style, wk.dir, frame);
         if (this.textures.exists(key) && wk.sprite.texture.key !== key) wk.sprite.setTexture(key);
       }
     }
@@ -4492,14 +4753,169 @@ class GameScene extends Phaser.Scene {
     this.loadPct = Math.max(this.loadPct, pct);
   }
 
-  private showSplashPanel(which: 'main' | 'auth' | 'chars' | 'exit'): void {
+  private showSplashPanel(which: 'main' | 'auth' | 'chars' | 'exit' | 'server'): void {
     const splash = document.getElementById('splashScreen');
-    if (splash) splash.style.display = 'flex';
-    const map: Record<string, string> = { main: 'splashMain', auth: 'authPanel', chars: 'charPanel', exit: 'exitPanel' };
+    // GĐ390-sửa panel: màn chọn server căn giữa màn hình (mặc định các panel khác vẫn dồn đáy như cũ)
+    if (splash) { splash.style.display = 'flex'; splash.classList.toggle('serverMode', which === 'server'); }
+    const map: Record<string, string> = { main: 'splashMain', auth: 'authPanel', chars: 'charPanel', exit: 'exitPanel', server: 'serverPanel' };
     for (const [k, id] of Object.entries(map)) {
       const el = document.getElementById(id);
-      if (el) el.style.display = k === which ? 'block' : 'none';
+      if (el) el.style.display = k === which ? (k === 'server' ? 'flex' : 'block') : 'none';
     }
+  }
+
+  // ---------------- GĐ390: khung chọn server ----------------
+  private loadStoredServer(): ServerEntry | null {
+    try {
+      const id = window.localStorage.getItem(SERVER_CHOICE_KEY) || '';
+      return SERVERS.find((s) => s.id === id) || null;
+    } catch { return null; }
+  }
+
+  private saveStoredServer(id: string): void {
+    try { window.localStorage.setItem(SERVER_CHOICE_KEY, id); } catch { /* bỏ qua */ }
+  }
+
+  private serverStatusUrl(entry: ServerEntry): string {
+    // GĐ390: /api/status của server đó — cùng origin thì đường dẫn tương đối;
+    // server khác origin thì URL đầy đủ (server đã mở CORS cho /api/status).
+    const base = (entry.origin || SERVER_URL || '').replace(/\/$/, '');
+    return base + '/api/status';
+  }
+
+  // GĐ390-sửa select lần 2: chỉ kiểm tra sống/chết — gọi /api/status nhưng
+  // KHÔNG đọc số người/độ trễ, chỉ trả true khi server trả lời OK.
+  private async fetchServerStatus(entry: ServerEntry): Promise<boolean> {
+    try {
+      const ctl = new AbortController();
+      const to = window.setTimeout(() => ctl.abort(), 5000);
+      const r = await fetch(this.serverStatusUrl(entry), { signal: ctl.signal });
+      window.clearTimeout(to);
+      return r.ok;
+    } catch { return false; }
+  }
+
+  // GĐ390-sửa select lần 2: nhãn 1 dòng cho 1 lựa chọn trong ô select — CHỈ tên + trạng thái, không số người/độ trễ
+  private serverOptionLabel(entry: ServerEntry): string {
+    if (entry.status === 'maintenance') return `🔴 ${entry.name} — Đang bảo trì`;
+    const st = this.serverStatusCache.get(entry.id);
+    if (st === undefined) return entry.name;
+    if (!st) return `⚪ ${entry.name} — Không truy cập được`;
+    return `🟢 ${entry.name}`;
+  }
+
+  private renderServerOptions(): void {
+    const sel = document.getElementById('serverSelect') as HTMLSelectElement | null;
+    if (!sel) return;
+    // GĐ390-sửa select: giữ lựa chọn đang chọn khi làm mới (mặc định = server đã nhớ, không thì server đầu)
+    const prev = sel.value || this.loadStoredServer()?.id || SERVERS[0]?.id || '';
+    const ids = SERVERS.map((s) => s.id).join(',');
+    if (!this.serverOptionsBuilt || sel.dataset.ids !== ids) {
+      sel.innerHTML = SERVERS.map((s) => `<option value="${s.id}">${this.serverOptionLabel(s)}</option>`).join('');
+      sel.dataset.ids = ids;
+      this.serverOptionsBuilt = true;
+    } else {
+      for (const opt of Array.from(sel.options)) {
+        const entry = SERVERS.find((s) => s.id === opt.value);
+        if (entry) opt.textContent = this.serverOptionLabel(entry);
+      }
+    }
+    if (SERVERS.some((s) => s.id === prev)) sel.value = prev;
+    else if (SERVERS[0]) sel.value = SERVERS[0].id;
+    this.updateServerDetail();
+  }
+
+  // GĐ390-sửa select: dòng chi tiết dưới ô select + trạng thái nút "Vào" theo server đang chọn
+  private updateServerDetail(): void {
+    const sel = document.getElementById('serverSelect') as HTMLSelectElement | null;
+    const detail = document.getElementById('serverDetail');
+    const enterBtn = document.getElementById('btnEnterServer') as HTMLButtonElement | null;
+    if (!sel || !detail || !enterBtn) return;
+    const entry = SERVERS.find((s) => s.id === sel.value);
+    if (!entry) { detail.textContent = ''; enterBtn.disabled = true; enterBtn.textContent = 'Vào'; return; }
+    if (entry.status === 'maintenance') {
+      // GĐ390: bảo trì theo server — khóa nút vào, hiện lý do + giờ mở lại
+      detail.textContent = `🔴 Đang bảo trì — ${entry.maintReason || 'nâng cấp máy chủ'}${entry.maintUntil ? `. Mở lại: ${entry.maintUntil}` : ''}`;
+      enterBtn.disabled = true;
+      enterBtn.textContent = 'Bảo trì';
+      return;
+    }
+    const st = this.serverStatusCache.get(entry.id);
+    if (st === undefined) {
+      detail.textContent = 'Đang kiểm tra…';
+      enterBtn.disabled = true;
+      enterBtn.textContent = 'Vào';
+      return;
+    }
+    if (!st) {
+      detail.textContent = '⚪ Không truy cập được';
+      enterBtn.disabled = true;
+      enterBtn.textContent = 'Không vào được';
+      return;
+    }
+    // GĐ390-sửa select lần 2: chỉ hiện trạng thái, không số người/độ trễ.
+    detail.textContent = '🟢 Đang hoạt động';
+    enterBtn.disabled = false;
+    enterBtn.textContent = 'Vào';
+  }
+
+  private async refreshServerList(): Promise<void> {
+    const sel = document.getElementById('serverSelect') as HTMLSelectElement | null;
+    if (!sel) return;
+    // GĐ390-sửa select: đo song song tất cả server rồi vẽ 1 lần (giữ nguyên lựa chọn + picker đang xổ)
+    await Promise.all(SERVERS.map(async (entry) => {
+      if (entry.status === 'maintenance') return;
+      this.serverStatusCache.set(entry.id, await this.fetchServerStatus(entry));
+    }));
+    this.renderServerOptions();
+  }
+
+  private showServerPanel(): void {
+    this.showSplashPanel('server');
+    void this.refreshServerList();
+    // GĐ390: làm mới trạng thái mỗi 60s (TẠM) trong lúc còn ở màn chọn
+    if (this.serverListTimer == null) {
+      this.serverListTimer = window.setInterval(() => {
+        if (document.getElementById('serverPanel')?.style.display !== 'none') void this.refreshServerList();
+      }, 60000);
+    }
+  }
+
+  private selectServer(entry: ServerEntry): void {
+    // GĐ390: nút bảo trì/offline đã khóa — phòng hờ bấm bằng tay
+    if (entry.status === 'maintenance') return;
+    this.saveStoredServer(entry.id);
+    this.selectedServer = entry;
+    const effOrigin = (entry.origin || SERVER_URL || '').replace(/\/$/, '');
+    const curOrigin = (this.socketOrigin || '').replace(/\/$/, '');
+    if (effOrigin !== curOrigin) {
+      // GĐ390: server khác origin với socket hiện tại — tải lại trang để
+      // socket nối đúng origin (lựa chọn đã nhớ nên vào thẳng sau khi tải lại).
+      window.location.reload();
+      return;
+    }
+    this.connManualOff = false; // GĐ390: đã chọn server — hiện lại dòng chờ kết nối
+    this.socket.connect();
+    if (this.session) {
+      this.showSplashPanel('chars');
+      const cl = document.getElementById('charList');
+      if (cl && !cl.innerHTML) cl.innerHTML = '<p class="splash-note">Đang tải danh sách nhân vật…</p>';
+    } else {
+      this.showSplashPanel('main');
+    }
+  }
+
+  private changeServer(): void {
+    // GĐ390: Đổi server = ngắt khỏi server cũ, về màn chọn (giữ phiên tài khoản).
+    // Đang trong game thì nút này không hiện (chỉ có ở màn chờ) nên không sợ
+    // rớt nhân vật giữa chừng.
+    try { if (this.socket.connected) this.socket.disconnect(); } catch { /* bỏ qua */ }
+    this.helloPayload = null;
+    this.pendingMode = null;
+    this.selectedServer = null;
+    this.connManualOff = true; // GĐ390: về màn chọn do tự ngắt — không hiện dòng chờ kết nối
+    try { window.localStorage.removeItem(SERVER_CHOICE_KEY); } catch { /* bỏ qua */ }
+    this.showServerPanel();
   }
 
   // GĐ339: đang chờ dữ liệu vào game (đã hello, chưa có danh sách nhân vật /
@@ -4522,7 +4938,8 @@ class GameScene extends Phaser.Scene {
     const atSplash = !!splash && splash.style.display !== 'none' && !this.inGame;
     let phase = '';
     let retry = false;
-    if (atSplash && !this.connManualOff) {
+    // GĐ390: chưa chọn server thì chưa nối gì cả — không hiện dòng chờ kết nối
+    if (atSplash && !this.connManualOff && this.selectedServer) {
       const now = Date.now();
       if (!this.socket.connected) {
         if (!this.connWaitStart) this.connWaitStart = now;
@@ -4695,6 +5112,23 @@ class GameScene extends Phaser.Scene {
     if (newsBtn) newsBtn.onclick = () => this.openNoticeBoard();
     const newsBtn2 = byId('btnNews2');
     if (newsBtn2) newsBtn2.onclick = () => this.openNoticeBoard();
+    this.updateNewsDot(); // GĐ391: chấm "mới" trên nút Thông báo (tin chưa đọc)
+    // GĐ390: khung chọn server — nút Đổi máy chủ + làm mới + bấm dòng server
+    const changeSrvBtn = byId('btnChangeServer');
+    if (changeSrvBtn) changeSrvBtn.onclick = () => this.changeServer();
+    const changeSrvBtn2 = byId('btnChangeServer2');
+    if (changeSrvBtn2) changeSrvBtn2.onclick = () => this.changeServer();
+    const refreshSrvBtn = byId('btnRefreshServers');
+    if (refreshSrvBtn) refreshSrvBtn.onclick = () => void this.refreshServerList();
+    // GĐ390-sửa select: đổi lựa chọn trong ô select → cập nhật dòng chi tiết + nút "Vào"
+    const serverSel = byId('serverSelect') as HTMLSelectElement | null;
+    if (serverSel) serverSel.addEventListener('change', () => this.updateServerDetail());
+    const enterSrvBtn = byId('btnEnterServer') as HTMLButtonElement | null;
+    if (enterSrvBtn) enterSrvBtn.onclick = () => {
+      if (enterSrvBtn.disabled) return;
+      const entry = SERVERS.find((s) => s.id === (serverSel?.value || ''));
+      if (entry) this.selectServer(entry);
+    };
     const backExit = byId('btnBackFromExit');
     if (backExit) backExit.onclick = () => this.showSplashPanel(this.session ? 'chars' : 'main');
     const createBtn = byId('btnCreateChar');
@@ -6085,6 +6519,62 @@ class GameScene extends Phaser.Scene {
         if (!xkBtn.dataset.bound) { xkBtn.dataset.bound = '1'; xkBtn.onclick = () => this.socket.emit('xuat_khieu'); }
       }
     }
+    // GĐ385: PHÁP BẢO — 1 dòng nhỏ trên thẻ; chi tiết mở thành PANEL NỔI riêng
+    // (class .panel như mọi panel khác, nút ▸ Pháp bảo trên thẻ chỉ để mở/đóng).
+    // GĐ385-sửaUI (11/11, Bảo chê ảnh chụp máy hẹp): bản đầu nở chi tiết TRONG thẻ
+    // → thẻ hẹp bóp mô tả vỡ vụn từng 2–3 chữ + tràn đè chat/dock; nay panel có
+    // bề ngang riêng, cuộn nội bộ, chi phí tách từng dòng, nút chữ ngắn không cắt.
+    {
+      const pb = (c as unknown as { phapBao?: CharacterData['phapBao'] }).phapBao;
+      const pbEl = document.getElementById('hudPhapBao');
+      const pbBtn = document.getElementById('btnPhapBao') as HTMLButtonElement | null;
+      const pbPanel = document.getElementById('phapBaoPanel');
+      const pbBody = document.getElementById('phapBaoBody');
+      if (pbEl) {
+        if (!pb || !pb.unlocked) { pbEl.style.opacity = '0.55'; pbEl.textContent = 'Pháp bảo — Hóa Thần mở'; }
+        else {
+          pbEl.style.opacity = '1';
+          const eq = pb.catalog.find((a) => a.id === pb.equipped);
+          pbEl.innerHTML = eq ? `<img class="iico" src="/sprites/items/${eq.id}.png" alt="" onerror="this.style.display='none'"> Pháp bảo: <b>${eq.name}</b> · cấp ${eq.level}` : 'Pháp bảo: <i>chưa đeo</i> — mở ▸ Pháp bảo để chế/đeo';
+        }
+      }
+      const pbOpenNow = this.openPanel === 'phapbao';
+      if (pbBtn) {
+        pbBtn.textContent = `${pbOpenNow ? '▾' : '▸'} Pháp bảo`;
+        if (!pbBtn.dataset.bound) { pbBtn.dataset.bound = '1'; pbBtn.onclick = () => { if (this.openPanel === 'phapbao') this.closePanels(); else { this.closePanels(); this.openPanel = 'phapbao'; this.pbSig = ''; } this.renderHudCharStatic(); }; }
+      }
+      if (pbPanel) pbPanel.style.display = pbOpenNow ? 'block' : 'none';
+      if (pbOpenNow && pb && pbBody) {
+        const costLines = (title: string, thuong: number, mats: Record<string, number>, cuc: number) => {
+          const rows = [`<div>💠 ${thuong.toLocaleString('vi-VN')} Linh thạch Thượng (có ${(c.stonesThuong ?? 0).toLocaleString('vi-VN')})</div>`];
+          for (const [id, n] of Object.entries(mats)) rows.push(`<div>🧱 ${ITEM_INFO[id]?.name || id} ×${n} (có ${(c.inventory || {})[id] || 0})</div>`);
+          if (cuc) rows.push(`<div>🔷 Cực phẩm ×${cuc} (có ${c.stonesCuc ?? 0})</div>`);
+          return `<div class="pbCosts"><b>${title}</b>${rows.join('')}</div>`;
+        };
+        const sig = JSON.stringify([pb.equipped, pb.owned, c.stonesThuong ?? 0, c.stonesCuc ?? 0, c.inventory]);
+        if (this.pbSig !== sig) {
+          this.pbSig = sig;
+          if (!pb.unlocked) pbBody.innerHTML = '<div class="pbItem"><span class="pbFx">🔒 Pháp bảo là kỳ vật bản mệnh của cõi cao — đạt <b>Hóa Thần</b> mới chế, đeo và nuôi được.</span></div>';
+          else pbBody.innerHTML = pb.catalog.map((a) => {
+            const head = `<div class="pbHead2"><img src="/sprites/items/${a.id}.png" alt="" onerror="this.style.display='none'"><span>${a.icon} <b>${a.name}</b>${a.level ? ` · cấp ${a.level}` : ''}${a.equipped ? ' · <b style="color:#86efac">ĐANG ĐEO</b>' : ''}</span></div>`;
+            let mid = '';
+            let btns = '';
+            if (!a.level) { mid = costLines('Chi phí chế tạo:', a.craft.thuong, a.craft.mats, 0); btns = `<button class="pbtn gold" data-pbcraft="${a.id}">Chế tạo</button>`; }
+            else {
+              if (!a.equipped) btns += `<button class="pbtn" data-pbequip="${a.id}">Đeo</button>`;
+              else btns += `<button class="pbtn" data-pbunequip="1">Tháo</button>`;
+              if (a.next) { mid = costLines(`Nuôi lên cấp ${a.next.level}:`, a.next.thuong, a.next.mats, a.next.cuc); btns += `<button class="pbtn gold" data-pbup="${a.id}">Nuôi cấp ${a.next.level}</button>`; }
+              else btns += '<i>Đã cấp tối đa</i>';
+            }
+            return `<div class="pbItem">${head}<span class="pbFx">${a.effect}</span>${mid}<div class="pbBtns">${btns}</div></div>`;
+          }).join('') + '<div class="note">Pháp bảo là vật bản mệnh: không bán tiệm, không giao dịch. Đổi món chỉ khi ngoài giao tranh; cấp của từng món giữ nguyên.</div>';
+          pbBody.querySelectorAll<HTMLButtonElement>('[data-pbcraft]').forEach((b) => { b.onclick = () => this.socket.emit('phapbao_craft', { id: b.dataset.pbcraft }); });
+          pbBody.querySelectorAll<HTMLButtonElement>('[data-pbequip]').forEach((b) => { b.onclick = () => this.socket.emit('phapbao_equip', { id: b.dataset.pbequip }); });
+          pbBody.querySelectorAll<HTMLButtonElement>('[data-pbunequip]').forEach((b) => { b.onclick = () => this.socket.emit('phapbao_unequip', {}); });
+          pbBody.querySelectorAll<HTMLButtonElement>('[data-pbup]').forEach((b) => { b.onclick = () => this.socket.emit('phapbao_upgrade', { id: b.dataset.pbup }); });
+        }
+      }
+    }
     if (brEl && br) {
       const step = (c as any).branchStep || 0;
       const qi = (c as any).branchQi || 0;
@@ -7206,7 +7696,7 @@ class GameScene extends Phaser.Scene {
 
   private closePanels(): void {
     this.openPanel = null;
-    for (const id of ['shopPanel', 'questPanel', 'invPanel', 'npcDialog', 'jobPanel', 'achPanel', 'learnPanel', 'boardPanel', 'stonesPanel', 'altarPanel', 'forgePanel', 'hintPanel', 'mountPanel', 'socialPanel', 'playerCardPanel', 'nearPanel', 'socialInvite', 'sectPanel', 'guildPanel']) { // GĐ194: + panel xã hội; GĐ224: + panel tông môn
+    for (const id of ['shopPanel', 'questPanel', 'invPanel', 'npcDialog', 'jobPanel', 'achPanel', 'learnPanel', 'boardPanel', 'stonesPanel', 'altarPanel', 'forgePanel', 'hintPanel', 'mountPanel', 'socialPanel', 'playerCardPanel', 'nearPanel', 'socialInvite', 'sectPanel', 'guildPanel', 'phapBaoPanel']) { // GĐ194: + panel xã hội; GĐ224: + panel tông môn; GĐ385-sửaUI: + phapBaoPanel
       const el = document.getElementById(id);
       if (el) el.style.display = 'none';
     }
@@ -7298,15 +7788,36 @@ class GameScene extends Phaser.Scene {
     if (tm) tm.className = 'nTab' + (noticeTab === 'thu' ? ' sel' : '');
     const comp = document.getElementById('mailCompose');
     if (comp) comp.style.display = noticeTab === 'thu' && mailGm ? 'flex' : 'none';
+    this.updateNewsDot(); // GĐ391: chấm "mới" trên nút Thông báo theo tin chưa đọc
     if (noticeTab === 'thu') { this.renderMailTab(list, content); return; }
-    const items = NOTICES.filter((n) => n.tab === noticeTab);
+    const items = sortNotices(getNotices().filter((n) => n.tab === noticeTab));
+    const readIds = getReadNoticeIds();
     if (!items.find((n) => n.id === noticeSelId)) noticeSelId = items.length ? items[0].id : '';
-    list.innerHTML = items.map((n) => `<button class="nItem${n.id === noticeSelId ? ' sel' : ''}" type="button" data-nid="${n.id}"><div class="nT">${escHtml245(n.title)}</div><div class="nD">${escHtml245(n.date)}</div></button>`).join('');
-    list.querySelectorAll<HTMLButtonElement>('.nItem').forEach((b) => { b.onclick = () => { noticeSelId = b.dataset.nid || ''; this.renderNoticeBoard(); }; });
+    list.innerHTML = items.map((n) => {
+      const icon = NOTICE_KIND_ICON[n.kind || 'capnhat'] || '📝';
+      const unread = !readIds.has(n.id);
+      return `<button class="nItem${n.id === noticeSelId ? ' sel' : ''}${unread ? ' unread' : ''}" type="button" data-nid="${n.id}"><div class="nT">${unread ? '<span class="nNew">●</span>' : ''}${n.pinned ? '📌 ' : ''}${icon} ${escHtml245(n.title)}</div><div class="nD">${escHtml245(n.date)}</div></button>`;
+    }).join('');
+    list.querySelectorAll<HTMLButtonElement>('.nItem').forEach((b) => { b.onclick = () => { noticeSelId = b.dataset.nid || ''; if (noticeSelId) markNoticeRead(noticeSelId); this.renderNoticeBoard(); }; });
     const cur = items.find((n) => n.id === noticeSelId);
+    const kindIcon = cur ? (NOTICE_KIND_ICON[cur.kind || 'capnhat'] || '📝') : '';
+    const srvName = cur?.serverId ? (SERVERS.find((s) => s.id === cur.serverId)?.name || '') : '';
+    const maintLine = cur && cur.kind === 'baotri' && (cur.maintStart || cur.maintEnd)
+      ? `<div class="nMaint">🛠 Bảo trì${cur.maintStart ? ` từ ${escHtml245(cur.maintStart)}` : ''}${cur.maintEnd ? ` đến ${escHtml245(cur.maintEnd)}` : ''} (giờ +07)${srvName ? ` · ${escHtml245(srvName)}` : ''}</div>`
+      : '';
     content.innerHTML = cur
-      ? `<h4>${escHtml245(cur.title)}</h4><div class="nDate">📅 ${escHtml245(cur.date)}</div><div class="nBody">${escHtml245(cur.body)}</div>`
+      ? `<h4>${kindIcon} ${escHtml245(cur.title)}</h4>${cur.pinned ? '<div class="nPin">📌 Tin đã ghim — luôn ở đầu danh sách</div>' : ''}<div class="nDate">📅 ${escHtml245(cur.date)}</div>${maintLine}<div class="nBody">${escHtml245(cur.body)}</div>`
       : '<div class="nBody">Chưa có mục nào.</div>';
+  }
+
+  // GĐ391: chấm "mới" trên nút Thông báo (splash + Menu) khi còn tin chưa đọc.
+  private updateNewsDot(): void {
+    let unread = false;
+    try { const read = getReadNoticeIds(); unread = getNotices().some((n) => !read.has(n.id)); } catch (e) { unread = false; }
+    ['btnNews', 'btnNews2', 'menuNewsBtn'].forEach((id) => {
+      const b = document.getElementById(id);
+      if (b) b.classList.toggle('hasNew', unread);
+    });
   }
 
   // GĐ304: tab Thư — danh sách + nội dung + nút nhận quà (trạng thái từ mail_state)
@@ -7498,14 +8009,14 @@ class GameScene extends Phaser.Scene {
       ];
       const FORGE_WEAPON_CLIENT: Record<string, Array<{ id: string; name: string }>> = {
         THE_TU: [{ id: 'TAY_KHONG', name: 'Tay Không' }, { id: 'CHIEN_PHU', name: 'Chiến Phủ' }, { id: 'CU_KIEM', name: 'Cự Kiếm' }, { id: 'DAO', name: 'Đao' }, { id: 'THUONG', name: 'Thương' }, { id: 'THIET_CON', name: 'Thiết Côn' }],
-        PHAP_TU: [{ id: 'PHIEN', name: 'Phiến' }, { id: 'PHAP_TRUONG', name: 'Pháp Trượng' }, { id: 'SACH_PHEP', name: 'Sách Phép' }],
-        PHAT_TU: [{ id: 'PHAT_CHAU', name: 'Phật Châu' }, { id: 'QUYEN_TRUONG', name: 'Quyền Trượng' }, { id: 'BINH_BAT', name: 'Bình Bát' }],
-        COT_TU: [{ id: 'COT_THUAN', name: 'Cốt Thuẫn' }, { id: 'COT_CHUY', name: 'Cốt Chùy' }],
+        PHAP_TU: [{ id: 'PHIEN', name: 'Phiến' }, { id: 'PHAP_TRUONG', name: 'Pháp Trượng' }, { id: 'SACH_PHEP', name: 'Sách Phép' }, { id: 'PHAP_AN', name: 'Pháp Ấn' }], // GĐ393
+        PHAT_TU: [{ id: 'PHAT_CHAU', name: 'Phật Châu' }, { id: 'QUYEN_TRUONG', name: 'Quyền Trượng' }, { id: 'BINH_BAT', name: 'Bình Bát' }, { id: 'PHAT_LUAN', name: 'Phật Luân' }], // GĐ393
+        COT_TU: [{ id: 'COT_THUAN', name: 'Cốt Thuẫn' }, { id: 'COT_CHUY', name: 'Cốt Chùy' }, { id: 'COT_CUNG', name: 'Cốt Cung' }, { id: 'COT_NHAN', name: 'Cốt Nhận' }], // GĐ393: vá mirror GĐ389 thiếu COT_CUNG/COT_NHAN (server vẫn nhận vì gate ở GEAR.WEAPONS, UI trước đây không hiện)
         SAT_THU: [{ id: 'DAO_GAM', name: 'Dao Găm' }, { id: 'SONG_DAO', name: 'Song Dao' }, { id: 'LIEM_NGAN', name: 'Liềm Ngắn' }, { id: 'TRAO', name: 'Trảo' }],
-        KIEM_TU: [{ id: 'KIEM', name: 'Kiếm' }, { id: 'SONG_KIEM', name: 'Song Kiếm' }, { id: 'TRONG_KIEM', name: 'Trọng Kiếm' }],
-        QUY_TU: [{ id: 'CO_LENH', name: 'Cờ Lệnh' }, { id: 'LUOI_HAI', name: 'Lưỡi Hái' }, { id: 'QUY_THUONG', name: 'Quỷ Thương' }],
-        Y_TU: [{ id: 'PHAT_TRAN', name: 'Phất Trần' }, { id: 'KIM_CHAM', name: 'Kim Châm' }, { id: 'CO_CAM', name: 'Cổ Cầm' }],
-        NHO_TU: [{ id: 'NGON_LINH', name: 'Ngôn Linh' }, { id: 'BUT_PHEP', name: 'Bút Phép' }, { id: 'QUYEN_TRUC', name: 'Quyển Trúc' }], // GĐ157: Độc Thơ → Ngôn Linh
+        KIEM_TU: [{ id: 'KIEM', name: 'Kiếm' }, { id: 'SONG_KIEM', name: 'Song Kiếm' }, { id: 'TRONG_KIEM', name: 'Trọng Kiếm' }, { id: 'PHI_KIEM', name: 'Phi Kiếm' }], // GĐ393
+        QUY_TU: [{ id: 'CO_LENH', name: 'Cờ Lệnh' }, { id: 'LUOI_HAI', name: 'Lưỡi Hái' }, { id: 'QUY_THUONG', name: 'Quỷ Thương' }, { id: 'QUY_LINH', name: 'Chiêu Hồn Linh' }], // GĐ393
+        Y_TU: [{ id: 'PHAT_TRAN', name: 'Phất Trần' }, { id: 'KIM_CHAM', name: 'Kim Châm' }, { id: 'CO_CAM', name: 'Cổ Cầm' }, { id: 'DOC_KINH', name: 'Độc Kinh' }], // GĐ393
+        NHO_TU: [{ id: 'NGON_LINH', name: 'Ngôn Linh' }, { id: 'BUT_PHEP', name: 'Bút Phép' }, { id: 'QUYEN_TRUC', name: 'Quyển Trúc' }, { id: 'VAN_KIEM', name: 'Văn Kiếm' }], // GĐ157: Độc Thơ → Ngôn Linh; GĐ393: + Văn Kiếm
       };
       const CLASS_PATH_CLIENT: Record<string, string> = { thetu: 'THE_TU', phattu: 'PHAT_TU', cottu: 'COT_TU', satthu: 'SAT_THU', kiemtu: 'KIEM_TU', phaptu: 'PHAP_TU', quytu: 'QUY_TU', ytu: 'Y_TU', nhotu: 'NHO_TU' };
       const path = CLASS_PATH_CLIENT[mc.classId] || 'THE_TU';
@@ -7865,19 +8376,112 @@ class GameScene extends Phaser.Scene {
   }
 
   // GĐ108: bộ sprite cho dân thành phố (xem vòng render trong onMapEnter).
-  private cityNpcSpriteKey(n: { id: string; role: string; style?: string }): string | null {
+  // GĐ396 (F3-2): vai → POOL bộ sprite (chọn 1 bộ theo hash id, xem
+  // cityNpcLook). Chuỗi role lấy ĐÚNG trong server/data/gdd/NPCData*.json
+  // (55 vai cũ + 64 vai mới) — vai nào không có trong bảng thì trả null =
+  // GIỮ HÀNH VI CŨ (style villager0-4 → city-a..e, id → villager-a/b/c).
+  // Lớp 0 (đổi vai → bộ CÓ SẴN) + lớp 1 (14 bộ f32 mới, file cắt ở chân 1).
+  private cityNpcPool(n: { id: string; role: string; style?: string }): string[] | null {
     const role = n.role || '';
-    if (role.includes('Sứ Giả')) return 'envoy';
-    if (role === 'Chủ Tiệm Đan') return 'shopdan';
-    if (role === 'Chủ Tiệm Nguyên Liệu') return 'shopnl';
-    if (role === 'Chủ Tiệm Thảo Dược') return 'npc-thaoduoc'; // GĐ254: dùng bộ riêng cô Thảo Dược như ở làng cho đồng bộ
-    if (role.includes('Thương nhân') || role.includes('Thương Gia')) return 'merchant';
-    if (role.startsWith('Trưởng') || role === 'Lão Tổ Về Hưu') return 'elder';
+    if (role.includes('Sứ Giả')) return ['envoy'];
+    if (role === 'Chủ Tiệm Đan') return ['shopdan'];
+    if (role === 'Chủ Tiệm Nguyên Liệu') return ['shopnl'];
+    if (role === 'Chủ Tiệm Thảo Dược' || role === 'Dược Sư' || role.includes('Đan Sư')) return ['npc-thaoduoc']; // Dược Sư / Đại Sư Đan Sư / Trợ Lý Đan Sư / Đan Sư
+    if (role === 'Thủ Tàng' || role === 'Thầy Đồ' || role.includes('Thư Ký') || role === 'Trợ Lý Trận Pháp' || role === 'Trợ Lý Phù Chú') return ['city-d'];
+    if (role.includes('Thương nhân') || role.includes('Thương Gia')) return ['merchant']; // gồm 'Thương nhân rong' + 'Thương Gia Bí Ẩn'
+    if (role.startsWith('Trưởng') || role === 'Lão Tổ Về Hưu' || role.includes('Thú Sư') || role === 'Đại Sư Trận Pháp' || role === 'Đại Sư Phù Chú' || role === 'Phù Sư' || role === 'Trận Sư') return ['elder'];
+    if (role.includes('Lính gác') || role.includes('Lính Gác')) return ['city-e']; // 'Lính gác' + 'Đội Trưởng Lính Gác'
+    if (role.includes('Thợ Rèn') || role === 'Chủ Tiệm Vũ Khí') return ['blacksmith']; // gồm 'Đại Sư Thợ Rèn' / 'Thợ Rèn Bậc Thầy' / 'Trợ Lý Thợ Rèn'
+    // Lớp 1 — 14 bộ mới (mẫu v2 đã duyệt; file cắt ở chân 1, chưa có file
+    // thì onMapEnter lùi về vẽ code qua useSet=false như cũ):
+    if (role === 'Chủ Quán Ăn') return ['f32-quanan'];
+    if (role === 'Chủ Tiệm Tạp Hóa') return ['f32-taphoa'];
+    if (role.includes('Người Áo Đen') || role === 'Người Giữ Bí Mật') return ['f32-aoden'];
+    if (role === 'Bà Mối') return ['f32-bamoi'];
+    if (role === 'Thầy Bói') return ['f32-thayboi'];
+    if (role === 'Lão Ngư') return ['f32-laongu'];
+    if (role.includes('Thợ Săn')) return ['f32-thosan']; // 'Thợ Săn Già'
+    if (role.includes('Kiếm Khách')) return ['f32-kiemkhach']; // 'Kiếm Khách Lang Thang'
+    if (role.includes('Hòa Thượng')) return ['f32-hoathuong']; // 'Hòa Thượng Khất Thực'
+    if (role.includes('Nữ Hiệp')) return ['f32-nuhiep']; // 'Nữ Hiệp Giang Hồ'
+    if (role.includes('Đạo Sĩ')) return ['f32-daosi']; // 'Đạo Sĩ Du Phương'
+    if (role.includes('Tiểu Yêu')) return ['f32-tieuyeu']; // 'Tiểu Yêu Tinh Nghịch'
+    if (role === 'Dân thường') return ['city-a', 'city-b', 'city-c', 'city-d', 'city-e', 'villager-a', 'villager-b', 'villager-c', 'f32-dannu', 'f32-laodan'];
+    if (role === 'Người ngắm cảnh') return ['city-b', 'city-c', 'city-d'];
+    return null;
+  }
+
+  // GĐ396 (F3-2): diện mạo XÁC ĐỊNH của 1 NPC: h = FNV-1a(id), id rỗng thì
+  // băm name|role|x,y. Bộ = pool[h % pool.length]; biến thể màu áo =
+  // floor(h / pool.length) % 8 (8 mức/bộ). Vai không khớp pool → giữ đúng
+  // cách chọn bộ cũ (style → city-a..e, số cuối id → villager-a/b/c), chỉ
+  // thêm biến thể màu (variant = h % 8). Số diện mạo/vai = poolSize × 8
+  // (dân thường 10×8=80; vai 1 bộ = 8; 2 NPC cùng vai kề nhau trùng mặt
+  // với xác suất 1/(poolSize×8) — vai 1 bộ là 1/8).
+  // ĐÍNH CHÍNH GĐ396-chân 1: server CÓ gán style cho mọi NPC thành phố lúc
+  // boot (server/index.js:704,767 + map_enter gửi style, :788) nên nhánh
+  // style villager0-4 VẪN CHẠY — "style thiếu, city-a 85,5%" đo trên file
+  // JSON thô là sai với payload thật (xem probes/f32/f32_count_396.cjs).
+  private cityNpcLook(n: { id: string; name?: string; role: string; style?: string; x?: number; y?: number }): { set: string; variant: number } {
+    const h = fnv1a32(n.id || `${n.name || ''}|${n.role || ''}|${n.x || 0},${n.y || 0}`);
+    const pool = this.cityNpcPool(n);
+    if (pool) return { set: pool[h % pool.length], variant: Math.floor(h / pool.length) % 8 };
     const sd = Number(String(n.style || '').replace('villager', ''));
-    if (Number.isInteger(sd) && sd >= 0 && sd <= 4) return ['city-a', 'city-b', 'city-c', 'city-d', 'city-e'][sd]; // GĐ253
+    if (Number.isInteger(sd) && sd >= 0 && sd <= 4) return { set: ['city-a', 'city-b', 'city-c', 'city-d', 'city-e'][sd], variant: h % 8 };
     const m = n.id.match(/(\d+)\s*$/);
     const idx = m ? Number(m[1]) : 0;
-    return ['villager-a', 'villager-b', 'villager-c'][Math.abs(idx) % 3];
+    return { set: ['villager-a', 'villager-b', 'villager-c'][Math.abs(idx) % 3], variant: h % 8 };
+  }
+
+  // GĐ396 (F3-2): sinh LƯỜI texture biến thể màu áo cho 1 khung của 1 bộ
+  // (gọi ở onMapEnter cho idle-south, ở applyNpcMoves + vòng trả idle cho
+  // khung walk — NPC chỉ đi lúc thuyết pháp nên rẻ; mỗi (set,variant,dir,
+  // frame) chỉ sinh 1 lần, lần sau textures.exists là trúng cache).
+  // Luôn trả về khóa DÙNG ĐƯỢC (đã exists): lỗi gì (thiếu texture gốc,
+  // thiếu hue, canvas lỗi) cũng lùi về khóa gốc thay vì trả khóa ma.
+  private ensureNpcVariantTex(set: string, variant: number, dir: string, frame: string): string {
+    const baseKey = spriteTexKey(set, dir, frame);
+    if (!variant || !this.textures.exists(baseKey)) return baseKey;
+    const key = npcTexKey(set, variant, dir, frame);
+    if (this.textures.exists(key)) return key;
+    const baseHue = NPC_SET_ROBE_HUE[set];
+    if (baseHue === undefined) return baseKey;
+    try {
+      const src = this.textures.get(baseKey).getSourceImage() as unknown as HTMLImageElement;
+      const w = src.width || 96, h = src.height || 96;
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return baseKey;
+      ctx.drawImage(src, 0, 0);
+      const img = ctx.getImageData(0, 0, w, h);
+      const d = img.data;
+      const dh = NPC_VARIANT_HUE_DELTAS[variant % 4];
+      const pale = variant >= 4;
+      for (let y = 48; y < 94 && y < h; y++) {
+        for (let x = 24; x < 72 && x < w; x++) {
+          const i = (y * w + x) * 4;
+          if (d[i + 3] < 200) continue;
+          const r = d[i], g = d[i + 1], b = d[i + 2];
+          let skin = false;
+          for (const s of NPC_SKIN_RGB) {
+            const dr = r - s[0], dg = g - s[1], db = b - s[2];
+            if (dr * dr + dg * dg + db * db < 45 * 45) { skin = true; break; }
+          }
+          if (skin) continue;
+          const [hh, ss, vv] = npcRgbToHsv(r / 255, g / 255, b / 255);
+          if (ss < 0.12 || vv < 0.10) continue;
+          if (npcHueDist(hh * 360, baseHue) > 18) continue;
+          const nh = ((((hh * 360 + dh) % 360) + 360) % 360) / 360;
+          const ns = pale ? ss * 0.6 : ss;
+          const [nr, ng, nb] = npcHsvToRgb(nh, ns, vv);
+          d[i] = Math.round(nr * 255); d[i + 1] = Math.round(ng * 255); d[i + 2] = Math.round(nb * 255);
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+      this.textures.addCanvas(key, canvas);
+    } catch (e) { return baseKey; }
+    return this.textures.exists(key) ? key : baseKey;
   }
 
   private terrObjects: Phaser.GameObjects.GameObject[] = []; // GĐ302
@@ -8033,13 +8637,13 @@ class GameScene extends Phaser.Scene {
     this.cityNpcLabels = [];
     for (const n of def.npcs || []) {
       // GĐ108: dân thành phố dùng sprite PixelLab thay hình vẽ code — vai trò
-      // rõ thì đúng bộ (Sứ Giả→envoy, Tiệm Đan→shopdan, Tiệm Nguyên Liệu→
-      // shopnl, thương nhân→merchant, trưởng/lão→elder), còn lại xoay 3 bộ
-      // villager theo số cuối id; thiếu texture thì lùi về vẽ code như cũ.
-      const npcSet = this.cityNpcSpriteKey(n);
-      const useSet = !!(npcSet && this.textures.exists(`${npcSet}-idle-south`));
+      // rõ thì đúng bộ/pool theo cityNpcLook (GĐ396: bộ theo hash id + biến
+      // thể màu áo 0..7), còn lại giữ cách chọn cũ (style → city-a..e,
+      // số cuối id → villager-a/b/c); thiếu texture thì lùi về vẽ code như cũ.
+      const look = this.cityNpcLook(n);
+      const useSet = this.textures.exists(spriteTexKey(look.set, 'down', 'idle'));
       const sprite = useSet
-        ? this.add.sprite(0, 0, spriteTexKey(npcSet as string, 'down', 'idle')).setOrigin(0.5, HERO_ORIGIN_Y).setScale(HERO_SCALE)
+        ? this.add.sprite(0, 0, this.ensureNpcVariantTex(look.set, look.variant, 'down', 'idle')).setOrigin(0.5, HERO_ORIGIN_Y).setScale(HERO_SCALE)
         : this.add.sprite(0, 0, personTexKey(n.style, 'down', 'idle'))
           .setOrigin(PERSON_TEX.originX, PERSON_TEX.originY).setScale(PERSON_TEX.scale);
       const parts: Phaser.GameObjects.GameObject[] = [sprite];
@@ -8053,7 +8657,7 @@ class GameScene extends Phaser.Scene {
       }
       const c = this.add.container(n.x, n.y, parts);
       (c as any).npcData = { id: n.id, name: n.name, role: n.role, kind: n.kind };
-      (c as any).npcWalk = { sprite, set: useSet ? npcSet : null, style: n.style, dir: 'down', lastMoveAt: 0, walking: false }; // GĐ364 (F1-6b): trạng thái bước/hướng cho applyNpcMoves + vòng trả idle
+      (c as any).npcWalk = { sprite, set: useSet ? look.set : null, variant: useSet ? look.variant : 0, style: n.style, dir: 'down', lastMoveAt: 0, walking: false }; // GĐ364 (F1-6b): trạng thái bước/hướng cho applyNpcMoves + vòng trả idle; GĐ396: + variant màu áo
       c.setDepth(n.y);
       this.cityNpcObjects.push(c);
       this.cityNpcById.set(n.id, c); // GĐ156
@@ -8364,6 +8968,10 @@ class GameScene extends Phaser.Scene {
     if ((d as any).mountShop) {
       html += `<div class="prow"><span class="pname">🐴 Trại Thú Cưỡi<span class="pdesc">Mua thú · đặt thuần hóa hộ · mua trứng tự ấp — thú cưỡi mở từ Nguyên Anh</span></span><button class="pbtn gold" data-mountshop="1">Vào trại</button></div>`;
     }
+    // GĐ386: Thủ Tàng Văn Uyển — khối đọc sách cho mọi lớp (PA2)
+    if (d.libInfo) {
+      html += `<div class="prow"><span class="pname">📚 Đọc sách ở Tàng Kinh Các<span class="pdesc">Ai cũng đọc được — đứng yên tại chính đường, mỗi 60 giây đọc xong 1 quyển (bạn đã đọc ${d.libInfo.booksRead} quyển). Nho Tu đọc ở đây còn tích Hạo Nhiên và mở Chương.</span></span><button class="pbtn gold" data-study="1">Vào đọc sách</button></div>`;
+    }
     // GĐ318: thiếu niên cầu sư — nút nhận làm đệ tử
     if ((d as any).discipleCandidate) {
       const dc = (d as any).discipleCandidate;
@@ -8571,6 +9179,10 @@ class GameScene extends Phaser.Scene {
     // GĐ161: mở panel Trại Thú Cưỡi (chế độ trại — hiện mục mua/thuần/ trứng)
     btns.querySelectorAll<HTMLButtonElement>('[data-mountshop]').forEach((b) => {
       b.onclick = () => { this.closePanels(); this.openMountPanel(true); };
+    });
+    // GĐ386: nút Vào đọc sách trong hội thoại Thủ Tàng — đóng thoại rồi bắt đầu đọc (server kiểm map/khoảng cách)
+    btns.querySelectorAll<HTMLButtonElement>('[data-study]').forEach((b) => {
+      b.onclick = () => { this.closePanels(); this.socket.emit('nho_study'); };
     });
     // GĐ131: bái sư — bấm xong mở lại hộp thoại để xem trạng thái đệ tử mới
     btns.querySelectorAll<HTMLButtonElement>('[data-disciple-npc]').forEach((b) => {
@@ -9683,7 +10295,8 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
         // GĐ245: dùng USABLE_ITEMS + họ tiền tố (mọi đan dan_*, rương
         // thành tựu ruong_thanh_tuu_*) — khớp các nhánh use_item của server.
         const usable = USABLE_ITEMS.has(itemId) || itemId.startsWith('dan_') || itemId.startsWith('ruong_thanh_tuu_');
-        return `<div class="prow"><span class="pname"><img class="iico" src="/sprites/items/${itemId}.png" alt="" onerror="this.style.display='none'">${ITEM_INFO[itemId]?.name || itemId} ×${n}<span class="pdesc">${ITEM_INFO[itemId]?.desc || ''}</span></span>${usable ? `<button class="pbtn" data-use="${itemId}">Dùng</button>` : ''}</div>`;
+        const descExtra387 = itemId === 'dan_dien_tho' ? ` Đã dùng ${(this.myChar as any).dienThoUsed || 0}/3 viên kiếp này.` : ''; // GĐ387: mô tả động theo nhân vật (payload dienThoUsed)
+        return `<div class="prow"><span class="pname"><img class="iico" src="/sprites/items/${itemId}.png" alt="" onerror="this.style.display='none'">${ITEM_INFO[itemId]?.name || itemId} ×${n}<span class="pdesc">${ITEM_INFO[itemId]?.desc || ''}${descExtra387}</span></span>${usable ? `<button class="pbtn" data-use="${itemId}">Dùng</button>` : ''}</div>`;
       })
       .join('');
     body.querySelectorAll<HTMLButtonElement>('[data-use]').forEach((b) => {
@@ -10516,7 +11129,7 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
         const wk = (c as any).npcWalk;
         if (wk && wk.walking && _time - wk.lastMoveAt > 350) {
           wk.walking = false;
-          const key = wk.set ? spriteTexKey(wk.set, wk.dir, 'idle') : personTexKey(wk.style, wk.dir, 'idle');
+          const key = wk.set ? this.ensureNpcVariantTex(wk.set, wk.variant || 0, wk.dir, 'idle') : personTexKey(wk.style, wk.dir, 'idle');
           if (this.textures.exists(key) && wk.sprite.texture.key !== key) wk.sprite.setTexture(key);
         }
       }
@@ -10605,7 +11218,7 @@ btns.querySelectorAll<HTMLButtonElement>('[data-gift]').forEach((b) => {
           } else if (near.type === 'study') {
             text = this.myChar.classId === 'nhotu'
               ? '📖 Bấm E — Đọc sách ở Văn Uyển (tích Hạo Nhiên, mở Chương)'
-              : '📖 Tàng Kinh Các — chỉ Nho Tu đọc sách được';
+              : '📖 Bấm E — Đọc sách ở Văn Uyển (đứng đọc 60 giây xong 1 quyển, ghi sổ Bác Học)'; // GĐ386: PA2 mở đọc sách cho mọi lớp
           } else if (near.type === 'stele') {
             text = '🗿 Bấm E — Đọc bia khắc Cổ Ngữ (chữ trên bia có thể là một manh mối)';
           } else if (near.type === 'node') {

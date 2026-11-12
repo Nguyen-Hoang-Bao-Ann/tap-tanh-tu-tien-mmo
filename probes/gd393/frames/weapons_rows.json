@@ -1,0 +1,578 @@
+{
+ "phaptu": [
+  {
+   "id": "phien",
+   "name": "Phiến",
+   "cat": "fan",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "phaptruong",
+   "name": "Pháp trượng",
+   "cat": "staff",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "sachphep",
+   "name": "Sách phép",
+   "cat": "book",
+   "speed": "nhanh",
+   "dmg": "Cao",
+   "mana": "Nhiều",
+   "ranged": true
+  },
+  {
+   "id": "phien_vm",
+   "name": "Càn Khôn Pháp Phiến",
+   "cat": "fan",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "phaptruong_vm",
+   "name": "Ngũ Lôi Pháp Trượng",
+   "cat": "staff",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "sachphep_vm",
+   "name": "Thiên Thư Pháp Điển",
+   "cat": "book",
+   "speed": "nhanh",
+   "dmg": "Cao",
+   "mana": "Nhiều",
+   "ranged": true
+  }
+ ],
+ "phattu": [
+  {
+   "id": "phatchau",
+   "name": "Phật châu",
+   "cat": "beads",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "quyentruong",
+   "name": "Quyền trượng",
+   "cat": "staff",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "binhbat",
+   "name": "Bình bát",
+   "cat": "bowl",
+   "speed": "trung",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "phatchau_vm",
+   "name": "Đại Nhật Phật Châu",
+   "cat": "beads",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "quyentruong_vm",
+   "name": "Phổ Độ Quyền Trượng",
+   "cat": "staff",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "binhbat_vm",
+   "name": "Càn Khôn Bình Bát",
+   "cat": "bowl",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": true
+  }
+ ],
+ "kiemtu": [
+  {
+   "id": "kiem",
+   "name": "Kiếm",
+   "cat": "sword",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": false
+  },
+  {
+   "id": "songkiem",
+   "name": "Song kiếm",
+   "cat": "dual",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "trongkiem",
+   "name": "Trọng kiếm",
+   "cat": "sword",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": false
+  },
+  {
+   "id": "kiem_vm",
+   "name": "Tâm Kiếm Vô Ngân",
+   "cat": "sword",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": false
+  },
+  {
+   "id": "songkiem_vm",
+   "name": "Lưu Vân Song Kiếm",
+   "cat": "dual",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "trongkiem_vm",
+   "name": "Trấn Nhạc Trọng Kiếm",
+   "cat": "sword",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": false
+  }
+ ],
+ "quytu": [
+  {
+   "id": "colenh",
+   "name": "Cờ lệnh",
+   "cat": "flag",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "luoihai",
+   "name": "Lưỡi hái",
+   "cat": "sickle",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "quythuong",
+   "name": "Quỷ thương",
+   "cat": "spear",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "colenh_vm",
+   "name": "Sinh Tử Lệnh Kỳ",
+   "cat": "flag",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "luoihai_vm",
+   "name": "Đoạt Mệnh Quỷ Liêm",
+   "cat": "sickle",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "quythuong_vm",
+   "name": "U Minh Quỷ Thương",
+   "cat": "spear",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  }
+ ],
+ "ytu": [
+  {
+   "id": "colenh",
+   "name": "Cờ lệnh",
+   "cat": "flag",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "luoihai",
+   "name": "Lưỡi hái",
+   "cat": "sickle",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "quythuong",
+   "name": "Quỷ thương",
+   "cat": "spear",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "colenh_vm",
+   "name": "Sinh Tử Lệnh Kỳ",
+   "cat": "flag",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "luoihai_vm",
+   "name": "Đoạt Mệnh Quỷ Liêm",
+   "cat": "sickle",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "quythuong_vm",
+   "name": "U Minh Quỷ Thương",
+   "cat": "spear",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  }
+ ],
+ "nhotu": [
+  {
+   "id": "butphep",
+   "name": "Bút phép",
+   "cat": "brush",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "quyentruc",
+   "name": "Quyển trục",
+   "cat": "scroll",
+   "speed": "cham",
+   "dmg": "Thấp",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "butphep_vm",
+   "name": "Văn Thánh Thần Bút",
+   "cat": "brush",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Trung bình",
+   "ranged": true
+  },
+  {
+   "id": "quyentruc_vm",
+   "name": "Thiên Chương Quyển Trục",
+   "cat": "scroll",
+   "speed": "cham",
+   "dmg": "Trung bình",
+   "mana": "Trung bình",
+   "ranged": true
+  }
+ ],
+ "cottu": [
+  {
+   "id": "cotthuan",
+   "name": "Cốt thuẫn",
+   "cat": "shield",
+   "speed": "cham",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "cotchuy",
+   "name": "Cốt chùy",
+   "cat": "club",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "cotcung",
+   "name": "Cốt cung",
+   "cat": "bow",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "cotnhan",
+   "name": "Cốt nhận",
+   "cat": "dual",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "cotthuan_vm",
+   "name": "Bất Diệt Cốt Thuẫn",
+   "cat": "shield",
+   "speed": "cham",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "cotchuy_vm",
+   "name": "Vương Giả Cốt Chùy",
+   "cat": "club",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "cotcung_vm",
+   "name": "Vạn Cốt Xuyên Vân Cung",
+   "cat": "bow",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": true
+  },
+  {
+   "id": "cotnhan_vm",
+   "name": "Liệt Hồn Song Nhận",
+   "cat": "dual",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  }
+ ],
+ "satthu": [
+  {
+   "id": "daogam",
+   "name": "Dao găm",
+   "cat": "dagger",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "songdao",
+   "name": "Song đao",
+   "cat": "dual",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "liemngan",
+   "name": "Liềm ngắn",
+   "cat": "sickle",
+   "speed": "trung",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "trao",
+   "name": "Trảo",
+   "cat": "claw",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "daogam_vm",
+   "name": "Ảnh Nhận Đoạt Hồn",
+   "cat": "dagger",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "songdao_vm",
+   "name": "Vô Ảnh Song Đao",
+   "cat": "dual",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "liemngan_vm",
+   "name": "Câu Hồn Liềm",
+   "cat": "sickle",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "trao_vm",
+   "name": "Xé Thiên Trảo",
+   "cat": "claw",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  }
+ ],
+ "thetu": [
+  {
+   "id": "taykhong",
+   "name": "Tay không",
+   "cat": "fist",
+   "speed": "nhanh",
+   "dmg": "Thấp",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "chienphu",
+   "name": "Chiến phủ",
+   "cat": "axe",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "cukiem",
+   "name": "Cự kiếm",
+   "cat": "sword",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "daothe",
+   "name": "Đao",
+   "cat": "sword",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "thuongthe",
+   "name": "Thương",
+   "cat": "spear",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "thietcon",
+   "name": "Thiết côn",
+   "cat": "staff",
+   "speed": "trung",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "taykhong_vm",
+   "name": "Thiên Quyền Vô Song",
+   "cat": "fist",
+   "speed": "nhanh",
+   "dmg": "Trung bình",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "chienphu_vm",
+   "name": "Khai Thiên Chiến Phủ",
+   "cat": "axe",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "cukiem_vm",
+   "name": "Trảm Thiên Cự Kiếm",
+   "cat": "sword",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "daothe_vm",
+   "name": "Diệt Thiên Đao",
+   "cat": "sword",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "thuongthe_vm",
+   "name": "Vấn Thiên Thương",
+   "cat": "spear",
+   "speed": "trung",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  },
+  {
+   "id": "thietcon_vm",
+   "name": "Kim Cang Trấn Thiên Côn",
+   "cat": "staff",
+   "speed": "cham",
+   "dmg": "Cao",
+   "mana": "Ít",
+   "ranged": false
+  }
+ ]
+}

@@ -172,7 +172,7 @@ const ACH138 = [
   { id: 'ach_an_dream', group: 'an', name: '???: giấc mơ kiếp trước', desc: 'Gặp ký ức kiếp trước (cần chơi nhiều kiếp)', base: 'Luân Hồi Giả', tiers: [1, 3, 5, 10], key: 'pastDreams', hidden: true, enabled: true },
   { id: 'ach_an_demon', group: 'an', name: '???: ma khí và chính đạo', desc: 'Giữ mức ma khí thấp suốt một kiếp (ẩn)', base: 'Chính Đạo', tiers: [1, 3, 5], key: 'lowDemonLives', hidden: true, enabled: true },
   { id: 'ach_an_souldef', group: 'an', name: '???: khiếm khuyết hồn thể', desc: 'Chết quá nhiều lần trong một kiếp — hồn khiếm khuyết, phải đi tìm lại 7 mảnh hồn (ẩn)', base: 'Khiếm Khuyết', tiers: [1], key: 'soulDeficient', hidden: true, enabled: true }, // GĐ315
-  { id: 'ach_an_books', group: 'an', name: '???: đọc hết sách', desc: 'Đọc hết sách trong Thư viện, tìm ra bí tịch ẩn', base: 'Bác Học Giả', tiers: [1, 3, 6, 10], key: 'booksRead', hidden: true, enabled: false }, // GĐ360: khôi phục def từng bị comment // GĐ315 nuốt mất (trước đây không tồn tại trong mảng nạp) — vẫn TẮT, chờ hệ Thư viện sách
+  { id: 'ach_an_books', group: 'an', name: '???: đọc hết sách', desc: 'Đọc hết sách trong Thư viện, tìm ra bí tịch ẩn', base: 'Bác Học Giả', tiers: [1, 3, 6, 10], key: 'booksRead', hidden: true, enabled: true }, // GĐ386: BẬT — Văn Uyển PA2 có NPC Thủ Tàng + đọc sách cho mọi lớp, addLibRead đếm booksRead (def gốc khôi phục ở GĐ360)
   { id: 'ach_an_cleanboss', group: 'an', name: '???: chiến thần', desc: 'Hạ trùm cuối bản đồ đầu tiên mà chưa dùng đan hay thần thông', base: 'Chiến Thần Tập Sự', tiers: [1, 3, 10], key: 'cleanBoss', hidden: true },
 ];
 // GĐ139 — THƯỞNG MỐC NHÓM (tài liệu bản -2, bảng "Thưởng theo nhóm"):

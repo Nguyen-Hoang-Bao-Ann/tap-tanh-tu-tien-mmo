@@ -206,6 +206,38 @@ export function drawWeaponShape(x: number, y: number, cat: string, face: number,
       line(hx, hy + 5, hx - F * 4, hy - 8, 1.8, woodD);
       dot(hx + F * 5, hy - 6, 1.9, ACC);
     }
+  } else if (cat === 'bow') { // GĐ389: Cốt Cung — thân cung cong bằng xương, dây gân mảnh + tên đốt xương
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = OUT; ctx.lineWidth = 4.6 + 2.4;
+    ctx.beginPath(); ctx.arc(hx + F * 2, hy - 2, 13, -Math.PI * 0.42, Math.PI * 0.42); ctx.stroke();
+    ctx.strokeStyle = '#e8e2d0'; ctx.lineWidth = 4.6;
+    ctx.beginPath(); ctx.arc(hx + F * 2, hy - 2, 13, -Math.PI * 0.42, Math.PI * 0.42); ctx.stroke();
+    const bx = hx + F * 2 + 13 * Math.cos(Math.PI * 0.42), byT = hy - 2 - 13 * Math.sin(Math.PI * 0.42), byB = hy - 2 + 13 * Math.sin(Math.PI * 0.42);
+    line(bx, byT, bx, byB, 1.1, '#c9bfa8'); // dây cung
+    line(hx - F * 2, hy - 2, hx + F * 15, hy - 2, 2, '#b0a892'); // cán tên
+    line(hx + F * 15, hy - 2, hx + F * 19, hy - 4.4, 2.2, steel); line(hx + F * 15, hy - 2, hx + F * 19, hy + 0.4, 2.2, steel); // đầu tên
+    dot(hx + F * 2, hy - 15.5, 1.8, ACC);
+  } else if (cat === 'seal') { // GĐ393: Pháp Ấn — ấn vuông vàng + tua đỏ
+    blk(hx - 5, hy - 10, 11, 13, gold);
+    blk(hx - 2.5, hy - 7, 6, 7, '#c22e2e');
+    line(hx, hy + 3, hx - F * 2, hy + 9, 1.6, '#c22e2e');
+    dot(hx, hy - 11.5, 1.8, ACC);
+  } else if (cat === 'wheel') { // GĐ393: Phật Luân — vòng luân vàng + nan
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = OUT; ctx.lineWidth = 4.6 + 2.4;
+    ctx.beginPath(); ctx.arc(hx + F * 2, hy - 3, 11, 0, Math.PI * 2); ctx.stroke();
+    ctx.strokeStyle = gold; ctx.lineWidth = 4.6;
+    ctx.beginPath(); ctx.arc(hx + F * 2, hy - 3, 11, 0, Math.PI * 2); ctx.stroke();
+    line(hx + F * 2 - 11, hy - 3, hx + F * 2 + 11, hy - 3, 1.6, gold);
+    line(hx + F * 2, hy - 14, hx + F * 2, hy + 8, 1.6, gold);
+    dot(hx + F * 2, hy - 3, 2.2, ACC);
+  } else if (cat === 'bell') { // GĐ393: Chiêu Hồn Linh — chuông đồng + quả lắc
+    ctx.fillStyle = OUT;
+    ctx.beginPath(); ctx.moveTo(hx - 8, hy + 6); ctx.lineTo(hx - 5, hy - 8); ctx.arc(hx + 1, hy - 8, 6, Math.PI, 0); ctx.lineTo(hx + 10, hy + 6); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#b08a4a';
+    ctx.beginPath(); ctx.moveTo(hx - 6.6, hy + 4.6); ctx.lineTo(hx - 3.6, hy - 8); ctx.arc(hx + 1, hy - 8, 4.6, Math.PI, 0); ctx.lineTo(hx + 8.6, hy + 4.6); ctx.closePath(); ctx.fill();
+    line(hx + 1, hy + 6, hx + 1, hy + 11, 1.6, gold);
+    dot(hx + 1, hy + 12, 1.8, ACC);
   } else if (cat === 'book') {
     blk(hx - 5.5, hy - 8.5, 12, 16, '#7a3fa0');
     blk(hx - 3.5, hy - 6.5, 8.6, 12, '#f2ead8');
@@ -3190,13 +3222,18 @@ const SKILL_TIER_FRAME: Record<string, string> = {
 export function skillGlyphFamily(weaponId: string): string {
   switch (weaponId) {
     case 'cukiem': case 'daothe': case 'songdao': case 'liemngan': case 'daogam':
-    case 'kiem': case 'songkiem': case 'trongkiem': return 'blade';
+    case 'kiem': case 'songkiem': case 'trongkiem': case 'cotnhan': case 'cotnhan_vm':
+    case 'phikiem': case 'phikiem_vm': case 'vankiem': case 'vankiem_vm': return 'blade'; // GĐ393
+    case 'cotcung': case 'cotcung_vm': return 'bow'; // GĐ389
+    case 'phapan': case 'phapan_vm': return 'seal'; // GĐ393
+    case 'phatluan': case 'phatluan_vm': return 'wheel'; // GĐ393
+    case 'quylinh': case 'quylinh_vm': return 'bell'; // GĐ393
     case 'thuongthe': case 'quythuong': case 'kimcham': return 'spear';
     case 'chienphu': return 'axe';
     case 'thietcon': case 'cotthuan': case 'cotchuy': return 'staff';
     case 'phaptruong': case 'quyentruong': case 'phatchau': case 'colenh': case 'phattran': return 'orb';
     case 'phien': case 'binhbat': return 'fan';
-    case 'sachphep': case 'butphep': case 'ngamtho': case 'quyentruc': return 'book';
+    case 'sachphep': case 'butphep': case 'ngamtho': case 'quyentruc': case 'dockinh': case 'dockinh_vm': return 'book'; // GĐ393: + Độc Kinh
     case 'luoihai': return 'chain';
     case 'cocam': return 'zither';
     default: return 'fist'; // taykhong, trao (trảo) + vũ khí lạ → nắm đấm
@@ -3258,6 +3295,12 @@ export function skillIconURL(skill: { id?: string; element?: string; tier?: stri
         b.lineWidth = 5; b.beginPath(); b.moveTo(cx, cy + 20); b.lineTo(cx, cy - 14); b.stroke();
         b.beginPath(); b.moveTo(cx, cy - 20); b.lineTo(cx - 7, cy - 8); b.lineTo(cx, cy - 12); b.lineTo(cx + 7, cy - 8); b.closePath(); b.fill();
         break;
+      case 'bow': // GĐ389: cung dọc + dây + tên ngang
+        b.lineWidth = 5; b.beginPath(); b.arc(cx + 6, cy, 17, -Math.PI * 0.45, Math.PI * 0.45); b.stroke();
+        b.lineWidth = 2.5; b.beginPath(); b.moveTo(cx + 6 + 17 * Math.cos(Math.PI * 0.45), cy - 17 * Math.sin(Math.PI * 0.45)); b.lineTo(cx + 6 + 17 * Math.cos(Math.PI * 0.45), cy + 17 * Math.sin(Math.PI * 0.45)); b.stroke();
+        b.lineWidth = 3.5; b.beginPath(); b.moveTo(cx - 16, cy); b.lineTo(cx + 14, cy); b.stroke();
+        b.beginPath(); b.moveTo(cx + 20, cy); b.lineTo(cx + 11, cy - 5); b.lineTo(cx + 11, cy + 5); b.closePath(); b.fill();
+        break;
       case 'axe':
         b.lineWidth = 5; b.beginPath(); b.moveTo(cx - 2, cy - 18); b.lineTo(cx - 2, cy + 20); b.stroke();
         b.beginPath(); b.arc(cx + 6, cy - 6, 12, -Math.PI / 2, Math.PI / 2); b.lineTo(cx - 2, cy + 6); b.closePath(); b.fill();
@@ -3291,6 +3334,22 @@ export function skillIconURL(skill: { id?: string; element?: string; tier?: stri
         b.lineWidth = 4; b.strokeRect(cx - 16, cy - 8, 32, 14);
         b.lineWidth = 1.8;
         for (const oy of [-3, 1, 5]) { b.beginPath(); b.moveTo(cx - 14, cy + oy); b.lineTo(cx + 14, cy + oy); b.stroke(); }
+        break;
+      case 'seal': // GĐ393: ấn vuông + tua đỏ
+        b.lineWidth = 4; b.strokeRect(cx - 12, cy - 14, 24, 24);
+        b.lineWidth = 2.5; b.beginPath(); b.moveTo(cx - 6, cy - 8); b.lineTo(cx + 6, cy - 8); b.moveTo(cx, cy - 8); b.lineTo(cx, cy + 4); b.stroke();
+        b.beginPath(); b.moveTo(cx, cy + 10); b.lineTo(cx, cy + 20); b.stroke();
+        break;
+      case 'wheel': // GĐ393: luân tròn + nan hoa
+        b.lineWidth = 4; b.beginPath(); b.arc(cx, cy, 15, 0, Math.PI * 2); b.stroke();
+        b.lineWidth = 2.5;
+        for (const a of [0, Math.PI / 3, 2 * Math.PI / 3]) { b.beginPath(); b.moveTo(cx - Math.cos(a) * 15, cy - Math.sin(a) * 15); b.lineTo(cx + Math.cos(a) * 15, cy + Math.sin(a) * 15); b.stroke(); }
+        b.fillStyle = '#ffd94d'; b.beginPath(); b.arc(cx, cy, 4, 0, Math.PI * 2); b.fill();
+        break;
+      case 'bell': // GĐ393: chuông + quả lắc
+        b.lineWidth = 4; b.beginPath(); b.moveTo(cx - 13, cy + 12); b.lineTo(cx - 9, cy - 8); b.arc(cx, cy - 8, 9, Math.PI, 0); b.lineTo(cx + 13, cy + 12); b.closePath(); b.stroke();
+        b.lineWidth = 2.5; b.beginPath(); b.moveTo(cx, cy + 12); b.lineTo(cx, cy + 19); b.stroke();
+        b.beginPath(); b.arc(cx, cy + 20, 2.5, 0, Math.PI * 2); b.fill();
         break;
       default: // fist
         b.beginPath(); b.arc(cx, cy + 2, 13, 0, Math.PI * 2); b.fill();

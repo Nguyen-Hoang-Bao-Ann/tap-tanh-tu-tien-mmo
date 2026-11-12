@@ -100,14 +100,15 @@ const GAME_WEAPON_TO_GEAR = {
   taykhong: 'TAY_KHONG', chienphu: 'CHIEN_PHU', cukiem: 'CU_KIEM', daothe: 'DAO',
   thuongthe: 'THUONG', thietcon: 'THIET_CON',
   phatchau: 'PHAT_CHAU', quyentruong: 'QUYEN_TRUONG', binhbat: 'BINH_BAT',
-  cotthuan: 'COT_THUAN', cotchuy: 'COT_CHUY',
+  cotthuan: 'COT_THUAN', cotchuy: 'COT_CHUY', cotcung: 'COT_CUNG', cotnhan: 'COT_NHAN', // GĐ389
   colenh: 'CO_LENH', luoihai: 'LUOI_HAI', quythuong: 'QUY_THUONG',
   daogam: 'DAO_GAM', songdao: 'SONG_DAO', liemngan: 'LIEM_NGAN', trao: 'TRAO',
   kiem: 'KIEM', songkiem: 'SONG_KIEM', trongkiem: 'TRONG_KIEM',
   phien: 'PHIEN', phaptruong: 'PHAP_TRUONG', sachphep: 'SACH_PHEP',
   phattran: 'PHAT_TRAN', kimcham: 'KIM_CHAM', cocam: 'CO_CAM',
   ngamtho: 'NGON_LINH', butphep: 'BUT_PHEP', quyentruc: 'QUYEN_TRUC',
-};
+  phapan: 'PHAP_AN', phatluan: 'PHAT_LUAN', phikiem: 'PHI_KIEM', quylinh: 'QUY_LINH', dockinh: 'DOC_KINH', vankiem: 'VAN_KIEM', // GĐ393
+}; // GĐ393: PHAP_AN + VAN_KIEM trùng id với 1 nội tại trong talent_pools (khác bảng tra cứu: weapons vs talent_pools, không lookup chung — đã grep xác minh)
 // Id vũ khí gear của đường vũ khí người chơi đang cầm (null nếu không rõ).
 function gearWeaponFor(player) {
   if (!player) return null;
@@ -165,9 +166,10 @@ function slotDisplayName(pathId, slot, weaponName) {
 // GĐ191: nhóm vũ khí (theo id đồ) cho pool nội tại độc nhất riêng của ô VŨ KHÍ
 const UNIQUE_WEAPON_GROUP = {
   THUONG: 'nhon', QUY_THUONG: 'nhon', DAO_GAM: 'nhon', KIM_CHAM: 'nhon',
-  KIEM: 'chem', SONG_KIEM: 'chem', TRONG_KIEM: 'chem', DAO: 'chem', SONG_DAO: 'chem', CHIEN_PHU: 'chem', CU_KIEM: 'chem', LUOI_HAI: 'chem', LIEM_NGAN: 'chem', TRAO: 'chem', PHIEN: 'chem', PHAT_TRAN: 'chem',
+  KIEM: 'chem', SONG_KIEM: 'chem', TRONG_KIEM: 'chem', DAO: 'chem', SONG_DAO: 'chem', CHIEN_PHU: 'chem', CU_KIEM: 'chem', LUOI_HAI: 'chem', LIEM_NGAN: 'chem', TRAO: 'chem', PHIEN: 'chem', PHAT_TRAN: 'chem', PHI_KIEM: 'chem', VAN_KIEM: 'chem', // GĐ393
   TAY_KHONG: 'nang', THIET_CON: 'nang', COT_CHUY: 'nang', COT_THUAN: 'nang',
-  PHAT_CHAU: 'phap', QUYEN_TRUONG: 'phap', BINH_BAT: 'phap', CO_LENH: 'phap', PHAP_TRUONG: 'phap', SACH_PHEP: 'phap', CO_CAM: 'phap', NGON_LINH: 'phap', BUT_PHEP: 'phap', QUYEN_TRUC: 'phap',
+  COT_CUNG: 'nhon', COT_NHAN: 'chem', // GĐ389: Cốt Cung = nhóm nhọn (xuyên), Cốt Nhận = nhóm chém
+  PHAT_CHAU: 'phap', QUYEN_TRUONG: 'phap', BINH_BAT: 'phap', CO_LENH: 'phap', PHAP_TRUONG: 'phap', SACH_PHEP: 'phap', CO_CAM: 'phap', NGON_LINH: 'phap', BUT_PHEP: 'phap', QUYEN_TRUC: 'phap', PHAP_AN: 'phap', PHAT_LUAN: 'phap', QUY_LINH: 'phap', DOC_KINH: 'phap', // GĐ393
 };
 // Pool dòng ĐỘC NHẤT mà 1 món có thể rút: dùng chung + riêng hướng tu +
 // (nếu là ô vũ khí) riêng nhóm vũ khí.
